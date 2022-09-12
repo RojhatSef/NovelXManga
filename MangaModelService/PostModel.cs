@@ -10,10 +10,11 @@ namespace MangaModelService
         public string Title { get; set; }
         public string postComment { set; get; }
 
+        public int BlogId { get; set; }
+        public BlogModel BlogModel { get; set; }
 
-        public ICollection<MasterModel> MasterModels { get; set; }
-        //public int MangaId { get; set; }
-        //public MangaModel mangaModel { get; set; }
+        public string UserID { get; set; }
+        public virtual UserModel UserModel { get; set; }
     }
 
 }

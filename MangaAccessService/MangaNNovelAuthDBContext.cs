@@ -17,62 +17,89 @@ namespace MangaAccessService
         public DbSet<GroupScanlatingModel> groupScanlatingModels { get; set; }
 
         public DbSet<StudioModel> studioModels { get; set; }
-        public DbSet<PostModel> Posts { get; set; }
+        public DbSet<PostModel> PostModels { get; set; }
+        public DbSet<BlogModel> blogModels { get; set; }
         public DbSet<MangaModel> mangaModels { get; set; }
         public DbSet<MasterModel> MasterModels { get; set; }
-
+        //public DbSet<IdentityUser> IdentityUsers { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<MasterModel>()
+           .HasOne(mm => mm.MangaModels)
+           .WithOne(i => i.MasterModels)
+           .HasForeignKey<MangaModel>(b => b.MangaID);
+
 
             modelBuilder.Entity<MasterModel>()
                 .HasKey(m => new
                 {
-                    m.MangaModelId,
-                    m.GroupsSanlatingId,
-                    m.postModelID,
-                    m.ChapterModelId,
-                    m.ArtistModelID,
-                    m.AuthorModelID,
-                    m.StudioModelID
+                    m.MangaModels,
+                    m.GroupScanlating,
+                    m.userModels
+
                 });
 
-            modelBuilder.Entity<MasterModel>()
-                .HasOne(mm => mm.mangaModel)
-                .WithMany(m => m.MasterModels)
-                .HasForeignKey(mm => mm.MangaModelId).OnDelete(DeleteBehavior.ClientCascade);
-            modelBuilder.Entity<MasterModel>()
-                .HasOne(mm => mm.ArtistModel)
-                .WithMany(m => m.MasterModels)
-                .HasForeignKey(mm => mm.MangaModelId).OnDelete(DeleteBehavior.ClientCascade);
-            modelBuilder.Entity<MasterModel>()
-               .HasOne(mm => mm.GroupScanlatingModel)
-               .WithMany(m => m.MasterModels)
-               .HasForeignKey(mm => mm.MangaModelId).OnDelete(DeleteBehavior.ClientCascade);
 
-            modelBuilder.Entity<MasterModel>()
-               .HasOne(mm => mm.StudioModel)
-               .WithMany(m => m.MasterModels)
-               .HasForeignKey(mm => mm.MangaModelId).OnDelete(DeleteBehavior.ClientCascade);
 
-            modelBuilder.Entity<MasterModel>()
-               .HasOne(mm => mm.chapterModel)
-               .WithMany(m => m.MasterModels)
-               .HasForeignKey(mm => mm.MangaModelId).OnDelete(DeleteBehavior.ClientCascade);
 
-            modelBuilder.Entity<MasterModel>()
-               .HasOne(mm => mm.PostModel)
-               .WithMany(m => m.MasterModels)
-               .HasForeignKey(mm => mm.MangaModelId).OnDelete(DeleteBehavior.ClientCascade);
 
-            modelBuilder.Entity<MasterModel>()
-               .HasOne(mm => mm.AuthorModel)
-               .WithMany(m => m.MasterModels)
-               .HasForeignKey(mm => mm.MangaModelId).OnDelete(DeleteBehavior.ClientCascade);
 
-            modelBuilder.Entity<ChapterModel>()
-                .HasOne(cm => cm.GroupScanlatingModel)
-                .WithMany(c => c.chapterModels)
-                .HasForeignKey(pt => pt.chapterID).OnDelete(DeleteBehavior.ClientCascade); ;
+            //modelBuilder.Entity<MasterModel>()
+            //    .HasOne(mm => mm.mangaModel)
+            //    .WithMany(m => m.MasterModels)
+            //    .HasForeignKey(mm => mm.MangaModelId).OnDelete(DeleteBehavior.ClientCascade);
+
+
+
+
+            //modelBuilder.Entity<MasterModel>()
+            //    .HasOne(mm => mm.ArtistModel)
+            //    .WithMany(m => m.MasterModels)
+            //    .HasForeignKey(mm => mm.ArtistModelID).OnDelete(DeleteBehavior.ClientCascade);
+            //modelBuilder.Entity<MasterModel>()
+            //   .HasOne(mm => mm.GroupScanlatingModel)
+            //   .WithMany(m => m.MasterModels)
+            //   .HasForeignKey(mm => mm.GroupsSanlatingId).OnDelete(DeleteBehavior.ClientCascade);
+
+            //modelBuilder.Entity<MasterModel>()
+            //   .HasOne(mm => mm.StudioModel)
+            //   .WithMany(m => m.MasterModels)
+            //   .HasForeignKey(mm => mm.StudioModelID).OnDelete(DeleteBehavior.ClientCascade);
+
+            //modelBuilder.Entity<MasterModel>()
+            //   .HasOne(mm => mm.chapterModel)
+            //   .WithMany(m => m.MasterModels)
+            //   .HasForeignKey(mm => mm.ChapterModelId).OnDelete(DeleteBehavior.ClientCascade);
+
+
+
+            //modelBuilder.Entity<MasterModel>()
+            //   .HasOne(mm => mm.PostModel)
+            //   .WithMany(m => m.MasterModels)
+            //   .HasForeignKey(mm => mm.MangaModelId).OnDelete(DeleteBehavior.ClientCascade);
+
+            //modelBuilder.Entity<MasterModel>()
+            //   .HasOne(mm => mm.AuthorModel)
+            //   .WithMany(m => m.MasterModels)
+            //   .HasForeignKey(mm => mm.AuthorModelID).OnDelete(DeleteBehavior.ClientCascade);
+
+
+            //modelBuilder.Entity<GroupScanlatingModel>()
+            //    .HasMany(c => c.chapterModels)
+            //    .WithMany(gm => gm.GroupScanlatingModels)
+            //    .using
+
+            //modelBuilder.Entity<ChapterModel>()
+            //    .HasOne(cm => cm.GroupScanlatingModels)
+            //    .WithMany(c => c.chapterModels)
+            //    .HasForeignKey(pt => pt.GroupScanlatingID).OnDelete(DeleteBehavior.ClientCascade); ;
+
+            //modelBuilder.Entity<PostModel>()
+            //    .HasOne(p => p.BlogModel)
+            //    .WithMany(b => b.postsModel)
+            //    .HasForeignKey(pm => pm.BlogId);
+
+
             base.OnModelCreating(modelBuilder);
 
         }

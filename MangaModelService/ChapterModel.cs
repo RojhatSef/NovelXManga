@@ -8,12 +8,16 @@ namespace MangaModelService
         public int chapterID { get; set; }
         public DateTime dateRelease { get; set; }
         public int? Volumes { get; set; }
+        public int? chapterNumber { get; set; }
         public string chapterName { get; set; }
-        public int GroupScanlatingID { get; set; }
-        public string chapterLinkNumber { get; set; }
-        public GroupScanlatingModel GroupScanlatingModel { get; set; }
 
-        public ICollection<MasterModel> MasterModels { get; set; }
+        public string chapterLinkNumber { get; set; }
+
+        public int GroupScanlatingID { get; set; }
+        public GroupScanlatingModel GroupScanlatingModels { get; set; }
+
+
+
         //public int MangaId { get; set; }
         //public MangaModel mangaModel { get; set; }
     }

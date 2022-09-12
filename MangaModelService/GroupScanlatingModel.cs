@@ -6,6 +6,7 @@ namespace MangaModelService
     {
         [Key]
         public int GroupScanlatingID { get; set; }
+        [Required]
         public string GroupScanlatingName { get; set; }
         public string? website { get; set; }
         public ICollection<ChapterModel> chapterModels { get; set; }

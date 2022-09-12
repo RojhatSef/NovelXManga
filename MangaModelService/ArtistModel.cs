@@ -1,18 +1,15 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace MangaModelService
+﻿namespace MangaModelService
 {
-    public class ArtistModel
+    public class ArtistModel : UserModel
     {
-        [Key]
-        public int ArtistId { get; set; }
-        [Required]
-        public string ArtistName { get; set; }
+
+
 
         public string Biography { get; set; }
-        public int Works { get; set; }
+        public int AmountOfWork { get; set; }
 
-        public ICollection<MasterModel> MasterModels { get; set; }
+        public ICollection<MangaModel> MangaModels { get; set; }
+        //public ICollection<MasterModel> MasterModels { get; set; }
         //ICollection<MangaModel> mangaModels { get; set; }
 
     }

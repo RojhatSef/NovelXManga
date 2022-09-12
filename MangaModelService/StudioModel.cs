@@ -1,13 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace MangaModelService
+﻿namespace MangaModelService
 {
-    public class StudioModel
+    public class StudioModel : GroupScanlatingModel
     {
-        [Key]
-        public int StudioId { get; set; }
-        [Required]
-        public string StudioName { get; set; }
+
 
         public string Biography { get; set; }
         public int Works { get; set; }

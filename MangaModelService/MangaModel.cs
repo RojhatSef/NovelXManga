@@ -18,17 +18,22 @@ namespace MangaModelService
 
         public string Description { get; set; }
         public DateTime ReleaseYear { get; set; }
-        public GenresModel? Genres { get; set; }
-        public ThemeModel? Theme { get; set; }
 
-        public ICollection<MasterModel> MasterModels { get; set; }
 
-        //ICollection<StudioModel> StudioModels { get; set; }
-        //ICollection<ArtistModel> ArtistModels { get; set; }
-        //ICollection<AuthorModel> AuthorModels { get; set; }
-        //ICollection<ChapterModel> ChaptersModels { get; set; }
-        //ICollection<PostModel> PostsModels { get; set; }
-        //ICollection<GroupScanlatingModel> GroupScanlatingModels { get; set; }
+        public int BlogModelID { get; set; }
+        public BlogModel BlogModel { get; set; }
+
+        public int MasterModelID { get; set; }
+        public MasterModel MasterModels { get; set; }
+        public ICollection<GenresModel> GenresModels { get; set; }
+        public ICollection<TagModel> TagsModels { get; set; }
+
+        //public ICollection<StudioModel> StudioModels { get; set; }
+        //public ICollection<ArtistModel> ArtistModels { get; set; }
+        //public ICollection<AuthorModel> AuthorModels { get; set; }
+        //public ICollection<ChapterModel> ChaptersModels { get; set; }
+
+        //public ICollection<GroupScanlatingModel> GroupScanlatingModels { get; set; }
 
     }
 }
