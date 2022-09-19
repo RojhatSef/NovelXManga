@@ -11,7 +11,6 @@ namespace MangaModelService
         public ICollection<UserModel> userModels { get; set; }
 
         [Required]
-
         public MangaModel MangaModels { get; set; }
 
         //[Key]

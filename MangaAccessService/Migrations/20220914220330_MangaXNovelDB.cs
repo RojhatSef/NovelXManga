@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MangaAccessService.Migrations
 {
-    public partial class TestMigrate : Migration
+    public partial class MangaXNovelDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -31,10 +31,22 @@ namespace MangaAccessService.Migrations
                     Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Allias = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ForumName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ArtistModel_FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ArtistModel_LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ArtistModel_Fullname = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ArtistModel_Biography = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ArtistModel_AmountOfWork = table.Column<int>(type: "int", nullable: true),
+                    ArtistBorn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ArtistDeath = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ArtistModel_Contact = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Fullname = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Biography = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     AmountOfWork = table.Column<int>(type: "int", nullable: true),
+                    AuthorBorn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    AuthorDeath = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Contact = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -67,6 +79,38 @@ namespace MangaAccessService.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_blogModels", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "groupScanlatingModels",
+                columns: table => new
+                {
+                    GroupScanlatingID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    GroupName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    website = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Biography = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Works = table.Column<int>(type: "int", nullable: true),
+                    Started = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DissolutionOfCorporation = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    StudioWebsite = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_groupScanlatingModels", x => x.GroupScanlatingID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "MasterModels",
+                columns: table => new
+                {
+                    MasterID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MasterModels", x => x.MasterID);
                 });
 
             migrationBuilder.CreateTable(
@@ -176,47 +220,6 @@ namespace MangaAccessService.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "groupScanlatingModels",
-                columns: table => new
-                {
-                    GroupScanlatingID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    GroupScanlatingName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    website = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UserModelId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    Biography = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Works = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_groupScanlatingModels", x => x.GroupScanlatingID);
-                    table.ForeignKey(
-                        name: "FK_groupScanlatingModels_AspNetUsers_UserModelId",
-                        column: x => x.UserModelId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "MasterModels",
-                columns: table => new
-                {
-                    MasterID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    AuthorModelId = table.Column<string>(type: "nvarchar(450)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_MasterModels", x => x.MasterID);
-                    table.ForeignKey(
-                        name: "FK_MasterModels_AspNetUsers_AuthorModelId",
-                        column: x => x.AuthorModelId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
                 name: "PostModels",
                 columns: table => new
                 {
@@ -227,7 +230,7 @@ namespace MangaAccessService.Migrations
                     BlogId = table.Column<int>(type: "int", nullable: false),
                     BlogModelid = table.Column<int>(type: "int", nullable: false),
                     UserID = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UserModelId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    UserModelId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -236,8 +239,7 @@ namespace MangaAccessService.Migrations
                         name: "FK_PostModels_AspNetUsers_UserModelId",
                         column: x => x.UserModelId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_PostModels_blogModels_BlogModelid",
                         column: x => x.BlogModelid,
@@ -266,6 +268,30 @@ namespace MangaAccessService.Migrations
                     table.ForeignKey(
                         name: "FK_chapterModels_groupScanlatingModels_GroupScanlatingModelsGroupScanlatingID",
                         column: x => x.GroupScanlatingModelsGroupScanlatingID,
+                        principalTable: "groupScanlatingModels",
+                        principalColumn: "GroupScanlatingID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "GroupScanlatingModelUserModel",
+                columns: table => new
+                {
+                    GroupScanlatingID = table.Column<int>(type: "int", nullable: false),
+                    userModelsId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_GroupScanlatingModelUserModel", x => new { x.GroupScanlatingID, x.userModelsId });
+                    table.ForeignKey(
+                        name: "FK_GroupScanlatingModelUserModel_AspNetUsers_userModelsId",
+                        column: x => x.userModelsId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_GroupScanlatingModelUserModel_groupScanlatingModels_GroupScanlatingID",
+                        column: x => x.GroupScanlatingID,
                         principalTable: "groupScanlatingModels",
                         principalColumn: "GroupScanlatingID",
                         onDelete: ReferentialAction.Cascade);
@@ -307,17 +333,11 @@ namespace MangaAccessService.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ReleaseYear = table.Column<DateTime>(type: "datetime2", nullable: false),
                     BlogModelID = table.Column<int>(type: "int", nullable: false),
-                    MasterModelID = table.Column<int>(type: "int", nullable: false),
-                    ArtistModelId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    MasterModelID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_mangaModels", x => x.MangaID);
-                    table.ForeignKey(
-                        name: "FK_mangaModels_AspNetUsers_ArtistModelId",
-                        column: x => x.ArtistModelId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_mangaModels_blogModels_BlogModelID",
                         column: x => x.BlogModelID,
@@ -453,25 +473,15 @@ namespace MangaAccessService.Migrations
                 column: "MasterModelsMasterID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_groupScanlatingModels_UserModelId",
-                table: "groupScanlatingModels",
-                column: "UserModelId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_mangaModels_ArtistModelId",
-                table: "mangaModels",
-                column: "ArtistModelId");
+                name: "IX_GroupScanlatingModelUserModel_userModelsId",
+                table: "GroupScanlatingModelUserModel",
+                column: "userModelsId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_mangaModels_BlogModelID",
                 table: "mangaModels",
                 column: "BlogModelID",
                 unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_MasterModels_AuthorModelId",
-                table: "MasterModels",
-                column: "AuthorModelId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_MasterModelUserModel_userModelsId",
@@ -521,6 +531,9 @@ namespace MangaAccessService.Migrations
                 name: "GroupScanlatingModelMasterModel");
 
             migrationBuilder.DropTable(
+                name: "GroupScanlatingModelUserModel");
+
+            migrationBuilder.DropTable(
                 name: "MasterModelUserModel");
 
             migrationBuilder.DropTable(
@@ -536,6 +549,9 @@ namespace MangaAccessService.Migrations
                 name: "groupScanlatingModels");
 
             migrationBuilder.DropTable(
+                name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
                 name: "mangaModels");
 
             migrationBuilder.DropTable(
@@ -543,9 +559,6 @@ namespace MangaAccessService.Migrations
 
             migrationBuilder.DropTable(
                 name: "MasterModels");
-
-            migrationBuilder.DropTable(
-                name: "AspNetUsers");
         }
     }
 }

@@ -13,7 +13,13 @@ builder.Services.AddDbContext<MangaNNovelAuthDBContext>(options => options.UseSq
 
 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<MangaNNovelAuthDBContext>();
+builder.Services.ConfigureApplicationCookie(config =>
+{
+    config.LoginPath = "/Login/LoginIndex";
+});
 var app = builder.Build();
+
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -27,7 +33,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapRazorPages();

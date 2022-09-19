@@ -25,8 +25,4 @@
     <ProjectReference Include="..\MangaModelService\MangaModelService.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Pages\Manga\" />
-  </ItemGroup>
-
 </Project>

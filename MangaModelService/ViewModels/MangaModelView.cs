@@ -1,10 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace MangaModelService
+namespace MangaModelService.ViewModels
 {
-    public class MangaModel
+    public class MangaModelView
     {
-        [Key]
+
         public int MangaID { get; set; }
 
         [Required(ErrorMessage = "Name is requried"),
@@ -19,21 +19,13 @@ namespace MangaModelService
         public string Description { get; set; }
         public DateTime ReleaseYear { get; set; }
 
+
         public int BlogModelID { get; set; }
         public BlogModel BlogModel { get; set; }
 
         public int MasterModelID { get; set; }
         public MasterModel MasterModels { get; set; }
-        public ICollection<GenresModel> GenresModels { get; set; }
-        public ICollection<TagModel> TagsModels { get; set; }
-
-
-        //public ICollection<StudioModel> StudioModels { get; set; }
-        //public ICollection<ArtistModel> ArtistModels { get; set; }
-        //public ICollection<AuthorModel> AuthorModels { get; set; }
-        //public ICollection<ChapterModel> ChaptersModels { get; set; }
-
-        //public ICollection<GroupScanlatingModel> GroupScanlatingModels { get; set; }
-
+        public string GenresModels { get; set; }
+        public string TagsModels { get; set; }
     }
 }

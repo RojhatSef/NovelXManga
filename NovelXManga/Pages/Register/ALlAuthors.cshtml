@@ -1,0 +1,21 @@
+﻿@page
+@model NovelXManga.Pages.Register.ALlAuthorsModel
+@{
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card-deck">
+
+            @foreach (var Author in Model.authorModel)
+            {
+                <br />
+                <h3>Author first Name: @Author.FirstName  </h3>
+                <br />
+                <h3>Author Family name: @Author.LastName</h3>
+                <br />
+              
+            }
+        </div>
+    </div>
+</div>

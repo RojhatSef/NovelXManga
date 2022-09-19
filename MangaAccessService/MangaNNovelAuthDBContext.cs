@@ -15,7 +15,7 @@ namespace MangaAccessService
         public DbSet<ChapterModel> chapterModels { get; set; }
 
         public DbSet<GroupScanlatingModel> groupScanlatingModels { get; set; }
-
+        public DbSet<UserModel> UserModels { get; set; }
         public DbSet<StudioModel> studioModels { get; set; }
         public DbSet<PostModel> PostModels { get; set; }
         public DbSet<BlogModel> blogModels { get; set; }
@@ -28,16 +28,17 @@ namespace MangaAccessService
            .HasOne(mm => mm.MangaModels)
            .WithOne(i => i.MasterModels)
            .HasForeignKey<MangaModel>(b => b.MangaID);
+            base.OnModelCreating(modelBuilder);
 
 
-            modelBuilder.Entity<MasterModel>()
-                .HasKey(m => new
-                {
-                    m.MangaModels,
-                    m.GroupScanlating,
-                    m.userModels
+            //modelBuilder.Entity<MasterModel>()
+            //    .HasKey(m => new
+            //    {
+            //        m.MangaModels,
+            //        m.GroupScanlating,
+            //        m.userModels
 
-                });
+            //    });
 
 
 
@@ -100,7 +101,6 @@ namespace MangaAccessService
             //    .HasForeignKey(pm => pm.BlogId);
 
 
-            base.OnModelCreating(modelBuilder);
 
         }
 
