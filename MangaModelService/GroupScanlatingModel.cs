@@ -8,6 +8,7 @@ namespace MangaModelService
         public int GroupScanlatingID { get; set; }
         [Required]
         public string GroupName { get; set; }
+        public string? PhotoPath { get; set; }
         public string? website { get; set; }
         public ICollection<ChapterModel> chapterModels { get; set; }
         public ICollection<MasterModel> MasterModels { get; set; }

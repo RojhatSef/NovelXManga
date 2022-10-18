@@ -8,7 +8,7 @@ namespace MangaModelService
         public string? Allias { get; set; }
         public string? ForumName { get; set; }
 
-
+        public string? userPhotoPath { get; set; }
 
         //navigation 
         public ICollection<GroupScanlatingModel>? GroupScanlating { get; set; }

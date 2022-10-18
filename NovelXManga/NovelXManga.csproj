@@ -25,4 +25,10 @@
     <ProjectReference Include="..\MangaModelService\MangaModelService.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\Images\AuthorImage\" />
+    <Folder Include="wwwroot\Images\MangaImage\" />
+    <Folder Include="wwwroot\Images\UserImage\" />
+  </ItemGroup>
+
 </Project>

@@ -151,6 +151,9 @@ namespace MangaAccessService.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("PhotoPath")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("website")
                         .HasColumnType("nvarchar(max)");
 
@@ -526,11 +529,12 @@ namespace MangaAccessService.Migrations
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
                     b.Property<string>("Allias")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ForumName")
-                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("userPhotoPath")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasDiscriminator().HasValue("UserModel");

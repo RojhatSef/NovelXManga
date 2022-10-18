@@ -29,7 +29,7 @@ namespace MangaAccessService
            .WithOne(i => i.MasterModels)
            .HasForeignKey<MangaModel>(b => b.MangaID);
             base.OnModelCreating(modelBuilder);
-
+            #region A test for other model building
 
             //modelBuilder.Entity<MasterModel>()
             //    .HasKey(m => new
@@ -100,7 +100,7 @@ namespace MangaAccessService
             //    .WithMany(b => b.postsModel)
             //    .HasForeignKey(pm => pm.BlogId);
 
-
+            #endregion
 
         }
 
