@@ -17,7 +17,7 @@ namespace MangaModelService
         public string? PhotoPath { get; set; }
 
         public string? Description { get; set; }
-        public DateTime ReleaseYear { get; set; }
+        public DateTime? ReleaseYear { get; set; }
 
         public int BlogModelID { get; set; }
         public BlogModel BlogModel { get; set; }

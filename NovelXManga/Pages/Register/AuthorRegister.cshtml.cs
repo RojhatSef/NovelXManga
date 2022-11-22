@@ -1,11 +1,13 @@
 using MangaAccessService;
 using MangaModelService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace NovelXManga.Pages.Register
 {
+    [Authorize]
     public class AuthorRegisterModel : PageModel
     {
         private readonly UserManager<IdentityUser> userManager;
@@ -45,7 +47,7 @@ namespace NovelXManga.Pages.Register
                 }
                 var user = new AuthorModel()
                 {
-                    UserName = RegiModel.Email,
+                    UserName = Authormodel.FirstName,
                     Email = RegiModel.Email,
                     FirstName = Authormodel.FirstName,
                     LastName = Authormodel.LastName,

@@ -20,7 +20,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    @{
+                    
                         @if (SignInManager.IsSignedIn(User))
                         {
                             <ul class="navbar-nav flex-grow-1">
@@ -33,6 +33,9 @@
                                 </li>
                                 <li class="nav-item">
                                     <a class="btn" asp-area="" asp-page="/Register/AuthorRegister">Author Register</a>
+                                </li>
+                                     <li class="nav-item">
+                                    <a class="btn" asp-area="" asp-page="/Register/UserRegister">User Register</a>
                                 </li>
                                     <li class="nav-item">
                                     <a class="btn" asp-area="" asp-page="/Register/ALlAuthors">Authors Post</a>
@@ -65,14 +68,15 @@
                                     <a class="btn" asp-area="" asp-page="/Register/AuthorRegister">Author Register</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="btn btn-primary" asp-area="" asp-page="/Login/LoginIndex">Login</a>
+                                    <a class="btn btn-primary" asp-area=""asp-page="/Login/LoginIndex">Login</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="btn" asp-area="" asp-page="/ContactUs">Contact Us</a>
+                                    <a class="btn" asp-area="" asp-page="/Register/UserRegister">UserRegister</a>
                                 </li>
+                  
                             </ul>
                         }
-                    }
+                   
 
                 </div>
             </div>

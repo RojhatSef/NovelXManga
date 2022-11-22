@@ -8,25 +8,35 @@
 
     <div class="row justify-content-center align-items-center">
         <div class="col-sm-12 col-md-12 col-1g-4">
-            <form methid=post>
-                <input hidden asp-for="mangaModel.MangaID" />          
-                <div class="text-danger" asp-validation-summary="All"></div>
+            <form method=post enctype="multipart/form-data">
+                <input hidden asp-for="mangaModelView.MangaID" />
+                <input hidden asp-for="mangaModelView.BlogModel" />
+                <input hidden asp-for="mangaModelView.BlogModelID" />
+                   <input hidden asp-for="mangaModelView.BlogModelID" />
+
+             
                 <div class="mb-3">
-                    <label class="form-label" asp-for="mangaModel.MangaName">Family Name</label>
-                    <input type="text" asp-for="mangaModel.MangaName" class="form-control" />
-                    <span asp-validation-for="mangaModel.MangaName" class="text-danger"></span>
+                    <label class="form-label" asp-for="mangaModelView.MangaName">Manga Title</label>
+                    <input type="text" asp-for="mangaModelView.MangaName" class="form-control" />
+                    <span asp-validation-for="mangaModelView.MangaName" class="text-danger"></span>
 
                 </div>
                 <div class="mb-3">
-                    <label class="form-label" asp-for="mangaModel.AssociatedNames">Family Name</label>
-                    <input type="text" asp-for="mangaModel.AssociatedNames" class="form-control" />
-                    <span asp-validation-for="mangaModel.AssociatedNames" class="text-danger"></span>
+                    <label class="form-label" asp-for="mangaModelView.AssociatedNames"> Associated Names </label>
+                    <input type="text" asp-for="mangaModelView.AssociatedNames" class="form-control" />
+                    <span asp-validation-for="mangaModelView.AssociatedNames" class="text-danger"></span>
 
                 </div>
                 <div class="mb-3">
-                    <label class="form-label" asp-for="mangaModel.AssociatedNames">Family Name</label>
-                    <input type="text" asp-for="mangaModel.AssociatedNames" class="form-control" />
-                    <span asp-validation-for="mangaModel.AssociatedNames" class="text-danger"></span>
+                    <label class="form-label" asp-for="mangaModelView.Description">Description</label>
+                    <input type="text" asp-for="mangaModelView.Description" class="form-control" />
+                    <span asp-validation-for="mangaModelView.Description" class="text-danger"></span>
+
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" asp-for="ReleaseYear">Year Released</label>
+                    <input type="datetime" asp-for="ReleaseYear" class="form-control" />
+             
 
                 </div>
                 <div class="form-group row">
@@ -35,6 +45,7 @@
                         <div class="custom-file">
                             <input asp-for="Photo" clas="custom-file-input form-control" />
                             <label class="custom-file-label">Click here to change photo</label>
+                            <span asp-validation-for="Photo" class="text-danger"></span>
 
                         </div>
 

@@ -4,7 +4,7 @@ namespace MangaModelService
 {
     public class RegisterModel
     {
-        [Required]
+        [Required(ErrorMessage = "Email is requried/Already in use")]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 

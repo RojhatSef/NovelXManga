@@ -7,7 +7,9 @@ namespace MangaModelService
         [Key]
         public int MasterID { get; set; }
 
+        public int? GroupScanlatingID { get; set; }
         public ICollection<GroupScanlatingModel>? GroupScanlating { get; set; }
+        public string? userId { get; set; }
         public ICollection<UserModel>? userModels { get; set; }
 
         [Required]

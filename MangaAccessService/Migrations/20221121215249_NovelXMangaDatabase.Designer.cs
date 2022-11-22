@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MangaAccessService.Migrations
 {
     [DbContext(typeof(MangaNNovelAuthDBContext))]
-    [Migration("20220919170436_MangaNovelX")]
-    partial class MangaNovelX
+    [Migration("20221121215249_NovelXMangaDatabase")]
+    partial class NovelXMangaDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -156,6 +156,12 @@ namespace MangaAccessService.Migrations
                     b.Property<string>("PhotoPath")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("masterId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("userID")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("website")
                         .HasColumnType("nvarchar(max)");
 
@@ -172,14 +178,12 @@ namespace MangaAccessService.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("AssociatedNames")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("BlogModelID")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("MangaName")
@@ -196,7 +200,6 @@ namespace MangaAccessService.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Type")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("MangaID");
@@ -215,6 +218,12 @@ namespace MangaAccessService.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MasterID"), 1L, 1);
 
+                    b.Property<int?>("GroupScanlatingID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("userId")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("MasterID");
 
                     b.ToTable("MasterModels");
@@ -222,11 +231,11 @@ namespace MangaAccessService.Migrations
 
             modelBuilder.Entity("MangaModelService.PostModel", b =>
                 {
-                    b.Property<int>("PostId")
+                    b.Property<int?>("PostId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PostId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("PostId"), 1L, 1);
 
                     b.Property<int>("BlogId")
                         .HasColumnType("int");
@@ -239,7 +248,6 @@ namespace MangaAccessService.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserID")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserModelId")
@@ -534,6 +542,15 @@ namespace MangaAccessService.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ForumName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("groupScanlationID")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("masterId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("postModelID")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("userPhotoPath")

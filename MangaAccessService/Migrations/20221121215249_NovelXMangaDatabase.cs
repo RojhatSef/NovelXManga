@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MangaAccessService.Migrations
 {
-    public partial class MangaNovelX : Migration
+    public partial class NovelXMangaDatabase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -32,6 +32,9 @@ namespace MangaAccessService.Migrations
                     Allias = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ForumName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     userPhotoPath = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    groupScanlationID = table.Column<int>(type: "int", nullable: true),
+                    masterId = table.Column<int>(type: "int", nullable: true),
+                    postModelID = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ArtistModel_FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ArtistModel_LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ArtistModel_Fullname = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -91,6 +94,8 @@ namespace MangaAccessService.Migrations
                     GroupName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PhotoPath = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     website = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    masterId = table.Column<int>(type: "int", nullable: true),
+                    userID = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Biography = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Works = table.Column<int>(type: "int", nullable: true),
@@ -108,7 +113,9 @@ namespace MangaAccessService.Migrations
                 columns: table => new
                 {
                     MasterID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1")
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    GroupScanlatingID = table.Column<int>(type: "int", nullable: true),
+                    userId = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -231,7 +238,7 @@ namespace MangaAccessService.Migrations
                     postComment = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     BlogId = table.Column<int>(type: "int", nullable: false),
                     BlogModelid = table.Column<int>(type: "int", nullable: false),
-                    UserID = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UserID = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserModelId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
@@ -329,10 +336,10 @@ namespace MangaAccessService.Migrations
                 {
                     MangaID = table.Column<int>(type: "int", nullable: false),
                     MangaName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AssociatedNames = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Type = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AssociatedNames = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Type = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PhotoPath = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ReleaseYear = table.Column<DateTime>(type: "datetime2", nullable: false),
                     BlogModelID = table.Column<int>(type: "int", nullable: false),
                     MasterModelID = table.Column<int>(type: "int", nullable: false)

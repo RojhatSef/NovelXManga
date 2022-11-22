@@ -1,5 +1,5 @@
 using MangaAccessService;
-
+using MangaAccessService.Migrations;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,8 +12,15 @@ builder.Services.AddDbContext<MangaNNovelAuthDBContext>(options => options.UseSq
 (builder.Configuration.GetConnectionString("AuthConnectionString")));
 
 
+builder.Services.AddScoped<IAuthorRepsitory, SQLAuthorRepository>();
+builder.Services.AddScoped<IMangaRepository, SQLMangaRepository>();
+builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
+{
+    options.Password.RequiredLength = 6;
+    options.Password.RequiredUniqueChars = 2;
+}).AddEntityFrameworkStores<MangaNNovelAuthDBContext>();
 
-builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<MangaNNovelAuthDBContext>();
+
 builder.Services.ConfigureApplicationCookie(config =>
 {
     config.LoginPath = "/Login/LoginIndex";

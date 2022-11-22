@@ -8,16 +8,19 @@ namespace NovelXManga.Pages.Login
     public class LoginIndexModel : PageModel
     {
         private readonly SignInManager<IdentityUser> signInManager;
-
         [BindProperty]
         public LoginModel LoginModel { get; set; }
+        public string ReturnUrl { get; set; }
         public LoginIndexModel(SignInManager<IdentityUser> signInManager)
         {
             this.signInManager = signInManager;
+
         }
         public void OnGet()
         {
+
         }
+        #region Test returnURl
         //public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         //{
         //    if (ModelState.IsValid)
@@ -37,20 +40,43 @@ namespace NovelXManga.Pages.Login
         //    }
         //    ModelState.AddModelError("", "username or password incorrect");
         //    return Page();
-        //}
-        public async Task<IActionResult> OnPostAsync()
+        //} 
+        #endregion
+
+        public async Task<IActionResult> OnPostAsync(string returnUrl)
         {
+            returnUrl = ReturnUrl ?? Url.Content("/");
             if (ModelState.IsValid)
             {
                 var identityResult = await signInManager.PasswordSignInAsync(LoginModel.Email, LoginModel.Password, LoginModel.RememberMe, false);
+                //if (identityResult.Succeeded)
+                //{
+                //    if (returnUrl == null || returnUrl == "/")
+                //    {
+                //        return RedirectToPage("/Index");
+                //    }
+                //    else
+                //    {
+                //        return RedirectToPage(returnUrl);
+                //    }
+
+                //}
                 if (identityResult.Succeeded)
                 {
-
-                    return RedirectToPage("/Login/LoginIndex");
+                    if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+                    {
+                        return Redirect(returnUrl);
+                    }
+                    else
+                    {
+                        return RedirectToPage("/Index");
+                    }
 
                 }
+
+                ModelState.AddModelError("", "username or password incorrect");
             }
-            ModelState.AddModelError("", "username or password incorrect");
+            ReturnUrl = returnUrl;
             return Page();
         }
     }

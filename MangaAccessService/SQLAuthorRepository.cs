@@ -2,7 +2,7 @@
 
 namespace MangaAccessService
 {
-    internal class SQLAuthorRepository : IAuthorRepsitory
+    public class SQLAuthorRepository : IAuthorRepsitory
     {
         private readonly MangaNNovelAuthDBContext context;
         public SQLAuthorRepository(MangaNNovelAuthDBContext mangaNNovelAuthDBContext)
