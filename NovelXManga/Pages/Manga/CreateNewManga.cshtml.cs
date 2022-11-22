@@ -56,14 +56,7 @@ namespace NovelXManga.Pages.Manga
                 var newMangaModel = mangaNNovelAuthDBContext.mangaModels.FirstOrDefault(mm => mm.MangaName == MangaModelView.MangaName);
                 if (newMangaModel == null)
                 {
-                    //newMangaModel = new MangaModel
-                    //{
-                    //    MangaName = mangaModelView.MangaName,
-                    //    AssociatedNames = mangaModelView.AssociatedNames,
-                    //    PhotoPath = ProcessUploadedFile(),
-                    //    ReleaseYear = ReleaseYear,
-                    //    BlogModel = new BlogModel { mangaName = mangaModelView.MangaName },
-                    //};
+
 
                     MasterModel masterModel = new MasterModel
                     {
