@@ -152,15 +152,18 @@ namespace MangaAccessService.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhotoPath")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("masterId")
+                    b.Property<int>("masterId")
                         .HasColumnType("int");
 
                     b.Property<string>("userID")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("website")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("GroupScanlatingID");
@@ -173,7 +176,10 @@ namespace MangaAccessService.Migrations
             modelBuilder.Entity("MangaModelService.MangaModel", b =>
                 {
                     b.Property<int>("MangaID")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MangaID"), 1L, 1);
 
                     b.Property<string>("AssociatedNames")
                         .HasColumnType("nvarchar(max)");
@@ -194,7 +200,7 @@ namespace MangaAccessService.Migrations
                     b.Property<string>("PhotoPath")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("ReleaseYear")
+                    b.Property<DateTime?>("ReleaseYear")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Type")
@@ -203,6 +209,9 @@ namespace MangaAccessService.Migrations
                     b.HasKey("MangaID");
 
                     b.HasIndex("BlogModelID")
+                        .IsUnique();
+
+                    b.HasIndex("MasterModelID")
                         .IsUnique();
 
                     b.ToTable("mangaModels");
@@ -694,7 +703,7 @@ namespace MangaAccessService.Migrations
 
                     b.HasOne("MangaModelService.MasterModel", "MasterModels")
                         .WithOne("MangaModels")
-                        .HasForeignKey("MangaModelService.MangaModel", "MangaID")
+                        .HasForeignKey("MangaModelService.MangaModel", "MasterModelID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

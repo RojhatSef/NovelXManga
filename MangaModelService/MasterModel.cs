@@ -13,7 +13,7 @@ namespace MangaModelService
         public ICollection<UserModel>? userModels { get; set; }
 
         [Required]
-        public MangaModel MangaModels { get; set; }
+        public MangaModel? MangaModels { get; set; }
 
         //[Key]
         //public int StudioModelID { get; set; }
