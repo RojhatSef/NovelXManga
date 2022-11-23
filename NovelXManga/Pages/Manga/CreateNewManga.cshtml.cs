@@ -56,8 +56,6 @@ namespace NovelXManga.Pages.Manga
                 var newMangaModel = mangaNNovelAuthDBContext.mangaModels.FirstOrDefault(mm => mm.MangaName == MangaModelView.MangaName);
                 if (newMangaModel == null)
                 {
-
-
                     MasterModel masterModel = new MasterModel
                     {
                         MangaModels = new MangaModel
@@ -67,9 +65,6 @@ namespace NovelXManga.Pages.Manga
                             PhotoPath = ProcessUploadedFile(),
                             ReleaseYear = ReleaseYear,
                             BlogModel = new BlogModel { mangaName = mangaModelView.MangaName },
-
-
-
                         },
                         GroupScanlating = null,
                         GroupScanlatingID = null,
@@ -118,7 +113,7 @@ namespace NovelXManga.Pages.Manga
 //            MangaName = mangaModel.MangaName,
 //            AssociatedNames = mangaModel.AssociatedNames,
 //            MangaID = mangaModel.MangaID,
-//            MasterModelID = mangaModel.MasterModelID,
+//            MasterID = mangaModel.MasterModelID,
 
 
 

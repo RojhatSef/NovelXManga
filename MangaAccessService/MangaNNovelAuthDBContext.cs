@@ -27,7 +27,14 @@ namespace MangaAccessService
             modelBuilder.Entity<MasterModel>()
            .HasOne(mm => mm.MangaModels)
            .WithOne(i => i.MasterModels)
-           .HasForeignKey<MangaModel>(b => b.MasterModelID);
+           .HasForeignKey<MangaModel>(b => b.MasterID);
+
+
+            modelBuilder.Entity<BlogModel>()
+            .HasOne(mm => mm.MangaModel)
+            .WithOne(i => i.BlogModel)
+            .HasForeignKey<MangaModel>(b => b.BlogModelId);
+
             base.OnModelCreating(modelBuilder);
             #region A test for other model building
 

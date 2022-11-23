@@ -19,10 +19,10 @@ namespace MangaModelService
         public string? Description { get; set; }
         public DateTime? ReleaseYear { get; set; }
 
-        public int BlogModelID { get; set; }
+        public int BlogModelId { get; set; }
         public BlogModel BlogModel { get; set; }
 
-        public int MasterModelID { get; set; }
+        public int MasterID { get; set; }
         public MasterModel MasterModels { get; set; }
         public ICollection<GenresModel>? GenresModels { get; set; }
         public ICollection<TagModel>? TagsModels { get; set; }

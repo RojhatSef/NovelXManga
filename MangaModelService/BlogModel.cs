@@ -5,10 +5,11 @@ namespace MangaModelService
     public class BlogModel
     {
         [Key]
-        public int id { get; set; }
+        public int BlogModelId { get; set; }
         public string mangaName { get; set; }
         public ICollection<PostModel>? postsModel { get; set; }
-        public int mangaId { get; set; }
+
+        [Required]
         public MangaModel MangaModel { get; set; }
     }
 }

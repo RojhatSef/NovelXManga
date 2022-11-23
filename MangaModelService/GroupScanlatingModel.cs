@@ -11,7 +11,7 @@ namespace MangaModelService
         public string PhotoPath { get; set; }
         public string website { get; set; }
         public ICollection<ChapterModel>? chapterModels { get; set; }
-        public int masterId { get; set; }
+        public int MasterID { get; set; }
         public ICollection<MasterModel>? MasterModels { get; set; }
         public string userID { get; set; }
         public ICollection<UserModel>? userModels { get; set; }
