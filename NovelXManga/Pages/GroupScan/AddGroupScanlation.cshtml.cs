@@ -1,5 +1,4 @@
 using MangaAccessService;
-using MangaModelService;
 using MangaModelService.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -31,20 +30,20 @@ namespace NovelXManga.Pages.GroupScan
             return Page();
 
         }
-        public IActionResult OnPostAsync()
-        {
-            if (ModelState.IsValid)
-            {
-                var newGroup = mangaNNovelAuthDBContext.groupScanlatingModels.FirstOrDefault(gcm => gcm.GroupName == groupModelView.GroupName);
-                if (newGroup != null)
-                {
-                    GroupScanlatingModel groupScanlatingModel = new GroupScanlatingModel()
-                    {
-                        GroupName = groupModelView.GroupName,
-                        chapterModels = null,
-                    }
-                }
-            }
-        }
+        //public IActionResult OnPostAsync()
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        var newGroup = mangaNNovelAuthDBContext.groupScanlatingModels.FirstOrDefault(gcm => gcm.GroupName == groupModelView.GroupName);
+        //        if (newGroup != null)
+        //        {
+        //            GroupScanlatingModel groupScanlatingModel = new GroupScanlatingModel()
+        //            {
+        //                GroupName = groupModelView.GroupName,
+        //                chapterModels = null,
+        //            }
+        //        }
+        //    }
+        //}
     }
 }

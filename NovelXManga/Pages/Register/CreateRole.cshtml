@@ -1,0 +1,25 @@
+﻿@page
+@model NovelXManga.Pages.Register.CreateRoleModel
+@{
+}
+<div class="container mt-5">
+    <div class="row justify-content-center align-items-center">
+        <div class="col-sm-12 col-md-12 col-1g-4">
+
+            <h1>Register User</h1>
+            <form method="post">
+                <div class="text-danger" asp-validation-summary="All"></div>
+                <div class="mb-3">
+                    <label class="form-label" asp-for="roleViewModel.RoleName">Email Adress</label>
+                    <input type="text" asp-for="roleViewModel.RoleName" class="form-control" />
+                    <span asp-validation-for="roleViewModel.RoleName" class="text-danger"></span>
+
+                </div>
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-primary">Register Role</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
