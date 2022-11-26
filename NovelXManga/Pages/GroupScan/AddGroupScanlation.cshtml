@@ -2,3 +2,66 @@
 @model NovelXManga.Pages.GroupScan.AddGroupScanlationModel
 @{
 }
+
+<div class="container mt-5">
+    <div class="row justify-content-center align-items-center">
+        <div class="col-sm-12 col-md-12 col-1g-4">
+            <input hidden 
+            <h1>Create New Group</h1>
+            <form method="post">
+                <div class="text-danger" asp-validation-summary="All"></div>
+                <div class="mb-3">
+                    <input hidden asp-for="groupModelView.GroupScanlatingID" />
+                    <input hidden asp-for="groupModelView.MasterID" />
+                    <label class="form-label" asp-for="groupModelView.GroupName">Group name</label>
+                    <input type="text" asp-for="groupModelView.GroupName" class="form-control" />
+                    <span asp-validation-for="groupModelView.GroupName" class="text-danger"></span>
+
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" asp-for="MangaName">Manga name</label>
+                    <input type="text" asp-for="MangaName" class="form-control" />
+                    <span asp-validation-for="MangaName" class="text-danger"></span>
+
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" asp-for="groupModelView.website">website </label>
+                    <input type="text" asp-for="groupModelView.website" class="form-control" />
+                    <span asp-validation-for="groupModelView.website" class="text-danger"></span>
+
+                </div>
+       
+                <div class="form-group row">
+                    <label asp-for="Photo" class="col-sm-2 col-form-label"></label>  <br />
+                    <div class="col-sm-10">
+                        <div class="custom-file">
+                            <input asp-for="Photo" clas="custom-file-input form-control" />
+                            <label class="custom-file-label">Click here to change photo</label>
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-primary">Register</button>
+                </div>
+  
+                <!-- Edits the Path for our photos-->
+                @section Scripts {
+                    <script>
+                        $(document).ready(function () {
+                            $('.custom-file-input').on("change", function () {
+                                var fileName = $(this).val().split("\\").pop();
+                                $(this).next('.custom-file-label').html(fileName);
+                            });
+                        })
+                    </script>
+                    <!-- client validation
+                    <partial name="_ValidationScriptsPartial" />
+                    -->
+                }
+            </form>
+        </div>
+    </div>
+</div>

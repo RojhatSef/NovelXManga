@@ -34,5 +34,6 @@ namespace NovelXManga.Pages.Register
         //    authorModel = userManager.GetUserAsync(id);
         //    authorModel = mangaNNovelAuthDBContext.authorModels;
         //}
+
     }
 }

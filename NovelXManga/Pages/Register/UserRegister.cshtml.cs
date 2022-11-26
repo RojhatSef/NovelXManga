@@ -1,3 +1,4 @@
+using MangaModelService;
 using MangaModelService.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -31,7 +32,7 @@ namespace NovelXManga.Pages.Register
                 var usermail = await userManager.FindByEmailAsync(Model.Email);
                 if (usermail == null)
                 {
-                    var user = new IdentityUser { UserName = Model.Email, Email = Model.Email };
+                    var user = new UserModel { UserName = Model.Email, Email = Model.Email, };
                     var result = await userManager.CreateAsync(user, Model.Password);
 
                     if (result.Succeeded)

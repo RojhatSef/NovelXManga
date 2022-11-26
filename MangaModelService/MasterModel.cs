@@ -12,6 +12,7 @@ namespace MangaModelService
         public string? userId { get; set; }
         public ICollection<UserModel>? userModels { get; set; }
 
+
         [Required]
         public MangaModel? MangaModels { get; set; }
 
