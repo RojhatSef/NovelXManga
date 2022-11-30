@@ -61,13 +61,14 @@ namespace NovelXManga.Pages.GroupScan
                         userModels = new List<UserModel> { currentUserModel }
 
                     };
-
+                    getMasterManga.GroupScanlating = new List<GroupScanlatingModel> { NewScanGroup };
+                    mangaNNovelAuthDBContext.Update(getMasterManga);
                     mangaNNovelAuthDBContext.groupScanlatingModels.Add(NewScanGroup);
                     mangaNNovelAuthDBContext.SaveChanges();
 
                 }
 
-                return RedirectToPage("Index");
+                return RedirectToPage("/Index");
             }
             return Page();
         }

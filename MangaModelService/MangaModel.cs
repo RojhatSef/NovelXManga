@@ -12,6 +12,10 @@ namespace MangaModelService
 
         public string MangaName { get; set; }
         public string? AssociatedNames { get; set; }
+        //public string? ISBN10 { get; set; }
+        //public string? ISBN13 { get; set; }
+        //public string? futureEvents { get; set; }
+
         public string? Type { get; set; }
 
         public string? PhotoPath { get; set; }

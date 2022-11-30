@@ -29,6 +29,7 @@ namespace NovelXManga.Pages.Register
         {
             if (ModelState.IsValid)
             {
+                //this might be wrong, as we are creating a userModel and we're looking for identityUsers. Need to check this later
                 var usermail = await userManager.FindByEmailAsync(Model.Email);
                 if (usermail == null)
                 {

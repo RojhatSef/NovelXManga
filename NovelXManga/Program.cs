@@ -26,7 +26,7 @@ builder.Services.ConfigureApplicationCookie(config =>
     config.LoginPath = "/Login/LoginIndex";
 });
 var app = builder.Build();
-
+//database();
 
 
 // Configure the HTTP request pipeline.
@@ -47,3 +47,11 @@ app.UseAuthorization();
 app.MapRazorPages();
 
 app.Run();
+//void database()
+//{
+//    using (var scope = app.Services.CreateScope())
+//    {
+//        var seeder = scope.ServiceProvider.GetRequiredService<SeedData>();
+//        seeder.seedData();
+//    }
+//}

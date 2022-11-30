@@ -4,10 +4,10 @@
     {
 
 
-        public string Biography { get; set; }
-        public int Works { get; set; }
+        public string? Biography { get; set; }
+        public int? Works { get; set; }
 
-        public DateTime Started { get; set; }
+        public DateTime? Started { get; set; }
 
         public DateTime? DissolutionOfCorporation { get; set; }
 
