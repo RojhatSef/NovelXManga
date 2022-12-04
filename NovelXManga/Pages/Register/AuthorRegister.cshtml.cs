@@ -22,8 +22,6 @@ namespace NovelXManga.Pages.Register
         [BindProperty]
         public IFormFile? Photo { get; set; }
 
-
-
         public AuthorRegisterModel(UserManager<IdentityUser> userManager, MangaNNovelAuthDBContext nNovelAuthDBContext, SignInManager<IdentityUser> signInManager, IWebHostEnvironment webHostEnvironment)
         {
             this.userManager = userManager;

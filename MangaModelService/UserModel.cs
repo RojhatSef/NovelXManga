@@ -9,6 +9,11 @@ namespace MangaModelService
         public string? ForumName { get; set; }
 
         public string? userPhotoPath { get; set; }
+        public string? nameInNativeLanguage { get; set; }
+        public string? placeOfBirth { get; set; }
+        public string? Zodiac { get; set; }
+
+
 
         //navigation 
         public int? groupScanlationID { get; set; }

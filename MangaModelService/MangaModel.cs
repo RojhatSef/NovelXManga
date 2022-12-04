@@ -12,17 +12,25 @@ namespace MangaModelService
 
         public string MangaName { get; set; }
         public string? AssociatedNames { get; set; }
-        //public string? ISBN10 { get; set; }
-        //public string? ISBN13 { get; set; }
-        //public string? futureEvents { get; set; }
-
+        public string? relatedSeries { get; set; }
+        public string? ISBN10 { get; set; }
+        public string? ISBN13 { get; set; }
+        public string? futureEvents { get; set; }
+        public string? StatusInCountryOfOrigin { get; set; }
+        public string? CompletelyTranslated { get; set; }
+        public string? orignalWebtoon { get; set; }
+        public string? OriginalPublisher { get; set; }
+        public string? OfficialTranslations { get; set; }
+        public double? score { get; set; }
         public string? Type { get; set; }
+
 
         public string? PhotoPath { get; set; }
 
         public string? Description { get; set; }
         public DateTime? ReleaseYear { get; set; }
-
+        public DateTime? EndingYear { get; set; }
+        public List<MangaModel>? RecommendedMangaModels { get; set; }
         public int BlogModelId { get; set; }
         public BlogModel BlogModel { get; set; }
 
@@ -32,12 +40,6 @@ namespace MangaModelService
         public ICollection<TagModel>? TagsModels { get; set; }
 
 
-        //public ICollection<StudioModel> StudioModels { get; set; }
-        //public ICollection<ArtistModel> ArtistModels { get; set; }
-        //public ICollection<AuthorModel> AuthorModels { get; set; }
-        //public ICollection<ChapterModel> ChaptersModels { get; set; }
-
-        //public ICollection<GroupScanlatingModel> GroupScanlatingModels { get; set; }
 
     }
 }

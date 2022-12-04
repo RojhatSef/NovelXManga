@@ -10,13 +10,13 @@
         public string LastName { get; set; }
 
         public string Fullname { get; set; }
-
-
+        public string? officalWebsite { get; set; }
+        public DateTime? lastUpdate { get; set; }
         public string? Biography { get; set; }
 
         public int? AmountOfWork { get; set; }
 
-        public DateTime AuthorBorn { get; set; }
+        public DateTime? AuthorBorn { get; set; }
         public DateTime? AuthorDeath { get; set; }
 
         public string? Contact { get; set; }

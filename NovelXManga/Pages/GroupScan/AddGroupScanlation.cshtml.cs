@@ -48,23 +48,34 @@ namespace NovelXManga.Pages.GroupScan
                 var currentUser = await userManager.GetUserAsync(User);
                 UserModel currentUserModel = (UserModel)currentUser;
                 var getMasterManga = mangaNNovelAuthDBContext.MasterModels.FirstOrDefault(mm => mm.MangaModels.MangaName == MangaName);
+
+
                 var newGroup = mangaNNovelAuthDBContext.groupScanlatingModels.FirstOrDefault(gcm => gcm.GroupName == groupModelView.GroupName);
                 if (newGroup == null)
                 {
-                    var NewScanGroup = new GroupScanlatingModel()
+                    newGroup = new GroupScanlatingModel()
                     {
                         GroupName = groupModelView.GroupName,
                         chapterModels = null,
                         PhotoPath = ProcessUploadedFile(),
                         website = groupModelView.website,
+                        userID = currentUser.Id,
                         MasterModels = new List<MasterModel> { getMasterManga },
-                        userModels = new List<UserModel> { currentUserModel }
-
+                        userModels = new List<UserModel> { currentUserModel },
                     };
-                    getMasterManga.GroupScanlating = new List<GroupScanlatingModel> { NewScanGroup };
-                    mangaNNovelAuthDBContext.Update(getMasterManga);
-                    mangaNNovelAuthDBContext.groupScanlatingModels.Add(NewScanGroup);
+
+                    newGroup.MasterID = getMasterManga.MasterID;
+                    getMasterManga.GroupScanlating = new List<GroupScanlatingModel> { newGroup };
+                    getMasterManga.GroupScanlatingID = newGroup.GroupScanlatingID;
+                    getMasterManga.userId = currentUser.Id;
+                    mangaNNovelAuthDBContext.groupScanlatingModels.Add(newGroup);
+                    //                   mangaNNovelAuthDBContext.SaveChanges();
+
+                    mangaNNovelAuthDBContext.MasterModels.Update(getMasterManga);
                     mangaNNovelAuthDBContext.SaveChanges();
+                    //mastermodel does not update with groupscanlating model, why? When groupscanlatingmodel is complete that is when it recives an ID
+                    // due to how EF works, it wont pass an id, so we need to update the masterModel again after the group has been created
+                    // we can do this by taking in the latest input. 
 
                 }
 
@@ -78,7 +89,7 @@ namespace NovelXManga.Pages.GroupScan
             if (Photo != null)
             {
                 string uploadsFolder =
-                    Path.Combine(webHostEnvironment.WebRootPath, "images/GroupImages");
+                Path.Combine(webHostEnvironment.WebRootPath, "images/GroupImages");
                 uniqueFileName = Guid.NewGuid().ToString() + ".png";
                 string filePath = Path.Combine(uploadsFolder, uniqueFileName);
                 using (var fileStream = new FileStream(filePath, FileMode.Create))
