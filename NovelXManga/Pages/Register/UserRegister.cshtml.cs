@@ -22,9 +22,7 @@ namespace NovelXManga.Pages.Register
             this.signInManager = signInManager;
 
         }
-        public void OnGet()
-        {
-        }
+
         public async Task<IActionResult> OnPostAsync()
         {
             if (ModelState.IsValid)

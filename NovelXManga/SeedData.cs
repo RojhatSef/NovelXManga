@@ -26,11 +26,11 @@ namespace NovelXManga
             context.Database.EnsureCreated();
             if (!context.mangaModels.Any())
             {
-                string filePath = Path.Combine(webHostEnvironment.WebRootPath, "images/MangaImage/0f3f5666-7cb9-4713-a779-f1e1546a0d5f", User.userPhotoPath);
+                string filePath = Path.Combine(webHostEnvironment.WebRootPath, "images/MangaImage/0f3f5666-7cb9-4713-a779-f1e1546a0d5f");
                 var user = new UserModel { UserName = "TestUSer", Email = "TestUser@hotmail.com", userPhotoPath = filePath };
-                var result = await userManager.CreateAsync(user, "Rojhat123!");
+
                 var author = new AuthorModel { UserName = "TestAuthor", Email = "TestAuthor@hotmail.com", FirstName = "TestAuthor", LastName = "Sefdin", userPhotoPath = filePath };
-                var authorresult = await userManager.CreateAsync(author, "Author123!");
+
 
                 MasterModel masterModel = new MasterModel
                 {
@@ -41,6 +41,17 @@ namespace NovelXManga
                         PhotoPath = filePath,
                         ReleaseYear = DateTime.Now,
                         BlogModel = new BlogModel { mangaName = "Naruto" },
+                        OfficialTranslations = "Japanese",
+                        Description = "A Kid who got something stuck in his stomach",
+                        CompletelyTranslated = "Completed",
+                        ISBN10 = null,
+                        ISBN13 = null,
+                        score = 10,
+                        EndingYear = DateTime.Now,
+                        StatusInCountryOfOrigin = "11, completed",
+                        Type = "Manga",
+                        OriginalPublisher = "SquareEnix",
+                        orignalWebtoon = null,
                     },
                     GroupScanlating = null,
                     GroupScanlatingID = null,
@@ -53,9 +64,20 @@ namespace NovelXManga
                     {
                         MangaName = "Berserk",
                         AssociatedNames = "Berserk Max",
-                        PhotoPath = "C:\\Users\\Rojhat\\source\\repos\\NovelXManga\\NovelXManga\\wwwroot\\Images\\MangaImage\\0f3f5666-7cb9-4713-a779-f1e1546a0d5f.png",
+                        PhotoPath = filePath,
                         ReleaseYear = DateTime.Now,
                         BlogModel = new BlogModel { mangaName = "Berserk" },
+                        OfficialTranslations = "Japanese",
+                        Description = "A broken man",
+                        CompletelyTranslated = "Ongoing",
+                        ISBN10 = "1506727549",
+                        ISBN13 = "978-1506717913",
+                        score = 10,
+                        EndingYear = DateTime.Now,
+                        StatusInCountryOfOrigin = "11, completed",
+                        Type = "Manga",
+                        OriginalPublisher = "SquareEnix",
+                        orignalWebtoon = null,
                     },
                     GroupScanlating = null,
                     GroupScanlatingID = null,
@@ -81,9 +103,11 @@ namespace NovelXManga
                 context.MasterModels.Add(masterModel);
                 context.MasterModels.Add(masterModel2);
                 context.SaveChanges();
-
+                var result = await userManager.CreateAsync(user, "Rojhat123!");
+                var authorresult = await userManager.CreateAsync(author, "Author123!");
 
             }
+
         }
     }
 }

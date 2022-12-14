@@ -2,6 +2,7 @@ using MangaAccessService;
 using MangaAccessService.Migrations;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using NovelXManga;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +15,7 @@ builder.Services.AddDbContext<MangaNNovelAuthDBContext>(options => options.UseSq
 
 builder.Services.AddScoped<IAuthorRepsitory, SQLAuthorRepository>();
 builder.Services.AddScoped<IMangaRepository, SQLMangaRepository>();
+builder.Services.AddScoped<SeedData>();
 builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
 {
     options.Password.RequiredLength = 6;
@@ -26,7 +28,7 @@ builder.Services.ConfigureApplicationCookie(config =>
     config.LoginPath = "/Login/LoginIndex";
 });
 var app = builder.Build();
-//database();
+database();
 
 
 // Configure the HTTP request pipeline.
@@ -47,11 +49,11 @@ app.UseAuthorization();
 app.MapRazorPages();
 
 app.Run();
-//void database()
-//{
-//    using (var scope = app.Services.CreateScope())
-//    {
-//        var seeder = scope.ServiceProvider.GetRequiredService<SeedData>();
-//        seeder.seedData();
-//    }
-//}
+void database()
+{
+    using (var scope = app.Services.CreateScope())
+    {
+        var seeder = scope.ServiceProvider.GetRequiredService<SeedData>();
+        seeder.seedData();
+    }
+}
