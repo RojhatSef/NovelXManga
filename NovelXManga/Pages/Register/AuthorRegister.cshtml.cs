@@ -1,9 +1,11 @@
 using MangaAccessService;
 using MangaModelService;
+using MangaModelService.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.ComponentModel.DataAnnotations;
 
 namespace NovelXManga.Pages.Register
 {
@@ -18,10 +20,17 @@ namespace NovelXManga.Pages.Register
         [BindProperty]
         public AuthorModel Authormodel { get; set; }
         [BindProperty]
-        public RegisterModel RegiModel { get; set; }
+        public ArtistModel Artistmodel { get; set; }
+        [BindProperty]
+        public VoiceActorModel VoiceActor { get; set; }
+        [BindProperty]
+        public AuthorViewModel authorViewModel { get; set; }
         [BindProperty]
         public IFormFile? Photo { get; set; }
 
+        [BindProperty]
+        [EnumDataType(typeof(Creator))]
+        public Creator Creators { get; set; }
         public AuthorRegisterModel(UserManager<IdentityUser> userManager, MangaNNovelAuthDBContext nNovelAuthDBContext, SignInManager<IdentityUser> signInManager, IWebHostEnvironment webHostEnvironment)
         {
             this.userManager = userManager;
@@ -29,45 +38,64 @@ namespace NovelXManga.Pages.Register
             this.signInManager = signInManager;
             this.webHostEnvironment = webHostEnvironment;
 
+
+
+        }
+        public enum Creator
+        {
+            Voice = 1,
+            Artist = 2,
+            Author = 3
         }
 
 
-        public void onGet()
+        public void onPost()
         {
-
-        }
-        public async Task<IActionResult> OnPostAsync()
-        {
-            if (ModelState.IsValid)
+            if (Creators.Equals(3))
             {
-                if (Authormodel.userPhotoPath != null)
+                if (ModelState.IsValid)
                 {
-                    string filePath = Path.Combine(webHostEnvironment.WebRootPath, "images/MangaImage", Authormodel.userPhotoPath);
-                    if (!filePath.EndsWith("NoPhoto.png")) { System.IO.File.Delete(filePath); }
-                }
-                var user = new AuthorModel()
-                {
-                    UserName = Authormodel.FirstName,
-                    Email = RegiModel.Email,
-                    FirstName = Authormodel.FirstName,
-                    LastName = Authormodel.LastName,
-                    userPhotoPath = ProcessUploadedFile(),
-
-                };
-                var result = await userManager.CreateAsync(user, RegiModel.Password);
-                if (result.Succeeded)
-                {
-                    await signInManager.SignInAsync(user, isPersistent: false);
-                    return RedirectToPage("/Index");
-
-                }
-                foreach (var error in result.Errors)
-                {
-                    ModelState.AddModelError(string.Empty, error.Description);
+                    Authormodel = new AuthorModel
+                    {
+                        FirstName = authorViewModel.FirstName,
+                        LastName = authorViewModel.LastName,
+                        AssociatedNames = authorViewModel.AssociatedNames,
+                        NameInNative = authorViewModel.NameInNative,
+                    };
                 }
             }
-            return Page();
+            else if (Creators.Equals(2))
+            {
+                if (ModelState.IsValid)
+                {
+                    Artistmodel = new ArtistModel
+                    {
+                        FirstName = authorViewModel.FirstName,
+                        LastName = authorViewModel.LastName,
+                        AssociatedNames = authorViewModel.AssociatedNames,
+                        NameInNative = authorViewModel.NameInNative,
+                    };
+                }
+            }
+            else
+            {
+                if (ModelState.IsValid)
+                {
+                    VoiceActor = new VoiceActorModel
+                    {
+                        FirstName = authorViewModel.FirstName,
+                        LastName = authorViewModel.LastName,
+                        AssociatedNames = authorViewModel.AssociatedNames,
+                        NameInNative = authorViewModel.NameInNative,
+                    };
+                }
+            }
+
+
+
+
         }
+
         private string ProcessUploadedFile()
         {
             string uniqueFileName = null;

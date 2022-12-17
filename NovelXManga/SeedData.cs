@@ -21,17 +21,49 @@ namespace NovelXManga
             this.webHostEnvironment = webHostEnvironment;
             this.roleManager = roleManager;
         }
-        public async void seedData()
+        public async Task seedData()
         {
             context.Database.EnsureCreated();
             if (!context.mangaModels.Any())
             {
                 string filePath = Path.Combine(webHostEnvironment.WebRootPath, "images/MangaImage/0f3f5666-7cb9-4713-a779-f1e1546a0d5f");
+                int rolesCount = roleManager.Roles.Count();
+                // creat an array loop our array add all our roles to the database
+                string[] roles = { "Admin", "NormalUser", "Owner", "AdminControl", "Updater", "ShadowBanned", "Scanlators", "ForumAdmin", "Author", "Artist", "Publisher", "Marketing", "SearchEngineOS", "FrontEndDeveloper", "SupportGroups", "BackEndDeveloper", "ProjectManager", "Tester" };
+                if (rolesCount == 0)
+                {
+                    for (int i = 0; i < roles.Length; i++)
+                    {
+                        if (!await roleManager.RoleExistsAsync(roles[i]))
+                        {
+                            var role = new IdentityRole();
+                            role.Name = roles[i];
+                            await roleManager.CreateAsync(role);
+                        }
+                    }
+                }
                 var user = new UserModel { UserName = "TestUSer", Email = "TestUser@hotmail.com", userPhotoPath = filePath };
 
-                var author = new AuthorModel { UserName = "TestAuthor", Email = "TestAuthor@hotmail.com", FirstName = "TestAuthor", LastName = "Sefdin", userPhotoPath = filePath };
-
-
+                var NewArtist = new ArtistModel
+                {
+                    FirstName = "Masashi ",
+                    LastName = "Kishimoto",
+                    Biography = "Graduated from the Faculty of Arts, Kyushu Sangyo University. \r\n\r\nMarried in 2003 and has children.\r\n\r\nKishimoto had a deal with Jump editorial department that he will receive Toriyama Akira's autographed paper as a reward when the serialization of Naruto reaches the third anniversary.\r\n\r\nHe and Oda Eiichiro are both rival and close friend.\r\n\r\nHis younger twin brother KISHIMOTO Seishi is 666 Satan’s author. Their art has been remarked as being very similar and accusations of plagiarism were made, either that Seishi had copied his brother or vice versa. However, Seishi notes in one of the volumes of his manga that the similarities are not intentional and that the occurrence would have been likely because they have been influenced by many of the same things. After several accusations, Masashi Kishimoto has asked that fans stop calling his brother a \"copy-cat\". His former assistants were ITAKURA Yuuichi, TASAKA Ryou and KAJISA Osamu.\r\nWhile IKEMOTO Mikio, TAIRA Kenji and OKUBO Akira were his assistants and now are his collaborators.\r\n\r\nHis favorite manga and anime are Dragon Ball, Yu Yu Hakusho, HUNTER x HUNTER, Ninku, AKIRA, Ghost in the Shell & Jin-Roh"
+                   ,
+                    BirthPlace = "Japan",
+                    Gender = "Male",
+                    WorkingAt = "Shueisha"
+                };
+                var newAuthor = new AuthorModel
+                {
+                    FirstName = "Masashi ",
+                    LastName = "Kishimoto",
+                    Biography = "Graduated from the Faculty of Arts, Kyushu Sangyo University. \r\n\r\nMarried in 2003 and has children.\r\n\r\nKishimoto had a deal with Jump editorial department that he will receive Toriyama Akira's autographed paper as a reward when the serialization of Naruto reaches the third anniversary.\r\n\r\nHe and Oda Eiichiro are both rival and close friend.\r\n\r\nHis younger twin brother KISHIMOTO Seishi is 666 Satan’s author. Their art has been remarked as being very similar and accusations of plagiarism were made, either that Seishi had copied his brother or vice versa. However, Seishi notes in one of the volumes of his manga that the similarities are not intentional and that the occurrence would have been likely because they have been influenced by many of the same things. After several accusations, Masashi Kishimoto has asked that fans stop calling his brother a \"copy-cat\". His former assistants were ITAKURA Yuuichi, TASAKA Ryou and KAJISA Osamu.\r\nWhile IKEMOTO Mikio, TAIRA Kenji and OKUBO Akira were his assistants and now are his collaborators.\r\n\r\nHis favorite manga and anime are Dragon Ball, Yu Yu Hakusho, HUNTER x HUNTER, Ninku, AKIRA, Ghost in the Shell & Jin-Roh"
+                  ,
+                    BirthPlace = "Japan",
+                    Gender = "Male",
+                    WorkingAt = "Shueisha"
+                };
                 MasterModel masterModel = new MasterModel
                 {
                     MangaModels = new MangaModel
@@ -44,6 +76,10 @@ namespace NovelXManga
                         OfficialTranslations = "Japanese",
                         Description = "A Kid who got something stuck in his stomach",
                         CompletelyTranslated = "Completed",
+                        ArtistModels = new List<ArtistModel> { NewArtist },
+                        Authormodels = new List<AuthorModel> { newAuthor },
+                        OfficalLanguage = "Japanese",
+
                         ISBN10 = null,
                         ISBN13 = null,
                         score = 10,
@@ -52,6 +88,7 @@ namespace NovelXManga
                         Type = "Manga",
                         OriginalPublisher = "SquareEnix",
                         orignalWebtoon = null,
+
                     },
                     GroupScanlating = null,
                     GroupScanlatingID = null,
@@ -73,6 +110,7 @@ namespace NovelXManga
                         ISBN10 = "1506727549",
                         ISBN13 = "978-1506717913",
                         score = 10,
+                        ArtistModels = new List<ArtistModel> { },
                         EndingYear = DateTime.Now,
                         StatusInCountryOfOrigin = "11, completed",
                         Type = "Manga",
@@ -84,27 +122,18 @@ namespace NovelXManga
                     userModels = null,
                     userId = null,
                 };
-                IdentityRole identityRole = new IdentityRole
-                {
-                    Name = "Admin"
-                };
-                IdentityResult resultRole = await roleManager.CreateAsync(identityRole);
-                IdentityRole identityRole2 = new IdentityRole
-                {
-                    Name = "NormalUser"
-                };
-                IdentityResult resultRole2 = await roleManager.CreateAsync(identityRole2);
-                IdentityRole ownerRole = new IdentityRole
-                {
-                    Name = "Owner"
-                };
-                IdentityResult resultRole3 = await roleManager.CreateAsync(ownerRole);
+
+
 
                 context.MasterModels.Add(masterModel);
                 context.MasterModels.Add(masterModel2);
                 context.SaveChanges();
                 var result = await userManager.CreateAsync(user, "Rojhat123!");
-                var authorresult = await userManager.CreateAsync(author, "Author123!");
+                if (result.Succeeded)
+                { // adds a role owner to the testobject
+                    var resultRole = await userManager.AddToRoleAsync(user, "Owner");
+                }
+
 
             }
 

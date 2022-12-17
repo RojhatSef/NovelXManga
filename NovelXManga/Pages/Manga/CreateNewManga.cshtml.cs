@@ -65,6 +65,8 @@ namespace NovelXManga.Pages.Manga
                             PhotoPath = ProcessUploadedFile(),
                             ReleaseYear = ReleaseYear,
                             BlogModel = new BlogModel { mangaName = mangaModelView.MangaName },
+
+
                         },
                         GroupScanlating = null,
                         GroupScanlatingID = null,

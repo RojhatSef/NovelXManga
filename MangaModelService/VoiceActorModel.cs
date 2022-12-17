@@ -2,10 +2,10 @@
 
 namespace MangaModelService
 {
-    public class AuthorModel
+    public class VoiceActorModel
     {
         [Key]
-        public int ArtistId { get; set; }
+        public int VoiceAcotrId { get; set; }
         [Required]
         public string FirstName { get; set; }
 
@@ -31,6 +31,5 @@ namespace MangaModelService
         public int? MangaID { get; set; }
         public MangaModel? mangaModel { get; set; }
 
-        //ICollection<MangaModel> mangaModels { get; set; }
     }
 }

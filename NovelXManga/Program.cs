@@ -28,7 +28,7 @@ builder.Services.ConfigureApplicationCookie(config =>
     config.LoginPath = "/Login/LoginIndex";
 });
 var app = builder.Build();
-database();
+SeedDatainitialize(app);
 
 
 // Configure the HTTP request pipeline.
@@ -49,11 +49,23 @@ app.UseAuthorization();
 app.MapRazorPages();
 
 app.Run();
-void database()
+static void SeedDatainitialize(IHost host)
 {
-    using (var scope = app.Services.CreateScope())
+    var scopefactorty = host.Services.GetService<IServiceScopeFactory>();
+    using (var scope = scopefactorty.CreateScope())
     {
-        var seeder = scope.ServiceProvider.GetRequiredService<SeedData>();
-        seeder.seedData();
+        var seed = scope.ServiceProvider.GetService<SeedData>();
+        seed.seedData().Wait();
     }
 }
+
+//todo
+//fix photopath
+// fix returnURl
+// fix userRoles and users 
+// add Roles to users, 
+// fix Updates work correctly 
+// fix removing users
+// fix Fix tags and genres
+// link genres to manga
+// 

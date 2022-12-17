@@ -23,6 +23,7 @@ namespace MangaModelService
         public string? OfficialTranslations { get; set; }
         public double? score { get; set; }
         public string? Type { get; set; }
+        public string? OfficalLanguage { get; set; }
 
 
         public string? PhotoPath { get; set; }
@@ -36,6 +37,10 @@ namespace MangaModelService
 
         public int MasterID { get; set; }
         public MasterModel MasterModels { get; set; }
+        public ICollection<AuthorModel>? Authormodels { get; set; }
+        public ICollection<ArtistModel>? ArtistModels { get; set; }
+        public ICollection<VoiceActorModel>? VoiceActors { get; set; }
+
         public ICollection<GenresModel>? GenresModels { get; set; }
         public ICollection<TagModel>? TagsModels { get; set; }
 

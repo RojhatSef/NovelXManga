@@ -6,8 +6,13 @@ namespace MangaModelService
     {
         [Key]
         public int? PostId { get; set; }
-
+        [Required]
+        [MinLength(3)]
+        [MaxLength(50)]
         public string Title { get; set; }
+        [Required]
+        [MinLength(10)]
+        [MaxLength(750)]
         public string postComment { set; get; }
 
         public double? score { get; set; }

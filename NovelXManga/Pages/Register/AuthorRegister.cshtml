@@ -13,36 +13,73 @@
 
             <h1>Register Author</h1>
             <form method="post">
-                <input hidden asp-for="Authormodel.userPhotoPath" />
+                <input hidden asp-for="Authormodel.PhotoPath" />
+                <input hidden asp-for="authorViewModel.creatorId" />
+                <input hidden asp-for="authorViewModel.MangaID" />
+                <input hidden asp-for="authorViewModel.mangaModel" />
+                <input hidden asp-for="authorViewModel.AmountOfWork" />
+
                 <div class="text-danger" asp-validation-summary="All"></div>
+      
+                <select asp-for="Creators" asp-items="Html.GetEnumSelectList<Model.Creators>()">
+                    <option selected="selected" value="">Please select</option>
+                </select>
                 <div class="mb-3">
-                    <label class="form-label" asp-for="RegiModel.Email">Email Adress</label>
-                    <input type="email" asp-for="RegiModel.Email" class="form-control" />
-                    <span asp-validation-for="RegiModel.Email" class="text-danger"></span>
-
+                    <label class="form-label" asp-for="authorViewModel.FirstName">Name</label>
+                    <input type="text" asp-for="authorViewModel.FirstName" class="form-control" />
+                    <span asp-validation-for="authorViewModel.FirstName" class="text-danger"></span>
                 </div>
                 <div class="mb-3">
-                    <label class="form-label" asp-for="Authormodel.FirstName">Name</label>
-                    <input type="text" asp-for="Authormodel.FirstName" class="form-control" />
-                    <span asp-validation-for="Authormodel.FirstName" class="text-danger"></span>
-
+                    <label class="form-label" asp-for="authorViewModel.LastName">Family name</label>
+                    <input type="text" asp-for="authorViewModel.LastName" class="form-control" />
+                    <span asp-validation-for="authorViewModel.LastName" class="text-danger"></span>
                 </div>
                 <div class="mb-3">
-                    <label class="form-label" asp-for="Authormodel.LastName">Family Name</label>
-                    <input type="text" asp-for="Authormodel.LastName" class="form-control" />
-                    <span asp-validation-for="Authormodel.LastName" class="text-danger"></span>
-
+                    <label class="form-label" asp-for="authorViewModel.NameInNative">Name in native language</label>
+                    <input type="text" asp-for="authorViewModel.NameInNative" class="form-control" />
+                </div>
+                <div class="textbox">
+                    <label class="form-label" asp-for="authorViewModel.Biography">Biography</label>
+                    <input type="text" asp-for="authorViewModel.Biography" class="form-control" />
+         
                 </div>
                 <div class="mb-3">
-                    <label class="form-label" asp-for="RegiModel.Password">Password</label>
-                    <input type="password" asp-for="RegiModel.Password" class="form-control" />
-                    <span asp-validation-for="RegiModel.Password" class="text-danger"></span>
+                    <label class="form-label" asp-for="authorViewModel.reddit">Reddit Page</label>
+                    <input type="text" asp-for="authorViewModel.reddit" class="form-control" />
                 </div>
                 <div class="mb-3">
-                    <label class="form-label" asp-for="RegiModel.ConfirmPassword">Confirm Password</label>
-                    <input type="password" asp-for="RegiModel.ConfirmPassword" class="form-control" />
-                    <span asp-validation-for="RegiModel.ConfirmPassword" class="text-danger"></span>
+                    <label class="form-label" asp-for="authorViewModel.Twitter">Twitter Page</label>
+                    <input type="text" asp-for="authorViewModel.Twitter" class="form-control" />
                 </div>
+                <div class="mb-3">
+                    <label class="form-label" asp-for="authorViewModel.Gender">Gender</label>
+                    <input type="text" asp-for="authorViewModel.Gender" class="form-control" />             
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" asp-for="authorViewModel.AuthorBorn">´Year of Birth</label>
+                    <input type="date" asp-for="authorViewModel.AuthorBorn" class="form-control" />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" asp-for="authorViewModel.officalWebsite">Offical Website</label>
+                    <input type="text" asp-for="authorViewModel.officalWebsite" class="form-control" />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" asp-for="authorViewModel.lastUpdate">Last updated work</label>
+                    <input type="date" asp-for="authorViewModel.lastUpdate" class="form-control" />
+                </div>
+                     <div class="mb-3">
+                    <label class="form-label" asp-for="authorViewModel.AuthorDeath">Death</label>
+                    <input type="date" asp-for="authorViewModel.reddit" class="form-control" />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" asp-for="authorViewModel.reddit">Reddit Page</label>
+                    <input type="text" asp-for="authorViewModel.reddit" class="form-control" />
+                </div>
+                 <div class="mb-3">
+                    <label class="form-label" asp-for="authorViewModel.reddit">Reddit Page</label>
+                    <input type="text" asp-for="authorViewModel.reddit" class="form-control" />
+                </div>
+     
                 <div class="form-group row">
                     <label asp-for="Photo" class="col-sm-2 col-form-label"></label>  <br />
                     <div class="col-sm-10">

@@ -1,11 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace MangaModelService
+namespace MangaModelService.ViewModels
 {
-    public class AuthorModel
+    public class AuthorViewModel
     {
-        [Key]
-        public int ArtistId { get; set; }
+
+        public int creatorId { get; set; }
         [Required]
         public string FirstName { get; set; }
 
@@ -19,18 +19,17 @@ namespace MangaModelService
 
         public string? Biography { get; set; }
         public string? NameInNative { get; set; }
-        public string? WikiPedia { get; set; }
         public List<string>? AssociatedNames { get; set; }
         public int? AmountOfWork { get; set; }
         public string? WorkingAt { get; set; }
+        public DateTime? lastUpdate { get; set; }
 
-        public DateTime? ArtistBorn { get; set; }
-        public DateTime? ArtistDeath { get; set; }
+        public DateTime? AuthorBorn { get; set; }
+        public DateTime? AuthorDeath { get; set; }
 
         public string? Contact { get; set; }
+
         public int? MangaID { get; set; }
         public MangaModel? mangaModel { get; set; }
-
-        //ICollection<MangaModel> mangaModels { get; set; }
     }
 }

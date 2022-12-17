@@ -1,0 +1,177 @@
+﻿@model MangaModel
+@{
+
+}
+<div class="container mt-5">
+    <div class="row justify-content-center align-items-center">
+        <div class="col-sm-12 col-md-12 col-1g-4">
+            <form method=post enctype="multipart/form-data">
+          
+          
+                <div class="mb-3">
+                    <label class="form-label" asp-for="MangaName"> Associated Names </label>
+
+
+                </div
+                @if(Model.AssociatedNames != null)
+                {
+                <div class="mb-3">
+                    <label class="form-label" asp-for="AssociatedNames"> Associated Names </label>               
+                </div>
+                }
+             
+                 @if(Model.Description != null)
+                {
+                  <div class="mb-3">
+                    <label class="form-label" asp-for="Description">Description</label>
+                
+                </div>
+                }
+            
+                @if(Model.ReleaseYear != null)
+                {
+                        <div class="mb-3">
+                    <label class="form-label" asp-for="ReleaseYear">Year Released</label>
+                  
+                </div>
+                }
+                @if(Model.EndingYear != null)
+                {
+                <div class="mb-3">
+                    <label class="form-label" asp-for="EndingYear"></label>
+                </div>
+                }
+            
+                       @if(Model.ISBN13 != null)
+                {
+                         <div class="mb-3">
+                    <label class="form-label" asp-for="ISBN13">ISBN13</label>
+                 
+                </div>
+                }
+           
+                       @if(Model.ISBN10 != null)
+                {
+                         <div class="mb-3">
+                    <label class="form-label" asp-for="ISBN10">ISBN10</label>
+                
+                </div>
+                }
+           
+                 @if(Model.Type != null)
+                {
+                         <div class="mb-3">
+                    <label class="form-label" asp-for="Type">Type</label>
+                 
+                </div>
+                }
+           
+                 @if(Model.OriginalPublisher != null)
+                {
+                        <div class="mb-3">
+                    <label class="form-label" asp-for="OriginalPublisher"></label>
+                   
+                </div>
+                }
+            
+                @if(Model.OfficialTranslations != null)
+                {
+                           <div class="mb-3">
+                    <label class="form-label" asp-for="OfficialTranslations"></label>
+                  
+                </div>
+                }
+         
+                @if(Model.OfficalLanguage != null)
+                {
+                           <div class="mb-3">
+                    <label class="form-label" asp-for="OfficalLanguage"></label>
+                   
+                </div>
+                }                    
+                @if(Model.orignalWebtoon != null)
+                {
+                <div class="mb-3">
+                    <label class="form-label" asp-for="orignalWebtoon"></label>
+                </div>
+                }
+              
+                @if(Model.StatusInCountryOfOrigin != null)
+                {
+                <div class="mb-3">
+                    <label class="form-label" asp-for="StatusInCountryOfOrigin"></label>
+                </div>
+                }
+                @if(Model.score != null)
+                {
+                <div class="mb-3">
+                    <label class="form-label" asp-for="orignalWebtoon"></label>
+                </div>
+                }
+                @if(Model.ArtistModels != null)
+                {
+                <div class="mb-3">
+                    <label class="form-label" asp-for="ArtistModels"></label>
+                </div>
+                }
+                @if(Model.Authormodels != null)
+                {
+                <div class="mb-3">
+                    <label class="form-label" asp-for="Authormodels"></label>
+                </div>
+                }
+                @if(Model.TagsModels != null)
+                {
+                <div class="mb-3">
+                    <label class="form-label" asp-for="TagsModels"></label>
+                </div>
+                }
+               @if(Model.CompletelyTranslated != null)
+                {
+                <div class="mb-3">
+                    <label class="form-label" asp-for="CompletelyTranslated"></label>
+                </div>
+                }
+               @if(Model.GenresModels != null)
+                {
+                <div class="mb-3">
+                    <label class="form-label" asp-for="GenresModels"></label>
+                </div>
+                }
+                @if(Model.RecommendedMangaModels != null)
+                {
+                <div class="mb-3">
+                    <label class="form-label" asp-for="RecommendedMangaModels"></label>
+                </div>
+                }
+               @if(Model.futureEvents != null)
+                {
+                <div class="mb-3">
+                    <label class="form-label" asp-for="futureEvents"></label>
+                </div>
+                }
+
+
+
+
+
+
+                <div class="form-group row">
+                    <label asp-for="PhotoPath" class="col-sm-2 col-form-label">Photo</label>  <br />
+                    <div class="col-sm-10">
+
+
+                    </div>
+                </div>
+                <br />
+                <br />
+                <div class="form-group row">
+                    <label asp-for="BlogModel.mangaName" class="col-sm-2 col-form-label">BlogModel</label>  <br />
+                    <div class="col-sm-10">
+ 
+   
+            </form>
+
+        </div>
+    </div>
+</div> 

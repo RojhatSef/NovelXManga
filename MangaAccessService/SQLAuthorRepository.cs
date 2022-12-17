@@ -45,7 +45,7 @@ namespace MangaAccessService
             {
                 return context.authorModels;
             }
-            return context.authorModels.Where(e => e.FirstName.Contains(searchTerm) || e.LastName.Contains(searchTerm) || e.Fullname.Contains(searchTerm));
+            return context.authorModels.Where(e => e.FirstName.Contains(searchTerm) || e.LastName.Contains(searchTerm) || e.AssociatedNames.Contains(searchTerm));
         }
 
         public AuthorModel Update(AuthorModel updateAuthorModel)
