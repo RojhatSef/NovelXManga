@@ -26,7 +26,11 @@ namespace NovelXManga.Pages.Register
         [BindProperty]
         public AuthorViewModel authorViewModel { get; set; }
         [BindProperty]
+        public string AssiocatedNamesPageStringName { get; set; }
+        [BindProperty]
         public IFormFile? Photo { get; set; }
+        [BindProperty]
+        public Creator creator { get; set; }
 
         [BindProperty]
         [EnumDataType(typeof(Creator))]
@@ -40,6 +44,13 @@ namespace NovelXManga.Pages.Register
 
 
 
+        }
+        public AssociatedNames names(string AssociatedNames)
+        {
+            AssociatedNames associatedNames = new AssociatedNames();
+            associatedNames.nameString = AssociatedNames;
+
+            return associatedNames;
         }
         public enum Creator
         {
@@ -55,40 +66,37 @@ namespace NovelXManga.Pages.Register
             {
                 if (ModelState.IsValid)
                 {
+                    var ListOfAssiocatedNames = names(AssiocatedNamesPageStringName);
                     Authormodel = new AuthorModel
                     {
                         FirstName = authorViewModel.FirstName,
                         LastName = authorViewModel.LastName,
-                        AssociatedNames = authorViewModel.AssociatedNames,
+                        AssociatedNames = new List<AssociatedNames> { ListOfAssiocatedNames },
                         NameInNative = authorViewModel.NameInNative,
                     };
                 }
             }
             else if (Creators.Equals(2))
             {
-                if (ModelState.IsValid)
+                var ListOfAssiocatedNames = names(AssiocatedNamesPageStringName);
+                Artistmodel = new ArtistModel
                 {
-                    Artistmodel = new ArtistModel
-                    {
-                        FirstName = authorViewModel.FirstName,
-                        LastName = authorViewModel.LastName,
-                        AssociatedNames = authorViewModel.AssociatedNames,
-                        NameInNative = authorViewModel.NameInNative,
-                    };
-                }
+                    FirstName = authorViewModel.FirstName,
+                    LastName = authorViewModel.LastName,
+                    AssociatedNames = new List<AssociatedNames> { ListOfAssiocatedNames },
+                    NameInNative = authorViewModel.NameInNative,
+                };
             }
             else
             {
-                if (ModelState.IsValid)
+                var ListOfAssiocatedNames = names(AssiocatedNamesPageStringName);
+                VoiceActor = new VoiceActorModel
                 {
-                    VoiceActor = new VoiceActorModel
-                    {
-                        FirstName = authorViewModel.FirstName,
-                        LastName = authorViewModel.LastName,
-                        AssociatedNames = authorViewModel.AssociatedNames,
-                        NameInNative = authorViewModel.NameInNative,
-                    };
-                }
+                    FirstName = authorViewModel.FirstName,
+                    LastName = authorViewModel.LastName,
+                    AssociatedNames = new List<AssociatedNames> { ListOfAssiocatedNames },
+                    NameInNative = authorViewModel.NameInNative,
+                };
             }
 
 

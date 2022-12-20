@@ -42,7 +42,13 @@ namespace NovelXManga.Pages.Manga
             this.mangaRepository = mangaRepository;
             this.webHostEnvironment = webHostEnvironment;
         }
+        public AssociatedNames names(string AssociatedNames)
+        {
+            AssociatedNames associatedNames = new AssociatedNames();
+            associatedNames.nameString = AssociatedNames;
 
+            return associatedNames;
+        }
 
         public IActionResult OnPostAsync()
         {
@@ -54,14 +60,17 @@ namespace NovelXManga.Pages.Manga
                 //    if (!filePath.EndsWith("NoPhoto.png")) { System.IO.File.Delete(filePath); }
                 //}
                 var newMangaModel = mangaNNovelAuthDBContext.mangaModels.FirstOrDefault(mm => mm.MangaName == MangaModelView.MangaName);
+                var ListOfAssiocatedNames = names(mangaModelView.AssociatedNames);
                 if (newMangaModel == null)
                 {
+
                     MasterModel masterModel = new MasterModel
                     {
+
                         MangaModels = new MangaModel
                         {
                             MangaName = mangaModelView.MangaName,
-                            AssociatedNames = mangaModelView.AssociatedNames,
+                            AssociatedNames = new List<AssociatedNames> { ListOfAssiocatedNames },
                             PhotoPath = ProcessUploadedFile(),
                             ReleaseYear = ReleaseYear,
                             BlogModel = new BlogModel { mangaName = mangaModelView.MangaName },

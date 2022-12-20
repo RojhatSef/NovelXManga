@@ -17,6 +17,7 @@ namespace MangaAccessService
         public DbSet<GroupScanlatingModel> groupScanlatingModels { get; set; }
         public DbSet<UserModel> UserModels { get; set; }
         public DbSet<StudioModel> studioModels { get; set; }
+        public DbSet<AssociatedNames> AssociatedNames { get; set; }
         public DbSet<PostModel> PostModels { get; set; }
         public DbSet<BlogModel> blogModels { get; set; }
         public DbSet<MangaModel> mangaModels { get; set; }
@@ -34,6 +35,9 @@ namespace MangaAccessService
             .HasOne(mm => mm.MangaModel)
             .WithOne(i => i.BlogModel)
             .HasForeignKey<MangaModel>(b => b.BlogModelId);
+
+
+
 
             base.OnModelCreating(modelBuilder);
             #region A test for other model building

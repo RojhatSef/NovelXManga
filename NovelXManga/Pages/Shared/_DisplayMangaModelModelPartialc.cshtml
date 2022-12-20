@@ -6,12 +6,14 @@
     <div class="row justify-content-center align-items-center">
         <div class="col-sm-12 col-md-12 col-1g-4">
             <form method=post enctype="multipart/form-data">
-          
+            <input hidden asp-for="MangaID" />
           
                 <div class="mb-3">
                     <label class="form-label" asp-for="MangaName"> Associated Names </label>
 
-
+                       <div class="row-cols-2 text-center"> 
+                  
+         </div>
                 </div
                 @if(Model.AssociatedNames != null)
                 {
@@ -50,9 +52,9 @@
                 </div>
                 }
            
-                       @if(Model.ISBN10 != null)
+               @if(Model.ISBN10 != null)
                 {
-                         <div class="mb-3">
+                  <div class="mb-3">
                     <label class="form-label" asp-for="ISBN10">ISBN10</label>
                 
                 </div>
@@ -76,7 +78,7 @@
             
                 @if(Model.OfficialTranslations != null)
                 {
-                           <div class="mb-3">
+                  <div class="mb-3">
                     <label class="form-label" asp-for="OfficialTranslations"></label>
                   
                 </div>
@@ -140,9 +142,23 @@
                 }
                 @if(Model.RecommendedMangaModels != null)
                 {
-                <div class="mb-3">
-                    <label class="form-label" asp-for="RecommendedMangaModels"></label>
+                    @foreach(var item in Model.RecommendedMangaModels)
+                    {
+                  <div class="mb-3">
+                    <label class="form-label" asp-for="@item.RecommendedMangaModels"></label>
                 </div>
+                    }
+            
+                }
+                        @if(Model.relatedSeries != null)
+                {
+                    @foreach(var item in Model.relatedSeries)
+                    {
+                  <div class="mb-3">
+                    <label class="form-label" asp-for="@item.relatedSeries"></label>
+                </div>
+                    }
+            
                 }
                @if(Model.futureEvents != null)
                 {
@@ -151,11 +167,6 @@
                 </div>
                 }
 
-
-
-
-
-
                 <div class="form-group row">
                     <label asp-for="PhotoPath" class="col-sm-2 col-form-label">Photo</label>  <br />
                     <div class="col-sm-10">
@@ -163,13 +174,16 @@
 
                     </div>
                 </div>
+                      <a asp-route-id="@Model.MangaID" class="btn btn-primary">View</a>
+               <a  asp-route-id="@Model.MangaID" class="btn btn-primary">Edit</a>
+               <a  asp-route-id="@Model.MangaID" class="btn btn-primary">Delete</a>      
                 <br />
                 <br />
                 <div class="form-group row">
                     <label asp-for="BlogModel.mangaName" class="col-sm-2 col-form-label">BlogModel</label>  <br />
                     <div class="col-sm-10">
  
-   
+        
             </form>
 
         </div>

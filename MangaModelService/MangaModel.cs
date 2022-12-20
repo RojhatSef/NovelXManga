@@ -11,8 +11,8 @@ namespace MangaModelService
         MinLength(2, ErrorMessage = "Name must contain at least 2 characters")]
 
         public string MangaName { get; set; }
-        public string? AssociatedNames { get; set; }
-        public string? relatedSeries { get; set; }
+        public ICollection<AssociatedNames>? AssociatedNames { get; set; }
+        public List<MangaModel>? relatedSeries { get; set; }
         public string? ISBN10 { get; set; }
         public string? ISBN13 { get; set; }
         public string? futureEvents { get; set; }
@@ -24,8 +24,6 @@ namespace MangaModelService
         public double? score { get; set; }
         public string? Type { get; set; }
         public string? OfficalLanguage { get; set; }
-
-
         public string? PhotoPath { get; set; }
 
         public string? Description { get; set; }

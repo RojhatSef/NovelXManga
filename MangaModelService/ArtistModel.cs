@@ -20,7 +20,7 @@ namespace MangaModelService
         public string? Biography { get; set; }
         public string? NameInNative { get; set; }
         public string? WikiPedia { get; set; }
-        public List<string>? AssociatedNames { get; set; }
+        public ICollection<AssociatedNames>? AssociatedNames { get; set; }
         public int? AmountOfWork { get; set; }
         public string? WorkingAt { get; set; }
 

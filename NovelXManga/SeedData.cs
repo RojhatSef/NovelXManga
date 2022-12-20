@@ -21,6 +21,13 @@ namespace NovelXManga
             this.webHostEnvironment = webHostEnvironment;
             this.roleManager = roleManager;
         }
+        public AssociatedNames names(string AssociatedNames)
+        {
+            AssociatedNames associatedNames = new AssociatedNames();
+            associatedNames.nameString = AssociatedNames;
+
+            return associatedNames;
+        }
         public async Task seedData()
         {
             context.Database.EnsureCreated();
@@ -42,6 +49,8 @@ namespace NovelXManga
                         }
                     }
                 }
+
+
                 var user = new UserModel { UserName = "TestUSer", Email = "TestUser@hotmail.com", userPhotoPath = filePath };
 
                 var NewArtist = new ArtistModel
@@ -64,12 +73,13 @@ namespace NovelXManga
                     Gender = "Male",
                     WorkingAt = "Shueisha"
                 };
+                var ListOfAssiocatedNames = names("Naruto Shippuden");
                 MasterModel masterModel = new MasterModel
                 {
                     MangaModels = new MangaModel
                     {
                         MangaName = "Naruto",
-                        AssociatedNames = "Naruto Shippuden",
+                        AssociatedNames = new List<AssociatedNames> { ListOfAssiocatedNames },
                         PhotoPath = filePath,
                         ReleaseYear = DateTime.Now,
                         BlogModel = new BlogModel { mangaName = "Naruto" },
@@ -95,12 +105,13 @@ namespace NovelXManga
                     userModels = null,
                     userId = null,
                 };
+                var ListOfAssiocatednames2 = names("Black Swordsman");
                 MasterModel masterModel2 = new MasterModel
                 {
                     MangaModels = new MangaModel
                     {
                         MangaName = "Berserk",
-                        AssociatedNames = "Berserk Max",
+                        AssociatedNames = new List<AssociatedNames> { ListOfAssiocatednames2 },
                         PhotoPath = filePath,
                         ReleaseYear = DateTime.Now,
                         BlogModel = new BlogModel { mangaName = "Berserk" },

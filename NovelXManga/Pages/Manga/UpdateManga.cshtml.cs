@@ -17,13 +17,33 @@ namespace NovelXManga.Pages.Manga
         private readonly MangaNNovelAuthDBContext context;
         private readonly UserManager<UserModel> userManager;
         private readonly IWebHostEnvironment webHostEnvironment;
+
+        public IEnumerable<MangaModel> mangaModel { get; set; }
         public UpdateMangaModel(MangaNNovelAuthDBContext context)
         {
             this.context = context;
         }
-        public void OnGet()
+        public void OnGet(int id)
         {
 
         }
+
+        //public async Task<IActionResult> onPost()
+        //{
+        //    foreach (var item in currentMangaModel.RecommendedMangaModels)
+        //    {
+
+
+        //    }
+        //    currentMangaModel.ISBN10 = MangaModelView.ISBN10;
+
+        //    currentMangaModel.RecommendedMangaModels.Add(context.mangaModels.FirstOrDefault(e => e.MangaName == MangaModelView.MangaName));
+
+
+        //    currentMangaModel.ISBN13 = MangaModelView.ISBN10;
+
+        //    return Page();
+
+        //}
     }
 }

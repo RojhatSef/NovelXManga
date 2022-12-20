@@ -37,7 +37,7 @@ namespace NovelXManga.Pages.Register
                     if (result.Succeeded)
                     {
                         await signInManager.SignInAsync(user, isPersistent: false);
-                        var resultToRole = await userManager.AddToRoleAsync(user, "User");
+                        var resultToRole = await userManager.AddToRoleAsync(user, "NormalUser");
                         return RedirectToPage("/Index");
                     }
                     foreach (var error in result.Errors)

@@ -5,7 +5,7 @@ namespace MangaModelService.ViewModels
     public class AuthorViewModel
     {
 
-        public int creatorId { get; set; }
+        public int ArtistId { get; set; }
         [Required]
         public string FirstName { get; set; }
 
@@ -19,16 +19,16 @@ namespace MangaModelService.ViewModels
 
         public string? Biography { get; set; }
         public string? NameInNative { get; set; }
-        public List<string>? AssociatedNames { get; set; }
+        public string? WikiPedia { get; set; }
+        public ICollection<AssociatedNames>? AssociatedNames { get; set; }
         public int? AmountOfWork { get; set; }
         public string? WorkingAt { get; set; }
-        public DateTime? lastUpdate { get; set; }
+        public DateTime? LastUpdate { get; set; }
 
-        public DateTime? AuthorBorn { get; set; }
-        public DateTime? AuthorDeath { get; set; }
+        public DateTime? born { get; set; }
+        public DateTime? death { get; set; }
 
         public string? Contact { get; set; }
-
         public int? MangaID { get; set; }
         public MangaModel? mangaModel { get; set; }
     }
