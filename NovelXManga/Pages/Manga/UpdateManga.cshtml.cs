@@ -12,6 +12,7 @@ namespace NovelXManga.Pages.Manga
     [Authorize(Roles = "Owner")]
     [Authorize(Roles = "AdminControl")]
 
+
     public class UpdateMangaModel : PageModel
     {
         private readonly MangaNNovelAuthDBContext context;
@@ -23,27 +24,8 @@ namespace NovelXManga.Pages.Manga
         {
             this.context = context;
         }
-        public void OnGet(int id)
-        {
-
-        }
-
-        //public async Task<IActionResult> onPost()
-        //{
-        //    foreach (var item in currentMangaModel.RecommendedMangaModels)
-        //    {
 
 
-        //    }
-        //    currentMangaModel.ISBN10 = MangaModelView.ISBN10;
 
-        //    currentMangaModel.RecommendedMangaModels.Add(context.mangaModels.FirstOrDefault(e => e.MangaName == MangaModelView.MangaName));
-
-
-        //    currentMangaModel.ISBN13 = MangaModelView.ISBN10;
-
-        //    return Page();
-
-        //}
     }
 }

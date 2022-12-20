@@ -1,0 +1,173 @@
+﻿@page
+@model NovelXManga.Pages.Manga.AllMangasModel
+@{
+}
+
+<div>Hello world</div>
+@foreach (var Books in Model.GetAllBooks)
+{
+    <div class="row">
+    </div>
+    @if (Books.AssociatedNames != null)
+    {
+        @foreach (var item in Books.AssociatedNames)
+        {
+            <div class="mb-3">
+                <label class="form-label" asp-for="@Books.AssociatedNames">@Books.AssociatedNames </label>
+            </div>
+        }
+ 
+    }
+
+    @if (Books.Description != null)
+    {
+        <div class="mb-3">
+            <label class="form-label" asp-for="@Books.Description">@Books.Description</label>
+
+        </div>
+    }
+
+    @if (Books.ReleaseYear != null)
+    {
+        <div class="mb-3">
+            <label class="form-label" asp-for="@Books.ReleaseYear">@Books.ReleaseYear</label>
+
+        </div>
+    }
+    @if (Books.EndingYear != null)
+    {
+        <div class="mb-3">
+            <label class="form-label" asp-for="@Books.EndingYear"></label>
+        </div>
+    }
+
+    @if (Books.ISBN13 != null)
+    {
+        <div class="mb-3">
+            <label class="form-label" asp-for="@Books.ISBN13">ISBN13</label>
+
+        </div>
+    }
+
+    @if (Books.ISBN10 != null)
+    {
+        <div class="mb-3">
+            <label class="form-label" asp-for="@Books.ISBN10">ISBN10</label>
+
+        </div>
+    }
+
+    @if (Books.Type != null)
+    {
+        <div class="mb-3">
+            <label class="form-label" asp-for="@Books.Type">Type</label>
+
+        </div>
+    }
+
+    @if (Books.OriginalPublisher != null)
+    {
+        <div class="mb-3">
+            <label class="form-label" asp-for="@Books.OriginalPublisher"></label>
+
+        </div>
+    }
+
+    @if (Books.OfficialTranslations != null)
+    {
+        <div class="mb-3">
+            <label class="form-label" asp-for="@Books.OfficialTranslations"></label>
+
+        </div>
+    }
+
+    @if (Books.OfficalLanguage != null)
+    {
+        <div class="mb-3">
+            <label class="form-label" asp-for="@Books.OfficalLanguage"></label>
+
+        </div>
+    }
+    @if (Books.orignalWebtoon != null)
+    {
+        <div class="mb-3">
+            <label class="form-label" asp-for="@Books.orignalWebtoon"></label>
+        </div>
+    }
+
+    @if (Books.StatusInCountryOfOrigin != null)
+    {
+        <div class="mb-3">
+            <label class="form-label" asp-for="@Books.StatusInCountryOfOrigin"></label>
+        </div>
+    }
+    @if (Books.score != null)
+    {
+        <div class="mb-3">
+            <label class="form-label" asp-for="@Books.orignalWebtoon"></label>
+        </div>
+    }
+    @if (Books.ArtistModels != null)
+    {
+        <div class="mb-3">
+            <label class="form-label" asp-for="@Books.ArtistModels"></label>
+        </div>
+    }
+    @if (Books.Authormodels != null)
+    {
+        <div class="mb-3">
+            <label class="form-label" asp-for="@Books.Authormodels"></label>
+        </div>
+    }
+    @if (Books.TagsModels != null)
+    {
+        <div class="mb-3">
+            <label class="form-label" asp-for="@Books.TagsModels"></label>
+        </div>
+    }
+    @if (Books.CompletelyTranslated != null)
+    {
+        <div class="mb-3">
+            <label class="form-label" asp-for="@Books.CompletelyTranslated"></label>
+        </div>
+    }
+    @if (Books.GenresModels != null)
+    {
+        <div class="mb-3">
+            <label class="form-label" asp-for="@Books.GenresModels"></label>
+        </div>
+    }
+    @if (Books.RecommendedMangaModels != null)
+    {
+        @foreach (var item in Books.RecommendedMangaModels)
+        {
+            <div class="mb-3">
+                <label class="form-label" asp-for="@item.RecommendedMangaModels"></label>
+            </div>
+        }
+
+    }
+    @if (Books.relatedSeries != null)
+    {
+        @foreach (var item in Books.relatedSeries)
+        {
+            <div class="mb-3">
+                <label class="form-label" asp-for="@item.relatedSeries"></label>
+            </div>
+        }
+
+    }
+    @if (Books.futureEvents != null)
+    {
+        <div class="mb-3">
+            <label class="form-label" asp-for="@Books.futureEvents"></label>
+        </div>
+    }
+
+    <div class="form-group row">
+        <label asp-for="@Books.PhotoPath" class="col-sm-2 col-form-label">Photo</label>  <br />
+        <div class="col-sm-10">
+        </div>
+    </div>
+
+}

@@ -74,12 +74,13 @@ namespace NovelXManga
                     WorkingAt = "Shueisha"
                 };
                 var ListOfAssiocatedNames = names("Naruto Shippuden");
+                var ListOfAssiocatedNames3 = names("Naluto");
                 MasterModel masterModel = new MasterModel
                 {
                     MangaModels = new MangaModel
                     {
                         MangaName = "Naruto",
-                        AssociatedNames = new List<AssociatedNames> { ListOfAssiocatedNames },
+                        AssociatedNames = new List<AssociatedNames> { ListOfAssiocatedNames, ListOfAssiocatedNames3 },
                         PhotoPath = filePath,
                         ReleaseYear = DateTime.Now,
                         BlogModel = new BlogModel { mangaName = "Naruto" },
@@ -90,8 +91,8 @@ namespace NovelXManga
                         Authormodels = new List<AuthorModel> { newAuthor },
                         OfficalLanguage = "Japanese",
 
-                        ISBN10 = null,
-                        ISBN13 = null,
+                        ISBN10 = "1569319006",
+                        ISBN13 = "978-1569319000",
                         score = 10,
                         EndingYear = DateTime.Now,
                         StatusInCountryOfOrigin = "11, completed",
