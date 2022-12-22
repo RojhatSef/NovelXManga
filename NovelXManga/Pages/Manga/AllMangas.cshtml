@@ -8,6 +8,14 @@
 {
     <div class="row">
     </div>
+
+    @if (Books.MangaName != null)
+    {
+        <div class="mb-3">
+            <label class="form-label" asp-for="@Books.MangaName">@Books.MangaName</label>
+
+        </div>
+    }
     @if (Books.AssociatedNames != null)
     {
         @foreach (var item in Books.AssociatedNames)

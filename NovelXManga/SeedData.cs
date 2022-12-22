@@ -90,7 +90,6 @@ namespace NovelXManga
                         ArtistModels = new List<ArtistModel> { NewArtist },
                         Authormodels = new List<AuthorModel> { newAuthor },
                         OfficalLanguage = "Japanese",
-
                         ISBN10 = "1569319006",
                         ISBN13 = "978-1569319000",
                         score = 10,

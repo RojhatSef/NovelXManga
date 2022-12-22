@@ -22,6 +22,7 @@ namespace NovelXManga.Pages.Manga
         {
             IEnumerable<MangaModel> GetAllBook = mangaRepository.GetAllManga();
             GetAllBooks = GetAllBook;
+
         }
     }
 }
