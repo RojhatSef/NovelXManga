@@ -11,8 +11,8 @@ namespace MangaModelService
         MinLength(2, ErrorMessage = "Name must contain at least 2 characters")]
 
         public string MangaName { get; set; }
-        public ICollection<AssociatedNames>? AssociatedNames { get; set; }
-        public List<MangaModel>? relatedSeries { get; set; }
+        public virtual ICollection<AssociatedNames>? AssociatedNames { get; set; }
+        public virtual List<MangaModel>? relatedSeries { get; set; }
         public string? ISBN10 { get; set; }
         public string? ISBN13 { get; set; }
         public string? futureEvents { get; set; }
@@ -29,18 +29,18 @@ namespace MangaModelService
         public string? Description { get; set; }
         public DateTime? ReleaseYear { get; set; }
         public DateTime? EndingYear { get; set; }
-        public List<MangaModel>? RecommendedMangaModels { get; set; }
+        public virtual List<MangaModel>? RecommendedMangaModels { get; set; }
         public int BlogModelId { get; set; }
         public BlogModel BlogModel { get; set; }
 
         public int MasterID { get; set; }
         public MasterModel MasterModels { get; set; }
-        public ICollection<AuthorModel>? Authormodels { get; set; }
-        public ICollection<ArtistModel>? ArtistModels { get; set; }
-        public ICollection<VoiceActorModel>? VoiceActors { get; set; }
+        public virtual ICollection<AuthorModel>? Authormodels { get; set; }
+        public virtual ICollection<ArtistModel>? ArtistModels { get; set; }
+        public virtual ICollection<VoiceActorModel>? VoiceActors { get; set; }
 
-        public ICollection<GenresModel>? GenresModels { get; set; }
-        public ICollection<TagModel>? TagsModels { get; set; }
+        public virtual ICollection<GenresModel>? GenresModels { get; set; }
+        public virtual ICollection<TagModel>? TagsModels { get; set; }
 
 
 

@@ -10,11 +10,11 @@ namespace MangaModelService
         public string GroupName { get; set; }
         public string? PhotoPath { get; set; }
         public string? website { get; set; }
-        public ICollection<ChapterModel>? chapterModels { get; set; }
+        public virtual ICollection<ChapterModel>? chapterModels { get; set; }
         public int? MasterID { get; set; }
-        public ICollection<MasterModel>? MasterModels { get; set; }
+        public virtual ICollection<MasterModel>? MasterModels { get; set; }
         public string? userID { get; set; }
-        public ICollection<UserModel>? userModels { get; set; }
+        public virtual ICollection<UserModel>? userModels { get; set; }
         //ICollection<MangaModel> mangaModels { get; set; }
     }
 }

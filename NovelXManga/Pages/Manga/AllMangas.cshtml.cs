@@ -1,6 +1,7 @@
 using MangaAccessService;
 using MangaModelService;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 
 namespace NovelXManga.Pages.Manga
 {
@@ -10,6 +11,7 @@ namespace NovelXManga.Pages.Manga
         private readonly IMangaRepository mangaRepository;
         private readonly IWebHostEnvironment webHostEnvironment;
 
+
         public AllMangasModel(MangaNNovelAuthDBContext mangaNNovelAuthDBContext, IMangaRepository mangaRepository, IWebHostEnvironment webHostEnvironment)
         {
             this.mangaNNovelAuthDBContext = mangaNNovelAuthDBContext;
@@ -17,10 +19,11 @@ namespace NovelXManga.Pages.Manga
             this.webHostEnvironment = webHostEnvironment;
         }
 
+        public IEnumerable<AssociatedNames> associatedNames { get; set; }
         public IEnumerable<MangaModel> GetAllBooks { get; set; }
         public void OnGet()
         {
-            IEnumerable<MangaModel> GetAllBook = mangaRepository.GetAllManga();
+            IEnumerable<MangaModel> GetAllBook = mangaNNovelAuthDBContext.mangaModels.Include(x => x.AssociatedNames).Include(e => e.BlogModel);
             GetAllBooks = GetAllBook;
 
         }

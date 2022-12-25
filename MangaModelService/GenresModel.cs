@@ -10,7 +10,7 @@ namespace MangaModelService
         public int MangaID { get; set; }
 
         public MangaModel mangaModel { get; set; }
-        //}
+
         //public enum GenresModel
         //{
         //    None,

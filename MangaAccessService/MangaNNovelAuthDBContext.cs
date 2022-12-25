@@ -36,6 +36,23 @@ namespace MangaAccessService
             .WithOne(i => i.BlogModel)
             .HasForeignKey<MangaModel>(b => b.BlogModelId);
 
+            modelBuilder.Entity<MangaModel>().Navigation(e => e.Authormodels).AutoInclude();
+            modelBuilder.Entity<MangaModel>().Navigation(e => e.ArtistModels).AutoInclude();
+            modelBuilder.Entity<MangaModel>().Navigation(e => e.VoiceActors).AutoInclude();
+            modelBuilder.Entity<MangaModel>().Navigation(e => e.AssociatedNames).AutoInclude();
+            modelBuilder.Entity<GroupScanlatingModel>().Navigation(e => e.chapterModels).AutoInclude();
+            modelBuilder.Entity<GroupScanlatingModel>().Navigation(e => e.MasterModels).AutoInclude();
+            modelBuilder.Entity<GroupScanlatingModel>().Navigation(e => e.userModels).AutoInclude();
+            modelBuilder.Entity<GroupScanlatingModel>().Navigation(e => e.chapterModels).AutoInclude();
+            modelBuilder.Entity<ArtistModel>().Navigation(e => e.AssociatedNames).AutoInclude();
+            modelBuilder.Entity<AuthorModel>().Navigation(e => e.AssociatedNames).AutoInclude();
+            modelBuilder.Entity<VoiceActorModel>().Navigation(e => e.AssociatedNames).AutoInclude();
+            modelBuilder.Entity<BlogModel>().Navigation(e => e.postsModel).AutoInclude();
+            modelBuilder.Entity<ChapterModel>().Navigation(e => e.GroupScanlatingModels).AutoInclude();
+            modelBuilder.Entity<MasterModel>().Navigation(e => e.GroupScanlating).AutoInclude();
+            modelBuilder.Entity<MasterModel>().Navigation(e => e.userModels).AutoInclude();
+
+
 
 
 

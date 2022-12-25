@@ -1,18 +1,21 @@
 ﻿@page
 @model NovelXManga.Pages.Manga.AllMangasModel
 @{
+  
 }
 
 <div>Hello world</div>
 @foreach (var Books in Model.GetAllBooks)
 {
+    
     <div class="row">
     </div>
+  
 
     @if (Books.MangaName != null)
     {
         <div class="mb-3">
-            <label class="form-label" asp-for="@Books.MangaName">@Books.MangaName</label>
+            <label class="form-label" asp-for="@Books.MangaName"> @Books.MangaName</label>
 
         </div>
     }
@@ -21,7 +24,7 @@
         @foreach (var item in Books.AssociatedNames)
         {
             <div class="mb-3">
-                <label class="form-label" asp-for="@Books.AssociatedNames">@Books.AssociatedNames </label>
+                <label class="form-label" asp-for="@item.nameString"> AssociatedNames: @item.nameString"  </label>
             </div>
         }
  

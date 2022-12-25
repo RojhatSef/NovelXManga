@@ -14,7 +14,7 @@ namespace MangaModelService
         public string chapterLinkNumber { get; set; }
 
         public int GroupScanlatingID { get; set; }
-        public GroupScanlatingModel GroupScanlatingModels { get; set; }
+        public virtual ICollection<GroupScanlatingModel> GroupScanlatingModels { get; set; }
 
 
 
