@@ -15,25 +15,51 @@
     @if (Books.MangaName != null)
     {
         <div class="mb-3">
-            <label class="form-label" asp-for="@Books.MangaName"> @Books.MangaName</label>
+            <label class="form-label" asp-for="@Books.MangaName">Title: @Books.MangaName</label>
 
         </div>
     }
+    <div>AssociatedNames: </div>
+    <div>
     @if (Books.AssociatedNames != null)
     {
         @foreach (var item in Books.AssociatedNames)
         {
-            <div class="mb-3">
-                <label class="form-label" asp-for="@item.nameString"> AssociatedNames: @item.nameString"  </label>
-            </div>
+
+                <label class="form-label" asp-for="@item.nameString"> @item.nameString ,  </label>
+          
+         
         }
  
+    }
+    </div>
+    <div>Tags: </div>
+     @if (Books.TagsModels != null)
+    {
+       
+        @foreach (var item in Books.TagsModels)
+        {
+           
+                <label class="form-label" asp-for="@item.TagName"> @item.TagName",  </label>
+        
+        }
+    }
+    <div>Genre: </div>
+    @if (Books.GenresModels != null)
+    {
+        @foreach (var item in Books.GenresModels)
+        {
+         
+                <label class="form-label" asp-for="@item.GenreName"> @item.GenreName",   </label>
+        
+        }
+
     }
 
     @if (Books.Description != null)
     {
         <div class="mb-3">
-            <label class="form-label" asp-for="@Books.Description">@Books.Description</label>
+            <label class="form-label" asp-for="@Books.Description">Description: @Books.Description</label>
 
         </div>
     }
@@ -41,21 +67,21 @@
     @if (Books.ReleaseYear != null)
     {
         <div class="mb-3">
-            <label class="form-label" asp-for="@Books.ReleaseYear">@Books.ReleaseYear</label>
+            <label class="form-label" asp-for="@Books.ReleaseYear">Book Release: @Books.ReleaseYear</label>
 
         </div>
     }
     @if (Books.EndingYear != null)
     {
         <div class="mb-3">
-            <label class="form-label" asp-for="@Books.EndingYear"></label>
+            <label class="form-label" asp-for="@Books.EndingYear">Ending: @Books.EndingYear</label>
         </div>
     }
 
     @if (Books.ISBN13 != null)
     {
         <div class="mb-3">
-            <label class="form-label" asp-for="@Books.ISBN13">ISBN13</label>
+            <label class="form-label" asp-for="@Books.ISBN13">ISBN13: @Books.ISBN13</label>
 
         </div>
     }
@@ -63,7 +89,7 @@
     @if (Books.ISBN10 != null)
     {
         <div class="mb-3">
-            <label class="form-label" asp-for="@Books.ISBN10">ISBN10</label>
+            <label class="form-label" asp-for="@Books.ISBN10">ISBN10: @Books.ISBN10</label>
 
         </div>
     }
@@ -71,7 +97,7 @@
     @if (Books.Type != null)
     {
         <div class="mb-3">
-            <label class="form-label" asp-for="@Books.Type">Type</label>
+            <label class="form-label" asp-for="@Books.Type">Type: @Books.Type</label>
 
         </div>
     }
@@ -79,15 +105,14 @@
     @if (Books.OriginalPublisher != null)
     {
         <div class="mb-3">
-            <label class="form-label" asp-for="@Books.OriginalPublisher"></label>
-
+            <label class="form-label" asp-for="@Books.OriginalPublisher">OriginalPublisher: @Books.OriginalPublisher"></label>
         </div>
     }
 
     @if (Books.OfficialTranslations != null)
     {
         <div class="mb-3">
-            <label class="form-label" asp-for="@Books.OfficialTranslations"></label>
+            <label class="form-label" asp-for="@Books.OfficialTranslations">OfficialTranslations: @Books.OfficialTranslations</label>
 
         </div>
     }
@@ -95,65 +120,73 @@
     @if (Books.OfficalLanguage != null)
     {
         <div class="mb-3">
-            <label class="form-label" asp-for="@Books.OfficalLanguage"></label>
+            <label class="form-label" asp-for="@Books.OfficalLanguage">OfficalLanguage: @Books.OfficalLanguage</label>
 
         </div>
     }
     @if (Books.orignalWebtoon != null)
     {
         <div class="mb-3">
-            <label class="form-label" asp-for="@Books.orignalWebtoon"></label>
+            <label class="form-label" asp-for="@Books.orignalWebtoon">orignalWebtoon: @Books.orignalWebtoon</label>
         </div>
     }
 
     @if (Books.StatusInCountryOfOrigin != null)
     {
         <div class="mb-3">
-            <label class="form-label" asp-for="@Books.StatusInCountryOfOrigin"></label>
+            <label class="form-label" asp-for="@Books.StatusInCountryOfOrigin">StatusInCountryOfOrigin: @Books.StatusInCountryOfOrigin</label>
         </div>
     }
     @if (Books.score != null)
     {
         <div class="mb-3">
-            <label class="form-label" asp-for="@Books.orignalWebtoon"></label>
+            <label class="form-label" asp-for="@Books.score">orignalWebtoon: @Books.score</label>
         </div>
     }
+    <div>Artist/s: </div>
     @if (Books.ArtistModels != null)
     {
-        <div class="mb-3">
-            <label class="form-label" asp-for="@Books.ArtistModels"></label>
-        </div>
+        @foreach (var item in Books.ArtistModels)
+        {
+            <div class="mb-3">
+                <label class="form-label" asp-for="@item.FirstName"> @item.FirstName" @item.LastName </label>
+            </div>
+        }
     }
+    <div>Author/s: </div>
     @if (Books.Authormodels != null)
     {
-        <div class="mb-3">
-            <label class="form-label" asp-for="@Books.Authormodels"></label>
-        </div>
+        @foreach (var item in Books.Authormodels)
+        {
+            <div class="mb-3">
+                <label class="form-label" asp-for="@item.FirstName"> @item.FirstName" @item.LastName </label>
+            </div>
+        }
     }
-    @if (Books.TagsModels != null)
+    <div>Audio Voice Actor/s: </div>
+    @if (Books.VoiceActors != null)
     {
-        <div class="mb-3">
-            <label class="form-label" asp-for="@Books.TagsModels"></label>
-        </div>
+        @foreach (var item in Books.VoiceActors)
+        {
+            <div class="mb-3">
+                <label class="form-label" asp-for="@item.FirstName"> @item.FirstName" @item.LastName </label>
+            </div>
+        }
     }
+
     @if (Books.CompletelyTranslated != null)
     {
         <div class="mb-3">
-            <label class="form-label" asp-for="@Books.CompletelyTranslated"></label>
+            <label class="form-label" asp-for="@Books.CompletelyTranslated">CompletelyTranslated: @Books.CompletelyTranslated</label>
         </div>
     }
-    @if (Books.GenresModels != null)
-    {
-        <div class="mb-3">
-            <label class="form-label" asp-for="@Books.GenresModels"></label>
-        </div>
-    }
+
     @if (Books.RecommendedMangaModels != null)
     {
         @foreach (var item in Books.RecommendedMangaModels)
         {
             <div class="mb-3">
-                <label class="form-label" asp-for="@item.RecommendedMangaModels"></label>
+                <label class="form-label" asp-for="@item.RecommendedMangaModels">@item.RecommendedMangaModels</label>
             </div>
         }
 
@@ -163,7 +196,7 @@
         @foreach (var item in Books.relatedSeries)
         {
             <div class="mb-3">
-                <label class="form-label" asp-for="@item.relatedSeries"></label>
+                <label class="form-label" asp-for="@item.relatedSeries">@item.relatedSeries</label>
             </div>
         }
 
@@ -171,12 +204,12 @@
     @if (Books.futureEvents != null)
     {
         <div class="mb-3">
-            <label class="form-label" asp-for="@Books.futureEvents"></label>
+            <label class="form-label" asp-for="@Books.futureEvents">Future Events: @Books.futureEvents</label>
         </div>
     }
 
     <div class="form-group row">
-        <label asp-for="@Books.PhotoPath" class="col-sm-2 col-form-label">Photo</label>  <br />
+        <label asp-for="@Books.PhotoPath" class="col-sm-2 col-form-label">@Books.PhotoPath</label>  <br />
         <div class="col-sm-10">
         </div>
     </div>
