@@ -65,6 +65,12 @@ static void SeedDatainitialize(IHost host)
 // fix userRoles and users 
 // add Roles to users, 
 // fix Updates work correctly 
+// fix the GroupScanlation Adds users /Manga
+// fix Master to users / group
+// fix User to Master and Group
+// Fix deleting commets
+// Fix Update Comments 
+// fix blog With comments
 // fix removing users
 // fix  tags and genres Done
 // link genres to manga Done 

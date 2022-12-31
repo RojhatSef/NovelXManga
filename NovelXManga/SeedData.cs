@@ -168,9 +168,11 @@ namespace NovelXManga
         #region SeedData
         public async Task seedData()
         {
+            // ensure we have a database if the user forgetts to update-database
             context.Database.EnsureCreated();
             if (!context.mangaModels.Any())
             {
+                //photopath needs fixing real bad
                 string filePath = Path.Combine(webHostEnvironment.WebRootPath, "images/MangaImage/0f3f5666-7cb9-4713-a779-f1e1546a0d5f");
                 int rolesCount = roleManager.Roles.Count();
                 // creat an array loop our array add all our roles to the database
@@ -187,10 +189,12 @@ namespace NovelXManga
                         }
                     }
                 }
+                // gives our manga an datetime. 
                 DateTime myDate = DateTime.ParseExact("1991-05-08 14:40:52,531", "yyyy-MM-dd HH:mm:ss,fff",
                                        System.Globalization.CultureInfo.InvariantCulture);
-
+                // creates a user,
                 var user = new UserModel { UserName = "TestUSer", Email = "TestUser@hotmail.com", userPhotoPath = filePath };
+                // create a "manga actually" but we use MasterModel to bind our users to a manga. 
                 MasterModel masterModel = new MasterModel
                 {
                     MangaModels = new MangaModel
