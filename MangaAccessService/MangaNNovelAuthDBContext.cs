@@ -16,6 +16,7 @@ namespace MangaAccessService
         public DbSet<ChapterModel> chapterModels { get; set; }
 
         public DbSet<GroupScanlatingModel> groupScanlatingModels { get; set; }
+        public DbSet<languages> Languages_ { get; set; }
         public DbSet<UserModel> UserModels { get; set; }
         public DbSet<StudioModel> studioModels { get; set; }
         public DbSet<AssociatedNames> AssociatedNames { get; set; }
@@ -44,6 +45,7 @@ namespace MangaAccessService
             modelBuilder.Entity<MangaModel>().Navigation(e => e.GenresModels).AutoInclude();
             modelBuilder.Entity<MangaModel>().Navigation(e => e.ArtistModels).AutoInclude();
             modelBuilder.Entity<MangaModel>().Navigation(e => e.VoiceActors).AutoInclude();
+
             modelBuilder.Entity<MangaModel>().Navigation(e => e.AssociatedNames).AutoInclude();
             modelBuilder.Entity<GroupScanlatingModel>().Navigation(e => e.chapterModels).AutoInclude();
             modelBuilder.Entity<GroupScanlatingModel>().Navigation(e => e.MasterModels).AutoInclude();
@@ -56,6 +58,7 @@ namespace MangaAccessService
             modelBuilder.Entity<ChapterModel>().Navigation(e => e.GroupScanlatingModels).AutoInclude();
             modelBuilder.Entity<MasterModel>().Navigation(e => e.GroupScanlating).AutoInclude();
             modelBuilder.Entity<MasterModel>().Navigation(e => e.userModels).AutoInclude();
+            modelBuilder.Entity<MasterModel>().Navigation(e => e.MangaModels).AutoInclude();
 
 
 

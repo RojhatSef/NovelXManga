@@ -23,7 +23,7 @@ namespace NovelXManga.Pages.Manga
         public IEnumerable<MangaModel> GetAllBooks { get; set; }
         public void OnGet()
         {
-            IEnumerable<MangaModel> GetAllBook = mangaNNovelAuthDBContext.mangaModels.Include(x => x.AssociatedNames).Include(e => e.BlogModel);
+            IEnumerable<MangaModel> GetAllBook = mangaNNovelAuthDBContext.mangaModels.Include(x => x.RecommendedMangaModels).Include(e => e.relatedSeries);
             GetAllBooks = GetAllBook;
 
         }

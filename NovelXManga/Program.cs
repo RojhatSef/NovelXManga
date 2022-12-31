@@ -66,6 +66,8 @@ static void SeedDatainitialize(IHost host)
 // add Roles to users, 
 // fix Updates work correctly 
 // fix removing users
-// fix Fix tags and genres
-// link genres to manga
+// fix  tags and genres Done
+// link genres to manga Done 
+// link tags  to manga Done 
+
 // 

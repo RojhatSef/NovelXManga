@@ -199,7 +199,6 @@ namespace NovelXManga
                         PhotoPath = "https://cdn.mangaupdates.com/image/i140134.png",
                         ReleaseYear = myDate,
                         BlogModel = new BlogModel { mangaName = "Naruto" },
-                        OfficialTranslations = "Japanese",
                         Description = "A Kid who got something stuck in his stomach",
                         CompletelyTranslated = "Completed",
                         OfficalLanguage = "Japanese",
@@ -227,10 +226,9 @@ namespace NovelXManga
                     {
                         MangaName = "Berserk",
 
-                        PhotoPath = filePath,
+                        PhotoPath = "https://cdn.mangaupdates.com/image/i372335.jpg",
                         ReleaseYear = DateTime.Now,
                         BlogModel = new BlogModel { mangaName = "Berserk" },
-                        OfficialTranslations = "Japanese",
                         Description = "A broken man",
                         CompletelyTranslated = "Ongoing",
                         ISBN10 = "1506727549",
@@ -265,6 +263,20 @@ namespace NovelXManga
                 CreatingAuthors();
             }
 
+        }
+        #endregion
+        public void addLanguages()
+        {
+            string[] LanguagesInput = { "English", "Japanese", "Spanish", "Mandarin", "Russian", "Arabic", };
+            var LangList = new List<languages>();
+            for (int i = 0; i < LanguagesInput.Length; i++)
+            {
+
+                languages newLang = new languages();
+                newLang.LanguageName = LanguagesInput[i];
+                LangList.Add(newLang);
+            }
+            context.Languages_.AddRange(LangList);
         }
         public void CombineGenreTag()
         {
@@ -315,7 +327,7 @@ namespace NovelXManga
             context.mangaModels.Update(manga2);
             context.SaveChanges();
         }
-        #endregion
+
         #region TagSeed
         public void TagsModel()
         {

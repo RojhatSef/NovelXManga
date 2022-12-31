@@ -20,7 +20,7 @@ namespace MangaModelService
         public string? CompletelyTranslated { get; set; }
         public string? orignalWebtoon { get; set; }
         public string? OriginalPublisher { get; set; }
-        public string? OfficialTranslations { get; set; }
+        public virtual ICollection<languages> AllLanguages { get; set; }
         public double? score { get; set; }
         public string? Type { get; set; }
         public string? OfficalLanguage { get; set; }

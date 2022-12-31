@@ -4,7 +4,6 @@
   
 }
 
-<div>Hello world</div>
 @foreach (var Books in Model.GetAllBooks)
 {
     
@@ -19,6 +18,17 @@
 
         </div>
     }
+    @if (Books.PhotoPath != string.Empty){
+        <div class="mb-3">
+            <img src="@Books.PhotoPath" alt="NoImage" width="100" height="200">
+
+        </div>
+    }
+    else{
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png" alt="BookImage" width="100" height="200">
+    }
+  
+   
     <div>AssociatedNames: </div>
     <div>
     @if (Books.AssociatedNames != null)
@@ -40,7 +50,7 @@
         @foreach (var item in Books.TagsModels)
         {
            
-                <label class="form-label" asp-for="@item.TagName"> @item.TagName",  </label>
+                <label class="form-label" asp-for="@item.TagName"> @item.TagName | </label>
         
         }
     }
@@ -50,7 +60,7 @@
         @foreach (var item in Books.GenresModels)
         {
          
-                <label class="form-label" asp-for="@item.GenreName"> @item.GenreName",   </label>
+                <label class="form-label" asp-for="@item.GenreName"> @item.GenreName | </label>
         
         }
 
@@ -108,13 +118,19 @@
             <label class="form-label" asp-for="@Books.OriginalPublisher">OriginalPublisher: @Books.OriginalPublisher"></label>
         </div>
     }
-
-    @if (Books.OfficialTranslations != null)
+     <div>Language/s: </div>
+    @if (Books.AllLanguages.Count > 0)
     {
-        <div class="mb-3">
-            <label class="form-label" asp-for="@Books.OfficialTranslations">OfficialTranslations: @Books.OfficialTranslations</label>
-
-        </div>
+        @foreach (var item in Books.AllLanguages)
+        {
+            <div class="mb-3">
+                <label class="form-label" asp-for="@item.LanguageName"> @item.LanguageName" </label>
+            </div>
+        }
+    }
+    else
+    {
+        <p>N/A</p>
     }
 
     @if (Books.OfficalLanguage != null)
@@ -144,7 +160,7 @@
         </div>
     }
     <div>Artist/s: </div>
-    @if (Books.ArtistModels != null)
+    @if (Books.ArtistModels.Count > 0)
     {
         @foreach (var item in Books.ArtistModels)
         {
@@ -153,23 +169,31 @@
             </div>
         }
     }
+    else
+    {
+        <p>N/A</p>
+    }
     <div>Author/s: </div>
-    @if (Books.Authormodels != null)
+    @if (Books.Authormodels.Count > 0)
     {
         @foreach (var item in Books.Authormodels)
         {
             <div class="mb-3">
-                <label class="form-label" asp-for="@item.FirstName"> @item.FirstName" @item.LastName </label>
+                <label class="form-label" asp-for="@item.FirstName"> @item.FirstName @item.LastName </label>
             </div>
         }
     }
+    else
+    {
+        <p>N/A</p>
+    }
     <div>Audio Voice Actor/s: </div>
-    @if (Books.VoiceActors != null)
+    @if (Books.VoiceActors.Count > 0)
     {
         @foreach (var item in Books.VoiceActors)
         {
             <div class="mb-3">
-                <label class="form-label" asp-for="@item.FirstName"> @item.FirstName" @item.LastName </label>
+                <label class="form-label" asp-for="@item.FirstName"> @item.FirstName @item.LastName </label>
             </div>
         }
     }
@@ -180,26 +204,34 @@
             <label class="form-label" asp-for="@Books.CompletelyTranslated">CompletelyTranslated: @Books.CompletelyTranslated</label>
         </div>
     }
-
-    @if (Books.RecommendedMangaModels != null)
+    <div>Recommended Books: </div>
+    @if (Books.RecommendedMangaModels.Count > 0)
     {
         @foreach (var item in Books.RecommendedMangaModels)
         {
-            <div class="mb-3">
-                <label class="form-label" asp-for="@item.RecommendedMangaModels">@item.RecommendedMangaModels</label>
-            </div>
+           
+                <label class="form-label">@item.MangaName</label>
+           
         }
-
     }
-    @if (Books.relatedSeries != null)
+    else
+    {
+        <p>N/A</p>
+    }
+    <div>Related Books: </div>
+    @if (Books.relatedSeries.Count > 0)
     {
         @foreach (var item in Books.relatedSeries)
         {
-            <div class="mb-3">
-                <label class="form-label" asp-for="@item.relatedSeries">@item.relatedSeries</label>
-            </div>
+         
+                <label class="form-label" asp-for="@item.relatedSeries">@item.MangaName</label>
+         
         }
 
+    }
+    else
+    {
+        <p>N/A</p>
     }
     @if (Books.futureEvents != null)
     {
@@ -207,11 +239,8 @@
             <label class="form-label" asp-for="@Books.futureEvents">Future Events: @Books.futureEvents</label>
         </div>
     }
+    <br />
+    <hr />
 
-    <div class="form-group row">
-        <label asp-for="@Books.PhotoPath" class="col-sm-2 col-form-label">@Books.PhotoPath</label>  <br />
-        <div class="col-sm-10">
-        </div>
-    </div>
 
 }
