@@ -10,13 +10,27 @@
     <div class="row">
     </div>
   
-
+  
     @if (Books.MangaName != null)
     {
         <div class="mb-3">
             <label class="form-label" asp-for="@Books.MangaName">Title: @Books.MangaName</label>
 
         </div>
+    }
+    <div>Language/s: </div>
+    @if (Books.AllLanguages.Count > 0)
+    {
+        @foreach (var item in Books.AllLanguages)
+        {
+         
+         <label class="form-label" asp-for="@item.LanguageName"> @item.LanguageName </label>
+        
+        }
+    }
+    else
+    {
+        <p>N/A</p>
     }
     @if (Books.PhotoPath != string.Empty){
         <div class="mb-3">
@@ -118,20 +132,7 @@
             <label class="form-label" asp-for="@Books.OriginalPublisher">OriginalPublisher: @Books.OriginalPublisher"></label>
         </div>
     }
-     <div>Language/s: </div>
-    @if (Books.AllLanguages.Count > 0)
-    {
-        @foreach (var item in Books.AllLanguages)
-        {
-            <div class="mb-3">
-                <label class="form-label" asp-for="@item.LanguageName"> @item.LanguageName" </label>
-            </div>
-        }
-    }
-    else
-    {
-        <p>N/A</p>
-    }
+
 
     @if (Books.OfficalLanguage != null)
     {

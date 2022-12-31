@@ -2,7 +2,7 @@
 
 namespace MangaModelService
 {
-    public class languages
+    public class Languages
     {
         [Key]
         public int languageId { get; set; }

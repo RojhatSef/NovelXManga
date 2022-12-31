@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MangaAccessService.Migrations
 {
     [DbContext(typeof(MangaNNovelAuthDBContext))]
-    [Migration("20221230202035_NovelXmanga")]
-    partial class NovelXmanga
+    [Migration("20221231141349_LangTest")]
+    partial class LangTest
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -82,6 +82,21 @@ namespace MangaAccessService.Migrations
                     b.HasIndex("userModelsId");
 
                     b.ToTable("GroupScanlatingModelUserModel");
+                });
+
+            modelBuilder.Entity("LanguagesMangaModel", b =>
+                {
+                    b.Property<int>("AllLanguageslanguageId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MangaModelsMangaID")
+                        .HasColumnType("int");
+
+                    b.HasKey("AllLanguageslanguageId", "MangaModelsMangaID");
+
+                    b.HasIndex("MangaModelsMangaID");
+
+                    b.ToTable("LanguagesMangaModel");
                 });
 
             modelBuilder.Entity("MangaModelMangaModel", b =>
@@ -396,6 +411,25 @@ namespace MangaAccessService.Migrations
                     b.HasDiscriminator<string>("Discriminator").HasValue("GroupScanlatingModel");
                 });
 
+            modelBuilder.Entity("MangaModelService.Languages", b =>
+                {
+                    b.Property<int>("languageId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("languageId"), 1L, 1);
+
+                    b.Property<string>("LanguageName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("MangaID")
+                        .HasColumnType("int");
+
+                    b.HasKey("languageId");
+
+                    b.ToTable("Languages_");
+                });
+
             modelBuilder.Entity("MangaModelService.MangaModel", b =>
                 {
                     b.Property<int>("MangaID")
@@ -430,9 +464,6 @@ namespace MangaAccessService.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("OfficalLanguage")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("OfficialTranslations")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("OriginalPublisher")
@@ -982,6 +1013,21 @@ namespace MangaAccessService.Migrations
                     b.HasOne("MangaModelService.UserModel", null)
                         .WithMany()
                         .HasForeignKey("userModelsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("LanguagesMangaModel", b =>
+                {
+                    b.HasOne("MangaModelService.Languages", null)
+                        .WithMany()
+                        .HasForeignKey("AllLanguageslanguageId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MangaModelService.MangaModel", null)
+                        .WithMany()
+                        .HasForeignKey("MangaModelsMangaID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

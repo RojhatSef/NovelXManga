@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MangaAccessService.Migrations
 {
-    public partial class NovelXmanga : Migration
+    public partial class LangTest : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -114,6 +114,20 @@ namespace MangaAccessService.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_groupScanlatingModels", x => x.GroupScanlatingID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Languages_",
+                columns: table => new
+                {
+                    languageId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    LanguageName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MangaID = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Languages_", x => x.languageId);
                 });
 
             migrationBuilder.CreateTable(
@@ -381,7 +395,6 @@ namespace MangaAccessService.Migrations
                     CompletelyTranslated = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     orignalWebtoon = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     OriginalPublisher = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    OfficialTranslations = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     score = table.Column<double>(type: "float", nullable: true),
                     Type = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     OfficalLanguage = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -529,6 +542,30 @@ namespace MangaAccessService.Migrations
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_GenresModelMangaModel_mangaModels_MangaModelsMangaID",
+                        column: x => x.MangaModelsMangaID,
+                        principalTable: "mangaModels",
+                        principalColumn: "MangaID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "LanguagesMangaModel",
+                columns: table => new
+                {
+                    AllLanguageslanguageId = table.Column<int>(type: "int", nullable: false),
+                    MangaModelsMangaID = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_LanguagesMangaModel", x => new { x.AllLanguageslanguageId, x.MangaModelsMangaID });
+                    table.ForeignKey(
+                        name: "FK_LanguagesMangaModel_Languages__AllLanguageslanguageId",
+                        column: x => x.AllLanguageslanguageId,
+                        principalTable: "Languages_",
+                        principalColumn: "languageId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_LanguagesMangaModel_mangaModels_MangaModelsMangaID",
                         column: x => x.MangaModelsMangaID,
                         principalTable: "mangaModels",
                         principalColumn: "MangaID",
@@ -751,6 +788,11 @@ namespace MangaAccessService.Migrations
                 column: "userModelsId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_LanguagesMangaModel_MangaModelsMangaID",
+                table: "LanguagesMangaModel",
+                column: "MangaModelsMangaID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_MangaModelMangaModel_relatedSeriesMangaID",
                 table: "MangaModelMangaModel",
                 column: "relatedSeriesMangaID");
@@ -826,6 +868,9 @@ namespace MangaAccessService.Migrations
                 name: "GroupScanlatingModelUserModel");
 
             migrationBuilder.DropTable(
+                name: "LanguagesMangaModel");
+
+            migrationBuilder.DropTable(
                 name: "MangaModelMangaModel");
 
             migrationBuilder.DropTable(
@@ -857,6 +902,9 @@ namespace MangaAccessService.Migrations
 
             migrationBuilder.DropTable(
                 name: "groupScanlatingModels");
+
+            migrationBuilder.DropTable(
+                name: "Languages_");
 
             migrationBuilder.DropTable(
                 name: "TagModels");

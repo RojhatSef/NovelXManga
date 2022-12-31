@@ -2,6 +2,7 @@
 using MangaAccessService;
 using MangaModelService;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace NovelXManga
 {
@@ -254,6 +255,7 @@ namespace NovelXManga
                 context.SaveChanges();
                 CombineGenreTag();
                 RelatedManga();
+                addLanguages(); CombineLang();
 
                 var result = await userManager.CreateAsync(user, "Rojhat123!");
                 if (result.Succeeded)
@@ -268,50 +270,88 @@ namespace NovelXManga
         public void addLanguages()
         {
             string[] LanguagesInput = { "English", "Japanese", "Spanish", "Mandarin", "Russian", "Arabic", };
-            var LangList = new List<languages>();
+            var LangList = new List<Languages>();
             for (int i = 0; i < LanguagesInput.Length; i++)
             {
 
-                languages newLang = new languages();
+                Languages newLang = new Languages();
                 newLang.LanguageName = LanguagesInput[i];
                 LangList.Add(newLang);
             }
             context.Languages_.AddRange(LangList);
+            context.SaveChanges();
+        }
+        public void CombineLang()
+        {
+            var manga1 = context.mangaModels.FirstOrDefault(e => e.MangaName == "Naruto");
+            var manga2 = context.mangaModels.FirstOrDefault(e => e.MangaName == "Berserk");
+            var Lang1ToManga1 = context.Languages_.Include(e => e.MangaModels).FirstOrDefault(s => s.LanguageName == "English");
+            var Lang2ToManga1 = context.Languages_.Include(e => e.MangaModels).FirstOrDefault(s => s.LanguageName == "Japanese");
+            Lang1ToManga1.MangaModels = new List<MangaModel> { manga1 };
+            Lang1ToManga1.MangaID = manga1.MangaID;
+            Lang2ToManga1.MangaModels = new List<MangaModel> { manga1 };
+            Lang2ToManga1.MangaID = manga1.MangaID;
+            var Lang3ToManga2 = context.Languages_.Include(e => e.MangaModels).FirstOrDefault(s => s.LanguageName == "Mandarin");
+            var Lang4ToManga2 = context.Languages_.Include(e => e.MangaModels).FirstOrDefault(s => s.LanguageName == "Russian");
+            Lang3ToManga2.MangaModels = new List<MangaModel> { manga2 };
+            Lang3ToManga2.MangaID = manga2.MangaID;
+            Lang4ToManga2.MangaModels = new List<MangaModel> { manga2 };
+            Lang4ToManga2.MangaID = manga2.MangaID;
+            manga1.AllLanguages = new List<Languages> { Lang1ToManga1, Lang2ToManga1 };
+            manga2.AllLanguages = new List<Languages> { Lang3ToManga2, Lang4ToManga2 };
+            context.Languages_.Update(Lang1ToManga1);
+            context.Languages_.Update(Lang2ToManga1);
+            context.Languages_.Update(Lang3ToManga2);
+            context.Languages_.Update(Lang4ToManga2);
+            context.mangaModels.Update(manga1);
+            context.mangaModels.Update(manga2);
+            context.SaveChanges();
+
+
         }
         public void CombineGenreTag()
         {
             var manga1 = context.mangaModels.FirstOrDefault(e => e.MangaName == "Naruto");
             var manga2 = context.mangaModels.FirstOrDefault(e => e.MangaName == "Berserk");
-            var tags = context.TagModels.FirstOrDefault(t => t.TagName == "Ninja");
-            var tagss = context.TagModels.FirstOrDefault(t => t.TagName == "Ninja");
-            tags.MangaModels = new List<MangaModel> { manga1 };
-            tags.MangaID = manga1.MangaID;
-            tagss.MangaModels = new List<MangaModel> { manga2 };
-            tagss.MangaID = manga2.MangaID;
-            var tags4 = context.TagModels.FirstOrDefault(t => t.TagName == "Adapted to Anime");
-            tags4.MangaModels = new List<MangaModel> { manga1 };
-            tags4.MangaID = manga1.MangaID;
-            var tags44 = context.TagModels.FirstOrDefault(t => t.TagName == "Adapted to Anime");
-            tags44.MangaModels = new List<MangaModel> { manga2 };
-            tags44.MangaID = manga2.MangaID;
-            var gen = context.GenresModels.FirstOrDefault(t => t.GenreName == "Action");
-            gen.MangaModels = new List<MangaModel> { manga1 };
-            gen.MangaID = manga1.MangaID;
-            var gens = context.GenresModels.FirstOrDefault(t => t.GenreName == "Action");
-            gens.MangaModels = new List<MangaModel> { manga2 };
-            gens.MangaID = manga1.MangaID;
-            var gen2 = context.GenresModels.FirstOrDefault(t => t.GenreName == "Adventure");
-            gen2.MangaModels = new List<MangaModel> { manga1 };
-            gen2.MangaID = manga1.MangaID;
-            var gen22 = context.GenresModels.FirstOrDefault(t => t.GenreName == "Adventure");
-            gen22.MangaModels = new List<MangaModel> { manga2 };
-            gen22.MangaID = manga1.MangaID;
+            var Tag1ToManga1 = context.TagModels.FirstOrDefault(t => t.TagName == "Ninja");
+            var Tag1ToManga2 = context.TagModels.FirstOrDefault(t => t.TagName == "Antihero");
+            Tag1ToManga1.MangaModels = new List<MangaModel> { manga1 };
+            Tag1ToManga1.MangaID = manga1.MangaID;
+            Tag1ToManga2.MangaModels = new List<MangaModel> { manga2 };
+            Tag1ToManga2.MangaID = manga2.MangaID;
+            var Tag2ToManga1 = context.TagModels.FirstOrDefault(t => t.TagName == "Adapted to Anime");
+            Tag2ToManga1.MangaModels = new List<MangaModel> { manga1 };
+            Tag2ToManga1.MangaID = manga1.MangaID;
+            var Tag2Tomanga2 = context.TagModels.FirstOrDefault(t => t.TagName == "Adapted to Anime");
+            Tag2Tomanga2.MangaModels = new List<MangaModel> { manga2 };
+            Tag2Tomanga2.MangaID = manga2.MangaID;
+            var Gen1ToManga1 = context.GenresModels.FirstOrDefault(t => t.GenreName == "Action");
+            Gen1ToManga1.MangaModels = new List<MangaModel> { manga1 };
+            Gen1ToManga1.MangaID = manga1.MangaID;
+            var GenToManga2 = context.GenresModels.FirstOrDefault(t => t.GenreName == "Action");
+            GenToManga2.MangaModels = new List<MangaModel> { manga2 };
+            GenToManga2.MangaID = manga1.MangaID;
+            var Gen2ToManga1 = context.GenresModels.FirstOrDefault(t => t.GenreName == "Adventure");
+            Gen2ToManga1.MangaModels = new List<MangaModel> { manga1 };
+            Gen2ToManga1.MangaID = manga1.MangaID;
+            var Gen2ToManga2 = context.GenresModels.FirstOrDefault(t => t.GenreName == "Adventure");
+            Gen2ToManga2.MangaModels = new List<MangaModel> { manga2 };
+            Gen2ToManga2.MangaID = manga2.MangaID;
 
-            manga1.TagsModels = new List<TagModel> { tags, tags4 };
-            manga1.GenresModels = new List<GenresModel> { gen, gen2 };
-            manga2.TagsModels = new List<TagModel> { tagss, tags44 };
-            manga2.GenresModels = new List<GenresModel> { gens, gen2 };
+            manga1.TagsModels = new List<TagModel> { Tag1ToManga1, Tag2ToManga1 };
+            manga1.GenresModels = new List<GenresModel> { Gen1ToManga1, Gen2ToManga1 };
+            manga2.TagsModels = new List<TagModel> { Tag1ToManga2, Tag2Tomanga2 };
+            manga2.GenresModels = new List<GenresModel> { GenToManga2, Gen2ToManga2 };
 
+
+            context.TagModels.Update(Tag1ToManga1);
+            context.TagModels.Update(Tag2ToManga1);
+            context.TagModels.Update(Tag1ToManga2);
+            context.TagModels.Update(Tag2Tomanga2);
+            context.GenresModels.Update(Gen1ToManga1);
+            context.GenresModels.Update(Gen2ToManga2);
+            context.GenresModels.Update(GenToManga2);
+            context.GenresModels.Update(Gen2ToManga2);
             context.mangaModels.Update(manga1);
             context.mangaModels.Update(manga2);
 
