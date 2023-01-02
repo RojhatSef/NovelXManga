@@ -47,9 +47,7 @@ namespace NovelXManga.Pages.GroupScan
                 // get current user when creating a new group
                 var currentUser = await userManager.GetUserAsync(User);
                 UserModel currentUserModel = (UserModel)currentUser;
-                var getMasterManga = mangaNNovelAuthDBContext.MasterModels.FirstOrDefault(mm => mm.MangaModels.MangaName == MangaName);
-
-
+                var getMasterManga = mangaNNovelAuthDBContext.mangaModels.FirstOrDefault(mm => mm.MangaName == MangaName);
                 var newGroup = mangaNNovelAuthDBContext.groupScanlatingModels.FirstOrDefault(gcm => gcm.GroupName == groupModelView.GroupName);
                 if (newGroup == null)
                 {
@@ -60,18 +58,18 @@ namespace NovelXManga.Pages.GroupScan
                         PhotoPath = ProcessUploadedFile(),
                         website = groupModelView.website,
                         userID = currentUser.Id,
-                        MasterModels = new List<MasterModel> { getMasterManga },
+
                         userModels = new List<UserModel> { currentUserModel },
                     };
 
-                    newGroup.MasterID = getMasterManga.MasterID;
+
                     getMasterManga.GroupScanlating = new List<GroupScanlatingModel> { newGroup };
                     getMasterManga.GroupScanlatingID = newGroup.GroupScanlatingID;
                     getMasterManga.userId = currentUser.Id;
                     mangaNNovelAuthDBContext.groupScanlatingModels.Add(newGroup);
                     //                   mangaNNovelAuthDBContext.SaveChanges();
 
-                    mangaNNovelAuthDBContext.MasterModels.Update(getMasterManga);
+                    mangaNNovelAuthDBContext.mangaModels.Update(getMasterManga);
                     mangaNNovelAuthDBContext.SaveChanges();
                     //mastermodel does not update with groupscanlating model, why? When groupscanlatingmodel is complete that is when it recives an ID
                     // due to how EF works, it wont pass an id, so we need to update the masterModel again after the group has been created

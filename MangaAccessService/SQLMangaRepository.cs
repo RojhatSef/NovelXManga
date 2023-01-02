@@ -9,7 +9,6 @@ namespace MangaAccessService.Migrations
 
         private readonly MangaNNovelAuthDBContext mangaNNovelAuthDBContext;
         public MangaModel mangaModel { get; set; }
-        public MasterModelView MasterModelView { get; set; }
         public MangaModelView MangaModelView { get; set; }
 
         public SQLMangaRepository(MangaNNovelAuthDBContext mangaNNovelAuthDBContext)

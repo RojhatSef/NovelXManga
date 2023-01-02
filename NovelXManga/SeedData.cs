@@ -195,65 +195,64 @@ namespace NovelXManga
                 // creates a user,
                 var user = new UserModel { UserName = "TestUSer", Email = "TestUser@hotmail.com", userPhotoPath = filePath };
                 // create a "manga actually" but we use MasterModel to bind our users to a manga. 
-                MasterModel masterModel = new MasterModel
+
+                MangaModel MangaModels = new MangaModel
                 {
-                    MangaModels = new MangaModel
-                    {
-                        MangaName = "Naruto",
+                    MangaName = "Naruto",
 
-                        PhotoPath = "https://cdn.mangaupdates.com/image/i140134.png",
-                        ReleaseYear = myDate,
-                        BlogModel = new BlogModel { mangaName = "Naruto" },
-                        Description = "A Kid who got something stuck in his stomach",
-                        CompletelyTranslated = "Completed",
-                        OfficalLanguage = "Japanese",
-                        ISBN10 = "1569319006",
-                        ISBN13 = "978-1569319000",
-                        score = 10,
+                    PhotoPath = "https://cdn.mangaupdates.com/image/i140134.png",
+                    ReleaseYear = myDate,
+                    BlogModel = new BlogModel { mangaName = "Naruto" },
+                    Description = "A Kid who got something stuck in his stomach",
+                    CompletelyTranslated = "Completed",
+                    OfficalLanguage = "Japanese",
+                    ISBN10 = "1569319006",
+                    ISBN13 = "978-1569319000",
+                    score = 10,
 
 
-                        EndingYear = DateTime.Now,
-                        StatusInCountryOfOrigin = "11, completed",
-                        Type = "Manga",
-                        OriginalPublisher = "SquareEnix",
-                        orignalWebtoon = "N/A",
-
-                    },
+                    EndingYear = DateTime.Now,
+                    StatusInCountryOfOrigin = "11, completed",
+                    Type = "Manga",
+                    OriginalPublisher = "SquareEnix",
+                    orignalWebtoon = "N/A",
                     GroupScanlating = null,
                     GroupScanlatingID = null,
                     userModels = null,
                     userId = null,
                 };
 
-                MasterModel masterModel2 = new MasterModel
-                {
-                    MangaModels = new MangaModel
-                    {
-                        MangaName = "Berserk",
 
-                        PhotoPath = "https://cdn.mangaupdates.com/image/i372335.jpg",
-                        ReleaseYear = DateTime.Now,
-                        BlogModel = new BlogModel { mangaName = "Berserk" },
-                        Description = "A broken man",
-                        CompletelyTranslated = "Ongoing",
-                        ISBN10 = "1506727549",
-                        ISBN13 = "978-1506717913",
-                        score = 10,
-                        futureEvents = "Near DeathBall",
-                        EndingYear = DateTime.Now,
-                        StatusInCountryOfOrigin = "11, completed",
-                        Type = "Manga",
-                        OriginalPublisher = "SquareEnix",
-                        orignalWebtoon = "N/A",
-                    },
+
+
+                MangaModel MangaModels2 = new MangaModel
+                {
+                    MangaName = "Berserk",
+
+                    PhotoPath = "https://cdn.mangaupdates.com/image/i372335.jpg",
+                    ReleaseYear = DateTime.Now,
+                    BlogModel = new BlogModel { mangaName = "Berserk" },
+                    Description = "A broken man",
+                    CompletelyTranslated = "Ongoing",
+                    ISBN10 = "1506727549",
+                    ISBN13 = "978-1506717913",
+                    score = 10,
+                    futureEvents = "Near DeathBall",
+                    EndingYear = DateTime.Now,
+                    StatusInCountryOfOrigin = "11, completed",
+                    Type = "Manga",
+                    OriginalPublisher = "SquareEnix",
+                    orignalWebtoon = "N/A",
                     GroupScanlating = null,
                     GroupScanlatingID = null,
                     userModels = null,
                     userId = null,
                 };
 
-                context.MasterModels.Add(masterModel);
-                context.MasterModels.Add(masterModel2);
+
+
+                context.mangaModels.Add(MangaModels);
+                context.mangaModels.Add(MangaModels2);
                 GenreSeed();
                 TagsModel();
                 context.SaveChanges();

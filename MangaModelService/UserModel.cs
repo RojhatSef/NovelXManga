@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MangaModelService
 {
@@ -18,10 +19,12 @@ namespace MangaModelService
 
         public virtual ICollection<BlogModel>? UserBlogModel { get; set; }
         //navigation 
+        [ForeignKey("GroupScanlatingModel")]
         public int? groupScanlationID { get; set; }
         public virtual ICollection<GroupScanlatingModel>? GroupScanlating { get; set; }
-        public int? masterId { get; set; }
-        public virtual ICollection<MasterModel>? MasterModel { get; set; }
+        [ForeignKey("MangaModel")]
+        public int? MangaModelId { get; set; }
+        public virtual ICollection<MangaModel>? MangaModels { get; set; }
         public string? postModelID { get; set; }
 
         public virtual ICollection<PostModel>? PostModel { get; set; }

@@ -27,14 +27,13 @@ namespace MangaAccessService
         public DbSet<TagModel> TagModels { get; set; }
         public DbSet<BlogModel> blogModels { get; set; }
         public DbSet<MangaModel> mangaModels { get; set; }
-        public DbSet<MasterModel> MasterModels { get; set; }
+        #region Removed DbSets
+        //public DbSet<MasterModel> MasterModels { get; set; }
         //public DbSet<IdentityUser> IdentityUsers { get; set; }
+        #endregion
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<MasterModel>()
-           .HasOne(mm => mm.MangaModels)
-           .WithOne(i => i.MasterModels)
-           .HasForeignKey<MangaModel>(b => b.MasterID);
+
 
 
             modelBuilder.Entity<BlogModel>()
@@ -51,7 +50,7 @@ namespace MangaAccessService
             modelBuilder.Entity<MangaModel>().Navigation(e => e.OfficalWebsites).AutoInclude();
             modelBuilder.Entity<MangaModel>().Navigation(e => e.AssociatedNames).AutoInclude();
             modelBuilder.Entity<GroupScanlatingModel>().Navigation(e => e.chapterModels).AutoInclude();
-            modelBuilder.Entity<GroupScanlatingModel>().Navigation(e => e.MasterModels).AutoInclude();
+            modelBuilder.Entity<PostModel>().Navigation(e => e.Replies).AutoInclude();
             modelBuilder.Entity<GroupScanlatingModel>().Navigation(e => e.userModels).AutoInclude();
             modelBuilder.Entity<GroupScanlatingModel>().Navigation(e => e.chapterModels).AutoInclude();
             modelBuilder.Entity<ArtistModel>().Navigation(e => e.AssociatedNames).AutoInclude();
@@ -59,17 +58,10 @@ namespace MangaAccessService
             modelBuilder.Entity<VoiceActorModel>().Navigation(e => e.AssociatedNames).AutoInclude();
             modelBuilder.Entity<BlogModel>().Navigation(e => e.postsModel).AutoInclude();
             modelBuilder.Entity<ChapterModel>().Navigation(e => e.GroupScanlatingModels).AutoInclude();
-            modelBuilder.Entity<MasterModel>().Navigation(e => e.GroupScanlating).AutoInclude();
-            modelBuilder.Entity<MasterModel>().Navigation(e => e.userModels).AutoInclude();
-            modelBuilder.Entity<MasterModel>().Navigation(e => e.MangaModels).AutoInclude();
-
-
-
-
 
             base.OnModelCreating(modelBuilder);
-            #region A test for other model building
-
+            #region Remved Builders
+            //modelBuilder.Entity<GroupScanlatingModel>().Navigation(e => e.MasterModels).AutoInclude();
             //modelBuilder.Entity<MasterModel>()
             //    .HasKey(m => new
             //    {
@@ -79,9 +71,14 @@ namespace MangaAccessService
 
             //    });
 
+            // modelBuilder.Entity<MasterModel>()
+            //.HasOne(mm => mm.MangaModels)
+            //.WithOne(i => i.MasterModels)
+            //.HasForeignKey<MangaModel>(b => b.MasterID);
 
-
-
+            //modelBuilder.Entity<MasterModel>().Navigation(e => e.GroupScanlating).AutoInclude();
+            //modelBuilder.Entity<MasterModel>().Navigation(e => e.userModels).AutoInclude();
+            //modelBuilder.Entity<MasterModel>().Navigation(e => e.MangaModels).AutoInclude();
 
 
             //modelBuilder.Entity<MasterModel>()
@@ -142,9 +139,5 @@ namespace MangaAccessService
             #endregion
 
         }
-
-
-
-
     }
 }

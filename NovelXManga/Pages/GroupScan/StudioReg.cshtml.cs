@@ -47,7 +47,7 @@ namespace NovelXManga.Pages.GroupScan
                 // get current user when creating a new group
                 var currentUser = await userManager.GetUserAsync(User);
                 UserModel currentUserModel = (UserModel)currentUser;
-                var getMasterManga = mangaNNovelAuthDBContext.MasterModels.FirstOrDefault(mm => mm.MangaModels.MangaName == MangaName);
+                var getMasterManga = mangaNNovelAuthDBContext.mangaModels.FirstOrDefault(mm => mm.MangaName == MangaName);
                 var newGroup = mangaNNovelAuthDBContext.studioModels.FirstOrDefault(gcm => gcm.GroupName == studioModel.GroupName);
                 if (newGroup == null)
                 {
@@ -57,7 +57,7 @@ namespace NovelXManga.Pages.GroupScan
                         chapterModels = null,
                         PhotoPath = ProcessUploadedFile(),
                         website = studioModel.website,
-                        MasterModels = new List<MasterModel> { getMasterManga },
+
                         userModels = new List<UserModel> { currentUserModel }
 
                     };

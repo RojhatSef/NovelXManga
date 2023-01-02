@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MangaModelService
 {
@@ -13,8 +14,9 @@ namespace MangaModelService
         public virtual ICollection<ChapterModel>? chapterModels { get; set; }
         public virtual ICollection<AssociatedNames>? AssociatedNames { get; set; }
         public virtual ICollection<OfficalWebsite>? OfficalWebsites { get; set; }
-        public int? MasterID { get; set; }
-        public virtual ICollection<MasterModel>? MasterModels { get; set; }
+        [ForeignKey("MangaModel")]
+        public int? MangaModelId { get; set; }
+        public virtual ICollection<MangaModel>? MangaModels { get; set; }
         public string? userID { get; set; }
         public virtual ICollection<UserModel>? userModels { get; set; }
         //ICollection<MangaModel> mangaModels { get; set; }

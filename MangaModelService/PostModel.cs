@@ -23,6 +23,7 @@ namespace MangaModelService
 
         public string? UserID { get; set; }
         public virtual UserModel? UserModel { get; set; }
+        public virtual ICollection<PostModel>? Replies { get; set; }
     }
 
 }

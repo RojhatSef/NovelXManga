@@ -64,25 +64,24 @@ namespace NovelXManga.Pages.Manga
                 if (newMangaModel == null)
                 {
 
-                    MasterModel masterModel = new MasterModel
+
+
+                    MangaModel MangaModels = new MangaModel
                     {
-
-                        MangaModels = new MangaModel
-                        {
-                            MangaName = mangaModelView.MangaName,
-                            AssociatedNames = new List<AssociatedNames> { ListOfAssiocatedNames },
-                            PhotoPath = ProcessUploadedFile(),
-                            ReleaseYear = ReleaseYear,
-                            BlogModel = new BlogModel { mangaName = mangaModelView.MangaName },
-
-
-                        },
+                        MangaName = mangaModelView.MangaName,
+                        AssociatedNames = new List<AssociatedNames> { ListOfAssiocatedNames },
+                        PhotoPath = ProcessUploadedFile(),
+                        ReleaseYear = ReleaseYear,
+                        BlogModel = new BlogModel { mangaName = mangaModelView.MangaName },
                         GroupScanlating = null,
                         GroupScanlatingID = null,
                         userModels = null,
                         userId = null,
+
                     };
-                    mangaNNovelAuthDBContext.MasterModels.Add(masterModel);
+
+
+                    mangaNNovelAuthDBContext.mangaModels.Add(MangaModels);
                     mangaNNovelAuthDBContext.SaveChanges();
                     SucessFulManga = "Manga has been created successfully";
 

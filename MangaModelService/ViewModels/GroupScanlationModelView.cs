@@ -12,7 +12,7 @@ namespace MangaModelService.ViewModels
         public string website { get; set; }
         public ICollection<ChapterModel>? chapterModels { get; set; }
         public int? MasterID { get; set; }
-        public ICollection<MasterModel>? MasterModels { get; set; }
+        public ICollection<MangaModel>? MangaModels { get; set; }
         public string? userID { get; set; }
         public ICollection<UserModel>? userModels { get; set; }
     }
