@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MangaAccessService.Migrations
 {
     [DbContext(typeof(MangaNNovelAuthDBContext))]
-    [Migration("20221231141349_LangTest")]
-    partial class LangTest
+    [Migration("20230102132702_officalWebsite")]
+    partial class officalWebsite
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -37,6 +37,36 @@ namespace MangaAccessService.Migrations
                     b.HasIndex("chapterModelschapterID");
 
                     b.ToTable("ChapterModelGroupScanlatingModel");
+                });
+
+            modelBuilder.Entity("CharacterCharacter", b =>
+                {
+                    b.Property<int>("FamilyCharacterId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Partner_sCharacterId")
+                        .HasColumnType("int");
+
+                    b.HasKey("FamilyCharacterId", "Partner_sCharacterId");
+
+                    b.HasIndex("Partner_sCharacterId");
+
+                    b.ToTable("CharacterCharacter");
+                });
+
+            modelBuilder.Entity("CharacterMangaModel", b =>
+                {
+                    b.Property<int>("CharactersCharacterId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MangaModelsMangaID")
+                        .HasColumnType("int");
+
+                    b.HasKey("CharactersCharacterId", "MangaModelsMangaID");
+
+                    b.HasIndex("MangaModelsMangaID");
+
+                    b.ToTable("CharacterMangaModel");
                 });
 
             modelBuilder.Entity("GenresModelMangaModel", b =>
@@ -171,9 +201,6 @@ namespace MangaAccessService.Migrations
                     b.Property<int?>("mangaModelMangaID")
                         .HasColumnType("int");
 
-                    b.Property<string>("officalWebsite")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("reddit")
                         .HasColumnType("nvarchar(max)");
 
@@ -198,6 +225,12 @@ namespace MangaAccessService.Migrations
                     b.Property<int?>("AuthorID")
                         .HasColumnType("int");
 
+                    b.Property<int?>("CharacterId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("GroupScanlatingModelGroupScanlatingID")
+                        .HasColumnType("int");
+
                     b.Property<int?>("MangaID")
                         .HasColumnType("int");
 
@@ -208,6 +241,7 @@ namespace MangaAccessService.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("nameString")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("AssociatedNamesId");
@@ -215,6 +249,10 @@ namespace MangaAccessService.Migrations
                     b.HasIndex("ArtistId");
 
                     b.HasIndex("AuthorID");
+
+                    b.HasIndex("CharacterId");
+
+                    b.HasIndex("GroupScanlatingModelGroupScanlatingID");
 
                     b.HasIndex("VoiceActorId");
 
@@ -282,9 +320,6 @@ namespace MangaAccessService.Migrations
 
                     b.Property<int?>("mangaModelMangaID")
                         .HasColumnType("int");
-
-                    b.Property<string>("officalWebsite")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("reddit")
                         .HasColumnType("nvarchar(max)");
@@ -354,6 +389,62 @@ namespace MangaAccessService.Migrations
                     b.ToTable("chapterModels");
                 });
 
+            modelBuilder.Entity("MangaModelService.Character", b =>
+                {
+                    b.Property<int>("CharacterId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CharacterId"), 1L, 1);
+
+                    b.Property<string>("Background")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Born")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CharacterName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Death")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Education")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FamousQuote")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Gender")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Lawful")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nationality")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Occupation")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Personality")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PlaceOffResidence")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("World")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("specie")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("CharacterId");
+
+                    b.ToTable("Characters");
+                });
+
             modelBuilder.Entity("MangaModelService.GenresModel", b =>
                 {
                     b.Property<int>("GenresId")
@@ -362,7 +453,11 @@ namespace MangaAccessService.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("GenresId"), 1L, 1);
 
+                    b.Property<string>("GenreDescription")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("GenreName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("MangaID")
@@ -420,10 +515,14 @@ namespace MangaAccessService.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("languageId"), 1L, 1);
 
                     b.Property<string>("LanguageName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("MangaID")
                         .HasColumnType("int");
+
+                    b.Property<string>("OfficalWebSiteToBuy")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("languageId");
 
@@ -520,6 +619,63 @@ namespace MangaAccessService.Migrations
                     b.ToTable("MasterModels");
                 });
 
+            modelBuilder.Entity("MangaModelService.OfficalWebsite", b =>
+                {
+                    b.Property<int>("OfficalID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OfficalID"), 1L, 1);
+
+                    b.Property<int?>("ArtistId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("AuthorID")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("CharacterId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("GroupScanId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("MangaID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("OfficalWebsiteString")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("VoiceActorId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("WebsiteName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("groupScanlatingModelGroupScanlatingID")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("mangaModelMangaID")
+                        .HasColumnType("int");
+
+                    b.HasKey("OfficalID");
+
+                    b.HasIndex("ArtistId");
+
+                    b.HasIndex("AuthorID");
+
+                    b.HasIndex("CharacterId");
+
+                    b.HasIndex("VoiceActorId");
+
+                    b.HasIndex("groupScanlatingModelGroupScanlatingID");
+
+                    b.HasIndex("mangaModelMangaID");
+
+                    b.ToTable("OfficalWebsites");
+                });
+
             modelBuilder.Entity("MangaModelService.PostModel", b =>
                 {
                     b.Property<int?>("PostId")
@@ -576,10 +732,14 @@ namespace MangaAccessService.Migrations
                     b.Property<int?>("MangaID")
                         .HasColumnType("int");
 
+                    b.Property<string>("TagDescription")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int?>("TagHeavy")
                         .HasColumnType("int");
 
                     b.Property<string>("TagName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("TagId");
@@ -602,6 +762,9 @@ namespace MangaAccessService.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("BirthPlace")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CharacterName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Contact")
@@ -646,9 +809,6 @@ namespace MangaAccessService.Migrations
 
                     b.Property<int?>("mangaModelMangaID")
                         .HasColumnType("int");
-
-                    b.Property<string>("officalWebsite")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("reddit")
                         .HasColumnType("nvarchar(max)");
@@ -972,6 +1132,36 @@ namespace MangaAccessService.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("CharacterCharacter", b =>
+                {
+                    b.HasOne("MangaModelService.Character", null)
+                        .WithMany()
+                        .HasForeignKey("FamilyCharacterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MangaModelService.Character", null)
+                        .WithMany()
+                        .HasForeignKey("Partner_sCharacterId")
+                        .OnDelete(DeleteBehavior.ClientCascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("CharacterMangaModel", b =>
+                {
+                    b.HasOne("MangaModelService.Character", null)
+                        .WithMany()
+                        .HasForeignKey("CharactersCharacterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MangaModelService.MangaModel", null)
+                        .WithMany()
+                        .HasForeignKey("MangaModelsMangaID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("GenresModelMangaModel", b =>
                 {
                     b.HasOne("MangaModelService.GenresModel", null)
@@ -1066,6 +1256,14 @@ namespace MangaAccessService.Migrations
                         .WithMany("AssociatedNames")
                         .HasForeignKey("AuthorID");
 
+                    b.HasOne("MangaModelService.Character", "Characters")
+                        .WithMany("AssociatedNames")
+                        .HasForeignKey("CharacterId");
+
+                    b.HasOne("MangaModelService.GroupScanlatingModel", null)
+                        .WithMany("AssociatedNames")
+                        .HasForeignKey("GroupScanlatingModelGroupScanlatingID");
+
                     b.HasOne("MangaModelService.VoiceActorModel", "VoiceActorModel")
                         .WithMany("AssociatedNames")
                         .HasForeignKey("VoiceActorId");
@@ -1077,6 +1275,8 @@ namespace MangaAccessService.Migrations
                     b.Navigation("ArtistModel");
 
                     b.Navigation("AuthorModel");
+
+                    b.Navigation("Characters");
 
                     b.Navigation("VoiceActorModel");
 
@@ -1116,6 +1316,45 @@ namespace MangaAccessService.Migrations
                     b.Navigation("BlogModel");
 
                     b.Navigation("MasterModels");
+                });
+
+            modelBuilder.Entity("MangaModelService.OfficalWebsite", b =>
+                {
+                    b.HasOne("MangaModelService.ArtistModel", "ArtistModel")
+                        .WithMany("OfficalWebsites")
+                        .HasForeignKey("ArtistId");
+
+                    b.HasOne("MangaModelService.AuthorModel", "AuthorModel")
+                        .WithMany("OfficalWebsites")
+                        .HasForeignKey("AuthorID");
+
+                    b.HasOne("MangaModelService.Character", "Characters")
+                        .WithMany("OfficalWebsites")
+                        .HasForeignKey("CharacterId");
+
+                    b.HasOne("MangaModelService.VoiceActorModel", "VoiceActorModel")
+                        .WithMany("OfficalWebsites")
+                        .HasForeignKey("VoiceActorId");
+
+                    b.HasOne("MangaModelService.GroupScanlatingModel", "groupScanlatingModel")
+                        .WithMany("OfficalWebsites")
+                        .HasForeignKey("groupScanlatingModelGroupScanlatingID");
+
+                    b.HasOne("MangaModelService.MangaModel", "mangaModel")
+                        .WithMany("OfficalWebsites")
+                        .HasForeignKey("mangaModelMangaID");
+
+                    b.Navigation("ArtistModel");
+
+                    b.Navigation("AuthorModel");
+
+                    b.Navigation("Characters");
+
+                    b.Navigation("VoiceActorModel");
+
+                    b.Navigation("groupScanlatingModel");
+
+                    b.Navigation("mangaModel");
                 });
 
             modelBuilder.Entity("MangaModelService.PostModel", b =>
@@ -1228,11 +1467,15 @@ namespace MangaAccessService.Migrations
             modelBuilder.Entity("MangaModelService.ArtistModel", b =>
                 {
                     b.Navigation("AssociatedNames");
+
+                    b.Navigation("OfficalWebsites");
                 });
 
             modelBuilder.Entity("MangaModelService.AuthorModel", b =>
                 {
                     b.Navigation("AssociatedNames");
+
+                    b.Navigation("OfficalWebsites");
                 });
 
             modelBuilder.Entity("MangaModelService.BlogModel", b =>
@@ -1243,6 +1486,20 @@ namespace MangaAccessService.Migrations
                     b.Navigation("postsModel");
                 });
 
+            modelBuilder.Entity("MangaModelService.Character", b =>
+                {
+                    b.Navigation("AssociatedNames");
+
+                    b.Navigation("OfficalWebsites");
+                });
+
+            modelBuilder.Entity("MangaModelService.GroupScanlatingModel", b =>
+                {
+                    b.Navigation("AssociatedNames");
+
+                    b.Navigation("OfficalWebsites");
+                });
+
             modelBuilder.Entity("MangaModelService.MangaModel", b =>
                 {
                     b.Navigation("ArtistModels");
@@ -1250,6 +1507,8 @@ namespace MangaAccessService.Migrations
                     b.Navigation("AssociatedNames");
 
                     b.Navigation("Authormodels");
+
+                    b.Navigation("OfficalWebsites");
 
                     b.Navigation("VoiceActors");
                 });
@@ -1263,6 +1522,8 @@ namespace MangaAccessService.Migrations
             modelBuilder.Entity("MangaModelService.VoiceActorModel", b =>
                 {
                     b.Navigation("AssociatedNames");
+
+                    b.Navigation("OfficalWebsites");
                 });
 
             modelBuilder.Entity("MangaModelService.UserModel", b =>

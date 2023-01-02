@@ -12,10 +12,11 @@ namespace MangaModelService
         public string? LastName { get; set; }
         public string? PhotoPath { get; set; }
         public string? Gender { get; set; }
-        public string? officalWebsite { get; set; }
+        public virtual ICollection<OfficalWebsite>? OfficalWebsites { get; set; }
         public string? Twitter { get; set; }
         public string? reddit { get; set; }
         public string? BirthPlace { get; set; }
+        public string? CharacterName { get; set; }
 
         public string? Biography { get; set; }
         public string? NameInNative { get; set; }

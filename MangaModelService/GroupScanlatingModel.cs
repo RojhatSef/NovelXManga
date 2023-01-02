@@ -11,6 +11,8 @@ namespace MangaModelService
         public string? PhotoPath { get; set; }
         public string? website { get; set; }
         public virtual ICollection<ChapterModel>? chapterModels { get; set; }
+        public virtual ICollection<AssociatedNames>? AssociatedNames { get; set; }
+        public virtual ICollection<OfficalWebsite>? OfficalWebsites { get; set; }
         public int? MasterID { get; set; }
         public virtual ICollection<MasterModel>? MasterModels { get; set; }
         public string? userID { get; set; }

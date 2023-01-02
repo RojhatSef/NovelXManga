@@ -35,12 +35,15 @@ namespace MangaModelService
 
         public int MasterID { get; set; }
         public MasterModel MasterModels { get; set; }
+
+        public virtual ICollection<OfficalWebsite> OfficalWebsites { get; set; }
         public virtual ICollection<AuthorModel>? Authormodels { get; set; }
         public virtual ICollection<ArtistModel>? ArtistModels { get; set; }
         public virtual ICollection<VoiceActorModel>? VoiceActors { get; set; }
 
         public virtual ICollection<GenresModel>? GenresModels { get; set; }
         public virtual ICollection<TagModel>? TagsModels { get; set; }
+        public virtual ICollection<Character> Characters { get; set; }
 
 
 

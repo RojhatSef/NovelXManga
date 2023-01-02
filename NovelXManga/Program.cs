@@ -59,6 +59,12 @@ static void SeedDatainitialize(IHost host)
     }
 }
 
+//large ToDos
+// fix a forum? <Unsure if we want this> everymanga field is a forumish
+// Fix private chatrooms?
+// fix Message
+
+
 //todo
 //fix photopath
 // fix returnURl
@@ -75,5 +81,10 @@ static void SeedDatainitialize(IHost host)
 // fix  tags and genres Done
 // link genres to manga Done 
 // link tags  to manga Done 
+// Display Mangas Done
+// Display currentManga Done
+// Fix manga links to Author/Artist/Voice To their info
+// fix tags/genre/language to search path
+
 
 // 
