@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MangaAccessService.Migrations
 {
     [DbContext(typeof(MangaNNovelAuthDBContext))]
-    [Migration("20230102145027_MasterGone")]
-    partial class MasterGone
+    [Migration("20230105134325_Testing")]
+    partial class Testing
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -678,15 +678,10 @@ namespace MangaAccessService.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserID")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserModelId")
-                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("postComment")
                         .IsRequired()
@@ -701,8 +696,6 @@ namespace MangaAccessService.Migrations
                     b.HasIndex("BlogModelId");
 
                     b.HasIndex("PostModelPostId");
-
-                    b.HasIndex("UserModelId");
 
                     b.ToTable("PostModels");
                 });
@@ -1040,6 +1033,21 @@ namespace MangaAccessService.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("PostModelUserModel", b =>
+                {
+                    b.Property<int>("PostModelPostId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserModelId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("PostModelPostId", "UserModelId");
+
+                    b.HasIndex("UserModelId");
+
+                    b.ToTable("PostModelUserModel");
+                });
+
             modelBuilder.Entity("MangaModelService.StudioModel", b =>
                 {
                     b.HasBaseType("MangaModelService.GroupScanlatingModel");
@@ -1073,7 +1081,20 @@ namespace MangaAccessService.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ForgottPasswordFavActor")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ForgottPasswordFavoritAnimal")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ForgottPasswordFavoritPlace")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ForumName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("MangaModelId")
@@ -1347,13 +1368,7 @@ namespace MangaAccessService.Migrations
                         .WithMany("Replies")
                         .HasForeignKey("PostModelPostId");
 
-                    b.HasOne("MangaModelService.UserModel", "UserModel")
-                        .WithMany("PostModel")
-                        .HasForeignKey("UserModelId");
-
                     b.Navigation("BlogModel");
-
-                    b.Navigation("UserModel");
                 });
 
             modelBuilder.Entity("MangaModelService.VoiceActorModel", b =>
@@ -1446,6 +1461,21 @@ namespace MangaAccessService.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("PostModelUserModel", b =>
+                {
+                    b.HasOne("MangaModelService.PostModel", null)
+                        .WithMany()
+                        .HasForeignKey("PostModelPostId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MangaModelService.UserModel", null)
+                        .WithMany()
+                        .HasForeignKey("UserModelId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("MangaModelService.ArtistModel", b =>
                 {
                     b.Navigation("AssociatedNames");
@@ -1509,8 +1539,6 @@ namespace MangaAccessService.Migrations
 
             modelBuilder.Entity("MangaModelService.UserModel", b =>
                 {
-                    b.Navigation("PostModel");
-
                     b.Navigation("UserBlogModel");
                 });
 #pragma warning restore 612, 618

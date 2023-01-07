@@ -6,13 +6,11 @@ namespace MangaModelService
     {
         [Key]
         public int? PostId { get; set; }
-        [Required]
-        [MinLength(3)]
-        [MaxLength(50)]
-        public string Title { get; set; }
+        public string? Title { get; set; }
         [Required]
         [MinLength(10)]
         [MaxLength(750)]
+
         public string postComment { set; get; }
 
         public double? score { get; set; }
@@ -22,7 +20,8 @@ namespace MangaModelService
         public BlogModel BlogModel { get; set; }
 
         public string? UserID { get; set; }
-        public virtual UserModel? UserModel { get; set; }
+
+        public virtual ICollection<UserModel>? UserModel { get; set; }
         public virtual ICollection<PostModel>? Replies { get; set; }
     }
 

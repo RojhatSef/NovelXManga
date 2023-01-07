@@ -46,6 +46,7 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
+
 app.MapRazorPages();
 
 app.Run();
@@ -67,6 +68,7 @@ static void SeedDatainitialize(IHost host)
 
 //todo
 //fix photopath
+// selling Point Book Of the week/ book of the month // book CLUB 
 // fix returnURl
 // fix userRoles and users 
 // add Roles to users, 

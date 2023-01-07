@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MangaAccessService.Migrations
 {
-    public partial class MasterGone : Migration
+    public partial class Testing : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -31,6 +31,9 @@ namespace MangaAccessService.Migrations
                     Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Allias = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ForumName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ForgottPasswordFavoritAnimal = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ForgottPasswordFavActor = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ForgottPasswordFavoritPlace = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     userPhotoPath = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     nameInNativeLanguage = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     placeOfBirth = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -413,24 +416,18 @@ namespace MangaAccessService.Migrations
                 {
                     PostId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     postComment = table.Column<string>(type: "nvarchar(750)", maxLength: 750, nullable: false),
                     score = table.Column<double>(type: "float", nullable: true),
                     CommentPostedTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     BlogId = table.Column<int>(type: "int", nullable: false),
                     BlogModelId = table.Column<int>(type: "int", nullable: false),
                     UserID = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UserModelId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     PostModelPostId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_PostModels", x => x.PostId);
-                    table.ForeignKey(
-                        name: "FK_PostModels_AspNetUsers_UserModelId",
-                        column: x => x.UserModelId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_PostModels_blogModels_BlogModelId",
                         column: x => x.BlogModelId,
@@ -717,6 +714,30 @@ namespace MangaAccessService.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "PostModelUserModel",
+                columns: table => new
+                {
+                    PostModelPostId = table.Column<int>(type: "int", nullable: false),
+                    UserModelId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PostModelUserModel", x => new { x.PostModelPostId, x.UserModelId });
+                    table.ForeignKey(
+                        name: "FK_PostModelUserModel_AspNetUsers_UserModelId",
+                        column: x => x.UserModelId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_PostModelUserModel_PostModels_PostModelPostId",
+                        column: x => x.PostModelPostId,
+                        principalTable: "PostModels",
+                        principalColumn: "PostId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AssociatedNames",
                 columns: table => new
                 {
@@ -999,8 +1020,8 @@ namespace MangaAccessService.Migrations
                 column: "PostModelPostId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PostModels_UserModelId",
-                table: "PostModels",
+                name: "IX_PostModelUserModel_UserModelId",
+                table: "PostModelUserModel",
                 column: "UserModelId");
 
             migrationBuilder.CreateIndex(
@@ -1063,7 +1084,7 @@ namespace MangaAccessService.Migrations
                 name: "OfficalWebsites");
 
             migrationBuilder.DropTable(
-                name: "PostModels");
+                name: "PostModelUserModel");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -1094,6 +1115,9 @@ namespace MangaAccessService.Migrations
 
             migrationBuilder.DropTable(
                 name: "voiceActorModels");
+
+            migrationBuilder.DropTable(
+                name: "PostModels");
 
             migrationBuilder.DropTable(
                 name: "mangaModels");

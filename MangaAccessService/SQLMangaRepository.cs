@@ -1,5 +1,4 @@
 ﻿using MangaModelService;
-using MangaModelService.ViewModels;
 
 namespace MangaAccessService.Migrations
 {
@@ -8,8 +7,7 @@ namespace MangaAccessService.Migrations
     {
 
         private readonly MangaNNovelAuthDBContext mangaNNovelAuthDBContext;
-        public MangaModel mangaModel { get; set; }
-        public MangaModelView MangaModelView { get; set; }
+
 
         public SQLMangaRepository(MangaNNovelAuthDBContext mangaNNovelAuthDBContext)
         {

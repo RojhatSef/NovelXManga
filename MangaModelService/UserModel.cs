@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MangaModelService
@@ -7,8 +8,15 @@ namespace MangaModelService
     {
 
         public string? Allias { get; set; }
-        public string? ForumName { get; set; }
+        [Required]
+        public string ForumName { get; set; }
 
+        [Required]
+        public string? ForgottPasswordFavoritAnimal { get; set; }
+        [Required]
+        public string? ForgottPasswordFavActor { get; set; }
+        [Required]
+        public string? ForgottPasswordFavoritPlace { get; set; }
         public string? userPhotoPath { get; set; }
         public string? nameInNativeLanguage { get; set; }
         public string? placeOfBirth { get; set; }
@@ -25,6 +33,11 @@ namespace MangaModelService
         [ForeignKey("MangaModel")]
         public int? MangaModelId { get; set; }
         public virtual ICollection<MangaModel>? MangaModels { get; set; }
+        public virtual ICollection<MangaModel>? ReadingList { get; set; }
+        public virtual ICollection<MangaModel>? CompletedList { get; set; }
+        public virtual ICollection<MangaModel>? DroppedList { get; set; }
+        public virtual ICollection<MangaModel>? WishList { get; set; }
+        public virtual ICollection<MangaModel>? FavoritList { get; set; }
         public string? postModelID { get; set; }
 
         public virtual ICollection<PostModel>? PostModel { get; set; }
