@@ -30,14 +30,17 @@ namespace MangaModelService
         [ForeignKey("GroupScanlatingModel")]
         public int? groupScanlationID { get; set; }
         public virtual ICollection<GroupScanlatingModel>? GroupScanlating { get; set; }
+
         [ForeignKey("MangaModel")]
         public int? MangaModelId { get; set; }
+
         public virtual ICollection<MangaModel>? MangaModels { get; set; }
-        public virtual ICollection<MangaModel>? ReadingList { get; set; }
-        public virtual ICollection<MangaModel>? CompletedList { get; set; }
-        public virtual ICollection<MangaModel>? DroppedList { get; set; }
-        public virtual ICollection<MangaModel>? WishList { get; set; }
-        public virtual ICollection<MangaModel>? FavoritList { get; set; }
+        public virtual ICollection<ReadingList>? ReadingList { get; set; }
+        public virtual ICollection<CompletedBookList>? CompletedList { get; set; }
+        public virtual ICollection<DroppedBookList>? DroppedList { get; set; }
+        public virtual ICollection<WishBookList>? WishList { get; set; }
+        public virtual ICollection<FavoritBookList>? FavoritList { get; set; }
+        public virtual ICollection<Review>? Reviews { get; set; }
         public string? postModelID { get; set; }
 
         public virtual ICollection<PostModel>? PostModel { get; set; }

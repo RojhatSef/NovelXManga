@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MangaAccessService.Migrations
 {
-    public partial class Testing : Migration
+    public partial class TestNumber100 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -108,6 +108,48 @@ namespace MangaAccessService.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "completedBookLists",
+                columns: table => new
+                {
+                    CompletedBookListID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    MangaModelId = table.Column<int>(type: "int", nullable: true),
+                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_completedBookLists", x => x.CompletedBookListID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "droppedBookLists",
+                columns: table => new
+                {
+                    DroppedId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    MangaModelId = table.Column<int>(type: "int", nullable: true),
+                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_droppedBookLists", x => x.DroppedId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "favoritBookLists",
+                columns: table => new
+                {
+                    FavoritBookListId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    MangaModelId = table.Column<int>(type: "int", nullable: true),
+                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_favoritBookLists", x => x.FavoritBookListId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "GenresModels",
                 columns: table => new
                 {
@@ -162,6 +204,35 @@ namespace MangaAccessService.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "readingLists",
+                columns: table => new
+                {
+                    ReadId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    MangaModelId = table.Column<int>(type: "int", nullable: true),
+                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_readingLists", x => x.ReadId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Reviews",
+                columns: table => new
+                {
+                    ReviewID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    BookScore = table.Column<int>(type: "int", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Content = table.Column<string>(type: "nvarchar(750)", maxLength: 750, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Reviews", x => x.ReviewID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "TagModels",
                 columns: table => new
                 {
@@ -175,6 +246,20 @@ namespace MangaAccessService.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TagModels", x => x.TagId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "wishBookLists",
+                columns: table => new
+                {
+                    WishBookListId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    MangaModelId = table.Column<int>(type: "int", nullable: true),
+                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_wishBookLists", x => x.WishBookListId);
                 });
 
             migrationBuilder.CreateTable(
@@ -327,6 +412,78 @@ namespace MangaAccessService.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "CompletedBookListUserModel",
+                columns: table => new
+                {
+                    CompletedListCompletedBookListID = table.Column<int>(type: "int", nullable: false),
+                    UserModelsId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CompletedBookListUserModel", x => new { x.CompletedListCompletedBookListID, x.UserModelsId });
+                    table.ForeignKey(
+                        name: "FK_CompletedBookListUserModel_AspNetUsers_UserModelsId",
+                        column: x => x.UserModelsId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CompletedBookListUserModel_completedBookLists_CompletedListCompletedBookListID",
+                        column: x => x.CompletedListCompletedBookListID,
+                        principalTable: "completedBookLists",
+                        principalColumn: "CompletedBookListID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "DroppedBookListUserModel",
+                columns: table => new
+                {
+                    DroppedListDroppedId = table.Column<int>(type: "int", nullable: false),
+                    UserModelsId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DroppedBookListUserModel", x => new { x.DroppedListDroppedId, x.UserModelsId });
+                    table.ForeignKey(
+                        name: "FK_DroppedBookListUserModel_AspNetUsers_UserModelsId",
+                        column: x => x.UserModelsId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_DroppedBookListUserModel_droppedBookLists_DroppedListDroppedId",
+                        column: x => x.DroppedListDroppedId,
+                        principalTable: "droppedBookLists",
+                        principalColumn: "DroppedId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "FavoritBookListUserModel",
+                columns: table => new
+                {
+                    FavoritListFavoritBookListId = table.Column<int>(type: "int", nullable: false),
+                    UserModelsId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_FavoritBookListUserModel", x => new { x.FavoritListFavoritBookListId, x.UserModelsId });
+                    table.ForeignKey(
+                        name: "FK_FavoritBookListUserModel_AspNetUsers_UserModelsId",
+                        column: x => x.UserModelsId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_FavoritBookListUserModel_favoritBookLists_FavoritListFavoritBookListId",
+                        column: x => x.FavoritListFavoritBookListId,
+                        principalTable: "favoritBookLists",
+                        principalColumn: "FavoritBookListId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ChapterModelGroupScanlatingModel",
                 columns: table => new
                 {
@@ -375,6 +532,78 @@ namespace MangaAccessService.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ReadingListUserModel",
+                columns: table => new
+                {
+                    ReadingListReadId = table.Column<int>(type: "int", nullable: false),
+                    UserModelsId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ReadingListUserModel", x => new { x.ReadingListReadId, x.UserModelsId });
+                    table.ForeignKey(
+                        name: "FK_ReadingListUserModel_AspNetUsers_UserModelsId",
+                        column: x => x.UserModelsId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ReadingListUserModel_readingLists_ReadingListReadId",
+                        column: x => x.ReadingListReadId,
+                        principalTable: "readingLists",
+                        principalColumn: "ReadId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ReviewUserModel",
+                columns: table => new
+                {
+                    ReviewsReviewID = table.Column<int>(type: "int", nullable: false),
+                    UserModelsId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ReviewUserModel", x => new { x.ReviewsReviewID, x.UserModelsId });
+                    table.ForeignKey(
+                        name: "FK_ReviewUserModel_AspNetUsers_UserModelsId",
+                        column: x => x.UserModelsId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ReviewUserModel_Reviews_ReviewsReviewID",
+                        column: x => x.ReviewsReviewID,
+                        principalTable: "Reviews",
+                        principalColumn: "ReviewID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserModelWishBookList",
+                columns: table => new
+                {
+                    UserModelsId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    WishListWishBookListId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserModelWishBookList", x => new { x.UserModelsId, x.WishListWishBookListId });
+                    table.ForeignKey(
+                        name: "FK_UserModelWishBookList_AspNetUsers_UserModelsId",
+                        column: x => x.UserModelsId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_UserModelWishBookList_wishBookLists_WishListWishBookListId",
+                        column: x => x.WishListWishBookListId,
+                        principalTable: "wishBookLists",
+                        principalColumn: "WishBookListId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "mangaModels",
                 columns: table => new
                 {
@@ -397,7 +626,13 @@ namespace MangaAccessService.Migrations
                     EndingYear = table.Column<DateTime>(type: "datetime2", nullable: true),
                     BlogModelId = table.Column<int>(type: "int", nullable: false),
                     GroupScanlatingID = table.Column<int>(type: "int", nullable: true),
-                    userId = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    userId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CompletedBookListID = table.Column<int>(type: "int", nullable: true),
+                    DroppedBookListDroppedId = table.Column<int>(type: "int", nullable: true),
+                    FavoritBookListId = table.Column<int>(type: "int", nullable: true),
+                    ReadingListReadId = table.Column<int>(type: "int", nullable: true),
+                    ReviewID = table.Column<int>(type: "int", nullable: true),
+                    WishBookListId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -408,6 +643,36 @@ namespace MangaAccessService.Migrations
                         principalTable: "blogModels",
                         principalColumn: "BlogModelId",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_mangaModels_completedBookLists_CompletedBookListID",
+                        column: x => x.CompletedBookListID,
+                        principalTable: "completedBookLists",
+                        principalColumn: "CompletedBookListID");
+                    table.ForeignKey(
+                        name: "FK_mangaModels_droppedBookLists_DroppedBookListDroppedId",
+                        column: x => x.DroppedBookListDroppedId,
+                        principalTable: "droppedBookLists",
+                        principalColumn: "DroppedId");
+                    table.ForeignKey(
+                        name: "FK_mangaModels_favoritBookLists_FavoritBookListId",
+                        column: x => x.FavoritBookListId,
+                        principalTable: "favoritBookLists",
+                        principalColumn: "FavoritBookListId");
+                    table.ForeignKey(
+                        name: "FK_mangaModels_readingLists_ReadingListReadId",
+                        column: x => x.ReadingListReadId,
+                        principalTable: "readingLists",
+                        principalColumn: "ReadId");
+                    table.ForeignKey(
+                        name: "FK_mangaModels_Reviews_ReviewID",
+                        column: x => x.ReviewID,
+                        principalTable: "Reviews",
+                        principalColumn: "ReviewID");
+                    table.ForeignKey(
+                        name: "FK_mangaModels_wishBookLists_WishBookListId",
+                        column: x => x.WishBookListId,
+                        principalTable: "wishBookLists",
+                        principalColumn: "WishBookListId");
                 });
 
             migrationBuilder.CreateTable(
@@ -939,6 +1204,21 @@ namespace MangaAccessService.Migrations
                 column: "MangaModelsMangaID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_CompletedBookListUserModel_UserModelsId",
+                table: "CompletedBookListUserModel",
+                column: "UserModelsId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DroppedBookListUserModel_UserModelsId",
+                table: "DroppedBookListUserModel",
+                column: "UserModelsId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_FavoritBookListUserModel_UserModelsId",
+                table: "FavoritBookListUserModel",
+                column: "UserModelsId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_GenresModelMangaModel_MangaModelsMangaID",
                 table: "GenresModelMangaModel",
                 column: "MangaModelsMangaID");
@@ -968,6 +1248,36 @@ namespace MangaAccessService.Migrations
                 table: "mangaModels",
                 column: "BlogModelId",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_mangaModels_CompletedBookListID",
+                table: "mangaModels",
+                column: "CompletedBookListID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_mangaModels_DroppedBookListDroppedId",
+                table: "mangaModels",
+                column: "DroppedBookListDroppedId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_mangaModels_FavoritBookListId",
+                table: "mangaModels",
+                column: "FavoritBookListId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_mangaModels_ReadingListReadId",
+                table: "mangaModels",
+                column: "ReadingListReadId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_mangaModels_ReviewID",
+                table: "mangaModels",
+                column: "ReviewID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_mangaModels_WishBookListId",
+                table: "mangaModels",
+                column: "WishBookListId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_MangaModelTagModel_TagsModelsTagId",
@@ -1025,6 +1335,21 @@ namespace MangaAccessService.Migrations
                 column: "UserModelId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ReadingListUserModel_UserModelsId",
+                table: "ReadingListUserModel",
+                column: "UserModelsId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ReviewUserModel_UserModelsId",
+                table: "ReviewUserModel",
+                column: "UserModelsId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserModelWishBookList_WishListWishBookListId",
+                table: "UserModelWishBookList",
+                column: "WishListWishBookListId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_voiceActorModels_mangaModelMangaID",
                 table: "voiceActorModels",
                 column: "mangaModelMangaID");
@@ -1060,6 +1385,15 @@ namespace MangaAccessService.Migrations
                 name: "CharacterMangaModel");
 
             migrationBuilder.DropTable(
+                name: "CompletedBookListUserModel");
+
+            migrationBuilder.DropTable(
+                name: "DroppedBookListUserModel");
+
+            migrationBuilder.DropTable(
+                name: "FavoritBookListUserModel");
+
+            migrationBuilder.DropTable(
                 name: "GenresModelMangaModel");
 
             migrationBuilder.DropTable(
@@ -1085,6 +1419,15 @@ namespace MangaAccessService.Migrations
 
             migrationBuilder.DropTable(
                 name: "PostModelUserModel");
+
+            migrationBuilder.DropTable(
+                name: "ReadingListUserModel");
+
+            migrationBuilder.DropTable(
+                name: "ReviewUserModel");
+
+            migrationBuilder.DropTable(
+                name: "UserModelWishBookList");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -1124,6 +1467,24 @@ namespace MangaAccessService.Migrations
 
             migrationBuilder.DropTable(
                 name: "blogModels");
+
+            migrationBuilder.DropTable(
+                name: "completedBookLists");
+
+            migrationBuilder.DropTable(
+                name: "droppedBookLists");
+
+            migrationBuilder.DropTable(
+                name: "favoritBookLists");
+
+            migrationBuilder.DropTable(
+                name: "readingLists");
+
+            migrationBuilder.DropTable(
+                name: "Reviews");
+
+            migrationBuilder.DropTable(
+                name: "wishBookLists");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

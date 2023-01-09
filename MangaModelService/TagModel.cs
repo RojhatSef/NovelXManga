@@ -16,6 +16,7 @@ namespace MangaModelService
 
     }
 }
+#region 1000 Tags
 //    public enum ListOfTagModels
 //    {
 
@@ -1037,3 +1038,4 @@ namespace MangaModelService
 
 
 //    }
+#endregion

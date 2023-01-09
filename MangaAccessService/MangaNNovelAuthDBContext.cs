@@ -14,7 +14,12 @@ namespace MangaAccessService
         public DbSet<AuthorModel> authorModels { get; set; }
         public DbSet<VoiceActorModel> voiceActorModels { get; set; }
         public DbSet<ChapterModel> chapterModels { get; set; }
-
+        public DbSet<Review> Reviews { get; set; }
+        public DbSet<ReadingList> readingLists { get; set; }
+        public DbSet<CompletedBookList> completedBookLists { get; set; }
+        public DbSet<DroppedBookList> droppedBookLists { get; set; }
+        public DbSet<WishBookList> wishBookLists { get; set; }
+        public DbSet<FavoritBookList> favoritBookLists { get; set; }
         public DbSet<Character> Characters { get; set; }
         public DbSet<GroupScanlatingModel> groupScanlatingModels { get; set; }
         public DbSet<Languages> Languages_ { get; set; }
@@ -41,6 +46,7 @@ namespace MangaAccessService
             .WithOne(i => i.BlogModel)
             .HasForeignKey<MangaModel>(b => b.BlogModelId);
 
+
             modelBuilder.Entity<MangaModel>().Navigation(e => e.Authormodels).AutoInclude();
             modelBuilder.Entity<MangaModel>().Navigation(e => e.TagsModels).AutoInclude();
             modelBuilder.Entity<MangaModel>().Navigation(e => e.GenresModels).AutoInclude();
@@ -58,6 +64,8 @@ namespace MangaAccessService
             modelBuilder.Entity<VoiceActorModel>().Navigation(e => e.AssociatedNames).AutoInclude();
             modelBuilder.Entity<BlogModel>().Navigation(e => e.postsModel).AutoInclude();
             modelBuilder.Entity<ChapterModel>().Navigation(e => e.GroupScanlatingModels).AutoInclude();
+            modelBuilder.Entity<UserModel>().Navigation(e => e.Reviews).AutoInclude();
+
 
             base.OnModelCreating(modelBuilder);
             #region Remved Builders

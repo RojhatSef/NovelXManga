@@ -2,10 +2,10 @@
 
 namespace MangaAccessService
 {
-    public class SQLArtistRepsitorycs : IArtistRepsitory
+    public class SQLArtistRepsitory : IArtistRepsitory
     {
         private readonly MangaNNovelAuthDBContext context;
-        public SQLArtistRepsitorycs(MangaNNovelAuthDBContext context)
+        public SQLArtistRepsitory(MangaNNovelAuthDBContext context)
         {
             this.context = context;
         }

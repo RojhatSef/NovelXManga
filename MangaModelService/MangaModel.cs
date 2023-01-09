@@ -32,10 +32,6 @@ namespace MangaModelService
         public virtual List<MangaModel>? RecommendedMangaModels { get; set; }
         public int BlogModelId { get; set; }
         public BlogModel BlogModel { get; set; }
-
-        //public int MasterID { get; set; }
-        //public MasterModel MasterModels { get; set; }
-
         public virtual ICollection<OfficalWebsite> OfficalWebsites { get; set; }
         public virtual ICollection<AuthorModel>? Authormodels { get; set; }
         public virtual ICollection<ArtistModel>? ArtistModels { get; set; }
