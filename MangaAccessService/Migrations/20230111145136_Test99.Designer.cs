@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MangaAccessService.Migrations
 {
     [DbContext(typeof(MangaNNovelAuthDBContext))]
-    [Migration("20230109165538_TestNumber100")]
-    partial class TestNumber100
+    [Migration("20230111145136_Test99")]
+    partial class Test99
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -673,6 +673,9 @@ namespace MangaAccessService.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("MonthRead")
+                        .HasColumnType("int");
+
                     b.Property<string>("OfficalLanguage")
                         .HasColumnType("nvarchar(max)");
 
@@ -697,7 +700,13 @@ namespace MangaAccessService.Migrations
                     b.Property<string>("Type")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("WeekRead")
+                        .HasColumnType("int");
+
                     b.Property<int?>("WishBookListId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("YearRead")
                         .HasColumnType("int");
 
                     b.Property<string>("futureEvents")
@@ -870,6 +879,9 @@ namespace MangaAccessService.Migrations
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("voteReview")
+                        .HasColumnType("int");
 
                     b.HasKey("ReviewID");
 

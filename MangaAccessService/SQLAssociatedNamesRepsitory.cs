@@ -36,7 +36,7 @@ namespace MangaAccessService
 
         public AssociatedNames GetModel(string id)
         {
-            return context.AssociatedNames.Find();
+            return context.AssociatedNames.Find(id);
         }
 
         public IEnumerable<AssociatedNames> Search(string searchTerm)

@@ -1,24 +1,33 @@
 ﻿@model MangaModel
 @{
-
+    @Html.Hidden("HiddenGroup")
+    
 }
 
-<div class="newbody">
+
 <div class="container2">
     <div class="Left_Side">
         <div class="profileText">
             @if (Model.MangaName != null)
             {
-                <div class="mb-3">
-                    <label class="form-label" asp-for="@Model.MangaName">@Model.MangaName</label>
+                <h2>@Model.MangaName</h2>
+                @if (User.Identity.IsAuthenticated && User.IsInRole("Updater"))
+                {
+                    <input type="text" class="HiddenGroup" asp-for="@Model.MangaName" class="form-control" />
 
-                </div>
+                }
+              
             }
             <div class="imgBx">
                 @if (Model.PhotoPath != string.Empty)
                 {
                     <div class="mb-3">
                         <img src="@Model.PhotoPath" alt="NoImage" width="100" height="200">
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("Updater"))
+                        {
+                            <input type="text" class="HiddenGroup" asp-for="@Model.PhotoPath" class="form-control" />
+
+                        }
 
                     </div>
                 }
@@ -27,43 +36,70 @@
                     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png" alt="BookImage" width="100" height="200">
                 }
             </div>
+
+                <div class="profileTextGroup">
+                     <div class="InfoGroup">
+                    <div class="Title">
+                        <div class="Info">
+                            <span class="icon">Language:   </span><br /><br />
+                            <div class="text">
+                            @if (Model.AllLanguages != null)
+                     {
+                 
+                    @foreach (var item in Model.AllLanguages)
+                    {
+                                        <p> <a href="@item.OfficalWebSiteToBuy">@item.LanguageName</a></p>
+
+
+                                    }
+                    }
+                    else
+                    {
+                        <span>N/A</span>
+                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    <div class="InfoGroup"> 
+                        <div class="Title">
+                            <div class="Info">
+                            <span class="icon">AssociatedNames  </span><br /><br />
+                            <span class="text">
+                                @if(Model.AssociatedNames != null)
+                                {
+                                    @foreach (var item in Model.AssociatedNames)
+                                    {
+                                        <a asp-page="CurrentManga" asp-route-id="@item.MangaID" class="btn btn-primary">@item.nameString ,</a>                                       
+                                    }
+
+                                }
+                                else
+                                {
+                                    <span>N/A</span>
+                                }
+                            </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        
         </div>
     </div>
 
-    <div class="Right_Side"></div>
+    <div class="Right_Side">
 
-<div>Language/s: </div>
-@if (Model.AllLanguages != null)
-{
-    @foreach (var item in Model.AllLanguages)
-    {
+    </div>
 
-        <label class="form-label" asp-for="@item.LanguageName"> @item.LanguageName </label>
 
-    }
-}
-else
-{
-    <p>N/A</p>
-}
+
+
 
 
 
 <div>AssociatedNames: </div>
-<div>
-    @if (Model.AssociatedNames != null)
-    {
-        @foreach (var item in Model.AssociatedNames)
-        {
 
-            <label class="form-label" asp-for="@item.nameString"> @item.nameString ,  </label>
-
-
-        }
-
-    }
-</div>
-<div>Tags: </div>
+<div> </div>
 @if (Model.TagsModels != null)
 {
 
@@ -247,4 +283,27 @@ else
     </div>
 }
     </div>
-</div>
+@if (Model.BlogModel != null)
+{
+    <textarea asp-for="BlogModel.postsModel">
+
+            </textarea>
+    if(Model.BlogModel.postsModel != null){
+        @foreach (var item in Model.BlogModel.postsModel)
+        {
+
+            <label class="form-label">@item.postComment</label>
+
+        }
+    }
+    else{
+        <p>Post not Responding</p>
+    }
+    
+
+}
+else
+{
+    <p>Blog not Responding</p>
+}
+

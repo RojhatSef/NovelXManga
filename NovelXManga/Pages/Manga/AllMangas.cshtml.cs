@@ -1,7 +1,6 @@
 using MangaAccessService;
 using MangaModelService;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
 
 namespace NovelXManga.Pages.Manga
 {
@@ -23,7 +22,7 @@ namespace NovelXManga.Pages.Manga
         public IEnumerable<MangaModel> GetAllBooks { get; set; }
         public void OnGet()
         {
-            IEnumerable<MangaModel> GetAllBook = mangaNNovelAuthDBContext.mangaModels.Include(x => x.RecommendedMangaModels).Include(e => e.relatedSeries);
+            IEnumerable<MangaModel> GetAllBook = mangaRepository.GetAllManga();
             GetAllBooks = GetAllBook;
 
         }

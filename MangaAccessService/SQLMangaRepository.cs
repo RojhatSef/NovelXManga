@@ -1,4 +1,5 @@
 ﻿using MangaModelService;
+using Microsoft.EntityFrameworkCore;
 
 namespace MangaAccessService.Migrations
 {
@@ -34,12 +35,22 @@ namespace MangaAccessService.Migrations
 
         public IEnumerable<MangaModel> GetAllManga()
         {
-            return mangaNNovelAuthDBContext.mangaModels;
+            return mangaNNovelAuthDBContext.mangaModels
+                //.Include(e => e.BlogModel)
+                .Include(s => s.GroupScanlating)
+                .Include(b => b.BlogModel.postsModel)
+                .Include(x => x.RecommendedMangaModels)
+                .Include(e => e.relatedSeries)
+                .Include(f => f.OfficalWebsites);
+
         }
 
         public MangaModel GetManga(int id)
         {
-            return mangaNNovelAuthDBContext.mangaModels.Find(id);
+
+            var CurrentManga = mangaNNovelAuthDBContext.mangaModels.Find(id);
+
+            return CurrentManga;
         }
 
         public IEnumerable<MangaModel> Search(string searchTerm)

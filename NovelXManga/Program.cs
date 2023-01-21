@@ -60,14 +60,21 @@ static void SeedDatainitialize(IHost host)
     }
 }
 
+
+// make or break ToDos
+// Sync all Data for every download page.
+
+
 //large ToDos
-// fix a forum? <Unsure if we want this> everymanga field is a forumish
+// fix a forum? <Unsure if we want this> everymanga field is a forumish Done
 // Fix private chatrooms?
-// fix Message
+// fix Message 
 
 
 //todo
 //fix photopath
+// fix double loggin problem
+// fix adding publishers 
 // selling Point Book Of the week/ book of the month // book CLUB 
 // fix returnURl
 // fix userRoles and users 

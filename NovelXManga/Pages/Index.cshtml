@@ -5,68 +5,87 @@
 @{
     ViewData["Title"] = "Home page";
 }
+<div class="container2">
+     <div class="Left_Side">
+        @if (SignInManager.IsSignedIn(User))
+        {
+            <ul class="navbar-nav flex-grow-1">
+           
+                <li class="nav-item">
+                    <a class="btn" asp-area="" asp-page="/Author/AuthorRegister">Author Register</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn" asp-area="" asp-page="/Register/UserRegister">User Register</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn" asp-area="" asp-page="/Register/ALlAuthors">Authors Post</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn" asp-area="" asp-page="/Manga/CreateNewManga">Create Manga</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn" asp-area="" asp-page="/Manga/AllMangas">AllManga Manga</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn" asp-area="" asp-page="/CreateBook">Create Book</a>
+                </li>
 
-@if (SignInManager.IsSignedIn(User))
-{
-    <ul class="navbar-nav flex-grow-1">
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
-        </li>
 
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
-        </li>
-        <li class="nav-item">
-            <a class="btn" asp-area="" asp-page="/Author/AuthorRegister">Author Register</a>
-        </li>
-        <li class="nav-item">
-            <a class="btn" asp-area="" asp-page="/Register/UserRegister">User Register</a>
-        </li>
-        <li class="nav-item">
-            <a class="btn" asp-area="" asp-page="/Register/ALlAuthors">Authors Post</a>
-        </li>
-        <li class="nav-item">
-            <a class="btn" asp-area="" asp-page="/Manga/CreateNewManga">Create Manga</a>
-        </li>
-        <li class="nav-item">
-            <a class="btn" asp-area="" asp-page="/Manga/AllMangas">AllManga Manga</a>
-        </li>
-        <li class="nav-item">
-            <a class="btn" asp-area="" asp-page="/CreateBook">Create Book</a>
-        </li>
+                <li class="nav-item">
+                    <a class="btn btn-primary" asp-area="" asp-page="Roles/CreateRole">Create Role</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-primary" asp-area="" asp-page="Roles/UpdateUserRoles">Update Role</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-primary" asp-area="" asp-page="GroupScan/AddGroupScanlation">AddGroup</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn" asp-area="" asp-page="/ContactUs">Contact Us</a>
+                </li>
+            </ul>
 
-   
-        <li class="nav-item">
-            <a class="btn btn-primary" asp-area="" asp-page="Register/CreateRole">Create Role</a>
-        </li>
-        <li class="nav-item">
-            <a class="btn btn-primary" asp-area="" asp-page="GroupScan/AddGroupScanlation">AddGroup</a>
-        </li>
-        <li class="nav-item">
-            <a class="btn" asp-area="" asp-page="/ContactUs">Contact Us</a>
-        </li>
-    </ul>
+            <ul class="navbar-nav d-flex justify-content-end">
+                <li class="nav-item">
+                    <a class="btn btn-primary" asp-area="" asp-page="/Login/LogOut">Logout</a>
+                </li>
+            </ul>
+        }
+        else
+        {
+            <ul class="navbar-nav d-flex justify-content-end flex-group-1">
+                <li class="nav-item">
+                    <a class="btn" asp-area="" asp-page="/Register/AuthorRegister">Author Register</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-primary" asp-area="" asp-page="/Login/LoginIndex">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn" asp-area="" asp-page="/Register/UserRegister">UserRegister</a>
+                </li>
 
-    <ul class="navbar-nav d-flex justify-content-end">
-        <li class="nav-item">
-            <a class="btn btn-primary" asp-area="" asp-page="/Login/LogOut">Logout</a>
-        </li>
-    </ul>
-}
-else
-{
-    <ul class="navbar-nav d-flex justify-content-end flex-group-1">
-        <li class="nav-item">
-            <a class="btn" asp-area="" asp-page="/Register/AuthorRegister">Author Register</a>
-        </li>
-        <li class="nav-item">
-            <a class="btn btn-primary" asp-area="" asp-page="/Login/LoginIndex">Login</a>
-        </li>
-        <li class="nav-item">
-            <a class="btn" asp-area="" asp-page="/Register/UserRegister">UserRegister</a>
-        </li>
+            </ul>
+        }
 
-    </ul>
-}
+        <h3>@Model.SucessFulManga</h3>
+     </div>
+     <div class="Right_Side">
+           @if (SignInManager.IsSignedIn(User))
+        { 
+            <ul>
+           
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
+                </li>
 
-<h3>@Model.SucessFulManga</h3>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
+                </li>
+               
+            </ul>
+        }
+        else{
+
+        }
+    </div>
+</div>

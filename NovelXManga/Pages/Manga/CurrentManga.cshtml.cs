@@ -24,6 +24,7 @@ namespace NovelXManga.Pages.Manga
         public void OnGet(int id)
         {
             var currentManga_ = mangaRepository.GetManga(id);
+            //currentManga_ = mangaNNovelAuthDBContext.mangaModels.Where(e => e.MangaID == id).Include(s => s.BlogModel.postsModel); 
             CurrentManga = currentManga_;
         }
     }

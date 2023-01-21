@@ -671,6 +671,9 @@ namespace MangaAccessService.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("MonthRead")
+                        .HasColumnType("int");
+
                     b.Property<string>("OfficalLanguage")
                         .HasColumnType("nvarchar(max)");
 
@@ -695,7 +698,13 @@ namespace MangaAccessService.Migrations
                     b.Property<string>("Type")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("WeekRead")
+                        .HasColumnType("int");
+
                     b.Property<int?>("WishBookListId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("YearRead")
                         .HasColumnType("int");
 
                     b.Property<string>("futureEvents")
@@ -868,6 +877,9 @@ namespace MangaAccessService.Migrations
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("voteReview")
+                        .HasColumnType("int");
 
                     b.HasKey("ReviewID");
 

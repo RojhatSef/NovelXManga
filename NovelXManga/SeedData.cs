@@ -200,7 +200,7 @@ namespace NovelXManga
                 {
                     MangaName = "Naruto",
 
-                    PhotoPath = "https://cdn.mangaupdates.com/image/i140134.png",
+                    PhotoPath = "C:\\Users\\Rojhat\\source\\repos\\NovelXManga\\NovelXManga\\wwwroot\\Images\\AuthorImage\\Rebecca Chambers.png",
                     ReleaseYear = myDate,
                     BlogModel = new BlogModel { mangaName = "Naruto" },
                     Description = "A Kid who got something stuck in his stomach",
@@ -229,7 +229,7 @@ namespace NovelXManga
                 {
                     MangaName = "Berserk",
 
-                    PhotoPath = "https://cdn.mangaupdates.com/image/i372335.jpg",
+                    PhotoPath = "C:\\Users\\Rojhat\\source\\repos\\NovelXManga\\NovelXManga\\wwwroot\\Images\\AuthorImage\\NoPhoto.png",
                     ReleaseYear = DateTime.Now,
                     BlogModel = new BlogModel { mangaName = "Berserk" },
                     Description = "A broken man",
@@ -272,12 +272,18 @@ namespace NovelXManga
         #endregion
         public void addLanguages()
         {
-            string[] LanguagesInput = { "English", "Japanese", "Spanish", "Mandarin", "Russian", "Arabic", };
+            string[] LanguagesInput = { "English", "Japanese", "Spanish", "Mandarin", "Russian", };
+            string[] OfficalWeb = { "https://www.amazon.com/Naruto-Vol-1-Uzumaki/dp/1569319006/ref=sr_1_2?keywords=Naruto+Manga&qid=1673876360&sr=8-2",
+                "https://www.amazon.com/Naruto-1-Japanese-Masashi-Kishimoto/dp/4088728408/ref=sr_1_1?crid=3UV6OU93CQ4G2&keywords=Naruto+Manga+Japanese&qid=1673876516&sprefix=naruto+manga+japane%2Caps%2C191&sr=8-1",
+                "https://www.amazon.com/Naruto-1-Masashi-Kishimoto/dp/8415821816/ref=sr_1_2?crid=14B33YWBQMXRP&keywords=Naruto+Manga+Spanish&qid=1673876488&sprefix=naruto+manga+spanish%2Caps%2C193&sr=8-2",
+                "https://www.abebooks.com/servlet/BookDetailsPL?bi=4678761458&searchurl=kn%3DNaruto%2B1%2B%2528Chinese%2BEdition%2529%26sortby%3D20&cm_sp=snippet-_-srp1-_-title3",
+            "https://comics.lv/en/product/naruto-box-set-1-volumes-1-27/"};
             var LangList = new List<Languages>();
             for (int i = 0; i < LanguagesInput.Length; i++)
             {
 
                 Languages newLang = new Languages();
+                newLang.OfficalWebSiteToBuy = OfficalWeb[i];
                 newLang.LanguageName = LanguagesInput[i];
                 LangList.Add(newLang);
             }
@@ -370,7 +376,37 @@ namespace NovelXManga
             context.mangaModels.Update(manga2);
             context.SaveChanges();
         }
+        public void AddOfficalWebsites()
+        {
+            string[] OfficalWebWebName = { "Naruto Offical", "Twitter", "FaceBook", "Line" };
+            string[] OfficalWeb = { "https://naruto-official.com/en", "https://mobile.twitter.com/naruto_info_en",
+                "https://www.facebook.com/narutoofficialsns/",
+                "https://social-plugins.line.me/lineit/share?url=https://naruto-official.com/en" };
+            var officalWebsites = new List<OfficalWebsite>();
+            for (int i = 0; i < OfficalWeb.Length; i++)
+            {
+                OfficalWebsite offWeb = new OfficalWebsite();
+                offWeb.OfficalWebsiteString = OfficalWeb[i];
+                offWeb.WebsiteName = OfficalWebWebName[i];
 
+                officalWebsites.Add(offWeb);
+            }
+            context.OfficalWebsites.AddRange(officalWebsites);
+            context.SaveChanges();
+        }
+        public void CombineOfficalWebsites()
+        {
+            var manga1 = context.mangaModels.FirstOrDefault(e => e.MangaName == "Naruto");
+
+            var officalWebsites = context.OfficalWebsites.FirstOrDefault(e => e.WebsiteName == "Twitter");
+            var officalWebsites2 = context.OfficalWebsites.FirstOrDefault(e => e.WebsiteName == "Facebook");
+            var officalWebsites3 = context.OfficalWebsites.FirstOrDefault(e => e.WebsiteName == "Naruto Offical");
+            var officalWebsites4 = context.OfficalWebsites.FirstOrDefault(e => e.WebsiteName == "Line");
+            manga1.OfficalWebsites = new List<OfficalWebsite> { officalWebsites, officalWebsites2, officalWebsites3, officalWebsites4 };
+
+            context.mangaModels.Update(manga1);
+            context.SaveChanges();
+        }
         #region TagSeed
         public void TagsModel()
         {

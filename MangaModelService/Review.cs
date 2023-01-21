@@ -7,6 +7,7 @@ namespace MangaModelService
         [Key]
         public int ReviewID { get; set; }
         public int BookScore { get; set; }
+        public int voteReview { get; set; }
         public string Title { get; set; }
         [Required]
         [MinLength(10)]

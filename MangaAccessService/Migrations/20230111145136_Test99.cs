@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MangaAccessService.Migrations
 {
-    public partial class TestNumber100 : Migration
+    public partial class Test99 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -224,6 +224,7 @@ namespace MangaAccessService.Migrations
                     ReviewID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     BookScore = table.Column<int>(type: "int", nullable: false),
+                    voteReview = table.Column<int>(type: "int", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Content = table.Column<string>(type: "nvarchar(750)", maxLength: 750, nullable: false)
                 },
@@ -621,6 +622,9 @@ namespace MangaAccessService.Migrations
                     Type = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     OfficalLanguage = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PhotoPath = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MonthRead = table.Column<int>(type: "int", nullable: true),
+                    WeekRead = table.Column<int>(type: "int", nullable: true),
+                    YearRead = table.Column<int>(type: "int", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ReleaseYear = table.Column<DateTime>(type: "datetime2", nullable: true),
                     EndingYear = table.Column<DateTime>(type: "datetime2", nullable: true),
