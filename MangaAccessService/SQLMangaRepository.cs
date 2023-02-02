@@ -59,7 +59,7 @@ namespace MangaAccessService.Migrations
             {
                 return mangaNNovelAuthDBContext.mangaModels;
             }
-            return mangaNNovelAuthDBContext.mangaModels.Where(s => s.MangaName.Contains(searchTerm));
+            return mangaNNovelAuthDBContext.mangaModels.Where(s => s.MangaName.Contains(searchTerm) || s.ISBN13.Contains(searchTerm) || s.ISBN10.Contains(searchTerm));
         }
 
         public MangaModel Update(MangaModel updatedManga)

@@ -12,8 +12,6 @@ namespace MangaModelService
         public int? TagHeavy { get; set; }
         public int? MangaID { get; set; }
         public virtual ICollection<MangaModel>? MangaModels { get; set; }
-
-
     }
 }
 //public enum GenresModel

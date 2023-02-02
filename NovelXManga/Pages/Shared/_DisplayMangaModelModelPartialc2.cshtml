@@ -1,0 +1,58 @@
+﻿@model MangaModel
+@{
+    @Html.Hidden("HiddenGroup")
+    
+}
+
+<div class="container2">
+    <div class="Left_Side">
+        <div class="profileText">
+            <h2>@Model.MangaName</h2>
+            <div class="imgBx">
+                <img src="@Model.PhotoPath" alt="NoImage">
+            </div>
+            <div class="profileTextGroup">
+                <div class="InfoGroup">
+                    <div class="Title">
+                        <div class="Info">
+                            <span class="icon">Language:</span><br /><br />
+                            <div class="text">
+                                @if (Model.AllLanguages != null)
+                                {
+                                    @foreach (var item in Model.AllLanguages)
+                                    {
+                                        <a href="@item.OfficalWebSiteToBuy">@item.LanguageName</a>
+                                    }
+                                }
+                                else
+                                {
+                                    <span>N/A</span>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="InfoGroup">
+                    <div class="Title">
+                        <div class="Info">
+                            <span class="icon">AssociatedNames:</span><br /><br />
+                            <span class="text">
+                                @if (Model.AssociatedNames != null)
+                                {
+                                    @foreach (var item in Model.AssociatedNames)
+                                    {
+                                        <a asp-page="CurrentManga" asp-route-id="@item.MangaID" class="btn btn-primary">@item.nameString</a>
+                                    }
+                                }
+                                else
+                                {
+                                    <span>N/A</span>
+                                }
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

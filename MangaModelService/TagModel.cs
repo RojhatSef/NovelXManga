@@ -10,10 +10,8 @@ namespace MangaModelService
         public string? TagName { get; set; }
         public string? TagDescription { get; set; }
         public int? TagHeavy { get; set; }
-
         public int? MangaID { get; set; }
         public virtual ICollection<MangaModel>? MangaModels { get; set; }
-
     }
 }
 #region 1000 Tags

@@ -6,7 +6,7 @@ html {
   html {
     font-size: 16px;
   }
-}
+/*}*/
 
 html {
   position: relative;
@@ -111,4 +111,61 @@ body {
         position: relative;
         background: #fff;
         padding: 40px;
+    }/*
+.container2 {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.Left_Side {
+    width: 50%;
+    padding: 20px;
+    text-align: center;
+}
+
+.Right_Side {
+    width: 50%;
+    padding: 20px;
+    text-align: center;
+}
+
+.profileText h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.imgBx img {
+    width: 100%;
+    height: auto;
+}
+
+.InfoGroup {
+    margin-bottom: 20px;
+}
+
+.Title span.icon {
+    font-weight: bold;
+}
+
+.text a {
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+.mb-3 {
+    margin-bottom: 30px;
+}
+
+.form-label {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    display: inline-block;
+}
+
+@media (max-width: 767px) {
+    .Left_Side, .Right_Side {
+        width: 100%;
     }
+}*/
