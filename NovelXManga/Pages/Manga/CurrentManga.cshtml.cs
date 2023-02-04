@@ -12,8 +12,8 @@ namespace NovelXManga.Pages.Manga
         private readonly IWebHostEnvironment webHostEnvironment;
         private readonly UserManager<IdentityUser> userManager;
 
-
         public MangaModel CurrentManga { get; set; }
+
         public CurrentMangaModel(UserManager<IdentityUser> userManager, IWebHostEnvironment webHostEnvironment, IMangaRepository mangaRepository, MangaNNovelAuthDBContext mangaNNovelAuthDBContext)
         {
             this.userManager = userManager;
@@ -21,10 +21,11 @@ namespace NovelXManga.Pages.Manga
             this.mangaRepository = mangaRepository;
             this.mangaNNovelAuthDBContext = mangaNNovelAuthDBContext;
         }
+
         public void OnGet(int id)
         {
             var currentManga_ = mangaRepository.GetManga(id);
-            //currentManga_ = mangaNNovelAuthDBContext.mangaModels.Where(e => e.MangaID == id).Include(s => s.BlogModel.postsModel); 
+            //currentManga_ = mangaNNovelAuthDBContext.mangaModels.Where(e => e.MangaID == id).Include(s => s.BlogModel.postsModel);
             CurrentManga = currentManga_;
         }
     }

@@ -8,7 +8,7 @@
 <div class="container2">
     <div class="Left_Side">
         <div class="profileText">
-            @if (Model.MangaName != null)
+            @if (Model.MangaName != null  )
             {
                 <h2>@Model.MangaName</h2>
                 @if (User.Identity.IsAuthenticated && User.IsInRole("Updater"))

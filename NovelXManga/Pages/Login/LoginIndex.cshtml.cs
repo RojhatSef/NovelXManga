@@ -8,19 +8,26 @@ namespace NovelXManga.Pages.Login
     public class LoginIndexModel : PageModel
     {
         private readonly SignInManager<IdentityUser> signInManager;
+
         [BindProperty]
         public LoginModel LoginModel { get; set; }
+
         public string ReturnUrl { get; set; }
+
         public LoginIndexModel(SignInManager<IdentityUser> signInManager)
         {
             this.signInManager = signInManager;
-
         }
-        public void OnGet()
+
+        public IActionResult OnGet(string? returnUrl)
         {
-
+            ReturnUrl = returnUrl;
+            ViewData["ReturnUrl"] = ReturnUrl;
+            return Page();
         }
+
         #region Test returnURl
+
         //public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         //{
         //    if (ModelState.IsValid)
@@ -40,8 +47,9 @@ namespace NovelXManga.Pages.Login
         //    }
         //    ModelState.AddModelError("", "username or password incorrect");
         //    return Page();
-        //} 
-        #endregion
+        //}
+
+        #endregion Test returnURl
 
         public async Task<IActionResult> OnPostAsync(string returnUrl)
         {
@@ -49,18 +57,17 @@ namespace NovelXManga.Pages.Login
             if (ModelState.IsValid)
             {
                 var identityResult = await signInManager.PasswordSignInAsync(LoginModel.Email, LoginModel.Password, LoginModel.RememberMe, false);
-                //if (identityResult.Succeeded)
-                //{
-                //    if (returnUrl == null || returnUrl == "/")
-                //    {
-                //        return RedirectToPage("/Index");
-                //    }
-                //    else
-                //    {
-                //        return RedirectToPage(returnUrl);
-                //    }
-
-                //}
+                if (identityResult.Succeeded)
+                {
+                    if (returnUrl == null || returnUrl == "/")
+                    {
+                        return RedirectToPage("/Index");
+                    }
+                    else
+                    {
+                        return RedirectToPage(returnUrl);
+                    }
+                }
                 if (identityResult.Succeeded)
                 {
                     if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
@@ -71,7 +78,6 @@ namespace NovelXManga.Pages.Login
                     {
                         return RedirectToPage("/Index");
                     }
-
                 }
 
                 ModelState.AddModelError("", "username or password incorrect");

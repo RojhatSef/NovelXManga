@@ -1,5 +1,4 @@
-﻿
-using MangaAccessService;
+﻿using MangaAccessService;
 using MangaModelService;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -14,6 +13,7 @@ namespace NovelXManga
         private readonly MangaNNovelAuthDBContext context;
         private readonly IWebHostEnvironment webHostEnvironment;
         private readonly RoleManager<IdentityRole> roleManager;
+
         public SeedData(MangaNNovelAuthDBContext context, UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, IWebHostEnvironment webHostEnvironment, RoleManager<IdentityRole> roleManager)
         {
             this.context = context;
@@ -22,7 +22,9 @@ namespace NovelXManga
             this.webHostEnvironment = webHostEnvironment;
             this.roleManager = roleManager;
         }
+
         #region CombiningAssociatedNamesToBook
+
         public void addAssName()
         {
             var manga1 = context.mangaModels.FirstOrDefault(e => e.MangaName == "Naruto");
@@ -32,10 +34,12 @@ namespace NovelXManga
             manga1.AssociatedNames = new List<AssociatedNames> { assName1, assName2, assName3 };
             context.mangaModels.Update(manga1);
             context.SaveChanges();
-
         }
-        #endregion
+
+        #endregion CombiningAssociatedNamesToBook
+
         #region AddingassociatedNamesToDatabase
+
         public void names()
         {
             //var manga2 = context.mangaModels.FirstOrDefault(e => e.MangaName == "Berserk");
@@ -71,10 +75,12 @@ namespace NovelXManga
             context.AssociatedNames.Add(associatedNames3);
             context.SaveChanges();
             addAssName();
-
         }
-        #endregion
+
+        #endregion AddingassociatedNamesToDatabase
+
         #region addAuthorToManga
+
         public void addAuthorToManga()
         {
             //var manga2 = context.mangaModels.FirstOrDefault(e => e.MangaName == "Berserk");
@@ -89,17 +95,18 @@ namespace NovelXManga
             context.SaveChanges();
             names();
         }
-        #endregion
+
+        #endregion addAuthorToManga
+
         #region CreatingAuthors
+
         public void CreatingAuthors()
         {
             //var manga2 = context.mangaModels.FirstOrDefault(e => e.MangaName == "Berserk");
             var manga1 = context.mangaModels.FirstOrDefault(e => e.MangaName == "Naruto");
 
-
             var NewArtist = new ArtistModel
             {
-
                 FirstName = "Masashi",
                 LastName = "Kishimoto",
                 Biography = "Graduated from the Faculty of Arts, Kyushu Sangyo University. " +
@@ -166,8 +173,11 @@ namespace NovelXManga
             context.SaveChanges();
             addAuthorToManga();
         }
-        #endregion
+
+        #endregion CreatingAuthors
+
         #region GenreSeeding
+
         public void GenreSeed()
         {
             string[] Genres = { "None", "Action", "Adult", "Adventure", "Comedy", "Drama", "Ecchi", "Fantasy", "Gender Bender", "Harem", "Historical",
@@ -184,10 +194,12 @@ namespace NovelXManga
             }
             context.GenresModels.AddRange(GenreList);
             context.SaveChanges();
-
         }
-        #endregion
+
+        #endregion GenreSeeding
+
         #region SeedData
+
         public async Task seedData()
         {
             // ensure we have a database if the user forgetts to update-database
@@ -215,12 +227,12 @@ namespace NovelXManga
                 }
                 GenreSeed();
                 TagsModel();
-                // gives our manga an datetime. 
+                // gives our manga an datetime.
                 DateTime myDate = DateTime.ParseExact("1991-05-08 14:40:52,531", "yyyy-MM-dd HH:mm:ss,fff",
                                        System.Globalization.CultureInfo.InvariantCulture);
                 // creates a user,
                 var user = new UserModel { UserName = "TestUSer", Email = "TestUser@hotmail.com", userPhotoPath = filePath };
-                // create a "manga actually" but we use MasterModel to bind our users to a manga. 
+                // create a "manga actually" but we use MasterModel to bind our users to a manga.
 
                 MangaModel MangaNaruto = new MangaModel
                 {
@@ -235,7 +247,6 @@ namespace NovelXManga
                     ISBN10 = "1569319006",
                     ISBN13 = "978-1569319000",
                     score = 10,
-
 
                     EndingYear = DateTime.Now,
                     StatusInCountryOfOrigin = "11, completed",
@@ -271,7 +282,8 @@ namespace NovelXManga
                     userId = null,
                 };
 
-                #region ChatGptData 
+                #region ChatGptData
+
                 var tag = context.TagModels.FirstOrDefault(e => e.TagName == "Pirates");
                 var tag2 = context.TagModels.FirstOrDefault(e => e.TagName == "Hot-Blooded Male Lead");
                 var tag3 = context.TagModels.FirstOrDefault(e => e.TagName == "Samurai");
@@ -315,8 +327,8 @@ namespace NovelXManga
                     EndingYear = new DateTime(2010, 10, 2),
                     AssociatedNames = new List<AssociatedNames>
                 {
-                new AssociatedNames { nameString = "FullMetal Alchemist Comics" },
-                new AssociatedNames { nameString = "Full Metal Alchemist Manga" },
+                new AssociatedNames { nameString = "FullMetal Alchemist Comics"  },
+                new AssociatedNames { nameString = "Full Metal Alchemist Manga" } ,
                 },
                     AllLanguages = new List<Languages>
                 {
@@ -432,10 +444,6 @@ namespace NovelXManga
                         new Character { CharacterName = "Franky" },
                         new Character { CharacterName = "Brook" },
                     },
-
-
-
-
                 };
                 MangaModel AttackOnTitan = new MangaModel
                 {
@@ -496,7 +504,6 @@ tagAt5, tagAt6
 {
 new Character { CharacterName = "Eren Jeager" },
 new Character { CharacterName = "Mikasa Ackerman" },
-
 },
                 };
                 MangaModel SailorMoon = new MangaModel
@@ -563,7 +570,6 @@ new Character { CharacterName = "Mikasa Ackerman" },
                         new Character { CharacterName = "Sailor Mars" },
                         new Character { CharacterName = "Sanji Venus" },
                     },
-
                 };
                 MangaModel DetectiveConan = new MangaModel
                 {
@@ -629,17 +635,16 @@ new Languages { LanguageName = "German" },
                 },
                 };
 
-
                 context.mangaModels.Add(DetectiveConan);
                 context.mangaModels.Add(SailorMoon);
                 context.mangaModels.Add(onePiece);
                 context.mangaModels.Add(fullmetalAlchemist);
                 context.mangaModels.Add(onePiece);
 
-                #endregion ChatGptEnd
+                #endregion ChatGptData
+
                 context.mangaModels.Add(MangaNaruto);
                 context.mangaModels.Add(MangaBerserk);
-
 
                 context.SaveChanges();
                 CombineGenreTag();
@@ -653,9 +658,9 @@ new Languages { LanguageName = "German" },
                 }
                 CreatingAuthors();
             }
-
         }
-        #endregion
+
+        #endregion SeedData
 
         public void addLanguages()
         {
@@ -668,7 +673,6 @@ new Languages { LanguageName = "German" },
             var LangList = new List<Languages>();
             for (int i = 0; i < LanguagesInput.Length; i++)
             {
-
                 Languages newLang = new Languages();
                 newLang.OfficalWebSiteToBuy = OfficalWeb[i];
                 newLang.LanguageName = LanguagesInput[i];
@@ -677,6 +681,7 @@ new Languages { LanguageName = "German" },
             context.Languages_.AddRange(LangList);
             context.SaveChanges();
         }
+
         public void CombineLang()
         {
             var manga1 = context.mangaModels.FirstOrDefault(e => e.MangaName == "Naruto");
@@ -702,9 +707,8 @@ new Languages { LanguageName = "German" },
             context.mangaModels.Update(manga1);
             context.mangaModels.Update(manga2);
             context.SaveChanges();
-
-
         }
+
         public void CombineGenreTag()
         {
             var manga1 = context.mangaModels.FirstOrDefault(e => e.MangaName == "Naruto");
@@ -739,7 +743,6 @@ new Languages { LanguageName = "German" },
             manga2.TagsModels = new List<TagModel> { Tag1ToManga2, Tag2Tomanga2 };
             manga2.GenresModels = new List<GenresModel> { GenToManga2, Gen2ToManga2 };
 
-
             context.TagModels.Update(Tag1ToManga1);
             context.TagModels.Update(Tag2ToManga1);
             context.TagModels.Update(Tag1ToManga2);
@@ -753,6 +756,7 @@ new Languages { LanguageName = "German" },
 
             context.SaveChanges();
         }
+
         public void RelatedManga()
         {
             var manga1 = context.mangaModels.FirstOrDefault(e => e.MangaName == "Naruto");
@@ -763,6 +767,7 @@ new Languages { LanguageName = "German" },
             context.mangaModels.Update(manga2);
             context.SaveChanges();
         }
+
         public void AddOfficalWebsites()
         {
             string[] OfficalWebWebName = { "Naruto Offical", "Twitter", "FaceBook", "Line" };
@@ -781,6 +786,7 @@ new Languages { LanguageName = "German" },
             context.OfficalWebsites.AddRange(officalWebsites);
             context.SaveChanges();
         }
+
         public void CombineOfficalWebsites()
         {
             var manga1 = context.mangaModels.FirstOrDefault(e => e.MangaName == "Naruto");
@@ -794,11 +800,11 @@ new Languages { LanguageName = "German" },
             context.mangaModels.Update(manga1);
             context.SaveChanges();
         }
+
         #region TagSeed
+
         public void TagsModel()
         {
-
-
             string[] Genres = { "None", "21st century", "4-koma/Yonkoma", "Abandoned Children", "Absent Parent",
 
                 "Accident", "Acting", "Actor", "Adapted to Anime", "Adapted to Drama CD", "Adapted to Game", "Adapted to Live Action",
@@ -815,7 +821,6 @@ new Languages { LanguageName = "German" },
 
                 "Arrogant Male Lead", "Artist", "Artificial Intelligence", "Assassin", "Attempted Murder",
 
-
                 "Attempted Rape", "Attempted Suicide", "Atypical Art Style", "Award-Nominated Work", "Award-Winning Work",
 
                 "Based on a Novel", "Based on a Manga", "Based on a Movie", "Based on a Song", "Bathroom Intercourse", "BDSM",
@@ -823,7 +828,6 @@ new Languages { LanguageName = "German" },
                 "Beautiful Female Lead", "Beautiful Male Lead", "Bespectacled Protagonist", "Bisexual Character/s",
 
                 "Best Friends", "Betrayal", "Bickering Love", "Big Breasts",
-
 
                 "Bishounen", "Blackmail", "Bishoujo", "Blood and Gore",
 
@@ -941,12 +945,10 @@ new Languages { LanguageName = "German" },
                 "Wishes", "Witch", "Workplace Romance", "World Travel",
                 "Writer", "Yandere", "Youkai", "Young Female Lead", "Young Male Lead", "Younger Brother", "Younger Sister",
                 "Zombies",
-
             };
             var GenreList = new List<TagModel>();
             for (int i = 0; i < Genres.Length; i++)
             {
-
                 TagModel newgenre = new TagModel();
                 newgenre.TagName = Genres[i];
                 GenreList.Add(newgenre);
@@ -954,6 +956,7 @@ new Languages { LanguageName = "German" },
             context.TagModels.AddRange(GenreList);
             context.SaveChanges();
         }
-        #endregion SeedTaskEnd
+
+        #endregion TagSeed
     }
 }
