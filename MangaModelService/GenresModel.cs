@@ -6,14 +6,18 @@ namespace MangaModelService
     {
         [Key]
         public int GenresId { get; set; }
+
         [Required]
         public string? GenreName { get; set; }
+
+        public bool? isChecked { get; set; }
         public string? GenreDescription { get; set; }
         public int? TagHeavy { get; set; }
         public int? MangaID { get; set; }
         public virtual ICollection<MangaModel>? MangaModels { get; set; }
     }
 }
+
 //public enum GenresModel
 //{
 //    None,

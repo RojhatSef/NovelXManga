@@ -13,7 +13,24 @@
                 <input hidden asp-for="mangaModelView.BlogModel" />
                 <input hidden asp-for="mangaModelView.BlogModelId" />
          
+                <h4>Select Multiple Logs</h4>
 
+
+                <select multiple class="form-control" asp-for="SelectedChanges">
+                    @foreach (var change in Model.Tags)
+                    {
+                        <option value="@change.TagId" class="@(Model.SelectedChanges.Contains(change.TagId) ? "selected-option" : "")">
+                            @change.TagName
+                        </option>
+                    }
+                </select><script>
+                             $(document).ready(function () {
+                                 $('#selectTags option').click(function () {
+                                     $(this).toggleClass('selectedOption');
+                                 });
+                             });
+                </script>
+  
              
                 <div class="mb-3">
                     <label class="form-label" asp-for="mangaModelView.MangaName">Manga Title</label>
@@ -66,3 +83,8 @@
         </div>
     </div>
 </div> 
+<style>
+    .selected-option {
+        background-color: blue;
+    }
+</style>

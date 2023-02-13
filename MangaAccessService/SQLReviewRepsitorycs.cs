@@ -5,6 +5,7 @@ namespace MangaAccessService
     public class SQLReviewRepsitorycs : IReviewRepsitory
     {
         private readonly MangaNNovelAuthDBContext context;
+
         public SQLReviewRepsitorycs(MangaNNovelAuthDBContext context)
         {
             this.context = context;
@@ -17,14 +18,13 @@ namespace MangaAccessService
             return addNewModel;
         }
 
-        public Review Delete(string id)
+        public Review Delete(int id)
         {
             Review modelToDelete = context.Reviews.Find(id);
             if (modelToDelete != null)
             {
                 context.Reviews.Remove(modelToDelete);
                 context.SaveChanges();
-
             }
             return modelToDelete;
         }
@@ -34,7 +34,7 @@ namespace MangaAccessService
             return context.Reviews;
         }
 
-        public Review GetModel(string id)
+        public Review GetModel(int id)
         {
             return context.Reviews.Find(id);
         }

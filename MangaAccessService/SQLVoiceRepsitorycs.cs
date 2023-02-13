@@ -5,6 +5,7 @@ namespace MangaAccessService
     public class SQLVoiceRepsitorycs : IVoiceRepsitory
     {
         private readonly MangaNNovelAuthDBContext context;
+
         public SQLVoiceRepsitorycs(MangaNNovelAuthDBContext context)
         {
             this.context = context;
@@ -17,14 +18,13 @@ namespace MangaAccessService
             return addNewModel;
         }
 
-        public VoiceActorModel Delete(string id)
+        public VoiceActorModel Delete(int id)
         {
             VoiceActorModel voiceToDele = context.voiceActorModels.Find(id);
             if (voiceToDele != null)
             {
                 context.voiceActorModels.Remove(voiceToDele);
                 context.SaveChanges();
-
             }
             return voiceToDele;
         }
@@ -34,7 +34,7 @@ namespace MangaAccessService
             return context.voiceActorModels;
         }
 
-        public VoiceActorModel GetModel(string id)
+        public VoiceActorModel GetModel(int id)
         {
             return context.voiceActorModels.Find(id);
         }

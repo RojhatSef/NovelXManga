@@ -5,6 +5,7 @@ namespace MangaAccessService
     public class SQLChapterModelRepsitory : IChapterModelRepsitory
     {
         private readonly MangaNNovelAuthDBContext context;
+
         public SQLChapterModelRepsitory(MangaNNovelAuthDBContext context)
         {
             this.context = context;
@@ -17,14 +18,13 @@ namespace MangaAccessService
             return addNewModel;
         }
 
-        public ChapterModel Delete(string id)
+        public ChapterModel Delete(int id)
         {
             ChapterModel chaptoDelete = context.chapterModels.Find(id);
             if (chaptoDelete != null)
             {
                 context.chapterModels.Remove(chaptoDelete);
                 context.SaveChanges();
-
             }
             return chaptoDelete;
         }
@@ -34,7 +34,7 @@ namespace MangaAccessService
             return context.chapterModels;
         }
 
-        public ChapterModel GetModel(string id)
+        public ChapterModel GetModel(int id)
         {
             return context.chapterModels.Find(id);
         }

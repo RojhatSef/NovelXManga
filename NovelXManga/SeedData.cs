@@ -109,19 +109,7 @@ namespace NovelXManga
             {
                 FirstName = "Masashi",
                 LastName = "Kishimoto",
-                Biography = "Graduated from the Faculty of Arts, Kyushu Sangyo University. " +
-                "\r\n\r\nMarried in 2003 and has children.\r\n\r\nKishimoto had a deal with Jump " +
-                "editorial department that he will receive Toriyama Akira's autographed paper as a " +
-                "reward when the serialization of Naruto reaches the third anniversary.\r\n\r\nHe and " +
-                "Oda Eiichiro are both rival and close friend.\r\n\r\nHis younger twin brother KISHIMOTO " +
-                "Seishi is 666 Satan’s author. Their art has been remarked as being very similar and accusations of " +
-                "plagiarism were made, either that Seishi had copied his brother or vice versa. However, Seishi notes " +
-                "in one of the volumes of his manga that the similarities are not intentional and that the occurrence " +
-                "would have been likely because they have been influenced by many of the same things. After several accusations, " +
-                "Masashi Kishimoto has asked that fans stop calling his brother a \"copy-cat\". His former " +
-                "assistants were ITAKURA Yuuichi, TASAKA Ryou and KAJISA Osamu.\r\nWhile IKEMOTO Mikio, TAIRA Kenji" +
-                " and OKUBO Akira were his assistants and now are his collaborators.\r\n\r\nHis favorite manga and anime" +
-                " are Dragon Ball, Yu Yu Hakusho, HUNTER x HUNTER, Ninku, AKIRA, Ghost in the Shell & Jin-Roh"
+                Biography = "Graduated from the Faculty of Arts, Kyushu Sangyo University. "
             ,
                 MangaModels = new List<MangaModel> { manga1 },
                 BirthPlace = "Japan",
@@ -133,19 +121,8 @@ namespace NovelXManga
             {
                 FirstName = "Masashi",
                 LastName = "Kishimoto",
-                Biography = "Graduated from the Faculty of Arts, Kyushu Sangyo University." +
-                " \r\n\r\nMarried in 2003 and has children.\r\n\r\nKishimoto had a deal with" +
-                " Jump editorial department that he will receive Toriyama Akira's autographed" +
-                " paper as a reward when the serialization of Naruto reaches the third anniversary." +
-                "\r\n\r\nHe and Oda Eiichiro are both rival and close friend.\r\n\r\nHis younger twin brother" +
-                " KISHIMOTO Seishi is 666 Satan’s author. Their art has been remarked as being very similar" +
-                " and accusations of plagiarism were made, either that Seishi had copied his brother or vice versa. " +
-                "However, Seishi notes in one of the volumes of his manga that the similarities are not intentional and " +
-                "that the occurrence would have been likely because they have been influenced by many of the same things." +
-                " After several accusations, Masashi Kishimoto has asked that fans stop calling his brother a \"copy-cat\"" +
-                ". His former assistants were ITAKURA Yuuichi, TASAKA Ryou and KAJISA Osamu.\r\nWhile IKEMOTO Mikio," +
-                " TAIRA Kenji and OKUBO Akira were his assistants and now are his collaborators.\r\n\r\nHis favorite " +
-                "manga and anime are Dragon Ball, Yu Yu Hakusho, HUNTER x HUNTER, Ninku, AKIRA, Ghost in the Shell & Jin-Roh"
+                Biography = "Graduated from the Faculty of Arts, Kyushu Sangyo University."
+
               ,
                 MangaModels = new List<MangaModel> { manga1 },
                 BirthPlace = "Japan",
@@ -180,7 +157,7 @@ namespace NovelXManga
 
         public void GenreSeed()
         {
-            string[] Genres = { "None", "Action", "Adult", "Adventure", "Comedy", "Drama", "Ecchi", "Fantasy", "Gender Bender", "Harem", "Historical",
+            string[] Genres = {  "Action", "Adult", "Adventure", "Comedy", "Drama", "Ecchi", "Fantasy", "Gender Bender", "Harem", "Historical",
                 "Classics", "Comic", "Graphic Novel", "Detective", "Horror", "Josei", "Martial Arts", "Mature", "Mecha", "Mystery", "Psychological", "Romance",
                 "School Life", "Sci-fi", "Seinen", "Detective", "Shoujo", "Shoujo Ai", "Shounen", "Shounen Ai", "Slice Of Life", "Smut", "Psychological", "Sports",
             "Supernatural", "Tragedy", "Wuxia", "Xianxia", "Xuanhuan", "Yaoi / Gay ", "Yuri / Lesbian", "Ecchi", "Fantasy", "Gender Bender", "Harem", "Historical",
@@ -199,6 +176,15 @@ namespace NovelXManga
         #endregion GenreSeeding
 
         #region SeedData
+
+        public void CombineFullMetal()
+        {
+            CombineGenreTagFullMetal();
+            //RelatedMangaFullMetal();
+            //addLanguagesFullMetal();
+            //CombineLangFullmetal();
+            //CreatingAuthorsFullMetal();
+        }
 
         public async Task seedData()
         {
@@ -287,12 +273,7 @@ namespace NovelXManga
                 var tag = context.TagModels.FirstOrDefault(e => e.TagName == "Pirates");
                 var tag2 = context.TagModels.FirstOrDefault(e => e.TagName == "Hot-Blooded Male Lead");
                 var tag3 = context.TagModels.FirstOrDefault(e => e.TagName == "Samurai");
-                var tag4 = context.TagModels.FirstOrDefault(e => e.TagName == "Arrogant Male Lead");
-                var tag5 = context.TagModels.FirstOrDefault(e => e.TagName == "Insecurity");
-                var tag6 = context.TagModels.FirstOrDefault(e => e.TagName == "Revenge");
-                var Genre = context.GenresModels.FirstOrDefault(e => e.GenreName == "Adventure");
-                var Genre2 = context.GenresModels.FirstOrDefault(e => e.GenreName == "Action");
-                var Genre3 = context.GenresModels.FirstOrDefault(e => e.GenreName == "Fantasy");
+
                 var tag7 = context.TagModels.FirstOrDefault(e => e.TagName == "Strong Female Lead");
                 var tag8 = context.TagModels.FirstOrDefault(e => e.TagName == "Coming of Age");
                 var tag9 = context.TagModels.FirstOrDefault(e => e.TagName == "Family");
@@ -307,6 +288,12 @@ namespace NovelXManga
                 var GenreCon5 = context.GenresModels.FirstOrDefault(e => e.GenreName == "Detective");
                 var tagCon5 = context.TagModels.FirstOrDefault(e => e.TagName == "Secret Identity");
                 var tagCon6 = context.TagModels.FirstOrDefault(e => e.TagName == "Murder");
+                var Genre = context.GenresModels.FirstOrDefault(e => e.GenreName == "Adventure");
+                var Genre2 = context.GenresModels.FirstOrDefault(e => e.GenreName == "Action");
+                var Genre3 = context.GenresModels.FirstOrDefault(e => e.GenreName == "Fantasy");
+                var tag4 = context.TagModels.FirstOrDefault(e => e.TagName == "Arrogant Male Lead");
+                var tag5 = context.TagModels.FirstOrDefault(e => e.TagName == "Insecurity");
+                var tag6 = context.TagModels.FirstOrDefault(e => e.TagName == "Revenge");
 
                 MangaModel fullmetalAlchemist = new MangaModel
                 {
@@ -647,10 +634,11 @@ new Languages { LanguageName = "German" },
                 context.mangaModels.Add(MangaBerserk);
 
                 context.SaveChanges();
+
                 CombineGenreTag();
                 RelatedManga();
                 addLanguages(); CombineLang();
-
+                CombineFullMetal();
                 var result = await userManager.CreateAsync(user, "Rojhat123!");
                 if (result.Succeeded)
                 { // adds a role owner to the testobject
@@ -661,6 +649,29 @@ new Languages { LanguageName = "German" },
         }
 
         #endregion SeedData
+
+        public void CombineGenreTagFullMetal()
+        {
+            var manga2 = context.mangaModels.FirstOrDefault(e => e.MangaName == "Fullmetal Alchemist");
+            var Tag1ToManga2 = context.TagModels.FirstOrDefault(t => t.TagName == "Science Fiction");
+            var Tag2Tomanga2 = context.TagModels.FirstOrDefault(t => t.TagName == "Adapted to Anime");
+            var Gen1ToManga2 = context.GenresModels.FirstOrDefault(t => t.GenreName == "Action");
+            var Gen2ToManga2 = context.GenresModels.FirstOrDefault(t => t.GenreName == "Adventure");
+            var Tag2ToManga2 = context.TagModels.FirstOrDefault(t => t.TagName == "Adapted to Anime");
+            Tag1ToManga2.MangaModels = new List<MangaModel> { manga2 };
+            Tag1ToManga2.MangaID = manga2.MangaID;
+            Tag2ToManga2.MangaModels = new List<MangaModel> { manga2 };
+            Tag2ToManga2.MangaID = manga2.MangaID;
+            Gen1ToManga2.MangaModels = new List<MangaModel> { manga2 };
+            Gen1ToManga2.MangaID = manga2.MangaID;
+            Gen2ToManga2.MangaModels = new List<MangaModel> { manga2 };
+            Gen2ToManga2.MangaID = manga2.MangaID;
+            context.TagModels.Update(Tag1ToManga2);
+            context.TagModels.Update(Tag2ToManga2);
+            context.GenresModels.Update(Gen1ToManga2);
+            context.GenresModels.Update(Gen2ToManga2);
+            context.SaveChanges();
+        }
 
         public void addLanguages()
         {
@@ -685,20 +696,21 @@ new Languages { LanguageName = "German" },
         public void CombineLang()
         {
             var manga1 = context.mangaModels.FirstOrDefault(e => e.MangaName == "Naruto");
-            var manga2 = context.mangaModels.FirstOrDefault(e => e.MangaName == "Berserk");
             var Lang1ToManga1 = context.Languages_.Include(e => e.MangaModels).FirstOrDefault(s => s.LanguageName == "English");
             var Lang2ToManga1 = context.Languages_.Include(e => e.MangaModels).FirstOrDefault(s => s.LanguageName == "Japanese");
             Lang1ToManga1.MangaModels = new List<MangaModel> { manga1 };
             Lang1ToManga1.MangaID = manga1.MangaID;
             Lang2ToManga1.MangaModels = new List<MangaModel> { manga1 };
             Lang2ToManga1.MangaID = manga1.MangaID;
+            manga1.AllLanguages = new List<Languages> { Lang1ToManga1, Lang2ToManga1 };
+
+            var manga2 = context.mangaModels.FirstOrDefault(e => e.MangaName == "Berserk");
             var Lang3ToManga2 = context.Languages_.Include(e => e.MangaModels).FirstOrDefault(s => s.LanguageName == "Mandarin");
             var Lang4ToManga2 = context.Languages_.Include(e => e.MangaModels).FirstOrDefault(s => s.LanguageName == "Russian");
             Lang3ToManga2.MangaModels = new List<MangaModel> { manga2 };
             Lang3ToManga2.MangaID = manga2.MangaID;
             Lang4ToManga2.MangaModels = new List<MangaModel> { manga2 };
             Lang4ToManga2.MangaID = manga2.MangaID;
-            manga1.AllLanguages = new List<Languages> { Lang1ToManga1, Lang2ToManga1 };
             manga2.AllLanguages = new List<Languages> { Lang3ToManga2, Lang4ToManga2 };
             context.Languages_.Update(Lang1ToManga1);
             context.Languages_.Update(Lang2ToManga1);
@@ -712,31 +724,36 @@ new Languages { LanguageName = "German" },
         public void CombineGenreTag()
         {
             var manga1 = context.mangaModels.FirstOrDefault(e => e.MangaName == "Naruto");
-            var manga2 = context.mangaModels.FirstOrDefault(e => e.MangaName == "Berserk");
+
             var Tag1ToManga1 = context.TagModels.FirstOrDefault(t => t.TagName == "Ninja");
-            var Tag1ToManga2 = context.TagModels.FirstOrDefault(t => t.TagName == "Antihero");
+            var Tag2Tomanga2 = context.TagModels.FirstOrDefault(t => t.TagName == "Adapted to Anime");
+
+            var Gen1ToManga1 = context.GenresModels.FirstOrDefault(t => t.GenreName == "Action");
+            var Gen2ToManga1 = context.GenresModels.FirstOrDefault(t => t.GenreName == "Adventure");
+            var Tag2ToManga1 = context.TagModels.FirstOrDefault(t => t.TagName == "Adapted to Anime");
             Tag1ToManga1.MangaModels = new List<MangaModel> { manga1 };
             Tag1ToManga1.MangaID = manga1.MangaID;
-            Tag1ToManga2.MangaModels = new List<MangaModel> { manga2 };
-            Tag1ToManga2.MangaID = manga2.MangaID;
-            var Tag2ToManga1 = context.TagModels.FirstOrDefault(t => t.TagName == "Adapted to Anime");
             Tag2ToManga1.MangaModels = new List<MangaModel> { manga1 };
             Tag2ToManga1.MangaID = manga1.MangaID;
-            var Tag2Tomanga2 = context.TagModels.FirstOrDefault(t => t.TagName == "Adapted to Anime");
-            Tag2Tomanga2.MangaModels = new List<MangaModel> { manga2 };
-            Tag2Tomanga2.MangaID = manga2.MangaID;
-            var Gen1ToManga1 = context.GenresModels.FirstOrDefault(t => t.GenreName == "Action");
             Gen1ToManga1.MangaModels = new List<MangaModel> { manga1 };
             Gen1ToManga1.MangaID = manga1.MangaID;
-            var GenToManga2 = context.GenresModels.FirstOrDefault(t => t.GenreName == "Action");
-            GenToManga2.MangaModels = new List<MangaModel> { manga2 };
-            GenToManga2.MangaID = manga1.MangaID;
-            var Gen2ToManga1 = context.GenresModels.FirstOrDefault(t => t.GenreName == "Adventure");
             Gen2ToManga1.MangaModels = new List<MangaModel> { manga1 };
             Gen2ToManga1.MangaID = manga1.MangaID;
+
+            var manga2 = context.mangaModels.FirstOrDefault(e => e.MangaName == "Berserk");
+            var Tag1ToManga2 = context.TagModels.FirstOrDefault(t => t.TagName == "Antihero");
+            var GenToManga2 = context.GenresModels.FirstOrDefault(t => t.GenreName == "Action");
             var Gen2ToManga2 = context.GenresModels.FirstOrDefault(t => t.GenreName == "Adventure");
+            GenToManga2.MangaModels = new List<MangaModel> { manga2 };
+            GenToManga2.MangaID = manga2.MangaID;
+            Tag2Tomanga2.MangaModels = new List<MangaModel> { manga2 };
+            Tag2Tomanga2.MangaID = manga2.MangaID;
+            Tag1ToManga2.MangaModels = new List<MangaModel> { manga2 };
+            Tag1ToManga2.MangaID = manga2.MangaID;
             Gen2ToManga2.MangaModels = new List<MangaModel> { manga2 };
             Gen2ToManga2.MangaID = manga2.MangaID;
+            GenToManga2.MangaModels = new List<MangaModel> { manga2 };
+            GenToManga2.MangaID = manga2.MangaID;
 
             manga1.TagsModels = new List<TagModel> { Tag1ToManga1, Tag2ToManga1 };
             manga1.GenresModels = new List<GenresModel> { Gen1ToManga1, Gen2ToManga1 };
@@ -805,7 +822,7 @@ new Languages { LanguageName = "German" },
 
         public void TagsModel()
         {
-            string[] Genres = { "None", "21st century", "4-koma/Yonkoma", "Abandoned Children", "Absent Parent",
+            string[] Genres = {"21st century", "4-koma/Yonkoma", "Abandoned Children", "Absent Parent",
 
                 "Accident", "Acting", "Actor", "Adapted to Anime", "Adapted to Drama CD", "Adapted to Game", "Adapted to Live Action",
 
@@ -854,7 +871,7 @@ new Languages { LanguageName = "German" },
                 "Doctor", "Dog", "Dungeon", "Dormitory", "Double Penetration", "Dragon",
 
                    "Dream", "Drug", "Drunken Intercourse", "Dubious Consent", "Elves", "Emotionally Strong Female Lead",
-                "Emotionally Weak Female Lead", "None", "None", "None", "None", "None",
+                "Emotionally Weak Female Lead",
 
                  "Emotionally Strong Male Lead", "Emotionally Weak Male Lead", "Enemies Become Friends", "Episodic", "ESP",
                 "European Ambience", "Exhibitionism", "Exorcism", "Experiments", "Expressionless Protagonist", "Extended Flashbacks", "Eyepatch",
@@ -865,7 +882,7 @@ new Languages { LanguageName = "German" },
                 "Fetishes", "Finding Love Again", "First Kiss", "First Love", "First-Time Intercourse", "Flashbacks", "Food", "Forbidden Love",
 
            "Foreigners", "Friends Become Enemies", "Friends Become Lovers", "Friends Grow Distant",
-                "Friendship", "Full Color", "Futanari", "Future", "Game Elements", "GameLit", "Games", "None",
+                "Friendship", "Full Color", "Futanari", "Future", "Game Elements", "GameLit", "Games",
               "Gang Rape", "Gangs", "Genetically Engineered", "Genius", "Ghosts", "Glasses-Wearing Female Lead",
                 "Glasses-Wearing Male Lead", "Glasses-Wearing Uke God", "Goddesses", "Groping", "Group Intercourse", "Guardian Relationship",
 
@@ -910,7 +927,7 @@ new Languages { LanguageName = "German" },
            "Revenge", "Harem", "Rich Family", "Rescue", "Rich Female Lead", "Rich Male Lead", "Rich Kid",
                 "Rivalry", "Romantic Subplot", "Roommates", "Royalty", "Robot",
               "Runaway", "Rushed Ending", "Sadist", "Salaryman", "Sadomasochism", "Samurai",
-                "Scar", "School Boy", "School Gir", "School Intercourse", "Scientist", "Secret Identity",
+                "Scar", "School Boy", "School Gir", "School Intercourse", "Scientist","Science Fiction" , "Secret Identity",
 
            "Secret Organization", "Secret Relationship", "Secrets", "Seeing Things Other Humans Can't",
                 "Old Classmate - Younger Classmate Relationship", "Serial Killer", "Studious Character",

@@ -5,6 +5,7 @@ namespace MangaAccessService
     public class SQLGroupScanlationRepsitory : IGroupScanlationRepsitory
     {
         private readonly MangaNNovelAuthDBContext context;
+
         public SQLGroupScanlationRepsitory(MangaNNovelAuthDBContext context)
         {
             this.context = context;
@@ -17,14 +18,13 @@ namespace MangaAccessService
             return addNewModel;
         }
 
-        public GroupScanlatingModel Delete(string id)
+        public GroupScanlatingModel Delete(int id)
         {
             GroupScanlatingModel modelToDelete = context.groupScanlatingModels.Find(id);
             if (modelToDelete != null)
             {
                 context.groupScanlatingModels.Remove(modelToDelete);
                 context.SaveChanges();
-
             }
             return modelToDelete;
         }
@@ -34,7 +34,7 @@ namespace MangaAccessService
             return context.groupScanlatingModels;
         }
 
-        public GroupScanlatingModel GetModel(string id)
+        public GroupScanlatingModel GetModel(int id)
         {
             return context.groupScanlatingModels.Find(id);
         }

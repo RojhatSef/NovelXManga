@@ -5,6 +5,7 @@ namespace MangaAccessService
     public class SQLPostRepsitory : IPostRepsitory
     {
         private readonly MangaNNovelAuthDBContext context;
+
         public SQLPostRepsitory(MangaNNovelAuthDBContext context)
         {
             this.context = context;
@@ -17,14 +18,13 @@ namespace MangaAccessService
             return addNewModel;
         }
 
-        public PostModel Delete(string id)
+        public PostModel Delete(int id)
         {
             PostModel modelToDelete = context.PostModels.Find(id);
             if (modelToDelete != null)
             {
                 context.PostModels.Remove(modelToDelete);
                 context.SaveChanges();
-
             }
             return modelToDelete;
         }
@@ -34,7 +34,7 @@ namespace MangaAccessService
             return context.PostModels;
         }
 
-        public PostModel GetModel(string id)
+        public PostModel GetModel(int id)
         {
             return context.PostModels.Find(id);
         }

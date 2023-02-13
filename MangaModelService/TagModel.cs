@@ -6,18 +6,22 @@ namespace MangaModelService
     {
         [Key]
         public int TagId { get; set; }
+
         [Required]
         public string? TagName { get; set; }
+
+        public bool? isChecked { get; set; }
         public string? TagDescription { get; set; }
         public int? TagHeavy { get; set; }
         public int? MangaID { get; set; }
         public virtual ICollection<MangaModel>? MangaModels { get; set; }
     }
 }
+
 #region 1000 Tags
+
 //    public enum ListOfTagModels
 //    {
-
 //        None,
 //        [Description("21st century")]
 //        TwentyFirststCentur,
@@ -898,7 +902,6 @@ namespace MangaModelService
 //        [Description("Super Powers")]
 //        SuperPowers,
 
-
 //        Survival,
 //        [Description("Swimsuit/s")]
 //        Swimsuits,
@@ -1034,6 +1037,6 @@ namespace MangaModelService
 //        [Description("Zombie/s")]
 //        Zombies,
 
-
 //    }
-#endregion
+
+#endregion 1000 Tags

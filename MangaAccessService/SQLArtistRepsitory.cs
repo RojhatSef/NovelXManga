@@ -5,6 +5,7 @@ namespace MangaAccessService
     public class SQLArtistRepsitory : IArtistRepsitory
     {
         private readonly MangaNNovelAuthDBContext context;
+
         public SQLArtistRepsitory(MangaNNovelAuthDBContext context)
         {
             this.context = context;
@@ -17,7 +18,7 @@ namespace MangaAccessService
             return addNewModel;
         }
 
-        public ArtistModel Delete(string id)
+        public ArtistModel Delete(int id)
         {
             ArtistModel artistToDelte = context.artistModels.Find(id);
             if (artistToDelte != null)
@@ -33,7 +34,7 @@ namespace MangaAccessService
             return context.artistModels;
         }
 
-        public ArtistModel GetModel(string id)
+        public ArtistModel GetModel(int id)
         {
             return context.artistModels.Find(id);
         }

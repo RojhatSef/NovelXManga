@@ -5,6 +5,7 @@ namespace MangaAccessService
     public class SQLOfficalWebsiteRepsitory : IOfficalWebsiteRepsitory
     {
         private readonly MangaNNovelAuthDBContext context;
+
         public SQLOfficalWebsiteRepsitory(MangaNNovelAuthDBContext context)
         {
             this.context = context;
@@ -17,14 +18,13 @@ namespace MangaAccessService
             return addNewModel;
         }
 
-        public OfficalWebsite Delete(string id)
+        public OfficalWebsite Delete(int id)
         {
             OfficalWebsite modelToDelete = context.OfficalWebsites.Find(id);
             if (modelToDelete != null)
             {
                 context.OfficalWebsites.Remove(modelToDelete);
                 context.SaveChanges();
-
             }
             return modelToDelete;
         }
@@ -34,7 +34,7 @@ namespace MangaAccessService
             return context.OfficalWebsites;
         }
 
-        public OfficalWebsite GetModel(string id)
+        public OfficalWebsite GetModel(int id)
         {
             return context.OfficalWebsites.Find(id);
         }

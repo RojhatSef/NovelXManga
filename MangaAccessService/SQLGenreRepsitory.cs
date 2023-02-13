@@ -5,6 +5,7 @@ namespace MangaAccessService
     public class SQLGenreRepsitory : IGenreRepsitory
     {
         private readonly MangaNNovelAuthDBContext context;
+
         public SQLGenreRepsitory(MangaNNovelAuthDBContext context)
         {
             this.context = context;
@@ -17,14 +18,13 @@ namespace MangaAccessService
             return addNewModel;
         }
 
-        public GenresModel Delete(string id)
+        public GenresModel Delete(int id)
         {
             GenresModel modelToDelete = context.GenresModels.Find(id);
             if (modelToDelete != null)
             {
                 context.GenresModels.Remove(modelToDelete);
                 context.SaveChanges();
-
             }
             return modelToDelete;
         }
@@ -34,7 +34,7 @@ namespace MangaAccessService
             return context.GenresModels;
         }
 
-        public GenresModel GetModel(string id)
+        public GenresModel GetModel(int id)
         {
             return context.GenresModels.Find(id);
         }

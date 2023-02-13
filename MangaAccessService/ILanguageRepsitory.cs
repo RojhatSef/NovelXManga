@@ -5,13 +5,15 @@ namespace MangaAccessService
     public interface ILanguageRepsitory
     {
         IEnumerable<Languages> Search(string searchTerm);
+
         IEnumerable<Languages> GetAllModels();
-        Languages GetModel(string id);
+
+        Languages GetModel(int id);
 
         Languages Update(Languages UpdateModel);
 
         Languages Add(Languages addNewModel);
 
-        Languages Delete(string id);
+        Languages Delete(int id);
     }
 }

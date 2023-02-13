@@ -1,18 +1,19 @@
 ﻿using MangaModelService;
 
-
 namespace MangaAccessService
 {
     public interface IArtistRepsitory
     {
         IEnumerable<ArtistModel> Search(string searchTerm);
+
         IEnumerable<ArtistModel> GetAllModels();
-        ArtistModel GetModel(string id);
+
+        ArtistModel GetModel(int id);
 
         ArtistModel Update(ArtistModel UpdateModel);
 
         ArtistModel Add(ArtistModel addNewModel);
 
-        ArtistModel Delete(string id);
+        ArtistModel Delete(int id);
     }
 }

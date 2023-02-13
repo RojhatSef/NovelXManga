@@ -595,6 +595,9 @@ namespace MangaAccessService.Migrations
                     b.Property<int?>("TagHeavy")
                         .HasColumnType("int");
 
+                    b.Property<bool?>("isChecked")
+                        .HasColumnType("bit");
+
                     b.HasKey("GenresId");
 
                     b.ToTable("GenresModels");
@@ -930,6 +933,9 @@ namespace MangaAccessService.Migrations
                     b.Property<string>("TagName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool?>("isChecked")
+                        .HasColumnType("bit");
 
                     b.HasKey("TagId");
 

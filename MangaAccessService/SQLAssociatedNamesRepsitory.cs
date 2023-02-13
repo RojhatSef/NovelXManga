@@ -5,6 +5,7 @@ namespace MangaAccessService
     public class SQLAssociatedNamesRepsitory : IAssociatedNamesRepsitory
     {
         private readonly MangaNNovelAuthDBContext context;
+
         public SQLAssociatedNamesRepsitory(MangaNNovelAuthDBContext context)
         {
             this.context = context;
@@ -17,14 +18,13 @@ namespace MangaAccessService
             return addNewModel;
         }
 
-        public AssociatedNames Delete(string id)
+        public AssociatedNames Delete(int id)
         {
             AssociatedNames assoToDelete = context.AssociatedNames.Find(id);
             if (assoToDelete != null)
             {
                 context.AssociatedNames.Remove(assoToDelete);
                 context.SaveChanges();
-
             }
             return assoToDelete;
         }
@@ -34,7 +34,7 @@ namespace MangaAccessService
             return context.AssociatedNames;
         }
 
-        public AssociatedNames GetModel(string id)
+        public AssociatedNames GetModel(int id)
         {
             return context.AssociatedNames.Find(id);
         }

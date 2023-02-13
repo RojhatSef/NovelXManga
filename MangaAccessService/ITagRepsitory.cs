@@ -5,13 +5,15 @@ namespace MangaAccessService
     public interface ITagRepsitory
     {
         IEnumerable<TagModel> Search(string searchTerm);
+
         IEnumerable<TagModel> GetAllModels();
-        TagModel GetModel(string id);
+
+        TagModel GetModel(int id);
 
         TagModel Update(TagModel UpdateModel);
 
         TagModel Add(TagModel addNewModel);
 
-        TagModel Delete(string id);
+        TagModel Delete(int id);
     }
 }

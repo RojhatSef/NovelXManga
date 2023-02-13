@@ -5,6 +5,7 @@ namespace MangaAccessService
     public class SQLLanguageRepsitory : ILanguageRepsitory
     {
         private readonly MangaNNovelAuthDBContext context;
+
         public SQLLanguageRepsitory(MangaNNovelAuthDBContext context)
         {
             this.context = context;
@@ -17,14 +18,13 @@ namespace MangaAccessService
             return addNewModel;
         }
 
-        public Languages Delete(string id)
+        public Languages Delete(int id)
         {
             Languages modelToDelete = context.Languages_.Find(id);
             if (modelToDelete != null)
             {
                 context.Languages_.Remove(modelToDelete);
                 context.SaveChanges();
-
             }
             return modelToDelete;
         }
@@ -34,7 +34,7 @@ namespace MangaAccessService
             return context.Languages_;
         }
 
-        public Languages GetModel(string id)
+        public Languages GetModel(int id)
         {
             return context.Languages_.Find(id);
         }

@@ -5,10 +5,12 @@ namespace MangaAccessService
     public class SQLBlogRepsitory : IBlogRepsitory
     {
         private readonly MangaNNovelAuthDBContext context;
+
         public SQLBlogRepsitory(MangaNNovelAuthDBContext context)
         {
             this.context = context;
         }
+
         public BlogModel Add(BlogModel addNewModel)
         {
             context.blogModels.Add(addNewModel);
@@ -16,9 +18,8 @@ namespace MangaAccessService
             return addNewModel;
         }
 
-        public BlogModel Delete(string id)
+        public BlogModel Delete(int id)
         {
-
             BlogModel BlogDelet = context.blogModels.Find(id);
             if (BlogDelet != null)
             {
@@ -33,12 +34,10 @@ namespace MangaAccessService
             return context.blogModels;
         }
 
-        public BlogModel GetModel(string id)
+        public BlogModel GetModel(int id)
         {
             return context.blogModels.Find(id);
         }
-
-
 
         public BlogModel Update(BlogModel UpdateModel)
         {

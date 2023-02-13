@@ -5,6 +5,7 @@ namespace MangaAccessService
     public class SQLTagRepository : ITagRepsitory
     {
         private readonly MangaNNovelAuthDBContext context;
+
         public SQLTagRepository(MangaNNovelAuthDBContext context)
         {
             this.context = context;
@@ -17,14 +18,13 @@ namespace MangaAccessService
             return addNewModel;
         }
 
-        public TagModel Delete(string id)
+        public TagModel Delete(int id)
         {
             TagModel modelToDelete = context.TagModels.Find(id);
             if (modelToDelete != null)
             {
                 context.TagModels.Remove(modelToDelete);
                 context.SaveChanges();
-
             }
             return modelToDelete;
         }
@@ -34,7 +34,7 @@ namespace MangaAccessService
             return context.TagModels;
         }
 
-        public TagModel GetModel(string id)
+        public TagModel GetModel(int id)
         {
             return context.TagModels.Find(id);
         }

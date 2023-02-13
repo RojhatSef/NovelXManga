@@ -5,6 +5,7 @@ namespace MangaAccessService
     public class SQLCharacterRepository : ICharacterRepsitory
     {
         private readonly MangaNNovelAuthDBContext context;
+
         public SQLCharacterRepository(MangaNNovelAuthDBContext context)
         {
             this.context = context;
@@ -17,14 +18,13 @@ namespace MangaAccessService
             return addNewModel;
         }
 
-        public Character Delete(string id)
+        public Character Delete(int id)
         {
             Character modelToDelete = context.Characters.Find(id);
             if (modelToDelete != null)
             {
                 context.Characters.Remove(modelToDelete);
                 context.SaveChanges();
-
             }
             return modelToDelete;
         }
@@ -34,7 +34,7 @@ namespace MangaAccessService
             return context.Characters;
         }
 
-        public Character GetModel(string id)
+        public Character GetModel(int id)
         {
             return context.Characters.Find(id);
         }
