@@ -1,17 +1,23 @@
 ﻿@page
 @model NovelXManga.Pages.Manga.Create_new_MangaModel
 @{
-    //var photoPath = "/images/" + (@Model.mangaModel.PhotoPath ?? "NoPhoto.png");
- 
-    }
+    var photoPath = "/uploads/" + (@Model._MangaModel?.PhotoPath ?? "NoPhoto.png");
+}
+   
+
+
+
 <div class="container mt-5">
  <h3>@Model.SucessFulManga</h3>
     <div class="row justify-content-center align-items-center">
         <div class="col-sm-12 col-md-12 col-1g-4">
-            <form method=post enctype="multipart/form-data">
-                <input hidden asp-for="mangaModelView.MangaID" />
-                <input hidden asp-for="mangaModelView.BlogModel" />
-                <input hidden asp-for="mangaModelView.BlogModelId" />
+                <form id="create-manga-form" method=post enctype="multipart/form-data">
+                <input hidden asp-for="_MangaModel.MangaID" />
+                <input hidden asp-for="_MangaModel.BlogModel" />
+                <input hidden asp-for="_MangaModel.BlogModelId" />
+                <input hidden asp-for="_MangaModel.AllLanguages" />
+                <input hidden asp-for="_MangaModel.OfficalLanguage" />
+                <input hidden asp-for="_MangaModel.BlogModelId" />
          
                 <h4>Select Multiple Logs</h4>
 
@@ -33,21 +39,21 @@
   
              
                 <div class="mb-3">
-                    <label class="form-label" asp-for="mangaModelView.MangaName">Manga Title</label>
-                    <input type="text" asp-for="mangaModelView.MangaName" class="form-control" />
-                    <span asp-validation-for="mangaModelView.MangaName" class="text-danger"></span>
+                    <label class="form-label" asp-for="_MangaModel.MangaName">Manga Title</label>
+                    <input type="text" asp-for="_MangaModel.MangaName" class="form-control" />
+                    <span asp-validation-for="_MangaModel.MangaName" class="text-danger"></span>
 
                 </div>
                 <div class="mb-3">
-                    <label class="form-label" asp-for="mangaModelView.AssociatedNames"> Associated Names </label>
-                    <input type="text" asp-for="mangaModelView.AssociatedNames" class="form-control" />
-                    <span asp-validation-for="mangaModelView.AssociatedNames" class="text-danger"></span>
+                    <label class="form-label" asp-for="_MangaModel.AssociatedNames"> Associated Names </label>
+                    <input type="text" asp-for="_MangaModel.AssociatedNames" class="form-control" />
+                    <span asp-validation-for="_MangaModel.AssociatedNames" class="text-danger"></span>
 
                 </div>
                 <div class="mb-3">
-                    <label class="form-label" asp-for="mangaModelView.Description">Description</label>
-                    <input type="text" asp-for="mangaModelView.Description" class="form-control" />
-                    <span asp-validation-for="mangaModelView.Description" class="text-danger"></span>
+                    <label class="form-label" asp-for="_MangaModel.Description">Description</label>
+                    <input type="text" asp-for="_MangaModel.Description" class="form-control" />
+                    <span asp-validation-for="_MangaModel.Description" class="text-danger"></span>
                 </div>
                 <div class="mb-3">
                     <label class="form-label" asp-for="ReleaseYear">Year Released</label>
@@ -57,27 +63,49 @@
                     <label asp-for="Photo" class="col-sm-2 col-form-label"></label>  <br />
                     <div class="col-sm-10">
                         <div class="custom-file">
-                            <input asp-for="Photo" clas="custom-file-input form-control" />
+                            <input asp-for="Photo" class="custom-file-input form-control" />
                             <label class="custom-file-label">Click here to change photo</label>
                             <span asp-validation-for="Photo" class="text-danger"></span>
-
                         </div>
-
+                        <br />
+                        <img src="@photoPath" class="img-thumbnail" width="200" />
                     </div>
                 </div>
+
                 <br />
                 <br />
                 <div class="mb-3">
                     <button type="submit" class="btn btn-primary">Save Manga / Novel </button>
                 </div>
-                <script>
-                    $(document).ready(function () {
-                        $('.custom-file-input').on("change", function () {
-                            var fileName = $(this).val().split("\\").pop();
-                            $(this).next('.custom-file-label').html(fileName);
+
+                @section scripts {
+                    <script>
+                        $(function () {
+                            // Intercept form submit and submit via AJAX instead
+                            $("#create-manga-form").submit(function (event) {
+                                event.preventDefault();
+                                var formData = new FormData($(this)[0]);
+
+                                $.ajax({
+                                    url: "@Url.Action("Create", "Manga")",
+                                    type: "POST",
+                                    data: formData,
+                                    cache: false,
+                                    contentType: false,
+                                    processData: false,
+                                    success: function (result) {
+                                        // Handle successful response
+                                        console.log(result);
+                                    },
+                                    error: function (xhr, status, error) {
+                                        // Handle error response
+                                        console.error(xhr.responseText);
+                                    }
+                                });
+                            });
                         });
-                    })
-                </script>
+                    </script>
+                }
             </form>
 
         </div>

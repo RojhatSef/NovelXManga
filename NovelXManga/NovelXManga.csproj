@@ -26,6 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Pages\MangaTry\" />
     <Folder Include="wwwroot\Images\AuthorImage\" />
     <Folder Include="wwwroot\Images\MangaImage\" />
     <Folder Include="wwwroot\Images\UserImage\" />
