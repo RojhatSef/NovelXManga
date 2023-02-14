@@ -32,6 +32,7 @@ namespace NovelXManga.Pages.Manga
 
         public IEnumerable<TagModel> Tags { get; set; }
         public IEnumerable<GenresModel> Genres { get; set; }
+        public IEnumerable<MangaModel>MangaModels { get; set;  }
 
         [TempData]
         public string SucessFulManga { get; set; }
@@ -110,12 +111,15 @@ namespace NovelXManga.Pages.Manga
                 return RedirectToPage("/Index");
             }
             Tags = tagRepsitory.GetAllModels();
+            MangaModels = mangaRepository.GetAllManga();
             return Page();
         }
 
         public async Task OnGet()
         {
             Tags = await context.TagModels.ToListAsync();
+            MangaModels = mangaRepository.GetAllManga(); 
+
         }
 
         private string ProcessUploadedFile()

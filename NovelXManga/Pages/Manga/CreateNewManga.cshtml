@@ -55,6 +55,120 @@
                     <input type="text" asp-for="_MangaModel.Description" class="form-control" />
                     <span asp-validation-for="_MangaModel.Description" class="text-danger"></span>
                 </div>
+<div class="mb-3">
+    <label class="form-label" asp-for="_MangaModel.relatedSeries">Related Series</label>
+    <select asp-for="_MangaModel.relatedSeries" class="form-control" multiple>
+        @foreach (var manga in Model.MangaModels)
+        {
+            <option value="@manga.MangaID">@manga.MangaName</option>
+        }
+    </select>
+</div>
+
+
+<div class="mb-3">
+    <label class="form-label" asp-for="_MangaModel.ISBN10">ISBN10</label>
+    <input asp-for="_MangaModel.ISBN10" class="form-control" />
+    <span asp-validation-for="_MangaModel.ISBN10" class="text-danger"></span>
+</div>
+
+<div class="mb-3">
+    <label class="form-label" asp-for="_MangaModel.ISBN13">ISBN13</label>
+    <input asp-for="_MangaModel.ISBN13" class="form-control" />
+    <span asp-validation-for="_MangaModel.ISBN13" class="text-danger"></span>
+</div>
+
+<div class="mb-3">
+    <label class="form-label" asp-for="_MangaModel.futureEvents">Future Events</label>
+    <input asp-for="_MangaModel.futureEvents" class="form-control" />
+    <span asp-validation-for="_MangaModel.futureEvents" class="text-danger"></span>
+</div>
+
+<div class="mb-3">
+    <label class="form-label" asp-for="_MangaModel.StatusInCountryOfOrigin">Status in Country of Origin</label>
+    <input asp-for="_MangaModel.StatusInCountryOfOrigin" class="form-control" />
+    <span asp-validation-for="_MangaModel.StatusInCountryOfOrigin" class="text-danger"></span>
+</div>
+
+<div class="mb-3">
+    <label class="form-label" asp-for="_MangaModel.CompletelyTranslated">Completely Translated</label>
+    <input asp-for="_MangaModel.CompletelyTranslated" class="form-control" />
+    <span asp-validation-for="_MangaModel.CompletelyTranslated" class="text-danger"></span>
+</div>
+
+<div class="mb-3">
+    <label class="form-label" asp-for="_MangaModel.orignalWebtoon">Original Webtoon</label>
+    <input asp-for="_MangaModel.orignalWebtoon" class="form-control" />
+    <span asp-validation-for="_MangaModel.orignalWebtoon" class="text-danger"></span>
+</div>
+
+<div class="mb-3">
+    <label class="form-label" asp-for="_MangaModel.OriginalPublisher">Original Publisher</label>
+    <input asp-for="_MangaModel.OriginalPublisher" class="form-control" />
+    <span asp-validation-for="_MangaModel.OriginalPublisher" class="text-danger"></span>
+</div>
+
+<div class="mb-3">
+    <label class="form-label" asp-for="_MangaModel.score">Score</label>
+    <input asp-for="_MangaModel.score" class="form-control" />
+    <span asp-validation-for="_MangaModel.score"  class="text-danger"></span>
+</div>
+
+<div class="mb-3">
+    <label class="form-label" asp-for="_MangaModel.Type">Type</label>
+    <input asp-for="_MangaModel.Type" class="form-control" />
+    <span asp-validation-for="_MangaModel.Type" class="text-danger"></span>
+</div>
+<div class="mb-3">
+    <label class="form-label" asp-for="_MangaModel.OfficalLanguage">Official Language</label>
+    <input asp-for="_MangaModel.OfficalLanguage" class="form-control" />
+    <span asp-validation-for="_MangaModel.OfficalLanguage" class="text-danger"></span>
+</div>
+<div class="mb-3">
+    <label class="form-label" asp-for="_MangaModel.MonthRead">Month Read</label>
+    <input asp-for="_MangaModel.MonthRead" class="form-control" />
+    <span asp-validation-for="_MangaModel.MonthRead" class="text-danger"></span>
+</div>
+<div class="mb-3">
+    <label class="form-label" asp-for="_MangaModel.WeekRead">Week Read</label>
+    <input asp-for="_MangaModel.WeekRead" class="form-control" />
+    <span asp-validation-for="_MangaModel.WeekRead" class="text-danger"></span>
+</div>
+<div class="mb-3">
+    <label class="form-label" asp-for="_MangaModel.YearRead">Year Read</label>
+    <input asp-for="_MangaModel.YearRead" class="form-control" />
+    <span asp-validation-for="_MangaModel.YearRead" class="text-danger"></span>
+</div>
+<div class="mb-3">
+    <label class="form-label" asp-for="_MangaModel.ReleaseYear">Release Year</label>
+    <input asp-for="_MangaModel.ReleaseYear" class="form-control" />
+    <span asp-validation-for="_MangaModel.ReleaseYear" class="text-danger"></span>
+</div>
+<div class="mb-3">
+    <label class="form-label" asp-for="_MangaModel.EndingYear">Ending Year</label>
+    <input asp-for="_MangaModel.EndingYear" class="form-control" />
+    <span asp-validation-for="_MangaModel.EndingYear" class="text-danger"></span>
+</div>
+<div class="mb-3">
+    <label class="form-label" asp-for="_MangaModel.AssociatedNames">Associated Names</label>
+    <input asp-for="_MangaModel.AssociatedNames" class="form-control" multiple />
+    <span asp-validation-for="_MangaModel.AssociatedNames" class="text-danger"></span>
+</div>
+
+<div class="mb-3">
+    <label class="form-label" asp-for="_MangaModel.AllLanguages">All Languages</label>
+    <input asp-for="_MangaModel.AllLanguages" class="form-control" multiple />
+    <span asp-validation-for="_MangaModel.AllLanguages" class="text-danger"></span>
+</div>
+
+<div class="mb-3">
+    <label class="form-label" asp-for="_MangaModel.RecommendedMangaModels">Recommended Manga Models</label>
+    <input asp-for="_MangaModel.RecommendedMangaModels" class="form-control" multiple />
+    <span asp-validation-for="_MangaModel.RecommendedMangaModels" class="text-danger"></span>
+</div>
+
+
+
                 <div class="mb-3">
                     <label class="form-label" asp-for="ReleaseYear">Year Released</label>
                     <input type="datetime" asp-for="ReleaseYear" class="form-control" />
@@ -105,6 +219,40 @@
                             });
                         });
                     </script>
+                    
+<script>
+    $(function () {
+        $('select[multiple]').select2({
+            width: '100%',
+            placeholder: 'Select related series...',
+            allowClear: true,
+            minimumInputLength: 3,
+            ajax: {
+                url: '/Manga/Search',
+                dataType: 'json',
+                delay: 250,
+                data: function (params) {
+                    return {
+                        q: params.term
+                    };
+                },
+                processResults: function (data) {
+                    return {
+                        results: $.map(data, function (manga) {
+                            return {
+                                id: manga.mangaID,
+                                text: manga.mangaName
+                            };
+                        })
+                    };
+                },
+                cache: true
+            }
+        });
+    });
+</script>
+                   
+
                 }
             </form>
 
