@@ -244,8 +244,8 @@ namespace NovelXManga
             var SailorMoon = context.BuyPages.FirstOrDefault(e => e.BuyWebsite == "https://www.amazon.com/Sailor-Moon-Kodansha-Comics-Edition/dp/1632366419");
             var SailorMoon2 = context.BuyPages.FirstOrDefault(e => e.BuyWebsite == "https://www.amazon.co.jp/SAILOR-MOON-SAILOR-MOON/dp/4088725093");
 
-            SailorMoon.Languages = new List<Languages> { EnglishLanguage };
-            SailorMoon2.Languages = new List<Languages> { JapaneseLanguage };
+            SailorMoon._Languages = new List<Languages> { EnglishLanguage };
+            SailorMoon2._Languages = new List<Languages> { JapaneseLanguage };
             context.Update(SailorMoon);
         }
 
@@ -536,8 +536,8 @@ namespace NovelXManga
                     },
                     BuyPages = new List<BuyPage>
                     {
-                        new BuyPage { BuyWebsite ="https://www.amazon.com/One-Piece-Vol-Romance-Dawn/dp/1569319014/ref=sr_1_3?keywords=Manga+One+Piece&qid=1675256565&sr=8-3"},
-                        new BuyPage {  BuyWebsite = "https://www.amazon.com/One-Piece-Vol-1-Japanese/dp/4088725093", _Languages = new List<Languages>{ Japanese } }
+                        new BuyPage { BuyWebsite ="https://www.amazon.com/One-Piece-Vol-Romance-Dawn/dp/1569319014/ref=sr_1_3?keywords=Manga+One+Piece&qid=1675256565&sr=8-3", _Languages = new List<Languages>{  }},
+                        new BuyPage {  BuyWebsite = "https://www.amazon.com/One-Piece-Vol-1-Japanese/dp/4088725093", _Languages = new List<Languages>{  } }
                     },
                     ArtistModels = new List<ArtistModel>
                     {
@@ -653,8 +653,8 @@ new Character { CharacterName = "Mikasa Ackerman" },
 
                     OfficalWebsites = new List<OfficalWebsite>
             {
-            new OfficalWebsite { OfficalWebsiteString = "www.sailormoon.com", OfficalWebsiteName = "SailorMoon.Com",  OfficalWebSiteToBuy = "https://www.amazon.com/Sailor-Moon-Kodansha-Comics-Edition/dp/1632366419"},
-            new OfficalWebsite { OfficalWebsiteString = "sailormoon.jp", OfficalWebsiteName = "SailorMoon.jp", OfficalWebSiteToBuy = "https://www.amazon.co.jp/SAILOR-MOON-SAILOR-MOON/dp/4088725093"},
+            new OfficalWebsite { OfficalWebsiteString = "www.sailormoon.com", OfficalWebsiteName = "SailorMoon.Com",  },
+            new OfficalWebsite { OfficalWebsiteString = "sailormoon.jp", OfficalWebsiteName = "SailorMoon.jp", },
             },
                     Authormodels = new List<AuthorModel>
             {
@@ -664,6 +664,11 @@ new Character { CharacterName = "Mikasa Ackerman" },
             {
             new ArtistModel { FirstName = "Naoko Takeuchi" },
             },
+                    BuyPages = new List<BuyPage>
+                    {
+                        new BuyPage { BuyWebsite ="https://www.amazon.com/Sailor-Moon-Kodansha-Comics-Edition/dp/1632366419", _Languages = new List<Languages>{  }},
+                        new BuyPage {  BuyWebsite = "https://www.amazon.co.jp/SAILOR-MOON-SAILOR-MOON/dp/4088725093", _Languages = new List<Languages>{  } }
+                    },
                     VoiceActors = new List<VoiceActorModel>
             {
             new VoiceActorModel { FirstName = "Kotono Mitsuishi" },

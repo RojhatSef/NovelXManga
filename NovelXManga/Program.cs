@@ -89,5 +89,7 @@ static void SeedDatainitialize(IHost host)
 // Display currentManga Done
 // Fix manga links to Author/Artist/Voice To their info
 // fix tags/genre/language to search path
+// fix IBuyPage SQLBuyPage
+// Fix Scope for Buypage.
 
 // 
