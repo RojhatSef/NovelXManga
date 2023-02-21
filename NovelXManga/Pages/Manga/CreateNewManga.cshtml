@@ -201,7 +201,7 @@
                                 var formData = new FormData($(this)[0]);
 
                                 $.ajax({
-                                    url: "@Url.Action("Create", "Manga")",
+                                    url: "@Url.Action("CreateNewManga", "Manga")",
                                     type: "POST",
                                     data: formData,
                                     cache: false,

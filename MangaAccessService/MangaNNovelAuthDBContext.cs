@@ -8,8 +8,8 @@ namespace MangaAccessService
     {
         public MangaNNovelAuthDBContext(DbContextOptions<MangaNNovelAuthDBContext> options) : base(options)
         {
-
         }
+
         public DbSet<ArtistModel> artistModels { get; set; }
         public DbSet<AuthorModel> authorModels { get; set; }
         public DbSet<VoiceActorModel> voiceActorModels { get; set; }
@@ -32,20 +32,22 @@ namespace MangaAccessService
         public DbSet<TagModel> TagModels { get; set; }
         public DbSet<BlogModel> blogModels { get; set; }
         public DbSet<MangaModel> mangaModels { get; set; }
+        public DbSet<BuyPage> BuyPages { get; set; }
+        //public DbSet<TestModel> TestModels { get; set; }
+
         #region Removed DbSets
+
         //public DbSet<MasterModel> MasterModels { get; set; }
         //public DbSet<IdentityUser> IdentityUsers { get; set; }
-        #endregion
+
+        #endregion Removed DbSets
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
-
-
             modelBuilder.Entity<BlogModel>()
             .HasOne(mm => mm.MangaModel)
             .WithOne(i => i.BlogModel)
             .HasForeignKey<MangaModel>(b => b.BlogModelId);
-
 
             modelBuilder.Entity<MangaModel>().Navigation(e => e.Authormodels).AutoInclude();
             modelBuilder.Entity<MangaModel>().Navigation(e => e.TagsModels).AutoInclude();
@@ -70,9 +72,10 @@ namespace MangaAccessService
             //modelBuilder.Entity<BlogModel>().Navigation(e => e.postsModel).AutoInclude();
             modelBuilder.Entity<UserModel>().Navigation(e => e.Reviews).AutoInclude();
 
-
             base.OnModelCreating(modelBuilder);
+
             #region Remved Builders
+
             //modelBuilder.Entity<GroupScanlatingModel>().Navigation(e => e.MasterModels).AutoInclude();
             //modelBuilder.Entity<MasterModel>()
             //    .HasKey(m => new
@@ -92,14 +95,10 @@ namespace MangaAccessService
             //modelBuilder.Entity<MasterModel>().Navigation(e => e.userModels).AutoInclude();
             //modelBuilder.Entity<MasterModel>().Navigation(e => e.MangaModels).AutoInclude();
 
-
             //modelBuilder.Entity<MasterModel>()
             //    .HasOne(mm => mm.mangaModel)
             //    .WithMany(m => m.MasterModels)
             //    .HasForeignKey(mm => mm.MangaModelId).OnDelete(DeleteBehavior.ClientCascade);
-
-
-
 
             //modelBuilder.Entity<MasterModel>()
             //    .HasOne(mm => mm.ArtistModel)
@@ -120,8 +119,6 @@ namespace MangaAccessService
             //   .WithMany(m => m.MasterModels)
             //   .HasForeignKey(mm => mm.ChapterModelId).OnDelete(DeleteBehavior.ClientCascade);
 
-
-
             //modelBuilder.Entity<MasterModel>()
             //   .HasOne(mm => mm.PostModel)
             //   .WithMany(m => m.MasterModels)
@@ -131,7 +128,6 @@ namespace MangaAccessService
             //   .HasOne(mm => mm.AuthorModel)
             //   .WithMany(m => m.MasterModels)
             //   .HasForeignKey(mm => mm.AuthorModelID).OnDelete(DeleteBehavior.ClientCascade);
-
 
             //modelBuilder.Entity<GroupScanlatingModel>()
             //    .HasMany(c => c.chapterModels)
@@ -148,8 +144,7 @@ namespace MangaAccessService
             //    .WithMany(b => b.postsModel)
             //    .HasForeignKey(pm => pm.BlogId);
 
-            #endregion
-
+            #endregion Remved Builders
         }
     }
 }

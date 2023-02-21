@@ -45,7 +45,7 @@ namespace MangaAccessService
             {
                 return context.OfficalWebsites;
             }
-            return context.OfficalWebsites.Where(e => e.WebsiteName.Contains(searchTerm));
+            return context.OfficalWebsites.Where(e => e.OfficalWebsiteName.Contains(searchTerm));
         }
 
         public OfficalWebsite Update(OfficalWebsite UpdateModel)
