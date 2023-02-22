@@ -7,11 +7,15 @@ namespace MangaModelService
     {
         [Key]
         public int DroppedId { get; set; }
+
         [ForeignKey("MangaModel")]
         public int? MangaModelId { get; set; }
-        public virtual ICollection<MangaModel> ReadingMangaList { get; set; }
+
+        public virtual ICollection<MangaModel> _DroppedBooks { get; set; }
+
         [ForeignKey("UserModel")]
         public string? UserId { get; set; }
+
         public virtual ICollection<UserModel> UserModels { get; set; }
     }
 }

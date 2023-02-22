@@ -27,6 +27,11 @@
 
   <ItemGroup>
     <Folder Include="Pages\MangaTry\" />
+    <Folder Include="Pages\Genre\" />
+    <Folder Include="Pages\Review\" />
+    <Folder Include="Pages\Studio\" />
+    <Folder Include="Pages\Tags\" />
+    <Folder Include="Pages\Posts\" />
     <Folder Include="wwwroot\Images\AuthorImage\" />
     <Folder Include="wwwroot\Images\MangaImage\" />
     <Folder Include="wwwroot\Images\UserImage\" />
