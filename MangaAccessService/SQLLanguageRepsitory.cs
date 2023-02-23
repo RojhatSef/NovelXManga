@@ -45,7 +45,7 @@ namespace MangaAccessService
             {
                 return context.Languages_;
             }
-            return context.Languages_.Where(e => e.LanguageName.Contains(searchTerm) || e.OfficalWebSiteToBuy.Contains(searchTerm));
+            return context.Languages_.Where(e => e.LanguageName.Contains(searchTerm));
         }
 
         public Languages Update(Languages UpdateModel)

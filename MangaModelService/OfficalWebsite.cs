@@ -11,10 +11,11 @@ namespace MangaModelService
         [Required]
         public string OfficalWebsiteName { get; set; }
 
-        public string Twitter { get; set; }
-        public string Facebook { get; set; }
-        public string Line { get; set; }
-        public string Naver { get; set; }
+        public string? Twitter { get; set; }
+        public string? Facebook { get; set; }
+        public string? Line { get; set; }
+        public string? Naver { get; set; }
+        public string? Instagram { get; set; }
 
         [Required]
         public string OfficalWebsiteString { get; set; }

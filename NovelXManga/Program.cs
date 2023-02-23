@@ -9,8 +9,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 
-builder.Services.AddDbContext<MangaNNovelAuthDBContext>(options => options.UseSqlServer
-(builder.Configuration.GetConnectionString("AuthConnectionString")));
+builder.Services.AddDbContext<MangaNNovelAuthDBContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("AuthConnectionString"),
+        b => b.MigrationsAssembly("MangaAccessService")));
 
 builder.Services.AddScoped<IGenreRepsitory, SQLGenreRepsitory>();
 builder.Services.AddScoped<ITagRepsitory, SQLTagRepository>();
