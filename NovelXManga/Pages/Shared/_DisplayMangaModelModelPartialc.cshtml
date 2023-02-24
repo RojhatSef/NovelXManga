@@ -22,10 +22,10 @@
                 @if (Model.PhotoPath != string.Empty)
                 {
                     <div class="mb-3">
-                        <img src="@Model.PhotoPath" alt="NoImage" width="100" height="200">
+                        <img asp-append-version="true" src="~/Images/MangaImage/@Model.PhotoPath" alt="NoImage" width="100" height="200">
                         @if (User.Identity.IsAuthenticated && User.IsInRole("Updater"))
                         {
-                            <input type="text" class="HiddenGroup" asp-for="@Model.PhotoPath" class="form-control" />
+                            <input type="text" class="HiddenGroup" asp-for="@Model.PhotoPath"  class="form-control" />
 
                         }
 
@@ -121,6 +121,22 @@
     }
 
 }
+    <div>studio/s: </div>
+    @if (Model.GenresModels != null)
+    {
+        @foreach (var item in Model.StudioModels)
+        {
+            if(item.website != null){
+                <a asp-for="@item.website"> Studio | </a>
+            }
+            else{
+                <p>N/A</p>
+            }
+       
+
+        }
+
+    }
 
 @if (Model.Description != null)
 {
@@ -171,7 +187,7 @@
 @if (Model.OriginalPublisher != null)
 {
     <div class="mb-3">
-        <label class="form-label" asp-for="@Model.OriginalPublisher">OriginalPublisher: @Model.OriginalPublisher"></label>
+        <label class="form-label" asp-for="@Model.OriginalPublisher">OriginalPublisher: @Model.OriginalPublisher"</label>
     </div>
 }
 

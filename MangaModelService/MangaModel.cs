@@ -42,6 +42,7 @@ namespace MangaModelService
         public virtual ICollection<GroupScanlatingModel>? GroupScanlating { get; set; }
         public string? userId { get; set; }
         public virtual ICollection<UserModel>? userModels { get; set; }
+        public virtual ICollection<StudioModel>? StudioModels { get; set; }
         public virtual ICollection<GenresModel>? GenresModels { get; set; }
         public virtual ICollection<TagModel>? TagsModels { get; set; }
         public virtual ICollection<Character>? Characters { get; set; }

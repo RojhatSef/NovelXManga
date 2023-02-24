@@ -1,6 +1,7 @@
 ﻿using MangaAccessService;
 using MangaModelService;
 using Microsoft.AspNetCore.Identity;
+using System.Globalization;
 
 namespace NovelXManga
 {
@@ -15,6 +16,27 @@ namespace NovelXManga
         private readonly IWebHostEnvironment webHostEnvironment;
         private readonly RoleManager<IdentityRole> roleManager;
 
+        public Languages JapaneseLanguage { get; set; }
+        public Languages SpanishLanguage { get; set; }
+
+        public Languages ChineseLanguage { get; set; }
+        public Languages EnglishLanguage { get; set; }
+        public Languages KoreanLanguage { get; set; }
+        public Languages RussianLanguage { get; set; }
+        public Languages FrenchLanguage { get; set; }
+        public string ImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Images", "MangaImage");
+
+        public void Tags_Genres_Languages()
+        {
+            JapaneseLanguage = context.Languages_.FirstOrDefault(l => l.LanguageName == "Japanese");
+            EnglishLanguage = context.Languages_.FirstOrDefault(l => l.LanguageName == "English");
+            ChineseLanguage = context.Languages_.FirstOrDefault(l => l.LanguageName == "Chinese");
+            SpanishLanguage = context.Languages_.FirstOrDefault(l => l.LanguageName == "Spanish");
+            RussianLanguage = context.Languages_.FirstOrDefault(l => l.LanguageName == "Russian");
+            KoreanLanguage = context.Languages_.FirstOrDefault(l => l.LanguageName == "Korean");
+            FrenchLanguage = context.Languages_.FirstOrDefault(l => l.LanguageName == "French");
+        }
+
         public SeedData(MangaNNovelAuthDBContext context, UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, IWebHostEnvironment webHostEnvironment, RoleManager<IdentityRole> roleManager)
         {
             this.context = context;
@@ -27,8 +49,6 @@ namespace NovelXManga
         #endregion properties, constructor and readonly.
 
         #region CommonSeed
-
-        #region RelatedManga
 
         private string ProcessUploadedFile(string filename)
         {
@@ -71,16 +91,14 @@ namespace NovelXManga
             context.SaveChanges();
         }
 
-        #endregion RelatedManga
-
         #region GenreSeeding
 
         public void GenreSeed()
         {
-            string[] Genres = {  "Action", "Adult", "Adventure", "Comedy", "Drama", "Ecchi", "Fantasy", "Gender Bender", "Harem", "Historical",
+            string[] Genres = {  "Action", "Adult", "Adventure", "Comedy", "Drama", "Ecchi", "Fantasy", "Gender Bender", "Historical",
                 "Classics", "Comic", "Graphic Novel", "Detective", "Horror", "Josei", "Martial Arts", "Mature", "Mecha", "Mystery", "Psychological", "Romance",
-                "School Life", "Sci-fi", "Seinen", "Detective", "Shoujo", "Shoujo Ai", "Shounen", "Shounen Ai", "Slice Of Life", "Smut", "Psychological", "Sports",
-            "Supernatural", "Tragedy", "Wuxia", "Xianxia", "Xuanhuan", "Yaoi / Gay ", "Yuri / Lesbian", "Ecchi", "Fantasy", "Gender Bender", "Harem", "Historical",
+                "School Life", "Seinen", "Shoujo", "Shoujo Ai", "Shounen", "Shounen Ai", "Slice Of Life", "Smut",  "Sports",
+            "Supernatural","Thriller", "Tragedy", "Wuxia", "Xianxia", "Xuanhuan", "Yaoi / Gay ", "Yuri / Lesbian", "Ecchi", "Fantasy", "Gender Bender", "Harem", "Historical",
             "Memoir", "True Crime", "Self Help", "Poetry", "Essay","Cookbooks", "Biographies and Autobiographies", "Short Stories",};
             var GenreList = new List<GenresModel>();
             for (int i = 0; i < Genres.Length; i++)
@@ -139,7 +157,7 @@ namespace NovelXManga
                  "Coming of Age",  "Competition", "Conspiracy", "Contract", "Cooking", "Cool Male Lead", "Cool Female Lead",
 
                  "Cyberpunk", "Cosplay", "Countryside", "Couple Growth", "Cousin", "Coworker Relationship", "Coworker", "Crime", "Cross-dressing",
-                "Cunnilingus", "Curse", "Dark Ambience",
+                "Cunnilingus", "Curse", "Dark Ambience", "Dark Fantasy",
 
                   "Dead Family Member", "Dead Friend", "Dead Lover", "Dead Parent", "Death", "Death of Loved One",
                 "Debt", "Deception", "Delinquent", "Demon Lord", "Demon", "Dense When It Comes To Love",
@@ -172,7 +190,7 @@ namespace NovelXManga
            "Independent Female Lead", "Independent Male Lead", "Inexperienced in Love",
                 "Inferiority Complex", "Injury", "Inner Demon", "Innocent Female Lead", "Innocent Male Lead",
                 "Insecurity", "Isekai", "Island", "Japan",
-              "Jealousy", "Kidnapping", "Kind Female Lead", "Kind Male Lead", "Knight",
+              "Jealousy", "Kidnapping", "Kind Female Lead", "Kind Male Lead", "Knight", "Level System",
                 "LGBT Parent", "LGBT Scenes", "Lifestyle Change", "Live-in Lover", "Loneliness", "Loner Protagonist", "Love at First Sight",
 
            "Love Confession", "Love Interests Who Don't Get Along", "Love Polygon", "Love Triangle", "Love-Hate Relationship",
@@ -181,7 +199,7 @@ namespace NovelXManga
                 "Manipulation", "Manly Gay Couple", "Marriage", "Marriage Proposal", "Married Couple", "Masculine Uke", "Masochist",
 
            "Master-Pet Relationship", "Master-Servant Relationship", "Masturbation", "Mature Child", "Middle School", "Military", "Mind Break",
-                "Misunderstanding", "Model", "Misunderstood Protagonist", "Models", "Modeling",
+                "Misunderstanding", "Model", "Misunderstood Protagonist","Middle-earth", "Models", "Modeling",
 
                  "Monster", "Multiple Couples", "Multiple Protagonists", "Murder", "Music", "Music Band",
                 "Mythos", "Naive Female Lead", "Naive Male Lead", "Near-Death Experience", "Neighbor", "Netorare",
@@ -198,7 +216,7 @@ namespace NovelXManga
 
                       "Pretend Lovers", "Priest", "Prince", "Princess", "Prostitute", "Prostitution",
 
-              "Protagonist Strong from the Start", "Psychopath", "Public Sex", "Quirky Character", "Rape",
+              "Protagonist Strong from the Start", "Psychopath", "Psychological", "Public Sex", "Quirky Character", "Rape",
                 "Rape Victim", "Regret", "Reader Interactive", "Reincarnated in Another World", "Reincarnation", "Restaurant", "Reunion",
 
            "Revenge", "Harem", "Rich Family", "Rescue", "Rich Female Lead", "Rich Male Lead", "Rich Kid",
@@ -289,6 +307,7 @@ namespace NovelXManga
                 GenreSeed();
                 TagsModel();
                 addLanguages();
+                Tags_Genres_Languages();
 
                 //photopath needs fixing real bad
                 string filePath = Path.Combine(webHostEnvironment.WebRootPath, "images/MangaImage/0f3f5666-7cb9-4713-a779-f1e1546a0d5f");
@@ -300,7 +319,16 @@ namespace NovelXManga
                 CreateNaruto();
                 CreateDeathNote();
                 CreateHarryPotter();
+                CreateFullMetal();
+                CreateOnePiece();
+                CreateConan();
                 AddSailor();
+                CreateAttackOnTitan();
+                CreateLordOfTheRings();
+                CreateSoloLeveling();
+                CreateTowerOfGod();
+                DonQuiXote();
+
                 RelatedManga();
 
                 var result = await userManager.CreateAsync(user, "Rojhat123!");
@@ -315,20 +343,16 @@ namespace NovelXManga
 
         public void AddBerserk()
         {
-            string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Images", "MangaImage");
-
             var Tag1ToManga2 = context.TagModels.FirstOrDefault(t => t.TagName == "Dark Fantasy");
             var Tag2ToManga2 = context.TagModels.FirstOrDefault(t => t.TagName == "Horror");
             var Tag3ToManga2 = context.TagModels.FirstOrDefault(t => t.TagName == "Mature");
             var Gen1ToManga2 = context.GenresModels.FirstOrDefault(t => t.GenreName == "Action");
             var Gen2ToManga2 = context.GenresModels.FirstOrDefault(t => t.GenreName == "Adventure");
-            var languageJapense = context.Languages_.FirstOrDefault(l => l.LanguageName == "Japanese");
-            var LanguageEnglish = context.Languages_.FirstOrDefault(l => l.LanguageName == "English");
 
             MangaModel Berserk = new MangaModel
             {
                 MangaName = "Berserk",
-                PhotoPath = $"MangaImage\\Berserk.jpg",
+                PhotoPath = Path.Combine(ProcessUploadedFile("Berserk.jpeg")),
                 ReleaseYear = new DateTime(1989, 8, 25),
                 BlogModel = new BlogModel { mangaName = "Berserk" },
                 Description = "Berserk follows the character of Guts, a lone mercenary warrior, as he travels a medieval-inspired world of dark fantasy in search of revenge against his former friend and ally, who betrayed him and sacrificed their comrades to demons in order to become one himself.",
@@ -345,11 +369,11 @@ namespace NovelXManga
                 GroupScanlating = null,
                 GroupScanlatingID = null,
                 userId = null,
-                AllLanguages = new List<Languages> { languageJapense, LanguageEnglish },
+                AllLanguages = new List<Languages> { JapaneseLanguage, EnglishLanguage },
                 BuyPages = new List<BuyPage> {
-        new BuyPage { BuyWebsite = "https://www.amazon.com/Berserk-Vol-1-Kentaro-Miura/dp/1593070209", _Languages = new List<Languages> { LanguageEnglish },  },
-        new BuyPage { BuyWebsite = "https://www.amazon.co.jp/%E3%83%99%E3%83%AB%E3%82%BB%E3%83%AB%E3%82%AF-1-%E7%95%AA%E5%A4%96%E7%B7%A8-%E3%83%A1%E3%82%AC%E3%83%9F%E3%83%83%E3%82%AF%E3%82%B3%E3%83%9F%E3%83%83%E3%82%AF%E3%82%B9KC-%E3%82%B1%E3%83%B3%E3%82%BF%E3%83%AD%E3%83%BC-%E3%83%9F%E3%83%A5%E3%83%A9/dp/4592135348", _Languages = new List<Languages> { languageJapense },  },
-        new BuyPage { BuyWebsite = "https://www.abebooks.com/products/isbn/9784592135345?cm_sp=bdp-_-9784592135345-_-isbn10", _Languages = new List<Languages> { LanguageEnglish },  },
+        new BuyPage { BuyWebsite = "https://www.amazon.com/Berserk-Vol-1-Kentaro-Miura/dp/1593070209", _Languages = new List<Languages> { EnglishLanguage },  },
+        new BuyPage { BuyWebsite = "https://www.amazon.co.jp/%E3%83%99%E3%83%AB%E3%82%BB%E3%83%AB%E3%82%AF-1-%E7%95%AA%E5%A4%96%E7%B7%A8-%E3%83%A1%E3%82%AC%E3%83%9F%E3%83%83%E3%82%AF%E3%82%B3%E3%83%9F%E3%83%83%E3%82%AF%E3%82%B9KC-%E3%82%B1%E3%83%B3%E3%82%BF%E3%83%AD%E3%83%BC-%E3%83%9F%E3%83%A5%E3%83%A9/dp/4592135348", _Languages = new List<Languages> { JapaneseLanguage },  },
+        new BuyPage { BuyWebsite = "https://www.abebooks.com/products/isbn/9784592135345?cm_sp=bdp-_-9784592135345-_-isbn10", _Languages = new List<Languages> { ChineseLanguage },  },
     },
                 AssociatedNames = new List<AssociatedNames>
     {new AssociatedNames { nameString = "Beruseruku" },
@@ -371,10 +395,10 @@ new ArtistModel { FirstName = "Kentaro", LastName = "Miura" },
 
                 VoiceActors = new List<VoiceActorModel>
 {
-new VoiceActorModel { FirstName = "Guts", LastName = "Berserker Armor", Gender = "Male" },
-new VoiceActorModel { FirstName = "Puck", Gender = "Male" },
-new VoiceActorModel { FirstName = "Griffith", Gender = "Male" },
-new VoiceActorModel { FirstName = "Schierke", Gender = "Female" },
+new VoiceActorModel { FirstName = "Canna", LastName = "Nobutoshi", Gender = "Male" },
+new VoiceActorModel { FirstName = "Kenji",LastName="Utsumi", Gender = "Male" },
+new VoiceActorModel { FirstName = "Toshiyuki",LastName = "Morikawa",  Gender = "Male" },
+new VoiceActorModel { FirstName = "Yuko ", LastName = "Miyamura", Gender="Female" },
 },
                 GenresModels = new List<GenresModel>
 {
@@ -408,19 +432,16 @@ new Character { CharacterName = "Ivalera", specie="Elf",Gender="Female", Born="U
 
         public void CreateNaruto()
         {
-            string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Images", "MangaImage");
-
-            var manga1 = context.mangaModels.FirstOrDefault(e => e.MangaName == "Naruto");
             var Tag1ToManga1 = context.TagModels.FirstOrDefault(t => t.TagName == "Ninja");
             var Tag2ToManga1 = context.TagModels.FirstOrDefault(t => t.TagName == "Adapted to Anime");
             var Gen1ToManga1 = context.GenresModels.FirstOrDefault(t => t.GenreName == "Action");
             var Gen2ToManga1 = context.GenresModels.FirstOrDefault(t => t.GenreName == "Adventure");
-            var languageJapense = context.Languages_.FirstOrDefault(l => l.LanguageName == "Japanese");
-            var LanguageEnglish = context.Languages_.FirstOrDefault(l => l.LanguageName == "English");
-            var languageChinese = context.Languages_.FirstOrDefault(l => l.LanguageName == "Chinese");
+
             //first
-            DateTime myDate = DateTime.ParseExact("1991-05-08 14:40:52,531", "yyyy-MM-dd HH:mm:ss,fff",
+            DateTime myDate = DateTime.ParseExact("1991-05-08", "yyyy-MM-dd",
                                      System.Globalization.CultureInfo.InvariantCulture);
+            DateTime started = DateTime.ParseExact("1979-05-08", "yyyy-MM-dd",
+                                  System.Globalization.CultureInfo.InvariantCulture);
             MangaModel MangaNaruto = new MangaModel
             {
                 MangaName = "Naruto",
@@ -434,21 +455,18 @@ new Character { CharacterName = "Ivalera", specie="Elf",Gender="Female", Born="U
                 ISBN10 = "1569319006",
                 ISBN13 = "978-1569319000",
                 score = 10,
-
+                relatedSeries = null,
                 EndingYear = DateTime.Now,
                 StatusInCountryOfOrigin = "11, completed",
                 Type = "Manga",
+                StudioModels = new List<StudioModel> { new StudioModel { GroupName = "Pierrot", Started = started, StudioWebsite = "https://en.pierrot.jp/", Biography = "Pierrot Co., Ltd. (株式会社ぴえろ, Kabushiki-gaisha Piero) is a Japanese animation studio established in May 1979 by Yuji Nunokawa, previously an animator and director for Tatsunoko Production. Its headquarters are located in Mitaka, Tokyo.[2] Pierrot is renowned for several worldwide popular anime series, such as Naruto, Bleach, Yu Yu Hakusho, Black Clover, Boruto: Naruto Next Generations, Tokyo Ghoul, Ghost Stories, Great Teacher Onizuka and Saiyuki. " } },
                 OriginalPublisher = "SquareEnix",
                 orignalWebtoon = "N/A",
-                GroupScanlating = null,
-                GroupScanlatingID = null,
-                userModels = null,
-                userId = null,
-                AllLanguages = new List<Languages> { languageJapense, LanguageEnglish },
+                AllLanguages = new List<Languages> { JapaneseLanguage, EnglishLanguage },
                 BuyPages = new List<BuyPage> {
-                  new BuyPage { BuyWebsite = "https://www.amazon.com/Naruto-Vol-1-Uzumaki/dp/1569319006/ref=sr_1_2?keywords=Naruto+Manga&qid=1673876360&sr=8-2", _Languages = new List<Languages> { LanguageEnglish },  },
-                  new BuyPage { BuyWebsite = "https://www.amazon.com/Naruto-1-Japanese-Masashi-Kishimoto/dp/4088728408/ref=sr_1_1?crid=3UV6OU93CQ4G2&keywords=Naruto+Manga+Japanese&qid=1673876516&sprefix=naruto+manga+japane%2Caps%2C191&sr=8-1", _Languages = new List<Languages> { languageJapense },  },
-                  new BuyPage { BuyWebsite = "https://www.abebooks.com/servlet/BookDetailsPL?bi=4678761458&searchurl=kn%3DNaruto%2B1%2B%2528Chinese%2BEdition%2529%26sortby%3D20&cm_sp=snippet-_-srp1-_-title3", _Languages = new List<Languages> { LanguageEnglish },  },
+                  new BuyPage { BuyWebsite = "https://www.amazon.com/Naruto-Vol-1-Uzumaki/dp/1569319006/ref=sr_1_2?keywords=Naruto+Manga&qid=1673876360&sr=8-2", _Languages = new List<Languages> { EnglishLanguage },  },
+                  new BuyPage { BuyWebsite = "https://www.amazon.com/Naruto-1-Japanese-Masashi-Kishimoto/dp/4088728408/ref=sr_1_1?crid=3UV6OU93CQ4G2&keywords=Naruto+Manga+Japanese&qid=1673876516&sprefix=naruto+manga+japane%2Caps%2C191&sr=8-1", _Languages = new List<Languages> { JapaneseLanguage },  },
+                  new BuyPage { BuyWebsite = "https://www.abebooks.com/servlet/BookDetailsPL?bi=4678761458&searchurl=kn%3DNaruto%2B1%2B%2528Chinese%2BEdition%2529%26sortby%3D20&cm_sp=snippet-_-srp1-_-title3", _Languages = new List<Languages> { EnglishLanguage },  },
                },
 
                 AssociatedNames = new List<AssociatedNames>
@@ -501,24 +519,19 @@ new Character { CharacterName = "Ivalera", specie="Elf",Gender="Female", Born="U
 
         public void CreateHarryPotter()
         {
-            string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Images", "MangaImage");
-
-            var manga1 = context.mangaModels.FirstOrDefault(e => e.MangaName == "Harry Potter");
             var Tag1ToManga1 = context.TagModels.FirstOrDefault(t => t.TagName == "Magic");
             var Tag2ToManga1 = context.TagModels.FirstOrDefault(t => t.TagName == "Fantasy");
             var Gen1ToManga1 = context.GenresModels.FirstOrDefault(t => t.GenreName == "Adventure");
             var Gen2ToManga1 = context.GenresModels.FirstOrDefault(t => t.GenreName == "Action");
-            var languageJapense = context.Languages_.FirstOrDefault(l => l.LanguageName == "Japanese");
-            var LanguageEnglish = context.Languages_.FirstOrDefault(l => l.LanguageName == "English");
-            var languageFrench = context.Languages_.FirstOrDefault(l => l.LanguageName == "French");
+
             //first
-            DateTime myDate = DateTime.ParseExact("1997-06-26 00:00:00,000", "yyyy-MM-dd HH:mm:ss,fff",
+            DateTime myDate = DateTime.ParseExact("1997-06-26", "yyyy-MM-dd",
                                          System.Globalization.CultureInfo.InvariantCulture);
             MangaModel MangaHarryPotter = new MangaModel
             {
                 MangaName = "Harry Potter",
 
-                PhotoPath = Path.Combine(imagePath, "HarryPotter.jpg"),
+                PhotoPath = Path.Combine(ProcessUploadedFile("HarryPotter.jpg")),
                 ReleaseYear = myDate,
                 BlogModel = new BlogModel { mangaName = "Harry Potter" },
                 Description = "The story follows the life of an orphan boy, Harry Potter, who discovers he is a wizard and embarks on a journey to learn magic and stop the evil Lord Voldemort.",
@@ -537,11 +550,11 @@ new Character { CharacterName = "Ivalera", specie="Elf",Gender="Female", Born="U
                 GroupScanlatingID = null,
                 userModels = null,
                 userId = null,
-                AllLanguages = new List<Languages> { LanguageEnglish, languageJapense, languageFrench },
+                AllLanguages = new List<Languages> { EnglishLanguage, JapaneseLanguage, FrenchLanguage },
                 BuyPages = new List<BuyPage> {
-          new BuyPage { BuyWebsite = "https://www.amazon.com/Harry-Potter-Sorcerers-Stone-Rowling/dp/059035342X/ref=sr_1_2?keywords=Harry+Potter+manga&qid=1673878089&sr=8-2", _Languages = new List<Languages> { LanguageEnglish },  },
-          new BuyPage { BuyWebsite = "https://www.amazon.co.jp/-/en/J-K-Rowling/dp/4835421060/ref=sr_1_1?crid=1ML74E33K0V7Q&keywords=harry+potter+manga&qid=1645671799&s=books&sprefix=harry+po%2Cstripbooks%2C242&sr=1-1", _Languages = new List<Languages> { languageJapense },  },
-          new BuyPage { BuyWebsite = "https://www.fnac.com/a8901018/Harry-Potter-Tome-1-Harry-Potter-a-l-ecole-des-sorciers-1-J-K-Rowling-Librio", _Languages = new List<Languages> { languageFrench },  },
+          new BuyPage { BuyWebsite = "https://www.amazon.com/Harry-Potter-Sorcerers-Stone-Rowling/dp/059035342X/ref=sr_1_2?keywords=Harry+Potter+manga&qid=1673878089&sr=8-2", _Languages = new List<Languages> { EnglishLanguage },  },
+          new BuyPage { BuyWebsite = "https://www.amazon.co.jp/-/en/J-K-Rowling/dp/4835421060/ref=sr_1_1?crid=1ML74E33K0V7Q&keywords=harry+potter+manga&qid=1645671799&s=books&sprefix=harry+po%2Cstripbooks%2C242&sr=1-1", _Languages = new List<Languages> { JapaneseLanguage },  },
+          new BuyPage { BuyWebsite = "https://www.fnac.com/a8901018/Harry-Potter-Tome-1-Harry-Potter-a-l-ecole-des-sorciers-1-J-K-Rowling-Librio", _Languages = new List<Languages> { FrenchLanguage },  },
        },
 
                 AssociatedNames = new List<AssociatedNames>
@@ -591,22 +604,17 @@ new Character { CharacterName = "Ivalera", specie="Elf",Gender="Female", Born="U
 
         public void CreateDeathNote()
         {
-            string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Images", "MangaImage");
-
-            var manga1 = context.mangaModels.FirstOrDefault(e => e.MangaName == "Death Note");
-            var Tag1ToManga1 = context.TagModels.FirstOrDefault(t => t.TagName == "Supernatural");
+            var Tag1ToManga1 = context.TagModels.FirstOrDefault(t => t.TagName == "Death of Loved One");
             var Tag2ToManga1 = context.TagModels.FirstOrDefault(t => t.TagName == "Psychological");
             var Gen1ToManga1 = context.GenresModels.FirstOrDefault(t => t.GenreName == "Mystery");
             var Gen2ToManga1 = context.GenresModels.FirstOrDefault(t => t.GenreName == "Thriller");
-            var languageJapense = context.Languages_.FirstOrDefault(l => l.LanguageName == "Japanese");
-            var LanguageEnglish = context.Languages_.FirstOrDefault(l => l.LanguageName == "English");
-            var languageFrench = context.Languages_.FirstOrDefault(l => l.LanguageName == "French");
-            DateTime myDate = DateTime.ParseExact("2003-12-01 00:00:00,000", "yyyy-MM-dd HH:mm:ss,fff",
+
+            DateTime myDate = DateTime.ParseExact("2003-12-01", "yyyy-MM-dd",
                                      System.Globalization.CultureInfo.InvariantCulture);
             MangaModel MangaDeathNote = new MangaModel
             {
                 MangaName = "Death Note",
-                PhotoPath = Path.Combine(imagePath, "DeathNote.jpg"),
+                PhotoPath = Path.Combine(ProcessUploadedFile("DeathNote.jpeg")),
                 ReleaseYear = myDate,
                 BlogModel = new BlogModel { mangaName = "Death Note" },
                 Description = "A young high school student discovers a supernatural notebook that can kill anyone whose name is written in it.",
@@ -626,11 +634,11 @@ new Character { CharacterName = "Ivalera", specie="Elf",Gender="Female", Born="U
                 GroupScanlatingID = null,
                 userModels = null,
                 userId = null,
-                AllLanguages = new List<Languages> { languageJapense, LanguageEnglish, languageFrench },
+                AllLanguages = new List<Languages> { JapaneseLanguage, EnglishLanguage, SpanishLanguage },
                 BuyPages = new List<BuyPage> {
-          new BuyPage { BuyWebsite = "https://www.amazon.com/Death-Note-Box-Set-Vols/dp/142152581X", _Languages = new List<Languages> { LanguageEnglish },  },
-          new BuyPage { BuyWebsite = "https://www.amazon.com/Death-Note-Black-Manga/dp/2505001525", _Languages = new List<Languages> { languageFrench },  },
-          new BuyPage { BuyWebsite = "https://www.amazon.co.jp/-/en/Obata-Takeshi-Tsugumi-Ohba/dp/408872836X/ref=sr_1_1?crid=13XLV7IL5PMZ&keywords=death+note+%E3%83%9E%E3%83%B3%E3%82%AC&qid=1645671799&s=books&sprefix=death+%2Cstripbooks%2C261&sr=1-1", _Languages = new List<Languages> { languageJapense },  },
+          new BuyPage { BuyWebsite = "https://www.amazon.com/Death-Note-Box-Set-Vols/dp/142152581X", _Languages = new List<Languages> { EnglishLanguage },  },
+          new BuyPage { BuyWebsite = "https://www.amazon.com/Death-Note-Black-Manga/dp/2505001525", _Languages = new List<Languages> { FrenchLanguage },  },
+          new BuyPage { BuyWebsite = "https://www.amazon.co.jp/-/en/Obata-Takeshi-Tsugumi-Ohba/dp/408872836X/ref=sr_1_1?crid=13XLV7IL5PMZ&keywords=death+note+%E3%83%9E%E3%83%B3%E3%82%AC&qid=1645671799&s=books&sprefix=death+%2Cstripbooks%2C261&sr=1-1", _Languages = new List<Languages> { JapaneseLanguage },  },
        },
 
                 AssociatedNames = new List<AssociatedNames>
@@ -677,7 +685,6 @@ new Character { CharacterName = "Misa Amane" ,specie="Human",Gender="Female", Bo
             context.SaveChanges();
         }
 
-        //Needs Fix
         public void CreateFullMetal()
         {
             var OpGen1 = context.GenresModels.FirstOrDefault(e => e.GenreName == "Adventure");
@@ -699,7 +706,7 @@ new Character { CharacterName = "Misa Amane" ,specie="Human",Gender="Female", Bo
                 score = 9.0,
                 Type = "Manga",
                 OfficalLanguage = "Japanese",
-                PhotoPath = "fullmetalAlchemist.jpg",
+                PhotoPath = Path.Combine(ProcessUploadedFile("FullMetal.jpeg")),
                 Description = "Two brothers use alchemy to revive their deceased mother, leading them on a journey to find the Philosopher's Stone and restore their bodies to their original form.",
                 ReleaseYear = new DateTime(2001, 1, 2),
                 EndingYear = new DateTime(2010, 10, 2),
@@ -750,7 +757,6 @@ new Character { CharacterName = "Misa Amane" ,specie="Human",Gender="Female", Bo
             context.SaveChanges();
         }
 
-        //needs Fix
         public void CreateOnePiece()
         {
             var OpTag = context.TagModels.FirstOrDefault(e => e.TagName == "Pirates");
@@ -772,10 +778,11 @@ new Character { CharacterName = "Misa Amane" ,specie="Human",Gender="Female", Bo
                 score = 9.5,
                 Type = "Manga",
                 OfficalLanguage = "Japanese",
-                PhotoPath = "onepiece.jpg",
+                PhotoPath = Path.Combine(ProcessUploadedFile("OnePiece.jpg")),
                 Description = "Follow the adventures of Monkey D. Luffy and the Straw Hat Pirates on their journey to become the King of the Pirates.",
                 ReleaseYear = new DateTime(1997, 7, 19),
                 EndingYear = null,
+                AllLanguages = new List<Languages> { JapaneseLanguage, EnglishLanguage, FrenchLanguage },
                 AssociatedNames = new List<AssociatedNames>
                     {
                         new AssociatedNames { nameString = "One Piece Comics" },
@@ -839,9 +846,6 @@ new Character { CharacterName = "Misa Amane" ,specie="Human",Gender="Female", Bo
         {
             string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Images", "MangaImage");
 
-            var languageJapense = context.Languages_.FirstOrDefault(l => l.LanguageName == "Japanese");
-            var LanguageEnglish = context.Languages_.FirstOrDefault(l => l.LanguageName == "English");
-            var languageChinese = context.Languages_.FirstOrDefault(l => l.LanguageName == "Chinese");
             var SailorTag7 = context.TagModels.FirstOrDefault(e => e.TagName == "Strong Female Lead");
             var SailorTag8 = context.TagModels.FirstOrDefault(e => e.TagName == "Coming of Age");
             var SailorTag9 = context.TagModels.FirstOrDefault(e => e.TagName == "Family");
@@ -862,7 +866,7 @@ new Character { CharacterName = "Misa Amane" ,specie="Human",Gender="Female", Bo
                 score = 8.0,
                 Type = "Manga",
                 OfficalLanguage = "Japanese",
-                PhotoPath = Path.Combine(imagePath, "Sailor.jpg"),
+                PhotoPath = Path.Combine(ProcessUploadedFile("SailorMoon.jpg")),
                 Description = "A young girl named Usagi transforms into the titular character Sailor Moon, a guardian who fights for love and justice, and battles against evil forces to protect the universe.",
                 ReleaseYear = new DateTime(1991, 3, 10),
                 EndingYear = new DateTime(1997, 2, 1),
@@ -887,9 +891,10 @@ new Character { CharacterName = "Misa Amane" ,specie="Human",Gender="Female", Bo
     },
                 BuyPages = new List<BuyPage>
     {
-        new BuyPage { BuyWebsite ="https://www.amazon.com/Sailor-Moon-Kodansha-Comics-Edition/dp/1632366419", _Languages = new List<Languages>{ LanguageEnglish }},
-        new BuyPage { BuyWebsite = "https://www.amazon.co.jp/SAILOR-MOON-SAILOR-MOON/dp/4088725093", _Languages = new List<Languages>{ languageJapense } }
+        new BuyPage { BuyWebsite ="https://www.amazon.com/Sailor-Moon-Kodansha-Comics-Edition/dp/1632366419", _Languages = new List<Languages>{ EnglishLanguage }},
+        new BuyPage { BuyWebsite = "https://www.amazon.co.jp/SAILOR-MOON-SAILOR-MOON/dp/4088725093", _Languages = new List<Languages>{ JapaneseLanguage } }
     },
+                AllLanguages = new List<Languages> { JapaneseLanguage, EnglishLanguage, FrenchLanguage },
                 VoiceActors = new List<VoiceActorModel>
     {
         new VoiceActorModel { FirstName = "Kotono Mitsuishi" },
@@ -917,7 +922,6 @@ new Character { CharacterName = "Misa Amane" ,specie="Human",Gender="Female", Bo
             context.SaveChanges();
         }
 
-        //Needs Fix
         public void CreateConan()
         {
             var GenreCon4 = context.GenresModels.FirstOrDefault(e => e.GenreName == "Mystery");
@@ -938,10 +942,11 @@ new Character { CharacterName = "Misa Amane" ,specie="Human",Gender="Female", Bo
                 score = 8.5,
                 Type = "Manga",
                 OfficalLanguage = "Japanese",
-                PhotoPath = "detectiveConan.jpg",
+                PhotoPath = Path.Combine(ProcessUploadedFile("Conan.jpeg")),
                 Description = "A high school detective who is transformed into a child after being poisoned, solves crimes under a different identity while searching for a cure.",
                 ReleaseYear = new DateTime(1994, 1, 2),
                 EndingYear = new DateTime(),
+                AllLanguages = new List<Languages> { JapaneseLanguage, EnglishLanguage, FrenchLanguage },
                 AssociatedNames = new List<AssociatedNames>
 {
 new AssociatedNames { nameString = "Detective Conan Comics" },
@@ -961,6 +966,11 @@ new AssociatedNames { nameString = "Detective Conan Manga" },
             {
             new ArtistModel { FirstName = "Gosho Aoyama" },
             },
+                BuyPages = new List<BuyPage>
+    {
+        new BuyPage { BuyWebsite ="https://www.amazon.com/Sailor-Moon-Kodansha-Comics-Edition/dp/1632366419", _Languages = new List<Languages>{ EnglishLanguage }},
+        new BuyPage { BuyWebsite = "https://www.amazon.co.jp/SAILOR-MOON-SAILOR-MOON/dp/4088725093", _Languages = new List<Languages>{ JapaneseLanguage } }
+    },
                 VoiceActors = new List<VoiceActorModel>
             {
             new VoiceActorModel { FirstName = "Minami Takayama" },
@@ -987,13 +997,13 @@ new AssociatedNames { nameString = "Detective Conan Manga" },
             context.SaveChanges();
         }
 
-        //Needs Fix
         public void CreateAttackOnTitan()
         {
             var tagAt5 = context.TagModels.FirstOrDefault(e => e.TagName == "Absent Parent");
-            var tagAt6 = context.TagModels.FirstOrDefault(e => e.TagName == "Drama");
+
             var GenreAt2 = context.GenresModels.FirstOrDefault(e => e.GenreName == "Fantasy");
-            var GenreAt3 = context.GenresModels.FirstOrDefault(e => e.GenreName == "Science Fiction");
+            var GenreAt3 = context.GenresModels.FirstOrDefault(e => e.GenreName == "Shounen");
+            var GenreAt4 = context.GenresModels.FirstOrDefault(e => e.GenreName == "Mecha");
 
             var tag4 = context.TagModels.FirstOrDefault(e => e.TagName == "Arrogant Male Lead");
             var tag5 = context.TagModels.FirstOrDefault(e => e.TagName == "Insecurity");
@@ -1012,10 +1022,16 @@ new AssociatedNames { nameString = "Detective Conan Manga" },
                 score = 8.5,
                 Type = "Anime",
                 OfficalLanguage = "Japanese",
-                PhotoPath = "AttackOnTitan.jpg",
+                PhotoPath = Path.Combine(ProcessUploadedFile("AttackOnTitan.jpeg")),
                 Description = "The story follows Eren Jeager and Mikasa Ackerman as they join the Scout Regiment to fight against the Titans who threaten their city and the rest of humanity.",
                 ReleaseYear = new DateTime(2013, 4, 7),
                 EndingYear = new DateTime(2013, 9, 29),
+                AllLanguages = new List<Languages> { JapaneseLanguage, EnglishLanguage, FrenchLanguage },
+                BuyPages = new List<BuyPage>
+    {
+        new BuyPage { BuyWebsite ="https://www.amazon.com/Sailor-Moon-Kodansha-Comics-Edition/dp/1632366419", _Languages = new List<Languages>{ EnglishLanguage }},
+        new BuyPage { BuyWebsite = "https://www.amazon.co.jp/SAILOR-MOON-SAILOR-MOON/dp/4088725093", _Languages = new List<Languages>{ JapaneseLanguage } }
+    },
                 AssociatedNames = new List<AssociatedNames>
 {
 new AssociatedNames { nameString = "Attack on Titan TV Show" },
@@ -1043,11 +1059,11 @@ new VoiceActorModel { FirstName = "Marina Inoue" },
 },
                 GenresModels = new List<GenresModel>
 {
-GenreAt2, GenreAt3
+GenreAt2, GenreAt3, GenreAt4
 },
                 TagsModels = new List<TagModel>
 {
-tagAt5, tagAt6
+tagAt5, tag4,tag5,tag6
 },
                 Characters = new List<Character>
 {
@@ -1056,6 +1072,337 @@ new Character { CharacterName = "Mikasa Ackerman" },
 },
             };
             context.mangaModels.Add(AttackOnTitan);
+            context.SaveChanges();
+        }
+
+        public void CreateLordOfTheRings()
+        {
+            var tag1 = context.TagModels.FirstOrDefault(t => t.TagName == "Emotionally Strong Male Lead");
+            var tag2 = context.TagModels.FirstOrDefault(t => t.TagName == "Sword and Sorcery");
+            var genre1 = context.GenresModels.FirstOrDefault(t => t.GenreName == "Adventure");
+            var genre2 = context.GenresModels.FirstOrDefault(t => t.GenreName == "Fantasy");
+
+            MangaModel lotr = new MangaModel
+            {
+                MangaName = "Lord of the Rings",
+                PhotoPath = Path.Combine(ProcessUploadedFile("lotr.jpg")),
+                BlogModel = new BlogModel { mangaName = "Lord of the Rings" },
+                ReleaseYear = new DateTime(1954, 7, 29),
+                Description = "In a sleepy village in the Shire, young hobbit Frodo Baggins finds himself tasked with an immense quest; to destroy the One Ring and thus ensure the destruction of the Dark Lord Sauron. Alongside a fellowship of heroes including wizards, elves and dwarves, he must journey across the land of Middle-earth, facing danger at every turn.",
+                CompletelyTranslated = "Yes",
+                OfficalLanguage = "English",
+                ISBN10 = "0618640150",
+                ISBN13 = "978-0618640157",
+                score = 9.5,
+                EndingYear = null,
+                StatusInCountryOfOrigin = "Completed",
+                Type = "Novel",
+                OriginalPublisher = "Allen & Unwin",
+                orignalWebtoon = null,
+                GroupScanlating = null,
+                GroupScanlatingID = null,
+                userModels = null,
+                userId = null,
+                AllLanguages = new List<Languages> { EnglishLanguage },
+                BuyPages = new List<BuyPage>
+        {
+            new BuyPage { BuyWebsite = "https://www.amazon.com/Lord-Rings-Trilogy-Boxed-Set/dp/0544445783/ref=sr_1_1?keywords=lord+of+the+rings&qid=1645876628&sr=8-1", _Languages = new List<Languages> { EnglishLanguage } }
+        },
+                AssociatedNames = new List<AssociatedNames>
+        {
+            new AssociatedNames { nameString = "LOTR" },
+            new AssociatedNames { nameString = "In the Name of the King" }
+        },
+                OfficalWebsites = new List<OfficalWebsite>
+        {
+            new OfficalWebsite { OfficalWebsiteString = "https://www.lordoftherings.net/", OfficalWebsiteName = "Lord of the Rings Official Site", Twitter = "https://twitter.com/lordoftherings", Facebook = "https://www.facebook.com/lordoftheringstrilogy/", Line = null }
+        },
+                Authormodels = new List<AuthorModel>
+        {
+            new AuthorModel { FirstName = "J.R.R.", LastName = "Tolkien", Biography = "John Ronald Reuel Tolkien CBE FRSL (3 January 1892 – 2 September 1973) was an English writer, poet, philologist, and academic. He is best known as the author of the high fantasy works The Hobbit, The Lord of the Rings, and The Silmarillion." }
+        },
+                ArtistModels = new List<ArtistModel>
+{
+    new ArtistModel { FirstName = "Alan", LastName = "Lee", Biography = "Alan Lee is an English artist and writer. He is best known for his illustration work based on J. R. R. Tolkien's Middle-earth fantasy writings. He won an Academy Award for Best Art Direction for his work on the 2003 film The Lord of the Rings: The Return of the King." },
+    new ArtistModel { FirstName = "John", LastName = "Howe", Biography = "John Howe is a Canadian book illustrator, living in Neuchâtel, Switzerland. One year after studying in a college in Oakville, Howe moved to France. He has illustrated many fantasy books, including The Lord of the Rings and The Hobbit by J. R. R. Tolkien, and is one of the conceptual designers employed by Peter Jackson's The Lord of the Rings film trilogy." },
+    new ArtistModel { FirstName = "Ted", LastName = "Nasmith", Biography = "Ted Nasmith is a Canadian artist and illustrator. He is best known for his illustration work based on J. R. R. Tolkien's Middle-earth fantasy writings, and has produced several Tolkien-themed calendars and illustrated editions of The Silmarillion, The Lord of the Rings and The Hobbit." },
+    new ArtistModel { FirstName = "Roger", LastName = "Garland", Biography = "Roger Garland is an artist and illustrator from the United Kingdom. He is known for his illustration work based on J. R. R. Tolkien's Middle-earth fantasy writings, and has created artwork for various editions of The Hobbit and The Lord of the Rings, as well as other fantasy works." },
+    new ArtistModel { FirstName = "Donato", LastName = "Giancola", Biography = "Donato Giancola is an American artist and illustrator, best known for his work in the science fiction and fantasy genres. He has created artwork for a number of book covers, including editions of The Lord of the Rings and The Hobbit, as well as works by other authors in the genre." },
+    new ArtistModel { FirstName = "Michael", LastName = "Hague", Biography = "Michael Hague is an American illustrator and author, known for his work in the fantasy genre. He has created artwork for numerous children's books, including editions of The Hobbit and The Lord of the Rings, as well as works by other authors." }
+},
+                VoiceActors = new List<VoiceActorModel>
+{
+    new VoiceActorModel { FirstName = "Rob Inglis", CharacterName = "Narrator" },
+    new VoiceActorModel { FirstName = "Ian Holm", CharacterName = "Bilbo Baggins" },
+    new VoiceActorModel { FirstName = "Andy Serkis", CharacterName = "Gollum" },
+    new VoiceActorModel { FirstName = "Christopher Lee", CharacterName = "Saruman" }
+},
+                GenresModels = new List<GenresModel>
+        {
+            genre1,
+            genre2
+        },
+                TagsModels = new List<TagModel>
+    {
+        tag1,
+        tag2,
+    },
+                Characters = new List<Character>
+    {
+        new Character { CharacterName = "Frodo Baggins", specie = "Hobbit", Gender = "Male", Born = "September 22, T.A. 2968", PlaceOffResidence = "Shire", World = "Middle-earth", Nationality = "Shire", Education = "Private tutor", Occupation = "Ring-bearer" },
+        new Character { CharacterName = "Gandalf", specie = "Maiar", Gender = "Male", Born = "Unknown", PlaceOffResidence = "Middle-earth", World = "Middle-earth", Nationality = "Unknown", Education = "Unknown", Occupation = "Wizard" },
+        new Character { CharacterName = "Aragorn", specie = "Human", Gender = "Male", Born = "March 1, T.A. 2931", PlaceOffResidence = "Gondor", World = "Middle-earth", Nationality = "Dúnedain", Education = "Ranger training", Occupation = "King of Gondor" },
+        new Character { CharacterName = "Legolas", specie = "Elf", Gender = "Male", Born = "Third Age, 87", PlaceOffResidence = "Mirkwood", World = "Middle-earth", Nationality = "Woodland Realm", Education = "Unknown", Occupation = "Prince of Mirkwood" },
+    },
+            };
+            context.mangaModels.Add(lotr);
+            context.SaveChanges();
+        }
+
+        public void CreateSoloLeveling()
+        {
+            var Tag1ToManga1 = context.TagModels.FirstOrDefault(t => t.TagName == "Level System");
+            var Tag2ToManga1 = context.TagModels.FirstOrDefault(t => t.TagName == "Monster");
+            var Tag3ToManga1 = context.TagModels.FirstOrDefault(t => t.TagName == "Weak to Strong");
+            var Gen1ToManga1 = context.GenresModels.FirstOrDefault(t => t.GenreName == "Action");
+            var Gen2ToManga1 = context.GenresModels.FirstOrDefault(t => t.GenreName == "Fantasy");
+            DateTime started = DateTime.ParseExact("2003-09-08", "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
+            var manga = new MangaModel
+            {
+                MangaName = "Solo Leveling",
+                PhotoPath = Path.Combine(ProcessUploadedFile("SoloLeveling.jpg")),
+                ReleaseYear = new DateTime(2018, 3, 19),
+                BlogModel = new BlogModel { mangaName = "Solo Leveling" },
+                Description = "The story of a world in which an average guy awakens as a hunter and aims to level up by risking his life in dangerous dungeons.",
+                CompletelyTranslated = "Ongoing",
+                OfficalLanguage = "Korean",
+                ISBN10 = "8952776072",
+                ISBN13 = "978-8952776078",
+                score = 9,
+                StudioModels = new List<StudioModel> { new StudioModel { GroupName = "Jin Ho Sung", Started = started, StudioWebsite = "N/A", Biography = "Jin Ho Sung is the author and artist of Solo Leveling." } },
+                EndingYear = null,
+                StatusInCountryOfOrigin = "14, ongoing",
+                Type = "Manhwa",
+                OriginalPublisher = "D&C Media",
+                orignalWebtoon = "https://page.kakao.com/home?seriesId=50870315",
+
+                AllLanguages = new List<Languages> { KoreanLanguage, EnglishLanguage },
+                BuyPages = new List<BuyPage>
+    {
+        new BuyPage { BuyWebsite = "https://www.amazon.com/Solo-Leveling-Vol-Chu-Gong/dp/1974720273", _Languages = new List<Languages> { EnglishLanguage },  },
+        new BuyPage { BuyWebsite = "https://www.kyobobook.co.kr/product/detailViewKor.laf?barcode=9791189381709", _Languages = new List<Languages> { KoreanLanguage },  },
+        new BuyPage { BuyWebsite = "https://www.cdjapan.co.jp/product/NEOBK-2299254", _Languages = new List<Languages> { JapaneseLanguage },  },
+    },
+
+                AssociatedNames = new List<AssociatedNames>
+        {
+            new AssociatedNames { nameString = "Na Honjaman Level Up" },
+            new AssociatedNames { nameString = "Only I Level Up" },
+            new AssociatedNames { nameString = "I Alone Level-Up" },
+            new AssociatedNames { nameString = "Solo Leveling" },
+            new AssociatedNames { nameString = "Tôi thăng cấp một mình" }
+        },
+
+                OfficalWebsites = new List<OfficalWebsite>
+        {
+            new OfficalWebsite { OfficalWebsiteString = "https://page.kakao.com/home?seriesId=50870315", OfficalWebsiteName = "KakaoPage" },
+            new OfficalWebsite { OfficalWebsiteString = "https://page.line.me/uqk0111n", OfficalWebsiteName = "LINE Webtoon" },
+            new OfficalWebsite { OfficalWebsiteString = "https://comic.naver.com/webtoon/list.nhn?titleId=758671", OfficalWebsiteName = "Naver Webtoon" }
+        },
+
+                GenresModels = new List<GenresModel>
+{
+    Gen1ToManga1,
+    Gen2ToManga1
+},
+                TagsModels = new List<TagModel>
+{
+    Tag1ToManga1,
+    Tag2ToManga1,
+    Tag3ToManga1
+},
+                Characters = new List<Character>
+        {
+            new Character { CharacterName = "Sung Jin-Woo",   specie="Human", Gender="Male", Born="March 20, 1997", PlaceOffResidence = "South Korea", World="Solo Leveling", Nationality ="Korean", Education="High School", Occupation="Hunter" },
+        new Character { CharacterName = "Cha Hae-In", specie="Human",Gender="Female", Born="January 6, 1998", PlaceOffResidence = "South Korea", World="Solo Leveling", Nationality ="Korean", Education="Hunter Association", Occupation="Hunter"},
+        new Character { CharacterName = "Go Gun-Hee", specie="Human",Gender="Male", Born="Unknown", PlaceOffResidence = "South Korea", World="Solo Leveling", Nationality ="Korean", Education="Unknown", Occupation="Chairman of the Hunter Association"},
+        new Character { CharacterName = "Jin-Ah Sung", specie="Human",Gender="Female", Born="Unknown", PlaceOffResidence = "South Korea", World="Solo Leveling", Nationality ="Korean", Education="High School", Occupation="Sung Jin-Woo's sister"},
+    },
+
+                Authormodels = new List<AuthorModel>
+    {
+        new AuthorModel { FirstName = "Chu-Gong" },
+    },
+
+                ArtistModels = new List<ArtistModel>
+    {
+        new ArtistModel { FirstName = "Jang Sung-Rak" },
+    },
+
+                VoiceActors = new List<VoiceActorModel>(),
+            };
+
+            context.mangaModels.Add(manga);
+            context.SaveChanges();
+        }
+
+        public void CreateTowerOfGod()
+        {
+            var Tag1ToManga1 = context.TagModels.FirstOrDefault(t => t.TagName == "Jealousy");
+            var Tag2ToManga1 = context.TagModels.FirstOrDefault(t => t.TagName == "Weak to Strong");
+            var Tag3ToManga1 = context.TagModels.FirstOrDefault(t => t.TagName == "Hunted Protagonist");
+            var Tag4ToManga1 = context.TagModels.FirstOrDefault(t => t.TagName == "Near-Death Experience");
+            var Gen1ToManga1 = context.GenresModels.FirstOrDefault(t => t.GenreName == "Supernatural");
+            var Gen2ToManga1 = context.GenresModels.FirstOrDefault(t => t.GenreName == "Fantasy");
+            var Gen3ToManga1 = context.GenresModels.FirstOrDefault(t => t.GenreName == "Adventure");
+
+            DateTime myDate = DateTime.ParseExact("2010-06-30", "yyyy-MM-dd", CultureInfo.InvariantCulture);
+            MangaModel MangaTowerOfGod = new MangaModel
+            {
+                MangaName = "Tower of God",
+                PhotoPath = Path.Combine(ProcessUploadedFile("TowerOfGod.jpg")),
+                ReleaseYear = myDate,
+                BlogModel = new BlogModel { mangaName = "Tower of God" },
+                Description = "Bam climbs the Tower of God to reach the top and find his friend Rachel, but the Tower is full of deadly tests and other climbers who will do anything to reach the top.",
+                CompletelyTranslated = "Ongoing",
+                OfficalLanguage = "Korean",
+                ISBN10 = "8952745013",
+                ISBN13 = "978-8952745018",
+                score = 9,
+
+                EndingYear = null,
+                StatusInCountryOfOrigin = "3, Ongoing",
+                Type = "Manhwa",
+                OriginalPublisher = "Naver",
+                orignalWebtoon = "https://comic.naver.com/webtoon/list.nhn?titleId=183559",
+                GroupScanlating = null,
+                GroupScanlatingID = null,
+                userModels = null,
+                userId = null,
+                AllLanguages = new List<Languages> { KoreanLanguage, EnglishLanguage },
+                BuyPages = new List<BuyPage>
+        {
+            new BuyPage { BuyWebsite = "https://www.amazon.com/Tower-God-Vol-1-SIU/dp/8952745013/ref=sr_1_1?crid=3OBHYUE8WT2SB&keywords=tower+of+god+manga&qid=1651934029&sprefix=tower+of+god%2Caps%2C188&sr=8-1", _Languages = new List<Languages> { EnglishLanguage } },
+            new BuyPage { BuyWebsite = "http://www.yes24.com/Product/Goods/78819624?scode=032&OzSrank=1", _Languages = new List<Languages> { KoreanLanguage } },
+            new BuyPage { BuyWebsite = "https://www.aladin.co.kr/search/wsearchresult.aspx?SearchTarget=All&SearchWord=%EC%9C%A0%EC%A3%BC%ED%98%B8%EB%B0%B0%EC%9A%B0", _Languages = new List<Languages> { KoreanLanguage } }
+        },
+                AssociatedNames = new List<AssociatedNames>
+        {
+            new AssociatedNames { nameString = "신의 탑" },
+            new AssociatedNames { nameString = "Tower of God" } ,
+        },
+                OfficalWebsites = new List<OfficalWebsite>
+        {
+            new OfficalWebsite { OfficalWebsiteString = "http://comic.naver.com/webtoon/list.nhn?titleId=183559&weekday=mon", OfficalWebsiteName = "Naver Webtoon" },
+            new OfficalWebsite { OfficalWebsiteString = "https://www.webtoons.com/en/fantasy/tower-of-god/list?title_no=95&page=1", OfficalWebsiteName = "Webtoons" },
+        },
+                Authormodels = new List<AuthorModel>
+        {
+            new AuthorModel { FirstName = "S.I.", LastName = "UWoo" },
+        },
+                ArtistModels = new List<ArtistModel>
+        {
+            new ArtistModel { FirstName = "LEE", LastName = "Jong-hui" },
+        },
+                VoiceActors = new List<VoiceActorModel>(),
+                GenresModels = new List<GenresModel>
+        {
+            new GenresModel { GenreName = "Action" },
+            new GenresModel { GenreName = "Adventure" },
+            new GenresModel { GenreName = "Fantasy" },
+        },
+                TagsModels = new List<TagModel>
+        {
+            new TagModel { TagName = "Tower Climbing" },
+            new TagModel { TagName = "Monsters" },
+            new TagModel { TagName = "Magic" },
+        },
+
+                Characters = new List<Character>
+        {
+            new Character { CharacterName = "Twenty-Fifth Baam", specie="Human", Gender="Male", Born="N/A", PlaceOffResidence = "The Tower", World="Tower of God", Nationality ="N/A", Education="N/A", Occupation="Irregular" },
+            new Character { CharacterName = "Yuri Jahad", specie="Human", Gender="Female", Born="N/A", PlaceOffResidence = "The Tower", World="Tower of God", Nationality ="N/A", Education="N/A", Occupation="Princess of Jahad" },
+            new Character { CharacterName = "Khun Aguero Agnis", specie="Human", Gender="Male", Born="N/A", PlaceOffResidence = "The Tower", World="Tower of God", Nationality ="N/A", Education="N/A", Occupation="Fisherman" },
+            new Character { CharacterName = "Rak Wraithraiser", specie="Crocus", Gender="Male", Born="N/A", PlaceOffResidence = "The Tower", World="Tower of God", Nationality ="N/A", Education="N/A", Occupation="Spear Bearer" },
+        },
+            };
+
+            context.mangaModels.Add(MangaTowerOfGod);
+            context.SaveChanges();
+        }
+
+        public void DonQuiXote()
+        {
+            var Tag2ToManga1 = context.TagModels.FirstOrDefault(t => t.TagName == "Middle-earth");
+            var Tag1ToManga1 = context.TagModels.FirstOrDefault(t => t.TagName == "Knight");
+            var Gen0ToManga1 = context.GenresModels.FirstOrDefault(t => t.GenreName == "Classics");
+            var Gen1ToManga1 = context.GenresModels.FirstOrDefault(t => t.GenreName == "Comedy");
+            var Gen2ToManga1 = context.GenresModels.FirstOrDefault(t => t.GenreName == "Adventure");
+
+            DateTime myDate = DateTime.ParseExact("1605-01-16", "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
+            DateTime started = DateTime.ParseExact("1605-01-16", "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
+
+            MangaModel DonQuixote = new MangaModel
+            {
+                MangaName = "Don Quixote",
+                PhotoPath = Path.Combine(ProcessUploadedFile("Don_Quixote.jpg")),
+                ReleaseYear = myDate,
+                BlogModel = new BlogModel { mangaName = "Don Quixote" },
+                Description = "A man who reads too many chivalric romances and decides to become a knight-errant",
+                CompletelyTranslated = "Completed",
+                OfficalLanguage = "Spanish",
+                ISBN10 = "9780142437230",
+                ISBN13 = "0142437239",
+                score = 9.2,
+                relatedSeries = null,
+                EndingYear = DateTime.Now,
+                StatusInCountryOfOrigin = "Complete",
+                Type = "Novel",
+                StudioModels = new List<StudioModel> { new StudioModel { GroupName = "Pan Pacific International Holdings Corporation", Started = started, StudioWebsite = "N/A", Biography = "N/A" } },
+                OriginalPublisher = "Francisco de Robles",
+                orignalWebtoon = "N/A",
+                AllLanguages = new List<Languages> { SpanishLanguage, EnglishLanguage },
+                BuyPages = new List<BuyPage> {
+        new BuyPage { BuyWebsite = "https://www.amazon.com/Don-Quixote-Miguel-Cervantes/dp/0142437239", _Languages = new List<Languages> { EnglishLanguage },  },
+        new BuyPage { BuyWebsite = "https://www.amazon.es/Don-Quijote-Mancha-Cervantes/dp/8420652364", _Languages = new List<Languages> { SpanishLanguage },  },
+    },
+                AssociatedNames = new List<AssociatedNames>
+    {
+        new AssociatedNames { nameString = "El Ingenioso Hidalgo Don Quijote de la Mancha"  },
+    },
+                OfficalWebsites = new List<OfficalWebsite>
+    {
+        new OfficalWebsite { OfficalWebsiteString = "N/A", OfficalWebsiteName = "N/A", Twitter = "N/A", Facebook = "N/A", Line = "N/A" },
+    },
+                Authormodels = new List<AuthorModel>
+    {
+        new AuthorModel { FirstName = "Miguel de", LastName = "Cervantes",  Biography = "An acclaimed Spanish writer who is widely regarded as one of the greatest writers in the Spanish language and one of the world's pre-eminent novelists." },
+    },
+                ArtistModels = new List<ArtistModel> {
+        new ArtistModel { FirstName = "Gustave", LastName = "Doré", Biography = "A French artist, engraver, illustrator, and sculptor. Doré worked primarily with wood engraving and steel engraving." },
+        new ArtistModel { FirstName = "Francisco", LastName = "Rico", Biography = "A Spanish literary critic and academician. He is an expert in C " }
+                },
+                VoiceActors = new List<VoiceActorModel> {
+new VoiceActorModel { FirstName = "John", LastName = "Lescault" },
+new VoiceActorModel { FirstName = "Robert", LastName = "Whitmire" },
+new VoiceActorModel { FirstName = "George", LastName = "Guidall" },
+},
+                GenresModels = new List<GenresModel>
+{
+Gen1ToManga1, Gen2ToManga1, Gen0ToManga1
+},
+                TagsModels = new List<TagModel>
+{
+ Tag2ToManga1
+},
+                Characters = new List<Character>
+{
+new Character { CharacterName = "Don Quixote", specie = "Human", Gender = "Male", Born = "N/A", PlaceOffResidence = "Spain", World = "Don Quixote", Nationality = "Spanish", Education = "N/A", Occupation = "Knight-errant" },
+new Character { CharacterName = "Sancho Panza", specie = "Human", Gender = "Male", Born = "N/A", PlaceOffResidence = "Spain", World = "Don Quixote", Nationality = "Spanish", Education = "N/A", Occupation = "Squire" },
+new Character { CharacterName = "Dulcinea del Toboso", specie = "Human", Gender = "Female", Born = "N/A", PlaceOffResidence = "Spain", World = "Don Quixote", Nationality = "Spanish", Education = "N/A", Occupation = "Noblewoman" },
+},
+            };
+            context.mangaModels.Add(DonQuixote);
             context.SaveChanges();
         }
     }

@@ -2,12 +2,13 @@ using MangaAccessService;
 using MangaModelService;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 
 namespace NovelXManga.Pages.Manga
 {
     public class CurrentMangaModel : PageModel
     {
-        private readonly MangaNNovelAuthDBContext mangaNNovelAuthDBContext;
+        private readonly MangaNNovelAuthDBContext Context;
         private readonly IMangaRepository mangaRepository;
         private readonly IWebHostEnvironment webHostEnvironment;
         private readonly UserManager<IdentityUser> userManager;
@@ -19,14 +20,12 @@ namespace NovelXManga.Pages.Manga
             this.userManager = userManager;
             this.webHostEnvironment = webHostEnvironment;
             this.mangaRepository = mangaRepository;
-            this.mangaNNovelAuthDBContext = mangaNNovelAuthDBContext;
+            this.Context = mangaNNovelAuthDBContext;
         }
 
         public void OnGet(int id)
         {
-            var currentManga_ = mangaRepository.GetManga(id);
-            //currentManga_ = mangaNNovelAuthDBContext.mangaModels.Where(e => e.MangaID == id).Include(s => s.BlogModel.postsModel);
-            CurrentManga = currentManga_;
+            CurrentManga = Context.mangaModels.Include(e => e.GenresModels).Include(e => e.AllLanguages).Include(e => e.AssociatedNames).Include(e => e.RecommendedMangaModels).Include(e => e.OfficalWebsites).Include(e => e.Authormodels).Include(e => e.ArtistModels).Include(e => e.VoiceActors).Include(e => e.GroupScanlating).Include(e => e.userModels).Include(e => e.StudioModels).Include(e => e.Characters).Include(e => e.reviews).Include(e => e.BuyPages).FirstOrDefault(e => e.MangaID == id);
         }
     }
 }
