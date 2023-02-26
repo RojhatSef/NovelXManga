@@ -26,31 +26,6 @@ namespace NovelXManga.Pages.Login
             return Page();
         }
 
-        #region Test returnURl
-
-        //public async Task<IActionResult> OnPostAsync(string returnUrl = null)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        var identityResult = await signInManager.PasswordSignInAsync(Model.Email, Model.Password, Model.RememberMe, false);
-        //        if (identityResult.Succeeded)
-        //        {
-        //            if (returnUrl == null || returnUrl == "/")
-        //            {
-        //                return RedirectToPage("Index");
-        //            }
-        //            else
-        //            {
-        //                return RedirectToPage(returnUrl);
-        //            }
-        //        }
-        //    }
-        //    ModelState.AddModelError("", "username or password incorrect");
-        //    return Page();
-        //}
-
-        #endregion Test returnURl
-
         public async Task<IActionResult> OnPostAsync(string returnUrl)
         {
             returnUrl = ReturnUrl ?? Url.Content("/");

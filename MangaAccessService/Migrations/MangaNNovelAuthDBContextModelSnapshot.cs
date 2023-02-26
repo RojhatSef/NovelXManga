@@ -501,6 +501,9 @@ namespace MangaAccessService.Migrations
                     b.Property<int>("GroupScanlatingID")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("UpdatedChapter")
+                        .HasColumnType("datetime2");
+
                     b.Property<int?>("Volumes")
                         .HasColumnType("int");
 
@@ -673,6 +676,9 @@ namespace MangaAccessService.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("GroupScanlatingID"), 1L, 1);
 
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Discriminator")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -735,6 +741,9 @@ namespace MangaAccessService.Migrations
 
                     b.Property<int>("BlogModelId")
                         .HasColumnType("int");
+
+                    b.Property<DateTime?>("BookAddedToDB")
+                        .HasColumnType("datetime2");
 
                     b.Property<int?>("CompletedBookListID")
                         .HasColumnType("int");
@@ -1436,6 +1445,9 @@ namespace MangaAccessService.Migrations
 
                     b.Property<string>("Allias")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("CreatedAcc")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");

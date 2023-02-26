@@ -6,7 +6,9 @@ namespace MangaModelService
     {
         [Key]
         public int chapterID { get; set; }
+
         public DateTime dateRelease { get; set; }
+        public DateTime UpdatedChapter { get; set; }
         public int? Volumes { get; set; }
         public int? chapterNumber { get; set; }
         public string chapterName { get; set; }
@@ -15,8 +17,6 @@ namespace MangaModelService
 
         public int GroupScanlatingID { get; set; }
         public virtual ICollection<GroupScanlatingModel> GroupScanlatingModels { get; set; }
-
-
 
         //public int MangaId { get; set; }
         //public MangaModel mangaModel { get; set; }

@@ -6,17 +6,20 @@ namespace MangaModelService
 {
     public class UserModel : IdentityUser
     {
-
         public string? Allias { get; set; }
+
         [Required]
         public string ForumName { get; set; }
 
         [Required]
         public string? ForgottPasswordFavoritAnimal { get; set; }
+
         [Required]
         public string? ForgottPasswordFavActor { get; set; }
+
         [Required]
         public string? ForgottPasswordFavoritPlace { get; set; }
+
         public string? userPhotoPath { get; set; }
         public string? nameInNativeLanguage { get; set; }
         public string? placeOfBirth { get; set; }
@@ -24,11 +27,14 @@ namespace MangaModelService
         public string? Description { get; set; }
 
         public string? Twitter { get; set; }
+        public DateTime? CreatedAcc { get; set; }
 
         public virtual ICollection<BlogModel>? UserBlogModel { get; set; }
-        //navigation 
+
+        //navigation
         [ForeignKey("GroupScanlatingModel")]
         public int? groupScanlationID { get; set; }
+
         public virtual ICollection<GroupScanlatingModel>? GroupScanlating { get; set; }
 
         [ForeignKey("MangaModel")]

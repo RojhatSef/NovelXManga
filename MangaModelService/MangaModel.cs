@@ -29,7 +29,7 @@ namespace MangaModelService
         public string? Description { get; set; }
         public DateTime? ReleaseYear { get; set; }
         public DateTime? EndingYear { get; set; }
-
+        public DateTime? BookAddedToDB { get; set; }
         public virtual ICollection<AssociatedNames>? AssociatedNames { get; set; }
         public virtual ICollection<Languages> AllLanguages { get; set; }
         public virtual List<MangaModel>? RecommendedMangaModels { get; set; }

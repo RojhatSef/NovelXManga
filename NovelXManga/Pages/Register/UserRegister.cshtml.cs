@@ -11,16 +11,13 @@ namespace NovelXManga.Pages.Register
         private readonly UserManager<IdentityUser> userManager;
         private readonly SignInManager<IdentityUser> signInManager;
 
-
-
-
         [BindProperty]
         public RegisterViewModel Model { get; set; }
+
         public UserRegisterModel(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
-
         }
 
         public async Task<IActionResult> OnPostAsync()
@@ -47,11 +44,8 @@ namespace NovelXManga.Pages.Register
                 }
                 else
                 {
-
                     ModelState.AddModelError(string.Empty, "Email is already in use");
-
                 }
-
             }
             return Page();
         }

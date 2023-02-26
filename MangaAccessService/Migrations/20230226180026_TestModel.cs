@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MangaAccessService.Migrations
 {
-    public partial class TestData : Migration
+    public partial class TestModel : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -67,6 +67,7 @@ namespace MangaAccessService.Migrations
                     Zodiac = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Twitter = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedAcc = table.Column<DateTime>(type: "datetime2", nullable: true),
                     groupScanlationID = table.Column<int>(type: "int", nullable: true),
                     MangaModelId = table.Column<int>(type: "int", nullable: true),
                     postModelID = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -138,6 +139,7 @@ namespace MangaAccessService.Migrations
                     chapterID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     dateRelease = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedChapter = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Volumes = table.Column<int>(type: "int", nullable: true),
                     chapterNumber = table.Column<int>(type: "int", nullable: true),
                     chapterName = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -712,6 +714,7 @@ namespace MangaAccessService.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ReleaseYear = table.Column<DateTime>(type: "datetime2", nullable: true),
                     EndingYear = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    BookAddedToDB = table.Column<DateTime>(type: "datetime2", nullable: true),
                     BlogModelId = table.Column<int>(type: "int", nullable: false),
                     GroupScanlatingID = table.Column<int>(type: "int", nullable: true),
                     userId = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -886,6 +889,7 @@ namespace MangaAccessService.Migrations
                     GroupName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PhotoPath = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     website = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     MangaModelId = table.Column<int>(type: "int", nullable: true),
                     userID = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),
