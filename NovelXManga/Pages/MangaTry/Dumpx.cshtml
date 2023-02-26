@@ -1,0 +1,291 @@
+﻿@page
+@model NovelXManga.Pages.MangaTry.DumpxModel
+@{
+}
+
+<div class="angry-grid">
+    <div id="item-0">&nbsp;</div>
+    <div id="item-1">&nbsp;</div>
+    <div id="item-2">&nbsp;</div>
+    <div id="item-3">&nbsp;</div>
+    <div id="item-4">&nbsp;</div>
+    <div id="item-5">&nbsp;</div>
+    <div id="item-6">&nbsp;</div>
+    <div id="item-7">&nbsp;</div>
+</div>
+@*<div class="parent">
+    <div class="div1">
+        <div class="div28">dsadsa </div>
+        <div class="div18">ddd </div>
+        <div class="div19"> aaa</div>
+        <div class="div20">ssss </div>
+        <div class="div21"> eeee</div>
+        <div class="div22">dsdsddsds </div>
+        <div class="div23">vvvv </div>
+        <div class="div24">eeee </div>
+        <div class="div25">qqq </div>
+        <div class="div26"> wwwww</div>
+    </div>
+    @foreach (var Books in Model.GetAllBooks)
+{
+    <div class="div3">
+            <div class="huge-card">
+                <div class="div30">      <img asp-append-version="true" src="~/Images/MangaImage/@Books.PhotoPath" alt="Huge Card Image"></div>    <div class="div27">
+                    <div class="huge-card-content">
+                        <h2 class="huge-card-title">@Books.MangaName</h2>
+                        @if (Books.GenresModels != null)
+                        {
+                            @foreach (var item in Books.GenresModels)
+                            {
+
+                                <h3 class="huge-card-genre">@item.GenreName</h3>
+
+                            }
+
+                        }
+                        @if (Books.TagsModels != null)
+                        {
+
+                            @foreach (var item in Books.TagsModels)
+                            {
+
+                                <span class="huge-card-tags">@item.TagName</span>
+
+                            }
+                        }
+                        @if (Books.Authormodels != null)
+                        {
+
+                            @foreach (var item in Books.Authormodels)
+                            {
+
+                                <p class="huge-card-author-artist">Author: @item.FirstName </p>
+
+                            }
+                        }
+                        <p class="huge-card-description">@Books.Description</p>
+
+                    </div>
+                </div>
+
+        </div>
+    </div>
+    <div class="div2">
+
+        <div class="div4">
+            <div class="div29">    <div class="medium-card">
+        <img asp-append-version="true" src="~/Images/MangaImage/@Books.PhotoPath" alt="Medium Card Image">
+        <div class="medium-card-content">
+            <h2 class="medium-card-title">@Books.MangaName</h2>
+            @if (Books.GenresModels != null)
+            {
+                @foreach (var item in Books.GenresModels)
+                {
+                    <h3 class="medium-card-genre">@item.GenreName</h3>
+                }
+            }
+            @if (Books.TagsModels != null)
+            {
+                @foreach (var item in Books.TagsModels)
+                {
+                    <span class="medium-card-tags">@item.TagName</span>
+                }
+            }
+        </div>
+    </div></div>
+            <div class="div7">    <div class="medium-card">
+        <img asp-append-version="true" src="~/Images/MangaImage/@Books.PhotoPath" alt="Medium Card Image">
+        <div class="medium-card-content">
+            <h2 class="medium-card-title">@Books.MangaName</h2>
+            @if (Books.GenresModels != null)
+            {
+                @foreach (var item in Books.GenresModels)
+                {
+                    <h3 class="medium-card-genre">@item.GenreName</h3>
+                }
+            }
+            @if (Books.TagsModels != null)
+            {
+                @foreach (var item in Books.TagsModels)
+                {
+                    <span class="medium-card-tags">@item.TagName</span>
+                }
+            }
+        </div>
+    </div> </div>
+            <div class="div8">    <div class="medium-card">
+        <img asp-append-version="true" src="~/Images/MangaImage/@Books.PhotoPath" alt="Medium Card Image">
+        <div class="medium-card-content">
+            <h2 class="medium-card-title">@Books.MangaName</h2>
+            @if (Books.GenresModels != null)
+            {
+                @foreach (var item in Books.GenresModels)
+                {
+                    <h3 class="medium-card-genre">@item.GenreName</h3>
+                }
+            }
+            @if (Books.TagsModels != null)
+            {
+                @foreach (var item in Books.TagsModels)
+                {
+                    <span class="medium-card-tags">@item.TagName</span>
+                }
+            }
+        </div>
+    </div> </div>
+                <div class="div9">
+                    <div class="medium-card">
+                        <img asp-append-version="true" src="~/Images/MangaImage/@Books.PhotoPath" alt="Medium Card Image">
+                        <div class="medium-card-content">
+                            <h2 class="medium-card-title">@Books.MangaName</h2>
+                            @if (Books.GenresModels != null)
+                            {
+                                @foreach (var item in Books.GenresModels)
+                                {
+                                    <h3 class="medium-card-genre">@item.GenreName</h3>
+                                }
+                            }
+                            @if (Books.TagsModels != null)
+                            {
+                                @foreach (var item in Books.TagsModels)
+                                {
+                                    <span class="medium-card-tags">@item.TagName</span>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+
+    <div class="div5">
+        <div class="div10"> </div>
+        <div class="div11"> </div>
+        <div class="div12"> </div>
+        <div class="div13"> </div>
+    </div>
+    <div class="div6">
+        <div class="div14"> </div>
+        <div class="div15"> </div>
+        <div class="div16"> </div>
+        <div class="div17"> </div>
+    </div>
+    }
+</div>
+
+@foreach (var Books in Model.GetAllBooks)
+{
+
+<div class="huge-card">
+        <img asp-append-version="true" src="~/Images/MangaImage/@Books.PhotoPath" alt="Huge Card Image">
+    <div class="huge-card-content">
+            <h2 class="huge-card-title">@Books.MangaName</h2>
+            @if (Books.GenresModels != null)
+            {
+                @foreach (var item in Books.GenresModels)
+                {
+
+                    <h3 class="huge-card-genre">@item.GenreName</h3>
+
+                }
+
+            }
+            @if (Books.TagsModels != null)
+            {
+
+                @foreach (var item in Books.TagsModels)
+                {
+
+                    <span class="huge-card-tags">@item.TagName</span>
+
+                }
+            }
+            @if (Books.Authormodels != null)
+            {
+
+                @foreach (var item in Books.Authormodels)
+                {
+
+                    <p class="huge-card-author-artist">Author: @item.FirstName </p>
+
+                }
+            }
+        <p class="huge-card-description">@Books.Description</p>
+
+    </div>
+</div>
+    <div class="large-card">
+        <img asp-append-version="true" src="~/Images/MangaImage/@Books.PhotoPath" alt="Large Card Image">
+        <div class="large-card-content">
+            <h2 class="large-card-title">@Books.MangaName</h2>
+            @if (Books.GenresModels != null)
+            {
+                @foreach (var item in Books.GenresModels)
+                {
+                    <h3 class="large-card-genre">@item.GenreName</h3>
+                }
+            }
+            @if (Books.TagsModels != null)
+            {
+                @foreach (var item in Books.TagsModels)
+                {
+                    <span class="large-card-tags">@item.TagName</span>
+                }
+            }
+            <p class="large-card-description">@Books.Description</p>
+        </div>
+    </div>
+    <div class="medium-card">
+        <img asp-append-version="true" src="~/Images/MangaImage/@Books.PhotoPath" alt="Medium Card Image">
+        <div class="medium-card-content">
+            <h2 class="medium-card-title">@Books.MangaName</h2>
+            @if (Books.GenresModels != null)
+            {
+                @foreach (var item in Books.GenresModels)
+                {
+                    <h3 class="medium-card-genre">@item.GenreName</h3>
+                }
+            }
+            @if (Books.TagsModels != null)
+            {
+                @foreach (var item in Books.TagsModels)
+                {
+                    <span class="medium-card-tags">@item.TagName</span>
+                }
+            }
+        </div>
+    </div>
+    <div class="vertical-small-card">
+        <img asp-append-version="true" src="~/Images/MangaImage/@Books.PhotoPath" alt="Vertical Small Card Image">
+        <div class="vertical-small-card-content">
+            <h2 class="vertical-small-card-title">@Books.MangaName</h2>
+        </div>
+    </div>
+    <div class="horizontal-small-card">
+        <img asp-append-version="true" src="~/Images/MangaImage/@Books.PhotoPath" alt="Horizontal Small Card Image">
+        <div class="horizontal-small-card-content">
+            <h2 class="horizontal-small-card-title">@Books.MangaName</h2>
+        </div>
+    </div>
+    <div class="center">
+        <div class="article-card">
+            <div class="content"> @if (Books.GenresModels != null)
+                {  @foreach (var item in Books.GenresModels)
+                    {
+                <p class="date">
+
+
+                          @item.GenreName
+
+
+
+
+            </p>
+                    }
+                        }
+                <p class="title">@Books.MangaName</p>
+            </div>
+            <img asp-append-version="true" src="~/Images/MangaImage/@Books.PhotoPath" alt="article-cover" />
+        </div>
+    </div>
+  }*@

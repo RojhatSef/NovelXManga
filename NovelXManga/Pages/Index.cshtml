@@ -5,7 +5,8 @@
 @{
     ViewData["Title"] = "Home page";
 }
-<div class="container2">
+
+<div class="container">
      <div class="Left_Side">
         @if (SignInManager.IsSignedIn(User))
         {
@@ -25,6 +26,9 @@
                 </li>
                 <li class="nav-item">
                     <a class="btn" asp-area="" asp-page="/Manga/AllMangas">AllManga Manga</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn" asp-area="" asp-page="/MangaTry/Test">test Manga</a>
                 </li>
                 <li class="nav-item">
                     <a class="btn" asp-area="" asp-page="/CreateBook">Create Book</a>

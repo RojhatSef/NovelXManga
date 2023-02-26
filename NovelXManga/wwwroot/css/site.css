@@ -1,190 +1,189 @@
-html {
-    font-size: 14px;
-}
-
-.select2-selection__choice__remove {
-    color: #aaa;
-    cursor: pointer;
-    display: inline-block;
-    font-weight: bold;
-    margin-right: 5px;
-}
-
-/*  Adding and trying shit abovee*/
-@media (min-width: 768px) {
-    html {
-        font-size: 16px;
-    }
-    /*}*/
-
-    html {
-        position: relative;
-        min-height: 100%;
-    }
-
-    body {
-        box-sizing: border-box;
-        background: lightblue;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-    }
-
-    .container2 {
-        position: relative;
-        width: 100%;
-        max-width: 1000px;
-        min-height: 1000px;
-        background: #fff;
-        margin: 50px;
-        display: grid;
-        grid-template-columns: 1fr 2fr;
-        box-shadow: 0 35px 55px rgba(0,0,0,0,1)
-    }
-
-    .newbody {
-        box-sizing: border-box;
-        background: lightblue;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-    }
-
-    .profileText {
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding-bottom: 20px;
-    }
-
-        .profileText h2 {
-            color: white;
-            font-size: 1.5em;
-            margin-top: 20px;
-            text-align: center;
-            font-weight: 600;
-            line-height: 1.4em;
-        }
-
-        .profileText .imgBx {
-            position: relative;
-            height: 200px;
-            width: 200px;
-            overflow: hidden
-        }
-
-            .profileText .imgBx img {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                object-fit: contain
-            }
-
-        .profileText h2 span {
-            font-size: 0.8em;
-            font-weight: 300;
-        }
-
-    .InfoGroup {
-        padding-top: 40px;
-    }
-
-    .Title {
-        color: #fff;
-        font-weight: 600;
-        letter-spacing: 1px;
-        margin-bottom: 20px;
-    }
-
-    .InfoGroup Info {
-        position: relative;
-    }
-
-    .InfoGroup .Info .text {
-        position: relative;
-        margin: 10px 0;
-        color: black;
-    }
-
-        .InfoGroup .Info .text a:link {
-            color: black;
-        }
-
-    .profileText .profileTextGroup {
-        border-bottom: 1px solid rgba(255,255,255,0.2);
-    }
-
-    .container .Left_Side {
-        position: relative;
-        background: #003147;
-        padding: 40px;
-    }
-
-    .container .Right_Side {
-        position: relative;
-        background: #fff;
-        padding: 40px;
-    }
-    /*
-.container2 {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-}
-
-.Left_Side {
-    width: 50%;
-    padding: 20px;
-    text-align: center;
-}
-
-.Right_Side {
-    width: 50%;
-    padding: 20px;
-    text-align: center;
-}
-
-.profileText h2 {
-    font-size: 36px;
-    margin-bottom: 20px;
-}
-
-.imgBx img {
+html, body {
     width: 100%;
-    height: auto;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    overflow-x: hidden;
 }
 
-.InfoGroup {
-    margin-bottom: 20px;
+.grid-container-costume {
 }
 
-.Title span.icon {
-    font-weight: bold;
+.grid-container-costume-1 {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    background-color: dimgrey;
+    grid-auto-rows: minmax(150px, auto);
+    grid-row-gap: 40px;
+    grid-column-gap: 25px;
+    height: 100vh;
 }
 
-.text a {
-    font-size: 18px;
-    margin-right: 10px;
+.grid-item-costum {
+    /*   margin-left: 10px;
+    margin-top:10px; */
 }
 
-.mb-3 {
-    margin-bottom: 30px;
+.grid-item-costum-1 {
+    background-color: green;
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row: 1 / 2
+    /*grid-area: header; */
 }
 
-.form-label {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 10px;
-    display: inline-block;
+.grid-item-costum-3 {
+    background-color: blue;
+    /* grid-area: sidebar;*/
 }
 
-@media (max-width: 767px) {
-    .Left_Side, .Right_Side {
-        width: 100%;
+.grid-item-costum-2 {
+    background-color: red;
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row: 1 / 8
+    /*  grid-area: content; */
+}
+
+.grid-item-costum-4 {
+    background-color: yellow;
+}
+
+.grid-item-costum-5 {
+    background-color: teal;
+}
+
+.center {
+    transform: scale(1.5);
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.article-card {
+    width: 350px;
+    height: 220px;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    font-family: Arial, Helvetica, sans-serif;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    transition: all 300ms;
+}
+
+    .article-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
     }
-}*/
+
+    .article-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .article-card .content {
+        box-sizing: border-box;
+        width: 100%;
+        position: absolute;
+        padding: 30px 20px 20px 20px;
+        height: auto;
+        bottom: 0;
+        background: linear-gradient(transparent, rgba(0, 0, 0, 0.6));
+    }
+
+    .article-card .date,
+    .article-card .title {
+        margin: 0;
+    }
+
+    .article-card .date {
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.9);
+        margin-bottom: 4px;
+    }
+
+    .article-card .title {
+        font-size: 17px;
+        color: #fff;
+    }
+
+*/
+/* Hide the menu labels by default */
+#menu li span {
+    display: none;
+}
+
+/* Show the menu labels on hover */
+#menu li:hover span {
+    display: inline;
+}
+
+/* Adjust the width of the sidebar when it's collapsed */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 70px;
+    }
+
+    #menu li span {
+        display: none;
+    }
+
+    #menu li:hover span {
+        display: none;
+    }
+}
+/* Hide the menu labels by default */
+.sidebar #menu li span {
+    display: none;
+}
+
+/* Show the menu labels on hover */
+.sidebar #menu li:hover span {
+    display: inline;
+}
+
+/* Adjust the width of the sidebar when it's collapsed */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 70px;
+    }
+
+        .sidebar #menu li span {
+            display: none;
+        }
+
+        .sidebar #menu li:hover span {
+            display: none;
+        }
+}
+/* Hide the menu labels by default */
+.sidebar #menu li span {
+    display: none;
+}
+
+/* Show the menu labels on hover */
+.sidebar.hover #menu li span {
+    display: inline;
+}
+
+/* Adjust the width of the sidebar when it's collapsed */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 70px;
+    }
+
+        .sidebar #menu li span {
+            display: none;
+        }
+
+        .sidebar.hover #menu li span {
+            display: none;
+        }
+}
+
+.cardsizecostume {
+    height: 300px !important;
+    width: 200px !important;
+}
