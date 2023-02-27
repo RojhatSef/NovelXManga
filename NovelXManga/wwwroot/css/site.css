@@ -161,6 +161,7 @@ p {
 .grid-item-costum-5 {
     background-color: teal;
 }
+
 /* Hide the menu labels by default */
 #menu li span {
     display: contents !important;
@@ -218,6 +219,12 @@ p {
     display: inline !important;
 }
 
+/* Hide the logos by default */
+.sidebar #logo {
+    display: none !important;
+}
+
+/* Show the menu labels on larger screens */
 @media (min-width: 768px) {
     /* Hide the menu labels by default on larger screens */
     .sidebar #menu li span {
@@ -228,18 +235,35 @@ p {
     .sidebar:hover #menu li span {
         display: inline !important;
     }
-}
-/* Show the menu labels on hover */
-.sidebar:hover #menu li span {
-    display: inline !important;
-}
 
+    /* Show the logos on larger screens */
+}
 .sidebar #logo {
     display: none !important;
 }
 
-.sidebar:hover #logo {
-    display: contents !important;
+/* Remove hover effect on logos and show logos when sidebar is expanded on small screens */
+@media (max-width: 767px) {
+    .sidebar #logo:hover {
+        cursor: default;
+        background: none;
+    }
+
+    .sidebar #menu li span {
+        display: inline !important;
+    }
+
+    .sidebar.expanded #logo {
+        display: contents !important;
+    }
+    .sidebar.expanded #logo {
+        display: contents !important;
+    }
+}
+
+/* Show the menu labels on hover */
+.sidebar:hover #menu li span {
+    display: inline !important;
 }
 
 /* Styles for large screens */
@@ -256,8 +280,8 @@ p {
         display: inline;
     }
 
+/* Set the sidebar to be fixed and full height on small screens */
 @media (max-width: 767px) {
-    /* Set the sidebar to be fixed and full height */
     .sidebar {
         position: fixed;
         top: 0;
@@ -284,7 +308,6 @@ p {
 .large-screen #sidebar-toggle {
     display: none;
 }
-
 /* Show the button on small screens when the sidebar is not expanded */
 .small-screen .sidebar:not(.expanded) + #sidebar-toggle {
     display: block;
@@ -301,15 +324,15 @@ p {
     .small-screen .sidebar:not(.expanded) + #sidebar-toggle:hover {
         background-color: rgba(52, 58, 64, 1);
     }
-
 /* Styles for large screens */
 .large-screen .sidebar {
     width: 70px;
 }
 
-    .large-screen .sidebar:hover {
-        width: 200px;
-    }
+.large-screen .sidebar:hover #logo {
+    width: 200px;
+    display: contents !important;
+}
 
     .large-screen .sidebar-nav .nav-link-text,
     .large-screen .sidebar .sidebar-nav .nav-link:hover .nav-link-text {
