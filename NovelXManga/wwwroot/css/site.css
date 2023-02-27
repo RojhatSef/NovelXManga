@@ -255,7 +255,6 @@ p {
         z-index: 1000;
         background-color: #343a40;
         transition: transform 0.3s ease-in-out;
-        /*   transform: translateX(-100%);*/
     }
 }
 

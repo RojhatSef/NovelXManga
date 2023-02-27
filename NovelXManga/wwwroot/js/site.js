@@ -18,13 +18,16 @@ function handleSidebarClick(event) {
             sidebar.style.transform = 'translateX(0)';
         } else {
             sidebar.style.transform = 'translateX(-100%)';
+            sidebar.classList.remove('show');
         }
     } else if (!sidebar.contains(event.target) && sidebar.classList.contains('show')) {
         sidebar.classList.remove('show');
         sidebar.style.transform = 'translateX(-100%)';
     }
 }
-
+document.addEventListener('DOMContentLoaded', () => {
+    window.addEventListener('click', handleSidebarClick);
+});
 document.addEventListener('DOMContentLoaded', () => {
     handleScreenSizeChange();
     window.addEventListener('resize', handleScreenSizeChange);
