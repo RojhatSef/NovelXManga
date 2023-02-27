@@ -1,3 +1,13 @@
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, caption {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: rgba(25,26,28,255);
+}
+
 body {
     background-color: #f2f2f2;
     font-family: 'RobotoDraft', 'Roboto', sans-serif;
@@ -169,7 +179,7 @@ p {
 
 .sidebar-nav .nav-link:focus,
 .sidebar-nav .nav-link:active {
-    background-color: #343a40;
+    background-color: red;
 }
 
 .sidebar-nav .collapse {
@@ -181,6 +191,7 @@ p {
     position: fixed;
     top: 0;
     bottom: 0;
+    background-color: green;
 }
 /* Set the content to have a margin on the left to accommodate the sidebar */
 .py-3 {
@@ -238,6 +249,7 @@ p {
 
     /* Show the logos on larger screens */
 }
+
 .sidebar #logo {
     display: none !important;
 }
@@ -256,6 +268,7 @@ p {
     .sidebar.expanded #logo {
         display: contents !important;
     }
+
     .sidebar.expanded #logo {
         display: contents !important;
     }
@@ -288,7 +301,7 @@ p {
         bottom: 0;
         width: 40%;
         z-index: 1000;
-        background-color: #343a40;
+        background-color: teal;
         transition: transform 0.3s ease-in-out;
     }
 }
@@ -298,7 +311,7 @@ p {
     top: 0;
     right: 0;
     z-index: 1000;
-    background-color: #343a40;
+    background-color: tomato;
     color: #fff;
     padding: 10px;
     cursor: pointer;
@@ -329,12 +342,24 @@ p {
     width: 70px;
 }
 
-.large-screen .sidebar:hover #logo {
-    width: 200px;
-    display: contents !important;
-}
+    .large-screen .sidebar:hover #logo {
+        width: 200px;
+        display: contents !important;
+    }
 
     .large-screen .sidebar-nav .nav-link-text,
     .large-screen .sidebar .sidebar-nav .nav-link:hover .nav-link-text {
         display: inline;
     }
+
+.row-1-item-1 {
+    background-color: red;
+}
+
+.row-1-item-2 {
+    background-color: blue;
+}
+
+.row-1-item-3 {
+    background-color: green;
+}
