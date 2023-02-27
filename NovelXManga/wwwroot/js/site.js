@@ -1,4 +1,42 @@
-﻿//const sidebar = document.querySelector('.sidebar');
+﻿function handleScreenSizeChange() {
+    if (window.matchMedia("(max-width: 767px)").matches) {
+        document.documentElement.classList.remove("large-screen");
+        document.documentElement.classList.add("small-screen");
+    } else {
+        document.documentElement.classList.remove("small-screen");
+        document.documentElement.classList.add("large-screen");
+    }
+}
+
+function handleSidebarClick(event) {
+    const sidebar = document.querySelector('.sidebar');
+    const sidebarToggle = document.querySelector('#sidebar-toggle');
+
+    if (event.target === sidebarToggle) {
+        sidebar.classList.toggle('show');
+        if (sidebar.classList.contains('show')) {
+            sidebar.style.transform = 'translateX(0)';
+        } else {
+            sidebar.style.transform = 'translateX(-100%)';
+        }
+    } else if (!sidebar.contains(event.target) && sidebar.classList.contains('show')) {
+        sidebar.classList.remove('show');
+        sidebar.style.transform = 'translateX(-100%)';
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    handleScreenSizeChange();
+    window.addEventListener('resize', handleScreenSizeChange);
+    document.addEventListener('click', handleSidebarClick);
+});
+
+const sidebarToggle = document.querySelector('#sidebar-toggle');
+
+// Toggle the sidebar when the button is clicked
+sidebarToggle.addEventListener('click', handleSidebarClick);
+
+//const sidebar = document.querySelector('.sidebar');
 
 //// Add an event listener to show the menu labels on hover
 //sidebar.addEventListener('mouseover', () => {

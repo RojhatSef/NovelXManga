@@ -166,24 +166,6 @@ p {
     display: contents !important;
 }
 
-.sidebar:hover {
-    width: 200px !important;
-}
-
-    .sidebar:hover .sidebar-nav .nav-link-text,
-    .sidebar .sidebar-nav .nav-link:hover .nav-link-text {
-        display: inline !important;
-    }
-
-/* Hide the menu labels by default */
-.sidebar #menu li span {
-    display: none;
-}
-
-.sidebar:hover #menu li span {
-    display: inline;
-}
-
 .sidebar-nav .nav-link:focus,
 .sidebar-nav .nav-link:active {
     background-color: #343a40;
@@ -199,7 +181,6 @@ p {
     top: 0;
     bottom: 0;
 }
-
 /* Set the content to have a margin on the left to accommodate the sidebar */
 .py-3 {
     margin-left: 70px;
@@ -231,6 +212,7 @@ p {
 .collapse:not(.show) {
     transition: height 0.35s ease;
 }
+
 /* Hide the menu labels by default */
 .sidebar #menu li span {
     display: none !important;
@@ -248,3 +230,78 @@ p {
 .sidebar:hover #logo {
     display: contents !important;
 }
+
+/* Styles for large screens */
+.large-screen .sidebar {
+    width: 70px;
+}
+
+    .large-screen .sidebar:hover {
+        width: 200px;
+    }
+
+    .large-screen .sidebar-nav .nav-link-text,
+    .large-screen .sidebar .sidebar-nav .nav-link:hover .nav-link-text {
+        display: inline;
+    }
+
+@media (max-width: 767px) {
+    /* Set the sidebar to be fixed and full height */
+    .sidebar {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        width: 40%;
+        z-index: 1000;
+        background-color: #343a40;
+        transition: transform 0.3s ease-in-out;
+        /*   transform: translateX(-100%);*/
+    }
+}
+
+#sidebar-toggle {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 1000;
+    background-color: #343a40;
+    color: #fff;
+    padding: 10px;
+    cursor: pointer;
+}
+
+/* Hide the button on large screens */
+.large-screen #sidebar-toggle {
+    display: none;
+}
+
+/* Show the button on small screens when the sidebar is not expanded */
+.small-screen .sidebar:not(.expanded) + #sidebar-toggle {
+    display: block;
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 1000;
+    background-color: rgba(52, 58, 64, 0.8);
+    color: #fff;
+    padding: 10px;
+    cursor: pointer;
+}
+
+    .small-screen .sidebar:not(.expanded) + #sidebar-toggle:hover {
+        background-color: rgba(52, 58, 64, 1);
+    }
+
+/* Styles for large screens */
+.large-screen .sidebar {
+    width: 70px;
+}
+
+    .large-screen .sidebar:hover {
+        width: 200px;
+    }
+
+    .large-screen .sidebar-nav .nav-link-text,
+    .large-screen .sidebar .sidebar-nav .nav-link:hover .nav-link-text {
+        display: inline;
+    }
