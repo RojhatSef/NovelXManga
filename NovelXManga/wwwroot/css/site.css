@@ -215,9 +215,20 @@ p {
 
 /* Hide the menu labels by default */
 .sidebar #menu li span {
-    display: none !important;
+    display: inline !important;
 }
 
+@media (min-width: 768px) {
+    /* Hide the menu labels by default on larger screens */
+    .sidebar #menu li span {
+        display: none !important;
+    }
+
+    /* Show the menu labels on hover on larger screens */
+    .sidebar:hover #menu li span {
+        display: inline !important;
+    }
+}
 /* Show the menu labels on hover */
 .sidebar:hover #menu li span {
     display: inline !important;
