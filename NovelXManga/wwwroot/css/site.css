@@ -1,9 +1,3 @@
-body {
-    background-color: #f2f2f2;
-    font-family: 'RobotoDraft', 'Roboto', sans-serif;
-    -webkit-font-smoothing: antialiased;
-}
-
 * {
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
@@ -162,10 +156,15 @@ p {
     background-color: teal;
 }
 
-/* Hide the menu labels by default */
-#menu li span {
-    display: contents !important;
+#menu {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
 }
+    /* Hide the menu labels by default */
+    #menu li span {
+        display: contents !important;
+    }
 
 .sidebar-nav .nav-link:focus,
 .sidebar-nav .nav-link:active {
@@ -181,7 +180,6 @@ p {
     position: fixed;
     top: 0;
     bottom: 0;
-    background-color: green;
 }
 /* Set the content to have a margin on the left to accommodate the sidebar */
 .py-3 {
@@ -192,12 +190,15 @@ p {
 .sidebar {
     transition: width 0.25s ease-in-out;
     width: 70px;
-    background-color: grey;
+    background-color: #323232;
 }
 
 #CostumeSidebar {
     color: #DDD0C8 !important;
-    background-color: #323232 !important;
+}
+
+.large-screen #CostumeSidebar #menu li:hover {
+    padding-left: 10px;
 }
 
 #SidebarColors {
@@ -252,9 +253,9 @@ p {
     /* Show the logos on larger screens */
 }
 
-.sidebar #logo {
+/*.sidebar #logo {
     display: none !important;
-}
+}*/
 
 /* Remove hover effect on logos and show logos when sidebar is expanded on small screens */
 @media (max-width: 767px) {
@@ -303,7 +304,7 @@ p {
         bottom: 0;
         width: 40%;
         z-index: 1000;
-        background-color: teal;
+        align-items: end;
         transition: transform 0.3s ease-in-out;
     }
 
@@ -334,15 +335,11 @@ p {
     top: 0;
     right: 0;
     z-index: 1000;
-    background-color: rgba(52, 58, 64, 0.8);
     color: #fff;
     padding: 10px;
     cursor: pointer;
 }
 
-    .small-screen .sidebar:not(.expanded) + #sidebar-toggle:hover {
-        background-color: rgba(52, 58, 64, 1);
-    }
 /* Styles for large screens */
 .large-screen .sidebar {
     width: 70px;

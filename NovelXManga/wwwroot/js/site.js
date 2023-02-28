@@ -30,7 +30,12 @@ const sidebarToggle = document.querySelector('#sidebar-toggle');
 
 sidebarToggle.addEventListener('click', handleSidebarClick);
 
-//const sidebar = document.querySelector('.sidebar');
+// Select all links with the "sidebar-link" class
+var links = document.querySelectorAll('.sidebar-link');
+
+const sidebarItems = document.querySelectorAll('#SidebarColors');
+
+// Add mouseover and mouseout event listeners to each element
 
 //// Add an event listener to show the menu labels on hover
 //sidebar.addEventListener('mouseover', () => {
