@@ -58,6 +58,8 @@ static void SeedDatainitialize(IHost host)
         seed.seedData().Wait();
     }
 }
+
+//bug fixes. When the user goes from mobile view and removes menu then goes to larger screen the menu wont come back.
 //missing repo
 //studio and BuyPage
 // make or break ToDos
