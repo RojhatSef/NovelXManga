@@ -7,7 +7,7 @@
 }
 <div class="container-fluid">
     <div class="row flex-nowrap">
-        <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark sidebar">
+        <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 sidebar" id="CostumeSidebar">
             <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
                 <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                     <i class="bi bi-list fs-3"></i>
@@ -17,58 +17,58 @@
                     <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                         <li class="nav-item">
                             <a href="#" class="nav-link align-middle px-0">
-                                <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Home</span>
+                                <i id="SidebarColors" class="fs-4 bi-house"></i> <span id="SidebarColors" class="ms-1 d-none d-sm-inline">Home</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#submenu1" data-bs-toggle="collapse" data-bs-popper="none" class="nav-link px-0 align-middle">
-                                <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline">Titles</span>
+                            <a  href="#submenu1" data-bs-toggle="collapse" data-bs-popper="none" class="nav-link px-0 align-middle">
+                                <i id="SidebarColors" class="fs-4 bi-speedometer2"></i> <span id="SidebarColors" class="ms-1 d-none d-sm-inline">Titles</span>
                             </a>
 
-                            <ul class="collapse nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
-                                <li class="w-100">
-                                    <a asp-page="/MangaTry/Test" class="nav-link px-0"> <span class="d-none d-sm-inline"> TEST Recently Added</span>  </a>
+                            <ul  class="collapse nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
+                                <li id="SidebarColors" class="w-100">
+                                    <a id="SidebarColors" asp-page="/MangaTry/Test" class="nav-link px-0"> <span id="SidebarColors" class="d-none d-sm-inline"> TEST Recently Added</span>  </a>
                                 </li>
                                 <li>
-                                    <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Latest Updates</span>  </a>
+                                    <a href="#" class="nav-link px-0"> <span id="SidebarColors" class="d-none d-sm-inline">Latest Updates</span>  </a>
                                 </li>
                                 <li>
-                                    <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Random</span>  </a>
+                                    <a href="#" class="nav-link px-0"> <span id="SidebarColors" class="d-none d-sm-inline">Random</span>  </a>
                                 </li>
                             </ul>
                         </li>
                         <li>
                             <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
-                                <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline">Community</span>
+                                <i id="SidebarColors" class="fs-4 bi-bootstrap"></i> <span id="SidebarColors" class="ms-1 d-none d-sm-inline">Community</span>
                             </a>
                             <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
                                 <li class="w-100">
-                                    <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Forum</span> </a>
+                                    <a href="#" class="nav-link px-0"> <span id="SidebarColors" class="d-none d-sm-inline">Forum</span> </a>
                                 </li>
                                 <li>
-                                    <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Groups</span> </a>
+                                    <a href="#" class="nav-link px-0"> <span id="SidebarColors" class="d-none d-sm-inline">Groups</span> </a>
                                 </li>
                                 <li>
-                                    <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Users</span> </a>
+                                    <a href="#" class="nav-link px-0"> <span id="SidebarColors" class="d-none d-sm-inline">Users</span> </a>
                                 </li>
                             </ul>
                         </li>
                         <li>
                             <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-                                <i class="fs-4 bi-grid"></i> <span class="ms-1 d-none d-sm-inline">NovelXManga</span>
+                                <i id="SidebarColors" class="fs-4 bi-grid"></i> <span id="SidebarColors" class="ms-1 d-none d-sm-inline">NovelXManga</span>
                             </a>
                             <ul class="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
                                 <li class="w-100">
-                                    <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">About us</span> </a>
+                                    <a href="#" class="nav-link px-0"> <span id="SidebarColors" class="d-none d-sm-inline">About us</span> </a>
                                 </li>
                                 <li>
-                                    <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Rules</span> </a>
+                                    <a href="#" class="nav-link px-0"> <span id="SidebarColors" class="d-none d-sm-inline">Rules</span> </a>
                                 </li>
                                 <li>
-                                    <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Privacy Policy</span> </a>
+                                    <a href="#" class="nav-link px-0"> <span id="SidebarColors" class="d-none d-sm-inline">Privacy Policy</span> </a>
                                 </li>
                                 <li>
-                                    <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Announcment</span> </a>
+                                    <a href="#" class="nav-link px-0"> <span id="SidebarColors" class="d-none d-sm-inline">Announcment</span> </a>
                                 </li>
                             </ul>
                         </li>
