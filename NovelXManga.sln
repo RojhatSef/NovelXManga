@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MangaAccessService", "Manga
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MangaModelService", "MangaModelService\MangaModelService.csproj", "{AD8EF969-EF4E-48F6-8BE9-F9EC53CCB46E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmailService", "EmailService\EmailService.csproj", "{6A003EF1-61E6-4DAA-93CB-1888DF553274}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{AD8EF969-EF4E-48F6-8BE9-F9EC53CCB46E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AD8EF969-EF4E-48F6-8BE9-F9EC53CCB46E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AD8EF969-EF4E-48F6-8BE9-F9EC53CCB46E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A003EF1-61E6-4DAA-93CB-1888DF553274}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A003EF1-61E6-4DAA-93CB-1888DF553274}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A003EF1-61E6-4DAA-93CB-1888DF553274}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A003EF1-61E6-4DAA-93CB-1888DF553274}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

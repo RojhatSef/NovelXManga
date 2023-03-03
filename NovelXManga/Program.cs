@@ -1,5 +1,7 @@
+using EmailService;
 using MangaAccessService;
 using MangaAccessService.Migrations;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using NovelXManga;
@@ -22,8 +24,22 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
 {
     options.Password.RequiredLength = 6;
     options.Password.RequiredUniqueChars = 2;
-}).AddEntityFrameworkStores<MangaNNovelAuthDBContext>();
+}).AddEntityFrameworkStores<MangaNNovelAuthDBContext>().AddDefaultTokenProviders();
 
+builder.Services.Configure<DataProtectionTokenProviderOptions>(opt =>
+   opt.TokenLifespan = TimeSpan.FromHours(2));
+
+var emailConfig = builder.Configuration
+        .GetSection("EmailConfiguration")
+        .Get<EmailConfiguration>();
+builder.Services.AddSingleton(emailConfig);
+builder.Services.AddScoped<IEmailSender, EmailSender>();
+builder.Services.Configure<FormOptions>(o =>
+{
+    o.ValueLengthLimit = int.MaxValue;
+    o.MultipartBodyLengthLimit = int.MaxValue;
+    o.MemoryBufferThreshold = int.MaxValue;
+});
 builder.Services.ConfigureApplicationCookie(config =>
 {
     config.LoginPath = "/Login/LoginIndex";

@@ -4,157 +4,135 @@
   
 }
 
-@foreach (var Books in Model.GetAllBooks)
-{
 
+<div class="container-fluid">
 
-
-    <div class="container2">
-        <div class="Left_Side">
-            @if (Books.PhotoPath != string.Empty)
-            {
-                <div class="mb-3">
-                   
-                    <img asp-append-version="true" src="~/Images/MangaImage/@Books.PhotoPath" alt="NoImage" width="100" height="200">
-                </div>
-            }
-            else
-            {
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png" alt="BookImage" width="100" height="200">
-            }
-            @if (Books.MangaName != null)
-            {
-
-                <div class="mb-3">
-                    <label class="form-label" asp-for="@Books.MangaName"><h3>@Books.MangaName</h3></label>
-
-                </div>
-            }
-        </div>
-        <div class="Right_Side">
-
-        </div>
-  
-    <div>Tags: </div>
-     @if (Books.TagsModels != null)
-    {
-       
-        @foreach (var item in Books.TagsModels)
-        {
+    <div class="container my-5">
+        <div class="row">
+            <div class="col ms-md-5">
            
-                <label class="form-label" asp-for="@item.TagName"> @item.TagName | </label>
-        
-        }
-    }
-    <div>Genre: </div>
-    @if (Books.GenresModels != null)
-    {
-        @foreach (var item in Books.GenresModels)
-        {
-         
-                <label class="form-label" asp-for="@item.GenreName"> @item.GenreName | </label>
-        
-        }
+                    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            @foreach (var book in Model.GetAllBooks.Take(2))
+                            {
+                                <div class="carousel-item @if (book == Model.GetAllBooks.First()) {
+                            <text>active</text>
+ }">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <img src="~/Images/MangaImage/@book.PhotoPath" class="d-block w-100" alt="...">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="caption-wrapper">
+                                                <h5>@book.MangaName</h5>
+                                                <h6>@book.Description</h6>
+                                               
+                                                <ul class="list-unstyled">
+                                                    @foreach (var tag in book.TagsModels)
+                                                    {
+                                                        <li class="coolGenre">@tag.TagName</li>
+                                                    }
+                                                </ul>
+                                              
+                                                <ul class="list-unstyled">
+                                                    @foreach (var genre in book.GenresModels)
+                                                    {
+                                                        <li class="coolGenre">@genre.GenreName</li>
+                                                    }
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+          
+            </div>
+        </div>
+    </div>
+    <div class="wrapperCustom">
+        <div class="wrapper-innerCustom">
+            <div class="item">
 
-    }
 
-    @if (Books.Description != null)
-    {
-        <div class="mb-3">
-            <label class="form-label" asp-for="@Books.Description">Description: @Books.Description</label>
+                <div class="titelCustom">Titel here...</div>
+                <div class="contentCustom">
+                    content goes here. this box has to grow until the space is filled.
+                </div>
+           
+            </div>
+        </div>
 
-        </div>
-    }
-
-    @if (Books.ReleaseYear != null)
-    {
-        <div class="mb-3">
-            <label class="form-label" asp-for="@Books.ReleaseYear">Book Release: @Books.ReleaseYear</label>
-
-        </div>
-    }
-    @if (Books.EndingYear != null)
-    {
-        <div class="mb-3">
-            <label class="form-label" asp-for="@Books.EndingYear">Ending: @Books.EndingYear</label>
-        </div>
-    }
-
-    @if (Books.ISBN13 != null)
-    {
-        <div class="mb-3">
-            <label class="form-label" asp-for="@Books.ISBN13">ISBN13: @Books.ISBN13</label>
-
-        </div>
-    }
-
-    @if (Books.ISBN10 != null)
-    {
-        <div class="mb-3">
-            <label class="form-label" asp-for="@Books.ISBN10">ISBN10: @Books.ISBN10</label>
-
-        </div>
-    }
-    @if (Books.Type != null)
-    {
-        <div class="mb-3">
-            <label class="form-label" asp-for="@Books.Type">Type: @Books.Type</label>
-
-        </div>
-    }
-    @if (Books.OriginalPublisher != null)
-    {
-        <div class="mb-3">
-            <label class="form-label" asp-for="@Books.OriginalPublisher">OriginalPublisher: @Books.OriginalPublisher"></label>
-        </div>
-    }
-    @if (Books.OfficalLanguage != null)
-    {
-        <div class="mb-3">
-            <label class="form-label" asp-for="@Books.OfficalLanguage">OfficalLanguage: @Books.OfficalLanguage</label>
-
-        </div>
-    }
-    @if (Books.orignalWebtoon != null)
-    {
-        <div class="mb-3">
-            <label class="form-label" asp-for="@Books.orignalWebtoon">orignalWebtoon: @Books.orignalWebtoon</label>
-        </div>
-    }
-
-    @if (Books.StatusInCountryOfOrigin != null)
-    {
-        <div class="mb-3">
-            <label class="form-label" asp-for="@Books.StatusInCountryOfOrigin">StatusInCountryOfOrigin: @Books.StatusInCountryOfOrigin</label>
-        </div>
-    }
-    @if (Books.score != null)
-    {
-        <div class="mb-3">
-            <label class="form-label" asp-for="@Books.score">orignalWebtoon: @Books.score</label>
-        </div>
-    } 
-    @if (Books.CompletelyTranslated != null)
-    {
-        <div class="mb-3">
-            <label class="form-label" asp-for="@Books.CompletelyTranslated">CompletelyTranslated: @Books.CompletelyTranslated</label>
-        </div>
-    }  
-    else
-    {
-        <p>N/A</p>
-    }
-    @if (Books.futureEvents != null)
-    {
-        <div class="mb-3">
-            <label class="form-label" asp-for="@Books.futureEvents">Future Events: @Books.futureEvents</label>
-        </div>
-    }
-    <br />
-    <hr />
-    <a asp-page="CurrentManga" asp-route-id="@Books.MangaID" class="btn btn-primary">View</a>
-    <a asp-page="UpdateManga" asp-route-id="@Books.MangaID" class="btn btn-primary">Edit</a>
 
     </div>
 
-}
+   
+    <section class="all-manga-section">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            @foreach (var book in Model.GetAllBooks.Skip(2))
+            {
+                <div class="col py-3">
+                    <div class="card mb-3 card-with-margin-top">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                @if (book.PhotoPath != string.Empty)
+                                {
+                                    <img asp-append-version="true" src="~/Images/MangaImage/@book.PhotoPath" alt="NoImage" class="card-img-top">
+                                }
+                                else
+                                {
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png" alt="BookImage" class="card-img-top">
+                                }
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    @if (book.MangaName != null)
+                                    {
+                                        <h3 class="card-title">@book.MangaName</h3>
+                                    }
+
+                                    <div>Tags: </div>       @if (book.TagsModels != null)
+                                    {
+                                        @foreach (var item in book.TagsModels)
+                                        {
+                                            <label class="form-label">@item.TagName | </label>
+                                        }
+                                    }
+
+                                    <div>Genre: </div>
+                                    @if (book.GenresModels != null)
+                                    {
+                                        @foreach (var item in book.GenresModels)
+                                        {
+                                            <label class="form-label">@item.GenreName | </label>
+                                        }
+                                    }
+
+                                    @if (book.Description != null)
+                                    {
+                                        <div class="card-text mb-3">
+                                            <label class="form-label">Description: @book.Description</label>
+                                        </div>
+                                    }
+
+                                    <a asp-page="CurrentManga" asp-route-id="@book.MangaID" class="btn btn-primary">View</a>
+                                    <a asp-page="UpdateManga" asp-route-id="@book.MangaID" class="btn btn-primary">Edit</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </section>
+
+</div>

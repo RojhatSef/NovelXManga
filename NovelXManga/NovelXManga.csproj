@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\EmailService\EmailService.csproj" />
     <ProjectReference Include="..\MangaAccessService\MangaAccessService.csproj" />
     <ProjectReference Include="..\MangaModelService\MangaModelService.csproj" />
   </ItemGroup>

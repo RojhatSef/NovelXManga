@@ -1,113 +1,25 @@
-* {
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
+.bg-light {
+    background-color: transparent !important;
 }
 
-h5 {
-    margin: 0px;
-    font-size: 1.4em;
-    font-weight: 700;
+html, body, nav {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    color: #323232;
+    background: #DDD0C8;
 }
 
-p {
-    font-size: 12px;
-}
-
-.center {
-    height: 100vh;
-    width: 100%;
+.content-container .large-screen {
+    padding-left: 20px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
-
-/* End Non-Essential  */
-
-.property-card {
-    height: 18em;
-    width: 14em;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    position: relative;
-    -webkit-transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
-    -o-transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
-    transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
-    border-radius: 16px;
-    overflow: hidden;
-    -webkit-box-shadow: 15px 15px 27px #e1e1e3, -15px -15px 27px #ffffff;
-    box-shadow: 15px 15px 27px #e1e1e3, -15px -15px 27px #ffffff;
-}
-/* ^-- The margin bottom is necessary for the drop shadow otherwise it gets clipped in certain cases. */
-
-/* Top Half of card, image. */
-
-.property-image {
-    height: 6em;
-    width: 14em;
-    padding: 1em 2em;
-    position: Absolute;
-    top: 0px;
-    -webkit-transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
-    -o-transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
-    transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
-    background-image: url('https://cdn.photographylife.com/wp-content/uploads/2017/01/What-is-landscape-photography.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-}
-
-/* Bottom Card Section */
-
-.property-description {
-    background-color: #FAFAFC;
-    height: 12em;
-    width: 14em;
-    position: absolute;
-    bottom: 0em;
-    -webkit-transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
-    -o-transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
-    transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
-    padding: 0.5em 1em;
-    text-align: center;
-}
-
-/* Social Icons */
-
-.property-social-icons {
-    width: 1em;
-    height: 1em;
-    background-color: black;
-    position: absolute;
-    bottom: 1em;
-    left: 1em;
-    -webkit-transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
-    -o-transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
-    transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
-}
-
-/* Property Cards Hover States */
-
-.property-card:hover .property-description {
-    height: 0em;
-    padding: 0px 1em;
-}
-
-.property-card:hover .property-image {
-    height: 18em;
-}
-
-.property-card:hover .property-social-icons {
-    background-color: white;
-}
-
-    .property-card:hover .property-social-icons:hover {
-        background-color: blue;
-        cursor: pointer;
-    }
 
 .grid-container-costume {
 }
@@ -168,7 +80,7 @@ p {
 
 .sidebar-nav .nav-link:focus,
 .sidebar-nav .nav-link:active {
-    background-color: red;
+   
 }
 
 .sidebar-nav .collapse {
@@ -194,7 +106,7 @@ p {
 }
 
 #CostumeSidebar {
-    color: #DDD0C8 !important;
+    /*  color: #DDD0C8 !important;*/
 }
 
 .large-screen #CostumeSidebar #menu li:hover {
@@ -212,8 +124,11 @@ p {
     width: 200px;
 }
 
+main {
+}
+
 .collapse {
-    transition: height 0.25s ease-in-out;
+    transition: height 0.5s ease-in-out;
 }
 
     .collapse.show {
@@ -238,6 +153,9 @@ p {
     display: none !important;
 }
 
+.card-with-margin-top {
+    margin-top: 80px;
+}
 /* Show the menu labels on larger screens */
 @media (min-width: 768px) {
     /* Hide the menu labels by default on larger screens */
@@ -318,7 +236,7 @@ p {
     top: 0;
     right: 0;
     z-index: 1000;
-    background-color: tomato;
+   
     color: #fff;
     padding: 10px;
     cursor: pointer;
@@ -345,6 +263,10 @@ p {
     width: 70px;
 }
 
+.large-screen {
+    margin-left: 20px;
+}
+
     .large-screen .sidebar:hover #logo {
         width: 200px;
         display: contents !important;
@@ -353,6 +275,232 @@ p {
     .large-screen .sidebar-nav .nav-link-text,
     .large-screen .sidebar .sidebar-nav .nav-link:hover .nav-link-text {
         display: inline;
+    }
+
+#CostumeSidebar:hover + .content-container {
+    transform: translateX(200px); /* Change this value to the width of your sidebar */
+}
+
+/* Remove the transform when the sidebar is not hovered */
+#CostumeSidebar:not(:hover) + .content-container {
+    transform: translateX(0);
+}
+
+/*
+
+New shit added
+*/
+/*Changes the entire carousel */
+.carousel {
+    position: relative;
+    width: 80%;
+    height: 600px;
+    margin: auto;
+    border: 1px solid red;
+    overflow: hidden;
+   
+    /*  margin-left: -100px;*/
+}
+.MyBox {
+    padding-left: 100px;
+    background-color: red;
+    aspect-ratio: 1/1;
+    flex-grow: 1;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+.wrapperCustom {
+    background: rgba(red, 0.3);
+    display: flex;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+    //flex-direction:column;
+    border: 1px solid red;
+}
+    
+.wrapper-inner
+{
+    padding: 20px;
+    max-width: 80%;
+    min-height: 100%;
+    //max-height: 500px;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    background: rgba(green, 0.2);
+}
+
+.itemCustom {
+    width: 100%;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    max-height: 600px;
+    background: #fff;
+}
+
+.titelCustom,
+.contentCustom
+ {
+    padding: 10px;
+    background: rgba(#000, 0.2);
+    margin-bottom: 10px;
+}
+
+.contentCustom {
+    flex-grow: 1;
+}
+
+
+
+
+@media (min-width: 992px) {
+    .content-container {
+        padding-left: -250px;
+    }
+}
+
+.carousel-section {
+    max-width: 1000px;
+    height: 600px;
+    margin: auto;
+    overflow: hidden;
+    margin-left: 20px;
+    border: 1px solid red;
+    margin-left: -200px;
+}
+
+.caption-wrapper {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+    /* border: 1px solid red;*/
+}
+
+    .caption-wrapper h5 {
+        font-size: 32px;
+        margin-bottom: 10px;
+    }
+
+    .caption-wrapper ul {
+        margin-bottom: 0;
+        font-size: 18px;
+        color: #777;
+    }
+
+.carousel-item img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border: 1px solid gray;
+    border-radius: 15px;
+    /* border: 1px solid red;*/
+}
+
+.carousel-inner {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.carousel-item {
+    position: relative;
+    display: none;
+    float: left;
+    width: 100%;
+    margin-right: -100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    transition: transform .6s ease-in-out;
+}
+
+    .carousel-item.active,
+    .carousel-item-next,
+    .carousel-item-prev {
+        display: block;
+    }
+
+        .carousel-item-next:not(.carousel-item-left),
+        .active.carousel-item-right {
+            transform: translateX(100%);
+        }
+
+        .carousel-item-prev:not(.carousel-item-right),
+        .active.carousel-item-left {
+            transform: translateX(-100%);
+        }
+
+.carousel-control-prev,
+.carousel-control-next {
+    position: absolute;
+    top: 50%;
+    z-index: 1;
+    display: inline-block;
+    margin-top: -15px;
+}
+
+.carousel-control-prev {
+    left: 0;
+}
+
+.carousel-control-next {
+    right: 0;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-repeat: no-repeat;
+    background-position: 50%;
+    background-size: 100% 100%;
+    color: rgba(0, 0, 0, 0);
+    border: 0;
+    outline: 0;
+    opacity: 0.5;
+    transition: opacity 0.15s ease-in-out;
+}
+
+.carousel-control-prev:hover .carousel-control-prev-icon,
+.carousel-control-next:hover .carousel-control-next-icon {
+    opacity: 1;
+}
+
+.carousel-indicators {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    z-index: 15;
+    width: 60%;
+    margin-left: -30%;
+    padding-left: 0;
+    list-style: none;
+    text-align: center;
+}
+
+    .carousel-indicators li {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        margin: 1px;
+        text-indent: -999px;
+        border: 1px solid #fff;
+        border-radius: 10px;
+        cursor: pointer;
+        background-color: rgba(0, 0, 0, 0.5);
+        -webkit-transition: background-color 0.15s ease-in-out;
+        transition: background-color 0.15s ease-in-out;
+    }
+
+    .carousel-indicators .active {
+        background-color: #fff;
     }
 
 .row-1-item-1 {
@@ -365,15 +513,4 @@ p {
 
 .row-1-item-3 {
     background-color: green;
-}
-
-html, body {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    outline: 0;
-    font-size: 100%;
-    vertical-align: baseline;
-    color: #323232;
-    background: #DDD0C8;
 }
