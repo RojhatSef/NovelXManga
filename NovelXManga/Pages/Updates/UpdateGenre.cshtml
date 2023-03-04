@@ -1,0 +1,29 @@
+﻿@page
+@model NovelXManga.Pages.Updates.UpdateGenreModel
+@{
+}
+<h1>Update Genres</h1>
+
+<div style="padding-left: 100px">
+    <form method="post" enctype="multipart/form-data">
+        <input type="hidden" name="mangaModel.MangaID" value="@Model.mangaModelUpdate.MangaID" />
+        <div class="form-group">
+            <div class="row">
+                @foreach (var Genre in Model.Genres)
+                {
+                    if (@Model.Genres.IndexOf(Genre) % 3 == 0)
+                    {
+                        @Html.Raw("</div><div class=\"row\">")
+                    }
+                    <div class="form-check col-md-4">
+                        <input type="checkbox" class="form-check-input" id="tag-@Genre.GenresId" name="selectedTags" value="@Genre.GenresId" @(Model.mangaModelUpdate.GenresModels.Any(t => t.GenresId == Genre.GenresId) ? "checked" : "")>
+                        <label class="form-check-label" for="tag-@Genre.GenresId">@Genre.GenreName</label>
+                    </div>
+
+                }
+            </div>
+        </div>
+        <button type="submit" class="btn btn-danger">Update Genre</button>
+        <a asp-page="/Index" class="btn btn-primary">Back</a>
+    </form>
+</div>

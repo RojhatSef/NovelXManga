@@ -1,0 +1,30 @@
+﻿@page
+@model NovelXManga.Pages.Updates.UpdateTagsModel
+@{
+}
+
+<h1>Update Tags</h1>
+
+<div style="padding-left: 100px">
+    <form method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <input type="hidden" name="mangaModel.MangaID" value="@Model.mangaModelUpdate.MangaID" />
+            <label for="tags">Tags:</label>
+            <div class="row">
+                @foreach (var tag in Model.Tags)
+                {
+                    if (@Model.Tags.IndexOf(tag) % 3 == 0)
+                    {
+                        @Html.Raw("</div><div class=\"row\">")
+                    }
+                    <div class="form-check col-md-4">
+                        <input type="checkbox" class="form-check-input" id="tag-@tag.TagId" name="selectedTags" value="@tag.TagId" @(Model.mangaModelUpdate.TagsModels.Any(t => t.TagId == tag.TagId) ? "checked" : "")>
+                        <label class="form-check-label" for="tag-@tag.TagId">@tag.TagName</label>
+                    </div>
+                }
+            </div>
+        </div>
+        <button type="submit" class="btn btn-danger">Update Tags</button>
+        <a asp-page="/Index" class="btn btn-primary">Back</a>
+    </form>
+</div>

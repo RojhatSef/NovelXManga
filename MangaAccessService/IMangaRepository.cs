@@ -10,11 +10,12 @@ namespace MangaAccessService
 
         MangaModel GetManga(int id);
 
+        MangaModel GetOneMangaAllIncluded(int id);
+
         MangaModel Update(MangaModel updatedManga);
 
         MangaModel Add(MangaModel NewManga);
 
         MangaModel Delete(int id);
-
     }
 }

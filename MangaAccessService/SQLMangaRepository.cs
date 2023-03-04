@@ -3,23 +3,20 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MangaAccessService.Migrations
 {
-
     public class SQLMangaRepository : IMangaRepository
     {
-
         private readonly MangaNNovelAuthDBContext mangaNNovelAuthDBContext;
-
 
         public SQLMangaRepository(MangaNNovelAuthDBContext mangaNNovelAuthDBContext)
         {
             this.mangaNNovelAuthDBContext = mangaNNovelAuthDBContext;
         }
+
         public MangaModel Add(MangaModel NewManga)
         {
             mangaNNovelAuthDBContext.mangaModels.Add(NewManga);
             mangaNNovelAuthDBContext.SaveChanges();
             return NewManga;
-
         }
 
         public MangaModel Delete(int id)
@@ -42,15 +39,25 @@ namespace MangaAccessService.Migrations
                 .Include(x => x.RecommendedMangaModels)
                 .Include(e => e.relatedSeries)
                 .Include(f => f.OfficalWebsites);
-
         }
 
         public MangaModel GetManga(int id)
         {
-
             var CurrentManga = mangaNNovelAuthDBContext.mangaModels.Find(id);
 
             return CurrentManga;
+        }
+
+        public MangaModel GetOneMangaAllIncluded(int id)
+        {
+            var mangaModel = mangaNNovelAuthDBContext.mangaModels.Include(e => e.AllLanguages).Include(e => e.OfficalWebsites)
+                .Include(e => e.VoiceActors).Include(e => e.ArtistModels).Include(e => e.Authormodels)
+                .Include(e => e.TagsModels).Include(e => e.StudioModels)
+                .Include(e => e.reviews).Include(e => e.Characters)
+                .Include(e => e.GenresModels).Include(e => e.BuyPages)
+                .Include(e => e.AssociatedNames).Include(e => e.StudioModels)
+                .Include(e => e.GroupScanlating).Include(e => e.userModels).FirstOrDefault(e => e.MangaID == id);
+            return mangaModel;
         }
 
         public IEnumerable<MangaModel> Search(string searchTerm)

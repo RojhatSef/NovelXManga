@@ -34,3 +34,21 @@ sidebarToggle.addEventListener('click', handleSidebarClick);
 var links = document.querySelectorAll('.sidebar-link');
 
 const sidebarItems = document.querySelectorAll('#SidebarColors');
+
+// For changing tags
+
+$(function () {
+    var selectedTags = $('#selectedTags').val().split(',');
+    $('input[type=checkbox]').each(function () {
+        if (selectedTags.includes($(this).val())) {
+            $(this).prop('checked', true);
+        }
+    });
+
+    $('input[type=checkbox]').on('change', function () {
+        var selectedTags = $('input[type=checkbox]:checked').map(function () {
+            return $(this).val();
+        }).get();
+        $('#selectedTags').val(selectedTags.join());
+    });
+});

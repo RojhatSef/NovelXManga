@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MangaAccessService.Migrations
 {
     [DbContext(typeof(MangaNNovelAuthDBContext))]
-    [Migration("20230226180026_TestModel")]
-    partial class TestModel
+    [Migration("20230304180855_NXM")]
+    partial class NXM
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -662,7 +662,7 @@ namespace MangaAccessService.Migrations
                     b.Property<int?>("TagHeavy")
                         .HasColumnType("int");
 
-                    b.Property<bool?>("isChecked")
+                    b.Property<bool>("isChecked")
                         .HasColumnType("bit");
 
                     b.HasKey("GenresId");
@@ -1016,7 +1016,7 @@ namespace MangaAccessService.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool?>("isChecked")
+                    b.Property<bool>("isChecked")
                         .HasColumnType("bit");
 
                     b.HasKey("TagId");

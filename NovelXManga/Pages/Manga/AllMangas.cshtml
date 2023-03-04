@@ -32,7 +32,10 @@
                                                     {
                                                         <li class="coolGenre">@tag.TagName</li>
                                                     }
+                                                            
+                                         
                                                 </ul>
+                                                                     <a asp-page="/Updates/UpdateTags" asp-route-id="@book.MangaID" class="btn btn-primary">Update Tag</a>
                                               
                                                 <ul class="list-unstyled">
                                                     @foreach (var genre in book.GenresModels)
@@ -40,6 +43,7 @@
                                                         <li class="coolGenre">@genre.GenreName</li>
                                                     }
                                                 </ul>
+                                                                  <a asp-page="/Updates/UpdateGenre" asp-route-id="@book.MangaID" class="btn btn-success">Update Genre</a>
                                             </div>
                                         </div>
                                     </div>

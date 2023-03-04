@@ -27,10 +27,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Pages\Genre\" />
+    <Folder Include="Pages\TagPages\" />
     <Folder Include="Pages\Review\" />
     <Folder Include="Pages\Studio\" />
-    <Folder Include="Pages\Tags\" />
     <Folder Include="Pages\Posts\" />
     <Folder Include="wwwroot\Images\AuthorImage\" />
     <Folder Include="wwwroot\Images\MangaImage\" />

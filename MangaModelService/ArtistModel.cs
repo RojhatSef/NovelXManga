@@ -6,8 +6,10 @@ namespace MangaModelService
     {
         [Key]
         public int ArtistId { get; set; }
+
         [Required]
         public string FirstName { get; set; }
+
         public string? LastName { get; set; }
         public string? PhotoPath { get; set; }
         public string? Gender { get; set; }

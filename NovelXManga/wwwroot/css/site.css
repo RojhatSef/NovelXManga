@@ -80,7 +80,6 @@ html, body, nav {
 
 .sidebar-nav .nav-link:focus,
 .sidebar-nav .nav-link:active {
-   
 }
 
 .sidebar-nav .collapse {
@@ -236,7 +235,6 @@ main {
     top: 0;
     right: 0;
     z-index: 1000;
-   
     color: #fff;
     padding: 10px;
     cursor: pointer;
@@ -298,9 +296,9 @@ New shit added
     margin: auto;
     border: 1px solid red;
     overflow: hidden;
-   
     /*  margin-left: -100px;*/
 }
+
 .MyBox {
     padding-left: 100px;
     background-color: red;
@@ -309,8 +307,6 @@ New shit added
     align-items: center;
     justify-content: center;
 }
-
-
 
 .wrapperCustom {
     background: rgba(red, 0.3);
@@ -321,9 +317,8 @@ New shit added
     //flex-direction:column;
     border: 1px solid red;
 }
-    
-.wrapper-inner
-{
+
+.wrapper-inner {
     padding: 20px;
     max-width: 80%;
     min-height: 100%;
@@ -344,8 +339,7 @@ New shit added
 }
 
 .titelCustom,
-.contentCustom
- {
+.contentCustom {
     padding: 10px;
     background: rgba(#000, 0.2);
     margin-bottom: 10px;
@@ -354,9 +348,6 @@ New shit added
 .contentCustom {
     flex-grow: 1;
 }
-
-
-
 
 @media (min-width: 992px) {
     .content-container {

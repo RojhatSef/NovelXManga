@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MangaAccessService.Migrations
 {
-    public partial class TestModel : Migration
+    public partial class NXM : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -226,7 +226,7 @@ namespace MangaAccessService.Migrations
                     GenresId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     GenreName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    isChecked = table.Column<bool>(type: "bit", nullable: true),
+                    isChecked = table.Column<bool>(type: "bit", nullable: false),
                     GenreDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     TagHeavy = table.Column<int>(type: "int", nullable: true),
                     MangaID = table.Column<int>(type: "int", nullable: true)
@@ -296,7 +296,7 @@ namespace MangaAccessService.Migrations
                     TagId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TagName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    isChecked = table.Column<bool>(type: "bit", nullable: true),
+                    isChecked = table.Column<bool>(type: "bit", nullable: false),
                     TagDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     TagHeavy = table.Column<int>(type: "int", nullable: true),
                     MangaID = table.Column<int>(type: "int", nullable: true)

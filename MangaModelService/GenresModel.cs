@@ -8,9 +8,9 @@ namespace MangaModelService
         public int GenresId { get; set; }
 
         [Required]
-        public string? GenreName { get; set; }
+        public string GenreName { get; set; }
 
-        public bool? isChecked { get; set; }
+        public bool isChecked { get; set; }
         public string? GenreDescription { get; set; }
         public int? TagHeavy { get; set; }
         public int? MangaID { get; set; }
