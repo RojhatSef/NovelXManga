@@ -56,7 +56,7 @@ namespace MangaAccessService.Migrations
                 .Include(e => e.reviews).Include(e => e.Characters)
                 .Include(e => e.GenresModels).Include(e => e.BuyPages)
                 .Include(e => e.AssociatedNames).Include(e => e.StudioModels)
-                .Include(e => e.GroupScanlating).Include(e => e.userModels).FirstOrDefault(e => e.MangaID == id);
+                .Include(e => e.GroupScanlating).Include(e => e.userModels).Include(e => e.relatedSeries).Include(e => e.RecommendedMangaModels).Include(e => e.BlogModel).FirstOrDefault(e => e.MangaID == id);
             return mangaModel;
         }
 

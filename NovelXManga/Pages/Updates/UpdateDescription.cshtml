@@ -1,0 +1,18 @@
+﻿@page
+@model NovelXManga.Pages.Updates.UpdateDescriptionModel
+@{
+}
+<form method="post" enctype="multipart/form-data">
+
+    <input type="hidden" name="mangaModel.MangaID" value="@Model.mangaModelUpdate.MangaID" /> 
+    <div class="form-group">
+        <label for="description">Description:</label>
+        <textarea input class="form-control" id="description" name="mangaModel.Description" rows="5" required>@Model.mangaModelUpdate.Description</textarea>
+       
+    </div>
+  
+ 
+    <button type="submit" class="btn btn-danger">Update</button>
+    <a asp-page="/Index" class="btn btn-primary">Back</a>
+</form>
+

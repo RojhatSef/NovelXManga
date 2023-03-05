@@ -26,7 +26,7 @@
                                             <div class="caption-wrapper">
                                                 <h5>@book.MangaName</h5>
                                                 <h6>@book.Description</h6>
-                                               
+                                                             <a asp-page="/Updates/UpdateDescription" asp-route-id="@book.MangaID" class="btn btn-success">Update Description</a>
                                                 <ul class="list-unstyled">
                                                     @foreach (var tag in book.TagsModels)
                                                     {
