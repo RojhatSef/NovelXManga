@@ -4,15 +4,15 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
-namespace NovelXManga.Pages.Updates
+namespace NovelXManga.Pages.MangaUpdates
 {
-    public class UpdateTagsModel : PageModel
+    public class UpdateGenreModel : PageModel
     {
         private readonly IMangaRepository mangaRepository;
         private readonly MangaNNovelAuthDBContext context;
         private readonly ITagRepsitory tagRepsitory;
 
-        public UpdateTagsModel(IMangaRepository mangaRepository, MangaNNovelAuthDBContext context, ITagRepsitory tagRepsitory)
+        public UpdateGenreModel(IMangaRepository mangaRepository, MangaNNovelAuthDBContext context, ITagRepsitory tagRepsitory)
         {
             this.mangaRepository = mangaRepository;
             this.context = context;
@@ -26,7 +26,7 @@ namespace NovelXManga.Pages.Updates
         [BindProperty]
         public MangaModel mangaModelUpdate { get; set; }
 
-        public List<TagModel> Tags { get; set; }
+        public List<GenresModel> Genres { get; set; }
 
         public async Task<IActionResult> OnPostAsync(MangaModel mangaModel)
         {
@@ -35,33 +35,33 @@ namespace NovelXManga.Pages.Updates
                 return RedirectToPage("/Index");
             }
             mangaModelUpdate = mangaRepository.GetOneMangaAllIncluded(mangaModel.MangaID);
-            Tags = await context.TagModels.ToListAsync();
+            Genres = await context.GenresModels.ToListAsync();
 
             // Get the selected tag ids
-            var selectedTagIds = SelectedTags ?? new List<int>();
+            var SelectedGenre = SelectedTags ?? new List<int>();
 
             // Get the existing tag ids
-            var existingTagIds = mangaModelUpdate.TagsModels.Select(t => t.TagId).ToList();
+            var exsitingGenre = mangaModelUpdate.GenresModels.Select(t => t.GenresId).ToList();
 
             // Remove tags that are not selected anymore
-            var tagsToRemove = existingTagIds.Except(selectedTagIds);
-            foreach (var tagId in tagsToRemove)
+            var genreToRemove = exsitingGenre.Except(SelectedGenre);
+            foreach (var genID in genreToRemove)
             {
-                var tagToRemove = mangaModelUpdate.TagsModels.FirstOrDefault(t => t.TagId == tagId);
+                var tagToRemove = mangaModelUpdate.GenresModels.FirstOrDefault(t => t.GenresId == genID);
                 if (tagToRemove != null)
                 {
-                    mangaModelUpdate.TagsModels.Remove(tagToRemove);
+                    mangaModelUpdate.GenresModels.Remove(tagToRemove);
                 }
             }
 
             // Add new tags that are selected now
-            var tagsToAdd = selectedTagIds.Except(existingTagIds);
+            var tagsToAdd = SelectedGenre.Except(exsitingGenre);
             foreach (var tagId in tagsToAdd)
             {
-                var tagToAdd = await context.TagModels.FindAsync(tagId);
+                var tagToAdd = await context.GenresModels.FindAsync(tagId);
                 if (tagToAdd != null)
                 {
-                    mangaModelUpdate.TagsModels.Add(tagToAdd);
+                    mangaModelUpdate.GenresModels.Add(tagToAdd);
                 }
             }
 
@@ -76,20 +76,21 @@ namespace NovelXManga.Pages.Updates
             {
                 return NotFound();
             }
-            mangaModelUpdate = context.mangaModels.Include(e => e.TagsModels).FirstOrDefault(e => e.MangaID == id);
+            mangaModelUpdate = context.mangaModels.Include(e => e.GenresModels).FirstOrDefault(e => e.MangaID == id);
+
             if (mangaModelUpdate == null)
             {
                 return NotFound();
             }
 
-            if (mangaModelUpdate.TagsModels == null)
+            if (mangaModelUpdate.GenresModels == null)
             {
-                mangaModelUpdate.TagsModels = new List<TagModel>();
+                mangaModelUpdate.GenresModels = new List<GenresModel>();
             }
 
-            SelectedTags = mangaModelUpdate.TagsModels.Select(t => t.TagId).ToList();
+            SelectedTags = mangaModelUpdate.GenresModels.Select(t => t.GenresId).ToList();
 
-            Tags = await context.TagModels.ToListAsync() ?? new List<TagModel>();
+            Genres = await context.GenresModels.ToListAsync() ?? new List<GenresModel>();
             return Page();
         }
     }

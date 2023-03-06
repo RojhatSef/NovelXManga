@@ -3,7 +3,7 @@ using MangaModelService;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace NovelXManga.Pages.Updates
+namespace NovelXManga.Pages.MangaUpdates
 {
     public class UpdatePhotoModel : PageModel
     {

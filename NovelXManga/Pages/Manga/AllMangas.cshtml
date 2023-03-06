@@ -24,7 +24,7 @@
                                           
                                         @if (User.IsInRole("NormalUser"))
                                         {
-                                                              <a asp-page="/Updates/UpdatePhoto"  asp-route-id="@book.MangaID">  <img src="~/Images/MangaImage/@book.PhotoPath" class="d-block w-100" alt="..."></a>
+                                                                      <a asp-page="/MangaUpdates/UpdatePhoto"  asp-route-id="@book.MangaID">  <img src="~/Images/MangaImage/@book.PhotoPath" class="d-block w-100" alt="..."></a>
                                         }
                                         else{
                                                       <img src="~/Images/MangaImage/@book.PhotoPath" class="d-block w-100" alt="...">
@@ -35,7 +35,7 @@
                                             <div class="caption-wrapper">
                                                 <h5>@book.MangaName</h5>
                                                 <h6>@book.Description</h6>
-                                                             <a asp-page="/Updates/UpdateDescription" asp-route-id="@book.MangaID" class="btn btn-success">Update Description</a>
+                                                                 <a asp-page="/MangaUpdates/UpdateDescription" asp-route-id="@book.MangaID" class="btn btn-success">Update Description</a>
                                                 <ul class="list-unstyled">
                                                     @foreach (var tag in book.TagsModels)
                                                     {
@@ -44,7 +44,7 @@
                                                             
                                          
                                                 </ul>
-                                                                     <a asp-page="/Updates/UpdateTags" asp-route-id="@book.MangaID" class="btn btn-primary">Update Tag</a>
+                                                                         <a asp-page="/MangaUpdates/UpdateTags" asp-route-id="@book.MangaID" class="btn btn-primary">Update Tag</a>
                                               
                                                 <ul class="list-unstyled">
                                                     @foreach (var genre in book.GenresModels)
@@ -52,7 +52,7 @@
                                                         <li class="coolGenre">@genre.GenreName</li>
                                                     }
                                                 </ul>
-                                                                  <a asp-page="/Updates/UpdateGenre" asp-route-id="@book.MangaID" class="btn btn-success">Update Genre</a>
+                                                                      <a asp-page="/MangaUpdates/UpdateGenre" asp-route-id="@book.MangaID" class="btn btn-success">Update Genre</a>
                                             </div>
                                         </div>
                                     </div>

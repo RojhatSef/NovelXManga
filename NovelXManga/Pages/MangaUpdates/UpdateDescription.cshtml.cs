@@ -3,7 +3,7 @@ using MangaModelService;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace NovelXManga.Pages.Updates
+namespace NovelXManga.Pages.MangaUpdates
 {
     public class UpdateDescriptionModel : PageModel
     {
@@ -29,9 +29,19 @@ namespace NovelXManga.Pages.Updates
             {
                 return RedirectToPage("/Index");
             }
+
             mangaModelUpdate = mangaRepository.GetOneMangaAllIncluded(mangaModel.MangaID);
 
             mangaModelUpdate.Description = mangaModel.Description;
+            mangaModelUpdate.ISBN10 = mangaModel.ISBN10;
+            mangaModelUpdate.ISBN13 = mangaModel.ISBN13;
+            mangaModelUpdate.futureEvents = mangaModel.futureEvents;
+            mangaModelUpdate.StatusInCountryOfOrigin = mangaModel.StatusInCountryOfOrigin;
+            mangaModelUpdate.CompletelyTranslated = mangaModel.CompletelyTranslated;
+            mangaModelUpdate.orignalWebtoon = mangaModel.orignalWebtoon;
+            mangaModelUpdate.OriginalPublisher = mangaModel.OriginalPublisher;
+            mangaModelUpdate.OfficalLanguage = mangaModel.OfficalLanguage;
+
             mangaModelUpdate = mangaRepository.Update(mangaModelUpdate);
 
             return RedirectToPage("/Index");
