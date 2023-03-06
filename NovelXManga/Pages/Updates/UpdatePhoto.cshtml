@@ -1,10 +1,13 @@
 ﻿@page
-@model NovelXManga.Pages.Artist.UpdateVoiceModel
+@model NovelXManga.Pages.Updates.UpdatePhotoModel
 @{
 }
 
-<form method="post" enctype="multipart/form-data">
 
+<h3> Update Photo</h3>
+
+<form method="post" enctype="multipart/form-data">
+  
     <img src="@Model.mangaModelUpdate.PhotoPath" class="card-img-top" alt="Image" />
     <div class="form-group row">
         <label asp-for="Photo" class="col-sm-2 col-form-label"></label>  <br />
@@ -18,7 +21,7 @@
             <input type="hidden" name="mangaModel.MangaID" value="@Model.mangaModelUpdate.MangaID" />
         </div>
     </div>
-
+ 
     <button type="submit" class="btn btn-danger">Update</button>
     <a asp-page="/Index" class="btn btn-primary">Back</a>
 </form>

@@ -2,17 +2,16 @@ using MangaAccessService;
 using MangaModelService;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
 
-namespace NovelXManga.Pages.Artist
+namespace NovelXManga.Pages.Updates
 {
-    public class UpdateVoiceModel : PageModel
+    public class UpdatePhotoModel : PageModel
     {
         private readonly IWebHostEnvironment webHostEnvironment;
         private readonly MangaNNovelAuthDBContext _context;
         private readonly IMangaRepository mangaRepository;
 
-        public UpdateVoiceModel(IWebHostEnvironment webHostEnvironment, IMangaRepository mangaRepository, MangaNNovelAuthDBContext context)
+        public UpdatePhotoModel(IWebHostEnvironment webHostEnvironment, IMangaRepository mangaRepository, MangaNNovelAuthDBContext context)
         {
             this.webHostEnvironment = webHostEnvironment;
 
@@ -31,7 +30,7 @@ namespace NovelXManga.Pages.Artist
             string uniqueFileName = null;
             if (Photo != null)
             {
-                string uploadsFolder = Path.Combine(webHostEnvironment.WebRootPath, "Images", "AuthorImage");
+                string uploadsFolder = Path.Combine(webHostEnvironment.WebRootPath, "Images", "MangaImage");
                 string extension = Path.GetExtension(Photo.FileName);
                 uniqueFileName = Guid.NewGuid().ToString() + extension;
                 string filePath = Path.Combine(uploadsFolder, uniqueFileName);
@@ -45,33 +44,34 @@ namespace NovelXManga.Pages.Artist
 
         public async Task<IActionResult> OnPostAsync(MangaModel mangaModel)
         {
-            try
+            if (mangaModel == null)
             {
-                if (mangaModel == null)
-                {
-                    return NotFound();
-                }
-                mangaModelUpdate = mangaRepository.GetOneMangaAllIncluded(mangaModel.MangaID);
+                return NotFound();
+            }
+            mangaModelUpdate = mangaRepository.GetOneMangaAllIncluded(mangaModel.MangaID);
 
-                if (mangaModelUpdate.PhotoPath != null)
+            if (mangaModelUpdate.PhotoPath != null)
+            {
+                string filePath = Path.Combine(webHostEnvironment.WebRootPath, "Images", "MangaImage", mangaModelUpdate.PhotoPath);
+                if (System.IO.File.Exists(filePath) && !filePath.EndsWith("NoPhoto.png"))
                 {
-                    string filePath = Path.Combine(webHostEnvironment.WebRootPath, "MangaImage", mangaModelUpdate.PhotoPath);
-                    if (!filePath.EndsWith("NoPhoto.png"))
+                    try
                     {
                         System.IO.File.Delete(filePath);
                     }
+                    catch (Exception ex)
+                    {
+                        // Handle any exceptions that may occur
+                        ModelState.AddModelError("Photo", ex.Message);
+                        return Page();
+                    }
                 }
-
-                mangaModelUpdate.PhotoPath = ProcessUploadedFile();
-                mangaModelUpdate = mangaRepository.Update(mangaModelUpdate);
-
-                return RedirectToPage("/Index");
             }
-            catch (Exception ex)
-            {
-                // Log the error or show it to the user.
-                return BadRequest($"An error occurred: {ex.Message}");
-            }
+
+            mangaModelUpdate.PhotoPath = ProcessUploadedFile();
+            mangaModelUpdate = mangaRepository.Update(mangaModelUpdate);
+
+            return RedirectToPage("/Index");
         }
 
         public async Task<IActionResult> OnGetAsync(int? id)
@@ -80,14 +80,9 @@ namespace NovelXManga.Pages.Artist
             {
                 return NotFound();
             }
-
-            mangaModelUpdate = _context.mangaModels.Include(e => e.VoiceActors).FirstOrDefault(e => e.MangaID == id);
+            mangaModelUpdate = _context.mangaModels.FirstOrDefault(e => e.MangaID == id);
 
             if (mangaModelUpdate == null)
-            {
-                return NotFound();
-            }
-            if (mangaModelUpdate.Authormodels == null)
             {
                 return NotFound();
             }

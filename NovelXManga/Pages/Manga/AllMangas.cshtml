@@ -20,8 +20,17 @@
  }">
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <img src="~/Images/MangaImage/@book.PhotoPath" class="d-block w-100" alt="...">
+                
+                                          
+                                        @if (User.IsInRole("NormalUser"))
+                                        {
+                                                              <a asp-page="/Updates/UpdatePhoto"  asp-route-id="@book.MangaID">  <img src="~/Images/MangaImage/@book.PhotoPath" class="d-block w-100" alt="..."></a>
+                                        }
+                                        else{
+                                                      <img src="~/Images/MangaImage/@book.PhotoPath" class="d-block w-100" alt="...">
+                                        }
                                         </div>
+                                               
                                         <div class="col-md-6">
                                             <div class="caption-wrapper">
                                                 <h5>@book.MangaName</h5>
