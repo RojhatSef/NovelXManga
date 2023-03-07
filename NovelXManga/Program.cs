@@ -28,6 +28,10 @@ builder.Services.AddScoped<IAssociatedNamesRepsitory, SQLAssociatedNamesRepsitor
 builder.Services.AddScoped<IReviewRepsitory, SQLReviewRepsitorycs>();
 builder.Services.AddScoped<ICharacterRepsitory, SQLCharacterRepository>();
 builder.Services.AddScoped<IOfficalWebsiteRepsitory, SQLOfficalWebsiteRepsitory>();
+builder.Services.AddScoped<IReadingListPageRepsitory, SQLReadingListPageRepsitory>();
+builder.Services.AddScoped<IFavoritListPageRepsitory, SQLFavoritListPageRepsitory>();
+builder.Services.AddScoped<IBuyPageRepsitory, SQLBuyPageRepsitory>();
+builder.Services.AddScoped<IDroppedBookListPageRepsitory, SQLDroppedBookListPageRepsitory>();
 
 builder.Services.AddScoped<SeedData>();
 builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
@@ -97,8 +101,8 @@ static void SeedDatainitialize(IHost host)
 // fix Message
 
 //todo
-//fix photopath
-// fix double loggin problem
+//fix photopath Done
+// fix double loggin problem done
 // fix adding publishers
 // selling Point Book Of the week/ book of the month // book CLUB
 // fix returnURl
@@ -106,15 +110,17 @@ static void SeedDatainitialize(IHost host)
 // add Roles to users,
 // fix Updates work correctly
 // fix the GroupScanlation Adds users /Manga
-// fix Master to users / group
-// fix User to Master and Group
-// Fix deleting commets
-// Fix Update Comments
+// fix Manga to users / group
+// fix User to Manga and Group
+// Fix deleting commets // comments can't be delted
+// Fix Update Comments // replies
 // fix blog With comments
 // fix removing users
+
 // fix  tags and genres Done
 // link genres to manga Done
 // link tags  to manga Done
+// search filter working with tags, name, genres, language etc
 // Display Mangas Done
 // Display currentManga Done
 // Fix manga links to Author/Artist/Voice To their info

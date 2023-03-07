@@ -22,7 +22,9 @@ namespace NovelXManga.Pages.Manga
         public BlogModel Blog { get; set; }
 
         [BindProperty]
-        public PostModel Post { get; set; }
+        public PostModel OnePost { get; set; }
+
+        public IEnumerable<PostModel> Posts { get; set; }
 
         public CurrentMangaModel(UserManager<IdentityUser> userManager, IWebHostEnvironment webHostEnvironment, IMangaRepository mangaRepository, MangaNNovelAuthDBContext mangaNNovelAuthDBContext, IBlogRepsitory blogRepsitory, IPostRepsitory postRepsitory)
         {
@@ -65,6 +67,7 @@ namespace NovelXManga.Pages.Manga
             }
             CurrentManga = mangaRepository.GetOneMangaAllIncluded(id);
             Blog = blogRepsitory.GetModel(CurrentManga.BlogModelId);
+            Posts = postRepsitory.GetAllModels();
         }
     }
 }
