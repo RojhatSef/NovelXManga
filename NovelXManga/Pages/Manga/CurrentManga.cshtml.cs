@@ -59,6 +59,29 @@ namespace NovelXManga.Pages.Manga
             return RedirectToAction("Index");
         }
 
+        // OnPost For characters
+
+        public async Task<IActionResult> OnPostAsync(int id, List<int> characters)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var mangaModelUpdate = mangaRepository.GetOneMangaAllIncluded(id);
+
+            if (mangaModelUpdate == null)
+            {
+                return NotFound();
+            }
+
+            // Update the characters
+            mangaModelUpdate.Characters = await mangaRepository.GetCharactersByIdsAsync(characters);
+            Context.SaveChanges();
+
+            return RedirectToPage("./CurrentManga", new { id = mangaModelUpdate.MangaID });
+        }
+
         public void OnGet(int id)
         {
             if (id == 0)

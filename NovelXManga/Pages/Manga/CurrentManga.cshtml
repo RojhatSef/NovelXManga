@@ -294,6 +294,31 @@
     {
         <p>N/A</p>
     }
+    <div>Related Books: </div>
+    @if (Model.CurrentManga.Characters != null)
+    {
+        
+<form method="post" asp-page="/MangaUpdates/UpdateCharacters">
+
+    <input type="hidden" name="id" value="@Model.CurrentManga.MangaID" />
+    @if (Model.CurrentManga.Characters != null)
+    {
+        foreach (var character in Model.CurrentManga.Characters)
+        {    
+             <input type="hidden" name="characterId" value="@character.CharacterId" />
+             <label class="form-label" asp-for="@character.CharacterName">@character.CharacterName</label>
+            <input type="hidden" name="characters" value="@character.CharacterId" />
+        }
+    }
+    <button type="submit">View Characters</button>
+</form>
+
+
+    }
+    else
+    {
+        <p>N/A</p>
+    }
     @if (Model.CurrentManga.futureEvents != null)
     {
         <div class="mb-3">
