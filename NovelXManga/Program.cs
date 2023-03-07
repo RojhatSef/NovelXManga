@@ -18,9 +18,17 @@ builder.Services.AddDbContext<MangaNNovelAuthDBContext>(options =>
 builder.Services.AddScoped<IGenreRepsitory, SQLGenreRepsitory>();
 builder.Services.AddScoped<ITagRepsitory, SQLTagRepository>();
 builder.Services.AddScoped<IAuthorRepsitory, SQLAuthorRepository>();
+builder.Services.AddScoped<IVoiceRepsitory, SQLVoiceRepsitorycs>();
+builder.Services.AddScoped<IArtistRepsitory, SQLArtistRepsitory>();
+builder.Services.AddScoped<ILanguageRepsitory, SQLLanguageRepsitory>();
 builder.Services.AddScoped<IMangaRepository, SQLMangaRepository>();
 builder.Services.AddScoped<IBlogRepsitory, SQLBlogRepsitory>();
 builder.Services.AddScoped<IPostRepsitory, SQLPostRepsitory>();
+builder.Services.AddScoped<IAssociatedNamesRepsitory, SQLAssociatedNamesRepsitory>();
+builder.Services.AddScoped<IReviewRepsitory, SQLReviewRepsitorycs>();
+builder.Services.AddScoped<ICharacterRepsitory, SQLCharacterRepository>();
+builder.Services.AddScoped<IOfficalWebsiteRepsitory, SQLOfficalWebsiteRepsitory>();
+
 builder.Services.AddScoped<SeedData>();
 builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
 {
