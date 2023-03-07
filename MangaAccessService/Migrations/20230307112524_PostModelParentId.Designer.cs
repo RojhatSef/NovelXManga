@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MangaAccessService.Migrations
 {
     [DbContext(typeof(MangaNNovelAuthDBContext))]
-    [Migration("20230304180855_NXM")]
-    partial class NXM
+    [Migration("20230307112524_PostModelParentId")]
+    partial class PostModelParentId
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -924,7 +924,7 @@ namespace MangaAccessService.Migrations
                     b.Property<DateTime>("CommentPostedTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("PostModelPostId")
+                    b.Property<int?>("ParentPostId")
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
@@ -943,7 +943,7 @@ namespace MangaAccessService.Migrations
 
                     b.HasKey("PostId");
 
-                    b.HasIndex("PostModelPostId");
+                    b.HasIndex("ParentPostId");
 
                     b.ToTable("PostModels");
                 });
@@ -1875,9 +1875,11 @@ namespace MangaAccessService.Migrations
 
             modelBuilder.Entity("MangaModelService.PostModel", b =>
                 {
-                    b.HasOne("MangaModelService.PostModel", null)
+                    b.HasOne("MangaModelService.PostModel", "ParentPost")
                         .WithMany("Replies")
-                        .HasForeignKey("PostModelPostId");
+                        .HasForeignKey("ParentPostId");
+
+                    b.Navigation("ParentPost");
                 });
 
             modelBuilder.Entity("MangaModelTagModel", b =>

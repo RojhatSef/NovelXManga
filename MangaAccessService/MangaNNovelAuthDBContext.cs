@@ -42,6 +42,10 @@ namespace MangaAccessService
             .WithOne(i => i.BlogModel)
             .HasForeignKey<MangaModel>(b => b.BlogModelId);
 
+            modelBuilder.Entity<PostModel>().Navigation(e => e.Replies).AutoInclude();
+
+            #region AutoNavagtions not needed
+
             //modelBuilder.Entity<MangaModel>().Navigation(e => e.Authormodels).AutoInclude();
             //modelBuilder.Entity<MangaModel>().Navigation(e => e.TagsModels).AutoInclude();
             //modelBuilder.Entity<MangaModel>().Navigation(e => e.GenresModels).AutoInclude();
@@ -50,11 +54,9 @@ namespace MangaAccessService
             //modelBuilder.Entity<MangaModel>().Navigation(e => e.AllLanguages).AutoInclude();
             //modelBuilder.Entity<MangaModel>().Navigation(e => e.StudioModels).AutoInclude();
             //modelBuilder.Entity<MangaModel>().Navigation(e => e.BlogModel).AutoInclude();
-
             //modelBuilder.Entity<MangaModel>().Navigation(e => e.OfficalWebsites).AutoInclude();
             //modelBuilder.Entity<MangaModel>().Navigation(e => e.AssociatedNames).AutoInclude();
             //modelBuilder.Entity<GroupScanlatingModel>().Navigation(e => e.chapterModels).AutoInclude();
-
             //modelBuilder.Entity<GroupScanlatingModel>().Navigation(e => e.userModels).AutoInclude();
             //modelBuilder.Entity<GroupScanlatingModel>().Navigation(e => e.chapterModels).AutoInclude();
             //modelBuilder.Entity<ArtistModel>().Navigation(e => e.AssociatedNames).AutoInclude();
@@ -64,6 +66,8 @@ namespace MangaAccessService
             //modelBuilder.Entity<VoiceActorModel>().Navigation(e => e.OfficalWebsites).AutoInclude();
 
             //modelBuilder.Entity<UserModel>().Navigation(e => e.Reviews).AutoInclude();
+
+            #endregion AutoNavagtions not needed
 
             base.OnModelCreating(modelBuilder);
         }

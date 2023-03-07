@@ -91,3 +91,4 @@ namespace NovelXManga.Pages.MangaUpdates
             return Page();
         }
     }
+}

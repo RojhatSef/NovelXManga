@@ -19,6 +19,8 @@ builder.Services.AddScoped<IGenreRepsitory, SQLGenreRepsitory>();
 builder.Services.AddScoped<ITagRepsitory, SQLTagRepository>();
 builder.Services.AddScoped<IAuthorRepsitory, SQLAuthorRepository>();
 builder.Services.AddScoped<IMangaRepository, SQLMangaRepository>();
+builder.Services.AddScoped<IBlogRepsitory, SQLBlogRepsitory>();
+builder.Services.AddScoped<IPostRepsitory, SQLPostRepsitory>();
 builder.Services.AddScoped<SeedData>();
 builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
 {

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MangaAccessService.Migrations
 {
-    public partial class NXM : Migration
+    public partial class PostModelParentId : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -247,14 +247,14 @@ namespace MangaAccessService.Migrations
                     score = table.Column<double>(type: "float", nullable: true),
                     CommentPostedTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UserID = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PostModelPostId = table.Column<int>(type: "int", nullable: true)
+                    ParentPostId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_PostModels", x => x.PostId);
                     table.ForeignKey(
-                        name: "FK_PostModels_PostModels_PostModelPostId",
-                        column: x => x.PostModelPostId,
+                        name: "FK_PostModels_PostModels_ParentPostId",
+                        column: x => x.ParentPostId,
                         principalTable: "PostModels",
                         principalColumn: "PostId");
                 });
@@ -1521,9 +1521,9 @@ namespace MangaAccessService.Migrations
                 column: "VoiceActorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PostModels_PostModelPostId",
+                name: "IX_PostModels_ParentPostId",
                 table: "PostModels",
-                column: "PostModelPostId");
+                column: "ParentPostId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PostModelUserModel_UserModelId",
