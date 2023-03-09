@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MangaAccessService.Migrations
 {
-    public partial class PostModelParentId : Migration
+    public partial class Characterupdate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -170,7 +170,16 @@ namespace MangaAccessService.Migrations
                     Occupation = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Lawful = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Personality = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    FamousQuote = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    FamousQuote = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Height = table.Column<int>(type: "int", nullable: true),
+                    Weight = table.Column<int>(type: "int", nullable: true),
+                    EyeColor = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    HairColor = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Abilities = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Hobbies = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Dislikes = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Likes = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PersonalityTraits = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {

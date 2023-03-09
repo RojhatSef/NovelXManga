@@ -2,3 +2,137 @@
 @model NovelXManga.Pages.MangaUpdates.UpdateCharactersModel
 @{
 }
+
+
+@foreach (var character in @Model.MangaModelUpdate.Characters)
+{
+
+<div class="card">
+    <div class="card-header">
+        <h5 class="card-title">Character Name: @character.CharacterName</h5>
+    </div>
+    <div class="card-body">
+        <div class="form-group">
+            <label>Background:</label>
+            <input asp-for="@character.Background" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label>Gender:</label>
+            <input asp-for="@character.Gender" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label>Born:</label>
+            <input asp-for="@character.Born" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label>Death:</label>
+            <input asp-for="@character.Death" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label>Species:</label>
+            <input asp-for="@character.specie" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label>Place of Residence:</label>
+            <input asp-for="@character.PlaceOffResidence" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label>World:</label>
+            <input asp-for="@character.World" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label>Nationality:</label>
+            <input asp-for="@character.Nationality" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label>Education:</label>
+            <input asp-for="@character.Education" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label>Occupation:</label>
+            <input asp-for="@character.Occupation" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label>Lawful:</label>
+            <input asp-for="@character.Lawful" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label>Personality:</label>
+            <input asp-for="@character.Personality" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label>Famous Quote:</label>
+            <input asp-for="@character.FamousQuote" class="form-control" />
+        </div>
+        <div class="form-group">
+    <label>Offical Websites:</label>
+    <select asp-for="@character.OfficalWebsites" asp-items="@character.OfficalWebsites.Select(a => new SelectListItem { Text = a.OfficalWebsiteName, Value = a.OfficalID.ToString() })" multiple class="form-control">
+        @foreach (var website in character.OfficalWebsites)
+        {
+            <option value="@website.OfficalID" selected>@website.OfficalWebsiteName</option>
+        }
+    </select>
+</div>
+  <div class="form-group">
+    <label>Partners:</label>
+    <select asp-for="@character.Partner_s" asp-items="@Model.MangaModelUpdate.Characters.Where(c => c.CharacterId != character.CharacterId).Select(c => new SelectListItem { Text = c.CharacterName, Value = c.CharacterId.ToString() })" multiple class="form-control">
+        @foreach (var partner in character.Partner_s)
+        {
+            <option value="@partner.CharacterId">@partner.CharacterName</option>
+        }
+    </select>
+</div>
+
+<div class="form-group">
+    <label>Family:</label>
+    <select asp-for="@character.Family" asp-items="@Model.MangaModelUpdate.Characters.Where(c => c.CharacterId != character.CharacterId).Select(c => new SelectListItem { Text = c.CharacterName, Value = c.CharacterId.ToString() })" multiple class="form-control">
+        @foreach (var familyMember in character.Family)
+        {
+            <option value="@familyMember.CharacterId">@familyMember.CharacterName</option>
+        }
+    </select>
+</div>
+
+        <div class="form-group">
+         <label>Associated Names:</label>
+            <input asp-for="@character.AssociatedNames" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label>Height:</label>
+            <input asp-for="@character.Height" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label>Weight:</label>
+            <input asp-for="@character.Weight" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label>Eye Color:</label>
+            <input asp-for="@character.EyeColor" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label>Hair Color:</label>
+            <input asp-for="@character.HairColor" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label>Abilities:</label>
+            <input asp-for="@character.Abilities" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label>Hobbies:</label>
+            <input asp-for="@character.Hobbies" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label>Likes:</label>
+            <input asp-for="@character.Likes" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label>Dislikes:</label>
+            <input asp-for="@character.Dislikes" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label>Personality Traits:</label>
+            <input asp-for="@character.PersonalityTraits" class="form-control" />
+        </div>
+    </div>
+</div>
+}

@@ -10,6 +10,8 @@ namespace MangaAccessService
 
         Character GetModel(int id);
 
+        IEnumerable<Character> GetCharactersByIds(List<int> characterIds);
+
         Character Update(Character UpdateModel);
 
         Character Add(Character addNewModel);

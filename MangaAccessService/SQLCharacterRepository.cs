@@ -29,6 +29,11 @@ namespace MangaAccessService
             return modelToDelete;
         }
 
+        public IEnumerable<Character> GetCharactersByIds(List<int> characterIds)
+        {
+            return context.Characters.Where(c => characterIds.Contains(c.CharacterId));
+        }
+
         public IEnumerable<Character> GetAllModels()
         {
             return context.Characters;
