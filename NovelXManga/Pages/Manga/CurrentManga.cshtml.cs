@@ -76,7 +76,7 @@ namespace NovelXManga.Pages.Manga
             }
 
             // Update the characters
-            mangaModelUpdate.Characters = await mangaRepository.GetCharactersByIdsAsync(characters);
+            //mangaModelUpdate.Characters = await mangaRepository.GetCharactersByIdsAsync(characters);
             Context.SaveChanges();
 
             return RedirectToPage("./CurrentManga", new { id = mangaModelUpdate.MangaID });
