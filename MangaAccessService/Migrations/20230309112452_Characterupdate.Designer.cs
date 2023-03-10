@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MangaAccessService.Migrations
 {
     [DbContext(typeof(MangaNNovelAuthDBContext))]
-    [Migration("20230307112524_PostModelParentId")]
-    partial class PostModelParentId
+    [Migration("20230309112452_Characterupdate")]
+    partial class Characterupdate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -536,6 +536,9 @@ namespace MangaAccessService.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CharacterId"), 1L, 1);
 
+                    b.Property<string>("Abilities")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Background")
                         .HasColumnType("nvarchar(max)");
 
@@ -549,7 +552,13 @@ namespace MangaAccessService.Migrations
                     b.Property<string>("Death")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Dislikes")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Education")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EyeColor")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FamousQuote")
@@ -558,7 +567,19 @@ namespace MangaAccessService.Migrations
                     b.Property<string>("Gender")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("HairColor")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("Height")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Hobbies")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Lawful")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Likes")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nationality")
@@ -570,8 +591,14 @@ namespace MangaAccessService.Migrations
                     b.Property<string>("Personality")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("PersonalityTraits")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("PlaceOffResidence")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("Weight")
+                        .HasColumnType("int");
 
                     b.Property<string>("World")
                         .HasColumnType("nvarchar(max)");

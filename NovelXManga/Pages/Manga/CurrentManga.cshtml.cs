@@ -3,6 +3,7 @@ using MangaModelService;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Threading.Channels;
 
 namespace NovelXManga.Pages.Manga
 {
@@ -14,6 +15,7 @@ namespace NovelXManga.Pages.Manga
         private readonly UserManager<IdentityUser> userManager;
         private readonly IBlogRepsitory blogRepsitory;
         private readonly IPostRepsitory postRepsitory;
+        private readonly ICharacterRepsitory characterRepsitory;
 
         [BindProperty]
         public MangaModel CurrentManga { get; set; }
@@ -26,7 +28,7 @@ namespace NovelXManga.Pages.Manga
 
         public IEnumerable<PostModel> Posts { get; set; }
 
-        public CurrentMangaModel(UserManager<IdentityUser> userManager, IWebHostEnvironment webHostEnvironment, IMangaRepository mangaRepository, MangaNNovelAuthDBContext mangaNNovelAuthDBContext, IBlogRepsitory blogRepsitory, IPostRepsitory postRepsitory)
+        public CurrentMangaModel(UserManager<IdentityUser> userManager, IWebHostEnvironment webHostEnvironment, IMangaRepository mangaRepository, MangaNNovelAuthDBContext mangaNNovelAuthDBContext, IBlogRepsitory blogRepsitory, IPostRepsitory postRepsitory, ICharacterRepsitory characterRepsitory)
         {
             this.userManager = userManager;
             this.webHostEnvironment = webHostEnvironment;
@@ -34,6 +36,7 @@ namespace NovelXManga.Pages.Manga
             this.Context = mangaNNovelAuthDBContext;
             this.blogRepsitory = blogRepsitory;
             this.postRepsitory = postRepsitory;
+            this.characterRepsitory = characterRepsitory;
         }
 
         public IActionResult OnPostCreateReply(int parentId, string comment)
@@ -60,14 +63,8 @@ namespace NovelXManga.Pages.Manga
         }
 
         // OnPost For characters
-
-        public async Task<IActionResult> OnPostAsync(int id, List<int> characters)
+        public IActionResult OnPostCharacters(int id, List<int> characters)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
             var mangaModelUpdate = mangaRepository.GetOneMangaAllIncluded(id);
 
             if (mangaModelUpdate == null)
@@ -76,10 +73,14 @@ namespace NovelXManga.Pages.Manga
             }
 
             // Update the characters
+<<<<<<< HEAD
             //mangaModelUpdate.Characters = await mangaRepository.GetCharactersByIdsAsync(characters);
+=======
+            mangaModelUpdate.Characters = characterRepsitory.GetCharactersByIds(characters).ToList();
+>>>>>>> 0f4c54d64f62debee36ff8b12baf2adc41a4a0ad
             Context.SaveChanges();
 
-            return RedirectToPage("./CurrentManga", new { id = mangaModelUpdate.MangaID });
+            return RedirectToPage("/MangaUpdates/UpdateCharacters", new { id = mangaModelUpdate.MangaID });
         }
 
         public void OnGet(int id)

@@ -298,19 +298,16 @@
     @if (Model.CurrentManga.Characters != null)
     {
         
-<form method="post" asp-page="/MangaUpdates/UpdateCharacters">
-
-    <input type="hidden" name="id" value="@Model.CurrentManga.MangaID" />
+<form method="post" asp-page="/MangaUpdates/UpdateCharacters" asp-route-id="@Model.CurrentManga.MangaID">
     @if (Model.CurrentManga.Characters != null)
     {
         foreach (var character in Model.CurrentManga.Characters)
         {    
-             <input type="hidden" name="characterId" value="@character.CharacterId" />
-             <label class="form-label" asp-for="@character.CharacterName">@character.CharacterName</label>
-            <input type="hidden" name="characters" value="@character.CharacterId" />
+             <input type="hidden" name="characters" value="@character.CharacterId" />
         }
     }
-    <button type="submit">View Characters</button>
+
+    <button type="submit">Update Characters</button>
 </form>
 
 

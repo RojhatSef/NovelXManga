@@ -1,54 +1,58 @@
 using MangaAccessService;
 using MangaModelService;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc;
 
 namespace NovelXManga.Pages.MangaUpdates
 {
     public class UpdateCharactersModel : PageModel
     {
         private readonly IMangaRepository mangaRepository;
-        private readonly MangaNNovelAuthDBContext context;
 
-        public UpdateCharactersModel(IMangaRepository mangaRepository, MangaNNovelAuthDBContext context)
+        public UpdateCharactersModel(IMangaRepository mangaRepository)
         {
             this.mangaRepository = mangaRepository;
-            this.context = context;
         }
 
         [BindProperty]
-        public MangaModel mangaModelUpdate { get; set; }
+        public MangaModel MangaModelUpdate { get; set; }
 
-        public async Task<IActionResult> OnPostAsync(MangaModel mangaModel)
-        {
-            if (mangaModel == null)
-            {
-                return RedirectToPage("/Index");
-            }
-            mangaModelUpdate = mangaRepository.GetOneMangaAllIncluded(mangaModel.MangaID);
-
-            await context.SaveChangesAsync();
-
-            return RedirectToPage("/Index");
-        }
-
-        public async Task<IActionResult> OnGetAsync(int id, List<Character> updatedCharacters)
+        public async Task<IActionResult> OnGetAsync(int id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            mangaModelUpdate = mangaRepository.GetOneMangaAllIncluded(id);
-            if (mangaModelUpdate == null)
+            MangaModelUpdate = mangaRepository.GetOneMangaAllIncluded(id);
+
+            if (MangaModelUpdate == null)
             {
                 return NotFound();
             }
 
-            // iterate through the updated characters list and update each character in the manga model
-            foreach (Character character in updatedCharacters)
+            return Page();
+        }
+
+        public async Task<IActionResult> OnPostAsync()
+        {
+            if (!ModelState.IsValid)
             {
-                Character existingCharacter = mangaModelUpdate.Characters.FirstOrDefault(c => c.CharacterId == character.CharacterId);
+                return Page();
+            }
+
+            var manga = mangaRepository.GetOneMangaAllIncluded(MangaModelUpdate.MangaID);
+
+            if (manga == null)
+            {
+                return NotFound();
+            }
+
+            // update existing characters
+            foreach (var character in MangaModelUpdate.Characters)
+            {
+                var existingCharacter = manga.Characters.FirstOrDefault(c => c.CharacterId == character.CharacterId);
+
                 if (existingCharacter != null)
                 {
                     existingCharacter.CharacterName = character.CharacterName;
@@ -57,8 +61,21 @@ namespace NovelXManga.Pages.MangaUpdates
                 }
             }
 
-            mangaRepository.Update(mangaModelUpdate);
-            return RedirectToPage("/Manga/MangaDetails", new { id = mangaModelUpdate.MangaID });
+            // add new characters
+            foreach (var character in MangaModelUpdate.Characters.Where(c => c.CharacterId == 0))
+            {
+                manga.Characters.Add(character);
+            }
+
+            // remove deleted characters
+            foreach (var character in manga.Characters.Where(c => !MangaModelUpdate.Characters.Any(m => m.CharacterId == c.CharacterId)))
+            {
+                manga.Characters.Remove(character);
+            }
+
+            mangaRepository.Update(manga);
+
+            return RedirectToPage("/Manga/MangaDetails", new { id = manga.MangaID });
         }
     }
 }
