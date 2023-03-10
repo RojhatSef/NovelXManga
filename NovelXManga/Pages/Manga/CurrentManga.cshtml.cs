@@ -3,6 +3,7 @@ using MangaModelService;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Threading.Channels;
 
 namespace NovelXManga.Pages.Manga
 {
@@ -62,26 +63,20 @@ namespace NovelXManga.Pages.Manga
         }
 
         // OnPost For characters
-
-        public Task<IActionResult> OnPostCharacters(int id, List<int> characters)
+        public IActionResult OnPostCharacters(int id, List<int> characters)
         {
-            if (id == null)
-            {
-                return Task.FromResult<IActionResult>(NotFound());
-            }
-
             var mangaModelUpdate = mangaRepository.GetOneMangaAllIncluded(id);
 
             if (mangaModelUpdate == null)
             {
-                return Task.FromResult<IActionResult>(NotFound());
+                return NotFound();
             }
 
             // Update the characters
             mangaModelUpdate.Characters = characterRepsitory.GetCharactersByIds(characters).ToList();
             Context.SaveChanges();
 
-            return Task.FromResult<IActionResult>(RedirectToPage("/Manga/CurrentManga", new { id = mangaModelUpdate.MangaID }));
+            return RedirectToPage("/MangaUpdates/UpdateCharacters", new { id = mangaModelUpdate.MangaID });
         }
 
         public void OnGet(int id)
