@@ -51,4 +51,32 @@ $(function () {
         }).get();
         $('#selectedTags').val(selectedTags.join());
     });
+})
+const tagDropdown = document.getElementById('tag-dropdown');
+const tagOptions = tagDropdown.options;
+
+tagDropdown.addEventListener('change', () => {
+    for (let i = 0; i < tagOptions.length; i++) {
+        const tagOption = tagOptions[i];
+
+        if (tagOption.selected) {
+            if (tagOption.getAttribute('data-selected') !== 'true') {
+                tagOption.setAttribute('data-selected', true);
+
+                const checkmark = document.createElement('span');
+                checkmark.innerText = '✔';
+                checkmark.style.marginLeft = '5px';
+                checkmark.style.color = 'green';
+
+                tagOption.appendChild(checkmark);
+            }
+        } else {
+            if (tagOption.getAttribute('data-selected') === 'true') {
+                tagOption.setAttribute('data-selected', false);
+
+                const checkmark = tagOption.querySelector('span');
+                checkmark.remove();
+            }
+        }
+    }
 });

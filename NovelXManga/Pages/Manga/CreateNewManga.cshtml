@@ -15,27 +15,22 @@
                 <input hidden asp-for="_MangaModel.MangaID" />
                 <input hidden asp-for="_MangaModel.BlogModel" />
                 <input hidden asp-for="_MangaModel.BlogModelId" />
-                <input hidden asp-for="_MangaModel.AllLanguages" />
-                <input hidden asp-for="_MangaModel.OfficalLanguage" />
-                <input hidden asp-for="_MangaModel.BlogModelId" />
+             
+      
          
-                <h4>Select Multiple Logs</h4>
+                <h4>Select Multiple Tags</h4>
 
+                <p>Not working Yet </p> 
+                <p> Genres and tags not working yet</p>
 
-                <select multiple class="form-control" asp-for="SelectedChanges">
-                    @foreach (var change in Model.Tags)
+                <select multiple class="form-control" asp-for="SelectedTags" id="tag-dropdown">
+                    @foreach (var tag in Model.Tags)
                     {
-                        <option value="@change.TagId" class="@(Model.SelectedChanges.Contains(change.TagId) ? "selected-option" : "")">
-                            @change.TagName
+                        <option value="@tag.TagId" id="tag-@tag.TagId" name="selectedTags" data-selected="@((Model != null && Model.SelectedTags != null && Model.SelectedTags.Contains(tag.TagId)) ? "true" : null)">
+                            @tag.TagName
                         </option>
                     }
-                </select><script>
-                             $(document).ready(function () {
-                                 $('#selectTags option').click(function () {
-                                     $(this).toggleClass('selectedOption');
-                                 });
-                             });
-                </script>
+                </select>
   
              
                 <div class="mb-3">
@@ -43,7 +38,7 @@
                     <input type="text" asp-for="_MangaModel.MangaName" class="form-control" />
                     <span asp-validation-for="_MangaModel.MangaName" class="text-danger"></span>
 
-                </div>
+                </div><p>Not working Yet</p>
                 <div class="mb-3">
                     <label class="form-label" asp-for="_MangaModel.AssociatedNames"> Associated Names </label>
                     <input type="text" asp-for="_MangaModel.AssociatedNames" class="form-control" />
@@ -55,6 +50,7 @@
                     <input type="text" asp-for="_MangaModel.Description" class="form-control" />
                     <span asp-validation-for="_MangaModel.Description" class="text-danger"></span>
                 </div>
+                <p>Not working Yet</p>
 <div class="mb-3">
     <label class="form-label" asp-for="_MangaModel.relatedSeries">Related Series</label>
     <select asp-for="_MangaModel.relatedSeries" class="form-control" multiple>
@@ -119,11 +115,18 @@
     <input asp-for="_MangaModel.Type" class="form-control" />
     <span asp-validation-for="_MangaModel.Type" class="text-danger"></span>
 </div>
+
+                <p>Not working Yet</p>
 <div class="mb-3">
     <label class="form-label" asp-for="_MangaModel.OfficalLanguage">Official Language</label>
     <input asp-for="_MangaModel.OfficalLanguage" class="form-control" />
     <span asp-validation-for="_MangaModel.OfficalLanguage" class="text-danger"></span>
-</div>
+                </div><p>Not working Yet</p>
+                <div class="mb-3">
+                    <label class="form-label" asp-for="_MangaModel.OfficalWebsites">Official Language</label>
+                    <input asp-for="_MangaModel.OfficalWebsites" class="form-control" />
+                    <span asp-validation-for="_MangaModel.OfficalWebsites" class="text-danger"></span>
+                </div>
 <div class="mb-3">
     <label class="form-label" asp-for="_MangaModel.MonthRead">Month Read</label>
     <input asp-for="_MangaModel.MonthRead" class="form-control" />
@@ -140,27 +143,27 @@
     <span asp-validation-for="_MangaModel.YearRead" class="text-danger"></span>
 </div>
 <div class="mb-3">
-    <label class="form-label" asp-for="_MangaModel.ReleaseYear">Release Year</label>
-    <input asp-for="_MangaModel.ReleaseYear" class="form-control" />
-    <span asp-validation-for="_MangaModel.ReleaseYear" class="text-danger"></span>
+                    <label class="form-label" asp-for="ReleaseYear">Release Year</label>
+    <input asp-for="ReleaseYear" class="form-control" />
+                    <span asp-validation-for="ReleaseYear" class="text-danger"></span>
 </div>
 <div class="mb-3">
-    <label class="form-label" asp-for="_MangaModel.EndingYear">Ending Year</label>
-    <input asp-for="_MangaModel.EndingYear" class="form-control" />
-    <span asp-validation-for="_MangaModel.EndingYear" class="text-danger"></span>
-</div>
+    <label class="form-label" asp-for="EndingYear">Ending Year</label>
+                    <input asp-for="EndingYear" class="form-control" />
+                    <span asp-validation-for="EndingYear" class="text-danger"></span>
+                </div><p>Not working Yet</p>
 <div class="mb-3">
     <label class="form-label" asp-for="_MangaModel.AssociatedNames">Associated Names</label>
     <input asp-for="_MangaModel.AssociatedNames" class="form-control" multiple />
     <span asp-validation-for="_MangaModel.AssociatedNames" class="text-danger"></span>
 </div>
-
+                <p>Not working Yet</p>
 <div class="mb-3">
     <label class="form-label" asp-for="_MangaModel.AllLanguages">All Languages</label>
     <input asp-for="_MangaModel.AllLanguages" class="form-control" multiple />
     <span asp-validation-for="_MangaModel.AllLanguages" class="text-danger"></span>
 </div>
-
+                <p>Not working Yet</p>
 <div class="mb-3">
     <label class="form-label" asp-for="_MangaModel.RecommendedMangaModels">Recommended Manga Models</label>
     <input asp-for="_MangaModel.RecommendedMangaModels" class="form-control" multiple />
@@ -178,18 +181,18 @@
                     <div class="col-sm-10">
                         <div class="custom-file">
                             <input asp-for="Photo" class="custom-file-input form-control" />
-                            <label class="custom-file-label">Click here to change photo</label>
+                           
                             <span asp-validation-for="Photo" class="text-danger"></span>
                         </div>
                         <br />
-                        <img src="@photoPath" class="img-thumbnail" width="200" />
+                     
                     </div>
                 </div>
 
                 <br />
                 <br />
                 <div class="mb-3">
-                    <button type="submit" class="btn btn-primary">Save Manga / Novel </button>
+                    <button type="submit" class="btn btn-primary">Save Book </button>
                 </div>
 
                 @section scripts {
@@ -259,8 +262,4 @@
         </div>
     </div>
 </div> 
-<style>
-    .selected-option {
-        background-color: blue;
-    }
-</style>
+

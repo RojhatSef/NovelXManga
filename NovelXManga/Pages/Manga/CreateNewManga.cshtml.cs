@@ -1,6 +1,5 @@
 using MangaAccessService;
 using MangaModelService;
-using MangaModelService.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -18,21 +17,27 @@ namespace NovelXManga.Pages.Manga
         private readonly ITagRepsitory tagRepsitory;
 
         [BindProperty]
-        public MangaModelView _MangaModel { get; set; }
+        public MangaModel _MangaModel { get; set; }
 
         [BindProperty]
         public IFormFile? Photo { get; set; }
 
-        [BindProperty]
         [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM}", ApplyFormatInEditMode = true)]
+        [BindProperty]
         public DateTime ReleaseYear { get; set; } = DateTime.Now;
 
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM}", ApplyFormatInEditMode = true)]
         [BindProperty]
-        public List<int> SelectedChanges { get; set; } = new List<int>();
+        public DateTime? EndingYear { get; set; } = null;
+
+        [BindProperty]
+        public List<int> SelectedTags { get; set; }
 
         public IEnumerable<TagModel> Tags { get; set; }
         public IEnumerable<GenresModel> Genres { get; set; }
-        public IEnumerable<MangaModel>MangaModels { get; set;  }
+        public IEnumerable<MangaModel> MangaModels { get; set; }
 
         [TempData]
         public string SucessFulManga { get; set; }
@@ -55,71 +60,100 @@ namespace NovelXManga.Pages.Manga
 
         public IActionResult OnPostAsync()
         {
-            if (ModelState.IsValid)
+            // Check if the uploads directory exists, and create it if it does not
+            var uploadsDirectory = Path.Combine(webHostEnvironment.WebRootPath, "uploads");
+            if (!Directory.Exists(uploadsDirectory))
             {
-                // Check if the uploads directory exists, and create it if it does not
-                var uploadsDirectory = Path.Combine(webHostEnvironment.WebRootPath, "uploads");
-                if (!Directory.Exists(uploadsDirectory))
+                Directory.CreateDirectory(uploadsDirectory);
+            }
+            string photoPath;
+            if (Photo != null)
+            {
+                photoPath = ProcessUploadedFile();
+            }
+            else
+            {
+                photoPath = null;
+            }
+            Tags = context.TagModels.ToList();
+            var newMangaModel = context.mangaModels.FirstOrDefault(mm => mm.MangaName == _MangaModel.MangaName);
+            //var ListOfAssiocatedNames = names
+            var selectedTagIds = SelectedTags ?? new List<int>();
+            // Add new tags that are selected now
+            _MangaModel.TagsModels = new List<TagModel>();
+            foreach (var tagId in selectedTagIds)
+            {
+                var tagToAdd = context.TagModels.Find(tagId);
+                if (tagToAdd != null)
                 {
-                    Directory.CreateDirectory(uploadsDirectory);
+                    _MangaModel.TagsModels.Add(tagToAdd);
                 }
-                string photoPath = null;
-                if (Photo != null)
+            }
+            if (newMangaModel == null)
+            {
+                MangaModel MangaModels = new MangaModel
                 {
-                    // Save the uploaded photo to a file on the server
-                    var filePath = Path.Combine(webHostEnvironment.WebRootPath, "uploads", Photo.FileName);
-                    using (var stream = new FileStream(filePath, FileMode.Create))
-                    {
-                        Photo.CopyTo(stream);
-                    }
-                    photoPath = Photo.FileName;
-                }
-                var newMangaModel = context.mangaModels.FirstOrDefault(mm => mm.MangaName == _MangaModel.MangaName);
-                //var ListOfAssiocatedNames = names
-                var selectedTagLogs = Tags?.Where(x => SelectedChanges?.Contains(x.TagId) ?? false).ToList();
-                if (newMangaModel == null)
-                {
-                    MangaModel MangaModels = new MangaModel
-                    {
-                        MangaName = _MangaModel.MangaName,
-                        //AssociatedNames = new List<AssociatedNames> { ListOfAssiocatedNames },
-                        AssociatedNames = null,
-                        PhotoPath = photoPath,
-                        ReleaseYear = ReleaseYear,
-                        BlogModel = new BlogModel { mangaName = _MangaModel.MangaName },
-                        GroupScanlating = null,
-                        GroupScanlatingID = null,
-                        userModels = null,
-                        userId = null,
-                        futureEvents = null,
-                        AllLanguages = null,
-                        score = 10,
-                        StatusInCountryOfOrigin = "Unknown",
-                        relatedSeries = null,
-                        ISBN10 = null,
-                        ISBN13 = null,
-                        Authormodels = null,
-                        ArtistModels = null,
-                    };
+                    MangaName = _MangaModel.MangaName,
 
-                    context.mangaModels.Add(MangaModels);
-                    context.SaveChanges();
-                    SucessFulManga = "Manga has been created successfully";
+                    AssociatedNames = null,
+                    PhotoPath = photoPath,
 
-                    return RedirectToPage("/Index");
-                }
+                    BlogModel = new BlogModel { mangaName = _MangaModel.MangaName },
+                    GroupScanlating = null,
+                    GroupScanlatingID = null,
+                    userModels = null,
+                    userId = null,
+                    futureEvents = _MangaModel.futureEvents,
+                    AllLanguages = null,
+                    score = 10,
+                    StatusInCountryOfOrigin = _MangaModel.StatusInCountryOfOrigin,
+                    relatedSeries = null,
+                    ISBN10 = _MangaModel.ISBN10,
+                    ISBN13 = _MangaModel.ISBN13,
+                    Authormodels = null,
+                    ArtistModels = null,
+                    Description = _MangaModel.Description,
+                    ReleaseYear = ReleaseYear,
+                    EndingYear = EndingYear,
+                    Type = _MangaModel.Type,
+                    OfficalLanguage = _MangaModel.OfficalLanguage,
+                    OriginalPublisher = _MangaModel.orignalWebtoon,
+                    CompletelyTranslated = _MangaModel.CompletelyTranslated,
+                    WeekRead = 0,
+                    MonthRead = 0,
+                    YearRead = 0,
+                    StudioModels = null,
+                    reviews = null,
+                    BuyPages = null,
+                    OfficalWebsites = null,
+                    RecommendedMangaModels = null,
+                    orignalWebtoon = _MangaModel.orignalWebtoon,
+                    TagsModels = _MangaModel.TagsModels,
+                    Characters = null,
+                    GenresModels = null,
+                    BookAddedToDB = DateTime.Now,
+                    VoiceActors = null,
+                };
+
+                context.mangaModels.Add(MangaModels);
+                context.SaveChanges();
+                SucessFulManga = "Manga has been created successfully";
+
                 return RedirectToPage("/Index");
             }
+            return RedirectToPage("/Index");
+
             Tags = tagRepsitory.GetAllModels();
             MangaModels = mangaRepository.GetAllManga();
             return Page();
         }
 
-        public async Task OnGet()
+        public async Task<IActionResult> OnGetAsync()
         {
             Tags = await context.TagModels.ToListAsync();
-            MangaModels = mangaRepository.GetAllManga(); 
+            MangaModels = mangaRepository.GetAllManga();
 
+            return Page();
         }
 
         private string ProcessUploadedFile()
@@ -127,9 +161,9 @@ namespace NovelXManga.Pages.Manga
             string uniqueFileName = null;
             if (Photo != null)
             {
-                string uploadsFolder =
-                    Path.Combine(webHostEnvironment.WebRootPath, "images/MangaImage");
-                uniqueFileName = Guid.NewGuid().ToString() + ".png";
+                string uploadsFolder = Path.Combine(webHostEnvironment.WebRootPath, "Images", "MangaImage");
+                string extension = Path.GetExtension(Photo.FileName);
+                uniqueFileName = Guid.NewGuid().ToString() + extension;
                 string filePath = Path.Combine(uploadsFolder, uniqueFileName);
                 using (var fileStream = new FileStream(filePath, FileMode.Create))
                 {

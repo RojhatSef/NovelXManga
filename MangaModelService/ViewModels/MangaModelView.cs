@@ -29,6 +29,7 @@ namespace MangaModelService.ViewModels
         public string? Description { get; set; }
         public DateTime? ReleaseYear { get; set; }
         public DateTime? EndingYear { get; set; }
+        public DateTime? BookAddedToDB { get; set; }
         public virtual ICollection<AssociatedNames>? AssociatedNames { get; set; }
         public virtual ICollection<Languages> AllLanguages { get; set; }
         public virtual List<MangaModel>? RecommendedMangaModels { get; set; }
@@ -42,9 +43,11 @@ namespace MangaModelService.ViewModels
         public virtual ICollection<GroupScanlatingModel>? GroupScanlating { get; set; }
         public string? userId { get; set; }
         public virtual ICollection<UserModel>? userModels { get; set; }
+        public virtual ICollection<StudioModel>? StudioModels { get; set; }
         public virtual ICollection<GenresModel>? GenresModels { get; set; }
         public virtual ICollection<TagModel>? TagsModels { get; set; }
         public virtual ICollection<Character>? Characters { get; set; }
         public virtual ICollection<Review>? reviews { get; set; }
+        public virtual ICollection<BuyPage>? BuyPages { get; set; }
     }
 }

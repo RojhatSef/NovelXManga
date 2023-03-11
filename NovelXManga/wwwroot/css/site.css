@@ -200,6 +200,11 @@ main {
 }
 
 /* Styles for large screens */
+.large-screen
+#PushContentLeftForLargeScreen {
+    padding-left: 75px !important;
+}
+
 .large-screen .sidebar {
     width: 70px;
 }
@@ -227,6 +232,10 @@ main {
 
     .py-3 {
         margin-left: 0;
+    }
+
+    #HideWhenSmall {
+        display: none;
     }
 }
 
@@ -347,12 +356,6 @@ New shit added
 
 .contentCustom {
     flex-grow: 1;
-}
-
-@media (min-width: 992px) {
-    .content-container {
-        padding-left: -250px;
-    }
 }
 
 .carousel-section {

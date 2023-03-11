@@ -3,7 +3,6 @@ using MangaModelService;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.Threading.Channels;
 
 namespace NovelXManga.Pages.Manga
 {
@@ -39,7 +38,7 @@ namespace NovelXManga.Pages.Manga
             this.characterRepsitory = characterRepsitory;
         }
 
-        public IActionResult OnPostCreateReply(int parentId, string comment)
+        public IActionResult OnPostCreateReply(MangaModel id, int parentId, string comment)
         {
             var parentPost = Context.PostModels.FirstOrDefault(p => p.PostId == parentId);
 
@@ -47,7 +46,9 @@ namespace NovelXManga.Pages.Manga
             {
                 return NotFound();
             }
-
+            CurrentManga = mangaRepository.GetOneMangaAllIncluded(id.MangaID);
+            Blog = blogRepsitory.GetModel(CurrentManga.BlogModelId);
+            Posts = postRepsitory.GetAllModels();
             var reply = new PostModel
             {
                 Title = "Reply to " + parentPost.Title,
@@ -62,26 +63,19 @@ namespace NovelXManga.Pages.Manga
             return RedirectToAction("Index");
         }
 
-        // OnPost For characters
-        public IActionResult OnPostCharacters(int id, List<int> characters)
+        public IActionResult OnPost(MangaModel manga)
         {
-            var mangaModelUpdate = mangaRepository.GetOneMangaAllIncluded(id);
-
-            if (mangaModelUpdate == null)
+            if (manga.MangaID == 0)
             {
-                return NotFound();
+                NotFound();
             }
-
-            // Update the characters
-<<<<<<< HEAD
-            //mangaModelUpdate.Characters = await mangaRepository.GetCharactersByIdsAsync(characters);
-=======
-            mangaModelUpdate.Characters = characterRepsitory.GetCharactersByIds(characters).ToList();
->>>>>>> 0f4c54d64f62debee36ff8b12baf2adc41a4a0ad
-            Context.SaveChanges();
-
-            return RedirectToPage("/MangaUpdates/UpdateCharacters", new { id = mangaModelUpdate.MangaID });
+            CurrentManga = mangaRepository.GetOneMangaAllIncluded(manga.MangaID);
+            Blog = blogRepsitory.GetModel(CurrentManga.BlogModelId);
+            Posts = postRepsitory.GetAllModels();
+            return Page();
         }
+
+        // OnPost For characters
 
         public void OnGet(int id)
         {
@@ -92,6 +86,7 @@ namespace NovelXManga.Pages.Manga
             CurrentManga = mangaRepository.GetOneMangaAllIncluded(id);
             Blog = blogRepsitory.GetModel(CurrentManga.BlogModelId);
             Posts = postRepsitory.GetAllModels();
+            Page();
         }
     }
 }

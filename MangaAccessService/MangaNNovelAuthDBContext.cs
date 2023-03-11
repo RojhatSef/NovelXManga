@@ -42,8 +42,6 @@ namespace MangaAccessService
             .WithOne(i => i.BlogModel)
             .HasForeignKey<MangaModel>(b => b.BlogModelId);
 
-            modelBuilder.Entity<PostModel>().Navigation(e => e.Replies).AutoInclude();
-
             #region AutoNavagtions not needed
 
             //modelBuilder.Entity<MangaModel>().Navigation(e => e.Authormodels).AutoInclude();

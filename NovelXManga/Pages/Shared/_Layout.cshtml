@@ -19,9 +19,9 @@
 <div class="container-fluid">
     <div class="row flex-nowrap">
         <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 sidebar" id="CostumeSidebar">
-            <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+            <div class=" flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
                 <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                    <i class="bi bi-list fs-3"></i>
+                    <i id="HideWhenSmall" class="bi bi-list fs-3"></i>
                     <span class="fs-5 d-none d-sm-inline" id="logo">NovelXmanga</span>
                 </a>         @if (SignInManager.IsSignedIn(User))
                 {
@@ -46,6 +46,9 @@
                                 <li>
                                     <a href="#" class="nav-link px-0"> <span id="SidebarColors" class="d-none d-sm-inline">Random</span>  </a>
                                 </li>
+                                        <li>
+                                            <a asp-page="/Manga/CreateNewManga" class="nav-link px-0"> <span id="SidebarColors" class="d-none d-sm-inline">Create New Book</span>  </a>
+                                        </li>
                             </ul>
                         </li>
                         <li>
@@ -178,7 +181,7 @@
     </div>
 </div>
 <div id="sidebar-toggle" class="small-screen">
-    <i class="fa fa-bars"></i>
+            <i class="bi bi-list fs-3"></i>
 </div>
       
     </nav>
@@ -188,9 +191,9 @@
 
  <div class="content-container px-4" >
         <main role="main" id="CostumeSidebar" class="pb-3">
-           
+           <div id="PushContentLeftForLargeScreen">
                     @RenderBody()
-            
+            </div>
             
        
         </main>
@@ -199,12 +202,14 @@
  
 </body>
 
-@*    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>*@
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <script src="~/js/site.js" asp-append-version="true"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
   @*  try*@
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+   
 
     @await RenderSectionAsync("Scripts", required: false)
 
