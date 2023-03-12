@@ -6,15 +6,164 @@
     ViewData["Title"] = "Home page";
 }
 <div class="col py-3">
-   
-   @* <div class="container-fluid">
-        <div class="row row-1-item-1"><div class="col col-1-item-1"> 1</div> <div class="col col-1-item-2"> 2</div> </div>
-        <div class="row row-1-item-2">2 </div>
-        <div class="row row-1-item-3">3 </div>
 
-    </div>*@
-    @*Content*@  @*sddsadsadas LOREM dasdasdasddddddddddddddddddddddddddsadas*@
-    <div class="center">
+
+    <div class="container-fluid">
+
+        <div class="container my-5">
+            <div class="row">
+                <div class="col ms-md-5">
+
+                    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            @foreach (var book in Model.GetAllBooks.Take(2))
+                            {
+                                <div class="carousel-item @if (book == Model.GetAllBooks.First()) {
+                            <text>active</text>
+ }">
+                                        <div class="row">
+                                            <div class="col-md-6">
+
+
+                                            @if (User.IsInRole("NormalUser"))
+                                            {
+                                                                              <a asp-page="/MangaUpdates/UpdatePhoto"  asp-route-id="@book.MangaID">  <img src="~/Images/MangaImage/@book.PhotoPath" class="d-block w-100" alt="..."></a>
+                                            }
+                                            else
+                                            {
+                                                              <img src="~/Images/MangaImage/@book.PhotoPath" class="d-block w-100" alt="...">
+                                            }
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="caption-wrapper">
+                                                    <h5>@book.MangaName</h5>
+                                                    <h6>@book.Description</h6>
+                                                @if (User.IsInRole("NormalUser"))
+                                                {
+                                                    <a asp-page="/MangaUpdates/UpdateDescription" asp-route-id="@book.MangaID" class="btn btn-success">Update Description</a>
+                                                }<p> Tag/s: </p>
+                                                <ul class="list-unstyled">
+                                                    @foreach (var tag in book.TagsModels)
+                                                    {
+                                                                <li class="coolGenre">@tag.TagName</li>
+                                                    }
+
+
+                                                    </ul>
+                                                @if (User.IsInRole("NormalUser"))
+                                                {
+                                                    <a asp-page="/MangaUpdates/UpdateTags" asp-route-id="@book.MangaID" class="btn btn-primary">Update Tag</a>
+                                                }
+                                                    <p style="color:red"> Genre/s: </p>
+                                                        <ul class="list-unstyled">
+                                                    @foreach (var genre in book.GenresModels)
+                                                    {
+                                                                <li class="coolGenre">@genre.GenreName</li>
+                                                    }
+                                                        </ul>      @if (User.IsInRole("NormalUser"))
+                                                {
+                                                    <a asp-page="/MangaUpdates/UpdateGenre" asp-route-id="@book.MangaID" class="btn btn-success">Update Genre</a>
+                                                }
+                                            </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            }
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        @*  <div class="wrapperCustom">
+        <div class="wrapper-innerCustom">
+        <div class="item">
+
+
+        <div class="titelCustom">Titel here...</div>
+        <div class="contentCustom">
+        content goes here. this box has to grow until the space is filled.
+        </div>
+
+        </div>
+        </div>
+
+
+        </div>*@
+
+
+        <section class="all-manga-section">
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                @foreach (var book in Model.GetAllBooks.Skip(2))
+                {
+                    <div class="col py-3">
+                        <div class="card mb-3 card-with-margin-top">
+                            <div class="row g-0">
+                                <div class="col-md-4">
+                                    @if (book.PhotoPath != string.Empty)
+                                    {
+                                        <img asp-append-version="true" src="~/Images/MangaImage/@book.PhotoPath" alt="NoImage" class="card-img-top">
+                                    }
+                                    else
+                                    {
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png" alt="BookImage" class="card-img-top">
+                                    }
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        @if (book.MangaName != null)
+                                        {
+                                            <h3 class="card-title">@book.MangaName</h3>
+                                        }
+
+                                        <div>Tags: </div>       @if (book.TagsModels != null)
+                                        {
+                                            @foreach (var item in book.TagsModels)
+                                            {
+                                                <label class="form-label">@item.TagName | </label>
+                                            }
+                                        }
+
+                                        <div>Genre: </div>
+                                        @if (book.GenresModels != null)
+                                        {
+                                            @foreach (var item in book.GenresModels)
+                                            {
+                                                <label class="form-label">@item.GenreName | </label>
+                                            }
+                                        }
+
+                                        @if (book.Description != null)
+                                        {
+                                            <div class="card-text mb-3">
+                                                <label class="form-label">Description: @book.Description</label>
+                                            </div>
+                                        }
+                                        @if (User.IsInRole("NormalUser")){
+                                               <a asp-page="/Manga/CurrentManga" asp-route-id="@book.MangaID" class="btn btn-primary">View</a>
+                                        <a asp-page="/Manga/UpdateManga" asp-route-id="@book.MangaID" class="btn btn-primary">Edit</a>
+                                        }
+                                     
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </section>
+
+    </div>
+@*    <div class="center">
         <div class="property-card">
             <a href="#">
                 <div class="property-image">
@@ -29,6 +178,6 @@
             </div>
     
         </div>
-    </div>
+    </div>*@
     <div class=""></div>
 </div>
