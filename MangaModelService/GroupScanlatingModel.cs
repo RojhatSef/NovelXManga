@@ -24,6 +24,7 @@ namespace MangaModelService
         public virtual ICollection<MangaModel>? MangaModels { get; set; }
         public string? userID { get; set; }
         public virtual ICollection<UserModel>? userModels { get; set; }
+        public bool IsChecked { get; set; }
         //ICollection<MangaModel> mangaModels { get; set; }
     }
 }

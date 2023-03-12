@@ -12,5 +12,7 @@ namespace MangaModelService
 
         [Required]
         public string BuyWebsite { get; set; }
+
+        public bool isChecked { get; set; }
     }
 }

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MangaAccessService.Migrations
 {
-    public partial class Character : Migration
+    public partial class IsCheckedAdded : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -29,7 +29,8 @@ namespace MangaAccessService.Migrations
                     WorkingAt = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ArtistBorn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ArtistDeath = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Contact = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Contact = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    isChecked = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -68,6 +69,7 @@ namespace MangaAccessService.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Twitter = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedAcc = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsChecked = table.Column<bool>(type: "bit", nullable: true),
                     groupScanlationID = table.Column<int>(type: "int", nullable: true),
                     MangaModelId = table.Column<int>(type: "int", nullable: true),
                     postModelID = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -112,7 +114,8 @@ namespace MangaAccessService.Migrations
                     LastUpdate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     AuthorBorn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     AuthorDeath = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Contact = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Contact = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    isChecked = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -125,7 +128,8 @@ namespace MangaAccessService.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    BuyWebsite = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    BuyWebsite = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    isChecked = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -144,7 +148,8 @@ namespace MangaAccessService.Migrations
                     chapterNumber = table.Column<int>(type: "int", nullable: true),
                     chapterName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     chapterLinkNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    GroupScanlatingID = table.Column<int>(type: "int", nullable: false)
+                    GroupScanlatingID = table.Column<int>(type: "int", nullable: false),
+                    isChecked = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -179,7 +184,8 @@ namespace MangaAccessService.Migrations
                     Hobbies = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Dislikes = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Likes = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PersonalityTraits = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    PersonalityTraits = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    isChecked = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -193,7 +199,8 @@ namespace MangaAccessService.Migrations
                     CompletedBookListID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     MangaModelId = table.Column<int>(type: "int", nullable: true),
-                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    isChecked = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -207,7 +214,8 @@ namespace MangaAccessService.Migrations
                     DroppedId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     MangaModelId = table.Column<int>(type: "int", nullable: true),
-                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    isChecked = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -221,7 +229,8 @@ namespace MangaAccessService.Migrations
                     FavoritBookListId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     MangaModelId = table.Column<int>(type: "int", nullable: true),
-                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    isChecked = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -255,6 +264,7 @@ namespace MangaAccessService.Migrations
                     postComment = table.Column<string>(type: "nvarchar(750)", maxLength: 750, nullable: false),
                     score = table.Column<double>(type: "float", nullable: true),
                     CommentPostedTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsChecked = table.Column<bool>(type: "bit", nullable: false),
                     UserID = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ParentPostId = table.Column<int>(type: "int", nullable: true)
                 },
@@ -275,7 +285,8 @@ namespace MangaAccessService.Migrations
                     ReadId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     MangaModelId = table.Column<int>(type: "int", nullable: true),
-                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsChecked = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -291,7 +302,8 @@ namespace MangaAccessService.Migrations
                     BookScore = table.Column<int>(type: "int", nullable: false),
                     voteReview = table.Column<int>(type: "int", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Content = table.Column<string>(type: "nvarchar(750)", maxLength: 750, nullable: false)
+                    Content = table.Column<string>(type: "nvarchar(750)", maxLength: 750, nullable: false),
+                    IsChecked = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -337,7 +349,8 @@ namespace MangaAccessService.Migrations
                     LastUpdate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     VoiceBorn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     VoiceDeath = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Contact = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Contact = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsChecked = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -351,7 +364,8 @@ namespace MangaAccessService.Migrations
                     WishBookListId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     MangaModelId = table.Column<int>(type: "int", nullable: true),
-                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsChecked = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -472,6 +486,7 @@ namespace MangaAccessService.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     mangaName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     MangaId = table.Column<int>(type: "int", nullable: false),
+                    isChecked = table.Column<bool>(type: "bit", nullable: false),
                     UserModelId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
@@ -727,6 +742,7 @@ namespace MangaAccessService.Migrations
                     BlogModelId = table.Column<int>(type: "int", nullable: false),
                     GroupScanlatingID = table.Column<int>(type: "int", nullable: true),
                     userId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsChecked = table.Column<bool>(type: "bit", nullable: false),
                     CompletedBookListID = table.Column<int>(type: "int", nullable: true),
                     DroppedBookListDroppedId = table.Column<int>(type: "int", nullable: true),
                     FavoritBookListId = table.Column<int>(type: "int", nullable: true),
@@ -901,6 +917,7 @@ namespace MangaAccessService.Migrations
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     MangaModelId = table.Column<int>(type: "int", nullable: true),
                     userID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsChecked = table.Column<bool>(type: "bit", nullable: false),
                     Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Biography = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Works = table.Column<int>(type: "int", nullable: true),
@@ -1050,6 +1067,7 @@ namespace MangaAccessService.Migrations
                     ArtistId = table.Column<int>(type: "int", nullable: true),
                     VoiceActorId = table.Column<int>(type: "int", nullable: true),
                     CharacterId = table.Column<int>(type: "int", nullable: true),
+                    isChecked = table.Column<bool>(type: "bit", nullable: false),
                     GroupScanlatingModelGroupScanlatingID = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -1179,7 +1197,8 @@ namespace MangaAccessService.Migrations
                     AuthorID = table.Column<int>(type: "int", nullable: true),
                     ArtistId = table.Column<int>(type: "int", nullable: true),
                     VoiceActorId = table.Column<int>(type: "int", nullable: true),
-                    CharacterId = table.Column<int>(type: "int", nullable: true)
+                    CharacterId = table.Column<int>(type: "int", nullable: true),
+                    IsChecked = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -1224,6 +1243,7 @@ namespace MangaAccessService.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     LanguageName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     MangaID = table.Column<int>(type: "int", nullable: true),
+                    IsChecked = table.Column<bool>(type: "bit", nullable: false),
                     OfficalWebsiteOfficalID = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>

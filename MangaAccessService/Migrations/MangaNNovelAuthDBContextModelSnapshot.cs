@@ -328,6 +328,9 @@ namespace MangaAccessService.Migrations
                     b.Property<string>("WorkingAt")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("isChecked")
+                        .HasColumnType("bit");
+
                     b.Property<string>("reddit")
                         .HasColumnType("nvarchar(max)");
 
@@ -361,6 +364,9 @@ namespace MangaAccessService.Migrations
 
                     b.Property<int?>("VoiceActorId")
                         .HasColumnType("int");
+
+                    b.Property<bool>("isChecked")
+                        .HasColumnType("bit");
 
                     b.Property<int?>("mangaModelMangaID")
                         .HasColumnType("int");
@@ -440,6 +446,9 @@ namespace MangaAccessService.Migrations
                     b.Property<string>("WorkingAt")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("isChecked")
+                        .HasColumnType("bit");
+
                     b.Property<string>("reddit")
                         .HasColumnType("nvarchar(max)");
 
@@ -461,6 +470,9 @@ namespace MangaAccessService.Migrations
 
                     b.Property<string>("UserModelId")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("isChecked")
+                        .HasColumnType("bit");
 
                     b.Property<string>("mangaName")
                         .IsRequired()
@@ -484,6 +496,9 @@ namespace MangaAccessService.Migrations
                     b.Property<string>("BuyWebsite")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("isChecked")
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
@@ -520,6 +535,9 @@ namespace MangaAccessService.Migrations
 
                     b.Property<DateTime>("dateRelease")
                         .HasColumnType("datetime2");
+
+                    b.Property<bool>("isChecked")
+                        .HasColumnType("bit");
 
                     b.HasKey("chapterID");
 
@@ -601,6 +619,9 @@ namespace MangaAccessService.Migrations
                     b.Property<string>("World")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("isChecked")
+                        .HasColumnType("bit");
+
                     b.Property<string>("specie")
                         .HasColumnType("nvarchar(max)");
 
@@ -623,6 +644,9 @@ namespace MangaAccessService.Migrations
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("isChecked")
+                        .HasColumnType("bit");
+
                     b.HasKey("CompletedBookListID");
 
                     b.ToTable("completedBookLists");
@@ -642,6 +666,9 @@ namespace MangaAccessService.Migrations
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("isChecked")
+                        .HasColumnType("bit");
+
                     b.HasKey("DroppedId");
 
                     b.ToTable("droppedBookLists");
@@ -660,6 +687,9 @@ namespace MangaAccessService.Migrations
 
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("isChecked")
+                        .HasColumnType("bit");
 
                     b.HasKey("FavoritBookListId");
 
@@ -714,6 +744,9 @@ namespace MangaAccessService.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsChecked")
+                        .HasColumnType("bit");
+
                     b.Property<int?>("MangaModelId")
                         .HasColumnType("int");
 
@@ -740,6 +773,9 @@ namespace MangaAccessService.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("languageId"), 1L, 1);
+
+                    b.Property<bool>("IsChecked")
+                        .HasColumnType("bit");
 
                     b.Property<string>("LanguageName")
                         .IsRequired()
@@ -798,6 +834,9 @@ namespace MangaAccessService.Migrations
 
                     b.Property<string>("ISBN13")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsChecked")
+                        .HasColumnType("bit");
 
                     b.Property<string>("MangaName")
                         .IsRequired()
@@ -892,6 +931,9 @@ namespace MangaAccessService.Migrations
                     b.Property<string>("Instagram")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsChecked")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Line")
                         .HasColumnType("nvarchar(max)");
 
@@ -949,6 +991,9 @@ namespace MangaAccessService.Migrations
                     b.Property<DateTime>("CommentPostedTime")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool>("IsChecked")
+                        .HasColumnType("bit");
+
                     b.Property<int?>("ParentPostId")
                         .HasColumnType("int");
 
@@ -981,6 +1026,9 @@ namespace MangaAccessService.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ReadId"), 1L, 1);
 
+                    b.Property<bool>("IsChecked")
+                        .HasColumnType("bit");
+
                     b.Property<int?>("MangaModelId")
                         .HasColumnType("int");
 
@@ -1007,6 +1055,9 @@ namespace MangaAccessService.Migrations
                         .IsRequired()
                         .HasMaxLength(750)
                         .HasColumnType("nvarchar(750)");
+
+                    b.Property<bool>("IsChecked")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -1079,6 +1130,9 @@ namespace MangaAccessService.Migrations
                     b.Property<string>("Gender")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsChecked")
+                        .HasColumnType("bit");
+
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
@@ -1121,6 +1175,9 @@ namespace MangaAccessService.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("WishBookListId"), 1L, 1);
+
+                    b.Property<bool?>("IsChecked")
+                        .HasColumnType("bit");
 
                     b.Property<int?>("MangaModelId")
                         .HasColumnType("int");
@@ -1494,6 +1551,9 @@ namespace MangaAccessService.Migrations
                     b.Property<string>("ForumName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsChecked")
+                        .HasColumnType("bit");
 
                     b.Property<int?>("MangaModelId")
                         .HasColumnType("int");

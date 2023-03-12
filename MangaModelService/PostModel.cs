@@ -18,7 +18,7 @@ namespace MangaModelService
         public DateTime CommentPostedTime { get; set; }
 
         public virtual ICollection<BlogModel>? BlogModels { get; set; }
-
+        public bool IsChecked { get; set; }
         public string? UserID { get; set; }
 
         public virtual ICollection<UserModel>? UserModel { get; set; }

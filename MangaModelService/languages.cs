@@ -13,5 +13,6 @@ namespace MangaModelService
         public int? MangaID { get; set; }
         public virtual ICollection<MangaModel>? MangaModels { get; set; }
         public virtual ICollection<BuyPage> BuyPages { get; set; }
+        public bool IsChecked { get; set; }
     }
 }

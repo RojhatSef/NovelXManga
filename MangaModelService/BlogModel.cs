@@ -6,11 +6,15 @@ namespace MangaModelService
     {
         [Key]
         public int BlogModelId { get; set; }
+
         public string mangaName { get; set; }
         public virtual ICollection<PostModel>? postsModel { get; set; }
 
         public int MangaId { get; set; }
+
         [Required]
         public MangaModel MangaModel { get; set; }
+
+        public bool isChecked { get; set; }
     }
 }

@@ -27,5 +27,6 @@ namespace MangaModelService
         public DateTime? ArtistDeath { get; set; }
         public string? Contact { get; set; }
         public virtual ICollection<MangaModel>? MangaModels { get; set; }
+        public bool isChecked { get; set; }
     }
 }

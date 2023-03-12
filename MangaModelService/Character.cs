@@ -32,7 +32,7 @@ namespace MangaModelService
         public string? Dislikes { get; set; }
         public string? Likes { get; set; }
         public string? PersonalityTraits { get; set; }
-
+        public bool isChecked { get; set; }
         public virtual ICollection<OfficalWebsite>? OfficalWebsites { get; set; }
         public virtual ICollection<Character>? Partner_s { get; set; }
         public virtual ICollection<Character>? Family { get; set; }

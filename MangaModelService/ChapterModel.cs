@@ -17,6 +17,7 @@ namespace MangaModelService
 
         public int GroupScanlatingID { get; set; }
         public virtual ICollection<GroupScanlatingModel> GroupScanlatingModels { get; set; }
+        public bool isChecked { get; set; }
 
         //public int MangaId { get; set; }
         //public MangaModel mangaModel { get; set; }

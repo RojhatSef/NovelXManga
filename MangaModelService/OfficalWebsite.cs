@@ -48,5 +48,6 @@ namespace MangaModelService
 
         public Character? Characters { get; set; }
         public ICollection<Languages>? Languages { get; set; }
+        public bool IsChecked { get; set; }
     }
 }

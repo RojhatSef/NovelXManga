@@ -6,8 +6,10 @@ namespace MangaModelService
     {
         [Key]
         public int AuthorID { get; set; }
+
         [Required]
         public string FirstName { get; set; }
+
         public string? LastName { get; set; }
         public string? PhotoPath { get; set; }
         public string? Gender { get; set; }
@@ -26,5 +28,6 @@ namespace MangaModelService
         public DateTime? AuthorDeath { get; set; }
         public string? Contact { get; set; }
         public virtual ICollection<MangaModel>? MangaModels { get; set; }
+        public bool isChecked { get; set; }
     }
 }

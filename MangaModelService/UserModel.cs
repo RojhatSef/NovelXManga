@@ -28,7 +28,7 @@ namespace MangaModelService
 
         public string? Twitter { get; set; }
         public DateTime? CreatedAcc { get; set; }
-
+        public bool IsChecked { get; set; }
         public virtual ICollection<BlogModel>? UserBlogModel { get; set; }
 
         //navigation

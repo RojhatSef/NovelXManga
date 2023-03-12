@@ -11,5 +11,6 @@
 
         public string? StudioWebsite { get; set; }
         public ICollection<MangaModel> MangaModels { get; set; }
+        public bool IsChecked { get; set; }
     }
 }
