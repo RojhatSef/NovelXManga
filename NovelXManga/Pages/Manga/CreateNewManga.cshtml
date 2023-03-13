@@ -1,7 +1,9 @@
-﻿@page
+﻿
+@page
 @model NovelXManga.Pages.Manga.Create_new_MangaModel
 @{
     var photoPath = "/uploads/" + (@Model._MangaModel?.PhotoPath ?? "NoPhoto.png");
+
 }
    
 
@@ -20,17 +22,27 @@
          
                 <h4>Select Multiple Tags</h4>
 
-                <p>Not working Yet </p> 
-                <p> Genres and tags not working yet</p>
-
-                <select multiple class="form-control" asp-for="SelectedTags" id="tag-dropdown">
-                    @foreach (var tag in Model.Tags)
-                    {
-                        <option value="@tag.TagId" id="tag-@tag.TagId" name="selectedTags" data-selected="@((Model != null && Model.SelectedTags != null && Model.SelectedTags.Contains(tag.TagId)) ? "true" : null)">
-                            @tag.TagName
-                        </option>
-                    }
-                </select>
+            
+                <p> Hiding tags not working yet</p>
+                <div class="form-group">
+                    <label for="tags">Tags:</label>
+                    <button type="button" class="btn btn-secondary mb-3" id="toggleTags">Show/Hide Tags</button>
+                    <div id="HideTagsWhen" class="row hidden-tags">
+                        @foreach (var tag in Model.Tags)
+                        {
+                            if (Model.Tags.IndexOf(tag) % 3 == 0)
+                            {
+                                @Html.Raw("</div><div class=\"row\">")
+                            }
+                            <div class="form-check col-md-4">
+                                <input type="checkbox" class="form-check-input" id="tag-@tag.TagId" name="selectedTags" value="@tag.TagId" @(Model.SelectedTags != null && Model.SelectedTags.Contains(tag.TagId) ? "checked" : "")>
+                                <label class="form-check-label" for="tag-@tag.TagId">@tag.TagName</label>
+                            </div>
+                        }
+                    
+                    </div>
+                </div>
+           
   
              
                 <div class="mb-3">
@@ -195,68 +207,7 @@
                     <button type="submit" class="btn btn-primary">Save Book </button>
                 </div>
 
-                @section scripts {
-                    <script>
-                        $(function () {
-                            // Intercept form submit and submit via AJAX instead
-                            $("#create-manga-form").submit(function (event) {
-                                event.preventDefault();
-                                var formData = new FormData($(this)[0]);
-
-                                $.ajax({
-                                    url: "@Url.Action("CreateNewManga", "Manga")",
-                                    type: "POST",
-                                    data: formData,
-                                    cache: false,
-                                    contentType: false,
-                                    processData: false,
-                                    success: function (result) {
-                                        // Handle successful response
-                                        console.log(result);
-                                    },
-                                    error: function (xhr, status, error) {
-                                        // Handle error response
-                                        console.error(xhr.responseText);
-                                    }
-                                });
-                            });
-                        });
-                    </script>
-                    
-<script>
-    $(function () {
-        $('select[multiple]').select2({
-            width: '100%',
-            placeholder: 'Select related series...',
-            allowClear: true,
-            minimumInputLength: 3,
-            ajax: {
-                url: '/Manga/Search',
-                dataType: 'json',
-                delay: 250,
-                data: function (params) {
-                    return {
-                        q: params.term
-                    };
-                },
-                processResults: function (data) {
-                    return {
-                        results: $.map(data, function (manga) {
-                            return {
-                                id: manga.mangaID,
-                                text: manga.mangaName
-                            };
-                        })
-                    };
-                },
-                cache: true
-            }
-        });
-    });
-</script>
-                   
-
-                }
+            
             </form>
 
         </div>
