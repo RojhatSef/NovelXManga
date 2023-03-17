@@ -1,4 +1,5 @@
 ﻿using MangaModelService;
+using Microsoft.EntityFrameworkCore;
 
 namespace MangaAccessService
 {
@@ -50,7 +51,56 @@ namespace MangaAccessService
 
         public AssociatedNames Update(AssociatedNames UpdateModel)
         {
-            throw new NotImplementedException();
+            var currentModel = context.AssociatedNames.Attach(UpdateModel);
+            currentModel.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            context.SaveChanges();
+            return UpdateModel;
+        }
+
+        public async Task<AssociatedNames> AddAsync(AssociatedNames AddAsync)
+        {
+            await context.AssociatedNames.AddAsync(AddAsync);
+            await context.SaveChangesAsync();
+            return AddAsync;
+        }
+
+        public async Task<AssociatedNames> DeleteAsync(int idAsync)
+        {
+            AssociatedNames modelToDelete = await context.AssociatedNames.FindAsync(idAsync);
+            if (modelToDelete != null)
+            {
+                context.AssociatedNames.Remove(modelToDelete);
+                await context.SaveChangesAsync();
+            }
+            return modelToDelete;
+        }
+
+        public async Task<IEnumerable<AssociatedNames>> GetAllModelAsync()
+        {
+            return await context.AssociatedNames.ToListAsync();
+        }
+
+        public async Task<AssociatedNames> GetModelAsync(int idAsync)
+        {
+            var CurrentModel = await context.AssociatedNames.FindAsync(idAsync);
+            return CurrentModel;
+        }
+
+        public async Task<AssociatedNames> UpdateAsync(AssociatedNames UpdateModelAsync)
+        {
+            var modelUpdate = context.AssociatedNames.Attach(UpdateModelAsync);
+            modelUpdate.State = EntityState.Modified;
+            await context.SaveChangesAsync();
+            return UpdateModelAsync;
+        }
+
+        public async Task<IEnumerable<AssociatedNames>> SearchAsync(string searchTermAsync)
+        {
+            if (string.IsNullOrEmpty(searchTermAsync))
+            {
+                return await context.AssociatedNames.ToListAsync();
+            }
+            return await context.AssociatedNames.Where(s => s.nameString.Contains(searchTermAsync)).ToListAsync();
         }
     }
 }

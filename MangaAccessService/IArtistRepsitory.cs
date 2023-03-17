@@ -15,5 +15,17 @@ namespace MangaAccessService
         ArtistModel Add(ArtistModel addNewModel);
 
         ArtistModel Delete(int id);
+
+        Task<IEnumerable<ArtistModel>> SearchAsync(string searchTermAsync);
+
+        Task<IEnumerable<ArtistModel>> GetAllModelAsync();
+
+        Task<ArtistModel> GetModelAsync(int idAsync);
+
+        Task<ArtistModel> UpdateAsync(ArtistModel UpdateModelAsync);
+
+        Task<ArtistModel> AddAsync(ArtistModel AddAsync);
+
+        Task<ArtistModel> DeleteAsync(int idAsync);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using MangaModelService;
+using Microsoft.EntityFrameworkCore;
 
 namespace MangaAccessService
 {
@@ -54,6 +55,52 @@ namespace MangaAccessService
             currentModel.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             context.SaveChanges();
             return UpdateModel;
+        }
+
+        public async Task<GroupScanlatingModel> AddAsync(GroupScanlatingModel AddAsync)
+        {
+            await context.groupScanlatingModels.AddAsync(AddAsync);
+            await context.SaveChangesAsync();
+            return AddAsync;
+        }
+
+        public async Task<GroupScanlatingModel> DeleteAsync(int idAsync)
+        {
+            GroupScanlatingModel modelToDelete = await context.groupScanlatingModels.FindAsync(idAsync);
+            if (modelToDelete != null)
+            {
+                context.groupScanlatingModels.Remove(modelToDelete);
+                await context.SaveChangesAsync();
+            }
+            return modelToDelete;
+        }
+
+        public async Task<IEnumerable<GroupScanlatingModel>> GetAllModelAsync()
+        {
+            return await context.groupScanlatingModels.ToListAsync();
+        }
+
+        public async Task<GroupScanlatingModel> GetModelAsync(int idAsync)
+        {
+            var CurrentModel = await context.groupScanlatingModels.FindAsync(idAsync);
+            return CurrentModel;
+        }
+
+        public async Task<GroupScanlatingModel> UpdateAsync(GroupScanlatingModel UpdateModelAsync)
+        {
+            var modelUpdate = context.groupScanlatingModels.Attach(UpdateModelAsync);
+            modelUpdate.State = EntityState.Modified;
+            await context.SaveChangesAsync();
+            return UpdateModelAsync;
+        }
+
+        public async Task<IEnumerable<GroupScanlatingModel>> SearchAsync(string searchTermAsync)
+        {
+            if (string.IsNullOrEmpty(searchTermAsync))
+            {
+                return await context.groupScanlatingModels.ToListAsync();
+            }
+            return await context.groupScanlatingModels.Where(s => s.GroupName.Contains(searchTermAsync)).ToListAsync();
         }
     }
 }

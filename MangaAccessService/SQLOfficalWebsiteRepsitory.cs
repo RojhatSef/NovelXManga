@@ -1,4 +1,5 @@
 ﻿using MangaModelService;
+using Microsoft.EntityFrameworkCore;
 
 namespace MangaAccessService
 {
@@ -54,6 +55,52 @@ namespace MangaAccessService
             currentModel.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             context.SaveChanges();
             return UpdateModel;
+        }
+
+        public async Task<OfficalWebsite> AddAsync(OfficalWebsite AddAsync)
+        {
+            await context.OfficalWebsites.AddAsync(AddAsync);
+            await context.SaveChangesAsync();
+            return AddAsync;
+        }
+
+        public async Task<OfficalWebsite> DeleteAsync(int idAsync)
+        {
+            OfficalWebsite modelToDelete = await context.OfficalWebsites.FindAsync(idAsync);
+            if (modelToDelete != null)
+            {
+                context.OfficalWebsites.Remove(modelToDelete);
+                await context.SaveChangesAsync();
+            }
+            return modelToDelete;
+        }
+
+        public async Task<IEnumerable<OfficalWebsite>> GetAllModelAsync()
+        {
+            return await context.OfficalWebsites.ToListAsync();
+        }
+
+        public async Task<OfficalWebsite> GetModelAsync(int idAsync)
+        {
+            var CurrentModel = await context.OfficalWebsites.FindAsync(idAsync);
+            return CurrentModel;
+        }
+
+        public async Task<OfficalWebsite> UpdateAsync(OfficalWebsite UpdateModelAsync)
+        {
+            var modelUpdate = context.OfficalWebsites.Attach(UpdateModelAsync);
+            modelUpdate.State = EntityState.Modified;
+            await context.SaveChangesAsync();
+            return UpdateModelAsync;
+        }
+
+        public async Task<IEnumerable<OfficalWebsite>> SearchAsync(string searchTermAsync)
+        {
+            if (string.IsNullOrEmpty(searchTermAsync))
+            {
+                return await context.OfficalWebsites.ToListAsync();
+            }
+            return await context.OfficalWebsites.Where(s => s.OfficalWebsiteName.Contains(searchTermAsync)).ToListAsync();
         }
     }
 }

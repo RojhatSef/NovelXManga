@@ -1,4 +1,5 @@
 ﻿using MangaModelService;
+using Microsoft.EntityFrameworkCore;
 
 namespace MangaAccessService
 {
@@ -54,6 +55,52 @@ namespace MangaAccessService
             assigment.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             context.SaveChanges();
             return updateAuthorModel;
+        }
+
+        public async Task<AuthorModel> AddAsync(AuthorModel AddAsync)
+        {
+            await context.authorModels.AddAsync(AddAsync);
+            await context.SaveChangesAsync();
+            return AddAsync;
+        }
+
+        public async Task<AuthorModel> DeleteAsync(int idAsync)
+        {
+            AuthorModel modelToDelete = await context.authorModels.FindAsync(idAsync);
+            if (modelToDelete != null)
+            {
+                context.authorModels.Remove(modelToDelete);
+                await context.SaveChangesAsync();
+            }
+            return modelToDelete;
+        }
+
+        public async Task<IEnumerable<AuthorModel>> GetAllModelAsync()
+        {
+            return await context.authorModels.ToListAsync();
+        }
+
+        public async Task<AuthorModel> GetModelAsync(int idAsync)
+        {
+            var CurrentModel = await context.authorModels.FindAsync(idAsync);
+            return CurrentModel;
+        }
+
+        public async Task<AuthorModel> UpdateAsync(AuthorModel UpdateModelAsync)
+        {
+            var modelUpdate = context.authorModels.Attach(UpdateModelAsync);
+            modelUpdate.State = EntityState.Modified;
+            await context.SaveChangesAsync();
+            return UpdateModelAsync;
+        }
+
+        public async Task<IEnumerable<AuthorModel>> SearchAsync(string searchTermAsync)
+        {
+            if (string.IsNullOrEmpty(searchTermAsync))
+            {
+                return await context.authorModels.ToListAsync();
+            }
+            return await context.authorModels.Where(e => e.FirstName.Contains(searchTermAsync) || e.LastName.Contains(searchTermAsync) || e.NameInNative.Contains(searchTermAsync)).ToListAsync();
         }
     }
 }

@@ -5,15 +5,21 @@
     var photoPath = "/uploads/" + (@Model._MangaModel?.PhotoPath ?? "NoPhoto.png");
 
 }
-   
 
 
 
+<button id="addRow" type="button" class="btn btn-info">Add</button>
+<form method="post" asp-page-handler="Author" >
+    <div id="newRow">
+        <input type="hidden" id="total" value="0" />
+    </div>
+    <input type="submit" class="btn btn-primary" value="Post" />
+</form>
 <div class="container mt-5">
  <h3>@Model.SucessFulManga</h3>
     <div class="row justify-content-center align-items-center">
         <div class="col-sm-12 col-md-12 col-1g-4">
-                <form id="create-manga-form" method=post enctype="multipart/form-data">
+                <form id="create-manga-form" method=post asp-page-handler="AddBook" enctype="multipart/form-data">
                 <input hidden asp-for="_MangaModel.MangaID" />
                 <input hidden asp-for="_MangaModel.BlogModel" />
                 <input hidden asp-for="_MangaModel.BlogModelId" />
@@ -175,6 +181,11 @@
     <input asp-for="_MangaModel.AllLanguages" class="form-control" multiple />
     <span asp-validation-for="_MangaModel.AllLanguages" class="text-danger"></span>
 </div>
+
+
+              
+            
+
                 <p>Not working Yet</p>
 <div class="mb-3">
     <label class="form-label" asp-for="_MangaModel.RecommendedMangaModels">Recommended Manga Models</label>

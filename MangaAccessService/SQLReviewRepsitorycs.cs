@@ -1,4 +1,5 @@
 ﻿using MangaModelService;
+using Microsoft.EntityFrameworkCore;
 
 namespace MangaAccessService
 {
@@ -54,6 +55,52 @@ namespace MangaAccessService
             currentModel.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             context.SaveChanges();
             return UpdateModel;
+        }
+
+        public async Task<Review> AddAsync(Review AddAsync)
+        {
+            await context.Reviews.AddAsync(AddAsync);
+            await context.SaveChangesAsync();
+            return AddAsync;
+        }
+
+        public async Task<Review> DeleteAsync(int idAsync)
+        {
+            Review modelToDelete = await context.Reviews.FindAsync(idAsync);
+            if (modelToDelete != null)
+            {
+                context.Reviews.Remove(modelToDelete);
+                await context.SaveChangesAsync();
+            }
+            return modelToDelete;
+        }
+
+        public async Task<IEnumerable<Review>> GetAllModelAsync()
+        {
+            return await context.Reviews.ToListAsync();
+        }
+
+        public async Task<Review> GetModelAsync(int idAsync)
+        {
+            var CurrentModel = await context.Reviews.FindAsync(idAsync);
+            return CurrentModel;
+        }
+
+        public async Task<Review> UpdateAsync(Review UpdateModelAsync)
+        {
+            var modelUpdate = context.Reviews.Attach(UpdateModelAsync);
+            modelUpdate.State = EntityState.Modified;
+            await context.SaveChangesAsync();
+            return UpdateModelAsync;
+        }
+
+        public async Task<IEnumerable<Review>> SearchAsync(string searchTermAsync)
+        {
+            if (string.IsNullOrEmpty(searchTermAsync))
+            {
+                return await context.Reviews.ToListAsync();
+            }
+            return await context.Reviews.Where(s => s.Title.Contains(searchTermAsync)).ToListAsync();
         }
     }
 }

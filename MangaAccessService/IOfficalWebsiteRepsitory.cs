@@ -15,5 +15,17 @@ namespace MangaAccessService
         OfficalWebsite Add(OfficalWebsite addNewModel);
 
         OfficalWebsite Delete(int id);
+
+        Task<IEnumerable<OfficalWebsite>> SearchAsync(string searchTermAsync);
+
+        Task<IEnumerable<OfficalWebsite>> GetAllModelAsync();
+
+        Task<OfficalWebsite> GetModelAsync(int idAsync);
+
+        Task<OfficalWebsite> UpdateAsync(OfficalWebsite UpdateModelAsync);
+
+        Task<OfficalWebsite> AddAsync(OfficalWebsite AddAsync);
+
+        Task<OfficalWebsite> DeleteAsync(int idAsync);
     }
 }

@@ -76,5 +76,70 @@ namespace MangaAccessService.Migrations
             mangaNNovelAuthDBContext.SaveChanges();
             return updatedManga;
         }
+
+        public async Task<MangaModel> AddAsync(MangaModel NewManga)
+        {
+            await mangaNNovelAuthDBContext.mangaModels.AddAsync(NewManga);
+            await mangaNNovelAuthDBContext.SaveChangesAsync();
+            return NewManga;
+        }
+
+        public async Task<MangaModel> DeleteAsync(int id)
+        {
+            MangaModel mangaModel = await mangaNNovelAuthDBContext.mangaModels.FindAsync(id);
+            if (mangaModel != null)
+            {
+                mangaNNovelAuthDBContext.mangaModels.Remove(mangaModel);
+                await mangaNNovelAuthDBContext.SaveChangesAsync();
+            }
+            return mangaModel;
+        }
+
+        public async Task<IEnumerable<MangaModel>> GetAllModelAsync()
+        {
+            return await mangaNNovelAuthDBContext.mangaModels
+                //.Include(e => e.BlogModel)
+                .Include(s => s.GroupScanlating)
+                .Include(b => b.BlogModel.postsModel)
+                .Include(x => x.RecommendedMangaModels)
+                .Include(e => e.relatedSeries)
+                .Include(f => f.OfficalWebsites)
+                .ToListAsync();
+        }
+
+        public async Task<MangaModel> GetModelAsync(int id)
+        {
+            var CurrentManga = await mangaNNovelAuthDBContext.mangaModels.FindAsync(id);
+            return CurrentManga;
+        }
+
+        public async Task<MangaModel> GetOneMangaAllIncludedAsync(int id)
+        {
+            var mangaModel = await mangaNNovelAuthDBContext.mangaModels.Include(e => e.AllLanguages).Include(e => e.OfficalWebsites)
+                    .Include(e => e.VoiceActors).Include(e => e.ArtistModels).Include(e => e.Authormodels)
+                    .Include(e => e.TagsModels).Include(e => e.StudioModels)
+                    .Include(e => e.reviews).Include(e => e.Characters)
+                    .Include(e => e.GenresModels).Include(e => e.BuyPages)
+                    .Include(e => e.AssociatedNames).Include(e => e.StudioModels)
+                    .Include(e => e.GroupScanlating).Include(e => e.userModels).Include(e => e.relatedSeries).Include(e => e.RecommendedMangaModels).Include(e => e.BlogModel).FirstOrDefaultAsync(e => e.MangaID == id);
+            return mangaModel;
+        }
+
+        public async Task<IEnumerable<MangaModel>> SearchAsync(string searchTerm)
+        {
+            if (string.IsNullOrEmpty(searchTerm))
+            {
+                return await mangaNNovelAuthDBContext.mangaModels.ToListAsync();
+            }
+            return await mangaNNovelAuthDBContext.mangaModels.Where(s => s.MangaName.Contains(searchTerm) || s.ISBN13.Contains(searchTerm) || s.ISBN10.Contains(searchTerm)).ToListAsync();
+        }
+
+        public async Task<MangaModel> UpdateAsync(MangaModel updatedManga)
+        {
+            var manga = mangaNNovelAuthDBContext.mangaModels.Attach(updatedManga);
+            manga.State = EntityState.Modified;
+            await mangaNNovelAuthDBContext.SaveChangesAsync();
+            return updatedManga;
+        }
     }
 }

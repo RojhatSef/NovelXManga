@@ -17,5 +17,17 @@ namespace MangaAccessService
         Character Add(Character addNewModel);
 
         Character Delete(int id);
+
+        Task<IEnumerable<Character>> SearchAsync(string searchTermAsync);
+
+        Task<IEnumerable<Character>> GetAllModelAsync();
+
+        Task<Character> GetModelAsync(int idAsync);
+
+        Task<Character> UpdateAsync(Character UpdateModelAsync);
+
+        Task<Character> AddAsync(Character AddAsync);
+
+        Task<Character> DeleteAsync(int idAsync);
     }
 }

@@ -1,9 +1,4 @@
 ﻿using MangaModelService;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MangaAccessService
 {
@@ -18,5 +13,15 @@ namespace MangaAccessService
         FavoritBookList Add(FavoritBookList addNewModel);
 
         FavoritBookList Delete(int id);
+
+        Task<IEnumerable<FavoritBookList>> GetAllModelAsync();
+
+        Task<FavoritBookList> GetModelAsync(int idAsync);
+
+        Task<FavoritBookList> UpdateAsync(FavoritBookList UpdateModelAsync);
+
+        Task<FavoritBookList> AddAsync(FavoritBookList AddAsync);
+
+        Task<FavoritBookList> DeleteAsync(int idAsync);
     }
 }

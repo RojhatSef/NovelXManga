@@ -1,4 +1,5 @@
 ﻿using MangaModelService;
+using Microsoft.EntityFrameworkCore;
 
 namespace MangaAccessService
 {
@@ -59,6 +60,52 @@ namespace MangaAccessService
             currentModel.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             context.SaveChanges();
             return UpdateModel;
+        }
+
+        public async Task<Character> AddAsync(Character AddAsync)
+        {
+            await context.Characters.AddAsync(AddAsync);
+            await context.SaveChangesAsync();
+            return AddAsync;
+        }
+
+        public async Task<Character> DeleteAsync(int idAsync)
+        {
+            Character modelToDelete = await context.Characters.FindAsync(idAsync);
+            if (modelToDelete != null)
+            {
+                context.Characters.Remove(modelToDelete);
+                await context.SaveChangesAsync();
+            }
+            return modelToDelete;
+        }
+
+        public async Task<IEnumerable<Character>> GetAllModelAsync()
+        {
+            return await context.Characters.ToListAsync();
+        }
+
+        public async Task<Character> GetModelAsync(int idAsync)
+        {
+            var CurrentModel = await context.Characters.FindAsync(idAsync);
+            return CurrentModel;
+        }
+
+        public async Task<Character> UpdateAsync(Character UpdateModelAsync)
+        {
+            var modelUpdate = context.Characters.Attach(UpdateModelAsync);
+            modelUpdate.State = EntityState.Modified;
+            await context.SaveChangesAsync();
+            return UpdateModelAsync;
+        }
+
+        public async Task<IEnumerable<Character>> SearchAsync(string searchTermAsync)
+        {
+            if (string.IsNullOrEmpty(searchTermAsync))
+            {
+                return await context.Characters.ToListAsync();
+            }
+            return await context.Characters.Where(e => e.CharacterName.Contains(searchTermAsync) || e.FamousQuote.Contains(searchTermAsync) || e.specie.Contains(searchTermAsync)).ToListAsync();
         }
     }
 }

@@ -1,9 +1,4 @@
 ﻿using MangaModelService;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MangaAccessService
 {
@@ -18,5 +13,15 @@ namespace MangaAccessService
         BuyPage Add(BuyPage addNewModel);
 
         BuyPage Delete(int id);
+
+        Task<IEnumerable<BuyPage>> GetAllModelAsync();
+
+        Task<BuyPage> GetModelAsync(int idAsync);
+
+        Task<BuyPage> UpdateAsync(BuyPage UpdateModelAsync);
+
+        Task<BuyPage> AddAsync(BuyPage AddAsync);
+
+        Task<BuyPage> DeleteAsync(int idAsync);
     }
 }

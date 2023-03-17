@@ -1,4 +1,5 @@
 ﻿using MangaModelService;
+using Microsoft.EntityFrameworkCore;
 
 namespace MangaAccessService
 {
@@ -54,6 +55,52 @@ namespace MangaAccessService
             currentModel.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             context.SaveChanges();
             return UpdateModel;
+        }
+
+        public async Task<GenresModel> AddAsync(GenresModel AddAsync)
+        {
+            await context.GenresModels.AddAsync(AddAsync);
+            await context.SaveChangesAsync();
+            return AddAsync;
+        }
+
+        public async Task<GenresModel> DeleteAsync(int idAsync)
+        {
+            GenresModel modelToDelete = await context.GenresModels.FindAsync(idAsync);
+            if (modelToDelete != null)
+            {
+                context.GenresModels.Remove(modelToDelete);
+                await context.SaveChangesAsync();
+            }
+            return modelToDelete;
+        }
+
+        public async Task<IEnumerable<GenresModel>> GetAllModelAsync()
+        {
+            return await context.GenresModels.ToListAsync();
+        }
+
+        public async Task<GenresModel> GetModelAsync(int idAsync)
+        {
+            var CurrentModel = await context.GenresModels.FindAsync(idAsync);
+            return CurrentModel;
+        }
+
+        public async Task<GenresModel> UpdateAsync(GenresModel UpdateModelAsync)
+        {
+            var modelUpdate = context.GenresModels.Attach(UpdateModelAsync);
+            modelUpdate.State = EntityState.Modified;
+            await context.SaveChangesAsync();
+            return UpdateModelAsync;
+        }
+
+        public async Task<IEnumerable<GenresModel>> SearchAsync(string searchTermAsync)
+        {
+            if (string.IsNullOrEmpty(searchTermAsync))
+            {
+                return await context.GenresModels.ToListAsync();
+            }
+            return await context.GenresModels.Where(s => s.GenreName.Contains(searchTermAsync)).ToListAsync();
         }
     }
 }

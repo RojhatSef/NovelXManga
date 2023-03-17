@@ -1,4 +1,5 @@
 ﻿using MangaModelService;
+using Microsoft.EntityFrameworkCore;
 
 namespace MangaAccessService
 {
@@ -54,6 +55,52 @@ namespace MangaAccessService
             currentModel.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             context.SaveChanges();
             return UpdateModel;
+        }
+
+        public async Task<ChapterModel> AddAsync(ChapterModel AddAsync)
+        {
+            await context.chapterModels.AddAsync(AddAsync);
+            await context.SaveChangesAsync();
+            return AddAsync;
+        }
+
+        public async Task<ChapterModel> DeleteAsync(int idAsync)
+        {
+            ChapterModel modelToDelete = await context.chapterModels.FindAsync(idAsync);
+            if (modelToDelete != null)
+            {
+                context.chapterModels.Remove(modelToDelete);
+                await context.SaveChangesAsync();
+            }
+            return modelToDelete;
+        }
+
+        public async Task<IEnumerable<ChapterModel>> GetAllModelAsync()
+        {
+            return await context.chapterModels.ToListAsync();
+        }
+
+        public async Task<ChapterModel> GetModelAsync(int idAsync)
+        {
+            var CurrentModel = await context.chapterModels.FindAsync(idAsync);
+            return CurrentModel;
+        }
+
+        public async Task<ChapterModel> UpdateAsync(ChapterModel UpdateModelAsync)
+        {
+            var modelUpdate = context.chapterModels.Attach(UpdateModelAsync);
+            modelUpdate.State = EntityState.Modified;
+            await context.SaveChangesAsync();
+            return UpdateModelAsync;
+        }
+
+        public async Task<IEnumerable<ChapterModel>> SearchAsync(string searchTermAsync)
+        {
+            if (string.IsNullOrEmpty(searchTermAsync))
+            {
+                return await context.chapterModels.ToListAsync();
+            }
+            return await context.chapterModels.Where(e => e.chapterName.Contains(searchTermAsync) || e.chapterLinkNumber.Contains(searchTermAsync)).ToListAsync(); ;
         }
     }
 }

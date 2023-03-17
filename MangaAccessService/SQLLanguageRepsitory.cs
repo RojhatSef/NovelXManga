@@ -1,4 +1,5 @@
 ﻿using MangaModelService;
+using Microsoft.EntityFrameworkCore;
 
 namespace MangaAccessService
 {
@@ -54,6 +55,52 @@ namespace MangaAccessService
             currentModel.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             context.SaveChanges();
             return UpdateModel;
+        }
+
+        public async Task<Languages> AddAsync(Languages AddAsync)
+        {
+            await context.Languages_.AddAsync(AddAsync);
+            await context.SaveChangesAsync();
+            return AddAsync;
+        }
+
+        public async Task<Languages> DeleteAsync(int idAsync)
+        {
+            Languages modelToDelete = await context.Languages_.FindAsync(idAsync);
+            if (modelToDelete != null)
+            {
+                context.Languages_.Remove(modelToDelete);
+                await context.SaveChangesAsync();
+            }
+            return modelToDelete;
+        }
+
+        public async Task<IEnumerable<Languages>> GetAllModelAsync()
+        {
+            return await context.Languages_.ToListAsync();
+        }
+
+        public async Task<Languages> GetModelAsync(int idAsync)
+        {
+            var CurrentModel = await context.Languages_.FindAsync(idAsync);
+            return CurrentModel;
+        }
+
+        public async Task<Languages> UpdateAsync(Languages UpdateModelAsync)
+        {
+            var modelUpdate = context.Languages_.Attach(UpdateModelAsync);
+            modelUpdate.State = EntityState.Modified;
+            await context.SaveChangesAsync();
+            return UpdateModelAsync;
+        }
+
+        public async Task<IEnumerable<Languages>> SearchAsync(string searchTermAsync)
+        {
+            if (string.IsNullOrEmpty(searchTermAsync))
+            {
+                return await context.Languages_.ToListAsync();
+            }
+            return await context.Languages_.Where(s => s.LanguageName.Contains(searchTermAsync)).ToListAsync();
         }
     }
 }

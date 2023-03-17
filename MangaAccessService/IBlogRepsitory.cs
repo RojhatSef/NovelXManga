@@ -13,5 +13,17 @@ namespace MangaAccessService
         BlogModel Add(BlogModel addNewModel);
 
         BlogModel Delete(int id);
+
+        Task<IEnumerable<BlogModel>> SearchAsync(string searchTermAsync);
+
+        Task<IEnumerable<BlogModel>> GetAllModelAsync();
+
+        Task<BlogModel> GetModelAsync(int idAsync);
+
+        Task<BlogModel> UpdateAsync(BlogModel UpdateModelAsync);
+
+        Task<BlogModel> AddAsync(BlogModel AddAsync);
+
+        Task<BlogModel> DeleteAsync(int idAsync);
     }
 }

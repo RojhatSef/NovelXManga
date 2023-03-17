@@ -4,32 +4,31 @@ namespace MangaModelService.ViewModels
 {
     public class AuthorViewModel
     {
+        [Key]
+        public int AuthorID { get; set; }
 
-        public int ArtistId { get; set; }
         [Required]
         public string FirstName { get; set; }
 
         public string? LastName { get; set; }
         public string? PhotoPath { get; set; }
         public string? Gender { get; set; }
-        public string? officalWebsite { get; set; }
+        public virtual ICollection<OfficalWebsite>? OfficalWebsites { get; set; }
         public string? Twitter { get; set; }
         public string? reddit { get; set; }
         public string? BirthPlace { get; set; }
-
         public string? Biography { get; set; }
         public string? NameInNative { get; set; }
         public string? WikiPedia { get; set; }
-        public ICollection<AssociatedNames>? AssociatedNames { get; set; }
+        public virtual ICollection<AssociatedNames>? AssociatedNames { get; set; }
         public int? AmountOfWork { get; set; }
         public string? WorkingAt { get; set; }
         public DateTime? LastUpdate { get; set; }
-
-        public DateTime? born { get; set; }
-        public DateTime? death { get; set; }
-
+        public DateTime? AuthorBorn { get; set; }
+        public DateTime? AuthorDeath { get; set; }
         public string? Contact { get; set; }
-        public int? MangaID { get; set; }
-        public MangaModel? mangaModel { get; set; }
+        public virtual ICollection<MangaModel>? MangaModels { get; set; }
+        public List<AuthorModel> ListOfAuthor { get; set; }
+        public bool isChecked { get; set; }
     }
 }

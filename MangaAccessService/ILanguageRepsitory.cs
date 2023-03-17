@@ -15,5 +15,17 @@ namespace MangaAccessService
         Languages Add(Languages addNewModel);
 
         Languages Delete(int id);
+
+        Task<IEnumerable<Languages>> SearchAsync(string searchTermAsync);
+
+        Task<IEnumerable<Languages>> GetAllModelAsync();
+
+        Task<Languages> GetModelAsync(int idAsync);
+
+        Task<Languages> UpdateAsync(Languages UpdateModelAsync);
+
+        Task<Languages> AddAsync(Languages AddAsync);
+
+        Task<Languages> DeleteAsync(int idAsync);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using MangaModelService;
+using Microsoft.EntityFrameworkCore;
 
 namespace MangaAccessService
 {
@@ -45,6 +46,52 @@ namespace MangaAccessService
             currentModel.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             context.SaveChanges();
             return UpdateModel;
+        }
+
+        public async Task<BlogModel> AddAsync(BlogModel AddAsync)
+        {
+            await context.blogModels.AddAsync(AddAsync);
+            await context.SaveChangesAsync();
+            return AddAsync;
+        }
+
+        public async Task<BlogModel> DeleteAsync(int idAsync)
+        {
+            BlogModel modelToDelete = await context.blogModels.FindAsync(idAsync);
+            if (modelToDelete != null)
+            {
+                context.blogModels.Remove(modelToDelete);
+                await context.SaveChangesAsync();
+            }
+            return modelToDelete;
+        }
+
+        public async Task<IEnumerable<BlogModel>> GetAllModelAsync()
+        {
+            return await context.blogModels.ToListAsync();
+        }
+
+        public async Task<BlogModel> GetModelAsync(int idAsync)
+        {
+            var CurrentModel = await context.blogModels.FindAsync(idAsync);
+            return CurrentModel;
+        }
+
+        public async Task<BlogModel> UpdateAsync(BlogModel UpdateModelAsync)
+        {
+            var modelUpdate = context.blogModels.Attach(UpdateModelAsync);
+            modelUpdate.State = EntityState.Modified;
+            await context.SaveChangesAsync();
+            return UpdateModelAsync;
+        }
+
+        public async Task<IEnumerable<BlogModel>> SearchAsync(string searchTermAsync)
+        {
+            if (string.IsNullOrEmpty(searchTermAsync))
+            {
+                return await context.blogModels.ToListAsync();
+            }
+            return await context.blogModels.Where(s => s.mangaName.Contains(searchTermAsync)).ToListAsync();
         }
     }
 }

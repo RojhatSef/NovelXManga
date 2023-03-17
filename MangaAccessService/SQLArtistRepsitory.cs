@@ -1,4 +1,5 @@
 ﻿using MangaModelService;
+using Microsoft.EntityFrameworkCore;
 
 namespace MangaAccessService
 {
@@ -54,6 +55,52 @@ namespace MangaAccessService
             currentModel.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             context.SaveChanges();
             return UpdateModel;
+        }
+
+        public async Task<ArtistModel> AddAsync(ArtistModel AddAsync)
+        {
+            await context.artistModels.AddAsync(AddAsync);
+            await context.SaveChangesAsync();
+            return AddAsync;
+        }
+
+        public async Task<ArtistModel> DeleteAsync(int idAsync)
+        {
+            ArtistModel modelToDelete = await context.artistModels.FindAsync(idAsync);
+            if (modelToDelete != null)
+            {
+                context.artistModels.Remove(modelToDelete);
+                await context.SaveChangesAsync();
+            }
+            return modelToDelete;
+        }
+
+        public async Task<IEnumerable<ArtistModel>> GetAllModelAsync()
+        {
+            return await context.artistModels.ToListAsync();
+        }
+
+        public async Task<ArtistModel> GetModelAsync(int idAsync)
+        {
+            var CurrentModel = await context.artistModels.FindAsync(idAsync);
+            return CurrentModel;
+        }
+
+        public async Task<ArtistModel> UpdateAsync(ArtistModel UpdateModelAsync)
+        {
+            var modelUpdate = context.artistModels.Attach(UpdateModelAsync);
+            modelUpdate.State = EntityState.Modified;
+            await context.SaveChangesAsync();
+            return UpdateModelAsync;
+        }
+
+        public async Task<IEnumerable<ArtistModel>> SearchAsync(string searchTermAsync)
+        {
+            if (string.IsNullOrEmpty(searchTermAsync))
+            {
+                return await context.artistModels.ToListAsync();
+            }
+            return await context.artistModels.Where(e => e.FirstName.Contains(searchTermAsync) || e.LastName.Contains(searchTermAsync) || e.NameInNative.Contains(searchTermAsync)).ToListAsync();
         }
     }
 }

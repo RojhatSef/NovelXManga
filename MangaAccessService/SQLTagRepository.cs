@@ -1,4 +1,5 @@
 ﻿using MangaModelService;
+using Microsoft.EntityFrameworkCore;
 
 namespace MangaAccessService
 {
@@ -54,6 +55,52 @@ namespace MangaAccessService
             currentModel.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             context.SaveChanges();
             return UpdateModel;
+        }
+
+        public async Task<TagModel> AddAsync(TagModel AddAsync)
+        {
+            await context.TagModels.AddAsync(AddAsync);
+            await context.SaveChangesAsync();
+            return AddAsync;
+        }
+
+        public async Task<TagModel> DeleteAsync(int idAsync)
+        {
+            TagModel modelToDelete = await context.TagModels.FindAsync(idAsync);
+            if (modelToDelete != null)
+            {
+                context.TagModels.Remove(modelToDelete);
+                await context.SaveChangesAsync();
+            }
+            return modelToDelete;
+        }
+
+        public async Task<IEnumerable<TagModel>> GetAllModelAsync()
+        {
+            return await context.TagModels.ToListAsync();
+        }
+
+        public async Task<TagModel> GetModelAsync(int idAsync)
+        {
+            var CurrentModel = await context.TagModels.FindAsync(idAsync);
+            return CurrentModel;
+        }
+
+        public async Task<TagModel> UpdateAsync(TagModel UpdateModelAsync)
+        {
+            var modelUpdate = context.TagModels.Attach(UpdateModelAsync);
+            modelUpdate.State = EntityState.Modified;
+            await context.SaveChangesAsync();
+            return UpdateModelAsync;
+        }
+
+        public async Task<IEnumerable<TagModel>> SearchAsync(string searchTermAsync)
+        {
+            if (string.IsNullOrEmpty(searchTermAsync))
+            {
+                return await context.TagModels.ToListAsync();
+            }
+            return await context.TagModels.Where(s => s.TagName.Contains(searchTermAsync)).ToListAsync();
         }
     }
 }

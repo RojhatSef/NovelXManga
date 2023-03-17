@@ -1,4 +1,5 @@
 ﻿using MangaModelService;
+using Microsoft.EntityFrameworkCore;
 
 namespace MangaAccessService
 {
@@ -45,6 +46,43 @@ namespace MangaAccessService
             currentModel.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             context.SaveChanges();
             return UpdateModel;
+        }
+
+        public async Task<FavoritBookList> AddAsync(FavoritBookList AddAsync)
+        {
+            await context.favoritBookLists.AddAsync(AddAsync);
+            await context.SaveChangesAsync();
+            return AddAsync;
+        }
+
+        public async Task<FavoritBookList> DeleteAsync(int idAsync)
+        {
+            FavoritBookList modelToDelete = await context.favoritBookLists.FindAsync(idAsync);
+            if (modelToDelete != null)
+            {
+                context.favoritBookLists.Remove(modelToDelete);
+                await context.SaveChangesAsync();
+            }
+            return modelToDelete;
+        }
+
+        public async Task<IEnumerable<FavoritBookList>> GetAllModelAsync()
+        {
+            return await context.favoritBookLists.ToListAsync();
+        }
+
+        public async Task<FavoritBookList> GetModelAsync(int idAsync)
+        {
+            var CurrentModel = await context.favoritBookLists.FindAsync(idAsync);
+            return CurrentModel;
+        }
+
+        public async Task<FavoritBookList> UpdateAsync(FavoritBookList UpdateModelAsync)
+        {
+            var modelUpdate = context.favoritBookLists.Attach(UpdateModelAsync);
+            modelUpdate.State = EntityState.Modified;
+            await context.SaveChangesAsync();
+            return UpdateModelAsync;
         }
     }
 }

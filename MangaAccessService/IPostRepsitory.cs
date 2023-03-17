@@ -15,5 +15,17 @@ namespace MangaAccessService
         PostModel Add(PostModel addNewModel);
 
         PostModel Delete(int id);
+
+        Task<IEnumerable<PostModel>> SearchAsync(string searchTermAsync);
+
+        Task<IEnumerable<PostModel>> GetAllModelAsync();
+
+        Task<PostModel> GetModelAsync(int idAsync);
+
+        Task<PostModel> UpdateAsync(PostModel UpdateModelAsync);
+
+        Task<PostModel> AddAsync(PostModel AddAsync);
+
+        Task<PostModel> DeleteAsync(int idAsync);
     }
 }

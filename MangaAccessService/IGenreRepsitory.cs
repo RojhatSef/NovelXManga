@@ -15,5 +15,17 @@ namespace MangaAccessService
         GenresModel Add(GenresModel addNewModel);
 
         GenresModel Delete(int id);
+
+        Task<IEnumerable<GenresModel>> SearchAsync(string searchTermAsync);
+
+        Task<IEnumerable<GenresModel>> GetAllModelAsync();
+
+        Task<GenresModel> GetModelAsync(int idAsync);
+
+        Task<GenresModel> UpdateAsync(GenresModel UpdateModelAsync);
+
+        Task<GenresModel> AddAsync(GenresModel AddAsync);
+
+        Task<GenresModel> DeleteAsync(int idAsync);
     }
 }

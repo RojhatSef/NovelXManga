@@ -1,9 +1,4 @@
 ﻿using MangaModelService;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MangaAccessService
 {
@@ -18,5 +13,15 @@ namespace MangaAccessService
         DroppedBookList Add(DroppedBookList addNewModel);
 
         DroppedBookList Delete(int id);
+
+        Task<IEnumerable<DroppedBookList>> GetAllModelAsync();
+
+        Task<DroppedBookList> GetModelAsync(int idAsync);
+
+        Task<DroppedBookList> UpdateAsync(DroppedBookList UpdateModelAsync);
+
+        Task<DroppedBookList> AddAsync(DroppedBookList AddAsync);
+
+        Task<DroppedBookList> DeleteAsync(int idAsync);
     }
 }

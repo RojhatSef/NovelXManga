@@ -1,9 +1,9 @@
 using MangaAccessService;
 using MangaModelService;
+using MangaModelService.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 
 namespace NovelXManga.Pages.Manga
@@ -18,6 +18,9 @@ namespace NovelXManga.Pages.Manga
 
         [BindProperty]
         public MangaModel _MangaModel { get; set; }
+
+        [BindProperty]
+        public AuthorViewModel authorViewModel { get; set; }
 
         [BindProperty]
         public IFormFile? Photo { get; set; }
@@ -55,12 +58,9 @@ namespace NovelXManga.Pages.Manga
             this.tagRepsitory = tagRepsitory;
         }
 
-        public AssociatedNames names(string AssociatedNames)
+        public void OnPostAuthor(List<AuthorModel> model)
         {
-            AssociatedNames associatedNames = new AssociatedNames();
-            associatedNames.nameString = AssociatedNames;
-
-            return associatedNames;
+            //do your stuff...
         }
 
         public IActionResult OnPostAsync()
@@ -158,11 +158,6 @@ namespace NovelXManga.Pages.Manga
                 _MangaModel.GroupScanlating = null;
             }
 
-            if (_MangaModel.GroupScanlatingID == null)
-            {
-                _MangaModel.GroupScanlatingID = null;
-            }
-
             if (_MangaModel.ISBN10 == null)
             {
                 _MangaModel.ISBN10 = null;
@@ -220,23 +215,18 @@ namespace NovelXManga.Pages.Manga
                 {
                     MangaName = _MangaModel.MangaName,
 
-                    AssociatedNames = null,
                     PhotoPath = photoPath,
 
                     BlogModel = new BlogModel { mangaName = _MangaModel.MangaName },
-                    GroupScanlating = null,
-                    GroupScanlatingID = null,
-                    userModels = null,
-                    userId = null,
+
                     futureEvents = _MangaModel.futureEvents,
-                    AllLanguages = null,
+
                     score = 10,
                     StatusInCountryOfOrigin = _MangaModel.StatusInCountryOfOrigin,
-                    relatedSeries = null,
+
                     ISBN10 = _MangaModel.ISBN10,
                     ISBN13 = _MangaModel.ISBN13,
-                    Authormodels = null,
-                    ArtistModels = null,
+
                     Description = _MangaModel.Description,
                     ReleaseYear = ReleaseYear,
                     EndingYear = EndingYear,
@@ -247,17 +237,12 @@ namespace NovelXManga.Pages.Manga
                     WeekRead = 0,
                     MonthRead = 0,
                     YearRead = 0,
-                    StudioModels = null,
-                    reviews = null,
-                    BuyPages = null,
-                    OfficalWebsites = null,
-                    RecommendedMangaModels = null,
+
                     orignalWebtoon = _MangaModel.orignalWebtoon,
                     TagsModels = selectedTags,
-                    Characters = null,
+
                     GenresModels = selectedGenres,
-                    BookAddedToDB = DateTime.Now,
-                    VoiceActors = null,
+                    BookAddedToDB = DateTime.UtcNow,
                 };
 
                 context.mangaModels.Add(MangaModels);
@@ -269,9 +254,9 @@ namespace NovelXManga.Pages.Manga
             return new RedirectToPageResult("/Index");
         }
 
-        public async Task<IActionResult> OnGetAsync()
+        public IActionResult OnGet()
         {
-            Tags = await context.TagModels.ToListAsync();
+            Tags = context.TagModels.ToList();
             MangaModels = mangaRepository.GetAllManga();
 
             return Page();
