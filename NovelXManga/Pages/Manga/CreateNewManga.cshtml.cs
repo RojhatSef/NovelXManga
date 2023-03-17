@@ -95,8 +95,7 @@ namespace NovelXManga.Pages.Manga
 
             if (_MangaModel.MangaName == null)
             {
-                _MangaModel.MangaName = null;
-                Page();
+                return RedirectToPage("/Index");
             }
 
             if (_MangaModel.Description == null)
