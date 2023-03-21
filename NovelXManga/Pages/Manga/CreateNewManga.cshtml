@@ -8,13 +8,6 @@
 
 
 
-<button id="addRow" type="button" class="btn btn-info">Add</button>
-<form method="post" asp-page-handler="Author" >
-    <div id="newRow">
-        <input type="hidden" id="total" value="0" />
-    </div>
-    <input type="submit" class="btn btn-primary" value="Post" />
-</form>
 <div class="container mt-5">
  <h3>@Model.SucessFulManga</h3>
     <div class="row justify-content-center align-items-center">
@@ -56,13 +49,8 @@
                     <input type="text" asp-for="_MangaModel.MangaName" class="form-control" />
                     <span asp-validation-for="_MangaModel.MangaName" class="text-danger"></span>
 
-                </div><p>Not working Yet</p>
-                <div class="mb-3">
-                    <label class="form-label" asp-for="_MangaModel.AssociatedNames"> Associated Names </label>
-                    <input type="text" asp-for="_MangaModel.AssociatedNames" class="form-control" />
-                    <span asp-validation-for="_MangaModel.AssociatedNames" class="text-danger"></span>
-
-                </div>
+             
+           
                 <div class="mb-3">
                     <label class="form-label" asp-for="_MangaModel.Description">Description</label>
                     <input type="text" asp-for="_MangaModel.Description" class="form-control" />
@@ -134,17 +122,13 @@
     <span asp-validation-for="_MangaModel.Type" class="text-danger"></span>
 </div>
 
-                <p>Not working Yet</p>
+               
 <div class="mb-3">
     <label class="form-label" asp-for="_MangaModel.OfficalLanguage">Official Language</label>
     <input asp-for="_MangaModel.OfficalLanguage" class="form-control" />
     <span asp-validation-for="_MangaModel.OfficalLanguage" class="text-danger"></span>
                 </div><p>Not working Yet</p>
-                <div class="mb-3">
-                    <label class="form-label" asp-for="_MangaModel.OfficalWebsites">Official Language</label>
-                    <input asp-for="_MangaModel.OfficalWebsites" class="form-control" />
-                    <span asp-validation-for="_MangaModel.OfficalWebsites" class="text-danger"></span>
-                </div>
+    
 <div class="mb-3">
     <label class="form-label" asp-for="_MangaModel.MonthRead">Month Read</label>
     <input asp-for="_MangaModel.MonthRead" class="form-control" />
@@ -169,29 +153,13 @@
     <label class="form-label" asp-for="EndingYear">Ending Year</label>
                     <input asp-for="EndingYear" class="form-control" />
                     <span asp-validation-for="EndingYear" class="text-danger"></span>
-                </div><p>Not working Yet</p>
-<div class="mb-3">
-    <label class="form-label" asp-for="_MangaModel.AssociatedNames">Associated Names</label>
-    <input asp-for="_MangaModel.AssociatedNames" class="form-control" multiple />
-    <span asp-validation-for="_MangaModel.AssociatedNames" class="text-danger"></span>
-</div>
-                <p>Not working Yet</p>
-<div class="mb-3">
-    <label class="form-label" asp-for="_MangaModel.AllLanguages">All Languages</label>
-    <input asp-for="_MangaModel.AllLanguages" class="form-control" multiple />
-    <span asp-validation-for="_MangaModel.AllLanguages" class="text-danger"></span>
-</div>
+                </div>
+
 
 
               
             
 
-                <p>Not working Yet</p>
-<div class="mb-3">
-    <label class="form-label" asp-for="_MangaModel.RecommendedMangaModels">Recommended Manga Models</label>
-    <input asp-for="_MangaModel.RecommendedMangaModels" class="form-control" multiple />
-    <span asp-validation-for="_MangaModel.RecommendedMangaModels" class="text-danger"></span>
-</div>
 
 
 

@@ -31,11 +31,11 @@ namespace MangaModelService
         public DateTime? BookAddedToDB { get; set; }
         public virtual List<MangaModel>? relatedSeries { get; set; }
         public virtual ICollection<AssociatedNames>? AssociatedNames { get; set; }
-        public virtual ICollection<Languages> AllLanguages { get; set; }
+        public virtual ICollection<Languages>? AllLanguages { get; set; }
         public virtual List<MangaModel>? RecommendedMangaModels { get; set; }
         public int BlogModelId { get; set; }
         public BlogModel BlogModel { get; set; }
-        public virtual ICollection<OfficalWebsite> OfficalWebsites { get; set; }
+        public virtual ICollection<OfficalWebsite>? OfficalWebsites { get; set; }
         public virtual ICollection<AuthorModel>? Authormodels { get; set; }
         public virtual ICollection<ArtistModel>? ArtistModels { get; set; }
         public virtual ICollection<VoiceActorModel>? VoiceActors { get; set; }

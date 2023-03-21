@@ -97,14 +97,7 @@ namespace MangaAccessService.Migrations
 
         public async Task<IEnumerable<MangaModel>> GetAllModelAsync()
         {
-            return await mangaNNovelAuthDBContext.mangaModels
-                //.Include(e => e.BlogModel)
-                .Include(s => s.GroupScanlating)
-                .Include(b => b.BlogModel.postsModel)
-                .Include(x => x.RecommendedMangaModels)
-                .Include(e => e.relatedSeries)
-                .Include(f => f.OfficalWebsites)
-                .ToListAsync();
+            return await mangaNNovelAuthDBContext.mangaModels.ToListAsync();
         }
 
         public async Task<MangaModel> GetModelAsync(int id)

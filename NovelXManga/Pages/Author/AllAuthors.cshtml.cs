@@ -6,11 +6,11 @@ namespace NovelXManga.Pages.Author
 {
     public class AllAuthorsModel : PageModel
     {
-
         private readonly MangaNNovelAuthDBContext mangaNNovelAuthDBContext;
         private readonly IAuthorRepsitory authorRepsitory;
         private readonly IWebHostEnvironment webHostEnvironment;
         public IEnumerable<AuthorModel> AuthorModels { get; set; }
+
         public AllAuthorsModel(IAuthorRepsitory authorRepsitory, MangaNNovelAuthDBContext mangaNNovelAuthDBContext, IWebHostEnvironment webHostEnvironment)
         {
             this.authorRepsitory = authorRepsitory;
@@ -23,10 +23,10 @@ namespace NovelXManga.Pages.Author
             IEnumerable<AuthorModel> AuthorList = authorRepsitory.GetAuthorModels();
             AuthorModels = AuthorList;
         }
-        //public Task<IActionResult> OnPost()
-        //{
-        //    var AuthorList
-        //    return 
-        //}
+
+        public void OnPostAuthor(List<AuthorModel> model)
+        {
+            //do your stuff...
+        }
     }
 }

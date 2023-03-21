@@ -8,8 +8,7 @@ namespace MangaModelService
         [Key]
         public int OfficalID { get; set; }
 
-        [Required]
-        public string OfficalWebsiteName { get; set; }
+        public string? OfficalWebsiteName { get; set; }
 
         public string? Twitter { get; set; }
         public string? Facebook { get; set; }
@@ -17,8 +16,7 @@ namespace MangaModelService
         public string? Naver { get; set; }
         public string? Instagram { get; set; }
 
-        [Required]
-        public string OfficalWebsiteString { get; set; }
+        public string? OfficalWebsiteString { get; set; }
 
         public int? MangaID { get; set; }
         public MangaModel? mangaModel { get; set; }

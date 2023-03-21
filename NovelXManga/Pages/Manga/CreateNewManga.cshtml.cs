@@ -4,6 +4,7 @@ using MangaModelService.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 
 namespace NovelXManga.Pages.Manga
@@ -58,205 +59,78 @@ namespace NovelXManga.Pages.Manga
             this.tagRepsitory = tagRepsitory;
         }
 
-        public void OnPostAuthor(List<AuthorModel> model)
-        {
-            //do your stuff...
-        }
-
-        public IActionResult OnPostAsync()
+        public async Task<IActionResult> OnPostAsync()
         {
             // Check if the uploads directory exists, and create it if it does not
 
-            var uploadsDirectory = Path.Combine(webHostEnvironment.WebRootPath, "uploads");
+            var uploadsDirectory = Path.Combine(webHostEnvironment.WebRootPath, "Images", "MangaImage");
             if (!Directory.Exists(uploadsDirectory))
             {
                 Directory.CreateDirectory(uploadsDirectory);
             }
-            string photoPath;
-            if (Photo != null)
-            {
-                photoPath = ProcessUploadedFile();
-            }
-            else
-            {
-                photoPath = null;
-            }
 
-            Tags = context.TagModels.ToList();
-
+            // Process uploaded file and get the photo path, if there's no photo photopath is null.
+            string photoPath = Photo != null ? ProcessUploadedFile() : null;
             // create a new list of TagModel objects
-            var selectedTags = context.TagModels.Where(tag => SelectedTags.Contains(tag.TagId)).ToList();
-            var selectedGenres = context.GenresModels.Where(tag => SelectedGenres.Contains(tag.GenresId)).ToList();
+            var selectedTags = await context.TagModels.Where(tag => SelectedTags.Contains(tag.TagId)).ToListAsync();
+            var selectedGenres = await context.GenresModels.Where(tag => SelectedGenres.Contains(tag.GenresId)).ToListAsync();
 
             _MangaModel.TagsModels = selectedTags;
-            var newMangaModel = context.mangaModels.FirstOrDefault(mm => mm.MangaName == _MangaModel.MangaName);
+
+            _MangaModel.PhotoPath = photoPath;
+            _MangaModel.ReleaseYear = ReleaseYear;
+            _MangaModel.EndingYear = EndingYear;
+            _MangaModel.TagsModels = selectedTags;
+            _MangaModel.GenresModels = selectedGenres;
 
             #region If Something == null
 
             if (_MangaModel.MangaName == null)
             {
+                SucessFulManga = "Book failed to create!";
                 return RedirectToPage("/Index");
-            }
-
-            if (_MangaModel.Description == null)
-            {
-                _MangaModel.Description = null;
-            }
-
-            if (_MangaModel.AssociatedNames == null)
-            {
-                _MangaModel.AssociatedNames = null;
-            }
-
-            if (_MangaModel.StatusInCountryOfOrigin == null)
-            {
-                _MangaModel.StatusInCountryOfOrigin = null;
-            }
-
-            if (_MangaModel.ISBN10 == null)
-            {
-                _MangaModel.ISBN10 = null;
-            }
-
-            if (_MangaModel.ISBN13 == null)
-            {
-                _MangaModel.ISBN13 = null;
-            }
-
-            if (_MangaModel.score == null)
-            {
-                _MangaModel.score = null;
-            }
-            if (_MangaModel.AssociatedNames == null)
-            {
-                _MangaModel.AssociatedNames = null;
-            }
-
-            if (_MangaModel.BlogModel == null)
-            {
-                _MangaModel.BlogModel = null;
-            }
-
-            if (_MangaModel.CompletelyTranslated == null)
-            {
-                _MangaModel.CompletelyTranslated = null;
-            }
-
-            if (_MangaModel.EndingYear == null)
-            {
-                _MangaModel.EndingYear = null;
-            }
-
-            if (_MangaModel.futureEvents == null)
-            {
-                _MangaModel.futureEvents = null;
-            }
-
-            if (_MangaModel.GroupScanlating == null)
-            {
-                _MangaModel.GroupScanlating = null;
-            }
-
-            if (_MangaModel.ISBN10 == null)
-            {
-                _MangaModel.ISBN10 = null;
-            }
-
-            if (_MangaModel.ISBN13 == null)
-            {
-                _MangaModel.ISBN13 = null;
-            }
-
-            if (_MangaModel.OfficalLanguage == null)
-            {
-                _MangaModel.OfficalLanguage = null;
-            }
-
-            if (_MangaModel.orignalWebtoon == null)
-            {
-                _MangaModel.orignalWebtoon = null;
-            }
-
-            if (_MangaModel.OriginalPublisher == null)
-            {
-                _MangaModel.OriginalPublisher = null;
-            }
-
-            if (_MangaModel.ReleaseYear == null)
-            {
-                _MangaModel.ReleaseYear = null;
-            }
-
-            if (selectedTags == null)
-            {
-                selectedTags = null;
-            }
-            if (selectedGenres == null)
-            {
-                selectedGenres = null;
-            }
-
-            if (_MangaModel.StatusInCountryOfOrigin == null)
-            {
-                _MangaModel.StatusInCountryOfOrigin = null;
-            }
-
-            if (_MangaModel.Type == null)
-            {
-                _MangaModel.Type = null;
             }
 
             #endregion If Something == null
 
-            if (newMangaModel == null)
+            MangaModel MangaModels = new MangaModel
             {
-                MangaModel MangaModels = new MangaModel
-                {
-                    MangaName = _MangaModel.MangaName,
+                MangaName = _MangaModel.MangaName,
+                PhotoPath = _MangaModel.PhotoPath,
+                BlogModel = new BlogModel { mangaName = _MangaModel.MangaName },
+                futureEvents = _MangaModel.futureEvents,
+                score = 10,
+                StatusInCountryOfOrigin = _MangaModel.StatusInCountryOfOrigin,
+                ISBN10 = _MangaModel.ISBN10,
+                ISBN13 = _MangaModel.ISBN13,
+                Description = _MangaModel.Description,
+                ReleaseYear = _MangaModel.ReleaseYear,
+                EndingYear = EndingYear,
+                Type = _MangaModel.Type,
+                OfficalLanguage = _MangaModel.OfficalLanguage,
+                OriginalPublisher = _MangaModel.orignalWebtoon,
+                CompletelyTranslated = _MangaModel.CompletelyTranslated,
+                WeekRead = 0,
+                MonthRead = 0,
+                YearRead = 0,
+                orignalWebtoon = _MangaModel.orignalWebtoon,
+                TagsModels = selectedTags,
+                GenresModels = selectedGenres,
+                BookAddedToDB = DateTime.UtcNow,
+            };
 
-                    PhotoPath = photoPath,
-
-                    BlogModel = new BlogModel { mangaName = _MangaModel.MangaName },
-
-                    futureEvents = _MangaModel.futureEvents,
-
-                    score = 10,
-                    StatusInCountryOfOrigin = _MangaModel.StatusInCountryOfOrigin,
-
-                    ISBN10 = _MangaModel.ISBN10,
-                    ISBN13 = _MangaModel.ISBN13,
-
-                    Description = _MangaModel.Description,
-                    ReleaseYear = ReleaseYear,
-                    EndingYear = EndingYear,
-                    Type = _MangaModel.Type,
-                    OfficalLanguage = _MangaModel.OfficalLanguage,
-                    OriginalPublisher = _MangaModel.orignalWebtoon,
-                    CompletelyTranslated = _MangaModel.CompletelyTranslated,
-                    WeekRead = 0,
-                    MonthRead = 0,
-                    YearRead = 0,
-
-                    orignalWebtoon = _MangaModel.orignalWebtoon,
-                    TagsModels = selectedTags,
-
-                    GenresModels = selectedGenres,
-                    BookAddedToDB = DateTime.UtcNow,
-                };
-
-                context.mangaModels.Add(MangaModels);
-                context.SaveChanges();
-                SucessFulManga = "Manga has been created successfully";
-                return RedirectToPage("/Index");
-            }
-
-            return new RedirectToPageResult("/Index");
+            await context.mangaModels.AddAsync(MangaModels);
+            await context.SaveChangesAsync();
+            int newMangaId = MangaModels.MangaID;
+            SucessFulManga = "Manga has been created successfully";
+            return RedirectToPage("/Author/CreateAuthor", new { mangaId = newMangaId });
         }
 
-        public IActionResult OnGet()
+        public async Task<IActionResult> OnGetAsync()
         {
-            Tags = context.TagModels.ToList();
-            MangaModels = mangaRepository.GetAllManga();
+            Tags = await context.TagModels.ToListAsync();
+            Genres = await context.GenresModels.ToListAsync();
+            MangaModels = await mangaRepository.GetAllModelAsync();
 
             return Page();
         }

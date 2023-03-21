@@ -1,10 +1,37 @@
-﻿$("#addRow").click(function () {
+﻿// Create a function to generate a new associated name input
+function createAssociatedNameInput(rowCount, index) {
+    return '<label for="Author_' + rowCount + '__AssociatedNames_' + index + '_nameString">Associated Name ' + (index + 1) + '</label>' +
+        '<input type="text" id="Author_' + rowCount + '__AssociatedNames_' + index + '_nameString" name="Author[' + rowCount + '].AssociatedNames[' + index + '].nameString" class="form-control" />';
+}
+
+// Create a function to generate a new official website input
+function createOfficialWebsiteInput(rowCount, index) {
+    return '<div class="official-websites-container">' +
+        '<h3>Official Website ' + (index + 1) + '</h3>' +
+        '<label for="Author_' + rowCount + '__OfficalWebsites_' + index + '_OfficalWebsiteName">Website Name</label>' +
+        '<input type="text" id="Author_' + rowCount + '__OfficalWebsites_' + index + '_OfficalWebsiteName" name="Author[' + rowCount + '].OfficalWebsite[' + index + '].OfficalWebsiteName" class="form-control" />' +
+        '<label for="Author_' + rowCount + '__OfficalWebsites_' + index + '_Twitter">Twitter</label>' +
+        '<input type="text" id="Author_' + rowCount + '__OfficalWebsites_' + index + '_Twitter" name="Author[' + rowCount + '].OfficalWebsite[' + index + '].Twitter" class="form-control" />' +
+        '<label for="Author_' + rowCount + '__OfficalWebsites_' + index + '_Facebook">Facebook</label>' +
+        '<input type="text" id="Author_' + rowCount + '__OfficalWebsites_' + index + '_Facebook" name="Author[' + rowCount + '].OfficalWebsite[' + index + '].Facebook" class="form-control" />' +
+        '<label for="Author_' + rowCount + '__OfficalWebsites_' + index + '_Line">Line</label>' +
+        '<input type="text" id="Author_' + rowCount + '__OfficalWebsites_' + index + '_Line" name="Author[' + rowCount + '].OfficalWebsite[' + index + '].Line" class="form-control" />' +
+        '<label for="Author_' + rowCount + '__OfficalWebsites_' + index + '_Naver">Naver</label>' +
+        '<input type="text" id="Author_' + rowCount + '__OfficalWebsites_' + index + '_Naver" name="Author[' + rowCount + '].OfficalWebsite[' + index + '].Naver" class="form-control" />' +
+        '<label for="Author_' + rowCount + '__OfficalWebsites_' + index + '_Instagram">Instagram</label>' +
+        '<input type="text" id="Author_' + rowCount + '__OfficalWebsites_' + index + '_Instagram" name="Author[' + rowCount + '].OfficalWebsite[' + index + '].Instagram" class="form-control" />' +
+        '<label for="Author_' + rowCount + '__OfficalWebsites_' + index + '_OfficalWebsiteString">Website URL</label>' +
+        '<input type="text" id="Author_' + rowCount + '__OfficalWebsites_' + index + '_OfficalWebsiteString" name="Author[' + rowCount + '].OfficalWebsite[' + index + '].OfficalWebsiteString" class="form-control" />' +
+        '</div>';
+}
+$("#addRow").click(function () {
     var rowCount = parseInt($("#total").val());
     console.log("Add button clicked");
     rowCount++;
     $("#total").val(rowCount);
     var html = '';
     html += '<div id="inputRow">';
+    html += '<h3>Author </h3>';
     html += '<label for="Author_' + (rowCount - 1) + '__FirstName">Author ' + rowCount + ' First Name</label>';
     html += '<input type="text" id="Author_' + (rowCount - 1) + '__FirstName" name="Author[' + (rowCount - 1) + '].FirstName" class="form-control" required />';
     html += '<label for="Author_' + (rowCount - 1) + '__LastName">Author ' + rowCount + ' Last Name</label>';
@@ -13,11 +40,11 @@
     html += '<input type="text" id="Author_' + (rowCount - 1) + '__PhotoPath" name="Author[' + (rowCount - 1) + '].PhotoPath" class="form-control" />';
     html += '<label for="Author_' + (rowCount - 1) + '__Gender">Author ' + rowCount + ' Gender</label>';
     html += '<input type="text" id="Author_' + (rowCount - 1) + '__Gender" name="Author[' + (rowCount - 1) + '].Gender" class="form-control" />';
-    html += '<label for="Author_' + (rowCount - 1) + '__OfficalWebsites">Author ' + rowCount + ' Official Websites</label>';
-    html += '<input type="text" id="Author_' + (rowCount - 1) + '__OfficalWebsites" name="Author[' + (rowCount - 1) + '].OfficalWebsites" class="form-control" />';
+
     html += '<label for="Author_' + (rowCount - 1) + '__Twitter">Author ' + rowCount + ' Twitter</label>';
     html += '<input type="text" id="Author_' + (rowCount - 1) + '__Twitter" name="Author[' + (rowCount - 1) + '].Twitter" class="form-control" />';
     html += '<label for="Author_' + (rowCount - 1) + '__reddit">Author ' + rowCount + ' Reddit</label>';
+    html += '<input type="text" id="Author_' + (rowCount - 1) + '__reddit" name="Author[' + (rowCount - 1) + '].reddit" class="form-control" />';
     html += '<label for="Author_' + (rowCount - 1) + '__BirthPlace">Author ' + rowCount + ' Birth Place</label>';
     html += '<input type="text" id="Author_' + (rowCount - 1) + '__BirthPlace" name="Author[' + (rowCount - 1) + '].BirthPlace" class="form-control" />';
     html += '<label for="Author_' + (rowCount - 1) + '__Biography">Author ' + rowCount + ' Biography</label>';
@@ -33,22 +60,48 @@
     html += '<label for="Author_' + (rowCount - 1) + '__LastUpdate">Author ' + rowCount + ' Last Update</label>';
     html += '<input type="text" id="Author_' + (rowCount - 1) + '__LastUpdate" name="Author[' + (rowCount - 1) + '].LastUpdate" class="form-control" />';
     html += '<label for="Author_' + (rowCount - 1) + '__AuthorBorn">Author ' + rowCount + ' Born</label>';
-    html += '<input type="text" id="Author_' + (rowCount - 1) + '__AuthorBorn" name="Author[' + (rowCount - 1) + '].AuthorBorn" class="form-control" />';
+    html += '<input type="date" id="Author_' + (rowCount - 1) + '__AuthorBorn" name="Author[' + (rowCount - 1) + '].AuthorBorn" class="form-control" />';
     html += '<label for="Author_' + (rowCount - 1) + '__AuthorDeath">Author ' + rowCount + ' Death</label>';
-    html += '<input type="text" id="Author_' + (rowCount - 1) + '__AuthorDeath" name="Author[' + (rowCount - 1) + '].AuthorDeath" class="form-control" />';
+    html += '<input type="date" id="Author_' + (rowCount - 1) + '__AuthorDeath" name="Author[' + (rowCount - 1) + '].AuthorDeath" class="form-control" />';
     html += '<label for="Author_' + (rowCount - 1) + '__Contact">Author ' + rowCount + ' Contact</label>';
     html += '<input type="text" id="Author_' + (rowCount - 1) + '__Contact" name="Author[' + (rowCount - 1) + '].Contact" class="form-control" />';
     html += '<label for="Author_' + (rowCount - 1) + '__MangaModels">Author ' + rowCount + ' Manga Models</label>';
     html += '<input type="text" id="Author_' + (rowCount - 1) + '__MangaModels" name="Author[' + (rowCount - 1) + '].MangaModels" class="form-control" />';
-    html += '<label for="Author_' + (rowCount - 1) + '__isChecked">Author ' + rowCount + ' is Checked</label>';
-    html += '<input type="checkbox" id="Author_' + (rowCount - 1) + '__isChecked" name="Author[' + (rowCount - 1) + '].isChecked" />';
-    html += '<label for="Author_' + (rowCount - 1) + '__AssociatedNames">Author ' + rowCount + ' Associated Names</label>';
-    html += '<input type="text" id="Author_' + (rowCount - 1) + '__AssociatedNames" name="Author[' + (rowCount - 1) + '].AssociatedNames" class="form-control" multiple />';
+
     html += '<button id="removeRow" type="button" class="btn btn-danger">Remove</button>';
     html += '</div>';
-    //add more inputs here...
+    html += '</div>';
+
+    // Add input fields for AssociatedNames
+
+    html += '<div class="associated-names-container">';
+    html += '<h3>Associated Names</h3>';
+    html += '</div>';
+    // Add an 'Add Associated Name' button for each author
+    html += '<button type="button" class="btn btn-primary add-associated-name">Add Associated Name</button>';
+
+    // Add input fields for OfficalWebsites
+    html += '<div class="official-websites-container">';
+    html += '<h3>Official Websites</h3>';
+    html += '</div>';
+    // Add an 'Add Offical Website' button for each author
+    html += '<button type="button" class="btn btn-primary add-official-website">Add Official Website</button>';
 
     $('#newRow').append(html);
+});
+// Add a new associated name input when the 'Add Associated Name' button is clicked
+$(document).on('click', '.add-associated-name', function () {
+    var rowCount = parseInt($("#total").val()) - 1;
+    var associatedNameCount = $(this).siblings('.associated-names-container').find('input[type="text"][name*="AssociatedNames"]').length;
+    $(this).siblings('.associated-names-container').append(createAssociatedNameInput(rowCount, associatedNameCount));
+});
+
+// Add a new official website input when the 'Add Official Website' button is clicked
+$(document).on('click', '.add-official-website', function () {
+    var rowCount = parseInt($("#total").val()) - 1;
+    var officialWebsiteCount = $(this).siblings('.official-websites-container').find('input[type="text"][name*="OfficialWebsites"]').length / 7; // Divide by 7 as there are 7 input fields per official website
+    var newOfficialWebsiteInput = createOfficialWebsiteInput(rowCount, officialWebsiteCount);
+    $(this).siblings('.official-websites-container').append(newOfficialWebsiteInput);
 });
 $(document).on('click', '#removeRow', function () {
     var rowCount = parseInt($("#total").val());
@@ -56,26 +109,3 @@ $(document).on('click', '#removeRow', function () {
     $("#total").val(rowCount);
     $(this).closest('#inputRow').remove();
 });
-
-//Orignal
-//$("#addRow").click(function () {
-//    var rowCount = parseInt($("#total").val());
-//    console.log("Add button clicked");
-//    rowCount++;
-//    $("#total").val(rowCount);
-//    var html = '';
-//    html += '<div id="inputRow">';
-//    html += '<input type="text" name="[' + (rowCount - 1) + '].Name"  />';
-//    html += '<input type="number" name="[' + (rowCount - 1) + '].Age"  />';
-//    //add more inputs here...
-//    html += '<button id="removeRow" type="button" class="btn btn-danger">Remove</button>';
-//    html += '</div>';
-
-//    $('#newRow').append(html);
-//});
-//$(document).on('click', '#removeRow', function () {
-//    var rowCount = parseInt($("#total").val());
-//    rowCount--;
-//    $("#total").val(rowCount);
-//    $(this).closest('#inputRow').remove();
-//});  

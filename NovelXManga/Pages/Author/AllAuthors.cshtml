@@ -2,3 +2,11 @@
 @model NovelXManga.Pages.Author.AllAuthorsModel
 @{
 }
+
+<button id="addRow" type="button" class="btn btn-info">Add</button>
+<form method="post" asp-page-handler="Author">
+    <div id="newRow">
+        <input type="hidden" id="total" value="0" />
+    </div>
+    <input type="submit" class="btn btn-primary" value="Post" />
+</form>
