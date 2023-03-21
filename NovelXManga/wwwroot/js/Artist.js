@@ -1,4 +1,30 @@
-﻿$("#addRowArtist").click(function () {
+﻿// Create a function to generate a new associated name input
+function createAssociatedNameInput(rowCount, index) {
+    return '<label for="Artist_' + rowCount + '__AssociatedNames_' + index + '_nameString">Associated Name ' + (index + 1) + '</label>' +
+        '<input type="text" id="Artist_' + rowCount + '__AssociatedNames_' + index + '_nameString" name="Artist[' + rowCount + '].AssociatedNames[' + index + '].nameString" class="form-control" />';
+}
+
+// Create a function to generate a new official website input
+function createOfficialWebsiteInput(rowCount, index) {
+    return '<div class="official-websites-container-artist">' +
+        '<h3>Official Website ' + (index + 1) + '</h3>' +
+        '<label for="Artist_' + rowCount + '__OfficalWebsites_' + index + '_OfficalWebsiteName">Website Name</label>' +
+        '<input type="text" id="Artist_' + rowCount + '__OfficalWebsites_' + index + '_OfficalWebsiteName" name="Artist[' + rowCount + '].OfficalWebsites[' + index + '].OfficalWebsiteName" class="form-control" />' +
+        '<label for="Artist_' + rowCount + '__OfficalWebsites_' + index + '_Twitter">Twitter</label>' +
+        '<input type="text" id="Artist_' + rowCount + '__OfficalWebsites_' + index + '_Twitter" name="Artist[' + rowCount + '].OfficalWebsites[' + index + '].Twitter" class="form-control" />' +
+        '<label for="Artist_' + rowCount + '__OfficalWebsites_' + index + '_Facebook">Facebook</label>' +
+        '<input type="text" id="Artist_' + rowCount + '__OfficalWebsites_' + index + '_Facebook" name="Artist[' + rowCount + '].OfficalWebsites[' + index + '].Facebook" class="form-control" />' +
+        '<label for="Artist_' + rowCount + '__OfficalWebsites_' + index + '_Line">Line</label>' +
+        '<input type="text" id="Artist_' + rowCount + '__OfficalWebsites_' + index + '_Line" name="Artist[' + rowCount + '].OfficalWebsites[' + index + '].Line" class="form-control" />' +
+        '<label for="Artist_' + rowCount + '__OfficalWebsites_' + index + '_Naver">Naver</label>' +
+        '<input type="text" id="Artist_' + rowCount + '__OfficalWebsites_' + index + '_Naver" name="Artist[' + rowCount + '].OfficalWebsites[' + index + '].Naver" class="form-control" />' +
+        '<label for="Artist_' + rowCount + '__OfficalWebsites_' + index + '_Instagram">Instagram</label>' +
+        '<input type="text" id="Artist_' + rowCount + '__OfficalWebsites_' + index + '_Instagram" name="Artist[' + rowCount + '].OfficalWebsites[' + index + '].Instagram" class="form-control" />' +
+        '<label for="Artist_' + rowCount + '__OfficalWebsites_' + index + '_OfficalWebsiteString">Website URL</label>' +
+        '<input type="text" id="Artist_' + rowCount + '__OfficalWebsites_' + index + '_OfficalWebsiteString" name="Artist[' + rowCount + '].OfficalWebsites[' + index + '].OfficalWebsiteString" class="form-control" />' +
+        '</div>';
+}
+$("#addRowArtist").click(function () {
     var rowCount = parseInt($("#totalArtist").val());
     console.log("Add button clicked");
     rowCount++;
@@ -47,27 +73,35 @@
     html += '</div>';
     //add more inputs here...
 
-    // Add input fields for AssociatedNames
-    html += '<div class="associated-names-container">';
+    html += '<div class="associated-names-container-artist">';
     html += '<h3>Associated Names</h3>';
-
-    for (var i = 0; i < 2; i++) {
-        html += '<label for="Artist_' + (rowCount - 1) + '__AssociatedNames_' + i + '_nameString">Associated Name ' + (i + 1) + '</label>';
-        html += '<input type="text" id="Artist_' + (rowCount - 1) + '__AssociatedNames_' + i + '_nameString" name="Artist[' + (rowCount - 1) + '].AssociatedNames[' + i + '].nameString" class="form-control" />';
-    }
     html += '</div>';
+
+    // Add an 'Add Associated Name' button for each Artist
+    html += '<button type="button" class="btn btn-primary add-associated-name-artist">Add Associated Name</button>';
 
     // Add input fields for OfficalWebsites
-    html += '<div class="official-websites-container">';
+    html += '<div class="official-websites-container-artist">';
     html += '<h3>Official Websites</h3>';
-    for (var i = 0; i < 2; i++) {
-        html += '<label for="Artist_' + (rowCount - 1) + '__OfficialWebsites_' + i + '_OfficalWebsiteName">Official Website ' + (i + 1) + '</label>';
-        html += '<input type="text" id="Artist_' + (rowCount - 1) + '__OfficialWebsites_' + i + '_OfficalWebsiteName" name="Artist[' + (rowCount - 1) + '].OfficalWebsites[' + i + '].OfficalWebsiteName" class="form-control" />';
-        html += '<label for="Artist_' + (rowCount - 1) + '__OfficialWebsites_' + i + '_OfficalWebsiteString">Official Website URL ' + (i + 1) + '</label>';
-        html += '<input type="text" id="Artist_' + (rowCount - 1) + '__OfficialWebsites_' + i + '_OfficalWebsiteString" name="Artist[' + (rowCount - 1) + '].OfficalWebsites[' + i + '].OfficalWebsiteString" class="form-control" />';
-    }
     html += '</div>';
+
+    // Add an 'Add Offical Website' button for each Artist
+    html += '<button type="button" class="btn btn-primary add-official-website">Add Official Website</button>';
+
     $('#newRowArtist').append(html);
+});
+$(document).on('click', '.add-associated-name-artist', function () {
+    var rowCount = parseInt($("#totalArtist").val()) - 1;
+    var associatedNameCount = $(this).siblings('.associated-names-container-artist').find('input[type="text"][name*="AssociatedNames"]').length;
+    $(this).siblings('.associated-names-container-artist').append(createAssociatedNameInput(rowCount, associatedNameCount));
+});
+
+// Add a new official website input when the 'Add Official Website' button is clicked
+$(document).on('click', '.add-official-website', function () {
+    var rowCount = parseInt($("#totalArtist").val()) - 1;
+    var officialWebsiteCount = $(this).siblings('.official-websites-container-artist').find('input[type="text"][name*="OfficalWebsites"]').length / 7; // Divide by 7 as there are 7 input fields per official website
+    var newOfficialWebsiteInput = createOfficialWebsiteInput(rowCount, officialWebsiteCount);
+    $(this).siblings('.official-websites-container-artist').append(newOfficialWebsiteInput);
 });
 $(document).on('click', '#removeRow', function () {
     var rowCount = parseInt($("#totalArtist").val());

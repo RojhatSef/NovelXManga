@@ -9,19 +9,19 @@ function createOfficialWebsiteInput(rowCount, index) {
     return '<div class="official-websites-container">' +
         '<h3>Official Website ' + (index + 1) + '</h3>' +
         '<label for="Author_' + rowCount + '__OfficalWebsites_' + index + '_OfficalWebsiteName">Website Name</label>' +
-        '<input type="text" id="Author_' + rowCount + '__OfficalWebsites_' + index + '_OfficalWebsiteName" name="Author[' + rowCount + '].OfficalWebsite[' + index + '].OfficalWebsiteName" class="form-control" />' +
+        '<input type="text" id="Author_' + rowCount + '__OfficalWebsites_' + index + '_OfficalWebsiteName" name="Author[' + rowCount + '].OfficalWebsites[' + index + '].OfficalWebsiteName" class="form-control" />' +
         '<label for="Author_' + rowCount + '__OfficalWebsites_' + index + '_Twitter">Twitter</label>' +
-        '<input type="text" id="Author_' + rowCount + '__OfficalWebsites_' + index + '_Twitter" name="Author[' + rowCount + '].OfficalWebsite[' + index + '].Twitter" class="form-control" />' +
+        '<input type="text" id="Author_' + rowCount + '__OfficalWebsites_' + index + '_Twitter" name="Author[' + rowCount + '].OfficalWebsites[' + index + '].Twitter" class="form-control" />' +
         '<label for="Author_' + rowCount + '__OfficalWebsites_' + index + '_Facebook">Facebook</label>' +
-        '<input type="text" id="Author_' + rowCount + '__OfficalWebsites_' + index + '_Facebook" name="Author[' + rowCount + '].OfficalWebsite[' + index + '].Facebook" class="form-control" />' +
+        '<input type="text" id="Author_' + rowCount + '__OfficalWebsites_' + index + '_Facebook" name="Author[' + rowCount + '].OfficalWebsites[' + index + '].Facebook" class="form-control" />' +
         '<label for="Author_' + rowCount + '__OfficalWebsites_' + index + '_Line">Line</label>' +
-        '<input type="text" id="Author_' + rowCount + '__OfficalWebsites_' + index + '_Line" name="Author[' + rowCount + '].OfficalWebsite[' + index + '].Line" class="form-control" />' +
+        '<input type="text" id="Author_' + rowCount + '__OfficalWebsites_' + index + '_Line" name="Author[' + rowCount + '].OfficalWebsites[' + index + '].Line" class="form-control" />' +
         '<label for="Author_' + rowCount + '__OfficalWebsites_' + index + '_Naver">Naver</label>' +
-        '<input type="text" id="Author_' + rowCount + '__OfficalWebsites_' + index + '_Naver" name="Author[' + rowCount + '].OfficalWebsite[' + index + '].Naver" class="form-control" />' +
+        '<input type="text" id="Author_' + rowCount + '__OfficalWebsites_' + index + '_Naver" name="Author[' + rowCount + '].OfficalWebsites[' + index + '].Naver" class="form-control" />' +
         '<label for="Author_' + rowCount + '__OfficalWebsites_' + index + '_Instagram">Instagram</label>' +
-        '<input type="text" id="Author_' + rowCount + '__OfficalWebsites_' + index + '_Instagram" name="Author[' + rowCount + '].OfficalWebsite[' + index + '].Instagram" class="form-control" />' +
+        '<input type="text" id="Author_' + rowCount + '__OfficalWebsites_' + index + '_Instagram" name="Author[' + rowCount + '].OfficalWebsites[' + index + '].Instagram" class="form-control" />' +
         '<label for="Author_' + rowCount + '__OfficalWebsites_' + index + '_OfficalWebsiteString">Website URL</label>' +
-        '<input type="text" id="Author_' + rowCount + '__OfficalWebsites_' + index + '_OfficalWebsiteString" name="Author[' + rowCount + '].OfficalWebsite[' + index + '].OfficalWebsiteString" class="form-control" />' +
+        '<input type="text" id="Author_' + rowCount + '__OfficalWebsites_' + index + '_OfficalWebsiteString" name="Author[' + rowCount + '].OfficalWebsites[' + index + '].OfficalWebsiteString" class="form-control" />' +
         '</div>';
 }
 $("#addRow").click(function () {
@@ -79,11 +79,11 @@ $("#addRow").click(function () {
     html += '</div>';
     // Add an 'Add Associated Name' button for each author
     html += '<button type="button" class="btn btn-primary add-associated-name">Add Associated Name</button>';
-
-    // Add input fields for OfficalWebsites
     html += '<div class="official-websites-container">';
-    html += '<h3>Official Websites</h3>';
+
     html += '</div>';
+    // Add input fields for OfficalWebsites
+
     // Add an 'Add Offical Website' button for each author
     html += '<button type="button" class="btn btn-primary add-official-website">Add Official Website</button>';
 
@@ -99,7 +99,7 @@ $(document).on('click', '.add-associated-name', function () {
 // Add a new official website input when the 'Add Official Website' button is clicked
 $(document).on('click', '.add-official-website', function () {
     var rowCount = parseInt($("#total").val()) - 1;
-    var officialWebsiteCount = $(this).siblings('.official-websites-container').find('input[type="text"][name*="OfficialWebsites"]').length / 7; // Divide by 7 as there are 7 input fields per official website
+    var officialWebsiteCount = $(this).siblings('.official-websites-container').find('input[type="text"][name*="OfficalWebsites"]').length / 7; // Divide by 7 as there are 7 input fields per official website
     var newOfficialWebsiteInput = createOfficialWebsiteInput(rowCount, officialWebsiteCount);
     $(this).siblings('.official-websites-container').append(newOfficialWebsiteInput);
 });
