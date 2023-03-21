@@ -18,13 +18,15 @@ namespace NovelXManga.Pages.Author
         public MangaModel mangaModel { get; set; }
 
         [BindProperty]
-        public List<AuthorModel> Author { get; set; }
+        public List<AuthorModel> Authors_ { get; set; }
 
         [BindProperty]
         public List<OfficalWebsite> OfficialWebsites { get; set; }
 
         [BindProperty]
         public List<AssociatedNames> AssociatedNamesList { get; set; }
+
+        public IFormFile? Photo_Uppload { get; set; }
 
         public int MangaID { get; set; }
 
@@ -38,20 +40,43 @@ namespace NovelXManga.Pages.Author
         }
 
         //public async Task<IActionResult> OnPostAuthorAsync(List<AuthorModel> model)
-        public async Task<IActionResult> OnPostAsync(List<AuthorModel> Author, int MangaID)
+        public async Task<IActionResult> OnPostAsync([FromForm] List<AuthorModel> Author, int MangaID, [FromForm] List<IFormFile> Photo)
         {
             if (MangaID != 0)
             {
                 var manga = await mangaRepository.GetOneMangaAllIncludedAsync(MangaID);
-                foreach (var author in Author)
+                for (int i = 0; i < Author.Count; i++)
                 {
+                    var author = Author[i];
+                    Photo_Uppload = Photo.FirstOrDefault(p =>
+                    {
+                        var parts = p.Name.Split("_");
+                        return parts.Length > 1 && int.TryParse(parts[1], out int index) && index == i;
+                    });
+
+                    var uploadsDirectory = Path.Combine(webHostEnvironment.WebRootPath, "Images", "AuthorImage");
+                    if (!Directory.Exists(uploadsDirectory))
+                    {
+                        Directory.CreateDirectory(uploadsDirectory);
+                    }
+
+                    // Process uploaded file and get the photo path, if there's no photo photopath is null.
+                    string photoPath = Photo_Uppload != null ? ProcessUploadedFile() : null;
                     // Create a new AuthorModel object
                     var newAuthor = new AuthorModel
                     {
                         FirstName = author.FirstName,
                         LastName = author.LastName,
                         AssociatedNames = new List<AssociatedNames>(),
-                        OfficalWebsites = new List<OfficalWebsite>()
+                        OfficalWebsites = new List<OfficalWebsite>(),
+                        PhotoPath = photoPath,
+                        AuthorDeath = author.AuthorDeath,
+                        AuthorBorn = author.AuthorBorn,
+                        WorkingAt = author.WorkingAt,
+                        Gender = author.Gender,
+                        Biography = author.Biography,
+                        Contact = author.Contact,
+                        MangaModels = new List<MangaModel> { manga },
                     };
 
                     // Add the new author to the database
@@ -95,22 +120,46 @@ namespace NovelXManga.Pages.Author
                     }
                     manga.Authormodels.Add(author);
                     // Add the new author to the manga's authors
-                    manga.Authormodels = new List<AuthorModel> { author };
+
+                    Authors_.Add(author);
 
                     await context.SaveChangesAsync();
                 }
+                //manga.Authormodels = new List<AuthorModel> { Authors_ };
             }
             else
             {
-                foreach (var author in Author)
+                for (int i = 0; i < Author.Count; i++)
                 {
+                    var author = Author[i];
+
+                    Photo_Uppload = Photo[i];
+                    foreach (var p in Photo)
+                    {
+                        System.Diagnostics.Debug.WriteLine($"File Name: {p.Name}");
+                    }
+                    var uploadsDirectory = Path.Combine(webHostEnvironment.WebRootPath, "Images", "AuthorImage");
+                    if (!Directory.Exists(uploadsDirectory))
+                    {
+                        Directory.CreateDirectory(uploadsDirectory);
+                    }
+
+                    // Process uploaded file and get the photo path, if there's no photo photopath is null.
+                    string photoPath = Photo_Uppload != null ? ProcessUploadedFile() : null;
                     // Create a new AuthorModel object
                     var newAuthor = new AuthorModel
                     {
                         FirstName = author.FirstName,
                         LastName = author.LastName,
                         AssociatedNames = new List<AssociatedNames>(),
-                        OfficalWebsites = new List<OfficalWebsite>()
+                        OfficalWebsites = new List<OfficalWebsite>(),
+                        PhotoPath = photoPath,
+                        AuthorDeath = author.AuthorDeath,
+                        AuthorBorn = author.AuthorBorn,
+                        WorkingAt = author.WorkingAt,
+                        Gender = author.Gender,
+                        Biography = author.Biography,
+                        Contact = author.Contact,
                     };
 
                     // Add the new author to the database
@@ -160,6 +209,23 @@ namespace NovelXManga.Pages.Author
             }
 
             return RedirectToPage("/Index");
+        }
+
+        private string ProcessUploadedFile()
+        {
+            string uniqueFileName = null;
+            if (Photo_Uppload != null)
+            {
+                string uploadsFolder = Path.Combine(webHostEnvironment.WebRootPath, "Images", "AuthorImage");
+                string extension = Path.GetExtension(Photo_Uppload.FileName);
+                uniqueFileName = Guid.NewGuid().ToString() + extension;
+                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    Photo_Uppload.CopyTo(fileStream);
+                }
+            }
+            return uniqueFileName;
         }
 
         public async Task<IActionResult> OnGetAsync(int mangaId)

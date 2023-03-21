@@ -1,4 +1,8 @@
-﻿// Create a function to generate a new associated name input
+﻿function createPhotoInput(rowCount) {
+    return '<label for="Photo_' + rowCount + '">Author ' + (rowCount + 1) + ' Photo</label>' +
+        '<input type="file" id="Photo_' + rowCount + '" name="Author[' + rowCount + '].Photo" data-author-index="' + rowCount + '" class="form-control-file  custom-file custom-file-input" />';
+}
+// Create a function to generate a new associated name input
 function createAssociatedNameInput(rowCount, index) {
     return '<label for="Author_' + rowCount + '__AssociatedNames_' + index + '_nameString">Associated Name ' + (index + 1) + '</label>' +
         '<input type="text" id="Author_' + rowCount + '__AssociatedNames_' + index + '_nameString" name="Author[' + rowCount + '].AssociatedNames[' + index + '].nameString" class="form-control" />';
@@ -36,8 +40,11 @@ $("#addRow").click(function () {
     html += '<input type="text" id="Author_' + (rowCount - 1) + '__FirstName" name="Author[' + (rowCount - 1) + '].FirstName" class="form-control" required />';
     html += '<label for="Author_' + (rowCount - 1) + '__LastName">Author ' + rowCount + ' Last Name</label>';
     html += '<input type="text" id="Author_' + (rowCount - 1) + '__LastName" name="Author[' + (rowCount - 1) + '].LastName" class="form-control" />';
-    html += '<label for="Author_' + (rowCount - 1) + '__PhotoPath">Author ' + rowCount + ' Photo Path</label>';
-    html += '<input type="text" id="Author_' + (rowCount - 1) + '__PhotoPath" name="Author[' + (rowCount - 1) + '].PhotoPath" class="form-control" />';
+    html += '<label for="Author_' + (rowCount - 1) + '__PhotoPath">Author ' + rowCount + ' Photo </label>';
+    html += '<input type="file" id="Photo_' + (rowCount - 1) + '" name="Photo" data-author-index="' + (rowCount - 1) + '" class="form-control-file  custom-file custom-file-input" />';
+    html += '<br />'
+    /*   html += createPhotoInput(rowCount - 1);*/
+    html += '<br />'
     html += '<label for="Author_' + (rowCount - 1) + '__Gender">Author ' + rowCount + ' Gender</label>';
     html += '<input type="text" id="Author_' + (rowCount - 1) + '__Gender" name="Author[' + (rowCount - 1) + '].Gender" class="form-control" />';
 
@@ -87,7 +94,7 @@ $("#addRow").click(function () {
     // Add an 'Add Offical Website' button for each author
     html += '<button type="button" class="btn btn-primary add-official-website">Add Official Website</button>';
 
-    $('#newRow').append(html);
+    $('#formRows').append(html);
 });
 // Add a new associated name input when the 'Add Associated Name' button is clicked
 $(document).on('click', '.add-associated-name', function () {
