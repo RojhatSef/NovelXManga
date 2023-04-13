@@ -40,7 +40,7 @@ namespace NovelXManga.Pages.Author
         }
 
         //public async Task<IActionResult> OnPostAuthorAsync(List<AuthorModel> model)
-        public async Task<IActionResult> OnPostAsync([FromForm] List<AuthorModel> Author, int MangaID, [FromForm] List<IFormFile> Photo)
+        public async Task<IActionResult> OnPostAsync([FromForm] List<AuthorModel> Author, int MangaID, [FromForm] IList<IFormFile> Photo)
         {
             if (MangaID != 0)
             {

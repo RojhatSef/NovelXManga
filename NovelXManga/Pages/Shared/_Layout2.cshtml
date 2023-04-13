@@ -14,113 +14,73 @@
 
 @*Tries*@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
-<div class="container-costum">
-    <nav>
-        <div class=" nav-costum">
-            <div class="Right-Side">
-              Search bar
-            </div>
-            <div class="Left-Side">
-                <button id="HideWhenSmall">
-                <i  class="bi bi-list fs-3"></i> 
-                </button>
-                @if (SignInManager.IsSignedIn(User))
-                {
-                    <div class="dropdown pb-4">
-                        <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img asp-append-version="true" src="~/Images/MangaImage/ThisNeedsAModel" alt="" width="30" height="30" class="rounded-circle">
-                            <span id="logo" class="d-none d-sm-inline mx-1">Profile</span>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-
-                            <li><a id="log" class="dropdown-item" asp-page="/profile/UserProfile">User</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" asp-page="/Login/LogOut">Sign out</a></li>
-                        </ul>
-                    </div>
-                }
-            </div>
-        </div>
-  
-    
-    
-    
-    </nav >
-    <div class="SidebarCostum">
-      
+<body>
+    <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
+        <div class="container-fluid">
+            <div class="row flex-nowrap">
+                <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 sidebar" id="CostumeSidebar">
                     <div class=" flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
                         <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                         
+                            <i id="HideWhenSmall" class="bi bi-list fs-3"></i>
                             <span class="fs-5 d-none d-sm-inline" id="logo">NovelXmanga</span>
                         </a>         @if (SignInManager.IsSignedIn(User))
                         {
                             <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start text-left" id="menu">
                                 <li class="nav-item">
-                                    <a  href="#" class="nav-link align-middle px-0">
-                                        <i class="fs-4 bi-house "></i> <span class="ms-1 d-none d-sm-inline ">Home</span>
+                                    <a id="SidebarColors" href="#" class="nav-link align-middle px-0">
+                                        <i class="fs-4 bi-house SidebarColors"></i> <span class="ms-1 d-none d-sm-inline SidebarColors">Home</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#submenu1" data-bs-toggle="collapse" data-bs-popper="none" class="nav-link px-0 align-middle">
-                                        <i  class="fs-4 bi-speedometer2 "></i> <span class="ms-1 d-none d-sm-inline ">Titles</span>
+                                    <a id="SidebarColors" href="#submenu1" data-bs-toggle="collapse" data-bs-popper="none" class="nav-link px-0 align-middle">
+                                        <i id="SidebarColors" class="fs-4 bi-speedometer2 SidebarColors"></i> <span class="ms-1 d-none d-sm-inline SidebarColors">Titles</span>
                                     </a>
 
-                                    <ul class="collapse nav flex-column ms-1"data-bs-parent="#menu">
+                                    <ul class="collapse nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
 
                                         <li>
-                                            <a href="#" class="nav-link px-0"> <span  class="d-none d-sm-inline">Latest Updates</span>  </a>
+                                            <a href="#" class="nav-link px-0"> <span id="SidebarColors" class="d-none d-sm-inline">Latest Updates</span>  </a>
                                         </li>
                                         <li>
-                                            <a asp-page="/Author/CreateAuthor" class="nav-link px-0"> <span  class="d-none d-sm-inline">AuthorTest</span>  </a>
+                                            <a asp-page="/Author/CreateAuthor" class="nav-link px-0"> <span id="SidebarColors" class="d-none d-sm-inline">AuthorTest</span>  </a>
                                         </li>
                                         <li>
-                                            <a asp-page="/Manga/CreateNewManga" class="nav-link px-0"> <span  class="d-none d-sm-inline">Create New Book</span>  </a>
+                                            <a asp-page="/Manga/CreateNewManga" class="nav-link px-0"> <span id="SidebarColors" class="d-none d-sm-inline">Create New Book</span>  </a>
                                         </li>
                                     </ul>
                                 </li>
                                 <li>
                                     <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
-                                        <i id="" class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline">Community</span>
+                                        <i id="SidebarColors" class="fs-4 bi-bootstrap"></i> <span id="SidebarColors" class="ms-1 d-none d-sm-inline">Community</span>
                                     </a>
                                     <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
                                         <li class="w-100">
-                                            <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Forum</span> </a>
+                                            <a href="#" class="nav-link px-0"> <span id="SidebarColors" class="d-none d-sm-inline">Forum</span> </a>
                                         </li>
                                         <li>
-                                            <a href="#" class="nav-link px-0"> <span  class="d-none d-sm-inline">Groups</span> </a>
+                                            <a href="#" class="nav-link px-0"> <span id="SidebarColors" class="d-none d-sm-inline">Groups</span> </a>
                                         </li>
                                         <li>
-                                            <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Users</span> </a>
+                                            <a href="#" class="nav-link px-0"> <span id="SidebarColors" class="d-none d-sm-inline">Users</span> </a>
                                         </li>
-                            <li>
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Latest Updates</span>  </a>
-                            </li>
-                            <li>
-                                <a asp-page="/Author/CreateAuthor" class="nav-link px-0"> <span class="d-none d-sm-inline">AuthorTest</span>  </a>
-                            </li>
-                            <li>
-                                <a asp-page="/Manga/CreateNewManga" class="nav-link px-0"> <span class="d-none d-sm-inline">Create New Book</span>  </a>
-                            </li>
                                     </ul>
                                 </li>
                                 <li>
                                     <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-                                        <i class="fs-4 bi-grid"></i> <span class="ms-1 d-none d-sm-inline">NovelXManga</span>
+                                        <i id="SidebarColors" class="fs-4 bi-grid"></i> <span id="SidebarColors" class="ms-1 d-none d-sm-inline">NovelXManga</span>
                                     </a>
                                     <ul class="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
                                         <li class="w-100">
-                                            <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">About us</span> </a>
+                                            <a href="#" class="nav-link px-0"> <span id="SidebarColors" class="d-none d-sm-inline">About us</span> </a>
                                         </li>
                                         <li>
-                                            <a href="#" class="nav-link px-0"> <span  class="d-none d-sm-inline">Rules</span> </a>
+                                            <a href="#" class="nav-link px-0"> <span id="SidebarColors" class="d-none d-sm-inline">Rules</span> </a>
                                         </li>
                                         <li>
-                                            <a href="#" class="nav-link px-0"> <span  class="d-none d-sm-inline">Privacy Policy</span> </a>
+                                            <a href="#" class="nav-link px-0"> <span id="SidebarColors" class="d-none d-sm-inline">Privacy Policy</span> </a>
                                         </li>
                                         <li>
-                                            <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Announcment</span> </a>
+                                            <a href="#" class="nav-link px-0"> <span id="SidebarColors" class="d-none d-sm-inline">Announcment</span> </a>
                                         </li>
                                     </ul>
                                 </li>
@@ -128,7 +88,20 @@
                             </ul>
 
                             <hr>
-                     
+                            <div class="dropdown pb-4">
+                                <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <img asp-append-version="true" src="~/Images/MangaImage/ThisNeedsAModel" alt="" width="30" height="30" class="rounded-circle">
+                                    <span id="logo" class="d-none d-sm-inline mx-1">Profile</span>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+
+                                    <li><a id="log" class="dropdown-item" asp-page="/profile/UserProfile">User</a></li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><a class="dropdown-item" asp-page="/Login/LogOut">Sign out</a></li>
+                                </ul>
+                            </div>
 
                         }
                         else
@@ -200,17 +173,32 @@
 
                             </ul>
                         }
-         
-        </div>
-       
-   
-    </div>
-    <main class="MainContent">
-        @RenderBody()
-    </main>
-   
+                    </div>
+                </div>
 
-</div>
+            </div>
+        </div>
+        <div id="sidebar-toggle" class="small-screen">
+            <i class="bi bi-list fs-3"></i>
+        </div>
+
+    </nav>
+
+
+
+
+    <div class="content-container px-4">
+        <main role="main" id="CostumeSidebar" class="pb-3">
+            <div id="PushContentLeftForLargeScreen">
+                @RenderBody()
+            </div>
+
+
+        </main>
+    </div>
+
+
+</body>
 
 
 

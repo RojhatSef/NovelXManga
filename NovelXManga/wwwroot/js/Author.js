@@ -28,6 +28,7 @@ function createOfficialWebsiteInput(rowCount, index) {
         '<input type="text" id="Author_' + rowCount + '__OfficalWebsites_' + index + '_OfficalWebsiteString" name="Author[' + rowCount + '].OfficalWebsites[' + index + '].OfficalWebsiteString" class="form-control" />' +
         '</div>';
 }
+
 $("#addRow").click(function () {
     var rowCount = parseInt($("#total").val());
     console.log("Add button clicked");
@@ -41,7 +42,26 @@ $("#addRow").click(function () {
     html += '<label for="Author_' + (rowCount - 1) + '__LastName">Author ' + rowCount + ' Last Name</label>';
     html += '<input type="text" id="Author_' + (rowCount - 1) + '__LastName" name="Author[' + (rowCount - 1) + '].LastName" class="form-control" />';
     html += '<label for="Author_' + (rowCount - 1) + '__PhotoPath">Author ' + rowCount + ' Photo </label>';
-    html += '<input type="file" id="Photo_' + (rowCount - 1) + '" name="Photo" data-author-index="' + (rowCount - 1) + '" class="form-control-file  custom-file custom-file-input" />';
+    html += '<input type="file" id="Photo_' + (rowCount - 1) + '" name="Photo" data-author-index="' + (rowCount - 1) + '" class="form-control-file custom-file custom-file-input" />';
+    html += '<input type="hidden" id="HiddenPhoto_' + (rowCount - 1) + '" name="Photo[' + (rowCount - 1) + ']" value="/Images/AuthorImage/NoPhoto.png" />';
+
+    $(document).on('change', 'input[type="file"].custom-file-input', function () {
+        var file = this.files[0];
+        if (file) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                // File successfully read, you can process the file here
+            };
+            reader.readAsDataURL(file);
+
+            // Replace the current hidden input field value with the new file value
+            var authorIndex = $(this).data('author-index');
+            $('#HiddenPhoto_' + authorIndex).val(file.name);
+        } else {
+            // File input is empty, use the default image path
+            $(this).data('img-path', '/Images/AuthorImage/NoPhoto.png');
+        }
+    });
     html += '<br />'
     /*   html += createPhotoInput(rowCount - 1);*/
     html += '<br />'
@@ -116,3 +136,19 @@ $(document).on('click', '#removeRow', function () {
     $("#total").val(rowCount);
     $(this).closest('#inputRow').remove();
 });
+      // $(document).on('change', 'input[type="file"][data-author-index]', function () {
+    //    var file = this.files[0];
+    //    var authorIndex = $(this).data('author-index');
+
+    //    if (file) {
+    //        // Remove the default photo path from the data attribute
+    //        $(this).data('default-photo', '');
+    //    } else {
+    //        if (!$(this).data('default-photo')) {
+    //            var defaultPhotoPath = '/Images/AuthorImage/NoPhoto.png';
+    //            $(this).data('default-photo', defaultPhotoPath);
+    //        }
+    //        // Set the value of the file input to the default photo path
+    //        $(this).val($(this).data('default-photo'));
+    //    }
+    //});

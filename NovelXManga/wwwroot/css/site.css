@@ -1,510 +1,165 @@
-.bg-light {
-    background-color: transparent !important;
+:root {
+    --main-radius: 5px;
+    --main-padding: 5px;
 }
 
-html, body, nav {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    outline: 0;
-    font-size: 100%;
-    vertical-align: baseline;
-    color: #323232;
-    background: #DDD0C8;
+html, body {
+    height: 100%;
+    min-height: 100vh;
+    margin: 0px;
+    padding: 0px
 }
 
-.content-container .large-screen {
-    padding-left: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.grid-container-costume {
-}
-
-.grid-container-costume-1 {
+.container-costum {
     display: grid;
-    grid-template-columns: 1fr auto;
-    background-color: dimgrey;
-    grid-auto-rows: minmax(150px, auto);
-    grid-row-gap: 40px;
-    grid-column-gap: 25px;
-    height: 100vh;
+    min-height: 100vh;
+    grid-template-columns: 0.5fr 1fr 1fr 1fr;
+    grid-template-rows: 0.2fr auto;
+    grid-template-areas:
+        "nav nav nav nav"
+        "SidebarCostum main main main";
+    grid-gap: 0.2rem;
+    font-family: 'Lucida Sans Typewriter';
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 12px;
+    color: whitesmoke;
+    text-align: center;
 }
 
-.grid-item-costum {
-    /*   margin-left: 10px;
-    margin-top:10px; */
+.nav-costum {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 100%;
+    grid-template-rows: 1fr;
+    grid-template-areas:
+        "Left-Side Right-Side";
+    grid-gap: 0.2rem;
+    font-family: 'Lucida Sans Typewriter';
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 12px;
+    color: whitesmoke;
+    text-align: center;
+    padding: 0px;
+    margin: 0px;
 }
 
-.grid-item-costum-1 {
-    background-color: green;
-    grid-column-start: 2;
-    grid-column-end: 3;
-    grid-row: 1 / 2
-    /*grid-area: header; */
+.Right-Side {
+    background-color: cadetblue;
+    grid-area: Right-Side;
+    height: 100%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
-.grid-item-costum-3 {
-    background-color: blue;
-    /* grid-area: sidebar;*/
-}
-
-.grid-item-costum-2 {
-    background-color: red;
-    grid-column-start: 1;
-    grid-column-end: 2;
-    grid-row: 1 / 8
-    /*  grid-area: content; */
-}
-
-.grid-item-costum-4 {
-    background-color: yellow;
-}
-
-.grid-item-costum-5 {
+.Left-Side {
     background-color: teal;
+    grid-area: Left-Side;
+    height: 100%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    display: inline-block;
 }
 
-#menu {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-}
-    /* Hide the menu labels by default */
-    #menu li span {
-        display: contents !important;
-    }
-
-.sidebar-nav .nav-link:focus,
-.sidebar-nav .nav-link:active {
+nav {
+    background-color: red;
+    grid-area: nav;
+    border-radius: var(--main-radius);
 }
 
-.sidebar-nav .collapse {
-    transition: height 0.25s ease-in-out;
-}
-
-/* Set the sidebar to be fixed and full height */
-.sidebar {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-}
-/* Set the content to have a margin on the left to accommodate the sidebar */
-.py-3 {
-    margin-left: 70px;
-}
-
-/* Set the sidebar to transition smoothly when collapsed */
-.sidebar {
-    transition: width 0.25s ease-in-out;
-    width: 70px;
-    background-color: #323232;
-}
-
-#CostumeSidebar {
-    /*  color: #DDD0C8 !important;*/
-}
-
-.large-screen #CostumeSidebar #menu li:hover {
-    padding-left: 10px;
-}
-
-#SidebarColors {
-    color: #DDD0C8 !important;
-}
-
-.text-white {
-}
-/* Set the width of the sidebar when it's expanded */
-.sidebar.expanded {
-    width: 200px;
+.MainContent {
+    display: grid;
+    min-height: 100%;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 25% 12.5% 50% 12.5%;
+    grid-template-areas:
+        "Content1Cost Content1Cost Content1Cost"
+        "Content2Cost Content2Cost Content2Cost"
+        "Content3Cost Content3Cost Content3Cost"
+        "Content4Cost Content4Cost Content4Cost";
+    grid-gap: 0.5rem;
+    font-family: 'Lucida Sans Typewriter';
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 12px;
+    color: whitesmoke;
+    text-align: center;
 }
 
 main {
+    background-color: blue;
+    grid-area: main;
 }
 
-.collapse {
-    transition: height 0.5s ease-in-out;
+.SidebarCostum {
+    background-color: grey;
+    position: sticky;
+    top: 0;
+    max-height: 100vh;
+    grid-area: SidebarCostum;
+    border-radius: var(--main-radius);
+    padding-top: var(--main-padding);
 }
 
-    .collapse.show {
-        height: auto;
+.Content1Cost {
+    background-color: pink;
+    grid-area: Content1Cost;
+    height: 100vh;
+    border-radius: var(--main-radius);
+    padding-top: var(--main-padding);
+}
+
+.Content2Cost {
+    background-color: tomato;
+    grid-area: Content2Cost;
+    border-radius: var(--main-radius);
+    padding-top: var(--main-padding);
+}
+
+.Content3Cost {
+    background-color: lightblue;
+    grid-area: Content3Cost;
+    border-radius: var(--main-radius);
+    padding-top: var(--main-padding);
+}
+
+.Content4Cost {
+    background-color: dimgrey;
+    grid-area: Content4Cost;
+    border-radius: var(--main-radius);
+    padding-top: var(--main-padding);
+}
+
+@media only screen and (max-width:550px) {
+    .container-costum {
+        grid-template-columns: 1fr;
+        grid-template-rows: 0.4fr 0.4fr 2.2fr;
+        grid-template-areas:
+            "nav"
+            "SidebarCostum"
+            "main"
     }
 
-.sidebar-nav .collapse:hover {
-    display: block;
-}
-
-.collapse:not(.show) {
-    transition: height 0.35s ease;
-}
-
-/* Hide the menu labels by default */
-.sidebar #menu li span {
-    display: inline !important;
-}
-
-/* Hide the logos by default */
-.sidebar #logo {
-    display: none !important;
-}
-
-.card-with-margin-top {
-    margin-top: 80px;
-}
-/* Show the menu labels on larger screens */
-@media (min-width: 768px) {
-    /* Hide the menu labels by default on larger screens */
-    .sidebar #menu li span {
-        display: none !important;
-    }
-
-    /* Show the menu labels on hover on larger screens */
-    .sidebar:hover #menu li span {
-        display: inline !important;
-    }
-
-    /* Show the logos on larger screens */
-}
-
-/*.sidebar #logo {
-    display: none !important;
-}*/
-
-/* Remove hover effect on logos and show logos when sidebar is expanded on small screens */
-@media (max-width: 767px) {
-    .sidebar #logo:hover {
-        cursor: default;
-        background: none;
-    }
-
-    .sidebar #menu li span {
-        display: inline !important;
-    }
-
-    .sidebar.expanded #logo {
-        display: contents !important;
-    }
-
-    .sidebar.expanded #logo {
-        display: contents !important;
-    }
-}
-
-/* Show the menu labels on hover */
-.sidebar:hover #menu li span {
-    display: inline !important;
-}
-
-/* Styles for large screens */
-.large-screen
-#PushContentLeftForLargeScreen {
-    padding-left: 75px !important;
-}
-
-.large-screen .sidebar {
-    width: 70px;
-}
-
-    .large-screen .sidebar:hover {
-        width: 200px;
-    }
-
-    .large-screen .sidebar-nav .nav-link-text,
-    .large-screen .sidebar .sidebar-nav .nav-link:hover .nav-link-text {
-        display: inline;
-    }
-
-/* Set the sidebar to be fixed and full height on small screens */
-@media (max-width: 767px) {
-    .sidebar {
-        position: fixed;
-        top: 0;
-        bottom: 0;
-        width: 40%;
-        z-index: 1000;
-        align-items: end;
-        transition: transform 0.3s ease-in-out;
-    }
-
-    .py-3 {
-        margin-left: 0;
-    }
-
-    #HideWhenSmall {
+    .SidebarCostum {
         display: none;
     }
 }
 
-#sidebar-toggle {
-    position: fixed;
-    top: 0;
-    right: 0;
-    z-index: 1000;
-    color: #fff;
-    padding: 10px;
-    cursor: pointer;
+.carousel img {
+    max-width: 750px;
+    max-height: 750px;
+    min-width: 450px;
+    min-height: 450px;
+    object-fit: contain;
 }
 
-/* Hide the button on large screens */
-.large-screen #sidebar-toggle {
+.hidden {
     display: none;
 }
-/* Show the button on small screens when the sidebar is not expanded */
-.small-screen .sidebar:not(.expanded) + #sidebar-toggle {
-    display: block;
-    position: fixed;
-    top: 0;
-    right: 0;
-    z-index: 1000;
-    color: #fff;
-    padding: 10px;
-    cursor: pointer;
-}
 
-/* Styles for large screens */
-.large-screen .sidebar {
-    width: 70px;
-}
-
-.large-screen {
-    margin-left: 20px;
-}
-
-    .large-screen .sidebar:hover #logo {
-        width: 200px;
-        display: contents !important;
-    }
-
-    .large-screen .sidebar-nav .nav-link-text,
-    .large-screen .sidebar .sidebar-nav .nav-link:hover .nav-link-text {
-        display: inline;
-    }
-
-#CostumeSidebar:hover + .content-container {
-    transform: translateX(200px); /* Change this value to the width of your sidebar */
-}
-
-/* Remove the transform when the sidebar is not hovered */
-#CostumeSidebar:not(:hover) + .content-container {
-    transform: translateX(0);
-}
-
-/*
-
-New shit added
-*/
-/*Changes the entire carousel */
-.carousel {
-    position: relative;
-    width: 80%;
-    height: 600px;
-    margin: auto;
-    border: 1px solid red;
-    overflow: hidden;
-    /*  margin-left: -100px;*/
-}
-
-.MyBox {
-    padding-left: 100px;
-    background-color: red;
-    aspect-ratio: 1/1;
-    flex-grow: 1;
-    align-items: center;
-    justify-content: center;
-}
-
-.wrapperCustom {
-    background: rgba(red, 0.3);
-    display: flex;
-    min-height: 100vh;
-    align-items: center;
-    justify-content: center;
-    //flex-direction:column;
-    border: 1px solid red;
-}
-
-.wrapper-inner {
-    padding: 20px;
-    max-width: 80%;
-    min-height: 100%;
-    //max-height: 500px;
-    background: #fff;
-    display: flex;
-    flex-direction: column;
-    background: rgba(green, 0.2);
-}
-
-.itemCustom {
-    width: 100%;
-    min-height: 100%;
-    display: flex;
-    flex-direction: column;
-    max-height: 600px;
-    background: #fff;
-}
-
-.titelCustom,
-.contentCustom {
-    padding: 10px;
-    background: rgba(#000, 0.2);
-    margin-bottom: 10px;
-}
-
-.contentCustom {
-    flex-grow: 1;
-}
-
-.carousel-section {
-    max-width: 1000px;
-    height: 600px;
-    margin: auto;
-    overflow: hidden;
-    margin-left: 20px;
-    border: 1px solid red;
-    margin-left: -200px;
-}
-
-.caption-wrapper {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 20px;
-    /* border: 1px solid red;*/
-}
-
-    .caption-wrapper h5 {
-        font-size: 32px;
-        margin-bottom: 10px;
-    }
-
-    .caption-wrapper ul {
-        margin-bottom: 0;
-        font-size: 18px;
-        color: #777;
-    }
-
-.carousel-item img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    border: 1px solid gray;
-    border-radius: 15px;
-    /* border: 1px solid red;*/
-}
-
-.carousel-inner {
-    position: relative;
-    width: 100%;
-    overflow: hidden;
-}
-
-.carousel-item {
-    position: relative;
-    display: none;
-    float: left;
-    width: 100%;
-    margin-right: -100%;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    transition: transform .6s ease-in-out;
-}
-
-    .carousel-item.active,
-    .carousel-item-next,
-    .carousel-item-prev {
-        display: block;
-    }
-
-        .carousel-item-next:not(.carousel-item-left),
-        .active.carousel-item-right {
-            transform: translateX(100%);
-        }
-
-        .carousel-item-prev:not(.carousel-item-right),
-        .active.carousel-item-left {
-            transform: translateX(-100%);
-        }
-
-.carousel-control-prev,
-.carousel-control-next {
-    position: absolute;
-    top: 50%;
-    z-index: 1;
-    display: inline-block;
-    margin-top: -15px;
-}
-
-.carousel-control-prev {
-    left: 0;
-}
-
-.carousel-control-next {
-    right: 0;
-}
-
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    background-repeat: no-repeat;
-    background-position: 50%;
-    background-size: 100% 100%;
-    color: rgba(0, 0, 0, 0);
-    border: 0;
-    outline: 0;
-    opacity: 0.5;
-    transition: opacity 0.15s ease-in-out;
-}
-
-.carousel-control-prev:hover .carousel-control-prev-icon,
-.carousel-control-next:hover .carousel-control-next-icon {
-    opacity: 1;
-}
-
-.carousel-indicators {
-    position: absolute;
-    bottom: 10px;
-    left: 50%;
-    z-index: 15;
-    width: 60%;
-    margin-left: -30%;
-    padding-left: 0;
-    list-style: none;
-    text-align: center;
-}
-
-    .carousel-indicators li {
-        display: inline-block;
-        width: 10px;
-        height: 10px;
-        margin: 1px;
-        text-indent: -999px;
-        border: 1px solid #fff;
-        border-radius: 10px;
-        cursor: pointer;
-        background-color: rgba(0, 0, 0, 0.5);
-        -webkit-transition: background-color 0.15s ease-in-out;
-        transition: background-color 0.15s ease-in-out;
-    }
-
-    .carousel-indicators .active {
-        background-color: #fff;
-    }
-
-.row-1-item-1 {
-    background-color: red;
-}
-
-.row-1-item-2 {
-    background-color: blue;
-}
-
-.row-1-item-3 {
-    background-color: green;
+.container-costum.expanded {
+    grid-template-areas:
+        "nav nav nav nav"
+        "main main main main";
 }
