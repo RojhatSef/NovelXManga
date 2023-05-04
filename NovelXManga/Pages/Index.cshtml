@@ -5,7 +5,6 @@
 @{
     ViewData["Title"] = "Home page";
 }
-
 <div class="Content1Cost">
     <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
@@ -14,57 +13,85 @@
                 <div class="carousel-item @if (book == Model.GetAllBooks.First()) {
                             <text>active</text>
  }">
-                                                    <div class="row">
-                                                        <div class="col-md-6">
+                                                        <div class="row">
+                                                            <div class="col-md-6">
 
 
                             @if (User.IsInRole("NormalUser"))
                             {
-                                                                                                      <a asp-page="/MangaUpdates/UpdatePhoto"  asp-route-id="@book.MangaID">  <img src="~/Images/MangaImage/@book.PhotoPath" class="d-block w-100" alt="..."></a>
+                                                                                                              <a asp-page="/MangaUpdates/UpdatePhoto"  asp-route-id="@book.MangaID">  <img src="~/Images/MangaImage/@book.PhotoPath" class="d-block w-100" alt="..."></a>
                             }
                             else
                             {
-                                                                                      <img src="~/Images/MangaImage/@book.PhotoPath" class="d-block w-100" alt="...">
+                                                                                              <img src="~/Images/MangaImage/@book.PhotoPath" class="d-block w-100" alt="...">
                             }
-                                                        </div>
+                                                            </div>
 
-                                                        <div class="col-md-6">
-                                                            <div class="caption-wrapper">
-                                                                <h5>@book.MangaName</h5>
-                                                                <h6>@book.Description</h6>
+                                                            <div class="col-md-6">
+                                                                <div class="caption-wrapper">
+                                                                    <h5>@book.MangaName</h5>
+                                                                    <h6>@book.Description</h6>
                                 @if (User.IsInRole("NormalUser"))
                                 {
-                                                                            <a asp-page="/MangaUpdates/UpdateDescription" asp-route-id="@book.MangaID" class="btn btn-success">Update Description</a>
+                                                                                    <a asp-page="/MangaUpdates/UpdateDescription" asp-route-id="@book.MangaID" class="btn btn-success">Update Description</a>
                                 }<p> Tag/s: </p>
-                                                            <ul class="list-unstyled">
+                                                                <ul class="list-unstyled">
                                     @foreach (var tag in book.TagsModels)
                                     {
-                                                                                        <li class="coolGenre">@tag.TagName</li>
+                                                                                                <li class="coolGenre">@tag.TagName</li>
                                     }
 
 
-                                                                </ul>
+                                                                    </ul>
                                 @if (User.IsInRole("NormalUser"))
                                 {
-                                                                            <a asp-page="/MangaUpdates/UpdateTags" asp-route-id="@book.MangaID" class="btn btn-primary">Update Tag</a>
+                                                                                    <a asp-page="/MangaUpdates/UpdateTags" asp-route-id="@book.MangaID" class="btn btn-primary">Update Tag</a>
                                 }
-                                                                <p style="color:red"> Genre/s: </p>
-                                                                    <ul class="list-unstyled">
+                                                                    <p style="color:red"> Genre/s: </p>
+                                                                        <ul class="list-unstyled">
                                     @foreach (var genre in book.GenresModels)
                                     {
-                                                                                        <li class="coolGenre">@genre.GenreName</li>
+                                                                                                <li class="coolGenre">@genre.GenreName</li>
                                     }
-                                                                    </ul>      @if (User.IsInRole("NormalUser"))
+                                                                        </ul>      @if (User.IsInRole("NormalUser"))
                                 {
-                                                                            <a asp-page="/MangaUpdates/UpdateGenre" asp-route-id="@book.MangaID" class="btn btn-success">Update Genre</a>
+                                                                                    <a asp-page="/MangaUpdates/UpdateGenre" asp-route-id="@book.MangaID" class="btn btn-success">Update Genre</a>
                                 }
-                                                        </div>
+                                                            </div>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-            }
+            
+            <!-- End of loop -->
+        }
         </div>
+    </div>
+   
+            <div class="carousel-inner">
+                @for (int i = 0; i < Model.GetAllBooks.Count(); i += 4)
+                {
+                    <div class="carousel-item @(i == 0 ? "active" : "")">
+                        <div class="carousel-multiple-items">
+                            @for (int j = i; j < i + 4 && j < Model.GetAllBooks.Count(); j++)
+                            {
+                                var book = Model.GetAllBooks.ElementAt(j);
+                                <div class="carousel-item-content">
+                                    <img src="~/Images/MangaImage/@book.PhotoPath" class="carousel-image" alt="...">
+                                    <div class="caption-wrapper">
+                                        <h5>@book.MangaName</h5>
+                                        <h6>@book.Description</h6>
+                                        <!-- Additional content like tags, genres, and buttons can be added here -->
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+            <!-- Add carousel controls if needed -->
+  
 </div>
+
 <div class="Content2Cost">
         <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
@@ -124,6 +151,7 @@
                 }
             </div>
 </div>
+    </div>
 <div class="Content3Cost">
             <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
@@ -183,6 +211,7 @@
                     }
                 </div>
 </div>
+        </div>
 <div class="Content4Cost">
                 <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
@@ -241,4 +270,5 @@
                                                 </div>
                         }
                     </div>
+</div>
 </div>

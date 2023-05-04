@@ -1,0 +1,186 @@
+/*:root {
+    --main-radius: 5px;
+    --main-padding: 5px;
+}
+
+html, body {
+    height: 100%;
+    min-height: 100vh;
+    margin: 0px;
+    padding: 0px
+}
+
+.container-costum {
+    display: grid;
+    min-height: 100vh;
+    grid-template-columns: 0.5fr 1fr 1fr 1fr;
+    grid-template-rows: 0.2fr auto;
+    grid-template-areas:
+        "nav nav nav nav"
+        "main main main main";
+    grid-gap: 0.2rem;
+    font-family: 'Lucida Sans Typewriter';
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 12px;
+    color: whitesmoke;
+    text-align: center;
+}
+
+    .container-costum.collapsed-sidebar {
+        display: grid;
+        min-height: 100vh;
+        grid-template-columns: 0.5fr 1fr 1fr 1fr;
+        grid-template-rows: 0.2fr auto;
+        grid-template-areas:
+            "nav nav nav nav"
+            "main main main main";
+        grid-gap: 0.2rem;
+        font-family: 'Lucida Sans Typewriter';
+        font-weight: 800;
+        text-transform: uppercase;
+        font-size: 12px;
+        color: whitesmoke;
+        text-align: center;
+    }
+
+.openbtn {
+    font-size: 20px;
+    cursor: pointer;
+    background-color: #111;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+.nav-costum {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 0.2fr;
+    grid-template-areas:
+        "Left-Side Right-Side";
+    grid-gap: 0.2rem;
+    font-family: 'Lucida Sans Typewriter';
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 12px;
+    color: whitesmoke;
+    text-align: center;
+    padding: 0px;
+    margin: 0px;
+}
+
+.Right-Side {
+    background-color: cadetblue;
+    grid-area: Right-Side;
+    height: 100%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.Left-Side {
+    background-color: teal;
+    grid-area: Left-Side;
+    height: 100%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    display: inline-block;
+}
+
+nav {
+    background-color: red;
+    grid-area: nav;
+    border-radius: var(--main-radius);
+}
+
+.MainContent {
+    display: grid;
+    min-height: 100%;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 25% 12.5% 50% 12.5%;
+    grid-template-areas:
+        "Content1Cost Content1Cost Content1Cost"
+        "Content2Cost Content2Cost Content2Cost"
+        "Content3Cost Content3Cost Content3Cost"
+        "Content4Cost Content4Cost Content4Cost";
+    grid-gap: 0.5rem;
+    font-family: 'Lucida Sans Typewriter';
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 12px;
+    color: whitesmoke;
+    text-align: center;
+}
+
+main {
+    background-color: blue;
+    grid-area: main;
+}
+
+.SidebarCostum {
+    background-color: grey;
+    position: sticky;
+    top: 0;
+    max-height: 100vh;
+    grid-area: SidebarCostum;
+    border-radius: var(--main-radius);
+    padding-top: var(--main-padding);
+}
+
+.Content1Cost {
+    background-color: pink;
+    grid-area: Content1Cost;
+    height: 100vh;
+    border-radius: var(--main-radius);
+    padding-top: var(--main-padding);
+}
+
+.Content2Cost {
+    background-color: tomato;
+    grid-area: Content2Cost;
+    border-radius: var(--main-radius);
+    padding-top: var(--main-padding);
+}
+
+.Content3Cost {
+    background-color: lightblue;
+    grid-area: Content3Cost;
+    border-radius: var(--main-radius);
+    padding-top: var(--main-padding);
+}
+
+.Content4Cost {
+    background-color: dimgrey;
+    grid-area: Content4Cost;
+    border-radius: var(--main-radius);
+    padding-top: var(--main-padding);
+}
+
+@media only screen and (max-width:550px) {
+    .container-costum {
+        grid-template-columns: 1fr;
+        grid-template-rows: 0.4fr 0.4fr 2.2fr;
+        grid-template-areas:
+            "nav"
+            "SidebarCostum"
+            "main"
+    }
+
+    .SidebarCostum {
+        display: none;
+    }
+}
+
+.carousel img {
+    max-width: 750px;
+    max-height: 750px;
+    min-width: 450px;
+    min-height: 450px;
+    object-fit: contain;
+}
+
+.hidden {
+    display: none;
+}*/

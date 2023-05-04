@@ -1,87 +1,40 @@
-:root {
-    --main-radius: 5px;
-    --main-padding: 5px;
-}
-
-html, body {
+body, html {
+    margin: 0;
+    padding: 0;
     height: 100%;
-    min-height: 100vh;
-    margin: 0px;
-    padding: 0px
+    font-family: Arial;
+    font-weight: 800;
+    font-size: 12px;
+    color: whitesmoke;
+    text-align: center;
 }
 
-.container-costum {
-    display: grid;
+/*@keyframes colorChange {
+    0% { SHOIT CHANGES COLORS
+        color: #801515;*/ /* Deep red */
+/*}
+
+    50% {
+        color: #b1551e;*/ /* Reddish-brown */
+/*}
+
+    100% {
+        color: #e8a372;*/ /* Light reddish-brown */
+/*}
+    50% {
+        color: #e8a372;*/ /* Light reddish-brown */
+/*}
+}*/
+
+.container-custom {
     min-height: 100vh;
     grid-template-columns: 0.5fr 1fr 1fr 1fr;
     grid-template-rows: 0.2fr auto;
     grid-template-areas:
         "nav nav nav nav"
-        "SidebarCostum main main main";
-    grid-gap: 0.2rem;
-    font-family: 'Lucida Sans Typewriter';
+        "main main main main";
+    grid-gap: 0.3rem;
     font-weight: 800;
-    text-transform: uppercase;
-    font-size: 12px;
-    color: whitesmoke;
-    text-align: center;
-}
-
-.nav-costum {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    height: 100%;
-    grid-template-rows: 1fr;
-    grid-template-areas:
-        "Left-Side Right-Side";
-    grid-gap: 0.2rem;
-    font-family: 'Lucida Sans Typewriter';
-    font-weight: 800;
-    text-transform: uppercase;
-    font-size: 12px;
-    color: whitesmoke;
-    text-align: center;
-    padding: 0px;
-    margin: 0px;
-}
-
-.Right-Side {
-    background-color: cadetblue;
-    grid-area: Right-Side;
-    height: 100%;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-}
-
-.Left-Side {
-    background-color: teal;
-    grid-area: Left-Side;
-    height: 100%;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    display: inline-block;
-}
-
-nav {
-    background-color: red;
-    grid-area: nav;
-    border-radius: var(--main-radius);
-}
-
-.MainContent {
-    display: grid;
-    min-height: 100%;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 25% 12.5% 50% 12.5%;
-    grid-template-areas:
-        "Content1Cost Content1Cost Content1Cost"
-        "Content2Cost Content2Cost Content2Cost"
-        "Content3Cost Content3Cost Content3Cost"
-        "Content4Cost Content4Cost Content4Cost";
-    grid-gap: 0.5rem;
-    font-family: 'Lucida Sans Typewriter';
-    font-weight: 800;
-    text-transform: uppercase;
     font-size: 12px;
     color: whitesmoke;
     text-align: center;
@@ -92,14 +45,161 @@ main {
     grid-area: main;
 }
 
-.SidebarCostum {
-    background-color: grey;
+#NovelTitle {
+    color: white;
+    padding-right: 30px;
+    font-size: 32px;
+}
+
+.main-content {
+    display: grid;
+    height: 100%;
+    grid-template-columns: 1fr;
+    grid-template-rows: 25% 12.5% 50% 12.5%;
+    grid-template-areas:
+        "Content1Cost Content1Cost Content1Cost Content1Cost"
+        "Content2Cost Content2Cost Content2Cost Content2Cost"
+        "Content3Cost Content3Cost Content3Cost Content3Cost"
+        "Content4Cost Content4Cost Content4Cost Content4Cost";
+    font-family: 'Lucida Sans Typewriter';
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 12px;
+    color: whitesmoke;
+    text-align: center;
+}
+
+.navbar {
+    grid-area: nav;
+    background-color: #333;
     position: sticky;
     top: 0;
-    max-height: 100vh;
-    grid-area: SidebarCostum;
-    border-radius: var(--main-radius);
-    padding-top: var(--main-padding);
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.2rem 1rem;
+    height: 65px;
+    flex-wrap: wrap;
+}
+
+a {
+    list-style: none;
+}
+
+.navbar-left {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-right {
+    display: flex;
+    align-items: center;
+}
+
+@media (max-width: 680px) {
+    .navbar h3 {
+        font-size: 15px;
+    }
+
+    .searchbar {
+        width: 100px;
+        padding: 0.3rem;
+    }
+
+    .sidebar-toggle {
+        padding: 0.3rem 0.6rem;
+        margin-right: 0.5rem;
+    }
+}
+
+.navbar.hidden {
+    visibility: hidden;
+}
+
+.sidebar-toggle {
+    cursor: pointer;
+    background-color: #555;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    padding: 0.5rem 1rem;
+    margin-right: 1rem;
+}
+
+.searchbar {
+    flex: 1 1 250px; /* Adjust the width as desired */
+    padding: 0.5rem;
+    border: none;
+    border-radius: 3px;
+    background-color: #444; /* Slightly lighter than the navbar background */
+    color: white; /* Make the text color white */
+}
+
+.main-content > div {
+    background-color: #555;
+    padding: 1rem;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 250px;
+    height: 100%;
+    background-color: #333;
+    transition: left 0.3s;
+    padding: 1rem;
+    z-index: 200;
+}
+
+    .sidebar.open {
+        left: 0;
+    }
+
+    .sidebar ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+#logo {
+    color: orangered;
+}
+
+.sidebar li {
+    font-size: 1.2rem;
+    text-align: left;
+    margin-bottom: 8px;
+}
+
+.sidebar a {
+    color: white;
+    text-decoration: none;
+}
+
+.sidebar li.active a {
+    color: orange;
+}
+
+.sidebar li:hover a {
+    color: #ccc;
+}
+
+@media (min-width: 769px) {
+    .sidebar li:hover a {
+        color: orangered;
+    }
+}
+
+@media (max-width: 768px) {
+    .container-custom {
+        grid-template-columns: 1fr
+    }
+
+    .main-content {
+        grid-template-columns: 1fr;
+    }
 }
 
 .Content1Cost {
@@ -131,35 +231,55 @@ main {
     padding-top: var(--main-padding);
 }
 
-@media only screen and (max-width:550px) {
-    .container-costum {
-        grid-template-columns: 1fr;
-        grid-template-rows: 0.4fr 0.4fr 2.2fr;
-        grid-template-areas:
-            "nav"
-            "SidebarCostum"
-            "main"
-    }
-
-    .SidebarCostum {
-        display: none;
-    }
+.carousel {
+    width: 100%;
+    background-color: #444;
+    border-radius: 25px;
 }
 
-.carousel img {
-    max-width: 750px;
-    max-height: 750px;
-    min-width: 450px;
-    min-height: 450px;
+.carousel-inner {
+    height: 440px;
+    border-radius: 25px;
+}
+
+.carousel-content {
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+
+.carousel-image-container {
+    width: 50%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.carousel-image {
+    height: 100%;
+    width: auto;
     object-fit: contain;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
-.hidden {
-    display: none;
+.carousel-text-container {
+    width: 50%;
+    padding: 10px;
+    box-sizing: border-box;
 }
 
-.container-costum.expanded {
-    grid-template-areas:
-        "nav nav nav nav"
-        "main main main main";
+.carousel-multiple-items {
+    position: relative;
+    width: 100%;
+    height: 440px;
 }
+
+    .carousel-multiple-items .carousel-item {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        height: 100%;
+    }

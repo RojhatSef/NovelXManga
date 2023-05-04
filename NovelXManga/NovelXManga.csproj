@@ -28,7 +28,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Pages\SearchFilter\" />
     <Folder Include="Pages\TagPages\" />
     <Folder Include="Pages\Review\" />
     <Folder Include="Pages\Studio\" />

@@ -38,8 +38,8 @@
 // All above was previous CSS
 
 // For changing tags
-
-$(function () {
+console.log('site.js loaded');
+(function () {
     var selectedTags = $('#selectedTags').val().split(',');
     $('input[type=checkbox]').each(function () {
         if (selectedTags.includes($(this).val())) {
@@ -54,39 +54,68 @@ $(function () {
         $('#selectedTags').val(selectedTags.join());
     });
 })
+console.log('site.js loaded2');
 const tagDropdown = document.getElementById('tag-dropdown');
-const tagOptions = tagDropdown.options;
+/*const tagOptions = tagDropdown.options;*/
 
-tagDropdown.addEventListener('change', () => {
-    for (let i = 0; i < tagOptions.length; i++) {
-        const tagOption = tagOptions[i];
+//tagDropdown.addEventListener('change', () => {
+//    for (let i = 0; i < tagOptions.length; i++) {
+//        const tagOption = tagOptions[i];
 
-        if (tagOption.selected) {
-            if (tagOption.getAttribute('data-selected') !== 'true') {
-                tagOption.setAttribute('data-selected', true);
+//        if (tagOption.selected) {
+//            if (tagOption.getAttribute('data-selected') !== 'true') {
+//                tagOption.setAttribute('data-selected', true);
 
-                const checkmark = document.createElement('span');
-                checkmark.innerText = '✔';
-                checkmark.style.marginLeft = '5px';
-                checkmark.style.color = 'green';
+//                const checkmark = document.createElement('span');
+//                checkmark.innerText = '✔';
+//                checkmark.style.marginLeft = '5px';
+//                checkmark.style.color = 'green';
 
-                tagOption.appendChild(checkmark);
-            }
+//                tagOption.appendChild(checkmark);
+//            }
+//        } else {
+//            if (tagOption.getAttribute('data-selected') === 'true') {
+//                tagOption.setAttribute('data-selected', false);
+
+//                const checkmark = tagOption.querySelector('span');
+//                checkmark.remove();
+//            }
+//        }
+//    }
+//});
+console.log('site.js loaded3');
+document.addEventListener("DOMContentLoaded", () => {
+    const navbar = document.querySelector(".navbar");
+    const sidebar = document.querySelector(".sidebar");
+    const sidebarToggle = document.querySelector("#sidebar-toggle");
+
+    let scrollPosition = window.pageYOffset;
+
+    window.addEventListener("scroll", () => {
+        const currentScrollPosition = window.pageYOffset;
+
+        if (scrollPosition > currentScrollPosition) {
+            navbar.classList.remove("hidden");
         } else {
-            if (tagOption.getAttribute('data-selected') === 'true') {
-                tagOption.setAttribute('data-selected', false);
-
-                const checkmark = tagOption.querySelector('span');
-                checkmark.remove();
-            }
+            navbar.classList.add("hidden");
         }
-    }
-});
-function myFunction() {
-    document.getElementById("HideWhenSmall").click();
 
-    sidebarToggle.addEventListener("click", function () {
-        sidebar.classList.toggle("hidden");
-        container.classList.toggle("expanded");
+        scrollPosition = currentScrollPosition;
+    });
+
+    sidebarToggle.addEventListener("click", () => {
+        sidebar.classList.toggle("open");
     });
 });
+
+//function openNav() {
+//    var container = $(".container-costum");
+
+//    if (container.css("grid-template-areas") === '"SidebarCostum nav nav nav" "SidebarCostum main main main"') {
+//        container.css("grid-template-areas", '"nav nav nav nav" "main main main main"');
+//        container.css("grid-template-columns", "1fr 1fr 1fr 1fr");
+//    } else {
+//        container.css("grid-template-areas", '"SidebarCostum nav nav nav" "SidebarCostum main main main"');
+//        container.css("grid-template-columns", "1fr 3fr");
+//    }
+//}
