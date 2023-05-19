@@ -6,7 +6,7 @@
 
 <form method="post" enctype="multipart/form-data">
   <input type="hidden" name="mangaModel.MangaID" value="@Model.CurrentManga.MangaID" />
-    <div class="FlexThis">
+    <div class="FlexRight">
   
         <div class="profileText">
             @if (@Model.CurrentManga.MangaName != null)
@@ -50,8 +50,22 @@
                                     @foreach (var item in Model.CurrentManga.BuyPages)
                                         {
                                            
-                                            <p> @item._Languages</p>
+                                          <a href="@item.BuyWebsite">....
+                                              <p>@item._Languages</p>
+
+                                          </a>
                                           
+
+                                    }
+                                    @foreach (var item in Model.CurrentManga.AllLanguages)
+                                    {
+
+                                      
+                                           
+                                            <p>@item.LanguageName</p>
+
+                                        
+
 
                                     }
                                       
