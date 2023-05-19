@@ -44,16 +44,25 @@
                         <div class="Info">
                             <span class="icon">Language:   </span><br /><br />
                             <div class="text">
-                                @if (Model.CurrentManga.AllLanguages != null)
+                                @if (Model.CurrentManga.BuyPages != null)
                                 {
 
                                     @foreach (var item in Model.CurrentManga.AllLanguages)
                                         {
                                            
                                             <p> @item.LanguageName</p>
-
+                                          
 
                                     }
+                                        @foreach (var item in Model.CurrentManga.BuyPages)
+                                        {
+                                           
+                                            <a href="@item.BuyWebsite"> <p>@Model.CurrentManga.</p>
+
+                                            </a>
+
+                                        }
+
                                 }
                                 else
                                 {
