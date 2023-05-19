@@ -5,9 +5,9 @@
 
 
 <form method="post" enctype="multipart/form-data">
-  <input type="hidden" name="mangaModel.MangaID" value="@Model.CurrentManga.MangaID" /> 
-<div class="container2">
-    <div class="Left_Side">
+  <input type="hidden" name="mangaModel.MangaID" value="@Model.CurrentManga.MangaID" />
+    <div class="FlexThis">
+  
         <div class="profileText">
             @if (@Model.CurrentManga.MangaName != null)
             {
@@ -47,21 +47,14 @@
                                 @if (Model.CurrentManga.BuyPages != null)
                                 {
 
-                                    @foreach (var item in Model.CurrentManga.AllLanguages)
+                                    @foreach (var item in Model.CurrentManga.BuyPages)
                                         {
                                            
-                                            <p> @item.LanguageName</p>
+                                            <p> @item._Languages</p>
                                           
 
                                     }
-                                        @foreach (var item in Model.CurrentManga.BuyPages)
-                                        {
-                                           
-                                            <a href="@item.BuyWebsite"> <p>@Model.CurrentManga.</p>
-
-                                            </a>
-
-                                        }
+                                      
 
                                 }
                                 else
@@ -96,11 +89,9 @@
                 </div>
 
         </div>
-    </div>
+   
 
-    <div class="Right_Side">
-
-    </div>
+  
 
 
 
@@ -332,32 +323,32 @@
         <div class="mb-3">
             <label class="form-label" asp-for="@Model.CurrentManga.futureEvents">Future Events: @Model.CurrentManga.futureEvents</label>
         </div>
-    }
-    </div>
-@if (Model.CurrentManga.BlogModel != null)
-{
-    <textarea asp-for="CurrentManga.BlogModel.postsModel">
-
-                </textarea>
-    if (Model.CurrentManga.BlogModel.postsModel != null)
-    {
-        @foreach (var item in Model.CurrentManga.BlogModel.postsModel)
+        }@if (Model.CurrentManga.BlogModel != null)
         {
-          
-                        <label class="form-label">@item.postComment</label>
+            <textarea asp-for="CurrentManga.BlogModel.postsModel">
+
+                    </textarea>
+            if (Model.CurrentManga.BlogModel.postsModel != null)
+            {
+                @foreach (var item in Model.CurrentManga.BlogModel.postsModel)
+                {
+
+                    <label class="form-label">@item.postComment</label>
+
+                }
+            }
+            else
+            {
+                <p>Post not Responding</p>
+            }
+
 
         }
-    }
-    else
-    {
-                <p>Post not Responding</p>
-    }
+        else
+        {
+            <p>Blog not Responding</p>
+        }
+    </div>
 
-
-}
-else
-{
-        <p>Blog not Responding</p>
-}
 
 </form>
