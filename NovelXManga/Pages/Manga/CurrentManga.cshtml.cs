@@ -75,8 +75,6 @@ namespace NovelXManga.Pages.Manga
             return Page();
         }
 
-        // OnPost For characters
-
         public void OnGet(int id)
         {
             if (id == 0)

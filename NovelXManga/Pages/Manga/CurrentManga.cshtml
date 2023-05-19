@@ -49,25 +49,28 @@
 
                                     @foreach (var item in Model.CurrentManga.BuyPages)
                                         {
+
+                                        <a href="@item.BuyWebsite">
+                                       
+
+                                            @foreach (var lang in item._Languages)
+                                            {
+
+
+
+                                                <p>@lang.LanguageName</p>
+
+
+
+
                                            
-                                          <a href="@item.BuyWebsite">....
-                                              <p>@item._Languages</p>
+                                            }
 
                                           </a>
                                           
 
                                     }
-                                    @foreach (var item in Model.CurrentManga.AllLanguages)
-                                    {
-
-                                      
-                                           
-                                            <p>@item.LanguageName</p>
-
-                                        
-
-
-                                    }
+                                  
                                       
 
                                 }
