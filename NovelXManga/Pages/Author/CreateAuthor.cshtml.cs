@@ -10,7 +10,7 @@ namespace NovelXManga.Pages.Author
         private readonly MangaNNovelAuthDBContext context;
         private readonly IMangaRepository mangaRepository;
         private readonly IWebHostEnvironment webHostEnvironment;
-        private readonly IAuthorRepsitory authorRepsitory;
+
         private readonly IAssociatedNamesRepsitory associatedNamesRepsitory;
         private readonly IOfficalWebsiteRepsitory officalWebsiteRepsitory;
 
