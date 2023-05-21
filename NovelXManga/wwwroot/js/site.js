@@ -100,6 +100,13 @@ document.addEventListener("DOMContentLoaded", () => {
             navbar.classList.add("hidden");
         }
 
+        // If user is at top of page, remove border from navbar
+        if (currentScrollPosition === 0) {
+            navbar.classList.add("top-scroll");
+        } else {
+            navbar.classList.remove("top-scroll");
+        }
+
         scrollPosition = currentScrollPosition;
     });
 

@@ -72,7 +72,13 @@ main {
     justify-content: space-between;
     padding: 0.2rem 1rem;
     height: 65px;
+    border-bottom: 1px solid orangered;
+    flex-direction: row-reverse;
 }
+
+    .navbar.top-scroll {
+        border-bottom: none;
+    }
 
 a {
     list-style: none;
@@ -86,6 +92,8 @@ a {
 .navbar-right {
     display: flex;
     align-items: center;
+    justify-content: flex-end;
+    width: 100%;
 }
 
 @media (max-width: 680px) {
@@ -127,11 +135,11 @@ a {
     border: none;
     border-radius: 3px;
     padding: 0.5rem 1rem;
-    margin-right: 1rem;
+    margin-left: 10px; /* add this */
 }
 
 .searchbar {
-    flex: 1 1 250px; /* Adjust the width as desired */
+    flex:  250px; /* Adjust the width as desired */
     padding: 0.5rem;
     border: none;
     border-radius: 3px;
@@ -141,7 +149,6 @@ a {
 
 .main-content > div {
     background-color: #191a1c;
-
 }
 
 .sidebar {
@@ -190,7 +197,6 @@ a {
     color: #ccc;
 }
 
-
 @media (min-width: 769px) {
     .sidebar li:hover a {
         color: orangered;
@@ -207,12 +213,12 @@ a {
         grid-template-columns: 1fr;
     }
 }
+
 .Content1Ex {
     width: 100%;
-    margin-bottom:40px
-
-   
+    margin-bottom: 40px
 }
+
 .Content1Cost {
     background-color: pink;
     grid-area: Content1Cost;
@@ -222,11 +228,9 @@ a {
     padding-top: var(--main-padding);
     display: flex;
     flex-direction: column;
-  
     padding: 1rem;
     padding-left: 2.5%;
     padding-right: 2.5%;
-   
 }
 
 .Content2Cost {
@@ -261,11 +265,12 @@ a {
     padding-left: 2.5%;
     padding-right: 2.5%;
 }
-.ContentDescription{
-    display:flex; 
+
+.ContentDescription {
+    display: flex;
     margin-right: auto;
-    padding-top:1%; 
-    width:100%; 
+    padding-top: 1%;
+    width: 100%;
 }
 
 @media (max-width: 680px) {
@@ -296,7 +301,6 @@ a {
         flex-basis: 50%;
         margin-bottom: 10px;
     }
- 
 }
 
 @media (max-width: 1400px) {
@@ -310,7 +314,6 @@ a {
         margin-bottom: 10px;
         flex-wrap: wrap;
     }
- 
 }
 
 @media (max-width: 1000px) {
@@ -387,23 +390,26 @@ a {
     flex-basis: 40px;
     flex-shrink: 0;
 }
+
 .card-ex {
     width: 100%;
     height: 320px;
     overflow: hidden;
     display: flex;
-    
-    justify-content:center; 
+    justify-content: center;
 }
+
 .card-image-ex {
     object-fit: cover;
     width: 100%;
     height: 100%;
 }
+
 .IndexArrowEx {
     position: absolute;
-    margin-top:auto; 
+    margin-top: auto;
 }
+
 .MidExTop {
     width: 70%;
     height: 120px;
@@ -412,8 +418,9 @@ a {
     margin-top: 255px;
     border-style: solid;
     border-radius: 10px;
-    border-color: #191a1c; 
+    border-color: #191a1c;
 }
+
 .card {
     width: 100%;
     height: 320px;
@@ -421,7 +428,7 @@ a {
     overflow: hidden;
     border-radius: 20px;
     position: relative;
-    margin-bottom:50px; 
+    margin-bottom: 50px;
 }
 
 .card-title {
@@ -498,7 +505,7 @@ a {
 }
 
 .BoxOne {
-    flex: 1; 
+    flex: 1;
     margin: 0;
 }
 
@@ -506,15 +513,16 @@ a {
     .BoxOne.hide-on-small {
         display: none;
     }
+
     .ContentDescription {
         padding-top: 4.5%;
     }
 }
+
 @media (max-width: 1200px) {
     .BoxOne.hide-on-medium {
         display: none;
     }
-   
 }
 
 /* MINICARDS ENDS HERE*/
@@ -525,7 +533,6 @@ a {
     top: 0;
     right: 0;
     position: absolute;
-   
     display: flex;
     color: white;
     align-items: flex-start;
