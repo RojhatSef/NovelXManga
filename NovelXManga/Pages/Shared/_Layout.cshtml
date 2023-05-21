@@ -1,5 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @inject SignInManager<IdentityUser> SignInManager
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,12 +9,11 @@
     <title>@ViewData["Title"] - NovelXManga</title>
 
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 
-    @*Tries*@
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+
+
 </head>
 <body>
     <div class="container-custom">
@@ -22,8 +22,8 @@
             <div class="navbar-left"> <a asp-page="/Index"><h3 id="NovelTitle"> OtakuLibrary</h3></a>  <input type="search" id="searchbar" class="searchbar" placeholder="Search"> </div>
 
             <div class="navbar-right">  <button id="sidebar-toggle" onclick="handleSidebarToggle()" class="sidebar-toggle">Toggle Sidebar</button></div>
-          
-           
+
+
         </nav>
 
 
@@ -35,175 +35,168 @@
 
     </div>
     <div class="sidebar">
-        <div class=" flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-            <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+        <div>
+            <a href="/">
 
-                <span class="fs-5 d-none d-sm-inline" id="logo">OtakuLibrary </span>
-            </a>         @if (SignInManager.IsSignedIn(User))
+                <span id="logo">OtakuLibrary </span>
+            </a>
+
+
+
+            <hr>
+            @if (SignInManager.IsSignedIn(User))
             {
+                <ul>
 
+                <li>
+                    <a href="#"> <span>Latest Updates</span>  </a>
+                </li>
+                <li>
+                    <a asp-page="/Author/CreateAuthor"> <span>AuthorTest</span>  </a>
+                </li>
+                <li>
+                    <a asp-page="/Manga/CreateNewManga"> <span>Create New Book</span>  </a>
+                </li>
+
+                <hr>
+
+
+
+                <li>
+                    <a href="#"> <span>Forum</span> </a>
+                </li>
+                <li>
+                    <a href="#"> <span>Groups</span> </a>
+                </li>
+                <li>
+                    <a href="#"> <span>Users</span> </a>
+                </li>
+                <li>
+                    <a href="#"> <span>Latest Updates</span>  </a>
+                </li>
+                <li>
+                    <a asp-page="/Author/CreateAuthor"> <span>AuthorTest</span>  </a>
+                </li>
+                <li>
+                    <a asp-page="/Manga/CreateNewManga"> <span>Create New Book</span>  </a>
+                </li>
 
 
                 <hr>
 
-                      <ul>
-
-                            <li>
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Latest Updates</span>  </a>
-                            </li>
-                            <li>
-                                <a asp-page="/Author/CreateAuthor" class="nav-link px-0"> <span class="d-none d-sm-inline">AuthorTest</span>  </a>
-                            </li>
-                            <li>
-                                <a asp-page="/Manga/CreateNewManga" class="nav-link px-0"> <span class="d-none d-sm-inline">Create New Book</span>  </a>
-                            </li>
-
-                    <hr>
-                 
-                      
-                      
-                            <li>
-                                <a href="#" class="nav-link px-0"> <span >Forum</span> </a>
-                            </li>
-                            <li>
-                                <a href="#" class="nav-link px-0"> <span>Groups</span> </a>
-                            </li>
-                            <li>
-                                <a href="#" class="nav-link px-0"> <span >Users</span> </a>
-                            </li>
-                            <li>
-                                <a href="#" class="nav-link px-0"> <span>Latest Updates</span>  </a>
-                            </li>
-                            <li>
-                                <a asp-page="/Author/CreateAuthor" class="nav-link px-0"> <span>AuthorTest</span>  </a>
-                            </li>
-                            <li>
-                                <a asp-page="/Manga/CreateNewManga" class="nav-link px-0"> <span>Create New Book</span>  </a>
-                            </li>
-
-
-                    <hr>
-                      
-                            <li >
-                                <a href="#" class="nav-link px-0"> <span>About us</span> </a>
-                            </li>
-                            <li>
-                                <a href="#" class="nav-link px-0"> <span >Rules</span> </a>
-                            </li>
-                            <li>
-                                <a href="#" class="nav-link px-0"> <span >Privacy Policy</span> </a>
-                            </li>
-                            <li>
-                                <a href="#" class="nav-link px-0"> <span>Announcment</span> </a>
-                            </li>
+                <li>
+                    <a href="#"> <span>About us</span> </a>
+                </li>
+                <li>
+                    <a href="#"> <span>Rules</span> </a>
+                </li>
+                <li>
+                    <a href="#"> <span>Privacy Policy</span> </a>
+                </li>
+                <li>
+                    <a href="#"> <span>Announcment</span> </a>
+                </li>
 
                 </ul>
-
-               
-
                 <hr>
-              
-                    <div class="dropdown pb-4">
-                        <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img asp-append-version="true" src="~/Images/MangaImage/ThisNeedsAModel" alt="" width="30" height="30" class="rounded-circle">
-                            <span class="d-none d-sm-inline mx-1">Profile</span>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
 
-                            <li><a id="log" class="dropdown-item" asp-page="/profile/UserProfile">User</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" asp-page="/Login/LogOut">Sign out</a></li>
-                        </ul>
-                    </div>
-            
+                <div>
+                    <a href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img asp-append-version="true" src="https://www.w3schools.com/images/w3schools_green.jpg" alt="" width="30" height="30">
+                        <span>Profile</span>
+                    </a>
+                    <ul aria-labelledby="dropdownUser1">
 
+                        <li><a id="log"  asp-page="/profile/UserProfile">User</a></li>
+                        <li>
+                            <hr>
+                        </li>
+                        <li><a asp-page="/Login/LogOut">Sign out</a></li>
+                    </ul>
+                </div>
             }
             else
             {
-                <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
-                    <li class="nav-item">
-                        <a href="#" class="nav-link align-middle px-0">
-                            <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Home</span>
-                        </a>
-                    </li>
+                <ul>
+                
                     <li>
-                        <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-                            <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline">Titles</span>
-                        </a>
-                        <ul class="collapse show nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
-                            <li class="w-100">
-                                <a asp-page="/MangaTry/Test" class="nav-link px-0"> <span class="d-none d-sm-inline"> TEST Recently Added</span>  </a>
+                  
+                        <ul>
+                            <li >
+                                <a asp-page="/MangaTry/Test" > <span class=""> TEST Recently Added</span>  </a>
                             </li>
                             <li>
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Latest Updates</span>  </a>
+                                <a href="#" > <span >Latest Updates</span>  </a>
                             </li>
                             <li>
-                                <a class="nav-link px-0"> <span class="d-none d-sm-inline">AuthorTest</span>  </a>
+                                <a > <span >AuthorTest</span>  </a>
                             </li>
                         </ul>
                     </li>
                     <li>
-                        <a asp-page="/Login/LoginIndex" class="nav-link px-0 align-middle">
-                            <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Login</span>
+                        <a asp-page="/Login/LoginIndex">
+                           <span >Login</span>
                         </a>
                     </li>
                     <li>
-                        <a asp-page="/Register/UserRegister" class="nav-link px-0 align-middle">
-                            <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Register</span>
+                        <a asp-page="/Register/UserRegister" >
+                           <span>Register</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
-                            <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline">Community</span>
-                        </a>
-                        <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
-                            <li class="w-100">
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Forum</span> </a>
+                       
+                        <ul >
+                            <li>
+                                <a href="#"> <span>Forum</span> </a>
                             </li>
                             <li>
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Groups</span> </a>
+                                <a href="#" > <span>Groups</span> </a>
                             </li>
                         </ul>
                     </li>
                     <li>
-                        <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-                            <i class="fs-4 bi-grid"></i> <span class="ms-1 d-none d-sm-inline">NovelXManga</span>
-                        </a>
-                        <ul class="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
-                            <li class="w-100">
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">About us</span> </a>
+                   
+                        <ul>
+                            <li>
+                                <a href="#"> <span>About us</span> </a>
                             </li>
                             <li>
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Rules</span> </a>
+                                <a href="#" > <span >Rules</span> </a>
                             </li>
                             <li>
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Privacy Policy</span> </a>
+                                <a href="#"> <span >Privacy Policy</span> </a>
                             </li>
                             <li>
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Announcment</span> </a>
+                                <a href="#"> <span >Announcment</span> </a>
                             </li>
                         </ul>
                     </li>
 
                 </ul>
             }
+
+
+
+
+         
+
+
+
+
+
 
         </div>
     </div>
 
     <script src="~/js/site.js" asp-append-version="true"></script>
-
+    <script src="~/js/Author.js" asp-append-version="true"></script>
 
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 
 
-    <script src="~/js/MultiSelectorJS.js" asp-append-version="true"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
-    <script src="~/js/Author.js" asp-append-version="true"></script>
+
     @*  try*@
 
 

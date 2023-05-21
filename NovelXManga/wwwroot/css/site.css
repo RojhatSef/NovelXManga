@@ -10,10 +10,14 @@ body, html {
     text-align: center;
     background-color: #191a1c;
 }
-a{
-   padding:0;
-   margin:0; 
+
+a {
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    color: inherit;
 }
+
 .container-custom {
     min-height: 100vh;
     grid-template-columns: 0.5fr 1fr 1fr 1fr;
@@ -26,12 +30,10 @@ a{
     font-size: 12px;
     color: whitesmoke;
     text-align: center;
-   
 }
 
 main {
     grid-area: main;
-    
 }
 
 #NovelTitle {
@@ -46,6 +48,7 @@ main {
     grid-template-columns: 1fr;
     grid-template-rows: 25% 12.5% 50% 12.5%;
     grid-template-areas:
+        "Content1Ex   Content1Ex   Content1Ex   Content1Ex"
         "Content1Cost Content1Cost Content1Cost Content1Cost"
         "Content2Cost Content2Cost Content2Cost Content2Cost"
         "Content3Cost Content3Cost Content3Cost Content3Cost"
@@ -105,9 +108,10 @@ a {
         padding: 0.3rem 0.6rem;
         margin-right: 0.5rem;
     }
+
     .BoxOne {
-        width: calc(50% - 20px); 
-        margin: 10px; 
+        width: calc(50% - 20px);
+        margin: 10px;
     }
 }
 
@@ -115,6 +119,7 @@ a {
     visibility: hidden;
 }
 
+/* SIDEbar STARTS HERE*/
 .sidebar-toggle {
     cursor: pointer;
     background-color: #555;
@@ -127,18 +132,16 @@ a {
 
 .searchbar {
     flex: 1 1 250px; /* Adjust the width as desired */
-        padding: 0.5rem;
-        border: none;
-        border-radius: 3px;
-        background-color: #444; /* Slightly lighter than the navbar background */
-        color: white; /* Make the text color white */
-    }
+    padding: 0.5rem;
+    border: none;
+    border-radius: 3px;
+    background-color: #444; /* Slightly lighter than the navbar background */
+    color: white; /* Make the text color white */
+}
 
 .main-content > div {
     background-color: #191a1c;
-    padding: 1rem;
-    padding-left: 2.5%;
-    padding-right: 2.5%;
+
 }
 
 .sidebar {
@@ -187,11 +190,13 @@ a {
     color: #ccc;
 }
 
+
 @media (min-width: 769px) {
     .sidebar li:hover a {
         color: orangered;
     }
 }
+/* SIDEbar ENDS STARTS HERE*/
 
 @media (max-width: 768px) {
     .container-custom {
@@ -202,7 +207,12 @@ a {
         grid-template-columns: 1fr;
     }
 }
+.Content1Ex {
+    width: 100%;
+    margin-bottom:40px
 
+   
+}
 .Content1Cost {
     background-color: pink;
     grid-area: Content1Cost;
@@ -212,7 +222,10 @@ a {
     padding-top: var(--main-padding);
     display: flex;
     flex-direction: column;
-    gap: 50px;
+  
+    padding: 1rem;
+    padding-left: 2.5%;
+    padding-right: 2.5%;
    
 }
 
@@ -224,7 +237,9 @@ a {
     display: flex;
     flex-direction: column;
     gap: 50px;
-    
+    padding: 1rem;
+    padding-left: 2.5%;
+    padding-right: 2.5%;
 }
 
 .Content3Cost {
@@ -232,6 +247,9 @@ a {
     grid-area: Content3Cost;
     border-radius: var(--main-radius);
     padding-top: var(--main-padding);
+    padding: 1rem;
+    padding-left: 2.5%;
+    padding-right: 2.5%;
 }
 
 .Content4Cost {
@@ -239,22 +257,16 @@ a {
     grid-area: Content4Cost;
     border-radius: var(--main-radius);
     padding-top: var(--main-padding);
+    padding: 1rem;
+    padding-left: 2.5%;
+    padding-right: 2.5%;
 }
-/* INDEX CARD TOP STARTS HERE */
-
-/*.IndexLeftImageLarge img {
-    padding-left: 10px;
-    border-radius: 15px;*/ /* Rounded corners */
-/*object-fit: cover;*/ /* This will ensure the images maintain their aspect ratio but are resized to fit within the container */
-
-/*min-width: 100px;*/ /* Min width */
-/*max-width: 200px;*/ /* Max width */
-/*min-height: 250px;*/ /* Min height */
-/*max-height: 300px;*/ /* Max height */
-/*aspect-ratio: 2 / 3;*/ /* For a vertical rectangle */
-/*z-index: 1;
-    padding-bottom: 5px;
-}*/
+.ContentDescription{
+    display:flex; 
+    margin-right: auto;
+    padding-top:1%; 
+    width:100%; 
+}
 
 @media (max-width: 680px) {
     .RemoveWhenSmall {
@@ -284,6 +296,7 @@ a {
         flex-basis: 50%;
         margin-bottom: 10px;
     }
+ 
 }
 
 @media (max-width: 1400px) {
@@ -297,6 +310,7 @@ a {
         margin-bottom: 10px;
         flex-wrap: wrap;
     }
+ 
 }
 
 @media (max-width: 1000px) {
@@ -373,7 +387,33 @@ a {
     flex-basis: 40px;
     flex-shrink: 0;
 }
-
+.card-ex {
+    width: 100%;
+    height: 320px;
+    overflow: hidden;
+    display: flex;
+    
+    justify-content:center; 
+}
+.card-image-ex {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+.IndexArrowEx {
+    position: absolute;
+    margin-top:auto; 
+}
+.MidExTop {
+    width: 70%;
+    height: 120px;
+    position: absolute;
+    background-color: orangered;
+    margin-top: 255px;
+    border-style: solid;
+    border-radius: 10px;
+    border-color: #191a1c; 
+}
 .card {
     width: 100%;
     height: 320px;
@@ -381,6 +421,7 @@ a {
     overflow: hidden;
     border-radius: 20px;
     position: relative;
+    margin-bottom:50px; 
 }
 
 .card-title {
@@ -430,6 +471,7 @@ a {
 }
 /* INDEX CARD TOP ENDS HERE*/
 /* MINICARDS STARTS HERE*/
+
 .MiniCards {
     background-color: rgb(25, 26, 28);
     flex-grow: 1;
@@ -446,7 +488,6 @@ a {
 .BoxContent {
     height: 100%;
     width: 100%;
-    position: absolute;
     color: green;
 }
 
@@ -457,8 +498,35 @@ a {
 }
 
 .BoxOne {
-    width: 12%;
+    flex: 1; 
     margin: 0;
-    flex-grow: 1;
 }
 
+@media (max-width: 599px) {
+    .BoxOne.hide-on-small {
+        display: none;
+    }
+    .ContentDescription {
+        padding-top: 4.5%;
+    }
+}
+@media (max-width: 1200px) {
+    .BoxOne.hide-on-medium {
+        display: none;
+    }
+   
+}
+
+/* MINICARDS ENDS HERE*/
+/* Card2 Starts HERE*/
+.card-2-bodyDetails {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    right: 0;
+    position: absolute;
+   
+    display: flex;
+    color: white;
+    align-items: flex-start;
+}

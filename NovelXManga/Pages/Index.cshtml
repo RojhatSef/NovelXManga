@@ -5,52 +5,114 @@
 @{
     ViewData["Title"] = "Home page";
 }
+<div class="Content1Ex">
 
+
+    <div class="card-ex">
+
+      
+        <div class="card-image-ex">
+
+            <img class="BoxImage" src="https://wallpaperaccess.com/full/17350.jpg" />
+
+         
+
+
+
+
+
+               
+        </div>
+
+        <div class="MidExTop">
+
+        </div>
+        <div ></div>
+        <div class="IndexArrowEx">
+            <button class="IndexArrowsPrev">
+                prev
+            </button>
+            <button class="IndexArrowsNext">
+                next
+            </button>
+        </div>
+    </div>
+
+
+</div>
 
 <div class="Content1Cost">
-
+    <div class="ContentDescription"><h1>Best rated</h1></div>
     @foreach (var book in Model.GetAllBooks.Take(1))
     {
-        <a asp-page="/Manga/CurrentManga" asp-route-id="@book.MangaID">
+      
         <div class="card">
-
+        
             <img class="card-img-background" src="~/Images/MangaImage/@book.PhotoPath" />
             <div class="card-body">
-               
+
                 <img class="card-img-index" src="~/Images/MangaImage/@book.PhotoPath" />
-                
+
                 <div class="TitleTagDescriptionCostum">
                     <div class="card-title">
-                        <h1 class="card-title-extra-style">
-                            Solo-Leveling
-                        </h1>
+                        <a asp-page="/Manga/CurrentManga" asp-route-id="@book.MangaID">
+                            <h1 class="card-title-extra-style">
+                                @book.MangaName
+                            </h1>
+                        </a>
 
                     </div>
 
                     <h2 class="tag-container">
-                        <span class="tag RemoveWhenSmall">One-Man-Army</span>
-                        <span class="tag RemoveWhenSmall">Hero</span>
-                        <span class="tag RemoveWhenSmall">Leveling</span>
-                        <span class="tag RemoveWhenSmall ">Action</span>
-                        <span class="tag RemoveWhenSmall">Adventure</span>
-                        <span class="tag RemoveWhenSmall">Fantasy</span>
+                        @foreach (var tag in book.TagsModels)
+                        {
+                            <a asp-page="/Manga/CurrentManga" asp-route-id="@book.MangaID">
+                                <span class="tag RemoveWhenSmall">@tag.TagName</span>
+                            </a>
+
+                        }
+                        @foreach (var genre in book.GenresModels)
+                        {
+                            <a asp-page="/Manga/CurrentManga" asp-route-id="@book.MangaID">
+                                <span class="tag RemoveWhenSmall">@genre.GenreName</span>
+                            </a>
+                        }
+
                     </h2>
                     <div class="card-description RemoveWhenSmall RemoveWhenLarge RemoveWhenMedium">
                         <p>
-                            Thus far, Jinwoo has managed to keep his rapid evolution hidden from his fellow hunters. When he arrives at his latest assignment, though, he is greeted by a group of familiar faces—Joohee, Mr. Song, and the other survivors of the double dungeon are gathered for the raid, and his comrades can’t help but notice Jinwoo’s drastic change in stature! Jinwoo intends to act the weakling he was before, but when their party is joined by a group of criminals and their association minder, Jinwoo may have no choice but to push his newly acquired skills to the limit if he and his friends want to get out alive!
+                            <a asp-page="/Manga/CurrentManga" asp-route-id="@book.MangaID">
+                                @book.Description
+                            </a>
 
                         </p>
                     </div>
                     <div class="Index_Artist_Author_Navigation_Arrows ">
                         <h2 class="Author_Artist">
-                            Chugong, DUBU(REDICE STUDIO)
+                            @foreach (var author in book.Authormodels)
+                            {
+                                <a asp-page="/Manga/CurrentManga" asp-route-id="@book.MangaID">
+                                    @author.FirstName @author.LastName 
+                                </a>
+                                 @foreach (var artst in book.ArtistModels)
+                                {
+                                    @if(author.FirstName != artst.FirstName) {
+                                        <a asp-page="/Manga/CurrentManga" asp-route-id="@book.MangaID">
+                                            @artst.FirstName @artst.LastName 
+                                </a>
+                                    }
+                            }
+                            }
+                           
                         </h2>
 
                         <div class="IndexArrowPostition">
                             <button class="IndexArrowsPrev">
-                                h
+                               <p>prev</p>
                             </button>
-                            <button class="IndexArrowsNext">></button>
+                            <button class="IndexArrowsNext">
+                               >
+                            </button>
                         </div>
                     </div>
 
@@ -65,180 +127,270 @@
             </div>
 
         </div>
-        </a>
+
     }
-  
-        <div class="MiniCards">
-        @foreach (var book in Model.GetAllBooks.Take(8))
-        {
-            <div class="BoxOne">
-                    <a asp-page="/Manga/CurrentManga" asp-route-id="@book.MangaID">
-                <img class="BoxImage" src="~/Images/MangaImage/@book.PhotoPath" />
+    <div class="ContentDescription"><h1>Users choice</h1></div>
+    <div class="MiniCards">
+        <div class="BoxOne">
+            <a asp-page="/Manga/CurrentManga" asp-route-id="@Model.AllBooksList[0].MangaID">
+                <img class="BoxImage" src="~/Images/MangaImage/@Model.AllBooksList[0].PhotoPath" />
                 <div class="BoxContent">
-                </div></a>
-            </div>
-        }
-            @*<div class="BoxTwo">
-                <img class="BoxImage" src="~/Images/MangaImage/@book.PhotoPath" />
-            </div>
-            <div class="BoxThree">
-                <img class="BoxImage" src="~/Images/MangaImage/@book.PhotoPath" />
-            </div>
-            <div class="BoxFour"> <img class="BoxImage" src="~/Images/MangaImage/@book.PhotoPath" /></div>
-            <div class="BoxFive"> <img class="BoxImage" src="~/Images/MangaImage/@book.PhotoPath" /></div>
-            <div class="BoxSix"> <img class="BoxImage" src="~/Images/MangaImage/@book.PhotoPath" /></div>
-            <div class="BoxSeven"> <img class="BoxImage" src="~/Images/MangaImage/@book.PhotoPath" /></div>
-            <div class="BoxEight"> <img class="BoxImage" src="~/Images/MangaImage/@book.PhotoPath" /></div>*@
+                </div>
+            </a>
         </div>
-   
+        <div class="BoxOne">
+            <a asp-page="/Manga/CurrentManga" asp-route-id="@Model.AllBooksList[1].MangaID">
+                <img class="BoxImage" src="~/Images/MangaImage/@Model.AllBooksList[1].PhotoPath" />
+                <div class="BoxContent">
+                </div>
+            </a>
+        </div>
+        <div class="BoxOne hide-on-small">
+            <a asp-page="/Manga/CurrentManga" asp-route-id="@Model.AllBooksList[2].MangaID">
+                <img class="BoxImage" src="~/Images/MangaImage/@Model.AllBooksList[2].PhotoPath" />
+                <div class="BoxContent">
+                </div>
+            </a>
+        </div>
+        <div class="BoxOne hide-on-small">
+            <a asp-page="/Manga/CurrentManga" asp-route-id="@Model.AllBooksList[3].MangaID">
+                <img class="BoxImage" src="~/Images/MangaImage/@Model.AllBooksList[3].PhotoPath" />
+                <div class="BoxContent">
+                </div>
+            </a>
+        </div>
+        <div class="BoxOne hide-on-medium">
+            <a asp-page="/Manga/CurrentManga" asp-route-id="@Model.AllBooksList[4].MangaID">
+                <img class="BoxImage" src="~/Images/MangaImage/@Model.AllBooksList[4].PhotoPath" />
+                <div class="BoxContent">
+                </div>
+            </a>
+        </div>
+        <div class="BoxOne hide-on-medium">
+            <a asp-page="/Manga/CurrentManga" asp-route-id="@Model.AllBooksList[5].MangaID">
+                <img class="BoxImage" src="~/Images/MangaImage/@Model.AllBooksList[5].PhotoPath" />
+                <div class="BoxContent">
+                </div>
+            </a>
+        </div>
+        <div class="BoxOne hide-on-medium">
+            <a asp-page="/Manga/CurrentManga" asp-route-id="@Model.AllBooksList[6].MangaID">
+                <img class="BoxImage" src="~/Images/MangaImage/@Model.AllBooksList[6].PhotoPath" />
+                <div class="BoxContent">
+                </div>
+            </a>
+        </div>
+        <div class="BoxOne hide-on-medium">
+            <a asp-page="/Manga/CurrentManga" asp-route-id="@Model.AllBooksList[7].MangaID">
+                <img class="BoxImage" src="~/Images/MangaImage/@Model.AllBooksList[7].PhotoPath" />
+                <div class="BoxContent">
+                </div>
+            </a>
+        </div>
+ 
+    </div>
+
+
 
 </div>
 <div class="Content2Cost">
-    <div class="card">
-        <img class="card-img-background" src="https://kbimages1-a.akamaihd.net/2c51ebd3-5134-41fc-8a1d-1bc83610fd55/1200/1200/False/solo-leveling-vol-3-comic.jpg" />
-        <div class="card-body">
-            <img class="card-img-index" src="https://kbimages1-a.akamaihd.net/2c51ebd3-5134-41fc-8a1d-1bc83610fd55/1200/1200/False/solo-leveling-vol-3-comic.jpg" />
-            <div class="TitleTagDescriptionCostum">
-                <div class="card-title">
-                    <h1 class="card-title-extra-style">
-                        Solo-Leveling
-                    </h1>
+    @foreach (var book in Model.GetAllBooks.Take(1))
+    {
 
-                </div>
+        <div class="card">
 
-                <h2 class="tag-container">
-                    <span class="tag RemoveWhenSmall">One-Man-Army</span>
-                    <span class="tag RemoveWhenSmall">Hero</span>
-                    <span class="tag RemoveWhenSmall">Leveling</span>
-                    <span class="tag RemoveWhenSmall ">Action</span>
-                    <span class="tag RemoveWhenSmall">Adventure</span>
-                    <span class="tag RemoveWhenSmall">Fantasy</span>
-                </h2>
-                <div class="card-description RemoveWhenSmall RemoveWhenLarge RemoveWhenMedium">
-                    <p>
-                        Thus far, Jinwoo has managed to keep his rapid evolution hidden from his fellow hunters. When he arrives at his latest assignment, though, he is greeted by a group of familiar faces—Joohee, Mr. Song, and the other survivors of the double dungeon are gathered for the raid, and his comrades can’t help but notice Jinwoo’s drastic change in stature! Jinwoo intends to act the weakling he was before, but when their party is joined by a group of criminals and their association minder, Jinwoo may have no choice but to push his newly acquired skills to the limit if he and his friends want to get out alive!
+          
+            <div class="card-2-bodyDetails">
 
-                    </p>
-                </div>
-                <div class="Index_Artist_Author_Navigation_Arrows ">
-                    <h2 class="Author_Artist">
-                        Chugong, DUBU(REDICE STUDIO)
-                    </h2>
+                <img class="card-img-index" src="~/Images/MangaImage/@book.PhotoPath" />
 
-                    <div class="IndexArrowPostition">
-                        <button class="IndexArrowsPrev">
-                            <
-                        </button>
-                        <button class="IndexArrowsNext">></button>
+                <div class="TitleTagDescriptionCostum">
+                    <div class="card-title">
+                        <a asp-page="/Manga/CurrentManga" asp-route-id="@book.MangaID">
+                            <h1 class="card-title-extra-style">
+                                @book.MangaName
+                            </h1>
+                        </a>
+
                     </div>
+
+                    <h2 class="tag-container">
+                        @foreach (var tag in book.TagsModels)
+                        {
+                            <a asp-page="/Manga/CurrentManga" asp-route-id="@book.MangaID">
+                                <span class="tag RemoveWhenSmall">@tag.TagName</span>
+                            </a>
+
+                        }
+                        @foreach (var genre in book.GenresModels)
+                        {
+                            <a asp-page="/Manga/CurrentManga" asp-route-id="@book.MangaID">
+                                <span class="tag RemoveWhenSmall">@genre.GenreName</span>
+                            </a>
+                        }
+
+                    </h2>
+                    <div class="card-description RemoveWhenSmall RemoveWhenLarge RemoveWhenMedium">
+                        <p>
+                            <a asp-page="/Manga/CurrentManga" asp-route-id="@book.MangaID">
+                                @book.Description
+                            </a>
+
+                        </p>
+                    </div>
+                    <div class="Index_Artist_Author_Navigation_Arrows ">
+                        <h2 class="Author_Artist">
+                            @foreach (var author in book.Authormodels)
+                            {
+                                <a asp-page="/Manga/CurrentManga" asp-route-id="@book.MangaID">
+                                    @author.FirstName @author.LastName
+                                </a>
+                                @foreach (var artst in book.ArtistModels)
+                                {
+                                    @if (author.FirstName != artst.FirstName)
+                                    {
+                                        <a asp-page="/Manga/CurrentManga" asp-route-id="@book.MangaID">
+                                            @artst.FirstName @artst.LastName
+                                        </a>
+                                    }
+                                }
+                            }
+
+                        </h2>
+
+                     
+                    </div>
+
                 </div>
 
+
+               
+
+
+
             </div>
 
-
-            <div>
-            </div>
-
-
-
         </div>
 
-    </div>
-    <div class="MiniCards">
+    }
 
-        <div class="BoxOne">
-            <img class="BoxImage" src="https://assetsio.reedpopcdn.com/naruto-watch-order.jpg?width=1600&height=900&fit=crop&quality=100&format=png&enable=upscale&auto=webp" />
-            <div class="BoxContent">
-            </div>
-        </div>
-        <div class="BoxTwo">
-            <img class="BoxImage" src="https://prodimage.images-bn.com/lf?set=key%5Bresolve.pixelRatio%5D,value%5B1%5D&set=key%5Bresolve.width%5D,value%5B600%5D&set=key%5Bresolve.height%5D,value%5B10000%5D&set=key%5Bresolve.imageFit%5D,value%5Bcontainerwidth%5D&set=key%5Bresolve.allowImageUpscaling%5D,value%5B0%5D&set=key%5Bresolve.format%5D,value%5Bwebp%5D&source=url%5Bhttps://prodimage.images-bn.com/pimages/9781591167532_p0_v2_s600x595.jpg%5D&scale=options%5Blimit%5D,size%5B600x10000%5D&sink=format%5Bwebp%5D" />
-        </div>
-        <div class="BoxThree">
-            <img class="BoxImage" src="https://upload.wikimedia.org/wikipedia/en/4/4a/Berserk_vol01.png" />
-        </div>
-        <div class="BoxFour"> <img class="BoxImage" src="https://upload.wikimedia.org/wikipedia/en/7/74/Code_Geass_R1_box_set_cover.jpg" /></div>
-        <div class="BoxFive"> <img class="BoxImage" src="https://i.redd.it/pm6d1gha5xj41.jpg" /></div>
-        <div class="BoxSix"> <img class="BoxImage" src="https://i.pinimg.com/originals/7a/7f/12/7a7f12e11c3b01c410286dd9ca10a928.jpg" /></div>
-        <div class="BoxSeven"> <img class="BoxImage" src="https://kbimages1-a.akamaihd.net/b99e2755-cbe0-4a9f-a888-d49edb71d440/1200/1200/False/one-punch-man-vol-2.jpg" /></div>
-        <div class="BoxEight"> <img class="BoxImage" src="https://external-preview.redd.it/B3OvdHblwX-tUe_fj8NcUDmAwhJH4oz8y8pygryp_K4.jpg?auto=webp&s=81328aaa3410be787c7fd77f0eeef9c11adc4601" /></div>
-    </div>
+
 </div>
-<div class="Content3Cost">Area 3</div>
+<div class="Content3Cost">
+    @foreach (var book in Model.GetAllBooks.Take(1))
+    {
+
+        <div class="card">
+
+            <img class="card-img-background" src="~/Images/MangaImage/@book.PhotoPath" />
+            <div class="card-body">
+
+                <img class="card-img-index" src="~/Images/MangaImage/@book.PhotoPath" />
+
+                <div class="TitleTagDescriptionCostum">
+                    <div class="card-title">
+                        <a asp-page="/Manga/CurrentManga" asp-route-id="@book.MangaID">
+                            <h1 class="card-title-extra-style">
+                                @book.MangaName
+                            </h1>
+                        </a>
+
+                    </div>
+
+                    <h2 class="tag-container">
+                        @foreach (var tag in book.TagsModels)
+                        {
+                            <a asp-page="/Manga/CurrentManga" asp-route-id="@book.MangaID">
+                                <span class="tag RemoveWhenSmall">@tag.TagName</span>
+                            </a>
+
+                        }
+                        @foreach (var genre in book.GenresModels)
+                        {
+                            <a asp-page="/Manga/CurrentManga" asp-route-id="@book.MangaID">
+                                <span class="tag RemoveWhenSmall">@genre.GenreName</span>
+                            </a>
+                        }
+
+                    </h2>
+                    <div class="card-description RemoveWhenSmall RemoveWhenLarge RemoveWhenMedium">
+                        <p>
+                            <a asp-page="/Manga/CurrentManga" asp-route-id="@book.MangaID">
+                                @book.Description
+                            </a>
+
+                        </p>
+                    </div>
+                    <div class="Index_Artist_Author_Navigation_Arrows ">
+                        <h2 class="Author_Artist">
+                            @foreach (var author in book.Authormodels)
+                            {
+                                <a asp-page="/Manga/CurrentManga" asp-route-id="@book.MangaID">
+                                    @author.FirstName @author.LastName
+                                </a>
+                                @foreach (var artst in book.ArtistModels)
+                                {
+                                    @if (author.FirstName != artst.FirstName)
+                                    {
+                                        <a asp-page="/Manga/CurrentManga" asp-route-id="@book.MangaID">
+                                            @artst.FirstName @artst.LastName
+                                        </a>
+                                    }
+                                }
+                            }
+
+                        </h2>
+
+                        <div class="IndexArrowPostition">
+                            <button class="IndexArrowsPrev">
+                                prev
+                            </button>
+                            <button class="IndexArrowsNext">
+                                next
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div>
+                </div>
+
+
+
+            </div>
+        
+        </div>
+
+    }
+    <div class="MiniCards">
+        @foreach (var book in Model.GetAllBooks.Take(8))
+        {
+            <div class="BoxOne">
+                <a asp-page="/Manga/CurrentManga" asp-route-id="@book.MangaID">
+                    <img class="BoxImage" src="~/Images/MangaImage/@book.PhotoPath" />
+                    <div class="BoxContent">
+                    </div>
+                </a>
+            </div>
+        }
+
+    </div>
+
+@*    <div class="MiniCards">
+        @foreach (var book in Model.GetAllBooks.Take(8))
+        {
+            <div class="BoxOne">
+                <a asp-page="/Manga/CurrentManga" asp-route-id="@book.MangaID">
+                    <img class="BoxImage" src="~/Images/MangaImage/@book.PhotoPath" />
+                    <div class="BoxContent">
+                    </div>
+                </a>
+            </div>
+        }
+
+    </div>*@
+</div>
 <div class="Content4Cost">Area 4</div>
 
-
-
-<div class="Content1Cost">
-    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-            @foreach (var book in Model.GetAllBooks.Take(1))
-            {
-                <div class="carousel-item @if (book == Model.GetAllBooks.First()) {
-         
-}">
-                    <div class="row">
-                     
-                               <div class="carousel-image-container ">  @if (User.IsInRole("NormalUser"))
-                                {
-                                        <a asp-page="/MangaUpdates/UpdatePhoto" asp-route-id="@book.MangaID">
-                                                    <img class="carousel-image" src="~/Images/MangaImage/@book.PhotoPath"  alt="...">
-                                        </a>
-                                }
-                                else
-                                {
-                                                <img class="carousel-image" src="~/Images/MangaImage/@book.PhotoPath"  alt="...">
-                                } </div>
-                          
-                    
-
-                     
-                              <a asp-page="/Manga/CurrentManga" asp-route-id="@book.MangaID">
-                            <div class="caption-wrapper">
-                                <h5>@book.MangaName</h5>
-                                <h6>@book.Description</h6>
-                                @if (User.IsInRole("NormalUser"))
-                                {
-                                    <a asp-page="/MangaUpdates/UpdateDescription" asp-route-id="@book.MangaID" class="btn btn-success">Update Description</a>
-                                }
-
-                                        <p>Tag/s:</p>
-                                    <div class="tag-container">
-                                        @foreach (var tag in book.TagsModels)
-                                        {
-                                                              <span class="tag">@tag.TagName</span>
-                                                
-                                        }
-      
-        </div> <p style="color:red">Genre/s:</p>
-                                   <div class="tag-container">
-                                        @foreach (var genre in book.GenresModels)
-                                        {
-                                                                <span class="tag">@genre.GenreName</span>
-                                        }
-
-        </div>
-
-                            
-                               
-                                @if (User.IsInRole("NormalUser"))
-                                {
-                                    <a asp-page="/MangaUpdates/UpdateGenre" asp-route-id="@book.MangaID" class="btn btn-success">Update Genre</a>
-                                }
-                            </div>
-                            </a>
-                    
-                    </div>
-                </div>
-            }
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
-        </div>
-    </div>
-</div>

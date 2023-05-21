@@ -23,14 +23,16 @@ namespace NovelXManga.Pages
             this.mangaRepository = mangaRepository;
             this.webHostEnvironment = webHostEnvironment;
             this.context = context;
-        }
 
+        }
+        public List<MangaModel> AllBooksList { get; set; }
         public IEnumerable<AssociatedNames> associatedNames { get; set; }
         public IEnumerable<MangaModel> GetAllBooks { get; set; }
 
         public void OnGet()
         {
-            GetAllBooks = context.mangaModels.Include(e => e.GenresModels).Include(e => e.TagsModels);
+            GetAllBooks = context.mangaModels.Include(e => e.GenresModels).Include(e => e.TagsModels).Include(e => e.ArtistModels).Include(e => e.Authormodels);
+            AllBooksList = GetAllBooks.ToList();
         }
     }
 }
