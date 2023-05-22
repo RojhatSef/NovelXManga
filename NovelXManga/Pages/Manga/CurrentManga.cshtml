@@ -3,6 +3,56 @@
 @{
 }
 
+<form method="post" enctype="multipart/form-data">
+    <input type="hidden" name="mangaModel.MangaID" value="@Model.CurrentManga.MangaID" />
+    <div class="manga-container">
+        <div class="manga-title">
+            <!-- Manga title goes here -->
+            @if (@Model.CurrentManga.MangaName != null)
+            {
+                <h2>@Model.CurrentManga.MangaName</h2>
+                @if (User.Identity.IsAuthenticated && User.IsInRole("Updater"))
+                {
+                    <input type="text" class="HiddenGroup" asp-for="@Model.CurrentManga.MangaName" class="form-control" />
+                }
+            }
+        </div>
+
+        <div class="manga-img">
+            <!-- Manga image goes here -->
+            @if (@Model.CurrentManga.PhotoPath != string.Empty)
+            {
+                <div class="mb-3">
+                    <img asp-append-version="true" src="~/Images/MangaImage/@Model.CurrentManga.PhotoPath" alt="NoImage" width="100" height="200">
+                    @if (User.Identity.IsAuthenticated && User.IsInRole("Updater"))
+                    {
+                        <input type="text" class="HiddenGroup" asp-for="@Model.CurrentManga.PhotoPath" class="form-control" />
+                    }
+                </div>
+            }
+            else
+            {
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png" alt="BookImage" width="100" height="200">
+            }
+        </div>
+
+        <div class="manga-details">
+            <!-- Details of the manga goes here -->
+            <!-- Let's add Language and Associated Names as an example -->
+            <div class="detail">
+                <span class="detail-title">Language:</span>
+                <!-- Languages list goes here -->
+                <!-- Use your logic to populate the languages -->
+            </div>
+            <div class="detail">
+                <span class="detail-title">Associated Names:</span>
+                <!-- Associated names list goes here -->
+                <!-- Use your logic to populate the associated names -->
+            </div>
+        </div>
+    </div>
+    <!-- continue with the rest of your form fields -->
+</form>
 
 <form method="post" enctype="multipart/form-data">
   <input type="hidden" name="mangaModel.MangaID" value="@Model.CurrentManga.MangaID" />
