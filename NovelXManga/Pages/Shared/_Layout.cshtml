@@ -17,7 +17,7 @@
         <nav class="custom-O-navbar">
             <div class="navbar-right">
                 <a asp-page="/Index"><h3 id="NovelTitle"> OtakuLibrary</h3></a>
-                <button id="sidebar-toggle" onclick="handleSidebarToggle()" class="sidebar-toggle">Toggle Sidebar</button>
+                <button id="sidebar-toggle" onclick="handleSidebarToggle()" class="sidebar-toggle"><i class="gg-menu-round"></i></button>
             </div>
             <div class="navbar-left">  <input type="search" id="searchbar" class="searchbar" placeholder="Search"> </div>
             <hr class="TheOrangeLine"/>
@@ -28,10 +28,13 @@
     </div>
     <div class="Custom-o-sidebar">
         <div>
-            <a href="/">
-                <span id="logo">OtakuLibrary   </span>
-            </a>
-            <button id="sidebar-toggle" onclick="handleSidebarToggle()" class="sidebar-toggle LayoutXButtonNoBackground">X</button>
+            <div>
+                <a href="/">
+                    <span id="logo">OtakuLibrary   </span>
+                </a>
+                <button id="sidebar-toggle" onclick="handleSidebarToggle()" class="sidebar-toggle LayoutXButtonNoBackground"><i class="gg-minimize"></i></button>
+            </div>
+          
             <hr>
             @if (SignInManager.IsSignedIn(User))
             {
@@ -146,7 +149,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
 
     <script src="~/js/site.js" asp-append-version="true"></script>
-    <script src="~/js/Author.js" asp-append-version="true"></script>
+   
 
 
     @await RenderSectionAsync("Scripts", required: false)
