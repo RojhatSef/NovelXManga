@@ -3,18 +3,34 @@ body, html {
     padding: 0;
     height: 100vh;
     width: 100%;
-    font-family: Arial;
-    font-weight: 800;
+    font-family: Lato !important;
+    font-weight: 800 !important;
+    line-height: normal;
     font-size: 12px;
     color: whitesmoke;
     text-align: center;
     background-color: #191a1c;
+    overflow-x: hidden;
+}
+
+input {
+    outline: none
+}
+
+ul {
+    list-style: none;
+}
+
+.row {
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+    margin: 0px !important;
 }
 
 a {
     padding: 0;
     margin: 0;
-    text-decoration: none;
+    text-decoration: none !important;
     color: inherit;
 }
 
@@ -53,15 +69,13 @@ main {
         "Content2Cost Content2Cost Content2Cost Content2Cost"
         "Content3Cost Content3Cost Content3Cost Content3Cost"
         "Content4Cost Content4Cost Content4Cost Content4Cost";
-    font-family: 'Lucida Sans Typewriter';
     font-weight: 800;
-    text-transform: uppercase;
     font-size: 12px;
     color: whitesmoke;
     text-align: center;
 }
 
-.navbar {
+.custom-O-navbar {
     grid-area: nav;
     background-color: #191a1c;
     position: sticky;
@@ -73,10 +87,10 @@ main {
     padding: 0.2rem 1rem;
     height: 65px;
     border-bottom: 1px solid orangered;
-    flex-direction: row-reverse;
+  
 }
 
-    .navbar.top-scroll {
+    .custom-O-navbar .top-scroll {
         border-bottom: none;
     }
 
@@ -86,18 +100,19 @@ a {
 
 .navbar-left {
     display: flex;
+  
     align-items: center;
 }
 
 .navbar-right {
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+   
     width: 100%;
 }
 
 @media (max-width: 680px) {
-    .navbar h3 {
+    .custom-O-navbar h3 {
         font-size: 15px;
     }
 
@@ -123,10 +138,153 @@ a {
     }
 }
 
-.navbar.hidden {
+.custom-O-navbar.hidden {
     visibility: hidden;
 }
+.LayoutXButtonNoBackground {
+    background-color: #333 !important; 
+    border-radius:25px; 
+    
+}
+    .LayoutXButtonNoBackground:hover {
+        background-color: #191a1c !important;
+        border-radius: 25px;
+    }
+/* Login STARTS HERE*/
+/*.btn-custom-secondary {
+    display: inline-block;
+    color: #fff;
+    background-color: orangered;
+    border-color: orangered;
+    padding: 0.375rem 0.75rem;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    width: 100%;
+    height: 50px;
+}
 
+    .btn-custom-secondary:hover {
+        background-color: #5a6268;
+        border-color: #545b62;
+    }*/
+.btn-custom-primary-login-forgott {
+    display: inline-block;
+    color: #fff;
+    background-color: orangered;
+    border-color: orangered;
+    padding: 0.375rem 0.75rem;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    width: 100%;
+    height: 50px;
+    margin-top: 15px;
+}
+
+    .btn-custom-primary-login-forgott:hover {
+        background-color: #E12700;
+        border-color: #E12700;
+    }
+.LoginRememberMehoverOrangeRed:hover{
+    color:orangered; 
+}
+.LoginForgottRegiSolidBorder {
+    border-top: solid 5px orangered;
+    border-bottom: solid 45px rgb(51, 51, 51);
+    box-shadow: 5px 10px 8px black;
+    border-radius: 5px;
+}
+
+.ForgottPasswordReturnback {
+    display: flex;
+    color: orangered;
+    width: 30%;
+    border-radius: 5px;
+}
+
+    .ForgottPasswordReturnback:hover {
+        color: white;
+    }
+
+.LoginForgotRegiContainer {
+    height: 550px;
+    background-color: #191a1c;
+    width: 30%;
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+}
+
+.specialButtonLoginForgotRegi {
+    width: 100% !important;
+}
+
+.LoginForgotRegiGroup {
+    margin: 10px;
+}
+
+.textOrangeRedForgottenPassword {
+    color: orangered;
+    font-size: 16px;
+    margin-left: 20%;
+}
+    .textOrangeRedForgottenPassword:hover {
+        color: white;
+    }
+
+    .LongerInput {
+        width: 400px;
+        font-size: 15px;
+    }
+
+.LongerInputField {
+    font-size: 20px; /* Change this value to make the label higher or longer */
+    width: 100%;
+    background-color: #444;
+    color: white;
+}
+
+.LoginRegisterAnchor {
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    align-items: center; /* This will center your text vertically */
+    color: orangered;
+    font-size: 15px;
+    height: 30px
+}
+
+    .LoginRegisterAnchor:hover {
+        color: white;
+    }
+
+.LargeLoginSize {
+    margin: 30px;
+    margin-top: 130px;
+}
+
+.centralContentCost {
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+}
+
+.LowBackGroundForLoginForgotRegi {
+    background-color: rgb(51, 51, 51);
+    display: flex;
+    width: 100% !important;
+    padding: 0;
+    margin: 0;
+    height: 10px;
+}
+
+.MassLoginForgottRegiAlignContent {
+    margin-top: 12%;
+}
+/* Login Ends HERE*/
 /* SIDEbar STARTS HERE*/
 .sidebar-toggle {
     cursor: pointer;
@@ -151,7 +309,7 @@ a {
     background-color: #191a1c;
 }
 
-.sidebar {
+.Custom-o-sidebar {
     position: fixed;
     top: 0;
     left: -100%;
@@ -164,11 +322,11 @@ a {
     overflow-y: auto;
 }
 
-    .sidebar.open {
+    .Custom-o-sidebar.open {
         left: 0;
     }
 
-    .sidebar ul {
+    .Custom-o-sidebar ul {
         list-style: none;
         padding: 0;
         margin: 0;
@@ -178,27 +336,27 @@ a {
     color: orangered;
 }
 
-.sidebar li {
+.Custom-o-sidebar li {
     font-size: 1.2rem;
     text-align: left;
     margin-bottom: 8px;
 }
 
-.sidebar a {
+.Custom-o-sidebar a {
     color: white;
     text-decoration: none;
 }
 
-.sidebar li.active a {
+.Custom-o-sidebar li.active a {
     color: orange;
 }
 
-.sidebar li:hover a {
+.Custom-o-sidebar li:hover a {
     color: #ccc;
 }
 
 @media (min-width: 769px) {
-    .sidebar li:hover a {
+    .Custom-o-sidebar li:hover a {
         color: orangered;
     }
 }
@@ -220,7 +378,7 @@ a {
 }
 
 .Content1Cost {
-    background-color: pink;
+    background-color: #191a1c;
     grid-area: Content1Cost;
     min-height: 1000px;
     max-height: 1400px;
@@ -234,7 +392,7 @@ a {
 }
 
 .Content2Cost {
-    background-color: tomato;
+    background-color: #191a1c;
     grid-area: Content2Cost;
     border-radius: var(--main-radius);
     padding-top: var(--main-padding);
@@ -247,7 +405,7 @@ a {
 }
 
 .Content3Cost {
-    background-color: lightblue;
+    background-color: #191a1c;
     grid-area: Content3Cost;
     border-radius: var(--main-radius);
     padding-top: var(--main-padding);
@@ -257,7 +415,7 @@ a {
 }
 
 .Content4Cost {
-    background-color: dimgrey;
+    background-color: #191a1c;
     grid-area: Content4Cost;
     border-radius: var(--main-radius);
     padding-top: var(--main-padding);
@@ -271,6 +429,28 @@ a {
     margin-right: auto;
     padding-top: 1%;
     width: 100%;
+}
+
+.mb-3 .btn {
+    color: white;
+    transition: background-color 0.3s; /* transition effect */
+}
+
+.HoverEffektLi a {
+    display: block;
+    margin: 10px;
+    padding-left: 10px;
+}
+
+    .HoverEffektLi a:hover {
+        background-color: #191a1c;
+        border-style: solid;
+        border-color: orangered;
+        transition: background-color 0.3s;
+    }
+
+.mb-3 .btn:hover {
+    background-color: #FF6347; /* color when hovered */
 }
 
 @media (max-width: 680px) {
@@ -395,7 +575,6 @@ a {
     position: relative;
     width: 100%;
     height: 320px;
-   
     display: flex;
     justify-content: center;
 }
@@ -449,6 +628,8 @@ a {
     border-radius: 1px;
     border-right: solid;
     border-color: #191a1c;
+    color: #191a1c;
+    font-size: 20px;
 }
 
 .noBorderStyle {
@@ -543,6 +724,22 @@ a {
     margin: 0;
 }
 
+@media (max-width: 1200px) {
+    .BoxOne.hide-on-medium {
+        display: none;
+    }
+
+    .LoginForgotRegiContainer {
+        width: 40%;
+    }
+}
+
+@media (max-width: 900px) {
+    .LoginForgotRegiContainer {
+        width: 60% !important;
+    }
+}
+
 @media (max-width: 599px) {
     .BoxOne.hide-on-small {
         display: none;
@@ -551,11 +748,9 @@ a {
     .ContentDescription {
         padding-top: 4.5%;
     }
-}
 
-@media (max-width: 1200px) {
-    .BoxOne.hide-on-medium {
-        display: none;
+    .LoginForgotRegiContainer {
+        width: 100% !important;
     }
 }
 
@@ -607,3 +802,37 @@ a {
 
 /* Ends Ends HERE*/
 /* CurrentMangaPage Ends HERE*/
+/* Book Starts HERE*/
+.author-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 500px;
+    margin: auto;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+}
+
+.author-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.add-author {
+    padding: 10px 20px;
+    background-color: #009688;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+    .add-author:hover {
+        background-color: #00796b;
+    }
+/* AuthorStyle Ends HERE*/

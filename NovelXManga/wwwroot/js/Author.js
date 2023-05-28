@@ -32,6 +32,7 @@ function createOfficialWebsiteInput(rowCount, index) {
 $("#addRow").click(function () {
     var rowCount = parseInt($("#total").val());
     console.log("Add button clicked");
+    console.log('site.js loaded3');
     rowCount++;
     $("#total").val(rowCount);
     var html = '';
@@ -136,6 +137,8 @@ $(document).on('click', '#removeRow', function () {
     $("#total").val(rowCount);
     $(this).closest('#inputRow').remove();
 });
+
+console.log('site.js loaded3');
       // $(document).on('change', 'input[type="file"][data-author-index]', function () {
     //    var file = this.files[0];
     //    var authorIndex = $(this).data('author-index');
@@ -152,3 +155,4 @@ $(document).on('click', '#removeRow', function () {
     //        $(this).val($(this).data('default-photo'));
     //    }
     //});
+

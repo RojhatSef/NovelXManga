@@ -3,6 +3,9 @@
 @{
 }
 
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+
 <form method="post" enctype="multipart/form-data">
     <input type="hidden" name="MangaID" value="@Model.MangaID" />
     <div id="newRow">
@@ -12,3 +15,4 @@
     <input type="submit" class="btn btn-primary" value="Post" />
 </form>
 <button id="addRow" type="button" asp-for="Author" class="btn btn-info">Add New Author</button>
+
