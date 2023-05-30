@@ -28,11 +28,14 @@ namespace NovelXManga.Pages
         public List<MangaModel> AllBooksList { get; set; }
         public IEnumerable<AssociatedNames> associatedNames { get; set; }
         public IEnumerable<MangaModel> GetAllBooks { get; set; }
-
+        public IEnumerable<WallPapers> WallPapers { get; set; }
+        public List<WallPapers> WallpaperList { get; set; }
         public void OnGet()
         {
             GetAllBooks = context.mangaModels.Include(e => e.GenresModels).Include(e => e.TagsModels).Include(e => e.ArtistModels).Include(e => e.Authormodels);
             AllBooksList = GetAllBooks.ToList();
+            WallPapers = context.WallPapers;
+            WallpaperList = WallPapers.ToList();
         }
     }
 }

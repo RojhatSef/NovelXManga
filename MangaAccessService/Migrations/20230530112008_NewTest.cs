@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MangaAccessService.Migrations
 {
-    public partial class IsCheckedAdded : Migration
+    public partial class NewTest : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -355,6 +355,19 @@ namespace MangaAccessService.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_voiceActorModels", x => x.VoiceActorId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "WallPapers",
+                columns: table => new
+                {
+                    WallpaperID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    WallPaperPhotoPath = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_WallPapers", x => x.WallpaperID);
                 });
 
             migrationBuilder.CreateTable(
@@ -1183,13 +1196,13 @@ namespace MangaAccessService.Migrations
                 {
                     OfficalID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    OfficalWebsiteName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    OfficalWebsiteName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Twitter = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Facebook = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Line = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Naver = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Instagram = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    OfficalWebsiteString = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    OfficalWebsiteString = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     MangaID = table.Column<int>(type: "int", nullable: true),
                     mangaModelMangaID = table.Column<int>(type: "int", nullable: true),
                     GroupScanId = table.Column<int>(type: "int", nullable: true),
@@ -1666,6 +1679,9 @@ namespace MangaAccessService.Migrations
 
             migrationBuilder.DropTable(
                 name: "UserModelWishBookList");
+
+            migrationBuilder.DropTable(
+                name: "WallPapers");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

@@ -20,6 +20,7 @@ builder.Services.AddScoped<ITagRepsitory, SQLTagRepository>();
 builder.Services.AddScoped<IAuthorRepsitory, SQLAuthorRepository>();
 builder.Services.AddScoped<IVoiceRepsitory, SQLVoiceRepsitorycs>();
 builder.Services.AddScoped<IArtistRepsitory, SQLArtistRepsitory>();
+builder.Services.AddScoped<IWallPaperRepsitory, SQLWallPaperRepsitory>();
 builder.Services.AddScoped<ILanguageRepsitory, SQLLanguageRepsitory>();
 builder.Services.AddScoped<IMangaRepository, SQLMangaRepository>();
 builder.Services.AddScoped<IBlogRepsitory, SQLBlogRepsitory>();

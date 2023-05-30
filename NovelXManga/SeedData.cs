@@ -315,11 +315,11 @@ namespace NovelXManga
         {
             WallPapers wallPapers = new WallPapers
             {
-                WallPaperPhotoPath = Path.Combine(WallProcessUploadedFile("AllAnime.jpeg"))
+                WallPaperPhotoPath = Path.Combine(WallProcessUploadedFile("AllAnime.jpg"))
             };
             WallPapers wallPapers1 = new WallPapers
             {
-                WallPaperPhotoPath = Path.Combine(WallProcessUploadedFile("AllAnime2.jpeg"))
+                WallPaperPhotoPath = Path.Combine(WallProcessUploadedFile("AllAnime2.jpg"))
             };
             WallPapers wallPapers2 = new WallPapers
             {
@@ -327,17 +327,34 @@ namespace NovelXManga
             };
             WallPapers wallPapers3 = new WallPapers
             {
-                WallPaperPhotoPath = Path.Combine(WallProcessUploadedFile("AllAnime4.jpeg"))
+                WallPaperPhotoPath = Path.Combine(WallProcessUploadedFile("AllAnime4.jpg"))
             };
-            WallPapers wallPaper4 = new WallPapers
+            WallPapers wallPapers4 = new WallPapers
             {
-                WallPaperPhotoPath = Path.Combine(WallProcessUploadedFile("AnimeWallPaper.jpeg"))
+                WallPaperPhotoPath = Path.Combine(WallProcessUploadedFile("AllAnime.jpg"))
             };
+            WallPapers wallPapers5 = new WallPapers
+            {
+                WallPaperPhotoPath = Path.Combine(WallProcessUploadedFile("AllAnime2.jpg"))
+            };
+            WallPapers wallPapers6 = new WallPapers
+            {
+                WallPaperPhotoPath = Path.Combine(WallProcessUploadedFile("AllAnime3.jpeg"))
+            };
+            WallPapers wallPapers7 = new WallPapers
+            {
+                WallPaperPhotoPath = Path.Combine(WallProcessUploadedFile("AllAnime4.jpg"))
+            };
+
             context.WallPapers.Add(wallPapers);
             context.WallPapers.Add(wallPapers1);
             context.WallPapers.Add(wallPapers2);
             context.WallPapers.Add(wallPapers3);
-            context.WallPapers.Add(wallPaper4);
+            context.WallPapers.Add(wallPapers4);
+            context.WallPapers.Add(wallPapers5);
+            context.WallPapers.Add(wallPapers6);
+            context.WallPapers.Add(wallPapers7);
+
             context.SaveChanges();
         }
 
@@ -352,7 +369,7 @@ namespace NovelXManga
                 TagsModel();
                 addLanguages();
                 Tags_Genres_Languages();
-
+                wallpaperSeed();
                 //photopath needs fixing real bad
                 string filePath = Path.Combine(webHostEnvironment.WebRootPath, "images/MangaImage/0f3f5666-7cb9-4713-a779-f1e1546a0d5f");
                 // creates a user,

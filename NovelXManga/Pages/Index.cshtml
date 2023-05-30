@@ -14,8 +14,10 @@
       
         <div class="card-image-ex">
             <a asp-page="/Index">
-                <img class="BoxImage" src="https://wallpaperaccess.com/full/17350.jpg" />
-
+                <div class="MoveDownIndexWallPapers">
+                    <img class="BoxImage SpecialBox" src="/Images/WallpaperImages/@Model.WallpaperList[2].WallPaperPhotoPath" />
+                </div>
+               
             </a>
         
          
@@ -154,7 +156,7 @@
         <div class="BoxOne">
             <a asp-page="/Manga/CurrentManga" asp-route-id="@Model.AllBooksList[1].MangaID">
                 <img class="BoxImage" src="~/Images/MangaImage/@Model.AllBooksList[1].PhotoPath" />
-                <div class="BoxContent">
+                <div class="BoxContent"> 
                 </div>
             </a>
         </div>

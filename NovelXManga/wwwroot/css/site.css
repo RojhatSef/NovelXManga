@@ -56,8 +56,6 @@ main {
     color: white;
     padding-right: 30px;
     font-size: 32px;
- 
-   
 }
 
     #NovelTitle:hover {
@@ -148,7 +146,6 @@ a {
 .LayoutXButtonNoBackground {
     background-color: #333 !important;
     border-radius: 25px;
-   
 }
 
     .LayoutXButtonNoBackground:hover {
@@ -316,7 +313,6 @@ a {
     width: 250px;
     height: 100%;
     background-color: #333;
-
     transition: left 0.3s;
     padding: 1rem;
     z-index: 200;
@@ -336,7 +332,7 @@ a {
 #logo {
     color: orangered;
     font-size: 22px;
-    margin-right:20px; 
+    margin-right: 20px;
 }
 
     #logo:hover {
@@ -445,13 +441,12 @@ a {
 }
 
 .Author_Artist:hover {
-    color:orangered; 
+    color: orangered;
 }
 
 flexLiLayout {
- 
-   
 }
+
 .HoverEffektLi a {
     display: block;
     margin: 10px;
@@ -468,7 +463,6 @@ flexLiLayout {
 .mb-3 .btn:hover {
     background-color: #FF6347; /* color when hovered */
 }
-
 
 @media (max-width: 680px) {
     .RemoveWhenSmall {
@@ -490,8 +484,6 @@ flexLiLayout {
     .card-img-index {
         margin: 10px !important;
     }
-
-   
 
     .MiniCards > div {
         flex-basis: 50%;
@@ -525,7 +517,6 @@ flexLiLayout {
 
 .tag-container {
     display: block;
-   
 }
 
     .tag-container h5 {
@@ -559,7 +550,6 @@ flexLiLayout {
     padding: 2px 5px; /* Add padding around the text */
     border-radius: 3px; /* Add rounded corners to the background */
     color: orangered; /* Change the text color to OrangeRed */
-  
 }
 
 .TitleTagDescriptionCostum {
@@ -586,7 +576,7 @@ flexLiLayout {
     width: 100%;
     flex-basis: 40px;
     flex-shrink: 0;
-    font-size:19px; 
+    font-size: 19px;
 }
 
 .card-ex {
@@ -601,6 +591,13 @@ flexLiLayout {
     object-fit: cover;
     width: 100%;
     height: 100%;
+    overflow: hidden
+}
+
+.MoveDownIndexWallPapers {
+    height: 100%;
+    width: 100%;
+    padding-top: px;
 }
 
 .IndexArrowEx {
@@ -611,8 +608,6 @@ flexLiLayout {
     justify-content: space-between;
     padding: 0 10px; /* optional: adjust as needed */
 }
-
-
 
 .MidExTop {
     width: 70%;
@@ -667,7 +662,7 @@ flexLiLayout {
 }
 
 .card-title-extra-style:hover {
-    color:orangered;
+    color: orangered;
 }
 
 .card-img-background {
@@ -718,7 +713,7 @@ flexLiLayout {
     flex-wrap: wrap;
     margin: 0;
     padding: 0;
-    overflow: hidden;
+    overflow: visible;
     position: relative;
     gap: 8px;
 }
@@ -738,7 +733,13 @@ flexLiLayout {
 .BoxOne {
     flex: 1;
     margin: 0;
+    transition: transform 0.3s ease;
 }
+
+    .BoxOne:hover {
+        transform: scale(1.1);
+        z-index: 2; /* This is to ensure the hovered box overlays the others */
+    }
 
 @media (max-width: 1200px) {
     .BoxOne.hide-on-medium {
@@ -930,6 +931,7 @@ flexLiLayout {
         bottom: 8px;
         background: currentColor
     }
+
 .IndexArrowsPrev, .IndexArrowsNext {
     background: none;
     border: none;
@@ -937,16 +939,19 @@ flexLiLayout {
     cursor: pointer;
     margin: 10px 0; /* Adjust as needed */
 }
+
     .IndexArrowsPrev:hover {
         background-color: orangered;
         border-radius: 10px;
-        border:20px;
+        border: 20px;
     }
+
     .IndexArrowsNext:hover {
         background-color: orangered;
         border-radius: 10px;
         border: 20px;
     }
+
 .gg-menu-round {
     box-sizing: border-box;
     position: relative;
@@ -972,13 +977,14 @@ flexLiLayout {
         left: 4px;
         box-shadow: 0 4px 0, 0 8px 0
     }
+
 .gg-minimize {
     box-sizing: border-box;
     position: relative;
-    justify-content:center; 
-    align-self:center; 
-    display:flex; 
-    margin-bottom:5px; 
+    justify-content: center;
+    align-self: center;
+    display: flex;
+    margin-bottom: 5px;
     display: block;
     transform: scale(var(--ggs,1));
     width: 4px;
