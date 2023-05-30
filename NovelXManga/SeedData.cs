@@ -64,6 +64,20 @@ namespace NovelXManga
             return uniqueFileName;
         }
 
+        private string WallProcessUploadedFile(string filename)
+        {
+            string uniqueFileName = null;
+            if (filename != null)
+            {
+                string uploadsFolder = Path.Combine(webHostEnvironment.WebRootPath, "Images", "WallpaperImages");
+                string extension = Path.GetExtension(filename);
+                uniqueFileName = Guid.NewGuid().ToString() + extension;
+                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                File.Copy(Path.Combine(webHostEnvironment.ContentRootPath, "wwwroot", "Images", "WallpaperImages", filename), filePath);
+            }
+            return uniqueFileName;
+        }
+
         public void addLanguages()
         {
             string[] LanguagesInput = { "English", "Japanese", "Spanish", "Chinese", "Russian", "French", "Arabic", "Korean", "Hindi", "Bengali", "Portuguese", "Indonesian", "Urdu", };
@@ -296,6 +310,36 @@ namespace NovelXManga
         #endregion CommonSeed
 
         #region SeedData
+
+        public void wallpaperSeed()
+        {
+            WallPapers wallPapers = new WallPapers
+            {
+                WallPaperPhotoPath = Path.Combine(WallProcessUploadedFile("AllAnime.jpeg"))
+            };
+            WallPapers wallPapers1 = new WallPapers
+            {
+                WallPaperPhotoPath = Path.Combine(WallProcessUploadedFile("AllAnime2.jpeg"))
+            };
+            WallPapers wallPapers2 = new WallPapers
+            {
+                WallPaperPhotoPath = Path.Combine(WallProcessUploadedFile("AllAnime3.jpeg"))
+            };
+            WallPapers wallPapers3 = new WallPapers
+            {
+                WallPaperPhotoPath = Path.Combine(WallProcessUploadedFile("AllAnime4.jpeg"))
+            };
+            WallPapers wallPaper4 = new WallPapers
+            {
+                WallPaperPhotoPath = Path.Combine(WallProcessUploadedFile("AnimeWallPaper.jpeg"))
+            };
+            context.WallPapers.Add(wallPapers);
+            context.WallPapers.Add(wallPapers1);
+            context.WallPapers.Add(wallPapers2);
+            context.WallPapers.Add(wallPapers3);
+            context.WallPapers.Add(wallPaper4);
+            context.SaveChanges();
+        }
 
         public async Task seedData()
         {

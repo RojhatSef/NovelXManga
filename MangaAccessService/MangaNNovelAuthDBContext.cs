@@ -33,6 +33,8 @@ namespace MangaAccessService
         public DbSet<BlogModel> blogModels { get; set; }
         public DbSet<MangaModel> mangaModels { get; set; }
         public DbSet<BuyPage> BuyPages { get; set; }
+
+        public DbSet<WallPapers> WallPapers { get; set; }
         //public DbSet<TestModel> TestModels { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
