@@ -384,7 +384,7 @@ a {
 .Content1Cost {
     background-color: #191a1c;
     grid-area: Content1Cost;
-    min-height: 1000px;
+    min-height: 1300px;
     max-height: 1400px;
     border-radius: var(--main-radius);
     padding-top: var(--main-padding);
@@ -470,6 +470,18 @@ flexLiLayout {
     }
 
     .Content1Cost {
+        gap: 10px !important;
+    }
+
+    .Content2Cost {
+        gap: 10px !important;
+    }
+
+    .Content3Cost {
+        gap: 10px !important;
+    }
+
+    .Content4Cost {
         gap: 10px !important;
     }
 
@@ -665,6 +677,56 @@ flexLiLayout {
     color: orangered;
 }
 
+.CardFour {
+    display: flex;
+    flex-wrap: wrap; /* This allows the boxes to wrap onto the next line */
+    width: 100%;
+    height: 100%;
+
+}
+.cardFourOfaKind {
+    width: 100%;
+    height: 620px;
+    display: flex;
+    overflow: hidden;
+    border-radius: 20px;
+    position: relative;
+    margin-bottom: 50px;
+}
+.FourOfAKind {
+    flex: 1 0 25%; /* Each box now takes up a quarter (25%) of the width */
+    max-height: 33.33%; /* And a third (33.33%) of the height */
+    display: flex;
+    align-items: center;
+    position: relative;
+    box-sizing: border-box;
+    padding: 10px;
+    
+}
+.ANoneStyle {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+    width: 100%;
+    height: 100%;
+}
+.FourOfAKind img {
+    height: 100%;
+    width: 30%;
+    object-fit: cover;
+}
+.aClassHeight{
+    height:100%; 
+    width:100%; 
+}
+
+.FourOfAKind .FourofKindContent {
+    width: 70%;
+    height: 100%; /* Make sure the content fits within its parent div */
+    padding-left: 10px; /* This will give a little space between the image and the text */
+}
+
 .card-img-background {
     width: 100%;
     height: 100%;
@@ -745,19 +807,39 @@ flexLiLayout {
     .BoxOne.hide-on-medium {
         display: none;
     }
-
+    .FourOfAKind {
+        flex: 1 0 33.33%; /* 3 boxes per row at widths <= 1200px */
+        max-height: 50%; /* 2 rows at widths <= 1200px */
+    }
     .LoginForgotRegiContainer {
         width: 40%;
+    }
+    .hide-on-Boxes-on-large {
+        display: none;
     }
 }
 
 @media (max-width: 900px) {
+    .FourOfAKind {
+        flex: 1 0 50%; /* 2 boxes per row at widths <= 900px */
+        max-height: 50%; /* 2 rows at widths <= 900px */
+    }
     .LoginForgotRegiContainer {
         width: 60% !important;
+    }
+    .hide-on-Boxes-on-medium{
+        display:none; 
+    }
+    .tag-container {
+        font-size: 12.5px;
     }
 }
 
 @media (max-width: 599px) {
+    .FourOfAKind {
+        flex: 1 0 100%; /* 1 box per row at widths <= 599px */
+        max-height: 100%; /* 1 row at widths <= 599px */
+    }
     .BoxOne.hide-on-small {
         display: none;
     }
@@ -765,7 +847,9 @@ flexLiLayout {
     .ContentDescription {
         padding-top: 4.5%;
     }
-
+    .hide-on-Boxes-on-small {
+        display: none;
+    }
     .LoginForgotRegiContainer {
         width: 100% !important;
     }

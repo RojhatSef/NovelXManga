@@ -5,17 +5,19 @@
 @{
     ViewData["Title"] = "Home page";
 }
-
+<script src="~/js/site.js" asp-append-version="true"></script>
 <div class="Content1Ex">
 
 
     <div class="card-ex">
-
-      
+     
+        
         <div class="card-image-ex">
             <a asp-page="/Index">
                 <div class="MoveDownIndexWallPapers">
+                
                     <img class="BoxImage SpecialBox" src="/Images/WallpaperImages/@Model.WallpaperList[2].WallPaperPhotoPath" />
+                 
                 </div>
                
             </a>
@@ -27,8 +29,8 @@
 
 
                
-        </div>
-
+            </div>
+    
         <div class="MidExTop">
             <div class="CardBody-Ex">
                <div class="card-description-Ex">
@@ -57,100 +59,194 @@
 </div>
 
 <div class="Content1Cost">
-    <div class="ContentDescription"><h1>Best rated</h1></div>
-    @foreach (var book in Model.GetAllBooks.Take(1))
-    {
-      
-        <div class="card">
-        
-            <img class="card-img-background" src="~/Images/MangaImage/@book.PhotoPath" />
-            <div class="card-body">
+    <div class="ContentDescription"><h1>Recently Updated</h1></div>
 
-                <img class="card-img-index" src="~/Images/MangaImage/@book.PhotoPath" />
+ 
+    <div class="cardFourOfaKind">
+       
+        <div class="CardFour">
 
-                <div class="TitleTagDescriptionCostum">
-                    <div class="card-title">
-                        <a asp-page="/Manga/CurrentManga" asp-route-id="@book.MangaID">
-                            <h1 class="card-title-extra-style">
-                                @book.MangaName
-                            </h1>
-                        </a>
+            <div class="FourOfAKind">
+
+                <a class="ANoneStyle" asp-page="/Manga/CurrentManga" asp-route-id="@Model.AllBooksList[11].MangaID">
+                    <img class="BoxImage" src="~/Images/MangaImage/@Model.AllBooksList[11].PhotoPath" />
+
+
+                    <div class="FourofKindContent">
+                        <h2>@Model.AllBooksList[11].MangaName</h2>
+                        <p>@Model.AllBooksList[11].Description</p>
+
 
                     </div>
+                </a>
+            </div>
+            <div class="FourOfAKind">
 
-                    <h2 class="tag-container">
-                        @foreach (var tag in book.TagsModels)
-                        {
-                            <a asp-page="/Manga/CurrentManga" asp-route-id="@book.MangaID">
-                                <span class="tag RemoveWhenSmall">@tag.TagName</span>
-                            </a>
+                <a class="ANoneStyle" asp-page="/Manga/CurrentManga" asp-route-id="@Model.AllBooksList[10].MangaID">
+                    <img class="BoxImage" src="~/Images/MangaImage/@Model.AllBooksList[10].PhotoPath" />
 
-                        }
-                        @foreach (var genre in book.GenresModels)
-                        {
-                            <a asp-page="/Manga/CurrentManga" asp-route-id="@book.MangaID">
-                                <span class="tag RemoveWhenSmall">@genre.GenreName</span>
-                            </a>
-                        }
 
-                    </h2>
-                    <div class="card-description RemoveWhenSmall RemoveWhenLarge RemoveWhenMedium">
-                        <p>
-                            <a asp-page="/Manga/CurrentManga" asp-route-id="@book.MangaID">
-                                @book.Description
-                            </a>
+                    <div class="FourofKindContent">
+                        <h2>@Model.AllBooksList[10].MangaName</h2>
+                        <p>@Model.AllBooksList[10].Description</p>
 
-                        </p>
+
                     </div>
-                    <div class="Index_Artist_Author_Navigation_Arrows ">
-                        <h2 class="Author_Artist">
-                            @foreach (var author in book.Authormodels)
-                            {
-                                <a asp-page="/Manga/CurrentManga" asp-route-id="@book.MangaID">
-                                    @author.FirstName @author.LastName 
-                                </a>
-                                 @foreach (var artst in book.ArtistModels)
-                                {
-                                    @if(author.FirstName != artst.FirstName) {
-                                        <a asp-page="/Manga/CurrentManga" asp-route-id="@book.MangaID">
-                                            @artst.FirstName @artst.LastName 
-                                </a>
-                                    }
-                            }
-                            }
-                           
-                        </h2>
+                </a>
+            </div>
+            <div class="FourOfAKind">
 
-                        <div class="IndexArrowPostition">
-                            <button class="IndexArrowsPrev">
-                                <i class="gg-arrow-left-r"></i>
-                            </button>
-                            <button class="IndexArrowsNext">
-                                <i class="gg-arrow-right-r"></i>
-                            </button>
-                        </div>
+                <a class="ANoneStyle" asp-page="/Manga/CurrentManga" asp-route-id="@Model.AllBooksList[9].MangaID">
+                    <img class="BoxImage" src="~/Images/MangaImage/@Model.AllBooksList[9].PhotoPath" />
+
+
+                    <div class="FourofKindContent">
+                        <h2>@Model.AllBooksList[9].MangaName</h2>
+                        <p>@Model.AllBooksList[9].Description</p>
+
+
                     </div>
+                </a>
+            </div>
+            <div class="FourOfAKind hide-on-Boxes-on-small">
 
-                </div>
+                <a class="ANoneStyle" asp-page="/Manga/CurrentManga" asp-route-id="@Model.AllBooksList[8].MangaID">
+                    <img class="BoxImage" src="~/Images/MangaImage/@Model.AllBooksList[8].PhotoPath" />
 
 
-                <div>
-                </div>
+                    <div class="FourofKindContent">
+                        <h2>@Model.AllBooksList[8].MangaName</h2>
+                        <p>@Model.AllBooksList[8].Description</p>
 
 
+                    </div>
+                </a>
+            </div>
+            <div class="FourOfAKind hide-on-Boxes-on-small">
 
+                <a class="ANoneStyle" asp-page="/Manga/CurrentManga" asp-route-id="@Model.AllBooksList[7].MangaID">
+                    <img class="BoxImage" src="~/Images/MangaImage/@Model.AllBooksList[7].PhotoPath" />
+
+
+                    <div class="FourofKindContent">
+                        <h2>@Model.AllBooksList[7].MangaName</h2>
+                        <p>@Model.AllBooksList[7].Description</p>
+
+
+                    </div>
+                </a>
+            </div>
+            <div class="FourOfAKind hide-on-Boxes-on-small">
+
+                <a class="ANoneStyle" asp-page="/Manga/CurrentManga" asp-route-id="@Model.AllBooksList[6].MangaID">
+                    <img class="BoxImage" src="~/Images/MangaImage/@Model.AllBooksList[6].PhotoPath" />
+
+
+                    <div class="FourofKindContent">
+                        <h2>@Model.AllBooksList[6].MangaName</h2>
+                        <p>@Model.AllBooksList[6].Description</p>
+
+
+                    </div>
+                </a>
+            </div>
+            <div class="FourOfAKind hide-on-Boxes-on-medium">
+
+                <a class="ANoneStyle" asp-page="/Manga/CurrentManga" asp-route-id="@Model.AllBooksList[5].MangaID">
+                    <img class="BoxImage" src="~/Images/MangaImage/@Model.AllBooksList[5].PhotoPath" />
+
+
+                    <div class="FourofKindContent">
+                        <h2>@Model.AllBooksList[5].MangaName</h2>
+                        <p>@Model.AllBooksList[5].Description</p>
+
+
+                    </div>
+                </a>
+            </div>
+            <div class="FourOfAKind hide-on-Boxes-on-medium">
+
+                <a class="ANoneStyle" asp-page="/Manga/CurrentManga" asp-route-id="@Model.AllBooksList[4].MangaID">
+                    <img class="BoxImage" src="~/Images/MangaImage/@Model.AllBooksList[4].PhotoPath" />
+
+
+                    <div class="FourofKindContent">
+                        <h2>@Model.AllBooksList[4].MangaName</h2>
+                        <p>@Model.AllBooksList[4].Description</p>
+
+
+                    </div>
+                </a>
+            </div>
+            <div class="FourOfAKind hide-on-Boxes-on-medium">
+             
+                <a class="ANoneStyle" asp-page="/Manga/CurrentManga" asp-route-id="@Model.AllBooksList[3].MangaID">
+                    <img class="BoxImage" src="~/Images/MangaImage/@Model.AllBooksList[3].PhotoPath" />
+
+               
+                <div class="FourofKindContent">
+                    <h2>@Model.AllBooksList[3].MangaName</h2>
+                    <p>@Model.AllBooksList[3].Description</p>
+
+
+                    </div>
+                </a>
+            </div>
+            <div class="FourOfAKind hide-on-Boxes-on-large">
+             
+                <a class="ANoneStyle" asp-page="/Manga/CurrentManga" asp-route-id="@Model.AllBooksList[2].MangaID">
+                    <img class="BoxImage" src="~/Images/MangaImage/@Model.AllBooksList[2].PhotoPath" />
+
+               
+                <div class="FourofKindContent">
+                    <h2>@Model.AllBooksList[2].MangaName</h2>
+                    <p>@Model.AllBooksList[2].Description</p>
+
+
+                    </div>
+                </a>
+            </div>
+            <div class="FourOfAKind hide-on-Boxes-on-large">
+             
+                <a class="ANoneStyle" asp-page="/Manga/CurrentManga" asp-route-id="@Model.AllBooksList[1].MangaID">
+                    <img class="BoxImage" src="~/Images/MangaImage/@Model.AllBooksList[1].PhotoPath" />
+
+               
+                <div class="FourofKindContent">
+                    <h2>@Model.AllBooksList[1].MangaName</h2>
+                    <p>@Model.AllBooksList[1].Description</p>
+
+
+                    </div>
+                </a>
+            </div>
+            <div class="FourOfAKind hide-on-Boxes-on-large">
+
+                <a class="ANoneStyle" asp-page="/Manga/CurrentManga" asp-route-id="@Model.AllBooksList[0].MangaID">
+                    <img class="BoxImage" src="~/Images/MangaImage/@Model.AllBooksList[0].PhotoPath" />
+
+
+                    <div class="FourofKindContent">
+                        <h2>@Model.AllBooksList[0].MangaName</h2>
+                        <p>@Model.AllBooksList[0].Description</p>
+
+
+                    </div>
+                </a>
             </div>
 
-        </div>
 
-    }
+        </div>
+      
+    </div>
+  
+   
     <div class="ContentDescription"><h1>Users choice</h1></div>
     <div class="MiniCards">
         <div class="BoxOne">
             <a asp-page="/Manga/CurrentManga" asp-route-id="@Model.AllBooksList[0].MangaID">
                 <img class="BoxImage" src="~/Images/MangaImage/@Model.AllBooksList[0].PhotoPath" />
-                <div class="BoxContent">
-                </div>
+              
             </a>
         </div>
         <div class="BoxOne">
@@ -163,43 +259,37 @@
         <div class="BoxOne hide-on-small">
             <a asp-page="/Manga/CurrentManga" asp-route-id="@Model.AllBooksList[2].MangaID">
                 <img class="BoxImage" src="~/Images/MangaImage/@Model.AllBooksList[2].PhotoPath" />
-                <div class="BoxContent">
-                </div>
+                
             </a>
         </div>
         <div class="BoxOne hide-on-small">
             <a asp-page="/Manga/CurrentManga" asp-route-id="@Model.AllBooksList[3].MangaID">
                 <img class="BoxImage" src="~/Images/MangaImage/@Model.AllBooksList[3].PhotoPath" />
-                <div class="BoxContent">
-                </div>
+             
             </a>
         </div>
         <div class="BoxOne hide-on-medium">
             <a asp-page="/Manga/CurrentManga" asp-route-id="@Model.AllBooksList[4].MangaID">
                 <img class="BoxImage" src="~/Images/MangaImage/@Model.AllBooksList[4].PhotoPath" />
-                <div class="BoxContent">
-                </div>
+              
             </a>
         </div>
         <div class="BoxOne hide-on-medium">
             <a asp-page="/Manga/CurrentManga" asp-route-id="@Model.AllBooksList[5].MangaID">
                 <img class="BoxImage" src="~/Images/MangaImage/@Model.AllBooksList[5].PhotoPath" />
-                <div class="BoxContent">
-                </div>
+               
             </a>
         </div>
         <div class="BoxOne hide-on-medium">
             <a asp-page="/Manga/CurrentManga" asp-route-id="@Model.AllBooksList[6].MangaID">
                 <img class="BoxImage" src="~/Images/MangaImage/@Model.AllBooksList[6].PhotoPath" />
-                <div class="BoxContent">
-                </div>
+              
             </a>
         </div>
         <div class="BoxOne hide-on-medium">
             <a asp-page="/Manga/CurrentManga" asp-route-id="@Model.AllBooksList[7].MangaID">
                 <img class="BoxImage" src="~/Images/MangaImage/@Model.AllBooksList[7].PhotoPath" />
-                <div class="BoxContent">
-                </div>
+             
             </a>
         </div>
  
@@ -209,13 +299,14 @@
 
 </div>
 <div class="Content2Cost">
+    <div class="ContentDescription"><h1>Best rated</h1></div>
     @foreach (var book in Model.GetAllBooks.Take(1))
     {
 
         <div class="card">
 
-          
-            <div class="card-2-bodyDetails">
+            <img class="card-img-background" src="~/Images/MangaImage/@book.PhotoPath" />
+            <div class="card-body">
 
                 <img class="card-img-index" src="~/Images/MangaImage/@book.PhotoPath" />
 
@@ -273,13 +364,21 @@
 
                         </h2>
 
-                     
+                        <div class="IndexArrowPostition">
+                            <button class="IndexArrowsPrev">
+                                <i class="gg-arrow-left-r"></i>
+                            </button>
+                            <button class="IndexArrowsNext">
+                                <i class="gg-arrow-right-r"></i>
+                            </button>
+                        </div>
                     </div>
 
                 </div>
 
 
-               
+                <div>
+                </div>
 
 
 
@@ -394,19 +493,7 @@
 
     </div>
 
-@*    <div class="MiniCards">
-        @foreach (var book in Model.GetAllBooks.Take(8))
-        {
-            <div class="BoxOne">
-                <a asp-page="/Manga/CurrentManga" asp-route-id="@book.MangaID">
-                    <img class="BoxImage" src="~/Images/MangaImage/@book.PhotoPath" />
-                    <div class="BoxContent">
-                    </div>
-                </a>
-            </div>
-        }
 
-    </div>*@
 </div>
-<div class="Content4Cost">Area 4</div>
+
 
