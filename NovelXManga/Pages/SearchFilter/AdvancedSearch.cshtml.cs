@@ -20,9 +20,6 @@ namespace NovelXManga.Pages.SearchFilter
         private readonly ILanguageRepsitory languageRepsitory;
         private readonly IStudioRepsitory studioRepsitory;
 
-        [BindProperty]
-        public IFormFile? Photo { get; set; }
-
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM}", ApplyFormatInEditMode = true)]
         [BindProperty]
@@ -63,7 +60,7 @@ namespace NovelXManga.Pages.SearchFilter
 
         public async Task<IActionResult> OnPostAsync()
         {
-            return
+            return Page();
         }
 
         public async Task<IActionResult> OnGetAsync()
