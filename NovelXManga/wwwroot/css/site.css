@@ -13,6 +13,10 @@ body, html {
     overflow-x: hidden;
 }
 
+hr {
+    color: orangered;
+}
+
 input {
     outline: none
 }
@@ -682,8 +686,8 @@ flexLiLayout {
     flex-wrap: wrap; /* This allows the boxes to wrap onto the next line */
     width: 100%;
     height: 100%;
-
 }
+
 .cardFourOfaKind {
     width: 100%;
     height: 620px;
@@ -693,6 +697,7 @@ flexLiLayout {
     position: relative;
     margin-bottom: 50px;
 }
+
 .FourOfAKind {
     flex: 1 0 25%; /* Each box now takes up a quarter (25%) of the width */
     max-height: 33.33%; /* And a third (33.33%) of the height */
@@ -701,8 +706,8 @@ flexLiLayout {
     position: relative;
     box-sizing: border-box;
     padding: 10px;
-    
 }
+
 .ANoneStyle {
     display: flex;
     align-items: center;
@@ -711,14 +716,16 @@ flexLiLayout {
     width: 100%;
     height: 100%;
 }
+
 .FourOfAKind img {
     height: 100%;
     width: 30%;
     object-fit: cover;
 }
-.aClassHeight{
-    height:100%; 
-    width:100%; 
+
+.aClassHeight {
+    height: 100%;
+    width: 100%;
 }
 
 .FourOfAKind .FourofKindContent {
@@ -807,13 +814,16 @@ flexLiLayout {
     .BoxOne.hide-on-medium {
         display: none;
     }
+
     .FourOfAKind {
         flex: 1 0 33.33%; /* 3 boxes per row at widths <= 1200px */
         max-height: 50%; /* 2 rows at widths <= 1200px */
     }
+
     .LoginForgotRegiContainer {
         width: 40%;
     }
+
     .hide-on-Boxes-on-large {
         display: none;
     }
@@ -824,12 +834,15 @@ flexLiLayout {
         flex: 1 0 50%; /* 2 boxes per row at widths <= 900px */
         max-height: 50%; /* 2 rows at widths <= 900px */
     }
+
     .LoginForgotRegiContainer {
         width: 60% !important;
     }
-    .hide-on-Boxes-on-medium{
-        display:none; 
+
+    .hide-on-Boxes-on-medium {
+        display: none;
     }
+
     .tag-container {
         font-size: 12.5px;
     }
@@ -840,6 +853,7 @@ flexLiLayout {
         flex: 1 0 100%; /* 1 box per row at widths <= 599px */
         max-height: 100%; /* 1 row at widths <= 599px */
     }
+
     .BoxOne.hide-on-small {
         display: none;
     }
@@ -847,9 +861,11 @@ flexLiLayout {
     .ContentDescription {
         padding-top: 4.5%;
     }
+
     .hide-on-Boxes-on-small {
         display: none;
     }
+
     .LoginForgotRegiContainer {
         width: 100% !important;
     }
@@ -1132,3 +1148,18 @@ flexLiLayout {
         top: 9px
     }
 /* ICONS End HERE*/
+/*CreateNewManga Starts here*/
+.showHideTags {
+    display: none;
+}
+.showTags {
+    display: block;
+}
+.showHideGenre {
+    display: none;
+}
+
+.showGenre {
+    display: block;
+}
+

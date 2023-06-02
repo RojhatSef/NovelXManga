@@ -1,4 +1,4 @@
-﻿console.log('site.js is loading');
+﻿
 (function () {
     var selectedTags = $('#selectedTags').val().split(',');
     $('input[type=checkbox]').each(function () {
@@ -15,7 +15,7 @@
     });
 })
 
-const tagDropdown = document.getElementById('tag-dropdown');
+/*const tagDropdown = document.getElementById('tag-dropdown');*/
 
 window.onload = function () {
     console.log("Scroll event fired onload");
@@ -26,7 +26,7 @@ window.onload = function () {
 function handleNavbar() {
     console.log(document); // logs the entire document
     const customOnavbar = document.querySelector(".custom-O-navbar");
-    console.log(navbar);
+ 
     console.log("Scroll event fired");
     if (!customOnavbar) {
         console.log('Navbar not found!');

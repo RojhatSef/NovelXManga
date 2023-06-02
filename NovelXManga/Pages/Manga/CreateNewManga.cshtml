@@ -10,24 +10,24 @@
 
 <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 
-<div class="Content1Cost">
- <h3>@Model.SucessFulManga</h3>
-    <div class="row justify-content-center align-items-center">
-        <div class="col-sm-12 col-md-12 col-1g-4">
+
+
+
+<div class="col-sm-12 col-md-12 col-1g-4">
                 <form id="create-manga-form" method=post asp-page-handler="AddBook" enctype="multipart/form-data">
                 <input hidden asp-for="_MangaModel.MangaID" />
                 <input hidden asp-for="_MangaModel.BlogModel" />
                 <input hidden asp-for="_MangaModel.BlogModelId" />
-             
+        <h3>@Model.SucessFulManga</h3>
       
          
                 <h4>Select Multiple Tags</h4>
 
-            
+        <button type="button" class="btn btn-secondary mb-3" onclick="handleShowHideTags()" >Show/Hide Tags</button>
                 <p> Hiding tags not working yet</p>
-                <div class="form-group">
+                <div class="form-group showHideTags">
                     <label for="tags">Tags:</label>
-                    <button type="button" class="btn btn-secondary mb-3" id="toggleTags">Show/Hide Tags</button>
+        
                     <div id="HideTagsWhen" class="row hidden-tags">
                         @foreach (var tag in Model.Tags)
                         {
@@ -42,7 +42,30 @@
                         }
                     
                     </div>
+            <button type="button" class="btn btn-secondary mb-3" onclick="handleShowHideTags()" >Show/Hide Tags</button>
                 </div>
+
+              <br />
+        <button type="button" class="btn btn-secondary mb-3" onclick="showHideGenres()">Show/Hide Genres</button>
+        <div class="form-group showHideGenre">
+            <label for="tags">Genres:</label>
+
+            <div id="HideTagsWhen" class="row hidden-tags">
+                @foreach (var genre in Model.Genres)
+                {
+                    if (Model.Genres.IndexOf(genre) % 3 == 0)
+                    {
+                        @Html.Raw("</div><div class=\"row\">")
+                    }
+                    <div class="form-check col-md-4">
+                        <input type="checkbox" class="form-check-input" id="tag-@genre.GenresId" name="selectedGenres" value="@genre.GenresId" @(Model.SelectedGenres != null && Model.SelectedGenres.Contains(genre.GenresId) ? "checked" : "")>
+                        <label class="form-check-label" for="tag-@genre.GenresId">@genre.GenreName</label>
+                    </div>
+                }
+
+            </div>
+            <button type="button" class="btn btn-secondary mb-3" onclick="showHideGenres()">Show/Hide Genres</button>
+        </div>
            
   
              
@@ -50,7 +73,7 @@
                     <label class="form-label" asp-for="_MangaModel.MangaName">Manga Title</label>
                     <input type="text" asp-for="_MangaModel.MangaName" class="form-control" />
                     <span asp-validation-for="_MangaModel.MangaName" class="text-danger"></span>
-
+                </div>
              
            
                 <div class="mb-3">
@@ -192,6 +215,6 @@
             </form>
 
         </div>
-    </div>
-</div> 
 
+
+<script src="~/js/ShowHideTagsGenres.js" asp-append-version="true"></script>
