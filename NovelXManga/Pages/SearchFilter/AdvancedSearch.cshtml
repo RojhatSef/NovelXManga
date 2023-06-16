@@ -2,3 +2,148 @@
 @model NovelXManga.Pages.SearchFilter.AdvancedSearchModel
 @{
 }
+
+@*MangaFilter*@
+<div class="AdvancedResultContent">
+
+
+<form id="AdvancedSearch" method=post asp-page-handler="AdvancedSearch" enctype="multipart/form-data">
+        <div>
+            <label for="SearchReleaseYearStart">Search Start Year:</label>
+            <input type="date" id="SearchReleaseYearStart" name="SearchReleaseYearStart" placeholder="YYYY">
+        </div>
+
+        <div>
+            <label for="SearchReleaseYearEnd">Search End Year:</label>
+            <input type="date" id="SearchReleaseYearEnd" name="SearchReleaseYearEnd" placeholder="YYYY">
+        </div>
+
+        <!-- Add dropdown for tag inclusion mode -->
+        <div>
+            <label for="TagInclusionMode">Tag Inclusion Mode:</label>
+            <select id="TagInclusionMode" name="TagInclusionMode">
+                <option value="And">And</option>
+                <option value="Or">Or</option>
+            </select>
+        </div>
+        <div>  <input type="search" id="@Model.SearchAuthor" name="SearchAuthor" class="SearchAuthorClass" placeholder="SearchAuthor"> </div>
+        <div>  <input type="search" id="@Model.SearchArtist" name="SearchArtist" class="SearchArtistClass" placeholder="SearchArtist"> </div>
+        <div>  <input type="search" id="@Model.SearchVoiceActor" name="SearchVoiceActor" class="SearchVoiceActorClass" placeholder="SearchVoiceActor"> </div>
+    <button type="button" class="MarginTop50PxAdvancedResult" onclick="handleShowHideTags()">Show/Hide Tags</button>
+        <!-- Add dropdown for tag inclusion mode -->
+        <div>
+            <label for="TagInclusionMode">Tag Inclusion Mode:</label>
+            <select id="TagInclusionMode" name="TagInclusionMode">
+                <option value="And">And</option>
+                <option value="Or">Or</option>
+            </select>
+        </div>
+
+        <!-- Add dropdown for tag exclusion mode -->
+        <div>
+            <label for="TagExclusionMode">Tag Exclusion Mode:</label>
+            <select id="TagExclusionMode" name="TagExclusionMode">
+                <option value="And">And</option>
+                <option value="Or">Or</option>
+            </select>
+        </div>
+<div class="showHideTags ">
+    <label for="tags">Tags:</label>
+
+    <div id="HideTagsWhen" class=" hidden-tags">
+        @foreach (var tag in Model.Tags)
+        {
+            if (Model.Tags.IndexOf(tag) % 3 == 0)
+            {
+                    @Html.Raw("</div><div class=\"TagGenreSpacer\">")
+            }
+            <div class="">
+                <input type="checkbox" class="" id="tag-@tag.TagId" name="selectedTags" value="@tag.TagId" @(Model.SelectedTags != null && Model.SelectedTags.Contains(tag.TagId) ? "checked" : "")>
+                <label class="" for="tag-@tag.TagId">@tag.TagName</label>
+            </div>
+        }
+
+    </div>
+    <button type="button" class="" onclick="handleShowHideTags()">Show/Hide Tags</button>
+</div>
+        <!-- Add dropdown for genre inclusion mode -->
+        <div>
+            <label for="GenreInclusionMode">Genre Inclusion Mode:</label>
+            <select id="GenreInclusionMode" name="GenreInclusionMode">
+                <option value="And">And</option>
+                <option value="Or">Or</option>
+            </select>
+        </div>
+
+        <!-- Add dropdown for genre exclusion mode -->
+        <div>
+            <label for="GenreExclusionMode">Genre Exclusion Mode:</label>
+            <select id="GenreExclusionMode" name="GenreExclusionMode">
+                <option value="And">And</option>
+                <option value="Or">Or</option>
+            </select>
+        </div>
+<button type="button" class="" onclick="showHideGenres()">Show/Hide Genres</button>
+<div class=" showHideGenre">
+    <label for="tags">Genres:</label>
+
+    <div id="HideTagsWhen" class="hidden-tags">
+        @foreach (var genre in Model.Genres)
+        {
+            if (Model.Genres.IndexOf(genre) % 3 == 0)
+            {
+                    @Html.Raw("</div><div class=\"TagGenreSpacer\">")
+            }
+            <div class="">
+                <input type="checkbox" class="" id="tag-@genre.GenresId" name="selectedGenres" value="@genre.GenresId" @(Model.SelectedGenres != null && Model.SelectedGenres.Contains(genre.GenresId) ? "checked" : "")>
+                <label class="" for="tag-@genre.GenresId">@genre.GenreName</label>
+            </div>
+        }
+
+    </div>
+    <button type="button" class="" onclick="showHideGenres()">Show/Hide Genres</button>
+
+</div>
+
+        <div class="">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+</form>
+
+@*MangaOutAfterSearchFilter *@
+<div class="cardFourOfaKind">
+
+
+    <div class="CardFour">
+            @if (Model.MangaModels.Any())
+            {
+                @foreach (var book in Model.MangaModels)
+                {
+                    <div class="FourOfAKind">
+
+                        <a class="ANoneStyle" asp-page="/Manga/CurrentManga" asp-route-id="@book.MangaID">
+                            <img class="BoxImage" src="~/Images/MangaImage/@book.PhotoPath" />
+
+
+                            <div class="FourofKindContent">
+                                <h2>@book.MangaName</h2>
+                                <p>@book.Description</p>
+
+
+                            </div>
+                        </a>
+                    </div>
+                }
+            }
+            else
+            {
+                <p>No manga found for your search criteria.</p>
+            }
+
+
+    </div>
+
+</div>
+
+</div>
+<script src="~/js/ShowHideTagsGenres.js" asp-append-version="true"></script>

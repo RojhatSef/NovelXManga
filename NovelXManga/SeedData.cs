@@ -1227,6 +1227,7 @@ new Character { CharacterName = "Mikasa Ackerman" },
             var Tag3ToManga1 = context.TagModels.FirstOrDefault(t => t.TagName == "Weak to Strong");
             var Gen1ToManga1 = context.GenresModels.FirstOrDefault(t => t.GenreName == "Action");
             var Gen2ToManga1 = context.GenresModels.FirstOrDefault(t => t.GenreName == "Fantasy");
+            var Gen3ToManga1 = context.GenresModels.FirstOrDefault(t => t.GenreName == "Shounen");
             DateTime started = DateTime.ParseExact("2003-09-08", "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
             var manga = new MangaModel
             {
@@ -1274,7 +1275,8 @@ new Character { CharacterName = "Mikasa Ackerman" },
                 GenresModels = new List<GenresModel>
 {
     Gen1ToManga1,
-    Gen2ToManga1
+    Gen2ToManga1,
+    Gen3ToManga1
 },
                 TagsModels = new List<TagModel>
 {
@@ -1316,7 +1318,7 @@ new Character { CharacterName = "Mikasa Ackerman" },
             var Gen1ToManga1 = context.GenresModels.FirstOrDefault(t => t.GenreName == "Supernatural");
             var Gen2ToManga1 = context.GenresModels.FirstOrDefault(t => t.GenreName == "Fantasy");
             var Gen3ToManga1 = context.GenresModels.FirstOrDefault(t => t.GenreName == "Adventure");
-
+            var GenreAt3 = context.GenresModels.FirstOrDefault(e => e.GenreName == "Shounen");
             DateTime myDate = DateTime.ParseExact("2010-06-30", "yyyy-MM-dd", CultureInfo.InvariantCulture);
             MangaModel MangaTowerOfGod = new MangaModel
             {
@@ -1371,6 +1373,7 @@ new Character { CharacterName = "Mikasa Ackerman" },
             new GenresModel { GenreName = "Action" },
             new GenresModel { GenreName = "Adventure" },
             new GenresModel { GenreName = "Fantasy" },
+            GenreAt3
         },
                 TagsModels = new List<TagModel>
         {

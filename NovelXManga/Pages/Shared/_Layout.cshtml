@@ -20,7 +20,7 @@
                 <button id="sidebar-toggle" onclick="handleSidebarToggle()" class="sidebar-toggle"><i class="gg-menu-round"></i></button>
             </div>
             <div class="navbar-left">  <input type="search" id="searchbar" class="searchbar" placeholder="Search"> </div>
-            <hr class="TheOrangeLine"/>
+        @*    <hr class="TheOrangeLine"/>*@
         </nav>
         <main class="main-content">
             @RenderBody()
@@ -28,14 +28,14 @@
     </div>
     <div class="Custom-o-sidebar">
         <div>
-            <div>
+            <div class="PushDownSidebar flexSidebarLogo">
                 <a href="/">
                     <span id="logo">OtakuLibrary   </span>
                 </a>
-                <button id="sidebar-toggle" onclick="handleSidebarToggle()" class="sidebar-toggle LayoutXButtonNoBackground"><i class="gg-minimize"></i></button>
+                <button id="sidebar-toggle" onclick="handleSidebarToggle()" class="sidebar-toggle rotateLogo"><i class="gg-menu-round"></i></button>
             </div>
           
-            <hr>
+            <hr >
             @if (SignInManager.IsSignedIn(User))
             {
                 <ul>
@@ -57,9 +57,9 @@
                     <li class="HoverEffektLi">
                         <a href="#"><span>Groups</span> </a>
                 </li>
-                    <li class="HoverEffektLi flexLiLayout">
+                    <li class="HoverEffektLi ">
 
-                        <a class="flexLiLayout" href="#">  <i class="gg-user"></i> Users </a>
+                        <a class="" href="#">  <i class="gg-user"></i> Users </a>
                 </li>
                     <li class="HoverEffektLi">
                     <a href="#"> <span>Latest Updates</span>  </a>
@@ -76,6 +76,9 @@
                     <li class="HoverEffektLi">
                     <a href="#"> <span>About us</span> </a>
                 </li>
+                    <li class="HoverEffektLi">
+                        <a asp-page="/SearchFilter/AdvancedSearch"> <span>Advanced Fileter </span> </a>
+                    </li>
                     <li class="HoverEffektLi">
                     <a href="#"> <span>Rules</span> </a>
                 </li>
@@ -119,6 +122,9 @@
                         <a asp-page="/Login/LoginIndex">
                            <span >Login</span>
                         </a>
+                    </li>
+                    <li class="HoverEffektLi">
+                        <a asp-page="/SearchFilter/AdvancedSearch"> <span>Advanced Search </span> </a>
                     </li>
                     <li class="HoverEffektLi">
                         <a asp-page="/Register/UserRegister" >

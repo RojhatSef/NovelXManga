@@ -13,6 +13,23 @@ body, html {
     overflow-x: hidden;
 }
 
+.TagGenreSpacer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+    .TagGenreSpacer .tag-genre-item {
+        flex: 1 0 calc(33.3333% - 10px); /* 33.3333% is approximately 1/3, and 10px is the desired space between items */
+        margin: 5px; /* Half of the space between items */
+        text-align: center; /* Center the text inside each item */
+        /* Add other styles as necessary */
+    }
+
+.MarginTop50PxAdvancedResult {
+    margin-top: 50px
+}
+
 hr {
     color: orangered;
 }
@@ -244,7 +261,7 @@ a {
     display: flex;
     height: 100%;
     justify-content: center;
-    align-items: center; /* This will center your text vertically */
+    align-items: center; /* This will center the text vertically */
     color: orangered;
     font-size: 15px;
     height: 30px
@@ -296,7 +313,9 @@ a {
         border-radius: 3px;
         padding: 0.5rem 1rem;
     }
-
+.flexSidebarLogo {
+    display:flex;
+}
 .searchbar {
     flex: 250px; /* Adjust the width as desired */
     padding: 0.5rem;
@@ -332,17 +351,26 @@ a {
         padding: 0;
         margin: 0;
     }
-
+    .Custom-o-sidebar li a{
+        margin-left:10px;
+        display:flex;
+        margin:10px;
+    }
+    .Custom-o-sidebar li a i{
+        margin-right: 10px;
+    }
+.PushDownSidebar {
+    margin-bottom:18px;
+}
 #logo {
     color: orangered;
-    font-size: 22px;
+    font-size: 32px;
     margin-right: 20px;
 }
 
-    #logo:hover {
-        color: white;
-        font-size: 22px;
-    }
+#logo:hover {
+    color: white;
+}
 
 .Custom-o-sidebar li {
     font-size: 1.2rem;
@@ -437,35 +465,25 @@ a {
     margin-right: auto;
     padding-top: 1%;
     width: 100%;
+    transition: width 0.5s, height 0.5s;
 }
 
-.mb-3 .btn {
+/*.mb-3 .btn {
     color: white;
-    transition: background-color 0.3s; /* transition effect */
-}
+    transition: background-color 0.3s;*/ /* transition effect */
+/*}*/
 
-.Author_Artist:hover {
-    color: orangered;
-}
+/*.mb-3 .btn:hover {
+    background-color: #FF6347;*/ /* color when hovered */
+/*}*/
 
+
+.Author_Artist {
+    display: -webkit-box;
+    -webkit-line-clamp: 1 ;
+    -webkit-box-orient: vertical;
+}
 flexLiLayout {
-}
-
-.HoverEffektLi a {
-    display: block;
-    margin: 10px;
-    padding-left: 10px;
-}
-
-    .HoverEffektLi a:hover {
-        background-color: #191a1c;
-        border-style: solid;
-        border-color: orangered;
-        transition: background-color 0.3s;
-    }
-
-.mb-3 .btn:hover {
-    background-color: #FF6347; /* color when hovered */
 }
 
 @media (max-width: 680px) {
@@ -593,6 +611,9 @@ flexLiLayout {
     flex-basis: 40px;
     flex-shrink: 0;
     font-size: 19px;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
 }
 
 .card-ex {
@@ -670,6 +691,7 @@ flexLiLayout {
     border-radius: 20px;
     position: relative;
     margin-bottom: 50px;
+    transition: width 0.5s, height 0.5s; /* Smooth transition for width and height */
 }
 
 .card-title {
@@ -686,6 +708,7 @@ flexLiLayout {
     flex-wrap: wrap; /* This allows the boxes to wrap onto the next line */
     width: 100%;
     height: 100%;
+    transition: width 0.5s, height 0.5s;
 }
 
 .cardFourOfaKind {
@@ -696,6 +719,7 @@ flexLiLayout {
     border-radius: 20px;
     position: relative;
     margin-bottom: 50px;
+    transition: width 0.5s, height 0.5s;
 }
 
 .FourOfAKind {
@@ -706,6 +730,27 @@ flexLiLayout {
     position: relative;
     box-sizing: border-box;
     padding: 10px;
+    transition: width 0.5s, height 0.5s;
+}
+
+.HideWhenHoverFourOfaKind {
+    display: block;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
+}
+
+.DisplayWhenHoverFourOfaKind {
+    display: none;
+}
+
+.FourofKindContent:hover .HideWhenHoverFourOfaKind {
+    display: none;
+}
+
+.FourofKindContent:hover .DisplayWhenHoverFourOfaKind {
+    display: block;
 }
 
 .ANoneStyle {
@@ -715,6 +760,11 @@ flexLiLayout {
     color: inherit;
     width: 100%;
     height: 100%;
+}
+.ANoneStyle:hover{
+    border-top: solid;
+    border-bottom:solid;
+    border-color: orangered;
 }
 
 .FourOfAKind img {
@@ -740,6 +790,7 @@ flexLiLayout {
     object-fit: cover;
     border-radius: 15px;
     filter: blur(25px);
+    transition: width 0.5s, height 0.5s;
 }
 
 .card-body {
@@ -753,6 +804,7 @@ flexLiLayout {
     display: flex;
     color: white;
     align-items: flex-start;
+    transition: width 0.5s, height 0.5s;
 }
 
 .card-img-index {
@@ -761,7 +813,10 @@ flexLiLayout {
     min-height: 300px; /* Min height */
     max-height: 350px; /* Max height */
     object-fit: cover;
-    margin: 30px;
+    margin-left: 30px !important;
+    margin-top: 10px;
+    margin-right: 30px;
+    transition: width 0.5s, height 0.5s;
     flex-shrink: 0;
     border-radius: 20px;
     align-self: center;
@@ -785,29 +840,35 @@ flexLiLayout {
     overflow: visible;
     position: relative;
     gap: 8px;
+    transition: width 0.5s, height 0.5s;
 }
 
 .BoxContent {
     height: 100%;
     width: 100%;
     color: green;
+    transition: width 0.5s, height 0.5s;
 }
 
 .BoxImage {
     height: 100%;
     width: 100%;
     object-fit: cover;
+    transition: width 0.5s, height 0.5s;
 }
 
 .BoxOne {
     flex: 1;
     margin: 0;
-    transition: transform 0.3s ease;
+    transition: width 0.5s, height 0.5s;
 }
 
     .BoxOne:hover {
         transform: scale(1.1);
         z-index: 2; /* This is to ensure the hovered box overlays the others */
+        border-top:solid;
+        border-bottom:solid;
+        border-color:orangered;
     }
 
 @media (max-width: 1200px) {
@@ -868,6 +929,10 @@ flexLiLayout {
 
     .LoginForgotRegiContainer {
         width: 100% !important;
+    }
+
+    .Author_Artist {
+       font-size:13px !important;
     }
 }
 
@@ -1041,13 +1106,11 @@ flexLiLayout {
 }
 
     .IndexArrowsPrev:hover {
-        background-color: orangered;
         border-radius: 10px;
         border: 20px;
     }
 
     .IndexArrowsNext:hover {
-        background-color: orangered;
         border-radius: 10px;
         border: 20px;
     }
@@ -1152,9 +1215,11 @@ flexLiLayout {
 .showHideTags {
     display: none;
 }
+
 .showTags {
     display: block;
 }
+
 .showHideGenre {
     display: none;
 }
@@ -1163,3 +1228,246 @@ flexLiLayout {
     display: block;
 }
 
+@media (max-width: 900px) {
+    #prev {
+        right: 70px; /* Adjust this value to place the left arrow horizontally */
+    }
+
+    #next {
+        right: 10px; /* Adjust this value to place the right arrow horizontally */
+    }
+}
+
+@media (max-width: 599px) {
+    #prev, #next {
+        position: absolute;
+        transform: translateY(-50%);
+        z-index: 1;
+        /* Add some padding and background color for visibility */
+        padding: 10px;
+    }
+
+    #prev {
+        left: 10px !important; /* Adjust this value to place the left arrow horizontally */
+        bottom: 10px; /* Adjust this value to place the arrows vertically */
+        display: none;
+    }
+
+    #next {
+        right: -5px !important; /* Adjust this value to place the right arrow horizontally */
+        color: rgba(255,255,255,0.5);
+    }
+}
+
+#slider {
+    position: relative;
+    display: flex;
+    overflow: hidden;
+    width: 100%;
+}
+
+#prev, #next {
+    position: absolute;
+    bottom: 10px; /* Adjust this value to place the arrows vertically */
+    transform: translateY(50%);
+    z-index: 1;
+    /* Add some padding and background color for visibility */
+    padding: 10px;
+    margin: 20px;
+    color: rgba(255,255,255,0.5);
+}
+
+    #prev:hover, #next:hover {
+        color: #191a1c !important;
+    }
+
+#next {
+    margin-left: 30px;
+}
+
+#prev {
+    right: 70px; /* Adjust this value to place the left arrow horizontally */
+}
+
+#next {
+    right: 10px; /* Adjust this value to place the right arrow horizontally */
+}
+
+.slide {
+    min-width: 100%;
+    transition: transform 0.5s;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+/* CurrentManga Page start */
+.blurimage {
+    height: 100%;
+    width: 100%;
+    filter: blur(15px) !important;
+}
+
+.title-wrapper, .img-wrapper {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.manga-title {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical; /* To limit lines vertically */
+    position: absolute;
+    top: calc(10% - 40px);
+    left: calc(12% + 285px - 30px/2); /* Adjust this value based on your design requirements */
+    font-size: 30px;
+    overflow: hidden; /* Hide the overflowing text */
+    transition: top 0.5s, left 0.5s; /* Smooth transition for top and left */
+}
+
+.manga-img-container {
+    position: absolute;
+    top: 10%;
+    width: 15%; /* Adjust this value based on your design requirements */
+    height: 200px; /* Adjust this value based on your design requirements */
+    left: 10%;
+    transition: top 0.5s, left 0.5s; /* Smooth transition for top and left */
+}
+
+.manga-img {
+    width: 280px;
+    height: 385px;
+    object-fit: cover; /* To maintain image aspect ratio */
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+    transition: width 0.5s, height 0.5s; /* Smooth transition for width and height */
+}
+.AddEditReportCurrentpage {
+    display: flex;
+    justify-content: start; /* This will align the items horizontally */
+  
+    position: absolute;
+    top: calc(14% + 200px); /* The top position is relative to the manga-title's top position */
+    left: calc(12% + 285px); /* Adjust this value based on your design requirements */
+    width: 100%;
+    transition: top 0.5s, left 0.5s
+}
+
+.AddSizeCurrentpage {
+    display: inline-block; /* This will ensure the divs are in a line */
+    margin-right: 10px; /* To ensure spacing between the buttons */
+    height: 50px;
+    width: 220px;
+}
+.EditSizeCurrentpage {
+    display: inline-block; /* This will ensure the divs are in a line */
+    margin-right: 10px; /* To ensure spacing between the buttons */
+    height: 50px;
+    width: 220px;
+}
+.ReportSizeCurrentpage {
+    display: inline-block; /* This will ensure the divs are in a line */
+  
+    height: 50px;
+    width: 220px;
+}
+
+.AddToReadListButton, .EditBookButton {
+    /* Add any specific button styles here, such as color, padding, font-size, etc. */
+    padding: 10px;
+    background-color: #f5f5f5;
+    border: none;
+   
+    cursor: pointer;
+    height: 100%;
+    width: 100%;
+}
+.ReportBookButton {
+    padding: 10px;
+    background-color: #f5f5f5;
+    border: none;
+    cursor: pointer;
+    height: 100%;
+    width: 100%;
+}
+.EditSizeCurrentpage, .ReportSizeCurrentpage {
+    transition: width 0.5s ease, height 0.5s ease;
+}
+
+/* Use media query for smaller screens */
+@media screen and (max-width: 768px) {
+    .manga-title {
+        top: calc(15px - 40px) !important;
+        left: calc(2% + 140px) !important; /* Adjust these values for smaller screens */
+       
+        
+    }
+
+    .manga-img-container {
+        top: 15px !important;
+        left: 2% !important; /* Adjust these values for smaller screens */
+    }
+
+    .manga-img {
+        width: 150px !important; /* Adjust these values for smaller screens */
+        height: 200px !important; /* Adjust these values for smaller screens */
+    }
+    div::-webkit-scrollbar {
+        display: none !important;
+    }
+    .AddEditReportCurrentpage {
+        top: calc(15% + 185px); /* Adjust these values for smaller screens */
+        left: 2% !important; /* Adjust these values for smaller screens */
+        justify-content: center;
+        width:400px !important; 
+    }
+    .EditSizeCurrentpage {
+        margin-right: 5px;
+        width: 18%;
+    }
+
+    .ReportSizeCurrentpage {
+        width: 40%;
+    }
+  
+   
+}
+@media screen and (max-width: 1200px) {
+    .manga-title {
+        top: calc(15px - 40px);
+        left: calc(17% + 180px ); /* Adjust these values for smaller screens */
+     
+    }
+
+    .manga-img-container {
+        top: 15px;
+        left: 3%; /* Adjust these values for smaller screens */
+    }
+
+    .manga-img {
+        width: 280px;
+        height: 385px;
+        object-fit: cover; /* To maintain image aspect ratio */
+    }
+    .AddEditReportCurrentpage {
+        top: calc(16% + 195px); /* Adjust these values for smaller screens */
+        left: 40%; /* Adjust these values for smaller screens */
+        justify-content: center;
+        width:550px; 
+        
+    }
+  
+}
+@media screen and (min-width: 769px) and (max-width: 910px) {
+
+    .EditSizeCurrentpage {
+        margin-right: 5px;
+        width: 18%;
+    }
+
+    .ReportSizeCurrentpage {
+        width: 18%;
+    }
+}
+
+
+/* CurrentManga Page Ends */

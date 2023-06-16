@@ -22,16 +22,28 @@ namespace NovelXManga.Pages.SearchFilter
 
         [BindProperty]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? SearchReleaseYearStart { get; set; }
 
         [BindProperty]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? SearchReleaseYearEnd { get; set; }
 
         [BindProperty]
         public string Search { get; set; }
+
+        [BindProperty]
+        public string SearchAuthor { get; set; }
+
+        [BindProperty]
+        public string SearchArtist { get; set; }
+
+        [BindProperty]
+        public string SearchVoiceActor { get; set; }
+
+        [BindProperty]
+        public string SearchCharacter { get; set; }
 
         [BindProperty]
         public MangaModel _MangaModel { get; set; }
@@ -60,6 +72,7 @@ namespace NovelXManga.Pages.SearchFilter
             this.chapterRepsitory = chapterRepsitory;
             this.associatedNamesRepsitory = associatedNamesRepsitory;
             this.languageRepsitory = languageRepsitory;
+            this.MangaModels = new List<MangaModel>();
         }
 
         public async Task<IActionResult> OnPostAsync()
@@ -73,15 +86,30 @@ namespace NovelXManga.Pages.SearchFilter
        .Include(m => m.GenresModels)
        .Include(m => m.TagsModels)
        .Include(m => m.Characters)
-
        .AsNoTracking()
        .AsQueryable();
 
             if (!string.IsNullOrEmpty(Search))
             {
-                query = query.Where(m => m.MangaName.Contains(Search) || m.ArtistModels.Any(at => at.FirstName.Contains(Search) || at.LastName.Contains(Search)) ||
-                                         m.Authormodels.Any(a => a.FirstName.Contains(Search) || a.LastName.Contains(Search)) || m.Characters.Any(a => a.CharacterName.Contains(Search)) ||
-                                         m.VoiceActors.Any(a => a.FirstName.Contains(Search) || a.LastName.Contains(Search)));
+                query = query.Where(m => m.MangaName.Contains(Search));
+            }
+
+            if (!string.IsNullOrEmpty(SearchAuthor))
+            {
+                query = query.Where(m => m.Authormodels.Any(a => a.FirstName.Contains(SearchAuthor) || a.LastName.Contains(SearchAuthor)));
+            }
+            if (!string.IsNullOrEmpty(SearchArtist))
+            {
+                query = query.Where(m => m.ArtistModels.Any(a => a.FirstName.Contains(SearchArtist) || a.LastName.Contains(SearchArtist)));
+            }
+            if (!string.IsNullOrEmpty(SearchVoiceActor))
+            {
+                query = query.Where(m => m.VoiceActors.Any(a => a.FirstName.Contains(SearchVoiceActor) || a.LastName.Contains(SearchVoiceActor)));
+            }
+
+            if (!string.IsNullOrEmpty(SearchCharacter))
+            {
+                query = query.Where(m => m.Characters.Any(a => a.CharacterName.Contains(SearchCharacter)));
             }
             // Filter by release year
             if (SearchReleaseYearStart.HasValue)
@@ -96,13 +124,14 @@ namespace NovelXManga.Pages.SearchFilter
             // Filter by selected genres
             if (selectedGenreIds.Count > 0)
             {
-                query = query.Where(m => m.GenresModels.Any(g => selectedGenreIds.Contains(g.GenresId)));
+                // Get all manga that include any of the specified genres
+                query = query.Where(m => selectedGenreIds.Any(id => m.GenresModels.Any(g => g.GenresId == id)));
             }
 
-            // Filter by selected tags
             if (selectedTagIds.Count > 0)
             {
-                query = query.Where(m => m.TagsModels.Any(t => selectedTagIds.Contains(t.TagId)));
+                // Then, filter the list further by checking if any of the manga also includes any of the specified tags
+                query = query.Where(m => selectedTagIds.Any(id => m.TagsModels.Any(t => t.TagId == id)));
             }
 
             // Execute the query
@@ -119,7 +148,7 @@ namespace NovelXManga.Pages.SearchFilter
         {
             Tags = await context.TagModels.ToListAsync();
             Genres = await context.GenresModels.ToListAsync();
-            MangaModels = await mangaRepository.GetAllModelAsync();
+            //MangaModels = await mangaRepository.GetAllModelAsync();
 
             return Page();
         }
