@@ -147,7 +147,12 @@ a {
     .searchbar {
         width: 100px;
         padding: 0.3rem;
+        transition: width 0.5s; /* Add transition for smooth width change */
     }
+
+        .searchbar:focus {
+            width: 200px; /* Change the width when the search bar is focused */
+        }
 
     .sidebar-toggle {
         padding: 0.3rem 0.6rem;
@@ -313,17 +318,25 @@ a {
         border-radius: 3px;
         padding: 0.5rem 1rem;
     }
+
 .flexSidebarLogo {
-    display:flex;
+    display: flex;
+   
 }
+
 .searchbar {
-    flex: 250px; /* Adjust the width as desired */
+    width: 250px; /* Adjust the width as desired */
     padding: 0.5rem;
     border: none;
     border-radius: 3px;
     background-color: #444; /* Slightly lighter than the navbar background */
     color: white; /* Make the text color white */
+    transition: width 1s; /* Transition duration is now 2 seconds */
 }
+
+    .searchbar:focus {
+        width: 600px; /* Change the width when the search bar is focused */
+    }
 
 .main-content > div {
     background-color: #191a1c;
@@ -340,6 +353,7 @@ a {
     padding: 1rem;
     z-index: 200;
     overflow-y: auto;
+    transition:0.5s; 
 }
 
     .Custom-o-sidebar.open {
@@ -351,26 +365,31 @@ a {
         padding: 0;
         margin: 0;
     }
-    .Custom-o-sidebar li a{
-        margin-left:10px;
-        display:flex;
-        margin:10px;
+
+    .Custom-o-sidebar li a {
+        margin-left: 10px;
+        display: flex;
+        margin: 10px;
     }
-    .Custom-o-sidebar li a i{
-        margin-right: 10px;
-    }
+
+        .Custom-o-sidebar li a i {
+            margin-right: 10px;
+        }
+
 .PushDownSidebar {
-    margin-bottom:18px;
+    margin-bottom: 18px;
 }
+
 #logo {
     color: orangered;
     font-size: 32px;
     margin-right: 20px;
+   
 }
 
-#logo:hover {
-    color: white;
-}
+    #logo:hover {
+        color: white;
+    }
 
 .Custom-o-sidebar li {
     font-size: 1.2rem;
@@ -477,12 +496,12 @@ a {
     background-color: #FF6347;*/ /* color when hovered */
 /*}*/
 
-
 .Author_Artist {
     display: -webkit-box;
-    -webkit-line-clamp: 1 ;
+    -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
 }
+
 flexLiLayout {
 }
 
@@ -761,11 +780,12 @@ flexLiLayout {
     width: 100%;
     height: 100%;
 }
-.ANoneStyle:hover{
-    border-top: solid;
-    border-bottom:solid;
-    border-color: orangered;
-}
+
+    .ANoneStyle:hover {
+        border-top: solid;
+        border-bottom: solid;
+        border-color: orangered;
+    }
 
 .FourOfAKind img {
     height: 100%;
@@ -866,9 +886,9 @@ flexLiLayout {
     .BoxOne:hover {
         transform: scale(1.1);
         z-index: 2; /* This is to ensure the hovered box overlays the others */
-        border-top:solid;
-        border-bottom:solid;
-        border-color:orangered;
+        border-top: solid;
+        border-bottom: solid;
+        border-color: orangered;
     }
 
 @media (max-width: 1200px) {
@@ -932,7 +952,7 @@ flexLiLayout {
     }
 
     .Author_Artist {
-       font-size:13px !important;
+        font-size: 13px !important;
     }
 }
 
@@ -1341,12 +1361,13 @@ flexLiLayout {
     box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
     transition: width 0.5s, height 0.5s; /* Smooth transition for width and height */
 }
+
 .AddEditReportCurrentpage {
     display: flex;
     justify-content: start; /* This will align the items horizontally */
-  
+
     position: absolute;
-    top: calc(14% + 200px); /* The top position is relative to the manga-title's top position */
+    top: calc(16% + 200px); /* The top position is relative to the manga-title's top position */
     left: calc(12% + 285px); /* Adjust this value based on your design requirements */
     width: 100%;
     transition: top 0.5s, left 0.5s
@@ -1358,37 +1379,76 @@ flexLiLayout {
     height: 50px;
     width: 220px;
 }
+
 .EditSizeCurrentpage {
     display: inline-block; /* This will ensure the divs are in a line */
     margin-right: 10px; /* To ensure spacing between the buttons */
     height: 50px;
     width: 220px;
 }
+
 .ReportSizeCurrentpage {
     display: inline-block; /* This will ensure the divs are in a line */
-  
+
     height: 50px;
     width: 220px;
 }
 
-.AddToReadListButton, .EditBookButton {
+.AddToReadListButton {
     /* Add any specific button styles here, such as color, padding, font-size, etc. */
-    padding: 10px;
-    background-color: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 25px 30px;
+    background-color: #ff6740;
+    color: white;
+    font-weight: bold;
     border: none;
-   
+    border-radius: 5px;
+    letter-spacing: 4px;
+    overflow: hidden;
+    transition: 0.5s;
     cursor: pointer;
     height: 100%;
     width: 100%;
 }
+
+.EditBookButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    height: 100%;
+    width: 100%;
+    background-color: #333;
+}
+
 .ReportBookButton {
     padding: 10px;
-    background-color: #f5f5f5;
+    background-color: #333;
     border: none;
     cursor: pointer;
     height: 100%;
     width: 100%;
+    border: none;
+    border-radius: 5px;
 }
+
+    .EditBookButton:hover, .ReportBookButton:hover {
+        background-color: #141414;
+        color:white; 
+    }
+
+.AddToReadListButton:hover {
+    background: orangered;
+    color: #050801;
+    box-shadow: 0 0 5px orangered, 0 0 25px orangered, 0 0 50px orangered, 0 0 200px orangered;
+    -webkit-box-reflect: below 1px linear-gradient(transparent, #0005);
+}
+
 .EditSizeCurrentpage, .ReportSizeCurrentpage {
     transition: width 0.5s ease, height 0.5s ease;
 }
@@ -1398,8 +1458,6 @@ flexLiLayout {
     .manga-title {
         top: calc(15px - 40px) !important;
         left: calc(2% + 140px) !important; /* Adjust these values for smaller screens */
-       
-        
     }
 
     .manga-img-container {
@@ -1411,15 +1469,18 @@ flexLiLayout {
         width: 150px !important; /* Adjust these values for smaller screens */
         height: 200px !important; /* Adjust these values for smaller screens */
     }
+
     div::-webkit-scrollbar {
         display: none !important;
     }
+
     .AddEditReportCurrentpage {
         top: calc(15% + 185px); /* Adjust these values for smaller screens */
         left: 2% !important; /* Adjust these values for smaller screens */
         justify-content: center;
-        width:400px !important; 
+        width: 400px !important;
     }
+
     .EditSizeCurrentpage {
         margin-right: 5px;
         width: 18%;
@@ -1428,14 +1489,12 @@ flexLiLayout {
     .ReportSizeCurrentpage {
         width: 40%;
     }
-  
-   
 }
+
 @media screen and (max-width: 1200px) {
     .manga-title {
         top: calc(15px - 40px);
         left: calc(17% + 180px ); /* Adjust these values for smaller screens */
-     
     }
 
     .manga-img-container {
@@ -1448,17 +1507,16 @@ flexLiLayout {
         height: 385px;
         object-fit: cover; /* To maintain image aspect ratio */
     }
+
     .AddEditReportCurrentpage {
         top: calc(16% + 195px); /* Adjust these values for smaller screens */
         left: 40%; /* Adjust these values for smaller screens */
         justify-content: center;
-        width:550px; 
-        
+        width: 550px;
     }
-  
 }
-@media screen and (min-width: 769px) and (max-width: 910px) {
 
+@media screen and (min-width: 769px) and (max-width: 910px) {
     .EditSizeCurrentpage {
         margin-right: 5px;
         width: 18%;
@@ -1467,7 +1525,11 @@ flexLiLayout {
     .ReportSizeCurrentpage {
         width: 18%;
     }
-}
 
+    .AddEditReportCurrentpage {
+        width: 50%; /* reduce the width of the container */
+        justify-content: space-between; /* distributes space between items evenly */
+    }
+}
 
 /* CurrentManga Page Ends */
