@@ -1478,7 +1478,7 @@ new Character { CharacterName = "Dulcinea del Toboso", specie = "Human", Gender 
         {
             var Tag1ToManga1 = context.TagModels.FirstOrDefault(t => t.TagName == "Mind Control");
             var Tag2ToManga1 = context.TagModels.FirstOrDefault(t => t.TagName == "Betrayal");
-            var Tag3ToManga1 = context.TagModels.FirstOrDefault(t => t.TagName == "Action");
+            var Tag3ToManga1 = context.TagModels.FirstOrDefault(t => t.TagName == "Politics");
             var Gen1ToManga1 = context.GenresModels.FirstOrDefault(t => t.GenreName == "Mecha");
             var Gen2ToManga1 = context.GenresModels.FirstOrDefault(t => t.GenreName == "Drama");
             var Gen3ToManga1 = context.GenresModels.FirstOrDefault(t => t.GenreName == "Thriller");
