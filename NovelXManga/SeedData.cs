@@ -143,7 +143,8 @@ namespace NovelXManga
 
                 "Anilingus", "Animal Sidekick", "Animal Transformation", "Antihero", "Antiheroine", "Apocalypse",
 
-                "Appearance Changes", "Appearance Different from Actual Age", "Appearance Different from Personality", "Aristocrat", "Armed Combat", "Arranged Marriage ", "Arrogant Female Lead",
+                "Appearance Changes", "Appearance Different from Actual Age", "Appearance Different from Personality",
+                "Aristocrat", "Armed Combat", "Arranged Marriage ", "Arrogant Female Lead",
 
                 "Arrogant Male Lead", "Artist", "Artificial Intelligence", "Assassin", "Attempted Murder",
 
@@ -187,7 +188,7 @@ namespace NovelXManga
 
                   "Family", "Family Drama", "Fantasy World", "Fast Romance", "Father and Daughter", "Fellatio",
 
-                "Female Demographic with Male Lead", "Female Dominance", "Female Fighters", "Female Lead Falls in Love First",
+                "Female Demographic with Male Lead", "Female Dominance", "Female Fighters","Female Lead", "Female Lead Falls in Love First",
                 "Fetishes", "Finding Love Again", "First Kiss", "First Love", "First-Time Intercourse", "Flashbacks", "Food", "Forbidden Love",
 
            "Foreigners", "Friends Become Enemies", "Friends Become Lovers", "Friends Grow Distant",
@@ -208,11 +209,11 @@ namespace NovelXManga
                 "LGBT Parent", "LGBT Scenes", "Lifestyle Change", "Live-in Lover", "Loneliness", "Loner Protagonist", "Love at First Sight",
 
            "Love Confession", "Love Interests Who Don't Get Along", "Love Polygon", "Love Triangle", "Love-Hate Relationship",
-                "Lust", "Mafia", "Magic", "Magic Schoo", "Magical Creature", "Magical Girl", "Magical Boy",
+                "Lust", "Mafia", "Magic", "Magic Schoo", "Magical Creature", "Male Lead", "Magical Girl", "Magical Boy",
               "Maid", "Male Demographic with Female Lead", "Male Lead Falls in Love First", "Male Protagonist", "Female Protagonist",
                 "Manipulation", "Manly Gay Couple", "Marriage", "Marriage Proposal", "Married Couple", "Masculine Uke", "Masochist",
 
-           "Master-Pet Relationship", "Master-Servant Relationship", "Masturbation", "Mature Child", "Middle School", "Military", "Mind Break",
+           "Master-Pet Relationship", "Master-Servant Relationship", "Masturbation", "Mature Child", "Middle School", "Military", "Mind Break", "Mind Control",
                 "Misunderstanding", "Model", "Misunderstood Protagonist","Middle-earth", "Models", "Modeling",
 
                  "Monster", "Multiple Couples", "Multiple Protagonists", "Murder", "Music", "Music Band",
@@ -389,6 +390,9 @@ namespace NovelXManga
                 CreateSoloLeveling();
                 CreateTowerOfGod();
                 DonQuiXote();
+                CreateAirGear();
+                CreateBleach();
+                CreateCodeGeass();
 
                 RelatedManga();
 
@@ -1467,6 +1471,235 @@ new Character { CharacterName = "Dulcinea del Toboso", specie = "Human", Gender 
 },
             };
             context.mangaModels.Add(DonQuixote);
+            context.SaveChanges();
+        }
+
+        public void CreateCodeGeass()
+        {
+            var Tag1ToManga1 = context.TagModels.FirstOrDefault(t => t.TagName == "Mind Control");
+            var Tag2ToManga1 = context.TagModels.FirstOrDefault(t => t.TagName == "Betrayal");
+            var Tag3ToManga1 = context.TagModels.FirstOrDefault(t => t.TagName == "Action");
+            var Gen1ToManga1 = context.GenresModels.FirstOrDefault(t => t.GenreName == "Mecha");
+            var Gen2ToManga1 = context.GenresModels.FirstOrDefault(t => t.GenreName == "Drama");
+            var Gen3ToManga1 = context.GenresModels.FirstOrDefault(t => t.GenreName == "Thriller");
+            DateTime started = DateTime.ParseExact("2006-10-05", "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
+            var manga = new MangaModel
+            {
+                MangaName = "Code Geass: Lelouch of the Rebellion",
+                PhotoPath = Path.Combine(ProcessUploadedFile("CodeGeass.jpg")),
+                ReleaseYear = new DateTime(2006, 10, 5),
+                BlogModel = new BlogModel { mangaName = "Code Geass: Lelouch of the Rebellion" },
+                Description = "In an alternate reality, Lelouch vi Britannia gains the power of Geass, which allows him to control minds. With this power, he seeks to destroy the Britannian Empire and create a better world.",
+                CompletelyTranslated = "Completed",
+                OfficalLanguage = "Japanese",
+                ISBN10 = "4047139281",
+                ISBN13 = "978-4047139287",
+                score = 9.1,
+                StudioModels = new List<StudioModel> { new StudioModel { GroupName = "Sunrise", Started = started, StudioWebsite = "http://www.sunrise-inc.co.jp/" } },
+                EndingYear = new DateTime(2008, 7, 28),
+                StatusInCountryOfOrigin = "50, completed",
+                Type = "Manga",
+                OriginalPublisher = "Kadokawa Shoten",
+                orignalWebtoon = "N/A",
+
+                AllLanguages = new List<Languages> { JapaneseLanguage, EnglishLanguage },
+                BuyPages = new List<BuyPage>
+        {
+            new BuyPage { BuyWebsite = "https://www.amazon.com/Code-Geass-Lelouch-Rebellion-Vol/dp/4047139281", _Languages = new List<Languages> { EnglishLanguage },  },
+            new BuyPage { BuyWebsite = "https://www.kadokawa.co.jp/product/200708000175/", _Languages = new List<Languages> { JapaneseLanguage },  },
+        },
+
+                AssociatedNames = new List<AssociatedNames>
+        {
+            new AssociatedNames { nameString = "Code Geass: Hangyaku no Lelouch" },
+            new AssociatedNames { nameString = "Code Geass: Lelouch of the Rebellion" },
+            new AssociatedNames { nameString = "Code Geass: Rebellion of Lelouch" },
+            new AssociatedNames { nameString = "Code Geass: 反叛的鲁鲁修" }
+        },
+
+                OfficalWebsites = new List<OfficalWebsite>
+        {
+            new OfficalWebsite { OfficalWebsiteString = "https://www.geass.jp/", OfficalWebsiteName = "Official Website" },
+        },
+
+                GenresModels = new List<GenresModel>
+        {
+            Gen1ToManga1,
+            Gen2ToManga1,
+            Gen3ToManga1
+        },
+                TagsModels = new List<TagModel>
+        {
+            Tag1ToManga1,
+            Tag2ToManga1,
+            Tag3ToManga1
+        },
+                Characters = new List<Character>
+        {
+            new Character { CharacterName = "Lelouch vi Britannia",   specie="Human", Gender="Male", Born="December 5, 2000", PlaceOffResidence = "Holy Britannian Empire", World="Code Geass", Nationality ="Britannian", Occupation="Exiled Prince, Leader of the Black Knights" },
+            new Character { CharacterName = "C.C.", specie="Human",Gender="Female", Born="Unknown", PlaceOffResidence = "World of C", World="Code Geass", Nationality ="Unknown", Occupation="Witch, Contractor of the Power of Geass"},
+            new Character { CharacterName = "Suzaku Kururugi", specie="Human",Gender="Male", Born="September 10, 2000", PlaceOffResidence = "Holy Britannian Empire", World="Code Geass", Nationality ="Britannian", Occupation="Knight of the Round, Member of the Black Knights"},
+            new Character { CharacterName = "Kallen Kozuki", specie="Human",Gender="Female", Born="March 29, 2000", PlaceOffResidence = "Area 11", World="Code Geass", Nationality ="Japanese", Occupation="Member of the Black Knights"},
+        },
+
+                Authormodels = new List<AuthorModel>(),
+                ArtistModels = new List<ArtistModel>(),
+                VoiceActors = new List<VoiceActorModel>(),
+            };
+
+            context.mangaModels.Add(manga);
+            context.SaveChanges();
+        }
+
+        public void CreateBleach()
+        {
+            var Tag1ToManga1 = context.TagModels.FirstOrDefault(t => t.TagName == "Fantasy World");
+            var Tag2ToManga1 = context.TagModels.FirstOrDefault(t => t.TagName == "Absent Parent");
+            var Tag3ToManga1 = context.TagModels.FirstOrDefault(t => t.TagName == "Death");
+            var Gen1ToManga1 = context.GenresModels.FirstOrDefault(t => t.GenreName == "Action");
+            var Gen2ToManga1 = context.GenresModels.FirstOrDefault(t => t.GenreName == "Supernatural");
+            var Gen3ToManga1 = context.GenresModels.FirstOrDefault(t => t.GenreName == "Shounen");
+            DateTime started = DateTime.ParseExact("2001-08-07", "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
+            var manga = new MangaModel
+            {
+                MangaName = "Bleach",
+                PhotoPath = Path.Combine(ProcessUploadedFile("Bleach.jpg")),
+                ReleaseYear = new DateTime(2001, 8, 7),
+                BlogModel = new BlogModel { mangaName = "Bleach" },
+                Description = "Ichigo Kurosaki becomes a Soul Reaper, a protector of the living world against evil spirits and guiding the souls of the deceased to the afterlife.",
+                CompletelyTranslated = "Completed",
+                OfficalLanguage = "Japanese",
+                ISBN10 = "4088730172",
+                ISBN13 = "978-4088730175",
+                score = 9,
+                StudioModels = new List<StudioModel> { new StudioModel { GroupName = "Studio Pierrot", Started = started, StudioWebsite = "https://www.pierrot.jp/" } },
+                EndingYear = new DateTime(2016, 8, 22),
+                StatusInCountryOfOrigin = "74, completed",
+                Type = "Manga",
+                OriginalPublisher = "Shueisha",
+                orignalWebtoon = "N/A",
+
+                AllLanguages = new List<Languages> { JapaneseLanguage, EnglishLanguage },
+                BuyPages = new List<BuyPage>
+        {
+            new BuyPage { BuyWebsite = "https://www.amazon.com/Bleach-Box-Set-Vols-1-21/dp/1421526107", _Languages = new List<Languages> { EnglishLanguage },  },
+            new BuyPage { BuyWebsite = "https://books.shueisha.co.jp/CGI/search/syousai_put.cgi?isbn_cd=4-08-873017-2", _Languages = new List<Languages> { JapaneseLanguage },  },
+        },
+
+                AssociatedNames = new List<AssociatedNames>
+        {
+            new AssociatedNames { nameString = "BLEACH-ブリーチ-" },
+            new AssociatedNames { nameString = "블리치" },
+        },
+
+                OfficalWebsites = new List<OfficalWebsite>
+        {
+            new OfficalWebsite { OfficalWebsiteString = "https://www.j-bleach.com/", OfficalWebsiteName = "Official Website" },
+        },
+
+                GenresModels = new List<GenresModel>
+        {
+            Gen1ToManga1,
+            Gen2ToManga1,
+            Gen3ToManga1
+        },
+                TagsModels = new List<TagModel>
+        {
+            Tag1ToManga1,
+            Tag2ToManga1,
+            Tag3ToManga1
+        },
+                Characters = new List<Character>
+        {
+            new Character { CharacterName = "Ichigo Kurosaki",   specie="Human", Gender="Male", Born="July 15, 1989", PlaceOffResidence = "Karakura Town", World="Bleach", Nationality ="Japanese", Occupation="Soul Reaper" },
+            new Character { CharacterName = "Rukia Kuchiki", specie="Shinigami",Gender="Female", Born="January 14", PlaceOffResidence = "Soul Society", World="Bleach", Nationality ="Japanese", Occupation="Soul Reaper"},
+            new Character { CharacterName = "Orihime Inoue", specie="Human",Gender="Female", Born="September 3", PlaceOffResidence = "Karakura Town", World="Bleach", Nationality ="Japanese", Occupation="High School Student"},
+            new Character { CharacterName = "Uryuu Ishida", specie="Human",Gender="Male", Born="November 6", PlaceOffResidence = "Karakura Town", World="Bleach", Nationality ="Japanese", Occupation="High School Student, Quincy"},
+        },
+
+                Authormodels = new List<AuthorModel>(),
+                ArtistModels = new List<ArtistModel>(),
+                VoiceActors = new List<VoiceActorModel>(),
+            };
+
+            context.mangaModels.Add(manga);
+            context.SaveChanges();
+        }
+
+        public void CreateAirGear()
+        {
+            var Tag1ToManga1 = context.TagModels.FirstOrDefault(t => t.TagName == "Absent Parent");
+            var Tag2ToManga1 = context.TagModels.FirstOrDefault(t => t.TagName == "Training");
+            var Tag3ToManga1 = context.TagModels.FirstOrDefault(t => t.TagName == "Neighbor");
+            var Tag4ToManga1 = context.TagModels.FirstOrDefault(t => t.TagName == "Male lead");
+            var Gen1ToManga1 = context.GenresModels.FirstOrDefault(t => t.GenreName == "Sports");
+            var Gen2ToManga1 = context.GenresModels.FirstOrDefault(t => t.GenreName == "Action");
+            var Gen3ToManga1 = context.GenresModels.FirstOrDefault(t => t.GenreName == "Comedy");
+
+            DateTime started = DateTime.ParseExact("2002-11-18", "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
+            var manga = new MangaModel
+            {
+                MangaName = "Air Gear",
+                PhotoPath = Path.Combine(ProcessUploadedFile("AirGear.jpg")),
+                ReleaseYear = new DateTime(2002, 11, 18),
+                BlogModel = new BlogModel { mangaName = "Air Gear" },
+                Description = "A group of young students participates in an underground form of inline skating called Air Treck, using high-tech rollerblades to perform gravity-defying stunts and engage in intense battles.",
+                CompletelyTranslated = "Completed",
+                OfficalLanguage = "Japanese",
+                ISBN10 = "4063192731",
+                ISBN13 = "978-4063192734",
+                score = 8,
+                StudioModels = new List<StudioModel> { new StudioModel { GroupName = "Toei Animation", Started = started, StudioWebsite = "https://www.toei-anim.co.jp/" } },
+                EndingYear = new DateTime(2012, 5, 23),
+                StatusInCountryOfOrigin = "37, completed",
+                Type = "Manga",
+                OriginalPublisher = "Kodansha",
+                orignalWebtoon = "N/A",
+
+                AllLanguages = new List<Languages> { JapaneseLanguage, EnglishLanguage },
+                BuyPages = new List<BuyPage>
+        {
+            new BuyPage { BuyWebsite = "https://www.amazon.com/Air-Gear-Vol-1-Oh-Great/dp/0345491896", _Languages = new List<Languages> { EnglishLanguage },  },
+            new BuyPage { BuyWebsite = "https://books.shueisha.co.jp/CGI/search/syousai_put.cgi?isbn_cd=4-06-319273-1", _Languages = new List<Languages> { JapaneseLanguage },  },
+        },
+
+                AssociatedNames = new List<AssociatedNames>
+        {
+            new AssociatedNames { nameString = "エア・ギア" },
+        },
+
+                OfficalWebsites = new List<OfficalWebsite>
+        {
+            new OfficalWebsite { OfficalWebsiteString = "https://www.kc.kodansha.co.jp/product?item=0000049145", OfficalWebsiteName = "Kodansha Comics" },
+        },
+
+                GenresModels = new List<GenresModel>
+        {
+            Gen1ToManga1,
+            Gen2ToManga1,
+            Gen3ToManga1,
+        },
+                TagsModels = new List<TagModel>
+        {
+            Tag1ToManga1,
+            Tag2ToManga1,
+            Tag3ToManga1,
+            Tag4ToManga1
+        },
+                Characters = new List<Character>
+        {
+            new Character { CharacterName = "Itsuki Minami", specie="Human", Gender="Male" },
+            new Character { CharacterName = "Simca", specie="Human", Gender="Female" },
+            new Character { CharacterName = "Kazu", specie="Human", Gender="Male" },
+            new Character { CharacterName = "Agito/Akito", specie="Human", Gender="Male" },
+        },
+
+                Authormodels = new List<AuthorModel>(),
+                ArtistModels = new List<ArtistModel>(),
+                VoiceActors = new List<VoiceActorModel>(),
+            };
+
+            context.mangaModels.Add(manga);
             context.SaveChanges();
         }
     }

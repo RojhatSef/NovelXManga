@@ -429,7 +429,7 @@ a {
 
 .Content1Ex {
     width: 100%;
-    margin-bottom: 40px
+  
 }
 
 .Content1Cost {
@@ -485,6 +485,8 @@ a {
     padding-top: 1%;
     width: 100%;
     transition: width 0.5s, height 0.5s;
+    margin-top:40px; 
+ 
 }
 
 /*.mb-3 .btn {
@@ -737,7 +739,7 @@ flexLiLayout {
     overflow: hidden;
     border-radius: 20px;
     position: relative;
-    margin-bottom: 50px;
+   
     transition: width 0.5s, height 0.5s;
 }
 
@@ -1343,6 +1345,7 @@ flexLiLayout {
     font-size: 30px;
     overflow: hidden; /* Hide the overflowing text */
     transition: top 0.5s, left 0.5s; /* Smooth transition for top and left */
+    -webkit-text-stroke: 0.5px black; 
 }
 
 .manga-img-container {
@@ -1368,7 +1371,7 @@ flexLiLayout {
 
     position: absolute;
     top: calc(16% + 200px); /* The top position is relative to the manga-title's top position */
-    left: calc(12% + 285px); /* Adjust this value based on your design requirements */
+    left: calc(11.5% + 285px); /* Adjust this value based on your design requirements */
     width: 100%;
     transition: top 0.5s, left 0.5s
 }
@@ -1423,17 +1426,19 @@ flexLiLayout {
     cursor: pointer;
     height: 100%;
     width: 100%;
-    background-color: #333;
+    color:white; 
+    background-color: rgb(25, 26, 28);
 }
 
 .ReportBookButton {
     padding: 10px;
-    background-color: #333;
+    background-color: rgb(25, 26, 28);
     border: none;
     cursor: pointer;
     height: 100%;
     width: 100%;
     border: none;
+    color: white;
     border-radius: 5px;
 }
 
@@ -1452,9 +1457,88 @@ flexLiLayout {
 .EditSizeCurrentpage, .ReportSizeCurrentpage {
     transition: width 0.5s ease, height 0.5s ease;
 }
+.CurrentMangaTagsContainer {
+    height: auto;
+    width: 60%;
+  
+    margin-left: 25%;
+    border: none;
+    border-radius: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    padding: 5px;
+    box-sizing: border-box;
+    transition: margin-left 0.5s ease;
+}
+
+.tagsInsideInsideCurrentManga {
+    background-color: #444;
+   
+    padding: 5px;
+    margin: 0;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 15px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 75px;
+    flex-shrink: 0;
+    border-radius: 5px;
+}
+
+.CustomWarningLabel {
+    color: red !important;
+}
+.CustomHintLabel {
+    color: rgb(255, 103, 64); 
+}
+@media screen and (min-width: 769px) and (max-width: 910px) {
+    .CurrentMangaTagsContainer {
+        margin-left: 40% !important; /* Adjusted to move to the right by setting margin-left to 40% */
+        margin-right: 0; /* Reset margin-right to 0 */
+    }
+}
+/* Media queries for responsiveness */
+@media (max-width: 1800px) {
+    .CurrentMangaTagsContainer {
+        margin-left: 27%; /* Adjusted to move to the right by setting margin-left: auto */
+        margin-right: 0; /* Reset margin-right to 0 */
+    }
+}
+@media (max-width: 1500px) {
+    .CurrentMangaTagsContainer {
+        margin-left: 35%; /* Adjusted to move to the right by setting margin-left: auto */
+        margin-right: 0; /* Reset margin-right to 0 */
+    }
+}
+@media (max-width: 768px) {
+    .CurrentMangaTagsContainer {
+        width: 100%; /* Adjust the width to occupy the full available width on smaller screens */
+        margin-left: 0; /* Remove the left margin for better centering on smaller screens */
+        padding: 0 10px; /* Add horizontal padding for spacing */
+     
+    }
+
+    .tagsInsideInsideCurrentManga {
+        min-width: 60px; /* Adjust the minimum width for better responsiveness on smaller screens */
+        font-size: 12px; /* Adjust the font size for better readability on smaller screens */
+    }
+}
+
 
 /* Use media query for smaller screens */
 @media screen and (max-width: 768px) {
+    .tagsInsideInsideCurrentManga {
+        /* Adjust the styles for smaller screens */
+        font-size: 14px;
+        padding: 3px;
+    }
     .manga-title {
         top: calc(15px - 40px) !important;
         left: calc(2% + 140px) !important; /* Adjust these values for smaller screens */
@@ -1530,6 +1614,7 @@ flexLiLayout {
         width: 50%; /* reduce the width of the container */
         justify-content: space-between; /* distributes space between items evenly */
     }
+  
 }
 
 /* CurrentManga Page Ends */

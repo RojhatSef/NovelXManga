@@ -1,0 +1,313 @@
+﻿@page
+@model NovelXManga.Pages.Manga.DUMPHTMLModel
+@{
+}
+
+@*
+
+
+
+
+<div>AssociatedNames: </div>
+
+<div> </div>
+    @if (Model.CurrentManga.TagsModels != null)
+    {
+
+        @foreach (var item in Model.CurrentManga.TagsModels)
+        {
+
+                <label class="form-label" asp-for="@item.TagName"> @item.TagName | </label>
+
+        }
+    }
+
+
+    <div>studio/s: </div>
+    @if (Model.CurrentManga.StudioModels != null)
+    {
+        @foreach (var item in Model.CurrentManga.StudioModels)
+        {
+            if (item.website != null)
+            {
+                            <a asp-for="@item.website"> Studio | </a>
+            }
+            else
+            {
+                            <p>@item.GroupName</p>
+            }
+
+
+        }
+
+    }
+
+    @if (Model.CurrentManga.Description != null)
+    {
+        <div class="mb-3">
+            <label class="form-label" asp-for="@Model.CurrentManga.Description">Description: @Model.CurrentManga.Description</label>
+
+        </div>
+    }
+
+    @if (Model.CurrentManga.ReleaseYear != null)
+    {
+        <div class="mb-3">
+            <label class="form-label" asp-for="@Model.CurrentManga.ReleaseYear">Book Release: @Model.CurrentManga.ReleaseYear</label>
+
+        </div>
+    }
+    @if (Model.CurrentManga.EndingYear != null)
+    {
+        <div class="mb-3">
+            <label class="form-label" asp-for="@Model.CurrentManga.EndingYear">Ending: @Model.CurrentManga.EndingYear</label>
+        </div>
+    }
+
+    @if (Model.CurrentManga.ISBN13 != null)
+    {
+        <div class="mb-3">
+            <label class="form-label" asp-for="@Model.CurrentManga.ISBN13">ISBN13: @Model.CurrentManga.ISBN13</label>
+
+        </div>
+    }
+
+    @if (Model.CurrentManga.ISBN10 != null)
+    {
+        <div class="mb-3">
+            <label class="form-label" asp-for="@Model.CurrentManga.ISBN10">ISBN10: @Model.CurrentManga.ISBN10</label>
+
+        </div>
+    }
+
+    @if (Model.CurrentManga.Type != null)
+    {
+        <div class="mb-3">
+            <label class="form-label" asp-for="@Model.CurrentManga.Type">Type: @Model.CurrentManga.Type</label>
+
+        </div>
+    }
+
+    @if (Model.CurrentManga.OriginalPublisher != null)
+    {
+        <div class="mb-3">
+            <label class="form-label" asp-for="@Model.CurrentManga.OriginalPublisher">OriginalPublisher: @Model.CurrentManga.OriginalPublisher"</label>
+        </div>
+    }
+
+
+    @if (Model.CurrentManga.OfficalLanguage != null)
+    {
+        <div class="mb-3">
+            <label class="form-label" asp-for="@Model.CurrentManga.OfficalLanguage">OfficalLanguage: @Model.CurrentManga.OfficalLanguage</label>
+
+        </div>
+    }
+    @if (Model.CurrentManga.orignalWebtoon != null)
+    {
+        <div class="mb-3">
+            <label class="form-label" asp-for="@Model.CurrentManga.orignalWebtoon">orignalWebtoon: @Model.CurrentManga.orignalWebtoon</label>
+        </div>
+    }
+
+    @if (Model.CurrentManga.StatusInCountryOfOrigin != null)
+    {
+        <div class="mb-3">
+            <label class="form-label" asp-for="@Model.CurrentManga.StatusInCountryOfOrigin">StatusInCountryOfOrigin: @Model.CurrentManga.StatusInCountryOfOrigin</label>
+        </div>
+    }
+    @if (Model.CurrentManga.score != null)
+    {
+        <div class="mb-3">
+            <label class="form-label" asp-for="@Model.CurrentManga.score">orignalWebtoon: @Model.CurrentManga.score</label>
+        </div>
+    }
+<div>Artist/s: </div>
+    @if (Model.CurrentManga.ArtistModels != null)
+    {
+        @foreach (var item in Model.CurrentManga.ArtistModels)
+        {
+                <div class="mb-3">
+                    <label class="form-label" asp-for="@item.FirstName"> @item.FirstName" @item.LastName </label>
+                </div>
+        }
+    }
+    else
+    {
+        <p>N/A</p>
+    }
+<div>Author/s: </div>
+    @if (Model.CurrentManga.Authormodels != null)
+    {
+        @foreach (var item in Model.CurrentManga.Authormodels)
+        {
+                <div class="mb-3">
+                    <label class="form-label" asp-for="@item.FirstName"> @item.FirstName @item.LastName </label>
+                </div>
+        }
+    }
+    else
+    {
+        <p>N/A</p>
+    }
+<div>Audio Voice Actor/s: </div>
+    @if (Model.CurrentManga.VoiceActors != null)
+    {
+        @foreach (var item in Model.CurrentManga.VoiceActors)
+        {
+                <div class="mb-3">
+                    <label class="form-label" asp-for="@item.FirstName"> @item.FirstName @item.LastName </label>
+                </div>
+        }
+    }
+
+    @if (Model.CurrentManga.CompletelyTranslated != null)
+    {
+        <div class="mb-3">
+            <label class="form-label" asp-for="@Model.CurrentManga.CompletelyTranslated">CompletelyTranslated: @Model.CurrentManga.CompletelyTranslated</label>
+        </div>
+    }
+<div>Recommended Books: </div>
+    @if (Model.CurrentManga.RecommendedMangaModels != null)
+    {
+        @foreach (var item in Model.CurrentManga.RecommendedMangaModels)
+        {
+
+                <label class="form-label">@item.MangaName</label>
+
+        }
+    }
+    else
+    {
+        <p>N/A</p>
+    }
+<div>Related Books: </div>
+    @if (Model.CurrentManga.relatedSeries != null)
+    {
+        @foreach (var item in Model.CurrentManga.relatedSeries)
+        {
+
+                <label class="form-label" asp-for="@item.relatedSeries">@item.MangaName</label>
+
+        }
+
+    }
+    else
+    {
+        <p>N/A</p>
+    }
+    <div>Characters: </div>
+
+
+
+
+@if (Model.CurrentManga.futureEvents != null)
+{
+    <div class="mb-3">
+        <label class="form-label" asp-for="@Model.CurrentManga.futureEvents">Future Events: @Model.CurrentManga.futureEvents</label>
+    </div>
+}@if (Model.CurrentManga.BlogModel != null)
+{
+    <textarea asp-for="CurrentManga.BlogModel.postsModel">
+
+                            </textarea>
+    if (Model.CurrentManga.BlogModel.postsModel != null)
+    {
+        @foreach (var item in Model.CurrentManga.BlogModel.postsModel)
+        {
+
+            <label class="form-label">@item.postComment</label>
+
+        }
+    }
+    else
+    {
+        <p>Post not Responding</p>
+    }
+
+
+}
+else
+{
+    <p>Blog not Responding</p>
+}
+
+
+
+
+<div class="FlexRight">
+
+    <div class="profileText">
+
+
+
+        <div class="profileTextGroup">
+            <div class="InfoGroup">
+                <div class="Title">
+                    <div class="Info">
+                        <span class="icon">Language:   </span><br /><br />
+                        <div class="text">
+                            @if (Model.CurrentManga.BuyPages != null)
+                            {
+
+                                @foreach (var item in Model.CurrentManga.BuyPages)
+                                {
+
+                                    <a href="@item.BuyWebsite">
+
+
+                                        @foreach (var lang in item._Languages)
+                                        {
+
+
+
+                                            <p>@lang.LanguageName</p>
+
+
+
+
+
+                                        }
+
+                                    </a>
+
+
+                                }
+
+
+
+                            }
+                            else
+                            {
+                                <span>N/A</span>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="InfoGroup">
+                <div class="Title">
+                    <div class="Info">
+                        <span class="icon">AssociatedNames  </span><br /><br />
+                        <span class="text">
+                            @if (Model.CurrentManga.AssociatedNames != null)
+                            {
+                                @foreach (var item in Model.CurrentManga.AssociatedNames)
+                                {
+                                    <p>@item.nameString</p>
+                                }
+
+                            }
+                            else
+                            {
+                                <span>N/A</span>
+                            }
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+*@

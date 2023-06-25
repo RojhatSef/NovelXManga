@@ -63,19 +63,25 @@ namespace NovelXManga.Pages.Manga
             return RedirectToAction("Index");
         }
 
-        public IActionResult OnPost(MangaModel manga)
+        public IActionResult OnPostMangaPage(int MangaID)
         {
-            if (manga.MangaID == 0)
+            CurrentManga = mangaRepository.GetOneMangaAllIncluded(MangaID);
+            if (CurrentManga == null)
             {
-                NotFound();
+                return NotFound();
             }
-            CurrentManga = mangaRepository.GetOneMangaAllIncluded(manga.MangaID);
+
             Blog = blogRepsitory.GetModel(CurrentManga.BlogModelId);
             Posts = postRepsitory.GetAllModels();
             return Page();
         }
 
-        public void OnGet(int id)
+        public IActionResult OnPost()
+        {
+            return Page();
+        }
+
+        public IActionResult OnGet(int id)
         {
             if (id == 0)
             {
@@ -84,7 +90,7 @@ namespace NovelXManga.Pages.Manga
             CurrentManga = mangaRepository.GetOneMangaAllIncluded(id);
             Blog = blogRepsitory.GetModel(CurrentManga.BlogModelId);
             Posts = postRepsitory.GetAllModels();
-            Page();
+            return Page();
         }
     }
 }
