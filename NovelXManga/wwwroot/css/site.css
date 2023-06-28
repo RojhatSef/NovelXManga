@@ -31,7 +31,7 @@ body, html {
 }
 
 hr {
-    color: orangered;
+    color: #ff6740;
 }
 
 input {
@@ -73,16 +73,6 @@ main {
     grid-area: main;
 }
 
-#NovelTitle {
-    color: white;
-    padding-right: 30px;
-    font-size: 32px;
-}
-
-    #NovelTitle:hover {
-        color: orangered;
-    }
-
 .main-content {
     display: grid;
     height: 100%;
@@ -111,7 +101,7 @@ main {
     justify-content: space-between;
     padding: 0.2rem 1rem;
     height: 65px;
-    border-bottom: 1px solid orangered;
+    border-bottom: 1px solid #ff6740;
 }
 
     .custom-O-navbar .top-scroll {
@@ -120,17 +110,6 @@ main {
 
 a {
     list-style: none;
-}
-
-.navbar-left {
-    display: flex;
-    align-items: center;
-}
-
-.navbar-right {
-    display: flex;
-    align-items: center;
-    width: 100%;
 }
 
 @media (max-width: 680px) {
@@ -147,11 +126,12 @@ a {
     .searchbar {
         width: 100px;
         padding: 0.3rem;
+        align-self: stretch;
         transition: width 0.5s; /* Add transition for smooth width change */
     }
 
         .searchbar:focus {
-            width: 200px; /* Change the width when the search bar is focused */
+            width: 80%; /* Change the width when the search bar is focused */
         }
 
     .sidebar-toggle {
@@ -183,8 +163,8 @@ a {
 .btn-custom-primary-login-forgott {
     display: inline-block;
     color: #fff;
-    background-color: orangered;
-    border-color: orangered;
+    background-color: #ff6740;
+    border-color: #ff6740;
     padding: 0.375rem 0.75rem;
     line-height: 1.5;
     border-radius: 0.25rem;
@@ -200,11 +180,11 @@ a {
     }
 
 .LoginRememberMehoverOrangeRed:hover {
-    color: orangered;
+    color: #ff6740;
 }
 
 .LoginForgottRegiSolidBorder {
-    border-top: solid 5px orangered;
+    border-top: solid 5px #ff6740;
     border-bottom: solid 45px rgb(51, 51, 51);
     box-shadow: 5px 10px 8px black;
     border-radius: 5px;
@@ -212,7 +192,7 @@ a {
 
 .ForgottPasswordReturnback {
     display: flex;
-    color: orangered;
+    color: #ff6740;
     width: 30%;
     border-radius: 5px;
 }
@@ -241,7 +221,7 @@ a {
 }
 
 .textOrangeRedForgottenPassword {
-    color: orangered;
+    color: #ff6740;
     font-size: 16px;
     margin-left: 20%;
 }
@@ -267,7 +247,7 @@ a {
     height: 100%;
     justify-content: center;
     align-items: center; /* This will center the text vertically */
-    color: orangered;
+    color: #ff6740;
     font-size: 15px;
     height: 30px
 }
@@ -301,6 +281,35 @@ a {
 }
 /* Login Ends HERE*/
 /* SIDEbar STARTS HERE*/
+#NovelTitle {
+    color: white;
+    padding-right: 30px;
+    font-size: 32px;
+}
+
+    #NovelTitle:hover {
+        color: #ff6740;
+    }
+
+.navbar-left {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    flex-grow: 1;
+}
+
+.navbar-right {
+    display: flex;
+    align-items: end;
+    justify-content: flex-end;
+    flex-grow: 2;
+    width: 100%;
+}
+
+.main-content > div {
+    background-color: #191a1c;
+}
+
 .sidebar-toggle {
     cursor: pointer;
     background-color: transparent;
@@ -313,7 +322,7 @@ a {
     .sidebar-toggle:hover {
         cursor: pointer;
         background-color: transparent;
-        color: orangered;
+        color: #ff6740;
         border: none;
         border-radius: 3px;
         padding: 0.5rem 1rem;
@@ -321,26 +330,23 @@ a {
 
 .flexSidebarLogo {
     display: flex;
-   
 }
 
 .searchbar {
-    width: 250px; /* Adjust the width as desired */
+    width: 250px; /* Adjust this as needed */
     padding: 0.5rem;
     border: none;
     border-radius: 3px;
-    background-color: #444; /* Slightly lighter than the navbar background */
-    color: white; /* Make the text color white */
-    transition: width 1s; /* Transition duration is now 2 seconds */
+    background-color: #444;
+    color: white;
+    transition: width 0.5s; /* Transition duration is now 0.5 seconds */
+    max-width: 100%; /* Make sure the search bar doesn't exceed the width of its container */
+    position: relative; /* Allow the search bar to be positioned in relation to its nearest positioned ancestor */
 }
 
     .searchbar:focus {
-        width: 600px; /* Change the width when the search bar is focused */
+        width: 100%; /* Change the width when the search bar is focused, but no larger than the maximum width */
     }
-
-.main-content > div {
-    background-color: #191a1c;
-}
 
 .Custom-o-sidebar {
     position: fixed;
@@ -353,7 +359,7 @@ a {
     padding: 1rem;
     z-index: 200;
     overflow-y: auto;
-    transition:0.5s; 
+    transition: 0.5s;
 }
 
     .Custom-o-sidebar.open {
@@ -381,10 +387,9 @@ a {
 }
 
 #logo {
-    color: orangered;
+    color: #ff6740;
     font-size: 32px;
     margin-right: 20px;
-   
 }
 
     #logo:hover {
@@ -412,7 +417,7 @@ a {
 
 @media (min-width: 769px) {
     .Custom-o-sidebar li:hover a {
-        color: orangered;
+        color: #ff6740;
     }
 }
 /* SIDEbar ENDS STARTS HERE*/
@@ -429,7 +434,6 @@ a {
 
 .Content1Ex {
     width: 100%;
-  
 }
 
 .Content1Cost {
@@ -455,6 +459,7 @@ a {
     flex-direction: column;
     gap: 50px;
     padding: 1rem;
+    padding-top: 0;
     padding-left: 2.5%;
     padding-right: 2.5%;
 }
@@ -485,18 +490,16 @@ a {
     padding-top: 1%;
     width: 100%;
     transition: width 0.5s, height 0.5s;
-    margin-top:40px; 
- 
+    margin-top: 40px;
 }
 
-/*.mb-3 .btn {
-    color: white;
-    transition: background-color 0.3s;*/ /* transition effect */
-/*}*/
+.ContentDescriptionContent2 {
+    display: flex;
+    margin-right: auto;
+    width: 100%;
+    transition: width 0.5s, height 0.5s;
+}
 
-/*.mb-3 .btn:hover {
-    background-color: #FF6347;*/ /* color when hovered */
-/*}*/
 
 .Author_Artist {
     display: -webkit-box;
@@ -604,7 +607,7 @@ flexLiLayout {
     background-color: rgba(0, 0, 0, 0.1); /* Add a slightly darker background */
     padding: 2px 5px; /* Add padding around the text */
     border-radius: 3px; /* Add rounded corners to the background */
-    color: orangered; /* Change the text color to OrangeRed */
+    color: #ff6740; /* Change the text color to OrangeRed */
 }
 
 .TitleTagDescriptionCostum {
@@ -655,7 +658,6 @@ flexLiLayout {
 .MoveDownIndexWallPapers {
     height: 100%;
     width: 100%;
-    padding-top: px;
 }
 
 .IndexArrowEx {
@@ -671,7 +673,6 @@ flexLiLayout {
     width: 70%;
     height: 120px;
     position: absolute;
-    background-color: orangered;
     margin-top: 255px;
     border-style: solid;
     border-radius: 10px;
@@ -685,7 +686,17 @@ flexLiLayout {
     display: flex;
     align-items: center;
     flex-grow: 1;
+    background-color: white;
+    color: #191a1c;
 }
+
+    .CardBody-Ex:hover {
+        background-color: #191a1c;
+        color: rgb(255, 103, 64) !important;
+        border-top: solid rgb(255, 103, 64) !important;
+        border-bottom: solid rgb(255, 103, 64) !important;
+        border-radius: 2px;
+    }
 
 .card-description-Ex {
     height: 100%;
@@ -696,7 +707,6 @@ flexLiLayout {
     border-radius: 1px;
     border-right: solid;
     border-color: #191a1c;
-    color: #191a1c;
     font-size: 20px;
 }
 
@@ -721,7 +731,7 @@ flexLiLayout {
 }
 
 .card-title-extra-style:hover {
-    color: orangered;
+    color: #ff6740;
 }
 
 .CardFour {
@@ -739,7 +749,6 @@ flexLiLayout {
     overflow: hidden;
     border-radius: 20px;
     position: relative;
-   
     transition: width 0.5s, height 0.5s;
 }
 
@@ -786,7 +795,7 @@ flexLiLayout {
     .ANoneStyle:hover {
         border-top: solid;
         border-bottom: solid;
-        border-color: orangered;
+        border-color: #ff6740;
     }
 
 .FourOfAKind img {
@@ -890,7 +899,7 @@ flexLiLayout {
         z-index: 2; /* This is to ensure the hovered box overlays the others */
         border-top: solid;
         border-bottom: solid;
-        border-color: orangered;
+        border-color: #ff6740;
     }
 
 @media (max-width: 1200px) {
@@ -1345,7 +1354,7 @@ flexLiLayout {
     font-size: 30px;
     overflow: hidden; /* Hide the overflowing text */
     transition: top 0.5s, left 0.5s; /* Smooth transition for top and left */
-    -webkit-text-stroke: 0.5px black; 
+    -webkit-text-stroke: 0.5px black;
 }
 
 .manga-img-container {
@@ -1426,7 +1435,7 @@ flexLiLayout {
     cursor: pointer;
     height: 100%;
     width: 100%;
-    color:white; 
+    color: white;
     background-color: rgb(25, 26, 28);
 }
 
@@ -1444,23 +1453,23 @@ flexLiLayout {
 
     .EditBookButton:hover, .ReportBookButton:hover {
         background-color: #141414;
-        color:white; 
+        color: white;
     }
 
 .AddToReadListButton:hover {
-    background: orangered;
+    background: #ff6740;
     color: #050801;
-    box-shadow: 0 0 5px orangered, 0 0 25px orangered, 0 0 50px orangered, 0 0 200px orangered;
+    box-shadow: 0 0 5px #ff6740, 0 0 25px #ff6740, 0 0 50px #ff6740, 0 0 200px #ff6740;
     -webkit-box-reflect: below 1px linear-gradient(transparent, #0005);
 }
 
 .EditSizeCurrentpage, .ReportSizeCurrentpage {
     transition: width 0.5s ease, height 0.5s ease;
 }
+
 .CurrentMangaTagsContainer {
     height: auto;
     width: 60%;
-  
     margin-left: 25%;
     border: none;
     border-radius: 5px;
@@ -1476,7 +1485,6 @@ flexLiLayout {
 
 .tagsInsideInsideCurrentManga {
     background-color: #444;
-   
     padding: 5px;
     margin: 0;
     border-radius: 3px;
@@ -1495,9 +1503,11 @@ flexLiLayout {
 .CustomWarningLabel {
     color: red !important;
 }
+
 .CustomHintLabel {
-    color: rgb(255, 103, 64); 
+    color: rgb(255, 103, 64);
 }
+
 @media screen and (min-width: 769px) and (max-width: 910px) {
     .CurrentMangaTagsContainer {
         margin-left: 40% !important; /* Adjusted to move to the right by setting margin-left to 40% */
@@ -1511,18 +1521,19 @@ flexLiLayout {
         margin-right: 0; /* Reset margin-right to 0 */
     }
 }
+
 @media (max-width: 1500px) {
     .CurrentMangaTagsContainer {
         margin-left: 35%; /* Adjusted to move to the right by setting margin-left: auto */
         margin-right: 0; /* Reset margin-right to 0 */
     }
 }
+
 @media (max-width: 768px) {
     .CurrentMangaTagsContainer {
         width: 100%; /* Adjust the width to occupy the full available width on smaller screens */
         margin-left: 0; /* Remove the left margin for better centering on smaller screens */
         padding: 0 10px; /* Add horizontal padding for spacing */
-     
     }
 
     .tagsInsideInsideCurrentManga {
@@ -1531,7 +1542,6 @@ flexLiLayout {
     }
 }
 
-
 /* Use media query for smaller screens */
 @media screen and (max-width: 768px) {
     .tagsInsideInsideCurrentManga {
@@ -1539,6 +1549,7 @@ flexLiLayout {
         font-size: 14px;
         padding: 3px;
     }
+
     .manga-title {
         top: calc(15px - 40px) !important;
         left: calc(2% + 140px) !important; /* Adjust these values for smaller screens */
@@ -1614,7 +1625,82 @@ flexLiLayout {
         width: 50%; /* reduce the width of the container */
         justify-content: space-between; /* distributes space between items evenly */
     }
-  
 }
 
+.mangaDetailsWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 5%;
+}
+
+/* Individual Content Box */
+
+.mangaDetailsBox {
+    flex: 1 1 auto; /* Will take up 30% of the container's width when the screen is large */
+    box-sizing: border-box;
+    margin: 1em;
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centers the content horizontally */
+    justify-content: center; /* Centers the content vertically */
+    border: 2px solid #ff6740; /* Adds a 2px solid border with color #ff6740 */
+    border-radius: 10px; /* Adds rounded corners to the box */
+    min-width: 30%;
+    background-color: #444;
+}
+
+    .mangaDetailsBox.bookdescription {
+        flex-grow: 2;
+    }
+}
+
+/* When the screen's width is 600px or less, change the boxes to take 100% of the width */
+@media (max-width: 600px) {
+    .mangaDetailsBox {
+        flex: 1 0 100%;
+        margin: 0.5em; /* reduce margin */
+        padding: 0.5em; /* reduce padding */
+    }
+}
+
+.MangaInputText {
+    background-color: #191a1c;
+    padding: 5px;
+    margin: 0;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 15px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 75px;
+    flex-shrink: 0;
+    border: 2px solid #ff6740; /* Adds a 2px solid border with color #ff6740 */
+    border-radius: 10px;
+}
+
+.MangaContainerInput {
+    height: auto;
+    width: 100%; /* Adjust width to take the full width of the parent */
+    border: none;
+    border-radius: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    padding: 5px;
+    box-sizing: border-box;
+    transition: margin-left 0.5s ease;
+    align-items: center; /* Centers the content horizontally */
+    justify-content: center;
+}
+
+.MangaInputText:hover {
+    background-color: #ff6740;
+}
 /* CurrentManga Page Ends */

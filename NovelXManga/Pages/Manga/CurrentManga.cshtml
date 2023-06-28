@@ -1,14 +1,20 @@
 ﻿@page
 @model NovelXManga.Pages.Manga.CurrentMangaModel
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<IdentityUser> UserManager
+@inject SignInManager<IdentityUser> SignInManager
 @{
+    var user = await UserManager.GetUserAsync(User);
+    var UpdaterUser = user != null && await UserManager.IsInRoleAsync(user, "NormalUser");
 }
 
 
 
 
+    <div class="Content1Ex">
+        
 <form method="post" asp-page-handler="MangaPage" enctype="multipart/form-data" >
     <input type="hidden" id="CurrentManga_MangaID" name="CurrentManga.MangaID" value="11" />
-    <div class="Content1Ex">
         <div class="card-ex">
             <div class="card-image-ex">
              
@@ -20,12 +26,18 @@
                     <!-- Manga image goes here -->
                     @if (@Model.CurrentManga.PhotoPath != string.Empty)
                     {
-                        <div class="mb-3">
-                            <img class="manga-img" asp-append-version="true" src="~/Images/MangaImage/@Model.CurrentManga.PhotoPath" alt="NoImage">
-                            @if (User.Identity.IsAuthenticated && User.IsInRole("Updater"))
+                        <div>
+                            @if (UpdaterUser)
                             {
-                                <input type="text" class="HiddenGroup" asp-for="@Model.CurrentManga.PhotoPath" class="form-control" />
+                                <a asp-page="/MangaUpdates/UpdatePhoto" asp-route-id="@Model.CurrentManga.MangaID">
+                                    <img class="manga-img" asp-append-version="true" src="~/Images/MangaImage/@Model.CurrentManga.PhotoPath" alt="NoImage">
+                                </a>
                             }
+                            else
+                            {
+                                <img class="manga-img" asp-append-version="true" src="~/Images/MangaImage/@Model.CurrentManga.PhotoPath" alt="NoImage">
+                            }
+
                         </div>
                     }
                     else
@@ -38,13 +50,14 @@
                     <!-- Manga title goes here -->
                     @if (@Model.CurrentManga.Authormodels != null)
                     {
-                        <h1 class="FontSizeCurrentBook">@Model.CurrentManga.MangaName</h1>
-                       @* <h1 class="FontSizeCurrentBook">Lorem um is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unk</h1>*@
+                       
+                       
+
                       
-                        @if (User.Identity.IsAuthenticated && User.IsInRole("Updater"))
-                        {
-                            <input type="text" class="HiddenGroup" asp-for="@Model.CurrentManga.MangaName" class="form-control" />
-                        }
+                            <h1 class="FontSizeCurrentBook">@Model.CurrentManga.MangaName</h1>
+                       
+                      
+
                     }
                 </div>
                 <div class="AddEditReportCurrentpage">
@@ -68,33 +81,53 @@
             </div>
 
         </div>
+    </form>
     </div>
    
 
 
     <div class="Content1Cost">
-
+        <form method="post" asp-page-handler="MangaPageTagGenre" enctype="multipart/form-data" >
+    <input type="hidden" id="CurrentManga_MangaID" name="CurrentManga.MangaID" value="11" />
         <div class="CurrentMangaTagsContainer">
-
+           
             @if (Model.CurrentManga.GenresModels != null)
             {
                 @foreach (var item in Model.CurrentManga.GenresModels)
                 {
                     <div class="tagsInsideInsideCurrentManga">
-                        @if (item.GenreName == "Adult" || item.GenreName == "Smut" || item.GenreName == "Mature")
-                        {
-                            <label class="CustomWarningLabel">
-                                @item.GenreName
-                            </label>
+                        @if (UpdaterUser)
+                        {                    <a asp-page="/MangaUpdates/UpdateGenre" asp-route-id="@Model.CurrentManga.MangaID">
+                            @if (item.GenreName == "Adult" || item.GenreName == "Smut" || item.GenreName == "Mature")
+                            {
+                                <label class="CustomWarningLabel">
+                                    @item.GenreName
+                                </label>
+                            }
+                            else
+                            {
+                                <label>
+                                    @item.GenreName
+                                </label>
+                            }</a>
                         }
                         else
-                        {
-                            <label>
-                                @item.GenreName
-                            </label>
-                        }
+                        {      @if (item.GenreName == "Adult" || item.GenreName == "Smut" || item.GenreName == "Mature")
+                            {
+                                <label class="CustomWarningLabel">
+                                    @item.GenreName
+                                </label>
+                            }
+                            else
+                            {
+                                <label>
+                                    @item.GenreName
+                                </label>
+                            }   }
+                  
                     </div>
                 }
+            
             }
             @if (Model.CurrentManga.TagsModels != null)
             {
@@ -128,36 +161,213 @@
                      
                     </div>
                 }
-            }
-        
+            }</div>
+
+    </form>
+    <div class="mangaDetailsWrapper">
+        <div class="mangaDetailsBox">
+            <h1>CHARACTERS: </h1>
+            <form method="post" asp-page-handler="RandomManga" asp-page="/MangaUpdates/UpdateCharacters" asp-route-id="@Model.CurrentManga.MangaID">
+                <div class="MangaContainerInput">
+                @if (Model.CurrentManga.Characters != null || Model.CurrentManga.Characters.Count <= 1)
+                { 
+                    foreach (var character in Model.CurrentManga.Characters)
+                    {
+                        <input type="hidden" name="characters" value="@character.CharacterId" />
+                            <div class="MangaInputText">
+                                <p>@character.CharacterName</p>
+                                </div>
+                    }
+                }
+                else
+                {
+                    <p>N/A</p>
+                }
+               
+            </div>
+           
+                <button type="submit">Update Characters</button>
+            </form>
+        </div>
+        <div class="mangaDetailsBox">
+            <h1>STUDIOS/S: </h1>
+
+            <div class="MangaContainerInput">
+
+                @if (Model.CurrentManga != null && Model.CurrentManga.StudioModels != null && Model.CurrentManga.StudioModels.Count >= 1)
+                {
+                    foreach (var item in Model.CurrentManga.StudioModels)
+                    {
+                        if (!string.IsNullOrEmpty(item.GroupName))
+                        {
+                            <div class="MangaInputText">  <a asp-for="@item.website"> @item.GroupName  </a></div>
+                        }
+                        else
+                        {
+                            <div class="MangaInputText">No Website</div>
+                        }
+                    }
+                }
+                else
+                {
+                    <div class="MangaInputText">Missing Information</div>
+                }
+            </div>
+        </div>
+        <div class="mangaDetailsBox">
+          
+            <h1>ASSOCIATED NAME/S:</h1>
+            <div class="MangaContainerInput">
+                @if (Model.CurrentManga.TagsModels != null)
+                {
+                    @foreach (var item in Model.CurrentManga.TagsModels)
+                    {
+                        <div class="MangaInputText">@item.TagName</div>
+
+                    }
+                }
+                else
+                {
+                    <p>N/A</p>
+                }
+            </div>
       
         </div>
+   
+        <div class="mangaDetailsBox bookdescription">
+            <div class="MangaContainerInput">
+                @if (Model.CurrentManga.Description != null)
+                {
+                   
+                       @* @Model.CurrentManga.Description*@
+                       <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+Why do we use it?
+
+It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+Why do we use it?
+
+It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+Why do we use it?
+
+It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                        Why do we use it?
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+Why do we use it?
+
+It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+Why do we use it?
+
+It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+Why do we use it?
+
+It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                        Why do we use it?
+
+                        It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+
+                        It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+                    </p>
   
+               
+                }
+              
+            </div>
+
+        </div>
+        <div class="mangaDetailsBox">
+            <h1>Buy At:</h1>
+            <div class="MangaContainerInput">
+                @if (Model.CurrentManga.BuyPages != null)
+                {
+
+                    @foreach (var item in Model.CurrentManga.BuyPages)
+                    {
+
+                        <a href="@item.BuyWebsite">
+
+
+                            @foreach (var lang in item._Languages)
+                            {
+
+                                <div class="MangaInputText">
+
+                                    <p>@lang.LanguageName</p>
+
+                                </div>
+
+
+
+
+
+
+                            }
+
+                        </a>
+
+
+                    }
+
+
+
+                }
+                else
+                {
+                    <span>N/A</span>
+                }
+            </div>
+        </div>
+         <div class="mangaDetailsBox">
+            <div class="MangaContainerInput">
+                @if (Model.CurrentManga.ReleaseYear != null)
+                {
+                    <div class="mb-3">
+                        <label class="form-label" asp-for="@Model.CurrentManga.ReleaseYear">Book Release: @Model.CurrentManga.ReleaseYear</label>
+
+                    </div>
+                }
+                <div class="MangaInputText">
+
+                </div>
+            </div>
+
+        </div>
+         <div class="mangaDetailsBox">
+            <div class="MangaContainerInput">
+                <div class="MangaInputText">
+
+                </div>
+            </div>
+
+        </div>
+        <div class="mangaDetailsBox">
+            <div class="MangaContainerInput">
+                <div class="MangaInputText">Dont fill this
+                </div>
+            </div>
+
+        </div>
+  
+
+    </div>
+
+
+
    
 
+
+        </div>
+
+
   
 
 
 
-
-
-
-</form>
-<form method="post" asp-page-handler="RandomManga" asp-page="/MangaUpdates/UpdateCharacters" asp-route-id="@Model.CurrentManga.MangaID">
-    @if (Model.CurrentManga.Characters != null)
-    {
-        foreach (var character in Model.CurrentManga.Characters)
-        {    
-             <input type="hidden" name="characters" value="@character.CharacterId" />
-             <p>@character.CharacterName</p>
-        }
-    }
-            else
-            {
-                <p>N/A</p>
-            }
-    <button type="submit">Update Characters</button>
-</form>
 
 
 

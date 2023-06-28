@@ -311,3 +311,99 @@ else
     </div>
 </div>
 *@
+
+
+
+@*  From INDEX PAGE  <div class="Content3Cost">
+    @foreach (var book in Model.GetAllBooks.Take(1))
+    {
+
+        <div class="card">
+
+            <img class="card-img-background" src="~/Images/MangaImage/@book.PhotoPath" />
+            <div class="card-body">
+
+                <img class="card-img-index" src="~/Images/MangaImage/@book.PhotoPath" />
+
+                <div class="TitleTagDescriptionCostum">
+                    <div class="card-title">
+                        <a asp-page="/Manga/CurrentManga" asp-route-id="@book.MangaID">
+                            <h1 class="card-title-extra-style">
+                                @book.MangaName
+                            </h1>
+                        </a>
+
+                    </div>
+
+                    <h2 class="tag-container">
+                        @foreach (var tag in book.TagsModels)
+                        {
+                            <a asp-page="/Manga/CurrentManga" asp-route-id="@book.MangaID">
+                                <span class="tag RemoveWhenSmall">@tag.TagName</span>
+                            </a>
+
+                        }
+                        @foreach (var genre in book.GenresModels)
+                        {
+                            <a asp-page="/Manga/CurrentManga" asp-route-id="@book.MangaID">
+                                <span class="tag RemoveWhenSmall">@genre.GenreName</span>
+                            </a>
+                        }
+
+                    </h2>
+                    <div class="card-description RemoveWhenSmall RemoveWhenLarge RemoveWhenMedium">
+                        <p>
+                            <a asp-page="/Manga/CurrentManga" asp-route-id="@book.MangaID">
+                                @book.Description
+                            </a>
+
+                        </p>
+                    </div>
+                    <div class="Index_Artist_Author_Navigation_Arrows ">
+                        <h2 class="Author_Artist">
+                            @foreach (var author in book.Authormodels)
+                            {
+                                <a asp-page="/Manga/CurrentManga" asp-route-id="@book.MangaID">
+                                    @author.FirstName @author.LastName
+                                </a>
+                                @foreach (var artst in book.ArtistModels)
+                                {
+                                    @if (author.FirstName != artst.FirstName)
+                                    {
+                                        <a asp-page="/Manga/CurrentManga" asp-route-id="@book.MangaID">
+                                            @artst.FirstName @artst.LastName
+                                        </a>
+                                    }
+                                }
+                            }
+
+
+                        </h2>
+
+                        <div class="IndexArrowPostition">
+                            <button id="prev" class="IndexArrowsPrev">
+                                prev
+                            </button>
+                            <button id="next" class="IndexArrowsNext">
+                                next
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div>
+                </div>
+
+
+
+            </div>
+
+        </div>
+
+    }
+
+
+
+</div>*@

@@ -76,6 +76,19 @@ namespace NovelXManga.Pages.Manga
             return Page();
         }
 
+        public IActionResult OnPostMangaPageTagGenre(int MangaID)
+        {
+            CurrentManga = mangaRepository.GetOneMangaAllIncluded(MangaID);
+            if (CurrentManga == null)
+            {
+                return NotFound();
+            }
+
+            Blog = blogRepsitory.GetModel(CurrentManga.BlogModelId);
+            Posts = postRepsitory.GetAllModels();
+            return Page();
+        }
+
         public IActionResult OnPost()
         {
             return Page();
@@ -89,6 +102,7 @@ namespace NovelXManga.Pages.Manga
             }
             CurrentManga = mangaRepository.GetOneMangaAllIncluded(id);
             Blog = blogRepsitory.GetModel(CurrentManga.BlogModelId);
+
             Posts = postRepsitory.GetAllModels();
             return Page();
         }

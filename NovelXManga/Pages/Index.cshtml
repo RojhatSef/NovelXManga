@@ -84,7 +84,7 @@
                             <h2 class="tag-container DisplayWhenHoverFourOfaKind">
                                 @if (Model.AllBooksList[11].TagsModels != null)
                                 {
-                                    @foreach (var tag in Model.AllBooksList[11].TagsModels)
+                                    @foreach (var tag in Model.AllBooksList[11].TagsModels.Take(5))
                                     {
 
                                         <span class="tag   ">@tag.TagName  </span>
@@ -95,7 +95,7 @@
 
                                 @if (Model.AllBooksList[11].GenresModels != null)
                                 {
-                                    @foreach (var genre in Model.AllBooksList[11].GenresModels)
+                                    @foreach (var genre in Model.AllBooksList[11].GenresModels.Take(5))
                                     {
 
                                         <span class="tag  ">  @genre.GenreName  </span>
@@ -118,7 +118,7 @@
                         <div class="FourofKindContent">
                             <h2>@Model.AllBooksList[10].MangaName</h2>
                             <h2 class="tag-container DisplayWhenHoverFourOfaKind">
-                                @foreach (var tag in Model.AllBooksList[10].TagsModels)
+                                @foreach (var tag in Model.AllBooksList[10].TagsModels.Take(5))
                                 {
 
                                     <span class="tag FourTagsGenreSize  ">@tag.TagName  </span>
@@ -126,7 +126,7 @@
 
                                 }
 
-                                @foreach (var genre in Model.AllBooksList[10].GenresModels)
+                                @foreach (var genre in Model.AllBooksList[10].GenresModels.Take(5))
                                 {
 
                                     <span class="tag FourTagsGenreSize ">  @genre.GenreName  </span>
@@ -150,7 +150,7 @@
                         <div class="FourofKindContent">
                             <h2>@Model.AllBooksList[9].MangaName</h2>
                             <h2 class="tag-container DisplayWhenHoverFourOfaKind">
-                                @foreach (var tag in Model.AllBooksList[9].TagsModels)
+                                @foreach (var tag in Model.AllBooksList[9].TagsModels.Take(5))
                                 {
 
                                     <span class="tag FourTagsGenreSize  ">@tag.TagName  </span>
@@ -158,7 +158,7 @@
 
                                 }
 
-                                @foreach (var genre in Model.AllBooksList[9].GenresModels)
+                                @foreach (var genre in Model.AllBooksList[9].GenresModels.Take(5))
                                 {
 
                                     <span class="tag FourTagsGenreSize ">  @genre.GenreName  </span>
@@ -182,7 +182,7 @@
                         <div class="FourofKindContent">
                             <h2>@Model.AllBooksList[8].MangaName</h2>
                             <h2 class="tag-container DisplayWhenHoverFourOfaKind">
-                                @foreach (var tag in Model.AllBooksList[8].TagsModels)
+                                @foreach (var tag in Model.AllBooksList[8].TagsModels.Take(5))
                                 {
 
                                     <span class="tag FourTagsGenreSize  ">@tag.TagName  </span>
@@ -190,7 +190,7 @@
 
                                 }
 
-                                @foreach (var genre in Model.AllBooksList[8].GenresModels)
+                                @foreach (var genre in Model.AllBooksList[8].GenresModels.Take(5))
                                 {
 
                                     <span class="tag FourTagsGenreSize ">  @genre.GenreName  </span>
@@ -214,7 +214,7 @@
                         <div class="FourofKindContent">
                             <h2>@Model.AllBooksList[7].MangaName</h2>
                             <h2 class="tag-container DisplayWhenHoverFourOfaKind">
-                                @foreach (var tag in Model.AllBooksList[7].TagsModels)
+                                @foreach (var tag in Model.AllBooksList[7].TagsModels.Take(5))
                                 {
 
                                     <span class="tag FourTagsGenreSize  ">@tag.TagName  </span>
@@ -222,10 +222,11 @@
 
                                 }
 
-                                @foreach (var genre in Model.AllBooksList[7].GenresModels)
+                                @foreach (var genre in Model.AllBooksList[7].GenresModels.Take(5))
                                 {
 
                                     <span class="tag FourTagsGenreSize ">  @genre.GenreName  </span>
+                                  
 
                                 }
 
@@ -246,7 +247,7 @@
                         <div class="FourofKindContent">
                             <h2>@Model.AllBooksList[6].MangaName</h2>
                             <h2 class="tag-container DisplayWhenHoverFourOfaKind">
-                                @foreach (var tag in Model.AllBooksList[6].TagsModels)
+                                @foreach (var tag in Model.AllBooksList[6].TagsModels.Take(5))
                                 {
 
                                     <span class="tag FourTagsGenreSize  ">@tag.TagName  </span>
@@ -254,7 +255,7 @@
 
                                 }
 
-                                @foreach (var genre in Model.AllBooksList[6].GenresModels)
+                                @foreach (var genre in Model.AllBooksList[6].GenresModels.Take(5))
                                 {
 
                                     <span class="tag FourTagsGenreSize ">  @genre.GenreName  </span>
@@ -278,7 +279,7 @@
                         <div class="FourofKindContent">
                             <h2>@Model.AllBooksList[5].MangaName</h2>
                             <h2 class="tag-container DisplayWhenHoverFourOfaKind">
-                                @foreach (var tag in Model.AllBooksList[5].TagsModels)
+                                @foreach (var tag in Model.AllBooksList[5].TagsModels.Take(5))
                                 {
 
                                     <span class="tag FourTagsGenreSize  ">@tag.TagName  </span>
@@ -286,7 +287,7 @@
 
                                 }
 
-                                @foreach (var genre in Model.AllBooksList[5].GenresModels)
+                                @foreach (var genre in Model.AllBooksList[5].GenresModels.Take(5))
                                 {
 
                                     <span class="tag FourTagsGenreSize ">  @genre.GenreName  </span>
@@ -310,7 +311,7 @@
                         <div class="FourofKindContent">
                             <h2>@Model.AllBooksList[4].MangaName</h2>
                             <h2 class="tag-container DisplayWhenHoverFourOfaKind">
-                                @foreach (var tag in Model.AllBooksList[4].TagsModels)
+                                @foreach (var tag in Model.AllBooksList[4].TagsModels.Take(5))
                                 {
 
                                     <span class="tag FourTagsGenreSize  ">@tag.TagName  </span>
@@ -318,7 +319,7 @@
 
                                 }
 
-                                @foreach (var genre in Model.AllBooksList[4].GenresModels)
+                                @foreach (var genre in Model.AllBooksList[4].GenresModels.Take(5))
                                 {
 
                                     <span class="tag FourTagsGenreSize ">  @genre.GenreName  </span>
@@ -342,7 +343,7 @@
                         <div class="FourofKindContent">
                             <h2>@Model.AllBooksList[3].MangaName</h2>
                             <h2 class="tag-container DisplayWhenHoverFourOfaKind">
-                                @foreach (var tag in Model.AllBooksList[3].TagsModels)
+                                @foreach (var tag in Model.AllBooksList[3].TagsModels.Take(5))
                                 {
 
                                     <span class="tag FourTagsGenreSize  ">@tag.TagName  </span>
@@ -350,7 +351,7 @@
 
                                 }
 
-                                @foreach (var genre in Model.AllBooksList[3].GenresModels)
+                                @foreach (var genre in Model.AllBooksList[3].GenresModels.Take(5))
                                 {
 
                                     <span class="tag FourTagsGenreSize ">  @genre.GenreName  </span>
@@ -374,7 +375,7 @@
                         <div class="FourofKindContent">
                             <h2>@Model.AllBooksList[2].MangaName</h2>
                             <h2 class="tag-container DisplayWhenHoverFourOfaKind">
-                                @foreach (var tag in Model.AllBooksList[2].TagsModels)
+                                @foreach (var tag in Model.AllBooksList[2].TagsModels.Take(5))
                                 {
 
                                     <span class="tag FourTagsGenreSize  ">@tag.TagName  </span>
@@ -382,7 +383,7 @@
 
                                 }
 
-                                @foreach (var genre in Model.AllBooksList[2].GenresModels)
+                                @foreach (var genre in Model.AllBooksList[2].GenresModels.Take(5))
                                 {
 
                                     <span class="tag FourTagsGenreSize ">  @genre.GenreName  </span>
@@ -406,7 +407,7 @@
                         <div class="FourofKindContent">
                             <h2>@Model.AllBooksList[1].MangaName</h2>
                             <h2 class="tag-container DisplayWhenHoverFourOfaKind">
-                                @foreach (var tag in Model.AllBooksList[1].TagsModels)
+                                @foreach (var tag in Model.AllBooksList[1].TagsModels.Take(5))
                                 {
 
                                     <span class="tag FourTagsGenreSize  ">@tag.TagName  </span>
@@ -414,7 +415,7 @@
 
                                 }
 
-                                @foreach (var genre in Model.AllBooksList[1].GenresModels)
+                                @foreach (var genre in Model.AllBooksList[1].GenresModels.Take(5))
                                 {
 
                                     <span class="tag FourTagsGenreSize ">  @genre.GenreName  </span>
@@ -438,7 +439,7 @@
                         <div class="FourofKindContent">
                             <h2>@Model.AllBooksList[0].MangaName</h2>
                             <h2 class="tag-container DisplayWhenHoverFourOfaKind">
-                                @foreach (var tag in Model.AllBooksList[0].TagsModels)
+                                @foreach (var tag in Model.AllBooksList[0].TagsModels.Take(5))
                                 {
 
                                     <span class="tag FourTagsGenreSize  ">@tag.TagName  </span>
@@ -446,7 +447,7 @@
 
                                 }
 
-                                @foreach (var genre in Model.AllBooksList[0].GenresModels)
+                                @foreach (var genre in Model.AllBooksList[0].GenresModels.Take(5))
                                 {
 
                                     <span class="tag FourTagsGenreSize ">  @genre.GenreName  </span>
@@ -473,21 +474,21 @@
         <div class="ContentDescription"><h1>Users choice</h1></div>
         <div class="MiniCards">
             <div class="BoxOne">
-                <a asp-page="/Manga/CurrentManga" asp-route-id="@Model.AllBooksList[0].MangaID">
-                    <img class="BoxImage" src="~/Images/MangaImage/@Model.AllBooksList[0].PhotoPath" />
+                <a asp-page="/Manga/CurrentManga" asp-route-id="@Model.AllBooksList[12].MangaID">
+                    <img class="BoxImage" src="~/Images/MangaImage/@Model.AllBooksList[12].PhotoPath" />
 
                 </a>
             </div>
             <div class="BoxOne">
-                <a asp-page="/Manga/CurrentManga" asp-route-id="@Model.AllBooksList[1].MangaID">
-                    <img class="BoxImage" src="~/Images/MangaImage/@Model.AllBooksList[1].PhotoPath" />
+                <a asp-page="/Manga/CurrentManga" asp-route-id="@Model.AllBooksList[14].MangaID">
+                    <img class="BoxImage" src="~/Images/MangaImage/@Model.AllBooksList[14].PhotoPath" />
                     @*     <div class="BoxContent"> 
                 </div>*@
                 </a>
             </div>
             <div class="BoxOne hide-on-small">
-                <a class="WierdBug" asp-page="/Manga/CurrentManga" asp-route-id="@Model.AllBooksList[2].MangaID">
-                    <img class="BoxImage" src="~/Images/MangaImage/@Model.AllBooksList[2].PhotoPath" />
+                <a class="WierdBug" asp-page="/Manga/CurrentManga" asp-route-id="@Model.AllBooksList[13].MangaID">
+                    <img class="BoxImage" src="~/Images/MangaImage/@Model.AllBooksList[13].PhotoPath" />
 
                 </a>
             </div>
@@ -529,9 +530,8 @@
     </div>
 }
 <div class="Content2Cost">
-    <div class="ContentDescription"><h1>Best rated</h1></div>
-  
-        <div class="card">
+    <div class="ContentDescriptionContent2 "><h1>Best rated</h1></div>
+        <div class="card MoveUpCardIndexCont2 ">
         <div id="slider">
 @if(Model.GetAllBooks != null){
         @foreach (var book in Model.GetAllBooks.Take(4))
@@ -555,7 +555,7 @@
 
                     <h2 class="tag-container">
                                     @if (book.TagsModels != null)
-                                    { @foreach (var tag in book.TagsModels)
+                                        { @foreach (var tag in book.TagsModels.Take(6))
                                         {
                                             <a asp-page="/Manga/CurrentManga" asp-route-id="@book.MangaID">
                                                 <span class="tag RemoveWhenSmall">@tag.TagName</span>
@@ -566,7 +566,7 @@
                                    
                                     @if (book.GenresModels != null)
                                     {
-                                        @foreach (var genre in book.GenresModels)
+                                            @foreach (var genre in book.GenresModels.Take(6))
                                         {
                                             <a asp-page="/Manga/CurrentManga" asp-route-id="@book.MangaID">
                                                 <span class="tag RemoveWhenSmall">@genre.GenreName</span>
@@ -664,99 +664,7 @@
 </div>
 
 </div>
-@*<div class="Content3Cost">
-    @foreach (var book in Model.GetAllBooks.Take(1))
-    {
 
-        <div class="card">
-
-            <img class="card-img-background" src="~/Images/MangaImage/@book.PhotoPath" />
-            <div class="card-body">
-
-                <img class="card-img-index" src="~/Images/MangaImage/@book.PhotoPath" />
-
-                <div class="TitleTagDescriptionCostum">
-                    <div class="card-title">
-                        <a asp-page="/Manga/CurrentManga" asp-route-id="@book.MangaID">
-                            <h1 class="card-title-extra-style">
-                                @book.MangaName
-                            </h1>
-                        </a>
-
-                    </div>
-
-                    <h2 class="tag-container">
-                        @foreach (var tag in book.TagsModels)
-                        {
-                            <a asp-page="/Manga/CurrentManga" asp-route-id="@book.MangaID">
-                                <span class="tag RemoveWhenSmall">@tag.TagName</span>
-                            </a>
-
-                        }
-                        @foreach (var genre in book.GenresModels)
-                        {
-                            <a asp-page="/Manga/CurrentManga" asp-route-id="@book.MangaID">
-                                <span class="tag RemoveWhenSmall">@genre.GenreName</span>
-                            </a>
-                        }
-
-                    </h2>
-                    <div class="card-description RemoveWhenSmall RemoveWhenLarge RemoveWhenMedium">
-                        <p>
-                            <a asp-page="/Manga/CurrentManga" asp-route-id="@book.MangaID">
-                                @book.Description
-                            </a>
-
-                        </p>
-                    </div>
-                    <div class="Index_Artist_Author_Navigation_Arrows ">
-                        <h2 class="Author_Artist">
-                            @foreach (var author in book.Authormodels)
-                            {
-                                <a asp-page="/Manga/CurrentManga" asp-route-id="@book.MangaID">
-                                    @author.FirstName @author.LastName
-                                </a>
-                                @foreach (var artst in book.ArtistModels)
-                                {
-                                    @if (author.FirstName != artst.FirstName)
-                                    {
-                                        <a asp-page="/Manga/CurrentManga" asp-route-id="@book.MangaID">
-                                            @artst.FirstName @artst.LastName
-                                        </a>
-                                    }
-                                }
-                            }
-                     
-
-                        </h2>
-
-                        <div class="IndexArrowPostition">
-                            <button id="prev" class="IndexArrowsPrev">
-                                prev
-                            </button>
-                            <button id="next" class="IndexArrowsNext">
-                                next
-                            </button>
-                        </div>
-                    </div>
-
-                </div>
-
-
-                <div>
-                </div>
-
-
-
-            </div>
-        
-        </div>
-
-    }
-
-
-
-</div>*@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 

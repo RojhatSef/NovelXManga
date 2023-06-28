@@ -4,10 +4,13 @@
 }
 <h1>Update Genres</h1>
 
-<div style="padding-left: 100px">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+
+    
+<div>
     <form method="post" enctype="multipart/form-data">
         <input type="hidden" name="mangaModel.MangaID" value="@Model.mangaModelUpdate.MangaID" />
-        <div class="form-group">
+
             <div class="row">
                 @foreach (var Genre in Model.Genres)
                 {
@@ -22,7 +25,7 @@
 
                 }
             </div>
-        </div>
+       
         <button type="submit" class="btn btn-danger">Update Genre</button>
         <a asp-page="/Index" class="btn btn-primary">Back</a>
     </form>
