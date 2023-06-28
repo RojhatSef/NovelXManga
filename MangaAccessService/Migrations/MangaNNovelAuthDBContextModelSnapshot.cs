@@ -774,6 +774,9 @@ namespace MangaAccessService.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("languageId"), 1L, 1);
 
+                    b.Property<string>("FlagUniCode")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("IsChecked")
                         .HasColumnType("bit");
 

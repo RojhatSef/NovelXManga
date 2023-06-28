@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MangaAccessService.Migrations
 {
-    public partial class TesTModel : Migration
+    public partial class TestModel3 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -1255,6 +1255,7 @@ namespace MangaAccessService.Migrations
                     languageId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     LanguageName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FlagUniCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     MangaID = table.Column<int>(type: "int", nullable: true),
                     IsChecked = table.Column<bool>(type: "bit", nullable: false),
                     OfficalWebsiteOfficalID = table.Column<int>(type: "int", nullable: true)

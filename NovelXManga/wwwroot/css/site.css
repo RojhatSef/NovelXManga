@@ -1552,7 +1552,7 @@ flexLiLayout {
 
     .manga-title {
         top: calc(15px - 40px) !important;
-        left: calc(2% + 140px) !important; /* Adjust these values for smaller screens */
+        left: calc(5% + 140px) !important; /* Adjust these values for smaller screens */
     }
 
     .manga-img-container {

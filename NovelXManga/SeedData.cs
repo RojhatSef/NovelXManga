@@ -81,13 +81,14 @@ namespace NovelXManga
         public void addLanguages()
         {
             string[] LanguagesInput = { "English", "Japanese", "Spanish", "Chinese", "Russian", "French", "Arabic", "Korean", "Hindi", "Bengali", "Portuguese", "Indonesian", "Urdu", };
-
+            string[] FlaguniCode = { "🇺🇸", "🇯🇵", "🇪🇸", "🇨🇳", "🇷🇺", "🇫🇷", "🇸🇦", "🇰🇷", "🇮🇳", "🇧🇩", "🇵🇹", "🇮🇩", "🇵🇰", };
             var LangList = new List<Languages>();
             for (int i = 0; i < LanguagesInput.Length; i++)
             {
                 Languages newLang = new Languages();
 
                 newLang.LanguageName = LanguagesInput[i];
+                newLang.FlagUniCode = FlaguniCode[i];
                 LangList.Add(newLang);
             }
             context.Languages_.AddRange(LangList);

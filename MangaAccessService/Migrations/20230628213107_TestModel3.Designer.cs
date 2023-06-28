@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MangaAccessService.Migrations
 {
     [DbContext(typeof(MangaNNovelAuthDBContext))]
-    [Migration("20230620095323_TesTModel")]
-    partial class TesTModel
+    [Migration("20230628213107_TestModel3")]
+    partial class TestModel3
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -775,6 +775,9 @@ namespace MangaAccessService.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("languageId"), 1L, 1);
+
+                    b.Property<string>("FlagUniCode")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsChecked")
                         .HasColumnType("bit");

@@ -10,6 +10,7 @@ namespace MangaModelService
         [Required]
         public string LanguageName { get; set; }
 
+        public string? FlagUniCode { get; set; }
         public int? MangaID { get; set; }
         public virtual ICollection<MangaModel>? MangaModels { get; set; }
         public virtual ICollection<BuyPage> BuyPages { get; set; }
