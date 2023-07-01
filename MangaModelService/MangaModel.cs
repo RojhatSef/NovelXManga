@@ -19,6 +19,7 @@ namespace MangaModelService
         public string? orignalWebtoon { get; set; }
         public string? OriginalPublisher { get; set; }
         public double? score { get; set; }
+
         public string? Type { get; set; }
         public string? OfficalLanguage { get; set; }
         public string? PhotoPath { get; set; }
@@ -50,5 +51,20 @@ namespace MangaModelService
         public virtual ICollection<Review>? reviews { get; set; }
         public virtual ICollection<BuyPage>? BuyPages { get; set; }
         public bool IsChecked { get; set; }
+
+        public double? OverAllBookScore
+        {
+            get
+            {
+                if (reviews != null && reviews.Any())
+                {
+                    return Math.Round(reviews.Average(r => r.OverAllBookScore), 1);
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
     }
 }

@@ -1632,6 +1632,7 @@ flexLiLayout {
     flex-wrap: wrap;
     justify-content: space-between;
     margin-top: 5%;
+    transition: margin-left 0.5s ease;
 }
 
 /* Individual Content Box */
@@ -1649,11 +1650,20 @@ flexLiLayout {
     border-radius: 10px; /* Adds rounded corners to the box */
     min-width: 30%;
     background-color: #444;
+    transition: margin-left 0.5s ease, margin-top 0.5s ease;
 }
 
     .mangaDetailsBox.bookdescription {
         flex-grow: 2;
     }
+
+
+.mangaDetailsBox .contentMangaBox-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 50%;
 }
 
 /* When the screen's width is 600px or less, change the boxes to take 100% of the width */

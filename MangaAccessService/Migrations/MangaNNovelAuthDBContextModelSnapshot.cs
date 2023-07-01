@@ -1049,7 +1049,7 @@ namespace MangaAccessService.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ReviewID"), 1L, 1);
 
-                    b.Property<double>("BookScore")
+                    b.Property<double>("CharactersScore")
                         .HasColumnType("float");
 
                     b.Property<string>("Content")
@@ -1057,15 +1057,21 @@ namespace MangaAccessService.Migrations
                         .HasMaxLength(750)
                         .HasColumnType("nvarchar(750)");
 
+                    b.Property<double>("GrammarScore")
+                        .HasColumnType("float");
+
                     b.Property<bool>("IsChecked")
                         .HasColumnType("bit");
+
+                    b.Property<double>("StoryScore")
+                        .HasColumnType("float");
+
+                    b.Property<double>("StylesScore")
+                        .HasColumnType("float");
 
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("voteReview")
-                        .HasColumnType("float");
 
                     b.HasKey("ReviewID");
 

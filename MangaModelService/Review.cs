@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MangaModelService
 {
@@ -8,10 +9,20 @@ namespace MangaModelService
         public int ReviewID { get; set; }
 
         [Required]
-        public double BookScore { get; set; }
+        [Range(0, 10)]
+        public double StylesScore { get; set; }
 
         [Required]
-        public double voteReview { get; set; }
+        [Range(0, 10)]
+        public double StoryScore { get; set; }
+
+        [Required]
+        [Range(0, 10)]
+        public double GrammarScore { get; set; }
+
+        [Required]
+        [Range(0, 10)]
+        public double CharactersScore { get; set; }
 
         [Required]
         public string Title { get; set; }
@@ -24,5 +35,14 @@ namespace MangaModelService
         public virtual ICollection<UserModel> UserModels { get; set; }
         public virtual ICollection<MangaModel> MangaModels { get; set; }
         public bool IsChecked { get; set; }
+
+        [NotMapped]
+        public double OverAllBookScore
+        {
+            get
+            {
+                return Math.Round((StylesScore + StoryScore + GrammarScore + CharactersScore) / 4.0, 1);
+            }
+        }
     }
 }

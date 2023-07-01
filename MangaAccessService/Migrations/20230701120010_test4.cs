@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MangaAccessService.Migrations
 {
-    public partial class TestModel3 : Migration
+    public partial class test4 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -299,8 +299,10 @@ namespace MangaAccessService.Migrations
                 {
                     ReviewID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    BookScore = table.Column<double>(type: "float", nullable: false),
-                    voteReview = table.Column<double>(type: "float", nullable: false),
+                    StylesScore = table.Column<double>(type: "float", nullable: false),
+                    StoryScore = table.Column<double>(type: "float", nullable: false),
+                    GrammarScore = table.Column<double>(type: "float", nullable: false),
+                    CharactersScore = table.Column<double>(type: "float", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Content = table.Column<string>(type: "nvarchar(750)", maxLength: 750, nullable: false),
                     IsChecked = table.Column<bool>(type: "bit", nullable: false)

@@ -3,11 +3,14 @@
 @{
 }
 
-<h1>Update Tags</h1>
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<script src="~/js/Author.js" asp-append-version="true"></script>
 
 <div style="padding-left: 100px">
     <form method="post" enctype="multipart/form-data">
+ 
         <div class="form-group">
+            <h1>Update Tags</h1>
             <input type="hidden" name="mangaModel.MangaID" value="@Model.mangaModelUpdate.MangaID" />
             <label for="tags">Tags:</label>
             <div class="row">
