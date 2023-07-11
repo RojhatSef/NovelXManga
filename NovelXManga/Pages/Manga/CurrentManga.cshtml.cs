@@ -12,6 +12,7 @@ namespace NovelXManga.Pages.Manga
         private readonly IMangaRepository mangaRepository;
         private readonly IWebHostEnvironment webHostEnvironment;
         private readonly UserManager<IdentityUser> userManager;
+        private readonly IReviewRepsitory reviewRepsitory;
         private readonly IBlogRepsitory blogRepsitory;
         private readonly IPostRepsitory postRepsitory;
         private readonly ICharacterRepsitory characterRepsitory;
@@ -25,9 +26,11 @@ namespace NovelXManga.Pages.Manga
         [BindProperty]
         public PostModel OnePost { get; set; }
 
+        public IEnumerable<Review> ReivewModel { get; set; }
+
         public IEnumerable<PostModel> Posts { get; set; }
 
-        public CurrentMangaModel(UserManager<IdentityUser> userManager, IWebHostEnvironment webHostEnvironment, IMangaRepository mangaRepository, MangaNNovelAuthDBContext mangaNNovelAuthDBContext, IBlogRepsitory blogRepsitory, IPostRepsitory postRepsitory, ICharacterRepsitory characterRepsitory)
+        public CurrentMangaModel(UserManager<IdentityUser> userManager, IWebHostEnvironment webHostEnvironment, IMangaRepository mangaRepository, MangaNNovelAuthDBContext mangaNNovelAuthDBContext, IBlogRepsitory blogRepsitory, IPostRepsitory postRepsitory, ICharacterRepsitory characterRepsitory, IReviewRepsitory reviewRepsitory)
         {
             this.userManager = userManager;
             this.webHostEnvironment = webHostEnvironment;
@@ -36,6 +39,7 @@ namespace NovelXManga.Pages.Manga
             this.blogRepsitory = blogRepsitory;
             this.postRepsitory = postRepsitory;
             this.characterRepsitory = characterRepsitory;
+            this.reviewRepsitory = reviewRepsitory;
         }
 
         public IActionResult OnPostCreateReply(MangaModel id, int parentId, string comment)
@@ -103,6 +107,8 @@ namespace NovelXManga.Pages.Manga
             CurrentManga = mangaRepository.GetOneMangaAllIncluded(id);
             Blog = blogRepsitory.GetModel(CurrentManga.BlogModelId);
 
+            ReivewModel = reviewRepsitory.GetAllModels()
+        .Where(r => r.MangaModels != null && r.MangaModels.Any(m => m.MangaID == id));
             Posts = postRepsitory.GetAllModels();
             return Page();
         }

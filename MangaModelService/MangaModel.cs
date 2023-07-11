@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MangaModelService
 {
@@ -51,6 +52,23 @@ namespace MangaModelService
         public virtual ICollection<Review>? reviews { get; set; }
         public virtual ICollection<BuyPage>? BuyPages { get; set; }
         public bool IsChecked { get; set; }
+
+        [NotMapped]
+        public Dictionary<int, int> ScoreDistribution
+        {
+            get
+            {
+                var distribution = new Dictionary<int, int>();
+                if (reviews != null && reviews.Any())
+                {
+                    for (int i = 1; i <= 10; i++)
+                    {
+                        distribution[i] = reviews.Count(r => Math.Round(r.OverAllBookScore) == i && r.MangaModels.Any(m => m.MangaID == this.MangaID));
+                    }
+                }
+                return distribution;
+            }
+        }
 
         public double? OverAllBookScore
         {

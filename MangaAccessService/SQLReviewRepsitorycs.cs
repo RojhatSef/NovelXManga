@@ -32,7 +32,7 @@ namespace MangaAccessService
 
         public IEnumerable<Review> GetAllModels()
         {
-            return context.Reviews;
+            return context.Reviews.Include(r => r.UserModels);
         }
 
         public Review GetModel(int id)
@@ -77,7 +77,7 @@ namespace MangaAccessService
 
         public async Task<IEnumerable<Review>> GetAllModelAsync()
         {
-            return await context.Reviews.ToListAsync();
+            return await context.Reviews.Include(r => r.UserModels).ToListAsync();
         }
 
         public async Task<Review> GetModelAsync(int idAsync)

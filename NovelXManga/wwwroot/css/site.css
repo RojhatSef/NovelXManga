@@ -500,7 +500,6 @@ a {
     transition: width 0.5s, height 0.5s;
 }
 
-
 .Author_Artist {
     display: -webkit-box;
     -webkit-line-clamp: 1;
@@ -1481,6 +1480,7 @@ flexLiLayout {
     padding: 5px;
     box-sizing: border-box;
     transition: margin-left 0.5s ease;
+    order: 1;
 }
 
 .tagsInsideInsideCurrentManga {
@@ -1657,14 +1657,13 @@ flexLiLayout {
         flex-grow: 2;
     }
 
-
-.mangaDetailsBox .contentMangaBox-wrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 50%;
-}
+    .mangaDetailsBox .contentMangaBox-wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 50%;
+    }
 
 /* When the screen's width is 600px or less, change the boxes to take 100% of the width */
 @media (max-width: 600px) {
@@ -1713,4 +1712,87 @@ flexLiLayout {
 .MangaInputText:hover {
     background-color: #ff6740;
 }
+.commonParentContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Will center align the child containers */
+}
+.RatingAddToLibbBookTypeContainer {
+    width: 10%;
+    margin: 5px 0 0 30%; /* Adjust the percentage as needed to move the container right */
+    display: flex;
+    margin-right: 49%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center; /* This will center the child items, reduce the space between items */
+    gap: 5px;
+    transition: margin-right 0.5s ease;
+    order: 2;
+    margin-top: 10px;
+}
+
+@media (min-width: 1000px) and (max-width: 1700px) {
+    .RatingAddToLibbBookTypeContainer {
+        margin-right: 40% !important;  /* Adjust as necessary */
+    }
+}
+
+.RatingAddToLibbBookTypeContainer .RatingAddToLibbBookTypeDetails {
+    /* Styles for the details */
+    padding: 5px;
+    border-radius: 3px;
+    background-color: #444;
+    color: #fff;
+    text-align: center;
+}
+
+.RatingAddToLibbBookTypeContainer .ratingStars {
+    /* Styles for the rating stars */
+    display: flex;
+    align-items: center;
+}
+
+    .RatingAddToLibbBookTypeContainer .ratingStars .fa {
+        /* Styles for each star icon */
+        color: gold;
+        margin-right: 2px;
+    }
+
+.RatingAddToLibbBookTypeContainer .reviewCount,
+.RatingAddToLibbBookTypeContainer .addReadingCount,
+.RatingAddToLibbBookTypeContainer .commentCount {
+    /* Styles for the counts */
+    padding: 5px;
+    border-radius: 3px;
+    background-color: #444;
+    color: #fff;
+    text-align: center;
+}
+
+.scoreArea {
+    position: relative; /* Makes scoreArea the reference point for its absolute positioned children */
+}
+
+.ratingStars {
+    /* no need for any specific styles here if you can't change them */
+}
+
+.scoreDistribution {
+    display: none;
+    position: absolute; /* Positions the scoreDistribution element relative to scoreArea */
+    background-color: black;
+    border: 1px solid #ddd;
+    padding: 10px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    top: 100%; /* positions the dropdown right below the scoreArea element */
+    width: 75px; /* adjust as necessary */
+    overflow-y: auto; /* adds a scrollbar when the content is too tall */
+}
+
+.scoreArea:hover .scoreDistribution {
+    display: block; /* Shows the dropdown on hover */
+}
+
+
 /* CurrentManga Page Ends */
