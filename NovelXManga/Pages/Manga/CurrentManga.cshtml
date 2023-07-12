@@ -45,19 +45,11 @@
                         <img class="manga-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png" alt="BookImage">
                     }
                 </div>
-
                 <div class="manga-title">
                     <!-- Manga title goes here -->
                     @if (@Model.CurrentManga.Authormodels != null)
-                    {
-                       
-                       
-
-                      
-                            <h1 class="FontSizeCurrentBook">@Model.CurrentManga.MangaName</h1>
-                       
-                      
-
+                    {                                           
+                            <h1 class="FontSizeCurrentBook">@Model.CurrentManga.MangaName</h1>                      
                     }
                 </div>
                 <div class="AddEditReportCurrentpage">
@@ -235,7 +227,7 @@
 
             <!-- Show Add Reading Count -->
             <div class="MangaInputText">
-                <span>RNuMe</span> <!-- Replace with actual data -->
+                <span>RNuMe</span> 
             </div>
 
             <!-- Show Comment Count -->
@@ -311,54 +303,85 @@
                                 </a>
                             }
                             else
-                            {
-                            
+                            {                           
                                 <div class="MangaInputText">
                                     <p>@character.CharacterName</p>
                                 </div>
-                            }
-                
+                        }
                     }
                 }
                 else
                 {
-                    <p>N/A</p>
-                }
-               
-            </div>
-           
-            
-        </div>
- 
-        <div class="mangaDetailsBox">
-          
-            <h1>ASSOCIATED NAME/S:</h1>
-            <div class="MangaContainerInput">
-                @if (Model.CurrentManga.AssociatedNames != null)
-                {
                     @if (UpdaterUser)
                     {
-                        <a asp-page="/MangaUpdates/UpdateGenre" asp-route-id="@Model.CurrentManga.MangaID">
-
+                          <a asp-page="/MangaUpdates/AddCharacter" asp-route-id="@Model.CurrentManga.MangaID">
+                        <div class="MangaInputText">
+                            <p>N/A</p>
+                        </div>
                         </a>
                     }
                     else
                     {
-
-                    }
-                    @foreach (var item in Model.CurrentManga.AssociatedNames)
-                    {
-                        <div class="MangaInputText">@item.nameString</div>
-
-                    }
-                }
-                else
-                {
-                    <p>N/A</p>
-                }
+                        <div class="MangaInputText">
+                            <p>N/A</p>
+                        </div>
+                    }               
+                }               
             </div>
-      
+           
+            
         </div>
+    @if (Model.CurrentManga.AssociatedNames != null)
+        {
+            <div class="mangaDetailsBox">
+
+                <h1>ASSOCIATED NAME/S:</h1>
+                <div class="MangaContainerInput">
+                    @if (Model.CurrentManga.AssociatedNames != null)
+                    {
+                        @if (UpdaterUser)
+                        {
+                            <a asp-page="/MangaUpdates/UpdateGenre" asp-route-id="@Model.CurrentManga.MangaID">
+                                @foreach (var item in Model.CurrentManga.AssociatedNames)
+                                {
+                                    <div class="MangaInputText">@item.nameString</div>
+
+                                }
+                            </a>
+                        }
+                        else
+                        {
+                            @foreach (var item in Model.CurrentManga.AssociatedNames)
+                            {
+                                <div class="MangaInputText">@item.nameString</div>
+
+                            }
+                        }
+                      
+                    }
+                    else
+                    {
+                        @if (UpdaterUser)
+                        {
+                            <a asp-page="/MangaUpdates/UpdateGenre" asp-route-id="@Model.CurrentManga.MangaID">
+                                <div class="MangaInputText">
+                                <p>N/A</p>
+                                </div>
+
+                            </a>
+                        }
+                        else
+                        {
+                            <div class="MangaInputText">
+                                <p>N/A</p>
+                            </div>
+                        }
+                }
+                </div>
+            </div>
+        }
+        
+  
         <div class="mangaDetailsBox">
             <h1>Buy At:</h1>
             <div class="MangaContainerInput">
@@ -438,9 +461,23 @@
 
 
 
-                            <div class="MangaInputText">
-                                <p> @Model.CurrentManga.score </p>
-                            </div>
+                    
+                                @foreach (var review in Model.ReivewModel.Take(4))
+                                {
+                                    <div class="UserReview">
+                                        <h2>@review.Title</h2>
+                                        <h3>By @review.UserModels.FirstOrDefault()?.UserName</h3>
+                                        <div>Style Score: @review.StylesScore</div>
+                                        <div>Story Score: @review.StoryScore</div>
+                                        <div>Grammar Score: @review.GrammarScore</div>
+                                        <div>Character Score: @review.CharactersScore</div>
+                                        <div>Overall Score: @review.OverAllBookScore</div>
+                                        <div class="UserReviewcontent">
+                                            @review.Content
+                                        </div>
+                                    </div>
+                                }
+                        
 
 
 
@@ -448,10 +485,22 @@
                     }
                     else
                     {
-                        <div class="MangaInputText">
-                            TBA
-                             
-                    </div>
+                        @if (UpdaterUser)
+                        {
+                              <div class="MangaInputText">
+                                TBA
+
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="MangaInputText">
+                                TBA
+
+                            </div>
+                        }
+
+
                 }
 
             </div>
@@ -590,8 +639,7 @@
                         {
 
                             <div class="MangaInputText">
-                                @Model.CurrentManga.OriginalPublisher
-                                
+                                @Model.CurrentManga.OriginalPublisher                               
                             </div>
 
                         }
@@ -603,7 +651,6 @@
                             <a asp-action="@Model.CurrentManga.OriginalPublisher" asp-route-id="@Model.CurrentManga.MangaID">
                                 <div class="MangaInputText">
                                    OriginalPublisher: N/A
-
                                 </div>
                             </a>
                         }
@@ -611,7 +658,6 @@
                         {
                             <div class="MangaInputText">
                                 OriginalPublisher: N/A
-
                             </div>
                         }
 
@@ -651,7 +697,6 @@
                             <a asp-action="@Model.CurrentManga.OfficalLanguage" asp-route-id="@Model.CurrentManga.MangaID">
                                 <div class="MangaInputText">
                                     Offical Language: N/A
-
                                 </div>
                             </a>
                         }
@@ -659,7 +704,6 @@
                         {
                             <div class="MangaInputText">
                                 Offical Language: N/A
-
                             </div>
                         }
 
@@ -893,307 +937,9 @@
 
             </div>
         </div>
-       @* <div class="mangaDetailsBox">
-            <h1>Random</h1>
-            <div class="MangaContainerInput">
-
-                @if (Model.CurrentManga.ISBN13 != null)
-                {
-                    @if (UpdaterUser)
-                    {
-                        <a asp-page="/MangaUpdates/SomethingHere" asp-route-id="@Model.CurrentManga.MangaID">
-                            <div class="MangaInputText">
-                            </div>
-                        </a>
-                    }
-                    else
-                    {
-                        <div class="MangaInputText">
-                            Dont fill this This is only testdata
-
-                        </div>
-                    }
-                }
-                else
-                {
-                    <div class="MangaInputText">
-                        TBA
-
-                    </div>
-                }
-
-            </div>
-
-        </div>*@
-
       @*  Insert here New mangaDetailBox*@
 
     </div>
-
-
-
-
-
+ 
  </div>
 
-@*  <div class="mangaDetailsBox">
-            <h1>Release | Ending</h1>
-            <div class="MangaContainerInput">
-
-                @if (Model.CurrentManga.ReleaseYear != null)
-                {
-                    <div class="MangaInputText">
-                        @Model.CurrentManga.ReleaseYear.Value.ToString("yyyy-MM-dd")
-                    </div>
-                    if (Model.CurrentManga.EndingYear != null)
-                    {
-                        <div class="MangaInputText">
-                            @Model.CurrentManga.EndingYear.Value.ToString("yyyy-MM-dd")
-                        </div>
-                    }
-                    else
-                    {
-                        <div class="MangaInputText">TBA</div>
-                    }
-                }
-                else
-                {
-                    <div class="MangaInputText">TBA</div>
-
-                }
-
-
-            </div>
-
-        </div>*@
-@*  <div class="mangaDetailsBox">
-            <h1>ISBN</h1>
-            <div class="MangaContainerInput">
-
-                @if (Model.CurrentManga.ISBN13 != null || Model.CurrentManga.ISBN10 != null)
-                {
-
-                    @if (UpdaterUser)
-                    {
-                        @if (Model.CurrentManga.ISBN13 != null)
-                        {
-
-                        }
-                        <div class="MangaInputText">
-                            <a asp-page="/MangaUpdates/SomethingHere" asp-route-id="@Model.CurrentManga.MangaID">
-                                ISBN13: @Model.CurrentManga.ISBN13
-                            </a>
-                        </div>
-                        <p>     </p>
-                        <a asp-page="/MangaUpdates/SomethingHere" asp-route-id="@Model.CurrentManga.MangaID">
-                            <div class="MangaInputText">
-                                ISBN10: @Model.CurrentManga.ISBN10
-
-                            </div>
-                        </a>
-                    }
-                    else
-                    {
-                        <div class="MangaInputText">
-                            ISBN13: @Model.CurrentManga.ISBN13
-
-                        </div>
-                        <p>     </p>
-                        <div class="MangaInputText">
-                            ISBN10: @Model.CurrentManga.ISBN10
-
-                        </div>
-                    }
-                }
-                else
-                {
-                    @if (UpdaterUser)
-                    {
-                        <a asp-action="@Model.CurrentManga.ISBN13" asp-route-id="@Model.CurrentManga.MangaID">
-                            <div class="MangaInputText">
-                                TBA ISBN13
-                            </div>
-                        </a>
-                        <a asp-action="@Model.CurrentManga.ISBN10" asp-route-id="@Model.CurrentManga.MangaID">
-                            <div class="MangaInputText">
-                                TBA ISBN10
-                            </div>
-                        </a>
-                    }
-                    else
-                    {
-                        <div class="MangaInputText">
-                            ISBN13: TBA
-                        </div>
-                        <div class="MangaInputText">
-                            ISBN10: TBA
-                        </div>
-                    }
-                }
-
-
-
-            </div>
-
-        </div>*@
-@*<div class="mangaDetailsBox">
-    <h1>Type</h1>
-    <div class="MangaContainerInput">
-        @if (Model.CurrentManga.Type != null)
-        {
-            @if (UpdaterUser)
-            {
-                <a asp-page="/MangaUpdates/SomethingHere" asp-route-id="@Model.CurrentManga.MangaID">
-                    <div class="MangaInputText">
-
-                        @Model.CurrentManga.Type
-
-                    </div>
-                </a>
-            }
-            else
-            {
-                <div class="MangaInputText">
-                    @Model.CurrentManga.Type
-
-                </div>
-            }
-        }
-        else
-        {
-            @if (UpdaterUser)
-            {
-                <a asp-action="@Model.CurrentManga.Type" asp-route-id="@Model.CurrentManga.MangaID">
-                    <div class="MangaInputText">
-                        TBA
-
-                    </div>
-                </a>
-            }
-            else
-            {
-                <div class="MangaInputText">
-                    TBA
-
-                </div>
-            }
-        }
-        <br />
-
-    </div>
-</div>*@
-
-@*      <div class="mangaDetailsBox">
-            <h1>STUDIOS/S: </h1>
-
-            <div class="MangaContainerInput">
-
-                @if (Model.CurrentManga != null && Model.CurrentManga.StudioModels != null && Model.CurrentManga.StudioModels.Count >= 1)
-                {
-                    foreach (var item in Model.CurrentManga.StudioModels)
-                    {
-                        @if (UpdaterUser)
-                        {
-                            <a asp-page="/MangaUpdates/UpdateGenre" asp-route-id="@Model.CurrentManga.MangaID">
-
-                            </a>
-                        }
-                        else
-                        {
-
-                        }
-                        if (!string.IsNullOrEmpty(item.GroupName))
-                        {
-                            <div class="MangaInputText">  <a asp-for="@item.website"> @item.GroupName  </a></div>
-                        }
-                        else
-                        {
-                            <div class="MangaInputText">No Website</div>
-                        }
-                    }
-                }
-                else
-                {
-                    <div class="MangaInputText">Missing Information</div>
-                }
-            </div>
-        </div>*@
-  
-
-
-@*   <div class="mangaDetailsBox">
-            <h2>Offical Language | Original Publisher</h2>
-            <div class="MangaContainerInput">
-
-                @if (Model.CurrentManga.OfficalLanguage != null)
-                {
-                    @if (UpdaterUser)
-                    {
-                        <a asp-page="/MangaUpdates/SomethingHere" asp-route-id="@Model.CurrentManga.MangaID">
-                            <div class="MangaInputText">
-                                @Model.CurrentManga.OfficalLanguage
-                            </div>
-                        </a>
-                    }
-                    else
-                    {
-                        @if (Model.CurrentManga.orignalWebtoon != null)
-                        {
-                            <a href="@Model.CurrentManga.orignalWebtoon">
-                                <div class="MangaInputText">
-                                    <p>@Model.CurrentManga.OfficalLanguage</p>
-                                </div>
-                            </a>
-                        }
-                        else
-                        {
-                            <div class="MangaInputText">
-                                N/A
-                            </div>
-                        }
-
-                }
-                }
-                else
-                {
-                    <div class="MangaInputText">
-                        TBA
-                    </div>
-                }
-                <p>     </p>@if (Model.CurrentManga.OriginalPublisher != null)
-                {
-                    @if (UpdaterUser)
-                    {
-                        <a asp-page="/MangaUpdates/SomethingHere" asp-route-id="@Model.CurrentManga.MangaID">
-                            <div class="MangaInputText">
-                                @Model.CurrentManga.OriginalPublisher
-                            </div>
-                        </a>
-                    }
-                    else
-                    {
-
-
-
-                        <div class="MangaInputText">
-                            <p> @Model.CurrentManga.OriginalPublisher </p>
-                        </div>
-
-
-
-                    }
-                }
-                else
-                {
-                    <div class="MangaInputText">
-                        TBA
-
-                    </div>
-                }
-
-            </div>
-        </div>*@
-
-
-
- 
