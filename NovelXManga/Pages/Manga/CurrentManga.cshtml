@@ -10,7 +10,7 @@
 
 
 
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <div class="Content1Ex">
         
 <form method="post" asp-page-handler="MangaPage" enctype="multipart/form-data" >
@@ -942,20 +942,104 @@
 
       @*  Insert here New mangaDetailBox*@
 
-
-    </div>   <div class="mangaDetailsBox">
-        <form method="post" asp-page-handler="ReviewManga" enctype="multipart/form-data">
-            <input type="hidden" id="CurrentManga_MangaID" name="CurrentManga.MangaID" value="@Model.CurrentManga.MangaID" />
- 
-        <div class="contentMangaBox-wrapper">
-            hello
-        </div>
-        <div class="contentMangaBox-wrapper">
-            hello2
-        </div>
-        <button>Send</button>
-        </form>
+    
+   
     </div>
+    <form class="mangaDetailsBox" method="post" asp-page-handler="ReviewManga" enctype="multipart/form-data">
+        <input type="hidden" id="CurrentManga_MangaID" name="CurrentManga.MangaID" value="@Model.CurrentManga.MangaID" />
+
+        <div class="contentMangaBox-wrapper">
+            <label class="LongerInput" asp-for="_ViewReview.Title">Titles</label><br />
+            <input class="LongerInputField" type="text" asp-for="_ViewReview.Title" class="form-control" />
+            <span asp-validation-for="_ViewReview.Title" class="text-danger"></span>
+        </div>
+        <div class="contentMangaBox-wrapper">
+            <div class="wrapperRowCurrent">
+            <input type="radio" name="clr1" class="colorsForStars1" />
+            <input type="radio" name="clr1" class="colorsForStars1" />
+            <input type="radio" name="clr1" class="colorsForStars1" />
+            <input type="radio" name="clr1" class="colorsForStars1" />
+            <input type="radio" name="clr1" class="colorsForStars1" />
+            <input type="radio" name="clr1" class="colorsForStars1" />
+            <input type="radio" name="clr1" class="colorsForStars1" />
+            <input type="radio" name="clr1" class="colorsForStars1" />
+            <input type="radio" name="clr1" class="colorsForStars1" />
+            <input type="radio" name="clr1" class="colorsForStars1" />
+                <input type="radio" name="clr1" class="colorsForStars1" />
+                <input type="radio" name="clr1" class="colorsForStars1" />
+                <input type="radio" name="clr1" class="colorsForStars1" />
+                <input type="radio" name="clr1" class="colorsForStars1" />
+                <input type="radio" name="clr1" class="colorsForStars1" />
+                <input type="radio" name="clr1" class="colorsForStars1" />
+                <input type="radio" name="clr1" class="colorsForStars1" />
+                <input type="radio" name="clr1" class="colorsForStars1" />
+                <input type="radio" name="clr1" class="colorsForStars1" />
+                <input type="radio" name="clr1" class="colorsForStars1" />
+        </div>
+
+        </div>
+        <div class="contentMangaBox-wrapper">
+            <div class="wrapperRowCurrent">
+                <input type="radio" name="clr2" class="colorsForStars1" />
+                <input type="radio" name="clr2" class="colorsForStars1" />
+                <input type="radio" name="clr2" class="colorsForStars1" />
+                <input type="radio" name="clr2" class="colorsForStars1" />
+                <input type="radio" name="clr2" class="colorsForStars1" />
+                <input type="radio" name="clr2" class="colorsForStars1" />
+                <input type="radio" name="clr2" class="colorsForStars1" />
+                <input type="radio" name="clr2" class="colorsForStars1" />
+                <input type="radio" name="clr2" class="colorsForStars1" />
+                <input type="radio" name="clr2" class="colorsForStars1" />
+            </div>
+        
+        </div>
+        <div class="contentMangaBox-wrapper">
+            <div class="wrapperRowCurrent">
+                <input type="radio" name="clr3" class="colorsForStars1" />
+                <input type="radio" name="clr3" class="colorsForStars1" />
+                <input type="radio" name="clr3" class="colorsForStars1" />
+                <input type="radio" name="clr3" class="colorsForStars1" />
+                <input type="radio" name="clr3" class="colorsForStars1" />
+                <input type="radio" name="clr3" class="colorsForStars1" />
+                <input type="radio" name="clr3" class="colorsForStars1" />
+                <input type="radio" name="clr3" class="colorsForStars1" />
+                <input type="radio" name="clr3" class="colorsForStars1" />
+                <input type="radio" name="clr3" class="colorsForStars1" />
+            </div>
+          
+        </div>
+        <div class="contentMangaBox-wrapper">
+            <div class="wrapperRowCurrent">
+                <input type="radio" name="clr4" class="colorsForStars1" />
+                <input type="radio" name="clr4" class="colorsForStars1" />
+                <input type="radio" name="clr4" class="colorsForStars1" />
+                <input type="radio" name="clr4" class="colorsForStars1" />
+                <input type="radio" name="clr4" class="colorsForStars1" />
+                <input type="radio" name="clr4" class="colorsForStars1" />
+                <input type="radio" name="clr4" class="colorsForStars1" />
+                <input type="radio" name="clr4" class="colorsForStars1" />
+                <input type="radio" name="clr4" class="colorsForStars1" />
+                <input type="radio" name="clr4" class="colorsForStars1" />
+            </div>
+
+        </div>
+        <div class="contentMangaBox-wrapper">
+
+            <br />
+
+            <textarea class="LongerInput" asp-for="_ViewReview.Content">Content</textarea>
+            <br />
+
+            <span asp-validation-for="_ViewReview.Content" class="text-danger"></span>
+
+
+            <br />
+
+        </div>
+     
+
+        <button>Send</button>
+    </form>
  
  </div>
 

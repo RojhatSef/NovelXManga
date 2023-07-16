@@ -1712,11 +1712,13 @@ flexLiLayout {
 .MangaInputText:hover {
     background-color: #ff6740;
 }
+
 .commonParentContainer {
     display: flex;
     flex-direction: column;
     align-items: center; /* Will center align the child containers */
 }
+
 .RatingAddToLibbBookTypeContainer {
     width: 10%;
     margin: 5px 0 0 30%; /* Adjust the percentage as needed to move the container right */
@@ -1733,7 +1735,7 @@ flexLiLayout {
 
 @media (min-width: 1000px) and (max-width: 1700px) {
     .RatingAddToLibbBookTypeContainer {
-        margin-right: 40% !important;  /* Adjust as necessary */
+        margin-right: 40% !important; /* Adjust as necessary */
     }
 }
 
@@ -1794,5 +1796,40 @@ flexLiLayout {
     display: block; /* Shows the dropdown on hover */
 }
 
+.colorsForStars1 {
+    --cc: #ff6740;
+}
+
+.wrapperRowCurrent {
+    height: 100%;
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row-reverse;
+    margin: 0px;
+    padding: 0px;
+}
+
+    .wrapperRowCurrent input {
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+        appearance: none;
+        -webkit-appearance: none;
+    }
+
+        .wrapperRowCurrent input::before {
+            content: '\f005';
+            font-family: FontAwesome;
+            font-size: 34px;
+            transition: 0.5s;
+        }
+
+        .wrapperRowCurrent input:hover ~ input::before,
+        .wrapperRowCurrent input:hover::before,
+        .wrapperRowCurrent input:checked ~ input::before,
+        .wrapperRowCurrent input:checked::before {
+            color: #ff6740;
+        }
 
 /* CurrentManga Page Ends */

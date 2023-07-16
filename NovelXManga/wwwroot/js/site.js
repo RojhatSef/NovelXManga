@@ -1,5 +1,4 @@
-﻿
-(function () {
+﻿(function () {
     var selectedTags = $('#selectedTags').val().split(',');
     $('input[type=checkbox]').each(function () {
         if (selectedTags.includes($(this).val())) {
@@ -26,7 +25,7 @@ window.onload = function () {
 function handleNavbar() {
     console.log(document); // logs the entire document
     const customOnavbar = document.querySelector(".custom-O-navbar");
- 
+
     console.log("Scroll event fired");
     if (!customOnavbar) {
         console.log('Navbar not found!');
@@ -63,4 +62,4 @@ function handleNavbar() {
 function handleSidebarToggle() {
     const sidebar = document.querySelector(".Custom-o-sidebar");
     sidebar.classList.toggle("open");
-}
+};
