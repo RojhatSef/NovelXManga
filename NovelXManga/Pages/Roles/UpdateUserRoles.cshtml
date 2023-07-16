@@ -8,7 +8,7 @@
 
 <h1 class="bg-info text-white">All Users</h1>
 <a asp-action="Create" class="btn btn-secondary">Create a User</a>
-  @foreach (IdentityUser user in Model.usersList)
+@foreach (UserModel user in Model.usersList)
     {
 <table class="table table-sm table-bordered">
     <tr><th>ID</th><th>Name</th></tr>

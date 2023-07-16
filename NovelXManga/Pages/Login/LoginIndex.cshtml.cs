@@ -7,14 +7,14 @@ namespace NovelXManga.Pages.Login
 {
     public class LoginIndexModel : PageModel
     {
-        private readonly SignInManager<IdentityUser> signInManager;
+        private readonly SignInManager<UserModel> signInManager;
 
         [BindProperty]
         public LoginModel LoginModel { get; set; }
 
         public string ReturnUrl { get; set; }
 
-        public LoginIndexModel(SignInManager<IdentityUser> signInManager)
+        public LoginIndexModel(SignInManager<UserModel> signInManager)
         {
             this.signInManager = signInManager;
         }

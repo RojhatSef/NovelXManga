@@ -1,3 +1,4 @@
+using MangaModelService;
 using MangaModelService.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -7,15 +8,15 @@ namespace NovelXManga.Pages.Login
 {
     public class ResetPasswordPageModel : PageModel
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> signInManager;
+        private readonly UserManager<UserModel> _userManager;
+        private readonly SignInManager<UserModel> signInManager;
 
         public ResetPasswordModelView tempResetpass { get; set; }
 
         [TempData]
         public string TempDataSuccededPassWordChange { get; set; }
 
-        public ResetPasswordPageModel(UserManager<IdentityUser> userManager)
+        public ResetPasswordPageModel(UserManager<UserModel> userManager)
         {
             this._userManager = userManager;
         }

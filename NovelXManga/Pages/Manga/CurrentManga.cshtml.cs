@@ -12,7 +12,7 @@ namespace NovelXManga.Pages.Manga
         private readonly MangaNNovelAuthDBContext Context;
         private readonly IMangaRepository mangaRepository;
         private readonly IWebHostEnvironment webHostEnvironment;
-        private readonly UserManager<IdentityUser> userManager;
+        private readonly UserManager<UserModel> userManager;
         private readonly IReviewRepsitory reviewRepsitory;
         private readonly IBlogRepsitory blogRepsitory;
         private readonly IPostRepsitory postRepsitory;
@@ -37,7 +37,7 @@ namespace NovelXManga.Pages.Manga
 
         public IEnumerable<PostModel> Posts { get; set; }
 
-        public CurrentMangaModel(UserManager<IdentityUser> userManager, IWebHostEnvironment webHostEnvironment, IMangaRepository mangaRepository, MangaNNovelAuthDBContext mangaNNovelAuthDBContext, IBlogRepsitory blogRepsitory, IPostRepsitory postRepsitory, ICharacterRepsitory characterRepsitory, IReviewRepsitory reviewRepsitory)
+        public CurrentMangaModel(UserManager<UserModel> userManager, IWebHostEnvironment webHostEnvironment, IMangaRepository mangaRepository, MangaNNovelAuthDBContext mangaNNovelAuthDBContext, IBlogRepsitory blogRepsitory, IPostRepsitory postRepsitory, ICharacterRepsitory characterRepsitory, IReviewRepsitory reviewRepsitory)
         {
             this.userManager = userManager;
             this.webHostEnvironment = webHostEnvironment;
@@ -66,7 +66,7 @@ namespace NovelXManga.Pages.Manga
                 StylesScore = _ViewReview.StylesScore,
                 Content = _ViewReview.Content,
                 MangaModels = new List<MangaModel> { CurrentManga },
-                //UserModels = new List<UserModel> { user },
+                UserModels = new List<UserModel> { user },
             };
 
             Context.Reviews.Add(review);

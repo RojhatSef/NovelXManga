@@ -1,6 +1,7 @@
 using EmailService;
 using MangaAccessService;
 using MangaAccessService.Migrations;
+using MangaModelService;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -37,7 +38,7 @@ builder.Services.AddScoped<IBuyPageRepsitory, SQLBuyPageRepsitory>();
 builder.Services.AddScoped<IDroppedBookListPageRepsitory, SQLDroppedBookListPageRepsitory>();
 
 builder.Services.AddScoped<SeedData>();
-builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
+builder.Services.AddIdentity<UserModel, IdentityRole>(options =>
 {
     options.Password.RequiredLength = 6;
     options.Password.RequiredUniqueChars = 2;

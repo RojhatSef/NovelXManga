@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MangaAccessService.Migrations
 {
     [DbContext(typeof(MangaNNovelAuthDBContext))]
-    [Migration("20230716123825_Test7")]
-    partial class Test7
+    [Migration("20230716124829_Wtf")]
+    partial class Wtf
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

@@ -11,8 +11,8 @@ namespace NovelXManga
         #region properties, constructor and readonly.
 
         public UserModel User { get; set; }
-        private readonly UserManager<IdentityUser> userManager;
-        private readonly SignInManager<IdentityUser> signInManager;
+        private readonly UserManager<UserModel> userManager;
+        private readonly SignInManager<UserModel> signInManager;
         private readonly MangaNNovelAuthDBContext context;
         private readonly IWebHostEnvironment webHostEnvironment;
         private readonly RoleManager<IdentityRole> roleManager;
@@ -38,7 +38,7 @@ namespace NovelXManga
             FrenchLanguage = context.Languages_.FirstOrDefault(l => l.LanguageName == "French");
         }
 
-        public SeedData(MangaNNovelAuthDBContext context, UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, IWebHostEnvironment webHostEnvironment, RoleManager<IdentityRole> roleManager)
+        public SeedData(MangaNNovelAuthDBContext context, UserManager<UserModel> userManager, SignInManager<UserModel> signInManager, IWebHostEnvironment webHostEnvironment, RoleManager<IdentityRole> roleManager)
         {
             this.context = context;
             this.userManager = userManager;

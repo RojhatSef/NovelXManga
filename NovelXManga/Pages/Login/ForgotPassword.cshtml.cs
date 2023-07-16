@@ -1,4 +1,5 @@
 using EmailService;
+using MangaModelService;
 using MangaModelService.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -8,12 +9,12 @@ namespace NovelXManga.Pages.Login
 {
     public class ForgotPasswordModel : PageModel
     {
-        private readonly UserManager<IdentityUser> userManager;
-        private readonly SignInManager<IdentityUser> signInManager;
+        private readonly UserManager<UserModel> userManager;
+        private readonly SignInManager<UserModel> signInManager;
 
         private readonly IEmailSender _emailSender;
 
-        public ForgotPasswordModel(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, IEmailSender emailSender)
+        public ForgotPasswordModel(UserManager<UserModel> userManager, SignInManager<UserModel> signInManager, IEmailSender emailSender)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;

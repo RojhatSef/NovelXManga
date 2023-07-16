@@ -8,13 +8,13 @@ namespace NovelXManga.Pages.Register
 {
     public class UserRegisterModel : PageModel
     {
-        private readonly UserManager<IdentityUser> userManager;
-        private readonly SignInManager<IdentityUser> signInManager;
+        private readonly UserManager<UserModel> userManager;
+        private readonly SignInManager<UserModel> signInManager;
 
         [BindProperty]
         public RegisterViewModel Model { get; set; }
 
-        public UserRegisterModel(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+        public UserRegisterModel(UserManager<UserModel> userManager, SignInManager<UserModel> signInManager)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
