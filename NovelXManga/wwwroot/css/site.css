@@ -1663,6 +1663,8 @@ flexLiLayout {
         justify-content: center;
         align-items: center;
         height: 50%;
+        margin: 0px;
+        padding: 0px;
     }
 
 /* When the screen's width is 600px or less, change the boxes to take 100% of the width */
@@ -1808,11 +1810,13 @@ flexLiLayout {
     flex-direction: row-reverse;
     margin: 0px;
     padding: 0px;
+    overflow: hidden;
 }
 
     .wrapperRowCurrent input {
-        width: 40px;
-        height: 40px;
+        margin: 0px;
+        padding: 0px;
+        position: relative;
         cursor: pointer;
         appearance: none;
         -webkit-appearance: none;
@@ -1821,7 +1825,7 @@ flexLiLayout {
         .wrapperRowCurrent input::before {
             content: '\f005';
             font-family: FontAwesome;
-            font-size: 34px;
+            font-size: 24px;
             transition: 0.5s;
         }
 
