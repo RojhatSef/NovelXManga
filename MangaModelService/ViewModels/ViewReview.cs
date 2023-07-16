@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace MangaModelService
+namespace MangaModelService.ViewModels
 {
-    public class Review
+    public class ViewReview
     {
         [Key]
         public int ReviewID { get; set; }

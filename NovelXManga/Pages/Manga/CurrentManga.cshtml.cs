@@ -1,5 +1,6 @@
 using MangaAccessService;
 using MangaModelService;
+using MangaModelService.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -26,6 +27,12 @@ namespace NovelXManga.Pages.Manga
         [BindProperty]
         public PostModel OnePost { get; set; }
 
+        [BindProperty]
+        public Review AddReview { get; set; }
+
+        [BindProperty]
+        public ViewReview _ViewReview { get; set; }
+
         public IEnumerable<Review> ReivewModel { get; set; }
 
         public IEnumerable<PostModel> Posts { get; set; }
@@ -42,26 +49,27 @@ namespace NovelXManga.Pages.Manga
             this.reviewRepsitory = reviewRepsitory;
         }
 
-        public IActionResult OnPostCreateReply(MangaModel id, int parentId, string comment)
+        public async Task<IActionResult> OnPostReviewManga(MangaModel id)
         {
-            var parentPost = Context.PostModels.FirstOrDefault(p => p.PostId == parentId);
-
-            if (parentPost == null)
-            {
-                return NotFound();
-            }
+            var user = await userManager.GetUserAsync(User);
             CurrentManga = mangaRepository.GetOneMangaAllIncluded(id.MangaID);
             Blog = blogRepsitory.GetModel(CurrentManga.BlogModelId);
             Posts = postRepsitory.GetAllModels();
-            var reply = new PostModel
+
+            Review review = new Review
             {
-                Title = "Reply to " + parentPost.Title,
-                postComment = comment,
-                CommentPostedTime = DateTime.Now,
-                ParentPostId = parentPost.PostId
+                Title = _ViewReview.Title,
+                Created = DateTime.Now,
+                CharactersScore = _ViewReview.CharactersScore,
+                GrammarScore = _ViewReview.GrammarScore,
+                StoryScore = _ViewReview.StoryScore,
+                StylesScore = _ViewReview.StylesScore,
+                Content = _ViewReview.Content,
+                MangaModels = new List<MangaModel> { CurrentManga },
+                //UserModels = new List<UserModel> { user },
             };
 
-            Context.PostModels.Add(reply);
+            Context.Reviews.Add(review);
             Context.SaveChanges();
 
             return RedirectToAction("Index");
@@ -80,24 +88,6 @@ namespace NovelXManga.Pages.Manga
             return Page();
         }
 
-        public IActionResult OnPostMangaPageTagGenre(int MangaID)
-        {
-            CurrentManga = mangaRepository.GetOneMangaAllIncluded(MangaID);
-            if (CurrentManga == null)
-            {
-                return NotFound();
-            }
-
-            Blog = blogRepsitory.GetModel(CurrentManga.BlogModelId);
-            Posts = postRepsitory.GetAllModels();
-            return Page();
-        }
-
-        public IActionResult OnPost()
-        {
-            return Page();
-        }
-
         public IActionResult OnGet(int id)
         {
             if (id == 0)
@@ -112,5 +102,31 @@ namespace NovelXManga.Pages.Manga
             Posts = postRepsitory.GetAllModels();
             return Page();
         }
+
+        //Not in use yet.
+        //public IActionResult OnPostCreateReply(MangaModel id, int parentId, string comment)
+        //{
+        //    var parentPost = Context.PostModels.FirstOrDefault(p => p.PostId == parentId);
+
+        //    if (parentPost == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    CurrentManga = mangaRepository.GetOneMangaAllIncluded(id.MangaID);
+        //    Blog = blogRepsitory.GetModel(CurrentManga.BlogModelId);
+        //    Posts = postRepsitory.GetAllModels();
+        //    var reply = new PostModel
+        //    {
+        //        Title = "Reply to " + parentPost.Title,
+        //        postComment = comment,
+        //        CommentPostedTime = DateTime.Now,
+        //        ParentPostId = parentPost.PostId
+        //    };
+
+        //    Context.PostModels.Add(reply);
+        //    Context.SaveChanges();
+
+        //    return RedirectToAction("Index");
+        //}
     }
 }

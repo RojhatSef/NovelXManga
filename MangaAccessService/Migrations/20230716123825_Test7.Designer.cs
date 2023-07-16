@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MangaAccessService.Migrations
 {
     [DbContext(typeof(MangaNNovelAuthDBContext))]
-    [Migration("20230701120010_test4")]
-    partial class test4
+    [Migration("20230716123825_Test7")]
+    partial class Test7
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -1059,11 +1059,17 @@ namespace MangaAccessService.Migrations
                         .HasMaxLength(750)
                         .HasColumnType("nvarchar(750)");
 
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
                     b.Property<double>("GrammarScore")
                         .HasColumnType("float");
 
                     b.Property<bool>("IsChecked")
                         .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastUpdated")
+                        .HasColumnType("datetime2");
 
                     b.Property<double>("StoryScore")
                         .HasColumnType("float");

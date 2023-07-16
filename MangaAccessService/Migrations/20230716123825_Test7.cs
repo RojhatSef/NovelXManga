@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MangaAccessService.Migrations
 {
-    public partial class test4 : Migration
+    public partial class Test7 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -305,6 +305,8 @@ namespace MangaAccessService.Migrations
                     CharactersScore = table.Column<double>(type: "float", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Content = table.Column<string>(type: "nvarchar(750)", maxLength: 750, nullable: false),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastUpdated = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsChecked = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>

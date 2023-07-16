@@ -343,6 +343,7 @@ namespace NovelXManga
                     StoryScore = 8.0,
                     GrammarScore = 6,
                     CharactersScore = 7.5,
+                    Created = DateTime.Now,
                     Title = "Solo Best",
                     Content = "Solo Leveling is a highly addictive webtoon. The art is stunning, and the story keeps you hooked with its action-packed sequences and intriguing world-building. The characters are well-designed, and the pacing is great. It's a must-read for fans of the genre."
                 };
@@ -354,6 +355,7 @@ namespace NovelXManga
                     StylesScore = 7.5,
                     StoryScore = 8.0,
                     GrammarScore = 7.5,
+                    Created = DateTime.Now,
                     CharactersScore = 8.5,
                     Title = "Tower Of The G",
                     Content = "Tower of God is an epic adventure with a unique premise. The art style may take some getting used to, but the story is engaging and full of twists. The characters are diverse and intriguing. It's a series that keeps you guessing and wanting more."
@@ -382,6 +384,7 @@ namespace NovelXManga
                     StylesScore = 8.5,
                     StoryScore = 8.7,
                     GrammarScore = 7.4,
+                    Created = DateTime.Now,
                     CharactersScore = 7.9,
                     Title = "Mind-Blowing Action",
                     Content = "Solo Leveling is an absolute thrill ride! The art is top-notch, with incredibly detailed action scenes that leave you in awe. The story is gripping, filled with intense moments and unexpected twists. The characters are well-developed and have unique abilities. If you're a fan of action-packed manga, Solo Leveling is a must-read!."

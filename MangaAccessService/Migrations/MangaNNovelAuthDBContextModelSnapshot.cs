@@ -1057,11 +1057,17 @@ namespace MangaAccessService.Migrations
                         .HasMaxLength(750)
                         .HasColumnType("nvarchar(750)");
 
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
                     b.Property<double>("GrammarScore")
                         .HasColumnType("float");
 
                     b.Property<bool>("IsChecked")
                         .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastUpdated")
+                        .HasColumnType("datetime2");
 
                     b.Property<double>("StoryScore")
                         .HasColumnType("float");
