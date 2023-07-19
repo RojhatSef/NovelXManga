@@ -61,7 +61,7 @@ namespace MangaModelService
                 var distribution = new Dictionary<int, int>();
                 if (reviews != null && reviews.Any())
                 {
-                    for (int i = 1; i <= 10; i++)
+                    for (int i = 1; i <= 5; i++)
                     {
                         distribution[i] = reviews.Count(r => Math.Round(r.OverAllBookScore) == i && r.MangaModels.Any(m => m.MangaID == this.MangaID));
                     }

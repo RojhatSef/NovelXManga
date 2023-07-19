@@ -55,22 +55,26 @@ namespace NovelXManga.Pages.Manga
             CurrentManga = mangaRepository.GetOneMangaAllIncluded(id.MangaID);
             Blog = blogRepsitory.GetModel(CurrentManga.BlogModelId);
             Posts = postRepsitory.GetAllModels();
-
-            Review review = new Review
+            if (ModelState.IsValid)
             {
-                Title = _ViewReview.Title,
-                Created = DateTime.Now,
-                CharactersScore = _ViewReview.CharactersScore,
-                GrammarScore = _ViewReview.GrammarScore,
-                StoryScore = _ViewReview.StoryScore,
-                StylesScore = _ViewReview.StylesScore,
-                Content = _ViewReview.Content,
-                MangaModels = new List<MangaModel> { CurrentManga },
-                UserModels = new List<UserModel> { user },
-            };
+                Review review = new Review
+                {
+                    Title = _ViewReview.Title,
+                    Created = DateTime.Now,
+                    CharactersScore = _ViewReview.CharactersScore,
+                    GrammarScore = _ViewReview.GrammarScore,
+                    StoryScore = _ViewReview.StoryScore,
+                    StylesScore = _ViewReview.StylesScore,
+                    Content = _ViewReview.Content,
+                    MangaModels = new List<MangaModel> { CurrentManga },
+                    UserModels = new List<UserModel> { user },
+                };
+                Context.Reviews.Add(review);
+                Context.SaveChanges();
+            }
 
-            Context.Reviews.Add(review);
-            Context.SaveChanges();
+
+
 
             return RedirectToAction("Index");
         }

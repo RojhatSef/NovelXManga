@@ -945,100 +945,104 @@
     
    
     </div>
-    <form class="mangaDetailsBox" method="post" asp-page-handler="ReviewManga" enctype="multipart/form-data">
+    <form class="" method="post" asp-page-handler="ReviewManga" enctype="multipart/form-data">
         <input type="hidden" id="CurrentManga_MangaID" name="CurrentManga.MangaID" value="@Model.CurrentManga.MangaID" />
-
-        <div class="contentMangaBox-wrapper">
-            <label class="LongerInput" asp-for="_ViewReview.Title">Titles</label><br />
-            <input class="LongerInputField" type="text" asp-for="_ViewReview.Title" class="form-control" />
+      
+        <label class="ReviewTitle" asp-for="_ViewReview.Title">Title</label>       <small id="TitleCount">0/50</small><br />
+        <input class="ReviewTitle" type="text" asp-for="_ViewReview.Title" class="form-control" oninput="TitleupdateCount(this.value)" maxlength="50" /> 
             <span asp-validation-for="_ViewReview.Title" class="text-danger"></span>
-        </div>
-        <div class="contentMangaBox-wrapper">
-            <div class="wrapperRowCurrent">
-            <input type="radio" name="clr1" class="colorsForStars1" />
-            <input type="radio" name="clr1" class="colorsForStars1" />
-            <input type="radio" name="clr1" class="colorsForStars1" />
-            <input type="radio" name="clr1" class="colorsForStars1" />
-            <input type="radio" name="clr1" class="colorsForStars1" />
-            <input type="radio" name="clr1" class="colorsForStars1" />
-            <input type="radio" name="clr1" class="colorsForStars1" />
-            <input type="radio" name="clr1" class="colorsForStars1" />
-            <input type="radio" name="clr1" class="colorsForStars1" />
-            <input type="radio" name="clr1" class="colorsForStars1" />
-                <input type="radio" name="clr1" class="colorsForStars1" />
-                <input type="radio" name="clr1" class="colorsForStars1" />
-                <input type="radio" name="clr1" class="colorsForStars1" />
-                <input type="radio" name="clr1" class="colorsForStars1" />
-                <input type="radio" name="clr1" class="colorsForStars1" />
-                <input type="radio" name="clr1" class="colorsForStars1" />
-                <input type="radio" name="clr1" class="colorsForStars1" />
-                <input type="radio" name="clr1" class="colorsForStars1" />
-                <input type="radio" name="clr1" class="colorsForStars1" />
-                <input type="radio" name="clr1" class="colorsForStars1" />
-        </div>
 
-        </div>
-        <div class="contentMangaBox-wrapper">
+        <div class="flex-direction-current">
             <div class="wrapperRowCurrent">
-                <input type="radio" name="clr2" class="colorsForStars1" />
-                <input type="radio" name="clr2" class="colorsForStars1" />
-                <input type="radio" name="clr2" class="colorsForStars1" />
-                <input type="radio" name="clr2" class="colorsForStars1" />
-                <input type="radio" name="clr2" class="colorsForStars1" />
-                <input type="radio" name="clr2" class="colorsForStars1" />
-                <input type="radio" name="clr2" class="colorsForStars1" />
-                <input type="radio" name="clr2" class="colorsForStars1" />
-                <input type="radio" name="clr2" class="colorsForStars1" />
-                <input type="radio" name="clr2" class="colorsForStars1" />
+                <div class="Skills_">
+                    <h3 class="name">Grammar Score</h3>
+                    <div class="ratings">
+                        <input asp-for="_ViewReview.GrammarScore" type="radio" name="grammar" class="colorsForStars1" value="0.5" />
+                        <input asp-for="_ViewReview.GrammarScore" type="radio" name="grammar" class="colorsForStars1" value="1" />
+                        <input asp-for="_ViewReview.GrammarScore" type="radio" name="grammar" class="colorsForStars1" value="1.5" />
+                        <input asp-for="_ViewReview.GrammarScore" type="radio" name="grammar" class="colorsForStars1" value="2" />
+                        <input asp-for="_ViewReview.GrammarScore" type="radio" name="grammar" class="colorsForStars1" value="2.5" />
+                        <input asp-for="_ViewReview.GrammarScore" type="radio" name="grammar" class="colorsForStars1" value="3" />
+                        <input asp-for="_ViewReview.GrammarScore" type="radio" name="grammar" class="colorsForStars1" value="3.5" />
+                        <input asp-for="_ViewReview.GrammarScore" type="radio" name="grammar" class="colorsForStars1" value="4" />
+                        <input asp-for="_ViewReview.GrammarScore" type="radio" name="grammar" class="colorsForStars1" value="4.5" />
+                        <input asp-for="_ViewReview.GrammarScore" type="radio" name="grammar" class="colorsForStars1" value="5" />
+              
+                    </div>
+                </div>
+                <div class="Skills_">
+                    <h3 class="name">Story Score</h3>
+                    <div class="ratings">
+                        <input asp-for="_ViewReview.StoryScore" type="radio" name="story" class="colorsForStars1" value="0.5" />
+                        <input asp-for="_ViewReview.StoryScore" type="radio" name="story" class="colorsForStars1" value="1" />
+                        <input asp-for="_ViewReview.StoryScore" type="radio" name="story" class="colorsForStars1" value="1.5" />
+                        <input asp-for="_ViewReview.StoryScore" type="radio" name="story" class="colorsForStars1" value="2" />
+                        <input asp-for="_ViewReview.StoryScore" type="radio" name="story" class="colorsForStars1" value="2.5" />
+                        <input asp-for="_ViewReview.StoryScore" type="radio" name="story" class="colorsForStars1" value="3" />
+                        <input asp-for="_ViewReview.StoryScore" type="radio" name="story" class="colorsForStars1" value="3.5" />
+                        <input asp-for="_ViewReview.StoryScore" type="radio" name="story" class="colorsForStars1" value="4" />
+                        <input asp-for="_ViewReview.StoryScore" type="radio" name="story" class="colorsForStars1" value="4.5" />
+                        <input asp-for="_ViewReview.StoryScore" type="radio" name="story" class="colorsForStars1" value="5" />
+                    </div>
+                </div>
+
+                <div class="Skills_">
+                    <h3 class="name">Style Score</h3>
+                    <div class="ratings">
+                        <input asp-for="_ViewReview.StylesScore" type="radio" name="style" class="colorsForStars1" value="0.5" />
+                        <input asp-for="_ViewReview.StylesScore" type="radio" name="style" class="colorsForStars1" value="1" />
+                        <input asp-for="_ViewReview.StylesScore" type="radio" name="style" class="colorsForStars1" value="1.5" />
+                        <input asp-for="_ViewReview.StylesScore" type="radio" name="style" class="colorsForStars1" value="2" />
+                        <input asp-for="_ViewReview.StylesScore" type="radio" name="style" class="colorsForStars1" value="2.5" />
+                        <input asp-for="_ViewReview.StylesScore" type="radio" name="style" class="colorsForStars1" value="3" />
+                        <input asp-for="_ViewReview.StylesScore" type="radio" name="style" class="colorsForStars1" value="3.5" />
+                        <input asp-for="_ViewReview.StylesScore" type="radio" name="style" class="colorsForStars1" value="4" />
+                        <input asp-for="_ViewReview.StylesScore" type="radio" name="style" class="colorsForStars1" value="4.5" />
+                        <input asp-for="_ViewReview.StylesScore" type="radio" name="style" class="colorsForStars1" value="5" />
+                    </div>
+                </div>
+
+                <div class="Skills_">
+                    <h3 class="name">Character Score</h3>
+                    <div class="ratings">
+                        <input asp-for="_ViewReview.CharactersScore" type="radio" name="character" class="colorsForStars1" value="0.5" />
+                        <input asp-for="_ViewReview.CharactersScore" type="radio" name="character" class="colorsForStars1" value="1" />
+                        <input asp-for="_ViewReview.CharactersScore" type="radio" name="character" class="colorsForStars1" value="1.5" />
+                        <input asp-for="_ViewReview.CharactersScore" type="radio" name="character" class="colorsForStars1" value="2" />
+                        <input asp-for="_ViewReview.CharactersScore" type="radio" name="character" class="colorsForStars1" value="2.5" />
+                        <input asp-for="_ViewReview.CharactersScore" type="radio" name="character" class="colorsForStars1" value="3" />
+                        <input asp-for="_ViewReview.CharactersScore" type="radio" name="character" class="colorsForStars1" value="3.5" />
+                        <input asp-for="_ViewReview.CharactersScore" type="radio" name="character" class="colorsForStars1" value="4" />
+                        <input asp-for="_ViewReview.CharactersScore" type="radio" name="character" class="colorsForStars1" value="4.5" />
+                        <input asp-for="_ViewReview.CharactersScore" type="radio" name="character" class="colorsForStars1" value="5" />
+                    </div>
+                </div>
+
+             
+           
             </div>
-        
-        </div>
-        <div class="contentMangaBox-wrapper">
-            <div class="wrapperRowCurrent">
-                <input type="radio" name="clr3" class="colorsForStars1" />
-                <input type="radio" name="clr3" class="colorsForStars1" />
-                <input type="radio" name="clr3" class="colorsForStars1" />
-                <input type="radio" name="clr3" class="colorsForStars1" />
-                <input type="radio" name="clr3" class="colorsForStars1" />
-                <input type="radio" name="clr3" class="colorsForStars1" />
-                <input type="radio" name="clr3" class="colorsForStars1" />
-                <input type="radio" name="clr3" class="colorsForStars1" />
-                <input type="radio" name="clr3" class="colorsForStars1" />
-                <input type="radio" name="clr3" class="colorsForStars1" />
-            </div>
-          
-        </div>
-        <div class="contentMangaBox-wrapper">
-            <div class="wrapperRowCurrent">
-                <input type="radio" name="clr4" class="colorsForStars1" />
-                <input type="radio" name="clr4" class="colorsForStars1" />
-                <input type="radio" name="clr4" class="colorsForStars1" />
-                <input type="radio" name="clr4" class="colorsForStars1" />
-                <input type="radio" name="clr4" class="colorsForStars1" />
-                <input type="radio" name="clr4" class="colorsForStars1" />
-                <input type="radio" name="clr4" class="colorsForStars1" />
-                <input type="radio" name="clr4" class="colorsForStars1" />
-                <input type="radio" name="clr4" class="colorsForStars1" />
-                <input type="radio" name="clr4" class="colorsForStars1" />
-            </div>
-
-        </div>
-        <div class="contentMangaBox-wrapper">
-
-            <br />
-
-            <textarea class="LongerInput" asp-for="_ViewReview.Content">Content</textarea>
-            <br />
-
+        <div class="fillerClassIc">
+                <h3>Content:    <small id="charCount">0/750</small></h3>
+            <textarea class="TextAreaCurrentReview" asp-for="_ViewReview.Content" id="content" maxlength="750" oninput="updateCount(this.value)"></textarea>
             <span asp-validation-for="_ViewReview.Content" class="text-danger"></span>
-
-
-            <br />
-
         </div>
+        </div>
+        
+        <button>Send</button>
+        
+      
+      
+    
+  
+    
+
+        
+
+
+    
+
      
 
-        <button>Send</button>
     </form>
  
  </div>

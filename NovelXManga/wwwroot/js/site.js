@@ -63,3 +63,12 @@ function handleSidebarToggle() {
     const sidebar = document.querySelector(".Custom-o-sidebar");
     sidebar.classList.toggle("open");
 };
+
+function updateCount(value) {
+    var len = value.length;
+    document.getElementById('charCount').innerText = len + "/750";
+};
+function TitleupdateCount(value) {
+    var len = value.length;
+    document.getElementById('TitleCount').innerText = len + "/50";
+}; 

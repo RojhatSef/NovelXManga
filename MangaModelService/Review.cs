@@ -9,22 +9,24 @@ namespace MangaModelService
         public int ReviewID { get; set; }
 
         [Required]
-        [Range(0, 10)]
+        [Range(0, 5)]
         public double StylesScore { get; set; }
 
         [Required]
-        [Range(0, 10)]
+        [Range(0, 5)]
         public double StoryScore { get; set; }
 
         [Required]
-        [Range(0, 10)]
+        [Range(0, 5)]
         public double GrammarScore { get; set; }
 
         [Required]
-        [Range(0, 10)]
+        [Range(0, 5)]
         public double CharactersScore { get; set; }
 
         [Required]
+        [MinLength(2)]
+        [MaxLength(50)]
         public string Title { get; set; }
 
         [Required]
