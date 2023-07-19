@@ -458,7 +458,7 @@ a {
     padding-top: var(--main-padding);
     display: flex;
     flex-direction: column;
-    gap: 50px;
+ /*   gap: 50px;*/
     padding: 1rem;
     padding-top: 0;
     padding-left: 2.5%;
@@ -1933,3 +1933,235 @@ flexLiLayout {
 }
 
 /* CurrentManga Page Ends */
+/*About page starts here*/
+.banner-aboutpage {
+    background-image: url('https://cdn.wallpapersafari.com/34/29/8NpjeV.jpg');
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+    min-height: 100vh;
+    /*-webkit-text-stroke: 1px white;*/ /* width and color */
+}
+
+.BackgroundShader {
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* black with 60% opacity */
+    color: white;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    overflow: hidden;
+}
+
+.AboutButtonSub {
+    background-color: #ff6740;
+}
+
+.content-container-aboutpage {
+    max-width: 500px;
+    word-wrap: break-word;
+    font-size: 1.5em;
+    padding-left: 15%;
+    text-align: left;
+    transition: 0.5s;
+    margin-top: 5%;
+}
+
+.banner-title-aboutpage {
+    font-size: 2.5em;
+}
+
+.banner-text-aboutpage,
+.info-text-aboutpage {
+    margin: 10px 0;
+}
+
+.info-section-aboutpage {
+    margin-bottom: 20px;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+    .contact-form input[type="email"] {
+        width: 70%;
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+
+    .contact-form input[type="submit"] {
+        width: 20%;
+        padding: 10px;
+        background-color: #f8f9fa;
+        border: none;
+        cursor: pointer;
+    }
+
+    .contact-form button {
+        width: 200px;
+        height: 55px;
+        border: none;
+        outline: none;
+        background-color: #ff6740;
+        color: #fff;
+        font-size: 22px;
+        border-radius: 40px;
+        text-align: center;
+        box-shadow: 0 6px 20px -5px rgba(0,0,0,0.4);
+        position: relative;
+        overflow: hidden;
+        cursor: pointer;
+        transition: width 0.5s ease, height 0.5s ease, font-size 0.5s ease;
+    }
+
+        .contact-form button:hover {
+            background-color: #ff4e40;
+        }
+
+.fa {
+    padding: 20px;
+    font-size: 30px;
+    width: 30px;
+    text-align: center;
+    text-decoration: none;
+    margin: 5px 2px;
+    border-radius: 50%;
+}
+
+    .fa:hover {
+        opacity: 0.7;
+    }
+
+.fa-facebook {
+    background: #3B5998;
+    color: white;
+}
+
+.fa-twitter {
+    background: #55ACEE;
+    color: white;
+}
+
+.fa-youtube {
+    background: #bb0000;
+    color: white;
+}
+
+.fa-instagram {
+    background: #125688;
+    color: white;
+}
+
+/* For tablets and small desktops */
+@media screen and (max-width: 768px) {
+    .banner-title-aboutpage {
+        font-size: 1.5em !important;
+    }
+
+    .content-container-aboutpage {
+        font-size: 1.2em;
+        padding-left: 2% !important;
+        margin-top: 30%;
+    }
+
+    .banner-aboutpage {
+    }
+
+    .contact-form input[type="email"] {
+        width: 100%;
+    }
+
+    .contact-form button {
+        width: 100%;
+        height: 40px; /* reduced button height */
+        font-size: 18px; /* reduced font size */
+    }
+}
+
+/* For large desktop screens */
+@media screen and (max-width: 1200px) {
+    .banner-title-aboutpage {
+        font-size: 2.5em;
+    }
+
+    .content-container-aboutpage {
+        padding-left: 10%;
+    }
+
+    .contact-form input[type="email"] {
+        width: 70%;
+    }
+
+    .contact-form button { /* update the selector here to target the button */
+        width: 45%;
+        height: 40px; /* reduced button height */
+        font-size: 20px; /* reduced font size */
+    }
+}
+
+/* about page ends here*/
+/*Privacy policy Starts here*/
+.privacy-policy-page {
+    padding: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+    color: #fff;
+}
+
+.privacy-policy-title, .gdpr-statement-title, .form-title, .closing-statement-title {
+    font-size: 2em;
+    margin-bottom: 1rem;
+}
+
+.privacy-policy-text, .gdpr-statement-text, .form-description, .closing-statement-text {
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.account-deletion-form {
+    background: rgba(0,0,0,0.1);
+    padding: 1rem;
+    border-radius: 5px;
+}
+
+    .account-deletion-form input[type="email"],
+    .account-deletion-form input[type="password"] {
+        display: block;
+        width: 100%;
+        padding: 0.5em;
+        margin-bottom: 1em;
+    }
+
+    .account-deletion-form select {
+        display: block;
+        width: 100%;
+        padding: 0.5em;
+        margin-bottom: 1em;
+    }
+
+    .account-deletion-form button[type="submit"] {
+        display: block;
+        width: 100%;
+        padding: 1em;
+        background: #ff6740;
+        border: none;
+        color: #fff;
+        cursor: pointer;
+        text-transform: uppercase;
+    }
+
+        .account-deletion-form button[type="submit"]:hover {
+            background: #ff4e40;
+        }
+    .account-deletion-form input[type="email"],
+    .account-deletion-form input[type="password"],
+    .account-deletion-form select,
+    .account-deletion-form button[type="submit"] {
+        box-sizing: border-box;
+    }
+/*Privacy Policy Ends here*/

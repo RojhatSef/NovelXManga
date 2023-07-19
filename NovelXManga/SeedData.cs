@@ -422,19 +422,7 @@ namespace NovelXManga
             };
             WallPapers wallPapers4 = new WallPapers
             {
-                WallPaperPhotoPath = Path.Combine(WallProcessUploadedFile("AllAnime.jpg"))
-            };
-            WallPapers wallPapers5 = new WallPapers
-            {
-                WallPaperPhotoPath = Path.Combine(WallProcessUploadedFile("AllAnime2.jpg"))
-            };
-            WallPapers wallPapers6 = new WallPapers
-            {
-                WallPaperPhotoPath = Path.Combine(WallProcessUploadedFile("AllAnime3.jpeg"))
-            };
-            WallPapers wallPapers7 = new WallPapers
-            {
-                WallPaperPhotoPath = Path.Combine(WallProcessUploadedFile("AllAnime4.jpg"))
+                WallPaperPhotoPath = Path.Combine(WallProcessUploadedFile("AboutMeWall.jpg"))
             };
 
             context.WallPapers.Add(wallPapers);
@@ -442,9 +430,6 @@ namespace NovelXManga
             context.WallPapers.Add(wallPapers2);
             context.WallPapers.Add(wallPapers3);
             context.WallPapers.Add(wallPapers4);
-            context.WallPapers.Add(wallPapers5);
-            context.WallPapers.Add(wallPapers6);
-            context.WallPapers.Add(wallPapers7);
 
             context.SaveChanges();
         }
