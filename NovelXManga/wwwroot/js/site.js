@@ -13,51 +13,49 @@
         $('#selectedTags').val(selectedTags.join());
     });
 })
-
-/*const tagDropdown = document.getElementById('tag-dropdown');*/
-
-window.onload = function () {
-    console.log("Scroll event fired onload");
-
-    handleNavbar();
-}
-// Function to handle Navbar
-function handleNavbar() {
-    console.log(document); // logs the entire document
-    const customOnavbar = document.querySelector(".custom-O-navbar");
-
-    console.log("Scroll event fired");
-    if (!customOnavbar) {
-        console.log('Navbar not found!');
-        return;
-    }
-
-    let scrollPosition = window.pageYOffset;
-
-    window.addEventListener("scroll", () => {
-        const currentScrollPosition = window.pageYOffset;
-
-        if (scrollPosition > currentScrollPosition) {
-            console.log("Scrolling up...");
-            customOnavbar.classList.remove("hidden");
+console.log("Document height: ", document.documentElement.scrollHeight);
+console.log("Window height: ", window.innerHeight);
+window.addEventListener("DOMContentLoaded", (event) => {
+    let navbar = document.querySelector('.custom-O-navbar');
+    let lastScrollTop = 0;
+    window.addEventListener("scroll", function () {
+        let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        if (scrollTop > lastScrollTop) {
+            navbar.style.opacity = 0;
         } else {
-            console.log("Scrolling down...");
-            customOnavbar.classList.add("hidden");
+            navbar.style.opacity = 1;
         }
+        lastScrollTop = scrollTop;
 
-        console.log('ustomOnavbar class list: ', customOnavbar.classList);
-
-        if (currentScrollPosition === 0) {
-            console.log("At top of page...");
-            customOnavbar.classList.add("top-scroll");
-        } else {
-            customOnavbar.classList.remove("top-scroll");
+        // If scroll is at the top of the screen, show navbar
+        if (window.scrollY === 0) {
+            navbar.style.opacity = 1;
         }
-
-        scrollPosition = currentScrollPosition;
     });
-}
+});
+//document.addEventListener("DOMContentLoaded", function () {
+//    console.log("Hello world");
 
+//    var lastScrollTop = 0;
+//    var navbar = document.querySelector('.custom-O-navbar');
+
+//    window.addEventListener('scroll', function () {
+//        console.log("Scroll event fired");
+//        var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+//        if (navbar !== null) {
+//            if (scrollTop > lastScrollTop && scrollTop > navbar.offsetHeight) {
+//                // Downscroll, hide navbar
+//                navbar.style.opacity = "0";
+//            } else {
+//                // Upscroll or reach top, show navbar
+//                navbar.style.opacity = "1";
+//            }
+//        }
+//        console.log("scrolled");
+//        lastScrollTop = scrollTop;
+//    });
+//});
 // Function to handle Sidebar
 function handleSidebarToggle() {
     const sidebar = document.querySelector(".Custom-o-sidebar");

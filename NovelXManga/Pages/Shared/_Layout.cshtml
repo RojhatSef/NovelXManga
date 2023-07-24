@@ -20,22 +20,24 @@
                 <button id="sidebar-toggle" onclick="handleSidebarToggle()" class="sidebar-toggle"><i class="gg-menu-round"></i></button>
             </div>
             <div class="navbar-right">  <input type="search" id="searchbar" class="searchbar" placeholder="Search"> </div>
-        @*    <hr class="TheOrangeLine"/>*@
+      
         </nav>
         <main class="main-content">
             @RenderBody()
         </main>
     </div>
     <div class="Custom-o-sidebar">
-        <div>
+       
             <div class="PushDownSidebar flexSidebarLogo">
-                <a href="/">
-                    <span id="logo">OtakuLibrary   </span>
-                </a>
-                <button id="sidebar-toggle" onclick="handleSidebarToggle()" class="sidebar-toggle rotateLogo"><i class="gg-menu-round"></i></button>
+            <div class="logo">
+                <a asp-page="/Index">  <span id="TextChange">OtakuLibrary  </span></a>  <button id="sidebar-toggle" onclick="handleSidebarToggle()" class="sidebar-toggle  colorSidebarToggle"><i class="gg-menu-round"></i></button>
+            </div>
+            
+         
+               
             </div>
           
-            <hr >
+        
             @if (SignInManager.IsSignedIn(User))
             {
                 <ul>
@@ -109,49 +111,69 @@
             {
                 <ul>
                     <li class="HoverEffektLi">
-                                <a asp-page="/MangaTry/Test" > <span class=""> TEST Recently Added</span>  </a>
-                            </li>
+                        <a href="#"> <span>Latest Updates</span>  </a>
+                    </li>
                     <li class="HoverEffektLi">
-                                <a href="#" > <span >Latest Updates</span>  </a>
-                            </li>
+                        <a asp-page="/Author/CreateAuthor"> <span>AuthorTest</span>  </a>
+                    </li>
                     <li class="HoverEffektLi">
+                        <a asp-page="/Manga/CreateNewManga"> <span>Create New Book</span>  </a>
+                    </li>
+                </ul>
+                <hr />
+                <ul>
+                    <li class="HoverEffektLi">
+                        <a href="#"> <span>Forum</span> </a>
+                    </li>
+                    <li class="HoverEffektLi">
+                        <a href="#"><span>Groups</span> </a>
+                    </li>
+                    <li class="HoverEffektLi ">
 
-                        <a href="#"> <span>AuthorTest</span>  </a>
-                            </li>
+                        <a class="" href="#">  <i class="gg-user"></i> Users </a>
+                    </li>
+                    <li class="HoverEffektLi">
+                        <a href="#"> <span>Latest Updates</span>  </a>
+                    </li>
                     <li class="HoverEffektLi">
                         <a asp-page="/Login/LoginIndex">
-                           <span >Login</span>
+                            <span>Login</span>
                         </a>
                     </li>
                     <li class="HoverEffektLi">
-                        <a asp-page="/SearchFilter/AdvancedSearch"> <span>Advanced Search </span> </a>
-                    </li>
-                    <li class="HoverEffektLi">
-                        <a asp-page="/Register/UserRegister" >
-                           <span>Register</span>
+                        <a asp-page="/Register/UserRegister">
+                            <span>Register</span>
                         </a>
                     </li>
                     <li class="HoverEffektLi">
-                                <a href="#"> <span>Forum</span> </a>
-                            </li>
+                        <a asp-page="/Author/CreateAuthor"> <span>AuthorTest</span>  </a>
+                    </li>
                     <li class="HoverEffektLi">
-                                <a href="#" > <span>Groups</span> </a>
-                            </li>
+                        <a asp-page="/Manga/CreateNewManga"> <span>Create New Book</span>  </a>
+                    </li>
+                </ul>
+                <hr />
+                <ul>
                     <li class="HoverEffektLi">
                         <a asp-page="/InfoPages/AboutUs"> <span>About us</span> </a>
-                            </li>
+                    </li>
                     <li class="HoverEffektLi">
-                                <a href="#" > <span >Rules</span> </a>
-                            </li>
+                        <a asp-page="/SearchFilter/AdvancedSearch"> <span>Advanced Fileter </span> </a>
+                    </li>
                     <li class="HoverEffektLi">
-                        <a asp-page="/InfoPages/Policy"><span>Privacy Policy</span> </a>
-                            </li>
+                        <a href="#"> <span>Rules</span> </a>
+                    </li>
                     <li class="HoverEffektLi">
-                                <a href="#"> <span >Announcment</span> </a>
-                            </li>
+                        <a asp-page="/InfoPages/Policy"> <span>Privacy Policy</span> </a>
+                    </li>
+                    <li class="HoverEffektLi">
+                        <a href="#"> <span>Announcment</span> </a>
+                    </li>
+
                 </ul>
+   
             }
-        </div>
+      
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
 
