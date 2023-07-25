@@ -13,6 +13,7 @@
         $('#selectedTags').val(selectedTags.join());
     });
 })
+
 console.log("Document height: ", document.documentElement.scrollHeight);
 console.log("Window height: ", window.innerHeight);
 window.addEventListener("DOMContentLoaded", (event) => {
@@ -33,30 +34,38 @@ window.addEventListener("DOMContentLoaded", (event) => {
         }
     });
 });
-//document.addEventListener("DOMContentLoaded", function () {
-//    console.log("Hello world");
 
-//    var lastScrollTop = 0;
-//    var navbar = document.querySelector('.custom-O-navbar');
+$(document).ready(function () {
+    $('.bar span').hide();
 
-//    window.addEventListener('scroll', function () {
-//        console.log("Scroll event fired");
-//        var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    var maxReviews = 0;
+    for (var score in scoreDistribution) {
+        if (scoreDistribution[score] > maxReviews) {
+            maxReviews = scoreDistribution[score];
+        }
+    }
 
-//        if (navbar !== null) {
-//            if (scrollTop > lastScrollTop && scrollTop > navbar.offsetHeight) {
-//                // Downscroll, hide navbar
-//                navbar.style.opacity = "0";
-//            } else {
-//                // Upscroll or reach top, show navbar
-//                navbar.style.opacity = "1";
-//            }
-//        }
-//        console.log("scrolled");
-//        lastScrollTop = scrollTop;
-//    });
-//});
-// Function to handle Sidebar
+    for (var score in scoreDistribution) {
+        var percentage = (scoreDistribution[score] / maxReviews) * 100;
+        var barId = '#bar-';
+        switch (parseInt(score)) {
+            case 5: barId += 'five'; break;
+            case 4: barId += 'four'; break;
+            case 3: barId += 'three'; break;
+            case 2: barId += 'two'; break;
+            case 1: barId += 'one'; break;
+        }
+
+        $(barId).animate({
+            width: percentage + '%'
+        }, 1000);
+    }
+
+    setTimeout(function () {
+        $('.bar span').fadeIn('slow');
+    }, 1000);
+});
+
 function handleSidebarToggle() {
     const sidebar = document.querySelector(".Custom-o-sidebar");
     sidebar.classList.toggle("open");

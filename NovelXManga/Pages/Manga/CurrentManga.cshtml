@@ -6,15 +6,17 @@
 @{
     var user = await UserManager.GetUserAsync(User);
     var UpdaterUser = user != null && await UserManager.IsInRoleAsync(user, "NormalUser");
+   
 }
 
-
-
+<script>
+    var scoreDistribution = @Html.Raw(Json.Serialize(Model.CurrentManga.ScoreDistribution));
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <div class="Content1Ex">
         
-<form method="post" asp-page-handler="MangaPage" enctype="multipart/form-data" >
-    <input type="hidden" id="CurrentManga_MangaID" name="CurrentManga.MangaID" value="11" />
+
         <div class="card-ex">
             <div class="card-image-ex">
              
@@ -51,14 +53,29 @@
                     {                                           
                             <h1 class="FontSizeCurrentBook">@Model.CurrentManga.MangaName</h1>                      
                     }
-                </div>
+            </div>
+          
                 <div class="AddEditReportCurrentpage">
-                  
-                    <div class="AddSizeCurrentpage">
+                <form method="post" asp-page-handler="AddToReadingList" asp-route-id="@Model.CurrentManga.MangaID" enctype="multipart/form-data">
+                    <input type="hidden" asp-for="CurrentManga.MangaID" />
+                <div class="AddSizeCurrentpage">
+                    
                         <button type="submit" class="AddToReadListButton">
-                            Add To Library
+                            @if (Model.IsInReadingList)
+                            {
+                                <text>Remove From Library</text>
+                            }
+                            else
+                            {
+                                <text>Add To Library</text>
+                            }
                         </button>
+
                     </div>
+                </form>
+                      
+                
+
                     <div class="EditSizeCurrentpage">
                         <button type="submit" class="EditBookButton">
                             Edit
@@ -70,10 +87,11 @@
                         </button>
                     </div>
                 </div>
+          
             </div>
 
         </div>
-    </form>
+   
     </div>
    
 
@@ -199,40 +217,74 @@
             <div class="scoreArea">
                 <div class="ratingStars">
                     <div class="MangaInputText">
-                        @Model.CurrentManga.OverAllBookScore Star /    <span> @Model.CurrentManga.reviews.Count</span>
+                        <span>     @Model.CurrentManga.OverAllBookScore  <i class="fas fa-star active"></i> </span>
                     </div>
                 </div>
                 <div class="scoreDistribution">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Score</th>
-                                <th>Count</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var entry in Model.CurrentManga.ScoreDistribution)
-                            {
-                                <tr>
-                                    <td>@entry.Key</td> <!-- This is the score -->
-                                    <td>@entry.Value</td> <!-- This is the count of reviews with this score -->
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-                </div>
+                    <div class="starrating-container">
+                        <div class="inner">
+                            <div class="rating-staringy">
+                                <span class="rating-num">@Model.CurrentManga.OverAllBookScore</span>
+                                <div class="rating-stars">
+                                    @for (var i = 0; i < Model.CurrentManga.OverAllBookScore; i++)
+                                    {
+                                        <span><i class="fas fa-star active"></i></span>
+                                    }
+                                    @for (var i = 0; i < (5 - Model.CurrentManga.OverAllBookScore); i++)
+                                    {
+                                        <span><i class="far fa-star"></i></span>
+                                    }
+                                </div>
+                                <div class="rating-users">
+                                    <i class="fas fa-user"></i> @Model.CurrentManga.reviews.Count total
+                                </div>
+                            </div>
 
+                           <div class="histo">
+    @foreach (var entry in Model.CurrentManga.ScoreDistribution)
+    {
+       
+            var barId = "bar-";
+            switch (entry.Key)
+            {
+                case 5: barId += "five"; break;
+                case 4: barId += "four"; break;
+                case 3: barId += "three"; break;
+                case 2: barId += "two"; break;
+                case 1: barId += "one"; break;
+            }
+       
+        <div class="@entry.Key histo-rate">
+            <span class="histo-star">
+                <i class="fas fa-star active"></i> @entry.Key
+            </span>
+            <span class="bar-block">
+                <span id="@barId" class="bar">
+                    <span>@entry.Value</span>&nbsp;
+                </span>
+            </span>
+        </div>
+    }
+</div>
+                        </div>
+                    </div>
+                </div>
             </div>
+
 
 
             <!-- Show Add Reading Count -->
             <div class="MangaInputText">
-                <span>RNuMe</span> 
-            </div>
+                <span>
+                    @Model.ReadingUsersCount &nbsp; <i class="fa-solid fa-book-open-reader book-icon"> </i>
+                </span>
+            </div> 
+
+
 
             <!-- Show Comment Count -->
             <div class="MangaInputText">
-                <span>CINum</span>
+                <span>Comments</span>
             </div>
 
         </div>
@@ -941,17 +993,13 @@
         
 
       @*  Insert here New mangaDetailBox*@
-
- 
-            </div>
-
-    @if (SignInManager.IsSignedIn(User))
-    {
+        @if (SignInManager.IsSignedIn(User))
+        {
             <form class="" method="post" asp-page-handler="ReviewManga" enctype="multipart/form-data">
                 <input type="hidden" id="CurrentManga_MangaID" name="CurrentManga.MangaID" value="@Model.CurrentManga.MangaID" />
 
                 <label class="ReviewTitle" asp-for="_ViewReview.Title">Title</label>       <small id="TitleCount">0/50</small><br />
-                <input class="ReviewTitle" type="text" asp-for="_ViewReview.Title" class="form-control" oninput="TitleupdateCount(this.value)" maxlength="50" /> 
+                <input class="ReviewTitle" type="text" asp-for="_ViewReview.Title" class="form-control" oninput="TitleupdateCount(this.value)" maxlength="50" />
                 <span asp-validation-for="_ViewReview.Title" class="text-danger"></span>
 
                 <div class="flex-direction-current">
@@ -1029,7 +1077,14 @@
 
                 <button>Send</button>
             </form>
-    }
+        }
+ 
             </div>
+
+
+</div>
+
+ 
+
       
 
