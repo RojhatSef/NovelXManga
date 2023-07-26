@@ -96,22 +96,23 @@
 
                 </ul>
                  </div>
-            
+            <hr>
             <div class="sidebar-section">
-                <div>
-                    <a href="#" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img asp-append-version="true" src="https://www.w3schools.com/images/w3schools_green.jpg" alt="" width="30" height="30">
-                        <span>Profile</span>
-                    </a>
-                    <ul >
+                <div class="user-section">
+                    <ul>
+                        <li class="HoverEffektLi"><a id="log" asp-page="/profile/UserProfile"><span> Profile</span></a></li>
                         <li class="HoverEffektLi"><a id="log" asp-page="/profile/UserProfile">User</a></li>
-                        <li>
-                            <hr>
-                        </li>
                         <li class="HoverEffektLi"><a asp-page="/Login/LogOut">Sign out</a></li>
                     </ul>
+                    <a id="log" class="sidebar-image" asp-page="/profile/UserProfile">
+                        <div class="profile-image">
+                            <img asp-append-version="true" src="https://www.w3schools.com/images/w3schools_green.jpg" alt="" width="30" height="30">
+                        </div>
+                    </a>
                 </div>
-                </div>
+            </div>
+
+
           
             }
             else

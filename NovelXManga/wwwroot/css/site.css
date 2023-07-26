@@ -70,9 +70,11 @@ a {
 main {
     grid-area: main;
 }
+
 .main-content > div {
     background-color: #191a1c;
 }
+
 .main-content {
     display: grid;
     height: 100%;
@@ -104,8 +106,6 @@ main {
     border-bottom: 1px solid #ff6740;
     transition: opacity 0.3s ease-in-out;
 }
-
-
 
 a {
     list-style: none;
@@ -143,7 +143,6 @@ a {
         margin: 10px;
     }
 }
-
 
 .LayoutXButtonNoBackground {
     background-color: #333 !important;
@@ -303,8 +302,6 @@ a {
     width: 100%;
 }
 
-
-
 .sidebar-toggle {
     cursor: pointer;
     background-color: transparent;
@@ -365,7 +362,6 @@ a {
         left: 0;
     }
 
-
     .Custom-o-sidebar ul {
         list-style: none;
         padding: 0;
@@ -385,6 +381,7 @@ a {
                 .Custom-o-sidebar ul li a i {
                     margin-right: 10px;
                 }
+
     .Custom-o-sidebar .sidebar-section {
         margin-bottom: 20px;
     }
@@ -396,6 +393,21 @@ a {
     }
 
         .Custom-o-sidebar .sidebar-title i {
+            margin-right: 10px;
+        }
+    .Custom-o-sidebar .user-section {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .Custom-o-sidebar .profile-image {
+        margin-left: auto; /* adjust this as per your requirements */
+        margin-right: 10px;
+    }
+
+        .Custom-o-sidebar .user-section .profile-image {
+            margin-left: auto;
             margin-right: 10px;
         }
 
@@ -410,7 +422,7 @@ a {
 }
 
 .logo {
-    font-size: 32px;
+    font-size: 30px;
     margin-right: 20px;
     background-color: #ff6740;
     width: 100%;
@@ -1419,12 +1431,14 @@ flexLiLayout {
     height: 50px;
     width: 220px;
 }
+
 .book-icon {
     color: white; /* this will change the color of the icon */
     font-size: 20px; /* this will change the size of the icon */
     font-family: FontAwesome;
     margin-right: 5px; /* this will add a small space between the icon and the text that follows it */
 }
+
 .EditSizeCurrentpage {
     display: inline-block; /* This will ensure the divs are in a line */
     margin-right: 10px; /* To ensure spacing between the buttons */
@@ -1811,14 +1825,16 @@ flexLiLayout {
     position: relative; /* Makes scoreArea the reference point for its absolute positioned children */
 }
 
-
 .scoreDistribution {
     display: none;
     position: absolute; /* Positions the scoreDistribution element relative to scoreArea */
     z-index: 1;
     top: 100%; /* positions the dropdown right below the scoreArea element */
     width: 400px; /* adjust as necessary */
-  
+}
+
+.colorstarCurrent {
+    color: yellow;
 }
 
 .scoreArea:hover .scoreDistribution {
@@ -1837,11 +1853,9 @@ flexLiLayout {
     height: 100%;
     margin: 10px;
     overflow: hidden;
-
 }
 /*Score test*/
 @import url(https://fonts.googleapis.com/css?family=Roboto:100,300,400);
-
 
 .starrating-container {
     width: 400px;
