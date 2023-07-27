@@ -62,6 +62,9 @@ builder.Services.ConfigureApplicationCookie(config =>
 {
     config.LoginPath = "/Login/LoginIndex";
 });
+builder.Services.AddScoped<MangaRankingService>();
+builder.Services.AddHostedService<UpdateRankingsBackgroundService>();
+
 var app = builder.Build();
 SeedDatainitialize(app);
 
@@ -93,7 +96,7 @@ static void SeedDatainitialize(IHost host)
     }
 }
 
-//bug fixes. When the user goes from mobile view and removes menu then goes to larger screen the menu wont come back.
+//bug fixes. When the user goes from mobile view and removes menu then goes to larger screen the menu wont come back. Done
 //missing repo
 //studio and BuyPage
 // make or break ToDos

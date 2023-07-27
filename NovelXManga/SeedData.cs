@@ -320,6 +320,7 @@ namespace NovelXManga
             var manga = context.mangaModels.FirstOrDefault(e => e.MangaName == "Berserk");
             var manga2 = context.mangaModels.FirstOrDefault(e => e.MangaName == "Solo Leveling");
             var manga3 = context.mangaModels.FirstOrDefault(e => e.MangaName == "Tower of God");
+            var manga4 = context.mangaModels.FirstOrDefault(e => e.MangaName == "Sailor Moon");
             if (user != null)
             {
                 // Find or create manga
@@ -381,17 +382,70 @@ namespace NovelXManga
             {
                 var review4 = new Review
                 {
-                    StylesScore = 4.5,
-                    StoryScore = 5,
-                    GrammarScore = 4.4,
+                    StylesScore = 2.5,
+                    StoryScore = 2,
+                    GrammarScore = 2.4,
                     Created = DateTime.Now,
-                    CharactersScore = 4.9,
+                    CharactersScore = 2.9,
                     Title = "Mind-Blowing Action",
                     Content = "Solo Leveling is an absolute thrill ride! The art is top-notch, with incredibly detailed action scenes that leave you in awe. The story is gripping, filled with intense moments and unexpected twists. The characters are well-developed and have unique abilities. If you're a fan of action-packed manga, Solo Leveling is a must-read!."
                 };
                 review4.UserModels = new List<UserModel>() { user2 };
                 review4.MangaModels = new List<MangaModel>() { manga2 };
+                var review5 = new Review
+                {
+                    StylesScore = 1.5,
+                    StoryScore = 1,
+                    GrammarScore = 1.4,
+                    Created = DateTime.Now,
+                    CharactersScore = 4.9,
+                    Title = "SailorD",
+                    Content = "Sailor Miss!."
+                };
+                review5.UserModels = new List<UserModel>() { user2 };
+                review5.MangaModels = new List<MangaModel>() { manga4 };
+                context.Reviews.Add(review5);
                 context.Reviews.Add(review4);
+                await context.SaveChangesAsync();
+            }
+            else
+            {
+                throw new Exception("Test user not found.");
+            }
+            var user3 = new UserModel { UserName = "TestUser3", Email = "TestUser3@hotmail.com" };
+            var result5 = await userManager.CreateAsync(user3, "Rojhat123!");
+            if (result5.Succeeded)
+            {
+                var resultRole = await userManager.AddToRoleAsync(user3, "Updater");
+            }
+            if (user3 != null)
+            {
+                var review4 = new Review
+                {
+                    StylesScore = 4.5,
+                    StoryScore = 5,
+                    GrammarScore = 4.4,
+                    Created = DateTime.Now,
+                    CharactersScore = 4.9,
+                    Title = "Test Action",
+                    Content = "Solo Monkey The story is gripping,  The characters are well-developed and have unique abilities. If you're a fan of action-packed manga, Solo Leveling is a must-read!."
+                };
+                review4.UserModels = new List<UserModel>() { user3 };
+                review4.MangaModels = new List<MangaModel>() { manga2 };
+                var review5 = new Review
+                {
+                    StylesScore = 4.5,
+                    StoryScore = 3,
+                    GrammarScore = 2.4,
+                    Created = DateTime.Now,
+                    CharactersScore = 4.9,
+                    Title = "MySalor",
+                    Content = "Sailor Miss!"
+                };
+                review5.UserModels = new List<UserModel>() { user3 };
+                review5.MangaModels = new List<MangaModel>() { manga4 };
+                context.Reviews.Add(review4);
+                context.Reviews.Add(review5);
                 await context.SaveChangesAsync();
             }
             else
@@ -501,7 +555,7 @@ namespace NovelXManga
                 OfficalLanguage = "Japanese",
                 ISBN10 = "1593070209",
                 ISBN13 = "978-1593070205",
-                score = 9.2,
+
                 EndingYear = null,
                 StatusInCountryOfOrigin = "Ongoing",
                 Type = "Manga",
@@ -595,7 +649,7 @@ new Character { CharacterName = "Ivalera", specie="Elf",Gender="Female", Born="U
                 OfficalLanguage = "Japanese",
                 ISBN10 = "1569319006",
                 ISBN13 = "978-1569319000",
-                score = 10,
+
                 relatedSeries = null,
                 EndingYear = DateTime.Now,
                 StatusInCountryOfOrigin = "11, completed",
@@ -680,7 +734,6 @@ new Character { CharacterName = "Ivalera", specie="Elf",Gender="Female", Born="U
                 OfficalLanguage = "English",
                 ISBN10 = "1408855674",
                 ISBN13 = "978-1408855676",
-                score = 9.5,
 
                 EndingYear = DateTime.Now,
                 StatusInCountryOfOrigin = "7, completed",
@@ -763,7 +816,6 @@ new Character { CharacterName = "Ivalera", specie="Elf",Gender="Female", Born="U
                 OfficalLanguage = "Japanese",
                 ISBN10 = "1421501686",
                 ISBN13 = "978-1421501680",
-                score = 9.5,
 
                 EndingYear = DateTime.ParseExact("2006-05-15 00:00:00,000", "yyyy-MM-dd HH:mm:ss,fff",
                                      System.Globalization.CultureInfo.InvariantCulture),
@@ -844,7 +896,7 @@ new Character { CharacterName = "Misa Amane" ,specie="Human",Gender="Female", Bo
                 StatusInCountryOfOrigin = "Completed",
                 CompletelyTranslated = "Yes",
                 OriginalPublisher = "Square Enix",
-                score = 9.0,
+
                 Type = "Manga",
                 OfficalLanguage = "Japanese",
                 PhotoPath = Path.Combine(ProcessUploadedFile("FullMetal.jpeg")),
@@ -916,7 +968,7 @@ new Character { CharacterName = "Misa Amane" ,specie="Human",Gender="Female", Bo
                 StatusInCountryOfOrigin = "Ongoing",
                 CompletelyTranslated = "No",
                 OriginalPublisher = "Shueisha",
-                score = 9.5,
+
                 Type = "Manga",
                 OfficalLanguage = "Japanese",
                 PhotoPath = Path.Combine(ProcessUploadedFile("OnePiece.jpg")),
@@ -1004,7 +1056,7 @@ new Character { CharacterName = "Misa Amane" ,specie="Human",Gender="Female", Bo
                 StatusInCountryOfOrigin = "Completed",
                 CompletelyTranslated = "Yes",
                 OriginalPublisher = "Kodansha",
-                score = 8.0,
+
                 Type = "Manga",
                 OfficalLanguage = "Japanese",
                 PhotoPath = Path.Combine(ProcessUploadedFile("SailorMoon.jpg")),
@@ -1080,7 +1132,7 @@ new Character { CharacterName = "Misa Amane" ,specie="Human",Gender="Female", Bo
                 StatusInCountryOfOrigin = "Ongoing",
                 CompletelyTranslated = "No",
                 OriginalPublisher = "Shogakukan",
-                score = 8.5,
+
                 Type = "Manga",
                 OfficalLanguage = "Japanese",
                 PhotoPath = Path.Combine(ProcessUploadedFile("Conan.jpeg")),
@@ -1160,7 +1212,7 @@ new AssociatedNames { nameString = "Detective Conan Manga" },
                 StatusInCountryOfOrigin = "Completed",
                 CompletelyTranslated = "Yes",
                 OriginalPublisher = "Production I.G",
-                score = 8.5,
+
                 Type = "Anime",
                 OfficalLanguage = "Japanese",
                 PhotoPath = Path.Combine(ProcessUploadedFile("AttackOnTitan.jpeg")),
@@ -1234,7 +1286,7 @@ new Character { CharacterName = "Mikasa Ackerman" },
                 OfficalLanguage = "English",
                 ISBN10 = "0618640150",
                 ISBN13 = "978-0618640157",
-                score = 9.5,
+
                 EndingYear = null,
                 StatusInCountryOfOrigin = "Completed",
                 Type = "Novel",
@@ -1320,7 +1372,7 @@ new Character { CharacterName = "Mikasa Ackerman" },
                 OfficalLanguage = "Korean",
                 ISBN10 = "8952776072",
                 ISBN13 = "978-8952776078",
-                score = 9,
+
                 StudioModels = new List<StudioModel> { new StudioModel { GroupName = "Jin Ho Sung", Started = started, StudioWebsite = "N/A", Biography = "Jin Ho Sung is the author and artist of Solo Leveling." } },
                 EndingYear = null,
                 StatusInCountryOfOrigin = "14, ongoing",
@@ -1411,7 +1463,6 @@ new Character { CharacterName = "Mikasa Ackerman" },
                 OfficalLanguage = "Korean",
                 ISBN10 = "8952745013",
                 ISBN13 = "978-8952745018",
-                score = 9,
 
                 EndingYear = null,
                 StatusInCountryOfOrigin = "3, Ongoing",
@@ -1497,7 +1548,7 @@ new Character { CharacterName = "Mikasa Ackerman" },
                 OfficalLanguage = "Spanish",
                 ISBN10 = "9780142437230",
                 ISBN13 = "0142437239",
-                score = 9.2,
+
                 relatedSeries = null,
                 EndingYear = DateTime.Now,
                 StatusInCountryOfOrigin = "Complete",
@@ -1570,7 +1621,7 @@ new Character { CharacterName = "Dulcinea del Toboso", specie = "Human", Gender 
                 OfficalLanguage = "Japanese",
                 ISBN10 = "4047139281",
                 ISBN13 = "978-4047139287",
-                score = 9.1,
+
                 StudioModels = new List<StudioModel> { new StudioModel { GroupName = "Sunrise", Started = started, StudioWebsite = "http://www.sunrise-inc.co.jp/" } },
                 EndingYear = new DateTime(2008, 7, 28),
                 StatusInCountryOfOrigin = "50, completed",
@@ -1647,7 +1698,7 @@ new Character { CharacterName = "Dulcinea del Toboso", specie = "Human", Gender 
                 OfficalLanguage = "Japanese",
                 ISBN10 = "4088730172",
                 ISBN13 = "978-4088730175",
-                score = 9,
+
                 StudioModels = new List<StudioModel> { new StudioModel { GroupName = "Studio Pierrot", Started = started, StudioWebsite = "https://www.pierrot.jp/" } },
                 EndingYear = new DateTime(2016, 8, 22),
                 StatusInCountryOfOrigin = "74, completed",
@@ -1724,7 +1775,7 @@ new Character { CharacterName = "Dulcinea del Toboso", specie = "Human", Gender 
                 OfficalLanguage = "Japanese",
                 ISBN10 = "4063192731",
                 ISBN13 = "978-4063192734",
-                score = 8,
+
                 StudioModels = new List<StudioModel> { new StudioModel { GroupName = "Toei Animation", Started = started, StudioWebsite = "https://www.toei-anim.co.jp/" } },
                 EndingYear = new DateTime(2012, 5, 23),
                 StatusInCountryOfOrigin = "37, completed",

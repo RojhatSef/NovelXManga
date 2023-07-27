@@ -19,8 +19,8 @@ namespace MangaModelService
         public string? CompletelyTranslated { get; set; }
         public string? orignalWebtoon { get; set; }
         public string? OriginalPublisher { get; set; }
-        public double? score { get; set; }
-
+        public int? Rank { get; set; }
+        public int? PageView { get; set; }
         public string? Type { get; set; }
         public string? OfficalLanguage { get; set; }
         public string? PhotoPath { get; set; }
@@ -76,13 +76,29 @@ namespace MangaModelService
             {
                 if (reviews != null && reviews.Any())
                 {
-                    return Math.Round(reviews.Average(r => r.OverAllBookScore), 1);
+                    return Math.Round(reviews.Average(r => (r.StylesScore + r.StoryScore + r.GrammarScore + r.CharactersScore) / 4), 1);
                 }
                 else
                 {
                     return null;
                 }
             }
+            //get  // system Bayesian
+            //{
+            //    double m = 50; // Choose your own threshold for minimum reviews to be considered in top list
+            //    double C = 3; // Choose your own average rating across all books
+            //    int v = Reviews.Count;
+            //    double R = Math.Round(Reviews.Average(r => (r.StylesScore + r.StoryScore + r.GrammarScore + r.CharactersScore) / 4), 1);
+
+            //    if (v > m)
+            //    {
+            //        return (v / (v + m)) * R + (m / (v + m)) * C;
+            //    }
+            //    else
+            //    {
+            //        return null;
+            //    }
+            //}
         }
     }
 }

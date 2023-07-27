@@ -84,5 +84,10 @@ namespace MangaAccessService
             await context.SaveChangesAsync();
             return UpdateModelAsync;
         }
+
+        public async Task<int> GetReadingListCountForMangaAsync(int mangaId)
+        {
+            return await context.readingLists.CountAsync(rl => rl.MangaModelId == mangaId);
+        }
     }
 }

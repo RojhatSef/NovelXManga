@@ -23,5 +23,7 @@ namespace MangaAccessService
         Task<ReadingList> AddAsync(ReadingList AddAsync);
 
         Task<ReadingList> DeleteAsync(int idAsync);
+
+        Task<int> GetReadingListCountForMangaAsync(int mangaId);
     }
 }

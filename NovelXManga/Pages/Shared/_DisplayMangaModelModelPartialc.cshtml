@@ -212,12 +212,7 @@
         <label class="form-label" asp-for="@Model.StatusInCountryOfOrigin">StatusInCountryOfOrigin: @Model.StatusInCountryOfOrigin</label>
     </div>
 }
-@if (Model.score != null)
-{
-    <div class="mb-3">
-        <label class="form-label" asp-for="@Model.score">orignalWebtoon: @Model.score</label>
-    </div>
-}
+
 <div>Artist/s: </div>
 @if (Model.ArtistModels != null)
 {

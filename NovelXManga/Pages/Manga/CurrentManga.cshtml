@@ -484,7 +484,7 @@
                 <h1></h1>
                 <div class="MangaContainerInput">
 
-                    @if (Model.CurrentManga.score != null)
+                    @if (Model.CurrentManga.OverAllBookScore != null)
                     {
                         @if (UpdaterUser)
                         {
@@ -535,25 +535,7 @@
 
                         }
                     }
-                    else
-                    {
-                        @if (UpdaterUser)
-                        {
-                              <div class="MangaInputText">
-                                TBA
-
-                            </div>
-                        }
-                        else
-                        {
-                            <div class="MangaInputText">
-                                TBA
-
-                            </div>
-                        }
-
-
-                }
+               
 
             </div>
 

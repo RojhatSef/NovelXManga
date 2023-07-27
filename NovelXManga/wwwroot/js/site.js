@@ -23,14 +23,17 @@ window.addEventListener("DOMContentLoaded", (event) => {
         let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         if (scrollTop > lastScrollTop) {
             navbar.style.opacity = 0;
+            navbar.style.visibility = "hidden"; // change from display to visibility
         } else {
             navbar.style.opacity = 1;
+            navbar.style.visibility = "visible"; // change from display to visibility
         }
         lastScrollTop = scrollTop;
 
         // If scroll is at the top of the screen, show navbar
         if (window.scrollY === 0) {
             navbar.style.opacity = 1;
+            navbar.style.visibility = "visible"; // change from display to visibility
         }
     });
 });

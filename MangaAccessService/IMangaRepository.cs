@@ -31,5 +31,11 @@ namespace MangaAccessService
         Task<MangaModel> AddAsync(MangaModel NewManga);
 
         Task<MangaModel> DeleteAsync(int id);
+
+        Task<IEnumerable<MangaModel>> GetTopRankedMangaAsync(int count);
+
+        Task<IEnumerable<MangaModel>> GetMostPopularMangaAsync(int count);
+
+        Task UpdateMangaRankingAsync(MangaModel manga, int rank);
     }
 }

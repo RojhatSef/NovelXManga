@@ -97,7 +97,7 @@ namespace MangaAccessService.Migrations
 
         public async Task<IEnumerable<MangaModel>> GetAllModelAsync()
         {
-            return await mangaNNovelAuthDBContext.mangaModels.ToListAsync();
+            return await mangaNNovelAuthDBContext.mangaModels.Include(e => e.reviews).ToListAsync();
         }
 
         public async Task<MangaModel> GetModelAsync(int id)
@@ -133,6 +133,29 @@ namespace MangaAccessService.Migrations
             manga.State = EntityState.Modified;
             await mangaNNovelAuthDBContext.SaveChangesAsync();
             return updatedManga;
+        }
+
+        public async Task<IEnumerable<MangaModel>> GetTopRankedMangaAsync(int count)
+        {
+            return await mangaNNovelAuthDBContext.mangaModels
+                .OrderByDescending(manga => manga.OverAllBookScore)
+                .Take(count)
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<MangaModel>> GetMostPopularMangaAsync(int count)
+        {
+            return await mangaNNovelAuthDBContext.mangaModels
+                .OrderByDescending(manga => manga.WeekRead + manga.MonthRead + manga.YearRead)
+                .Take(count)
+                .ToListAsync();
+        }
+
+        public async Task UpdateMangaRankingAsync(MangaModel manga, int rank)
+        {
+            manga.Rank = rank;
+            mangaNNovelAuthDBContext.mangaModels.Update(manga);
+            await mangaNNovelAuthDBContext.SaveChangesAsync();
         }
     }
 }
