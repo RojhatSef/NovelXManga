@@ -20,6 +20,7 @@ namespace MangaModelService
         public string? Nationality { get; set; }
         public string? Education { get; set; }
         public string? Occupation { get; set; }
+        public string? PhotoPath { get; set; }
         public string? Lawful { get; set; }
         public string? Personality { get; set; }
         public string? FamousQuote { get; set; }

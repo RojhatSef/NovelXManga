@@ -34,6 +34,7 @@
     <Folder Include="Pages\Posts\" />
     <Folder Include="wwwroot\Images\AuthorImage\" />
     <Folder Include="wwwroot\Images\MangaImage\" />
+    <Folder Include="wwwroot\Images\CharacterImage\" />
     <Folder Include="wwwroot\Images\UserImage\" />
   </ItemGroup>
 

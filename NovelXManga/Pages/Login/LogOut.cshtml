@@ -2,23 +2,18 @@
 @model NovelXManga.Pages.Login.LogOutModel
 @{
 }
-<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-<form method="post">
 
+<div class="logout-container">
+    <div class="MarginAutoLogOut">
+        <form method="post" class="account-deletion-form">
+            <h2 class="form-title">Are you sure you want to logout</h2>
+            <p class="form-description">
+                @User.Identity.Name
+            </p>
 
-    <div class="Content1Cost">
-        <div class="MassAlignContent">
-        <div class="row justify-content-center">
-            <div class="col-sm-12 col-md-12 col-lg-4">
-                <p> Are you sure you want to logout?</p>
-                <p> @User.Identity.Name</p>
-                <p>
-                    <button class="btn btn-primary" asp-page-handler="DontLogOut">Cancel</button>
-                    <button class="btn btn-danger m-lg-5 border-dark" asp-page-handler="Logout">Logout</button>
-                </p>
-            </div>
-        </div>
-        </div>
+            <button class="btn btn-custom-primary-login-Cancel" asp-page-handler="DontLogOut">Cancel</button>
+            <button class="btn btn-custom-primary-login-Logout " asp-page-handler="Logout">Logout</button>
+        </form>
     </div>
+</div>
 
-</form>

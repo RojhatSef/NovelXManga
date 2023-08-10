@@ -32,7 +32,7 @@ namespace NovelXManga.Pages.Manga
         public Review AddReview { get; set; }
 
         [BindProperty]
-        public ViewReview _ViewReview { get; set; }
+        public ViewReview _ViewReview { get; set; } = new ViewReview();
 
         public IEnumerable<Review> ReivewModel { get; set; }
 
@@ -51,33 +51,6 @@ namespace NovelXManga.Pages.Manga
             this.postRepsitory = postRepsitory;
             this.characterRepsitory = characterRepsitory;
             this.reviewRepsitory = reviewRepsitory;
-        }
-
-        public async Task<IActionResult> OnPostReviewManga(MangaModel id)
-        {
-            var user = await userManager.GetUserAsync(User);
-            CurrentManga = mangaRepository.GetOneMangaAllIncluded(id.MangaID);
-            Blog = blogRepsitory.GetModel(CurrentManga.BlogModelId);
-            Posts = postRepsitory.GetAllModels();
-            if (ModelState.IsValid)
-            {
-                Review review = new Review
-                {
-                    Title = _ViewReview.Title,
-                    Created = DateTime.Now,
-                    CharactersScore = _ViewReview.CharactersScore,
-                    GrammarScore = _ViewReview.GrammarScore,
-                    StoryScore = _ViewReview.StoryScore,
-                    StylesScore = _ViewReview.StylesScore,
-                    Content = _ViewReview.Content,
-                    MangaModels = new List<MangaModel> { CurrentManga },
-                    UserModels = new List<UserModel> { user },
-                };
-                Context.Reviews.Add(review);
-                Context.SaveChanges();
-            }
-
-            return RedirectToAction("Index");
         }
 
         public IActionResult OnPostMangaPage(int MangaID)
@@ -103,14 +76,11 @@ namespace NovelXManga.Pages.Manga
                 // No user is logged in, return the page without making any changes
                 return RedirectToPage(new { id });
             }
-
             CurrentManga = mangaRepository.GetOneMangaAllIncluded(id);
-
             // Check if the manga is already in the reading list
             var readingListEntry = await Context.readingLists
                 .Where(rl => rl.UserId == user.Id && rl.MangaModelId == id)
                 .FirstOrDefaultAsync();
-
             // If the manga is not in the reading list, add it
             if (readingListEntry == null)
             {
@@ -134,6 +104,67 @@ namespace NovelXManga.Pages.Manga
             return RedirectToPage(new { id });
         }
 
+        public async Task<IActionResult> OnPostPostTotalScoreAsync(int id)
+        {
+            if (string.IsNullOrEmpty(_ViewReview.Title)
+           || string.IsNullOrEmpty(_ViewReview.Content)
+           || _ViewReview.GrammarScore < 0.5
+           || _ViewReview.StoryScore < 0.5
+           || _ViewReview.StylesScore < 0.5
+           || _ViewReview.CharactersScore < 0.5)
+            {
+                OnGetAsync(id);
+                return Page();
+            }
+            CurrentManga = mangaRepository.GetOneMangaAllIncluded(id);
+            var user = await userManager.GetUserAsync(User);
+            var existingReview = CurrentManga?.reviews?.FirstOrDefault(r => r.UserModels.Contains(user));
+            if (existingReview != null)
+            {
+                // User has already reviewed this manga, update the review
+                existingReview.Title = _ViewReview.Title;
+                existingReview.Content = _ViewReview.Content;
+                existingReview.StylesScore = _ViewReview.StylesScore;
+                existingReview.StoryScore = _ViewReview.StoryScore;
+                existingReview.GrammarScore = _ViewReview.GrammarScore;
+                existingReview.CharactersScore = _ViewReview.CharactersScore;
+                existingReview.LastUpdated = DateTime.Now;
+
+                // Now update the review in the database
+                await reviewRepsitory.UpdateAsync(existingReview);
+            }
+            else
+            {
+                // New review
+                Review newReview = new Review
+                {
+                    Title = _ViewReview.Title,
+                    Content = _ViewReview.Content,
+                    StylesScore = _ViewReview.StylesScore,
+                    StoryScore = _ViewReview.StoryScore,
+                    GrammarScore = _ViewReview.GrammarScore,
+                    CharactersScore = _ViewReview.CharactersScore,
+                    Created = DateTime.Now,
+                    LastUpdated = DateTime.Now
+                    // set other properties if needed
+                };
+                if (CurrentManga != null)
+                {
+                    if (CurrentManga.reviews == null) CurrentManga.reviews = new List<Review>();
+                    CurrentManga.reviews.Add(newReview);
+                }
+
+                if (user != null)
+                {
+                    if (user.Reviews == null) user.Reviews = new List<Review>();
+                    user.Reviews.Add(newReview);
+                }
+            }
+            // Save changes
+            await Context.SaveChangesAsync();
+            return RedirectToPage(new { id });
+        }
+
         public async Task<IActionResult> OnGetAsync(int id)
         {
             if (id == 0)
@@ -152,6 +183,35 @@ namespace NovelXManga.Pages.Manga
             // If the user is logged in, check if the manga is in their reading list
             if (user != null)
             {
+                var userWithReviews = await userManager.Users
+       .Include(u => u.Reviews)
+       .SingleOrDefaultAsync(u => u.Id == user.Id);
+                if (CurrentManga == null)
+                {
+                    throw new Exception("CurrentManga is null");
+                }
+                if (CurrentManga.reviews == null)
+                {
+                    throw new Exception("reviews in CurrentManga is null");
+                }
+                foreach (var review in CurrentManga.reviews)
+                {
+                    if (review.UserModels == null)
+                    {
+                        throw new Exception("UserModels in a review is null");
+                    }
+                }
+
+                var userReview = CurrentManga?.reviews?.FirstOrDefault(r => r.UserModels?.Contains(user) ?? false);
+                if (userReview != null)
+                {
+                    _ViewReview.Title = userReview.Title;
+                    _ViewReview.Content = userReview.Content;
+                    _ViewReview.StylesScore = userReview.StylesScore;
+                    _ViewReview.StoryScore = userReview.StoryScore;
+                    _ViewReview.GrammarScore = userReview.GrammarScore;
+                    _ViewReview.CharactersScore = userReview.CharactersScore;
+                }
                 IsInReadingList = await Context.readingLists
                     .Where(rl => rl.UserId == user.Id && rl.MangaModelId == id)
                     .AnyAsync();

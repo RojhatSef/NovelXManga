@@ -21,6 +21,11 @@ body, html {
         /* Add other styles as necessary */
     }
 
+.MoveDownIndexWallPapers {
+    height: 360px;
+    width: 100%;
+}
+
 .MarginTop50PxAdvancedResult {
     margin-top: 50px
 }
@@ -56,7 +61,6 @@ a {
     grid-template-columns: 0.5fr 1fr 1fr 1fr;
     grid-template-rows: 0.2fr auto;
     grid-template-areas:
-        "nav nav nav nav"
         "main main main main";
     grid-gap: 0.3rem;
     font-weight: 800;
@@ -92,19 +96,96 @@ main {
     text-align: center;
 }
 
+.Content1Ex {
+    width: 100%;
+}
+
+.content-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.HiddenOverflowContent1Ex {
+}
+
+.Content1Cost {
+    background-color: #191a1c;
+    grid-area: Content1Cost;
+    min-height: 1300px;
+    border-radius: var(--main-radius);
+    padding-top: var(--main-padding);
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    padding-left: 2.5%;
+    padding-right: 2.5%;
+}
+
+.Content2Cost {
+    background-color: #191a1c;
+    grid-area: Content2Cost;
+    border-radius: var(--main-radius);
+    padding-top: var(--main-padding);
+    display: flex;
+    flex-direction: column;
+    /*   gap: 50px;*/
+    padding: 1rem;
+    padding-top: 0;
+    padding-left: 2.5%;
+    padding-right: 2.5%;
+}
+
+.Content3Cost {
+    background-color: #191a1c;
+    grid-area: Content3Cost;
+    border-radius: var(--main-radius);
+    padding-top: var(--main-padding);
+    padding: 1rem;
+    padding-left: 2.5%;
+    padding-right: 2.5%;
+}
+
+.Content4Cost {
+    background-color: #191a1c;
+    grid-area: Content4Cost;
+    border-radius: var(--main-radius);
+    padding-top: var(--main-padding);
+    padding: 1rem;
+    padding-left: 2.5%;
+    padding-right: 2.5%;
+}
+
+.ContentDescription {
+    display: flex;
+    margin-right: auto;
+    padding-top: 1%;
+    width: 100%;
+    transition: width 0.5s, height 0.5s;
+    margin-top: 40px;
+}
+
+.ContentDescriptionContent2 {
+    display: flex;
+    margin-right: auto;
+    width: 100%;
+    transition: width 0.5s, height 0.5s;
+}
+
 .custom-O-navbar {
     grid-area: nav;
-    background-color: #191a1c;
-    position: sticky;
+    background-color: transparent;
+    position: fixed;
+    width: 100%;
     top: 0;
     z-index: 100;
-    display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0.2rem 1rem;
     height: 65px;
-    border-bottom: 1px solid #ff6740;
+    border-bottom: none;
     transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+    display: flex;
 }
 
 a {
@@ -123,15 +204,10 @@ a {
     }
 
     .searchbar {
-        width: 100px;
         padding: 0.3rem;
         align-self: stretch;
         transition: width 0.5s; /* Add transition for smooth width change */
     }
-
-        .searchbar:focus {
-            width: 80%; /* Change the width when the search bar is focused */
-        }
 
     .sidebar-toggle {
         padding: 0.3rem 0.6rem;
@@ -154,6 +230,35 @@ a {
         border-radius: 25px;
     }
 /* Login STARTS HERE*/
+.logout-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 25vh;
+    /* Ensure the container is on top of other content */
+}
+
+.MarginAutoLogOut {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 400px; /* Adjust the max-width as needed */
+    padding: 20px;
+}
+
+.account-deletion-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.MarginAutoLogOut btn {
+    width: 15%;
+    margin: 10px;
+}
 
 .btn-custom-primary-login-forgott {
     display: inline-block;
@@ -172,6 +277,44 @@ a {
     .btn-custom-primary-login-forgott:hover {
         background-color: #E12700;
         border-color: #E12700;
+    }
+
+.btn-custom-primary-login-Cancel {
+    display: inline-block;
+    color: #fff;
+    background-color: #ff6740;
+    border-color: #ff6740;
+    padding: 0.375rem 0.75rem;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    width: 100%;
+    height: 50px;
+    margin-top: 15px;
+}
+
+    .btn-custom-primary-login-Cancel:hover {
+        background-color: #ff8866;
+        border-color: #ff8866;
+    }
+
+.btn-custom-primary-login-Logout {
+    display: inline-block;
+    color: #fff;
+    padding: 0.375rem 0.75rem;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    width: 100%;
+    height: 50px;
+    margin-top: 15px;
+    background-color: #E12700;
+    border-color: #E12700;
+}
+
+    .btn-custom-primary-login-Logout:hover {
+        background-color: #B00000;
+        border-color: #B00000;
     }
 
 .LoginRememberMehoverOrangeRed:hover {
@@ -230,6 +373,10 @@ a {
     font-size: 15px;
 }
 
+.MassAlignContent {
+    margin-top: 15%;
+}
+
 .LongerInputField {
     font-size: 20px; /* Change this value to make the label higher or longer */
     width: 100%;
@@ -257,7 +404,6 @@ a {
 }
 
 .centralContentCost {
-    margin-top: 30px;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -281,6 +427,7 @@ a {
     color: white;
     padding-right: 30px;
     font-size: 32px;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
 
     #NovelTitle:hover {
@@ -290,16 +437,14 @@ a {
 .navbar-left {
     display: flex;
     align-items: center;
-    width: 100%;
-    flex-grow: 1;
+    flex: 1;
 }
 
 .navbar-right {
     display: flex;
     align-items: end;
     justify-content: flex-end;
-    flex-grow: 2;
-    width: 100%;
+    flex: 1;
 }
 
 .sidebar-toggle {
@@ -329,19 +474,21 @@ a {
 }
 
 .searchbar {
-    width: 250px; /* Adjust this as needed */
+    width: 50%;
     padding: 0.5rem;
     border: none;
     border-radius: 3px;
-    background-color: #444;
+    background-color: rgba(68, 68, 68, 0.4);
     color: white;
-    transition: width 0.5s; /* Transition duration is now 0.5 seconds */
-    max-width: 100%; /* Make sure the search bar doesn't exceed the width of its container */
-    position: relative; /* Allow the search bar to be positioned in relation to its nearest positioned ancestor */
+    max-width: 100%;
+    transition: width 0.5s, background-color 0.5s, color 0.5s; /* transition rule for the width property */
+    position: relative;
+    margin-right: 5.5%;
 }
 
     .searchbar:focus {
-        width: 100%; /* Change the width when the search bar is focused, but no larger than the maximum width */
+        width: 100%; /* expanded width */
+        background-color: #444;
     }
 
 .Custom-o-sidebar {
@@ -395,6 +542,7 @@ a {
         .Custom-o-sidebar .sidebar-title i {
             margin-right: 10px;
         }
+
     .Custom-o-sidebar .user-section {
         display: flex;
         justify-content: space-between;
@@ -406,10 +554,10 @@ a {
         margin-right: 10px;
     }
 
-        .Custom-o-sidebar .user-section .profile-image {
-            margin-left: auto;
-            margin-right: 10px;
-        }
+    .Custom-o-sidebar .user-section .profile-image {
+        margin-left: auto;
+        margin-right: 10px;
+    }
 
 .HoverEffektLi a {
     display: flex;
@@ -471,74 +619,6 @@ a {
     .main-content {
         grid-template-columns: 1fr;
     }
-}
-
-.Content1Ex {
-    width: 100%;
-}
-
-.Content1Cost {
-    background-color: #191a1c;
-    grid-area: Content1Cost;
-    min-height: 1300px;
-    max-height: 1400px;
-    border-radius: var(--main-radius);
-    padding-top: var(--main-padding);
-    display: flex;
-    flex-direction: column;
-    padding: 1rem;
-    padding-left: 2.5%;
-    padding-right: 2.5%;
-}
-
-.Content2Cost {
-    background-color: #191a1c;
-    grid-area: Content2Cost;
-    border-radius: var(--main-radius);
-    padding-top: var(--main-padding);
-    display: flex;
-    flex-direction: column;
-    /*   gap: 50px;*/
-    padding: 1rem;
-    padding-top: 0;
-    padding-left: 2.5%;
-    padding-right: 2.5%;
-}
-
-.Content3Cost {
-    background-color: #191a1c;
-    grid-area: Content3Cost;
-    border-radius: var(--main-radius);
-    padding-top: var(--main-padding);
-    padding: 1rem;
-    padding-left: 2.5%;
-    padding-right: 2.5%;
-}
-
-.Content4Cost {
-    background-color: #191a1c;
-    grid-area: Content4Cost;
-    border-radius: var(--main-radius);
-    padding-top: var(--main-padding);
-    padding: 1rem;
-    padding-left: 2.5%;
-    padding-right: 2.5%;
-}
-
-.ContentDescription {
-    display: flex;
-    margin-right: auto;
-    padding-top: 1%;
-    width: 100%;
-    transition: width 0.5s, height 0.5s;
-    margin-top: 40px;
-}
-
-.ContentDescriptionContent2 {
-    display: flex;
-    margin-right: auto;
-    width: 100%;
-    transition: width 0.5s, height 0.5s;
 }
 
 .Author_Artist {
@@ -683,7 +763,7 @@ flexLiLayout {
 .card-ex {
     position: relative;
     width: 100%;
-    height: 320px;
+    height: 360px;
     display: flex;
     justify-content: center;
 }
@@ -695,9 +775,15 @@ flexLiLayout {
     overflow: hidden
 }
 
-.MoveDownIndexWallPapers {
-    height: 100%;
+.CardHeight {
+    height: 420px;
     width: 100%;
+    object-fit: cover;
+}
+
+.blurredbackground {
+    height: 100%;
+    width: 100%
 }
 
 .IndexArrowEx {
@@ -918,6 +1004,13 @@ flexLiLayout {
     height: 100%;
     width: 100%;
     color: green;
+    transition: width 0.5s, height 0.5s;
+}
+
+.BackGroundImageBox {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
     transition: width 0.5s, height 0.5s;
 }
 
@@ -1196,6 +1289,7 @@ flexLiLayout {
     border-radius: 24px;
     border: 2px solid;
     --ggs: 1.5;
+    position: relative;
 }
 
     .gg-menu-round::before {
@@ -1209,7 +1303,19 @@ flexLiLayout {
         border-radius: 3px;
         top: 4px;
         left: 4px;
-        box-shadow: 0 4px 0, 0 8px 0
+        box-shadow: 0 4px 0, 0 8px 0;
+    }
+
+    .gg-menu-round::after {
+        content: "";
+        position: absolute;
+        top: -3px; /* Adjust these values as needed */
+        left: -3px;
+        right: -3px;
+        bottom: -3px;
+        border: 1px solid #191a1c; /* This will be your border */
+        border-radius: inherit; /* This will ensure the border radius matches the parent */
+        z-index: -1; /* This ensures the border is below the main element */
     }
 
 .gg-minimize {
@@ -1389,7 +1495,7 @@ flexLiLayout {
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical; /* To limit lines vertically */
     position: absolute;
-    top: calc(10% - 40px);
+    top: calc(20% - 40px);
     left: calc(12% + 285px - 30px/2); /* Adjust this value based on your design requirements */
     font-size: 30px;
     overflow: hidden; /* Hide the overflowing text */
@@ -1399,7 +1505,7 @@ flexLiLayout {
 
 .manga-img-container {
     position: absolute;
-    top: 10%;
+    top: 20%;
     width: 15%; /* Adjust this value based on your design requirements */
     height: 200px; /* Adjust this value based on your design requirements */
     left: 10%;
@@ -1419,10 +1525,11 @@ flexLiLayout {
     justify-content: start; /* This will align the items horizontally */
 
     position: absolute;
-    top: calc(16% + 200px); /* The top position is relative to the manga-title's top position */
+    top: calc(25% + 200px); /* The top position is relative to the manga-title's top position */
     left: calc(11.5% + 285px); /* Adjust this value based on your design requirements */
-    width: 100%;
-    transition: top 0.5s, left 0.5s
+    width: 100vh;
+    transition: top 0.5s, left 0.5s;
+    overflow: hidden;
 }
 
 .AddSizeCurrentpage {
@@ -1599,18 +1706,18 @@ flexLiLayout {
     }
 
     .manga-title {
-        top: calc(15px - 40px) !important;
+        top: calc(15% - 40px) !important;
         left: calc(5% + 140px) !important; /* Adjust these values for smaller screens */
     }
 
     .manga-img-container {
-        top: 15px !important;
+        top: 15.5% !important;
         left: 2% !important; /* Adjust these values for smaller screens */
     }
 
     .manga-img {
         width: 150px !important; /* Adjust these values for smaller screens */
-        height: 200px !important; /* Adjust these values for smaller screens */
+        height: 220px !important; /* Adjust these values for smaller screens */
     }
 
     div::-webkit-scrollbar {
@@ -1618,7 +1725,7 @@ flexLiLayout {
     }
 
     .AddEditReportCurrentpage {
-        top: calc(15% + 185px); /* Adjust these values for smaller screens */
+        /* Adjust these values for smaller screens */
         left: 2% !important; /* Adjust these values for smaller screens */
         justify-content: center;
         width: 400px !important;
@@ -1636,12 +1743,12 @@ flexLiLayout {
 
 @media screen and (max-width: 1200px) {
     .manga-title {
-        top: calc(15px - 40px);
+        top: calc(15% - 40px);
         left: calc(17% + 180px ); /* Adjust these values for smaller screens */
     }
 
     .manga-img-container {
-        top: 15px;
+        top: 18%;
         left: 3%; /* Adjust these values for smaller screens */
     }
 
@@ -1652,7 +1759,7 @@ flexLiLayout {
     }
 
     .AddEditReportCurrentpage {
-        top: calc(16% + 195px); /* Adjust these values for smaller screens */
+        top: calc(25% + 195px); /* Adjust these values for smaller screens */
         left: 40%; /* Adjust these values for smaller screens */
         justify-content: center;
         width: 550px;
@@ -1681,6 +1788,7 @@ flexLiLayout {
     justify-content: space-between;
     margin-top: 5%;
     transition: margin-left 0.5s ease;
+    overflow: hidden;
 }
 
 /* Individual Content Box */
@@ -1823,6 +1931,10 @@ flexLiLayout {
 
 .scoreArea {
     position: relative; /* Makes scoreArea the reference point for its absolute positioned children */
+}
+
+.overFlowFilter-scoring {
+    overflow: hidden;
 }
 
 .scoreDistribution {
@@ -1991,7 +2103,7 @@ flexLiLayout {
             letter-spacing: 2px;
         }
 
-        .wrapperRowCurrent .Skills_ .ratings {
+        .wrapperRowCurrent .Skills_ .User_ratings {
             position: relative;
             display: flex;
             justify-content: center;
@@ -1999,7 +2111,7 @@ flexLiLayout {
             flex-direction: row-reverse;
         }
 
-            .wrapperRowCurrent .Skills_ .ratings input {
+            .wrapperRowCurrent .Skills_ .User_ratings input {
                 position: relative;
                 width: 20px;
                 height: 40px;
@@ -2011,7 +2123,7 @@ flexLiLayout {
                 overflow: hidden;
             }
 
-                .wrapperRowCurrent .Skills_ .ratings input::before {
+                .wrapperRowCurrent .Skills_ .User_ratings input::before {
                     content: "\f005";
                     position: absolute;
                     font-family: FontAwesome;
@@ -2022,20 +2134,20 @@ flexLiLayout {
                     transition: 0.5s;
                 }
 
-                .wrapperRowCurrent .Skills_ .ratings input:nth-child(2n+1)::before {
+                .wrapperRowCurrent .Skills_ .User_ratings input:nth-child(2n+1)::before {
                     right: 4px;
                     left: initial;
                 }
 
-                .wrapperRowCurrent .Skills_ .ratings input:hover ~ input::before,
-                .wrapperRowCurrent .Skills_ .ratings input:hover:before,
-                .wrapperRowCurrent .Skills_ .ratings input:checked ~ input::before,
-                .wrapperRowCurrent .Skills_ .ratings input:checked:before {
+                .wrapperRowCurrent .Skills_ .User_ratings input:hover ~ input::before,
+                .wrapperRowCurrent .Skills_ .User_ratings input:hover:before,
+                .wrapperRowCurrent .Skills_ .User_ratings input:checked ~ input::before,
+                .wrapperRowCurrent .Skills_ .User_ratings input:checked:before {
                     color: #ff6740;
                 }
 
 .fillerClassIc textarea.TextAreaCurrentReview {
-    width: 98%;
+    width: 50%;
     max-width: calc(100% - 16px);
     height: 250px;
     margin-top: 0px; /* Update or remove this margin as needed */
@@ -2260,6 +2372,7 @@ flexLiLayout {
     padding: 2rem;
     max-width: 800px;
     margin: 0 auto;
+    margin-top: 40px;
     color: #fff;
 }
 
@@ -2316,3 +2429,74 @@ flexLiLayout {
         box-sizing: border-box;
     }
 /*Privacy Policy Ends here*/
+
+.rating-wrap {
+    max-width: 480px;
+    margin: auto;
+    padding: 15px;
+    box-shadow: 0 0 3px 0 rgba(0,0,0,.2);
+    text-align: center;
+}
+
+.star-center {
+    width: 162px;
+    margin: auto;
+}
+
+#rating-value {
+    width: 110px;
+    margin: 40px auto 0;
+    padding: 10px 5px;
+    text-align: center;
+    box-shadow: inset 0 0 2px 1px rgba(46,204,113,.2);
+}
+
+/*styling star rating*/
+.rating-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.star-rating-input {
+    border: none;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+    .star-rating-input > input {
+        display: none;
+    }
+
+    .star-rating-input > label:before {
+        content: '\f005';
+        font-family: FontAwesome;
+        margin: 5px;
+        font-size: 1.5rem;
+        display: inline-block;
+        cursor: pointer;
+    }
+
+    .star-rating-input > .half:before {
+        content: '\f089';
+        position: absolute;
+        cursor: pointer;
+    }
+
+    .star-rating-input > label {
+        color: #ddd;
+        cursor: pointer;
+    }
+
+    .star-rating-input > input:checked ~ label,
+    .star-rating-input:not(:checked) > label:hover,
+    .star-rating-input:not(:checked) > label:hover ~ label {
+        color: #2ce679;
+    }
+
+        .star-rating-input > input:checked + label:hover,
+        .star-rating-input > input:checked ~ label:hover,
+        .star-rating-input > label:hover ~ input:checked ~ label,
+        .star-rating-input > input:checked ~ label:hover ~ label {
+            color: #2ddc76;
+        }

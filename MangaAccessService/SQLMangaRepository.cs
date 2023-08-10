@@ -53,7 +53,7 @@ namespace MangaAccessService.Migrations
             var mangaModel = mangaNNovelAuthDBContext.mangaModels.Include(e => e.AllLanguages).Include(e => e.OfficalWebsites)
                 .Include(e => e.VoiceActors).Include(e => e.ArtistModels).Include(e => e.Authormodels)
                 .Include(e => e.TagsModels).Include(e => e.StudioModels)
-                .Include(e => e.reviews).Include(e => e.Characters)
+                .Include(e => e.reviews).ThenInclude(r => r.UserModels).Include(e => e.Characters)
                 .Include(e => e.GenresModels).Include(e => e.BuyPages).ThenInclude(b => b._Languages)
                 .Include(e => e.AssociatedNames).Include(e => e.StudioModels)
                 .Include(e => e.GroupScanlating).Include(e => e.userModels).Include(e => e.relatedSeries).Include(e => e.RecommendedMangaModels).Include(e => e.BlogModel).FirstOrDefault(e => e.MangaID == id);

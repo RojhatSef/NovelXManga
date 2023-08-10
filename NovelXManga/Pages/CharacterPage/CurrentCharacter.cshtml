@@ -1,0 +1,63 @@
+﻿@page
+@model NovelXManga.Pages.CharacterPage.CurrentCharacterModel
+@inject UserManager<UserModel> UserManager
+@inject SignInManager<UserModel> SignInManager
+@{
+    var user = await UserManager.GetUserAsync(User);
+    var UpdaterUser = user != null && await UserManager.IsInRoleAsync(user, "NormalUser");
+
+}
+<div class="parent-div">
+    <div class="Content1Ex HiddenOverflowContent1Ex">
+
+
+        <div class="card-ex">
+            <div class="card-image-ex">
+
+                <div class="blurredbackground ">
+                    <img class="BoxImage blurimage SpecialBox" src="/Images/MangaImage/@Model.CurrentManga.PhotoPath" />
+                </div>
+
+                <div class="manga-img-container">
+                    <!-- Manga image goes here -->
+                    @if (@Model.CurrentManga.PhotoPath != string.Empty)
+                    {
+                        <div>
+                            @if (UpdaterUser)
+                            {
+                                <a asp-page="/MangaUpdates/UpdatePhoto" asp-route-id="@Model.CurrentManga.MangaID">
+                                    <img class="manga-img" asp-append-version="true" src="~/Images/MangaImage/@Model.CurrentManga.PhotoPath" alt="NoImage">
+                                </a>
+                            }
+                            else
+                            {
+                                <img class="manga-img" asp-append-version="true" src="~/Images/MangaImage/@Model.CurrentManga.PhotoPath" alt="NoImage">
+                            }
+
+                        </div>
+                    }
+                    else
+                    {
+                        <img class="manga-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png" alt="BookImage">
+                    }
+                </div>
+                <div class="manga-title">
+                    <!-- Manga title goes here -->
+                    @if (@Model.CurrentManga.MangaName != null)
+                    {
+                        <h1 class="FontSizeCurrentBook">@Model.CurrentManga.MangaName</h1>
+                    }
+                </div>
+
+
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+<div class="Content1Cost">
+
+
+</div>

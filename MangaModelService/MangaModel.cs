@@ -83,7 +83,7 @@ namespace MangaModelService
                     return null;
                 }
             }
-            //get  // system Bayesian
+            //get  // system Bayesian DONT DELETE THIS!!!!
             //{
             //    double m = 50; // Choose your own threshold for minimum reviews to be considered in top list
             //    double C = 3; // Choose your own average rating across all books
