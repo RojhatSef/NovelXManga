@@ -343,9 +343,9 @@
                                 </a>
                             }
                             else
-                            {     
-                                
-                                <a asp-page="/Character/CurrentCharacter" asp-route-id="@character.CharacterId @Model.CurrentManga.MangaID">
+                            {
+
+                            <a asp-page="/CharacterPage/CurrentCharacter" asp-route-id="@character.CharacterId">
                                 <input type="hidden" name="characters" value="@character.CharacterId" />
                                 <div class="MangaInputText">
                                     <p>@character.CharacterName</p>
@@ -972,188 +972,188 @@
 
 
 </div>
-<div class="Content2Cost">
-    <form method="post" asp-route-id="@Model.CurrentManga.MangaID" asp-page-handler="postTotalScore">
-        <input type="hidden" id="CurrentManga_MangaID" name="CurrentManga.MangaID" value="@Model.CurrentManga.MangaID" />
+@if (SignInManager.IsSignedIn(User))
+{
+    <div class="Content2Cost">
+        <form method="post" asp-route-id="@Model.CurrentManga.MangaID" asp-page-handler="postTotalScore">
+            <input type="hidden" id="CurrentManga_MangaID" name="CurrentManga.MangaID" value="@Model.CurrentManga.MangaID" />
 
-        <label class="ReviewTitle" asp-for="_ViewReview.Title">Title</label>       <small id="TitleCount">0/50</small><br />
-        <input class="ReviewTitle" type="text" asp-for="_ViewReview.Title" class="form-control" oninput="TitleupdateCount(this.value)" maxlength="50" />
-        <span asp-validation-for="_ViewReview.Title" class="text-danger"></span>
-        <input hidden asp-for="_ViewReview.Created">
-        <input hidden asp-for="_ViewReview.LastUpdated">
-        <div class="fillerClassIc">
-            <h3>Content:    <small id="charCount">0/750</small></h3>
-            <textarea class="TextAreaCurrentReview" asp-for="_ViewReview.Content" id="content" maxlength="750" oninput="updateCount(this.value)"></textarea>
-            <span asp-validation-for="_ViewReview.Content" class="text-danger"></span>
-        </div>
-    <div class="rating-container" data-category="GrammarScore">
-    <div class="rating-wrap">
-        <h2>Grammar Rating</h2>
-            <div class="star-center">
-                    <h4 id="rating-GrammarScore"></h4>
-                <fieldset class="star-rating-input">
-                        <input type="radio" asp-for="_ViewReview.GrammarScore" id="GrammarScore-star5" name="_ViewReview.GrammarScore" value="5" required>
-                        <label for="GrammarScore-star5" class="full" title="Awesome"></label>
-
-                        <input type="radio" asp-for="_ViewReview.GrammarScore" id="GrammarScore-star4.5" name="_ViewReview.GrammarScore" value="4.5">
-                        <label for="GrammarScore-star4.5" class="half"></label>
-
-                        <input type="radio" asp-for="_ViewReview.GrammarScore" id="GrammarScore-star4" name="_ViewReview.GrammarScore" value="4">
-                        <label for="GrammarScore-star4" class="full"></label>
-
-                        <input type="radio" asp-for="_ViewReview.GrammarScore" id="GrammarScore-star3.5" name="_ViewReview.GrammarScore" value="3.5">
-                        <label for="GrammarScore-star3.5" class="half"></label>
-
-                        <input type="radio" asp-for="_ViewReview.GrammarScore" id="GrammarScore-star3" name="_ViewReview.GrammarScore" value="3">
-                        <label for="GrammarScore-star3" class="full"></label>
-
-                        <input type="radio" asp-for="_ViewReview.GrammarScore" id="GrammarScore-star2.5" name="_ViewReview.GrammarScore" value="2.5">
-                        <label for="GrammarScore-star2.5" class="half"></label>
-
-                        <input type="radio" asp-for="_ViewReview.GrammarScore" id="GrammarScore-star2" name="_ViewReview.GrammarScore" value="2">
-                        <label for="GrammarScore-star2" class="full"></label>
-
-                        <input type="radio" asp-for="_ViewReview.GrammarScore" id="GrammarScore-star1.5" name="_ViewReview.GrammarScore" value="1.5">
-                        <label for="GrammarScore-star1.5" class="half"></label>
-
-                        <input type="radio" asp-for="_ViewReview.GrammarScore" id="GrammarScore-star1" name="_ViewReview.GrammarScore" value="1">
-                        <label for="GrammarScore-star1" class="full"></label>
-
-                        <input type="radio" asp-for="_ViewReview.GrammarScore" id="GrammarScore-star0.5" name="_ViewReview.GrammarScore" value="0.5">
-                        <label for="GrammarScore-star0.5" class="half"></label>
-
-                </fieldset>
-        </div>
-                <h4 id="rating-value"> </h4>
-
-
-    </div>
-    </div>
-    <div class="rating-container" data-category="CharacterScore">
-    <div class="rating-wrap">
-        <h2>Character Rating</h2>
-            <div class="star-center">
-                    <h4 id="rating-CharacterScore"> </h4>
-            <fieldset class="star-rating-input">
-                        <input type="radio" asp-for="_ViewReview.CharactersScore" id="CharacterScore-star5" name="_ViewReview.CharactersScore" value="5" required>
-                        <label for="CharacterScore-star5" class="full" title="Awesome"></label>
-
-                        <input type="radio" asp-for="_ViewReview.CharactersScore" id="CharacterScore-star4.5" name="_ViewReview.CharactersScore" value="4.5">
-                        <label for="CharacterScore-star4.5" class="half"></label>
-
-                        <input type="radio" asp-for="_ViewReview.CharactersScore" id="CharacterScore-star4" name="_ViewReview.CharactersScore" value="4">
-                        <label for="CharacterScore-star4" class="full"></label>
-
-                        <input type="radio" asp-for="_ViewReview.CharactersScore" id="CharacterScore-star3.5" name="_ViewReview.CharactersScore" value="3.5">
-                        <label for="CharacterScore-star3.5" class="half"></label>
-
-                        <input type="radio" asp-for="_ViewReview.CharactersScore" id="CharacterScore-star3" name="_ViewReview.CharactersScore" value="3">
-                        <label for="CharacterScore-star3" class="full"></label>
-
-                        <input type="radio" asp-for="_ViewReview.CharactersScore" id="CharacterScore-star2.5" name="_ViewReview.CharactersScore" value="2.5">
-                        <label for="CharacterScore-star2.5" class="half"></label>
-
-                        <input type="radio" asp-for="_ViewReview.CharactersScore" id="CharacterScore-star2" name="_ViewReview.CharactersScore" value="2">
-                        <label for="CharacterScore-star2" class="full"></label>
-
-                        <input type="radio" asp-for="_ViewReview.CharactersScore" id="CharacterScore-star1.5" name="_ViewReview.CharactersScore" value="1.5">
-                        <label for="CharacterScore-star1.5" class="half"></label>
-
-                        <input type="radio" asp-for="_ViewReview.CharactersScore" id="CharacterScore-star1" name="_ViewReview.CharactersScore" value="1">
-                        <label for="CharacterScore-star1" class="full"></label>
-
-                        <input type="radio" asp-for="_ViewReview.CharactersScore" id="CharacterScore-star0.5" name="_ViewReview.CharactersScore" value="0.5">
-                        <label for="CharacterScore-star0.5" class="half"></label>
-            </fieldset>
-        </div>
-
-    </div>
-    </div>
-    <div class="rating-container" data-category="StoryScore">
-        <div class="rating-wrap">
-            <h2>Story Rating</h2>
-                <h4 id="rating-StoryScore"> </h4>
-            <div class="star-center">
-                <fieldset class="star-rating-input">
-                        <input type="radio" id="StoryScore-star5" asp-for="_ViewReview.StoryScore" name="_ViewReview.StoryScore" value="5" required>
-                        <label for="StoryScore-star5" class="full" title="Awesome"></label>
-
-                        <input type="radio" id="StoryScore-star4.5" asp-for="_ViewReview.StoryScore" name="_ViewReview.StoryScore" value="4.5">
-                        <label for="StoryScore-star4.5" class="half"></label>
-
-                        <input type="radio" id="StoryScore-star4" asp-for="_ViewReview.StoryScore" name="_ViewReview.StoryScore" value="4">
-                        <label for="StoryScore-star4" class="full"></label>
-
-                        <input type="radio" id="StoryScore-star3.5" asp-for="_ViewReview.StoryScore" name="_ViewReview.StoryScore" value="3.5">
-                        <label for="StoryScore-star3.5" class="half"></label>
-
-                        <input type="radio" id="StoryScore-star3" asp-for="_ViewReview.StoryScore" name="_ViewReview.StoryScore" value="3">
-                        <label for="StoryScore-star3" class="full"></label>
-
-                        <input type="radio" id="StoryScore-star2.5" asp-for="_ViewReview.StoryScore" name="_ViewReview.StoryScore" value="2.5">
-                        <label for="StoryScore-star2.5" class="half"></label>
-
-                        <input type="radio" id="StoryScore-star2" asp-for="_ViewReview.StoryScore" name="_ViewReview.StoryScore" value="2">
-                        <label for="StoryScore-star2" class="full"></label>
-
-                        <input type="radio" id="StoryScore-star1.5" asp-for="_ViewReview.StoryScore" name="_ViewReview.StoryScore" value="1.5">
-                        <label for="StoryScore-star1.5" class="half"></label>
-
-                        <input type="radio" id="StoryScore-star1" asp-for="_ViewReview.StoryScore" name="_ViewReview.StoryScore" value="1">
-                        <label for="StoryScore-star1" class="full"></label>
-
-                        <input type="radio" id="StoryScore-star0.5" asp-for="_ViewReview.StoryScore" name="_ViewReview.StoryScore" value="0.5">
-                        <label for="StoryScore-star0.5" class="half"></label>
-                </fieldset>
+            <label class="ReviewTitle" asp-for="_ViewReview.Title">Title</label>       <small id="TitleCount">0/50</small><br />
+            <input class="ReviewTitle" type="text" asp-for="_ViewReview.Title" class="form-control" oninput="TitleupdateCount(this.value)" maxlength="50" />
+            <span asp-validation-for="_ViewReview.Title" class="text-danger"></span>
+            <input hidden asp-for="_ViewReview.Created">
+            <input hidden asp-for="_ViewReview.LastUpdated">
+            <div class="fillerClassIc">
+                <h3>Content:    <small id="charCount">0/750</small></h3>
+                <textarea class="TextAreaCurrentReview" asp-for="_ViewReview.Content" id="content" maxlength="750" oninput="updateCount(this.value)"></textarea>
+                <span asp-validation-for="_ViewReview.Content" class="text-danger"></span>
             </div>
+            <div class="rating-container" data-category="GrammarScore">
+                <div class="rating-wrap">
+                    <h2>Grammar Rating</h2>
+                    <div class="star-center">
+                        <h4 id="rating-GrammarScore"></h4>
+                        <fieldset class="star-rating-input">
+                            <input type="radio" asp-for="_ViewReview.GrammarScore" id="GrammarScore-star5" name="_ViewReview.GrammarScore" value="5" required>
+                            <label for="GrammarScore-star5" class="full" title="Awesome"></label>
 
-        </div>
-    </div>
-    <div class="rating-container" data-category="StyleScore">
-        <div class="rating-wrap">
-            <h2>Style Rating</h2>
-                <h4 id="rating-StyleScore"> </h4>
-            <div class="star-center">
-                <fieldset class="star-rating-input">
-                        <input type="radio" id="StyleScore-star5" asp-for="_ViewReview.StylesScore" name="_ViewReview.StylesScore" value="5" required>
-                    <label for="StyleScore-star5" class="full" title="Awesome"></label>
+                            <input type="radio" asp-for="_ViewReview.GrammarScore" id="GrammarScore-star4.5" name="_ViewReview.GrammarScore" value="4.5">
+                            <label for="GrammarScore-star4.5" class="half"></label>
 
-                        <input type="radio" id="StyleScore-star4.5" asp-for="_ViewReview.StylesScore" name="_ViewReview.StylesScore" value="4.5">
-                        <label for="StyleScore-star4.5" class="half"></label>
+                            <input type="radio" asp-for="_ViewReview.GrammarScore" id="GrammarScore-star4" name="_ViewReview.GrammarScore" value="4">
+                            <label for="GrammarScore-star4" class="full"></label>
 
-                        <input type="radio" id="StyleScore-star4" asp-for="_ViewReview.StylesScore" name="_ViewReview.StylesScore" value="4">
-                        <label for="StyleScore-star4" class="full"></label>
+                            <input type="radio" asp-for="_ViewReview.GrammarScore" id="GrammarScore-star3.5" name="_ViewReview.GrammarScore" value="3.5">
+                            <label for="GrammarScore-star3.5" class="half"></label>
 
-                        <input type="radio" id="StyleScore-star3.5" asp-for="_ViewReview.StylesScore" name="_ViewReview.StylesScore" value="3.5">
-                        <label for="StyleScore-star3.5" class="half"></label>
+                            <input type="radio" asp-for="_ViewReview.GrammarScore" id="GrammarScore-star3" name="_ViewReview.GrammarScore" value="3">
+                            <label for="GrammarScore-star3" class="full"></label>
 
-                        <input type="radio" id="StyleScore-star3" asp-for="_ViewReview.StylesScore" name="_ViewReview.StylesScore" value="3">
-                        <label for="StyleScore-star3" class="full"></label>
+                            <input type="radio" asp-for="_ViewReview.GrammarScore" id="GrammarScore-star2.5" name="_ViewReview.GrammarScore" value="2.5">
+                            <label for="GrammarScore-star2.5" class="half"></label>
 
-                        <input type="radio" id="StyleScore-star2.5" asp-for="_ViewReview.StylesScore" name="_ViewReview.StylesScore" value="2.5">
-                        <label for="StyleScore-star2.5" class="half"></label>
+                            <input type="radio" asp-for="_ViewReview.GrammarScore" id="GrammarScore-star2" name="_ViewReview.GrammarScore" value="2">
+                            <label for="GrammarScore-star2" class="full"></label>
 
-                        <input type="radio" id="StyleScore-star2" asp-for="_ViewReview.StylesScore" name="_ViewReview.StylesScore" value="2">
-                        <label for="StyleScore-star2" class="full"></label>
+                            <input type="radio" asp-for="_ViewReview.GrammarScore" id="GrammarScore-star1.5" name="_ViewReview.GrammarScore" value="1.5">
+                            <label for="GrammarScore-star1.5" class="half"></label>
 
-                        <input type="radio" id="StyleScore-star1.5" asp-for="_ViewReview.StylesScore" name="_ViewReview.StylesScore" value="1.5">
-                        <label for="StyleScore-star1.5" class="half"></label>
+                            <input type="radio" asp-for="_ViewReview.GrammarScore" id="GrammarScore-star1" name="_ViewReview.GrammarScore" value="1">
+                            <label for="GrammarScore-star1" class="full"></label>
 
-                        <input type="radio" id="StyleScore-star1" asp-for="_ViewReview.StylesScore" name="_ViewReview.StylesScore" value="1">
-                        <label for="StyleScore-star1" class="full"></label>
+                            <input type="radio" asp-for="_ViewReview.GrammarScore" id="GrammarScore-star0.5" name="_ViewReview.GrammarScore" value="0.5">
+                            <label for="GrammarScore-star0.5" class="half"></label>
 
-                        <input type="radio" id="StyleScore-star0.5" asp-for="_ViewReview.StylesScore" name="_ViewReview.StylesScore" value="0.5">
-                        <label for="StyleScore-star0.5" class="half"></label>
-                </fieldset>
+                        </fieldset>
+                    </div>
+         
+
+
+                </div>
             </div>
+            <div class="rating-container" data-category="CharacterScore">
+                <div class="rating-wrap">
+                    <h2>Character Rating</h2>
+                    <div class="star-center">
+                        <h4 id="rating-CharacterScore"> </h4>
+                        <fieldset class="star-rating-input">
+                            <input type="radio" asp-for="_ViewReview.CharactersScore" id="CharacterScore-star5" name="_ViewReview.CharactersScore" value="5" required>
+                            <label for="CharacterScore-star5" class="full" title="Awesome"></label>
 
-        </div>
+                            <input type="radio" asp-for="_ViewReview.CharactersScore" id="CharacterScore-star4.5" name="_ViewReview.CharactersScore" value="4.5">
+                            <label for="CharacterScore-star4.5" class="half"></label>
+
+                            <input type="radio" asp-for="_ViewReview.CharactersScore" id="CharacterScore-star4" name="_ViewReview.CharactersScore" value="4">
+                            <label for="CharacterScore-star4" class="full"></label>
+
+                            <input type="radio" asp-for="_ViewReview.CharactersScore" id="CharacterScore-star3.5" name="_ViewReview.CharactersScore" value="3.5">
+                            <label for="CharacterScore-star3.5" class="half"></label>
+
+                            <input type="radio" asp-for="_ViewReview.CharactersScore" id="CharacterScore-star3" name="_ViewReview.CharactersScore" value="3">
+                            <label for="CharacterScore-star3" class="full"></label>
+
+                            <input type="radio" asp-for="_ViewReview.CharactersScore" id="CharacterScore-star2.5" name="_ViewReview.CharactersScore" value="2.5">
+                            <label for="CharacterScore-star2.5" class="half"></label>
+
+                            <input type="radio" asp-for="_ViewReview.CharactersScore" id="CharacterScore-star2" name="_ViewReview.CharactersScore" value="2">
+                            <label for="CharacterScore-star2" class="full"></label>
+
+                            <input type="radio" asp-for="_ViewReview.CharactersScore" id="CharacterScore-star1.5" name="_ViewReview.CharactersScore" value="1.5">
+                            <label for="CharacterScore-star1.5" class="half"></label>
+
+                            <input type="radio" asp-for="_ViewReview.CharactersScore" id="CharacterScore-star1" name="_ViewReview.CharactersScore" value="1">
+                            <label for="CharacterScore-star1" class="full"></label>
+
+                            <input type="radio" asp-for="_ViewReview.CharactersScore" id="CharacterScore-star0.5" name="_ViewReview.CharactersScore" value="0.5">
+                            <label for="CharacterScore-star0.5" class="half"></label>
+                        </fieldset>
+                    </div>
+
+                </div>
+            </div>
+            <div class="rating-container" data-category="StoryScore">
+                <div class="rating-wrap">
+                    <h2>Story Rating</h2>
+                    <h4 id="rating-StoryScore"> </h4>
+                    <div class="star-center">
+                        <fieldset class="star-rating-input">
+                            <input type="radio" id="StoryScore-star5" asp-for="_ViewReview.StoryScore" name="_ViewReview.StoryScore" value="5" required>
+                            <label for="StoryScore-star5" class="full" title="Awesome"></label>
+
+                            <input type="radio" id="StoryScore-star4.5" asp-for="_ViewReview.StoryScore" name="_ViewReview.StoryScore" value="4.5">
+                            <label for="StoryScore-star4.5" class="half"></label>
+
+                            <input type="radio" id="StoryScore-star4" asp-for="_ViewReview.StoryScore" name="_ViewReview.StoryScore" value="4">
+                            <label for="StoryScore-star4" class="full"></label>
+
+                            <input type="radio" id="StoryScore-star3.5" asp-for="_ViewReview.StoryScore" name="_ViewReview.StoryScore" value="3.5">
+                            <label for="StoryScore-star3.5" class="half"></label>
+
+                            <input type="radio" id="StoryScore-star3" asp-for="_ViewReview.StoryScore" name="_ViewReview.StoryScore" value="3">
+                            <label for="StoryScore-star3" class="full"></label>
+
+                            <input type="radio" id="StoryScore-star2.5" asp-for="_ViewReview.StoryScore" name="_ViewReview.StoryScore" value="2.5">
+                            <label for="StoryScore-star2.5" class="half"></label>
+
+                            <input type="radio" id="StoryScore-star2" asp-for="_ViewReview.StoryScore" name="_ViewReview.StoryScore" value="2">
+                            <label for="StoryScore-star2" class="full"></label>
+
+                            <input type="radio" id="StoryScore-star1.5" asp-for="_ViewReview.StoryScore" name="_ViewReview.StoryScore" value="1.5">
+                            <label for="StoryScore-star1.5" class="half"></label>
+
+                            <input type="radio" id="StoryScore-star1" asp-for="_ViewReview.StoryScore" name="_ViewReview.StoryScore" value="1">
+                            <label for="StoryScore-star1" class="full"></label>
+
+                            <input type="radio" id="StoryScore-star0.5" asp-for="_ViewReview.StoryScore" name="_ViewReview.StoryScore" value="0.5">
+                            <label for="StoryScore-star0.5" class="half"></label>
+                        </fieldset>
+                    </div>
+
+                </div>
+            </div>
+            <div class="rating-container" data-category="StyleScore">
+                <div class="rating-wrap">
+                    <h2>Style Rating</h2>
+                    <h4 id="rating-StyleScore"> </h4>
+                    <div class="star-center">
+                        <fieldset class="star-rating-input">
+                            <input type="radio" id="StyleScore-star5" asp-for="_ViewReview.StylesScore" name="_ViewReview.StylesScore" value="5" required>
+                            <label for="StyleScore-star5" class="full" title="Awesome"></label>
+
+                            <input type="radio" id="StyleScore-star4.5" asp-for="_ViewReview.StylesScore" name="_ViewReview.StylesScore" value="4.5">
+                            <label for="StyleScore-star4.5" class="half"></label>
+
+                            <input type="radio" id="StyleScore-star4" asp-for="_ViewReview.StylesScore" name="_ViewReview.StylesScore" value="4">
+                            <label for="StyleScore-star4" class="full"></label>
+
+                            <input type="radio" id="StyleScore-star3.5" asp-for="_ViewReview.StylesScore" name="_ViewReview.StylesScore" value="3.5">
+                            <label for="StyleScore-star3.5" class="half"></label>
+
+                            <input type="radio" id="StyleScore-star3" asp-for="_ViewReview.StylesScore" name="_ViewReview.StylesScore" value="3">
+                            <label for="StyleScore-star3" class="full"></label>
+
+                            <input type="radio" id="StyleScore-star2.5" asp-for="_ViewReview.StylesScore" name="_ViewReview.StylesScore" value="2.5">
+                            <label for="StyleScore-star2.5" class="half"></label>
+
+                            <input type="radio" id="StyleScore-star2" asp-for="_ViewReview.StylesScore" name="_ViewReview.StylesScore" value="2">
+                            <label for="StyleScore-star2" class="full"></label>
+
+                            <input type="radio" id="StyleScore-star1.5" asp-for="_ViewReview.StylesScore" name="_ViewReview.StylesScore" value="1.5">
+                            <label for="StyleScore-star1.5" class="half"></label>
+
+                            <input type="radio" id="StyleScore-star1" asp-for="_ViewReview.StylesScore" name="_ViewReview.StylesScore" value="1">
+                            <label for="StyleScore-star1" class="full"></label>
+
+                            <input type="radio" id="StyleScore-star0.5" asp-for="_ViewReview.StylesScore" name="_ViewReview.StylesScore" value="0.5">
+                            <label for="StyleScore-star0.5" class="half"></label>
+                        </fieldset>
+                    </div>
+
+                </div>
+            </div>
+            <button type="submit">Send</button>
+        </form>
     </div>
-        <button type="submit">Send</button>
-    </form>
-</div>
-
-  
-
+}
 
 

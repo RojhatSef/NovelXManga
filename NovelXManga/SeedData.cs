@@ -65,6 +65,20 @@ namespace NovelXManga
             return uniqueFileName;
         }
 
+        private string CharacterProcessUploadedFile(string filename)
+        {
+            string uniqueFileName = null;
+            if (filename != null)
+            {
+                string uploadsFolder = Path.Combine(webHostEnvironment.WebRootPath, "Images", "CharacterImage");
+                string extension = Path.GetExtension(filename);
+                uniqueFileName = Guid.NewGuid().ToString() + extension;
+                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                File.Copy(Path.Combine(webHostEnvironment.ContentRootPath, "wwwroot", "Images", "CharacterImage", filename), filePath);
+            }
+            return uniqueFileName;
+        }
+
         private string WallProcessUploadedFile(string filename)
         {
             string uniqueFileName = null;
@@ -1342,7 +1356,7 @@ new Character { CharacterName = "Mikasa Ackerman" },
     },
                 Characters = new List<Character>
     {
-        new Character { CharacterName = "Frodo Baggins", specie = "Hobbit", Gender = "Male", Born = "September 22, T.A. 2968", PlaceOffResidence = "Shire", World = "Middle-earth", Nationality = "Shire", Education = "Private tutor", Occupation = "Ring-bearer" },
+        new Character { CharacterName = "Frodo Baggins", specie = "Hobbit", Gender = "Male", Born = "September 22, T.A. 2968", PlaceOffResidence = "Shire", World = "Middle-earth", Nationality = "Shire", Education = "Private tutor", Occupation = "Ring-bearer", },
         new Character { CharacterName = "Gandalf", specie = "Maiar", Gender = "Male", Born = "Unknown", PlaceOffResidence = "Middle-earth", World = "Middle-earth", Nationality = "Unknown", Education = "Unknown", Occupation = "Wizard" },
         new Character { CharacterName = "Aragorn", specie = "Human", Gender = "Male", Born = "March 1, T.A. 2931", PlaceOffResidence = "Gondor", World = "Middle-earth", Nationality = "Dúnedain", Education = "Ranger training", Occupation = "King of Gondor" },
         new Character { CharacterName = "Legolas", specie = "Elf", Gender = "Male", Born = "Third Age, 87", PlaceOffResidence = "Mirkwood", World = "Middle-earth", Nationality = "Woodland Realm", Education = "Unknown", Occupation = "Prince of Mirkwood" },
@@ -1418,7 +1432,7 @@ new Character { CharacterName = "Mikasa Ackerman" },
 },
                 Characters = new List<Character>
         {
-            new Character { CharacterName = "Sung Jin-Woo",   specie="Human", Gender="Male", Born="March 20, 1997", PlaceOffResidence = "South Korea", World="Solo Leveling", Nationality ="Korean", Education="High School", Occupation="Hunter" },
+            new Character { CharacterName = "Sung Jin-Woo",   specie="Human", Gender="Male", Born="March 20, 1997", PlaceOffResidence = "South Korea", World="Solo Leveling", Nationality ="Korean", Education="High School", Occupation="Hunter" , PhotoPath =  Path.Combine(CharacterProcessUploadedFile("SungJin.jpg"))  },
         new Character { CharacterName = "Cha Hae-In", specie="Human",Gender="Female", Born="January 6, 1998", PlaceOffResidence = "South Korea", World="Solo Leveling", Nationality ="Korean", Education="Hunter Association", Occupation="Hunter"},
         new Character { CharacterName = "Go Gun-Hee", specie="Human",Gender="Male", Born="Unknown", PlaceOffResidence = "South Korea", World="Solo Leveling", Nationality ="Korean", Education="Unknown", Occupation="Chairman of the Hunter Association"},
         new Character { CharacterName = "Jin-Ah Sung", specie="Human",Gender="Female", Born="Unknown", PlaceOffResidence = "South Korea", World="Solo Leveling", Nationality ="Korean", Education="High School", Occupation="Sung Jin-Woo's sister"},

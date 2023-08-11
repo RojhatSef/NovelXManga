@@ -15,23 +15,23 @@
             <div class="card-image-ex">
 
                 <div class="blurredbackground ">
-                    <img class="BoxImage blurimage SpecialBox" src="/Images/MangaImage/@Model.CurrentManga.PhotoPath" />
+                    <img class="BoxImage blurimage SpecialBox" src="/Images/CharacterImage/@Model.CurrentCharacter.PhotoPath" />
                 </div>
 
                 <div class="manga-img-container">
                     <!-- Manga image goes here -->
-                    @if (@Model.CurrentManga.PhotoPath != string.Empty)
+                    @if (@Model.CurrentCharacter.PhotoPath != string.Empty)
                     {
                         <div>
                             @if (UpdaterUser)
                             {
-                                <a asp-page="/MangaUpdates/UpdatePhoto" asp-route-id="@Model.CurrentManga.MangaID">
-                                    <img class="manga-img" asp-append-version="true" src="~/Images/MangaImage/@Model.CurrentManga.PhotoPath" alt="NoImage">
+                                <a asp-page="/MangaUpdates/UpdatePhoto" asp-route-id="@Model.CurrentCharacter.CharacterId">
+                                    <img class="manga-img" asp-append-version="true" src="~/Images/CharacterImage/@Model.CurrentCharacter.PhotoPath" alt="NoImage">
                                 </a>
                             }
                             else
                             {
-                                <img class="manga-img" asp-append-version="true" src="~/Images/MangaImage/@Model.CurrentManga.PhotoPath" alt="NoImage">
+                                <img class="manga-img" asp-append-version="true" src="~/Images/CharacterImage/@Model.CurrentCharacter.PhotoPath" alt="NoImage">
                             }
 
                         </div>
@@ -43,9 +43,9 @@
                 </div>
                 <div class="manga-title">
                     <!-- Manga title goes here -->
-                    @if (@Model.CurrentManga.MangaName != null)
+                    @if (@Model.CurrentCharacter.CharacterName != null)
                     {
-                        <h1 class="FontSizeCurrentBook">@Model.CurrentManga.MangaName</h1>
+                        <h1 class="FontSizeCurrentBook">@Model.CurrentCharacter.CharacterName</h1>
                     }
                 </div>
 

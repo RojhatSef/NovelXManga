@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MangaAccessService.Migrations
 {
-    public partial class Test11 : Migration
+    public partial class PhotoCharacter : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -173,6 +173,7 @@ namespace MangaAccessService.Migrations
                     Nationality = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Education = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Occupation = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhotoPath = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Lawful = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Personality = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     FamousQuote = table.Column<string>(type: "nvarchar(max)", nullable: true),

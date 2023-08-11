@@ -3,6 +3,7 @@ using MangaModelService;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 
 namespace NovelXManga.Pages.CharacterPage
 {
@@ -14,7 +15,6 @@ namespace NovelXManga.Pages.CharacterPage
         private readonly IWebHostEnvironment webHostEnvironment;
         private readonly UserManager<UserModel> userManager;
         private readonly IReviewRepsitory reviewRepsitory;
-
 
         public CurrentCharacterModel(MangaNNovelAuthDBContext context, IMangaRepository mangaRepository, IWebHostEnvironment webHostEnvironment, UserManager<UserModel> userManager, IReviewRepsitory reviewRepsitory, ICharacterRepsitory characterRepsitory)
         {
@@ -30,16 +30,34 @@ namespace NovelXManga.Pages.CharacterPage
         public Character CurrentCharacter { get; set; }
 
         [BindProperty]
-        public MangaModel CurrentManga { get; set; }
+        public List<MangaModel> CurrentMangas { get; set; } = new List<MangaModel>();
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
-            if (id == 0)
+            if (id == 0 || id == null)
             {
-                NotFound();
+                return NotFound();
             }
-            CurrentCharacter = await characterRepsitory.GetModelAsync(id);
-            CurrentManga = CurrentCharacter.MangaModels.FirstOrDefault(e => e.MangaID == CurrentManga.MangaID);
+            CurrentCharacter = await Context.Characters
+           .Include(c => c.MangaModels)
+           .FirstOrDefaultAsync(c => c.CharacterId == id);
+
+            if (CurrentCharacter == null)
+            {
+                return NotFound();
+            }
+
+            // If you have multiple mangas associated with the character,
+            // you loop through each and fetch all related data
+            foreach (var manga in CurrentCharacter.MangaModels)
+            {
+                var detailedManga = mangaRepository.GetOneMangaAllIncluded(manga.MangaID);
+                if (detailedManga != null)
+                {
+                    CurrentMangas.Add(detailedManga);
+                }
+            }
+
             return Page();
         }
     }
