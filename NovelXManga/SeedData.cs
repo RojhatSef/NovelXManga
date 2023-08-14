@@ -1751,11 +1751,96 @@ new Character {
     },
                 Characters = new List<Character>
                     {
-                        new Character { CharacterName = "Sailor Jupter" },
-                        new Character { CharacterName = "Sailor Moon" },
-                        new Character { CharacterName = "Sailor Mercury" },
-                        new Character { CharacterName = "Sailor Mars" },
-                        new Character { CharacterName = "Sanji Venus" },
+                new Character
+    {
+        CharacterName = "Sailor Jupiter",
+        specie = "Human",
+        Gender = "Female",
+        World = "Sailor Moon",
+        Occupation = "Guardian of Thunder and Courage",
+        PhotoPath = Path.Combine(CharacterProcessUploadedFile("SailorJupiter.jpg")),
+        Personality = "Strong-willed, Kind, Loyal",
+        FamousQuote = "Supreme Thunder Dragon!",
+        EyeColor = "Green",
+        HairColor = "Brown",
+        Abilities = "Control over thunder and lightning",
+        Hobbies = "Cooking, Gardening",
+        Likes = "Nature, Physical strength",
+        Dislikes = "Cooking failures, Injustice",
+        PersonalityTraits = "Resilient, Reliable, Compassionate"
+    },
+    new Character
+    {
+        CharacterName = "Sailor Moon",
+        specie = "Human",
+        Gender = "Female",
+        World = "Sailor Moon",
+        Occupation = "Guardian of Love and Justice",
+        PhotoPath = Path.Combine(CharacterProcessUploadedFile("SailorMoon.jpg")),
+        Personality = "Kind-hearted, Optimistic, Clumsy",
+        FamousQuote = "In the name of the Moon, I'll punish you!",
+        EyeColor = "Blue",
+        HairColor = "Blonde",
+        Abilities = "Moon Prism Power, Healing abilities",
+        Hobbies = "Eating, Spending time with friends",
+        Likes = "Helping others, Romance",
+        Dislikes = "Evil, Loneliness",
+        PersonalityTraits = "Empathetic, Courageous, Unyielding"
+    },
+    new Character
+    {
+        CharacterName = "Sailor Mercury",
+        specie = "Human",
+        Gender = "Female",
+        World = "Sailor Moon",
+        Occupation = "Guardian of Wisdom and Water",
+        PhotoPath = Path.Combine(CharacterProcessUploadedFile("SailorMercury.jpg")),
+        Personality = "Smart, Shy, Analytical",
+        FamousQuote = "Mercury Power, Make Up!",
+        EyeColor = "Blue",
+        HairColor = "Blue",
+        Abilities = "Control over water and ice, Intellect",
+        Hobbies = "Studying, Reading",
+        Likes = "Learning, Solving problems",
+        Dislikes = "Ignorance, Misuse of technology",
+        PersonalityTraits = "Intellectual, Caring, Reserved"
+    },
+    new Character
+    {
+        CharacterName = "Sailor Mars",
+        specie = "Human",
+        Gender = "Female",
+        World = "Sailor Moon",
+        Occupation = "Guardian of Fire and Passion",
+        PhotoPath = Path.Combine(CharacterProcessUploadedFile("SailorMars.jpg")),
+        Personality = "Fiery, Intuitive, Spiritual",
+        FamousQuote = "Mars Power, Make Up!",
+        EyeColor = "Purple",
+        HairColor = "Black",
+        Abilities = "Control over fire, Spiritual sensitivity",
+        Hobbies = "Shrine visits, Meditation",
+        Likes = "Spiritual practices, Fortunetelling",
+        Dislikes = "Disrespect for tradition, Evil spirits",
+        PersonalityTraits = "Passionate, Intense, Mystical"
+    },
+    new Character
+    {
+        CharacterName = "Sailor Venus",
+        specie = "Human",
+        Gender = "Female",
+        World = "Sailor Moon",
+        Occupation = "Guardian of Love and Beauty",
+        PhotoPath = Path.Combine(CharacterProcessUploadedFile("SailorVenus.jpg")),
+        Personality = "Playful, Charismatic, Romantic",
+        FamousQuote = "Venus Power, Make Up!",
+        EyeColor = "Blue",
+        HairColor = "Blonde",
+        Abilities = "Control over love-based energy, Combat skills",
+        Hobbies = "Idol activities, Dancing",
+        Likes = "Popularity, Stardom",
+        Dislikes = "Misunderstandings, Betrayal",
+        PersonalityTraits = "Charming, Confident, Optimistic"
+    },
                     },
             };
             context.mangaModels.Add(SailorMoon);
