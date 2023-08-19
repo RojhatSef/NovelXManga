@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using System.Data;
 
 namespace NovelXManga.Pages.Register
@@ -13,16 +14,23 @@ namespace NovelXManga.Pages.Register
     {
         private readonly MangaNNovelAuthDBContext Context;
         private readonly UserManager<UserModel> _userManager;
+        private readonly ILogger<DeleteUserPageModel> _logger;
 
-        public DeleteUserPageModel(MangaNNovelAuthDBContext context, UserManager<UserModel> userManager)
+        public DeleteUserPageModel(MangaNNovelAuthDBContext context, UserManager<UserModel> userManager, ILogger<DeleteUserPageModel> logger)
         {
             Context = context;
             _userManager = userManager;
+            _logger = logger;
         }
 
-        public async Task DeleteUser(string userId)
+        public class UserToDelete
         {
-            var user = Context.UserModels.Find(userId);
+            public string UserId { get; set; }
+        }
+
+        public async Task DeleteUserMethod(string userId)
+        {
+            var user = Context.UserModels.Include(u => u.Reviews).FirstOrDefault(u => u.Id == userId);
             if (user != null)
             {
                 // Set user as deleted
@@ -42,18 +50,96 @@ namespace NovelXManga.Pages.Register
                 await _userManager.ResetPasswordAsync(user, token, randomPassword);
 
                 // Obfuscate other user data
-                user.Allias = null;
+
                 user.ForumName = "Deleted User";
+                user.Allias = "N/A";
+
+                user.ForgottPasswordFavoritAnimal = "N/A";
+                user.ForgottPasswordFavActor = "N/A";
+                user.ForgottPasswordFavoritPlace = "N/A";
+                user.userPhotoPath = "N/A";
+                user.nameInNativeLanguage = "N/A";
+                user.placeOfBirth = "N/A";
+                user.Zodiac = "N/A";
+                user.Description = "N/A";
+                user.Twitter = "N/A";
+                user.IsShadowBanned = true;
+                user.IsDeleted = true;
                 // ... [Set other PII to null or generic values]
 
-                // Replace comments with a generic message
-                foreach (var post in user.PostModel)
+                // Modify user's reviews
+                if (user.Reviews != null && user.Reviews.Any())
                 {
-                    post.postComment = "This comment has been removed";
+                    foreach (var review in user.Reviews)
+                    {
+                        review.Title = "DeletedTitle";
+                        review.Content = "DeletedContent";
+                    }
+                }
+                // Replace comments with a generic message
+                if (user.PostModel != null && user.PostModel.Any())
+                {
+                    foreach (var post in user.PostModel)
+                    {
+                        post.postComment = "This comment has been removed";
+                    }
+                }
+                if (!await _userManager.IsInRoleAsync(user, "ShadowBanned"))
+                {
+                    await _userManager.AddToRoleAsync(user, "ShadowBanned");
                 }
 
                 Context.SaveChanges();
             }
+        }
+
+        public async Task<IActionResult> OnGet()
+        {
+            var currentUser = await _userManager.GetUserAsync(User);
+
+            // Check if the user is authenticated
+            if (currentUser == null) return RedirectToPage("/Login");  // Adjust the redirection as needed
+
+            // Check if the user is an Owner or AdminControl
+            if (await _userManager.IsInRoleAsync(currentUser, "Owner") ||
+                await _userManager.IsInRoleAsync(currentUser, "AdminControl"))
+            {
+                return Page(); // They can access this page
+            }
+
+            // Otherwise, they can't access the page
+            return Forbid();
+        }
+
+        public async Task<IActionResult> OnGetSearchUsers(string searchTerm)
+        {
+            if (string.IsNullOrEmpty(searchTerm))
+            {
+                return new JsonResult(new List<UserModel>());
+            }
+
+            searchTerm = searchTerm.ToLower();
+
+            var users = await _userManager.Users
+                .Where(u => u.UserName.ToLower().StartsWith(searchTerm) ||
+                            u.Email.ToLower().StartsWith(searchTerm))
+                .ToListAsync();
+
+            var userRoles = new List<object>();
+
+            foreach (var user in users)
+            {
+                var roles = await _userManager.GetRolesAsync(user);
+                userRoles.Add(new
+                {
+                    user.UserName,
+                    user.Email,
+                    user.Id,
+                    Roles = roles
+                });
+            }
+
+            return new JsonResult(userRoles);
         }
 
         private string GenerateRandomPassword(int minLength = 6, int minUniqueChars = 2)
@@ -75,116 +161,50 @@ namespace NovelXManga.Pages.Register
             return result;
         }
 
-        public async Task<IActionResult> OnGet()
+        public async Task<IActionResult> OnPostDeleteUser([FromBody] UserToDelete request)
         {
-            var currentUser = await _userManager.GetUserAsync(User);
-
-            // Check if the user is authenticated
-            if (currentUser == null) return RedirectToPage("/Login");  // Adjust the redirection as needed
-
-            // Check if the user is an Owner or AdminControl
-            if (await _userManager.IsInRoleAsync(currentUser, "Owner") ||
-                await _userManager.IsInRoleAsync(currentUser, "AdminControl"))
+            try
             {
-                return Page(); // They can access this page
-            }
+                var currentUser = await _userManager.GetUserAsync(User);
+                var targetUser = await _userManager.FindByIdAsync(request.UserId);
 
-            // Otherwise, they can't access the page
-            return Forbid();
-        }
-
-        public IActionResult OnGetSearchUsers(string searchTerm)
-        {
-            if (string.IsNullOrEmpty(searchTerm))
-            {
-                return new JsonResult(new List<UserModel>());
-            }
-
-            searchTerm = searchTerm.ToLower();
-
-            var users = _userManager.Users
-                .Where(u => u.UserName.ToLower().StartsWith(searchTerm) ||
-                            u.Email.ToLower().StartsWith(searchTerm))
-                .Select(u => new
+                if (currentUser == null || targetUser == null)
                 {
-                    u.UserName,
-                    u.Email,
-                    u.Id
-                })
-                .ToList();
+                    return new JsonResult(new { success = false, message = "User not found." });
+                }
 
-            return new JsonResult(users);
-        }
+                if (currentUser.Id == targetUser.Id)
+                {
+                    return new JsonResult(new { success = false, message = "You cannot delete yourself." });
+                }
 
-        //public async Task<IActionResult> OnGetSearchAsync(string searchTerm)
-        //{
-        //    var currentUser = await _userManager.GetUserAsync(User);
+                // If the target is the owner, only another owner can delete
+                if (await _userManager.IsInRoleAsync(targetUser, "Owner"))
+                {
+                    if (!await _userManager.IsInRoleAsync(currentUser, "Owner"))
+                        return new JsonResult(new { success = false, message = "Forbidden, only an owner can delete another owner." });
+                }
+                // If the target is AdminControl, only an Owner can delete
+                else if (await _userManager.IsInRoleAsync(targetUser, "AdminControl"))
+                {
+                    if (!await _userManager.IsInRoleAsync(currentUser, "Owner"))
+                        return new JsonResult(new { success = false, message = "Forbidden, only an owner can delete AdminControl." });
+                }
+                // Otherwise, it's okay to delete
+                else
+                {
+                    await DeleteUserMethod(request.UserId);
+                    return new JsonResult(new { success = true, message = "User deleted successfully." });
+                }
 
-        //    // Check if the user is authenticated
-        //    if (currentUser == null) return new JsonResult(new { status = "error", message = "Not authenticated" });
-
-        //    // Check if the user is an Owner or AdminControl
-        //    if (!(await _userManager.IsInRoleAsync(currentUser, "Owner") ||
-        //          await _userManager.IsInRoleAsync(currentUser, "AdminControl")))
-        //    {
-        //        return new JsonResult(new { status = "error", message = "Description of the error" });
-        //    }
-
-        //    // Fetching users based on the provided searchTerm
-        //    var users = await Context.Users.OfType<UserModel>()
-        // .Where(u => u.UserName.Contains(searchTerm))
-        // .ToListAsync();
-
-        //    var result = new List<object>();
-        //    foreach (var user in users)
-        //    {
-        //        var roles = await _userManager.GetRolesAsync(user);
-        //        result.Add(new
-        //        {
-        //            user.Id,
-        //            user.UserName,
-        //            RoleName = string.Join(", ", roles)
-        //        });
-        //    }
-
-        //    return new JsonResult(new { status = "success", data = result });
-        //}
-
-        public async Task<IActionResult> OnPostDeleteUser(string userId)
-        {
-            var currentUser = await _userManager.GetUserAsync(User);
-            var targetUser = await _userManager.FindByIdAsync(userId);
-
-            if (currentUser == null || targetUser == null)
-            {
-                return NotFound(); // User not found
+                return new JsonResult(new { success = false, message = "Forbidden action." });
             }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error occurred while deleting user.");
 
-            if (currentUser.Id == targetUser.Id)
-            {
-                return Forbid();
+                return new JsonResult(new { success = false, message = $"An error occurred: {ex.Message}" });
             }
-
-            // If the target is the owner, only another owner can delete
-            if (await _userManager.IsInRoleAsync(targetUser, "Owner"))
-            {
-                if (!await _userManager.IsInRoleAsync(currentUser, "Owner"))
-                    return Forbid(); // Forbidden, only an owner can delete another owner
-            }
-            // If the target is AdminControl, only an Owner can delete
-            else if (await _userManager.IsInRoleAsync(targetUser, "AdminControl"))
-            {
-                if (!await _userManager.IsInRoleAsync(currentUser, "Owner"))
-                    return Forbid(); // Forbidden, only an owner can delete AdminControl
-            }
-            // Otherwise, it's okay to delete
-            else
-            {
-                await DeleteUser(userId);
-                return RedirectToPage("/Success"); // or whatever redirection you want after deletion
-            }
-
-            return Forbid(); // If none of the above conditions are met, forbid the action
         }
     }
 }

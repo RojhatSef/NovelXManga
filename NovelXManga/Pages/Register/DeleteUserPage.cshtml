@@ -1,28 +1,22 @@
 ﻿@page
 @model NovelXManga.Pages.Register.DeleteUserPageModel
 @{
-  
+    @Html.AntiForgeryToken()
 }
 <div class="delete-page-container">
-
-   
-
     <h2>Delete User</h2>
     <p>Select a user to delete:</p>
 
     <input type="text" id="searchField" placeholder="Search for users..." />
     <div id="results"></div>
 
-    <div id="userDetails"> 
-
+    <div id="userDetails">
         <p>-----------------------------</p>
         <p>Role: <span id="userRole"></span></p>
         <p>Username: <span id="userName"></span></p>
         <p>Email: <span id="userEmail"></span></p>
         <button onclick="requestDeletion()" class="delete-init-button">Delete this User</button>
     </div>
-
-
 </div>
 
 <script>
@@ -31,32 +25,61 @@
         fetch(`/Register/DeleteUserPage?handler=SearchUsers&searchTerm=${searchTerm}`)
             .then(response => response.json())
             .then(data => {
-                console.log(data); // Debug line
-                document.getElementById('results').innerHTML = data.map(user => `<div>${user.userName} - ${user.email}</div>`).join('');
+                document.getElementById('results').innerHTML = data.map(user => `
+                    <div>
+                        <input type="radio" name="selectedUser"
+                               value="${user.id}"
+                               data-username="${user.userName}"
+                               data-email="${user.email}"
+                               data-role="${user.roles.join(', ')}">
+                        ${user.userName} - ${user.email} - Role: ${user.roles.join(", ")}
+                    </div>
+                `).join('');
             });
     });
+
+    function getAntiForgeryToken() {
+        return document.querySelector('input[name="__RequestVerificationToken"]').value;
+    }
+
+    function requestDeletion() {
+        const selectedUser = document.querySelector('input[name="selectedUser"]:checked');
+        if (selectedUser) {
+            const userName = selectedUser.getAttribute("data-username");
+            const userEmail = selectedUser.getAttribute("data-email");
+            const userRole = selectedUser.getAttribute("data-role");
+            const userId = selectedUser.value;
+
+            const message = `Are you sure you want to delete the following user?
+                             \n\nName: ${userName}\nEmail: ${userEmail}\nRole: ${userRole}`;
+
+            if (confirm(message)) {
+                fetch('/Register/DeleteUserPage?handler=DeleteUser', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'RequestVerificationToken': getAntiForgeryToken() // Include the antiforgery token
+                    },
+                    body: JSON.stringify({ userId: userId })
+                })
+                    .then(response => {
+                        if (response.ok) {
+                            // Success handling here, e.g., display a success message or refresh the page.
+                            alert("User successfully deleted.");
+                            location.reload();
+                        } else {
+                            // Error handling here
+                            alert("An error occurred. User was not deleted.");
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert("An unexpected error occurred.");
+                    });
+            }
+        } else {
+            alert("Please select a user to delete.");
+        }
+    }
 </script>
 
-@*
-@if (ViewData["RequiresConfirmation"] as bool? == true)
-{
-    <div class="custom-modal-background" id="confirmationModalBackground">
-        <div class="custom-modal" id="confirmationModal">
-            <div class="custom-modal-header">
-                <h5>Confirm Deletion</h5>
-                <button onclick="closeModal()" id="closeModalButton">&times;</button>
-            </div>
-            <div class="custom-modal-body">
-                Are you sure you want to delete this user?
-            </div>
-            <div class="custom-modal-footer">
-                <button onclick="closeModal()" id="cancelButton">Cancel</button>
-                <form method="post">
-                    <input type="hidden" name="userId" value="@ViewData["TargetUserId"]" />
-                    <input type="hidden" name="isConfirmed" value="true" />
-                    <button type="submit" class="confirm-button">Delete User</button>
-                </form>
-            </div>
-        </div>
-    </div>
-}*@
