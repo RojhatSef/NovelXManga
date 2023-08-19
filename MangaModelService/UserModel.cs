@@ -25,7 +25,8 @@ namespace MangaModelService
         public string? placeOfBirth { get; set; }
         public string? Zodiac { get; set; }
         public string? Description { get; set; }
-
+        public bool IsShadowBanned { get; set; }
+        public bool IsDeleted { get; set; }
         public string? Twitter { get; set; }
         public DateTime? CreatedAcc { get; set; }
         public bool IsChecked { get; set; }

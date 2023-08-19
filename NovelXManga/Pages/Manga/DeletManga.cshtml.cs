@@ -1,9 +1,11 @@
 using MangaAccessService;
 using MangaModelService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace NovelXManga.Pages.Manga
 {
+    [Authorize(Roles = "Owner, Admin, AdminControl")]
     public class DeletMangaModel : PageModel
     {
         private readonly MangaNNovelAuthDBContext context;

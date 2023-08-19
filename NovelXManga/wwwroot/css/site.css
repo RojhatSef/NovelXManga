@@ -2215,7 +2215,6 @@ flexLiLayout {
     box-shadow: inset 0 0 2px 1px rgba(46,204,113,.2);
 }
 
-
 .rating-container {
     display: flex;
     align-items: center;
@@ -2500,4 +2499,140 @@ flexLiLayout {
         box-sizing: border-box;
     }
 /*Privacy Policy Ends here*/
+.GridWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
 
+.GridItem {
+    transition: width 0.5s, height 0.5s;
+    width: 240px;
+    min-width: 160px; /* Set the minimum width */
+    flex: 1; /* Allows the item to grow if there's available space */
+    height: 380px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 8px;
+}
+
+.GridImage {
+    width: 100%; /* this will make the image take up the full width of the .GridItem */
+    border-radius: 10px;
+    height: 320px;
+    object-fit: cover;
+    margin-bottom: 5px; /* optional, adds a small space between the image and the name */
+}
+
+.MangaInputTextloco p {
+    color: white; /* Adjust the color as per your design */
+    text-align: center;
+    margin: 5px 0; /* Add some spacing around the name */
+}
+
+@media (max-width: 768px) {
+    .GridItem {
+        flex: 1 1 calc(33.33% - 8px); /* Taking into consideration the gap */
+        max-width: calc(33.33% - 8px);
+    }
+}
+/*Character page
+*/
+.Author_Artist_Characters {
+}
+/*
+    character page end
+*/
+
+/*Delete Page
+*/
+.custom-modal-background {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+}
+
+.custom-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60%;
+    max-width: 500px;
+    background: #fff;
+    padding: 20px;
+    z-index: 1001;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.custom-modal-header,
+.custom-modal-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#closeModalButton {
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    line-height: 1;
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+}
+
+    #closeModalButton:hover {
+        opacity: 1;
+    }
+
+.delete-page-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    background-color: #f5f5f5;
+}
+
+.delete-init-button {
+    background-color: #e74c3c;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+    .delete-init-button:hover {
+        background-color: #c0392b;
+    }
+
+#userDetails {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-top: 20px;
+}
+
+#dropdown {
+    position: absolute;
+    border: 1px solid #ccc;
+    max-height: 200px;
+    overflow-y: auto;
+    width: 250px; /* adjust width accordingly */
+    background-color: #fff;
+    cursor: pointer;
+    z-index: 1000; /* To appear over other elements */
+}
+
+    #dropdown div:hover {
+        background-color: #f0f0f0;
+    }
+/*Deletepage ends*/

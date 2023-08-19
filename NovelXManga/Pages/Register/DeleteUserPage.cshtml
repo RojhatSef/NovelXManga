@@ -1,0 +1,62 @@
+﻿@page
+@model NovelXManga.Pages.Register.DeleteUserPageModel
+@{
+  
+}
+<div class="delete-page-container">
+
+   
+
+    <h2>Delete User</h2>
+    <p>Select a user to delete:</p>
+
+    <input type="text" id="searchField" placeholder="Search for users..." />
+    <div id="results"></div>
+
+    <div id="userDetails"> 
+
+        <p>-----------------------------</p>
+        <p>Role: <span id="userRole"></span></p>
+        <p>Username: <span id="userName"></span></p>
+        <p>Email: <span id="userEmail"></span></p>
+        <button onclick="requestDeletion()" class="delete-init-button">Delete this User</button>
+    </div>
+
+
+</div>
+
+<script>
+    document.getElementById('searchField').addEventListener('input', function (e) {
+        const searchTerm = e.target.value;
+        fetch(`/Register/DeleteUserPage?handler=SearchUsers&searchTerm=${searchTerm}`)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data); // Debug line
+                document.getElementById('results').innerHTML = data.map(user => `<div>${user.userName} - ${user.email}</div>`).join('');
+            });
+    });
+</script>
+
+@*
+@if (ViewData["RequiresConfirmation"] as bool? == true)
+{
+    <div class="custom-modal-background" id="confirmationModalBackground">
+        <div class="custom-modal" id="confirmationModal">
+            <div class="custom-modal-header">
+                <h5>Confirm Deletion</h5>
+                <button onclick="closeModal()" id="closeModalButton">&times;</button>
+            </div>
+            <div class="custom-modal-body">
+                Are you sure you want to delete this user?
+            </div>
+            <div class="custom-modal-footer">
+                <button onclick="closeModal()" id="cancelButton">Cancel</button>
+                <form method="post">
+                    <input type="hidden" name="userId" value="@ViewData["TargetUserId"]" />
+                    <input type="hidden" name="isConfirmed" value="true" />
+                    <button type="submit" class="confirm-button">Delete User</button>
+                </form>
+            </div>
+        </div>
+    </div>
+}*@

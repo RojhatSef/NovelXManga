@@ -1,6 +1,12 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @inject SignInManager<UserModel> SignInManager
+@inject UserManager<UserModel> UserManager
+@{
+    var user = await UserManager.GetUserAsync(User);
+    var UpdaterUser = user != null && await UserManager.IsInRoleAsync(user, "Updater");
+    var OwnerUser = user != null && await UserManager.IsInRoleAsync(user, "Owner");
 
+}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -54,15 +60,27 @@
                 <h2 class="sidebar-title"><i class="material-icons">update</i></h2>
                 <ul>
                     <li class="HoverEffektLi">
-                    <a href="#"> <span>Forum</span> </a>
-                </li>
+                        <a href="#"> <span>Forum</span> </a>
+                    </li>
                     <li class="HoverEffektLi">
                         <a href="#"><span>Groups</span> </a>
-                </li>
-                    <li class="HoverEffektLi ">
+                    </li>
+                    @if (UpdaterUser || OwnerUser)
+                    {
+                        <li class="HoverEffektLi ">
 
-                        <a class="" href="#">  <i class="gg-user"></i> Users </a>
-                </li>
+                        <a asp-page="/Roles/UpdateUserRoles">  <i class="gg-user"></i> Users </a>
+                        </li>
+                    }
+                        @if (OwnerUser)
+                    {
+                        <li class="HoverEffektLi ">
+
+                        <a asp-page="/Register/DeleteUserPage">  <i class="gg-user"></i> Delete User </a>
+                        </li>
+                    }
+                  
+
                     <li class="HoverEffektLi">
                     <a href="#"> <span>Latest Updates</span>  </a>
                 </li>

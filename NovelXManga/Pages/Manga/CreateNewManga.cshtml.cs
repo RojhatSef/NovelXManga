@@ -9,7 +9,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace NovelXManga.Pages.Manga
 {
-    [Authorize]
+    [Authorize(Roles = "Owner, Admin, Updater, Publisher, Artist, Author, Tester, AdminControl, Scanlators, BackEndDeveloper, SupportGroups")]
     public class Create_new_MangaModel : PageModel
     {
         private readonly MangaNNovelAuthDBContext context;

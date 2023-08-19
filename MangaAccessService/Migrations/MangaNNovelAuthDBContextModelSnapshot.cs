@@ -1592,6 +1592,12 @@ namespace MangaAccessService.Migrations
                     b.Property<bool>("IsChecked")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsShadowBanned")
+                        .HasColumnType("bit");
+
                     b.Property<int?>("MangaModelId")
                         .HasColumnType("int");
 

@@ -1,10 +1,12 @@
 using MangaAccessService;
 using MangaModelService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace NovelXManga.Pages.MangaUpdates
 {
+    [Authorize(Roles = "Owner, Admin, Updater")]
     public class UpdateDescriptionModel : PageModel
     {
         private readonly IMangaRepository mangaRepository;

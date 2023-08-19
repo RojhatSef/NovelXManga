@@ -308,7 +308,7 @@ namespace NovelXManga
             // creat an array loop our array add all our roles to the database
             string[] roles = { "Admin", "NormalUser", "Owner", "AdminControl", "Updater",
                     "ShadowBanned", "Scanlators", "ForumAdmin", "Author", "Artist", "Publisher",
-                    "Marketing", "SearchEngineOS", "FrontEndDeveloper", "SupportGroups", "BackEndDeveloper", "ProjectManager", "Tester" };
+                    "Marketing", "SearchEngineOS", "FrontEndDeveloper", "SupportGroups", "BackEndDeveloper", "ProjectManager", "Tester", "DELETEDUSER" };
             if (rolesCount == 0)
             {
                 for (int i = 0; i < roles.Length; i++)
@@ -1970,7 +1970,7 @@ new AssociatedNames { nameString = "Detective Conan Manga" },
         Gender = "Male",
         World = "Detective Conan",
         Occupation = "High School Student, Amateur Detective",
-        PhotoPath = Path.Combine(CharacterProcessUploadedFile("ShinichiKudo.jpg")),
+        PhotoPath = Path.Combine(CharacterProcessUploadedFile("ShinichiKudo.jpeg")),
         Personality = "Sharp, Observant, Determined",
         FamousQuote = "There's only one truth!",
         EyeColor = "Brown",
