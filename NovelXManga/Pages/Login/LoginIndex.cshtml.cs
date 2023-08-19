@@ -21,6 +21,11 @@ namespace NovelXManga.Pages.Login
 
         public IActionResult OnGet(string? returnUrl)
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToPage("/Index");  // or any other appropriate page
+            }
+
             ReturnUrl = returnUrl;
             ViewData["ReturnUrl"] = ReturnUrl;
             return Page();
@@ -28,6 +33,10 @@ namespace NovelXManga.Pages.Login
 
         public async Task<IActionResult> OnPostAsync(string returnUrl)
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToPage("/Index");  // or any other appropriate page
+            }
             returnUrl = ReturnUrl ?? Url.Content("/");
             if (ModelState.IsValid)
             {

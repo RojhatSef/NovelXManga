@@ -50,10 +50,8 @@ namespace NovelXManga.Pages.Register
                 await _userManager.ResetPasswordAsync(user, token, randomPassword);
 
                 // Obfuscate other user data
-
                 user.ForumName = "Deleted User";
                 user.Allias = "N/A";
-
                 user.ForgottPasswordFavoritAnimal = "N/A";
                 user.ForgottPasswordFavActor = "N/A";
                 user.ForgottPasswordFavoritPlace = "N/A";
@@ -167,17 +165,14 @@ namespace NovelXManga.Pages.Register
             {
                 var currentUser = await _userManager.GetUserAsync(User);
                 var targetUser = await _userManager.FindByIdAsync(request.UserId);
-
                 if (currentUser == null || targetUser == null)
                 {
                     return new JsonResult(new { success = false, message = "User not found." });
                 }
-
                 if (currentUser.Id == targetUser.Id)
                 {
                     return new JsonResult(new { success = false, message = "You cannot delete yourself." });
                 }
-
                 // If the target is the owner, only another owner can delete
                 if (await _userManager.IsInRoleAsync(targetUser, "Owner"))
                 {
