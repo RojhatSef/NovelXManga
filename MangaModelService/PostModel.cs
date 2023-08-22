@@ -16,7 +16,7 @@ namespace MangaModelService
 
         public double? score { get; set; }
         public DateTime CommentPostedTime { get; set; }
-
+        public DateTime? NextAllowedPostTime { get; set; }
         public virtual ICollection<BlogModel>? BlogModels { get; set; }
         public bool IsChecked { get; set; }
         public string? UserID { get; set; }
