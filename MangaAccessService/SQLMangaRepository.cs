@@ -146,7 +146,7 @@ namespace MangaAccessService.Migrations
         public async Task<IEnumerable<MangaModel>> GetMostPopularMangaAsync(int count)
         {
             return await mangaNNovelAuthDBContext.mangaModels
-                .OrderByDescending(manga => manga.WeekRead + manga.MonthRead + manga.YearRead)
+                .OrderByDescending(manga => manga.DailyRead + manga.WeekRead + manga.MonthRead + manga.YearRead + manga.ForeverRead)
                 .Take(count)
                 .ToListAsync();
         }

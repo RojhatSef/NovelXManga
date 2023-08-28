@@ -24,9 +24,11 @@ namespace MangaModelService
         public string? Type { get; set; }
         public string? OfficalLanguage { get; set; }
         public string? PhotoPath { get; set; }
-        public int? MonthRead { get; set; }
+        public int? DailyRead { get; set; }
         public int? WeekRead { get; set; }
+        public int? MonthRead { get; set; }
         public int? YearRead { get; set; }
+        public int? ForeverRead { get; set; }
         public string? Description { get; set; }
         public DateTime? ReleaseYear { get; set; }
         public DateTime? EndingYear { get; set; }

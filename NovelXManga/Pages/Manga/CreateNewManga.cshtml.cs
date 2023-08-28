@@ -110,9 +110,7 @@ namespace NovelXManga.Pages.Manga
                 OfficalLanguage = _MangaModel.OfficalLanguage,
                 OriginalPublisher = _MangaModel.orignalWebtoon,
                 CompletelyTranslated = _MangaModel.CompletelyTranslated,
-                WeekRead = _MangaModel.WeekRead,
-                MonthRead = _MangaModel.MonthRead,
-                YearRead = _MangaModel.YearRead,
+
                 orignalWebtoon = _MangaModel.orignalWebtoon,
                 TagsModels = selectedTags,
                 GenresModels = selectedGenres,

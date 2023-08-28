@@ -126,7 +126,7 @@ namespace NovelXManga.Pages.Manga
                 {
                     // Reject the update, user must wait
                     // You can return an appropriate message or redirect to a different page
-                    return RedirectToPage("/Index");
+                    return RedirectToPage(new { id });
                 }
                 // User has already reviewed this manga, update the review
                 existingReview.Title = _ViewReview.Title;
