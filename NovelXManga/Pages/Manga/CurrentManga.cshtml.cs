@@ -121,6 +121,13 @@ namespace NovelXManga.Pages.Manga
             var existingReview = CurrentManga?.reviews?.FirstOrDefault(r => r.UserModels.Contains(user));
             if (existingReview != null)
             {
+                // To reduce spam, and overflow of information to database.
+                if (DateTime.Now - existingReview.LastUpdated < TimeSpan.FromSeconds(30))
+                {
+                    // Reject the update, user must wait
+                    // You can return an appropriate message or redirect to a different page
+                    return RedirectToPage("/Index");
+                }
                 // User has already reviewed this manga, update the review
                 existingReview.Title = _ViewReview.Title;
                 existingReview.Content = _ViewReview.Content;
