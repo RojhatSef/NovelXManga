@@ -60,6 +60,9 @@ namespace NovelXManga.Pages.SearchFilter
         public List<GenresModel> Genres { get; set; }
         public IEnumerable<MangaModel> MangaModels { get; set; }
         public string SearchTerm { get; set; }
+        public int CurrentPage { get; set; }
+        public int PageSize { get; set; }
+        public int TotalPages { get; set; }
 
         public AdvancedSearchModel(MangaNNovelAuthDBContext context, IMangaRepository mangaRepository, IAuthorRepsitory authorRepsitory, IArtistRepsitory artistRepsitory, ITagRepsitory tagRepsitory, IGenreRepsitory genreRepsitory, IChapterModelRepsitory chapterRepsitory, IAssociatedNamesRepsitory associatedNamesRepsitory, ILanguageRepsitory languageRepsitory)
         {
@@ -77,7 +80,10 @@ namespace NovelXManga.Pages.SearchFilter
 
         public async Task<IActionResult> OnPostAsync()
         {
+            int pageIndex = 1; // You can get this value from the query string or as a parameter
+            int pageSize = 8; // Number of books per page
             // Get the selected tag/genres ids
+
             var selectedGenreIds = SelectedGenres ?? new List<int>();
             var selectedTagIds = SelectedTags ?? new List<int>();
             var query = context.mangaModels
@@ -87,8 +93,11 @@ namespace NovelXManga.Pages.SearchFilter
        .Include(m => m.TagsModels)
        .Include(m => m.Characters)
        .AsNoTracking()
-       .AsQueryable();
-
+       .AsQueryable().Skip((pageIndex - 1) * pageSize)
+    .Take(pageSize);
+            CurrentPage = pageIndex;
+            PageSize = pageSize;
+            TotalPages = (int)Math.Ceiling(await query.CountAsync() / (double)pageSize);
             if (!string.IsNullOrEmpty(Search))
             {
                 query = query.Where(m => m.MangaName.Contains(Search));

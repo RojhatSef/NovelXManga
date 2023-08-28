@@ -3,6 +3,7 @@ using MangaModelService.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.ComponentModel.DataAnnotations;
 
 namespace NovelXManga.Pages.Register
 {
@@ -13,6 +14,10 @@ namespace NovelXManga.Pages.Register
 
         [BindProperty]
         public RegisterViewModel Model { get; set; }
+
+        [BindProperty]
+        [Required(ErrorMessage = "Please select a role.")]
+        public string Role { get; set; }
 
         public UserRegisterModel(UserManager<UserModel> userManager, SignInManager<UserModel> signInManager)
         {
@@ -34,7 +39,8 @@ namespace NovelXManga.Pages.Register
                     if (result.Succeeded)
                     {
                         await signInManager.SignInAsync(user, isPersistent: false);
-                        var resultToRole = await userManager.AddToRoleAsync(user, "Owner");
+                        await signInManager.RefreshSignInAsync(user); // Refresh the sign-in
+                        var resultToRole = await userManager.AddToRoleAsync(user, Role);
                         return RedirectToPage("/Index");
                     }
                     foreach (var error in result.Errors)
