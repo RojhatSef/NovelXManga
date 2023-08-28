@@ -20,7 +20,17 @@
             <div class="LoginForgotRegiGroup LargeLoginSize">
 
 
-
+                    <div class="">
+        <label class="LongerInput">Role</label><br />
+        <input type="radio" asp-for="@Model.Role" value="Admin" /> Admin<br />
+        <input type="radio" asp-for="@Model.Role" value="NormalUser" /> Normal User<br />
+        <input type="radio" asp-for="@Model.Role" value="Owner" /> Owner<br />
+        <input type="radio" asp-for="@Model.Role" value="AdminControl" /> Admin Control<br />
+        <input type="radio" asp-for="@Model.Role" value="Updater" /> Updater<br />
+        <input type="radio" asp-for="@Model.Role" value="ShadowBanned" /> Shadow Banned<br />
+        <span asp-validation-for="@Model.Role" class="text-danger"></span>
+    </div>
+    <br />
 
              
                 <div class="">

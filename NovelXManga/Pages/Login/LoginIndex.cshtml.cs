@@ -8,15 +8,17 @@ namespace NovelXManga.Pages.Login
     public class LoginIndexModel : PageModel
     {
         private readonly SignInManager<UserModel> signInManager;
+        private readonly UserManager<UserModel> userManager;
 
         [BindProperty]
         public LoginModel LoginModel { get; set; }
 
         public string ReturnUrl { get; set; }
 
-        public LoginIndexModel(SignInManager<UserModel> signInManager)
+        public LoginIndexModel(SignInManager<UserModel> signInManager, UserManager<UserModel> userManager)
         {
             this.signInManager = signInManager;
+            this.userManager = userManager;
         }
 
         public IActionResult OnGet(string? returnUrl)
@@ -43,6 +45,8 @@ namespace NovelXManga.Pages.Login
                 var identityResult = await signInManager.PasswordSignInAsync(LoginModel.Email, LoginModel.Password, LoginModel.RememberMe, false);
                 if (identityResult.Succeeded)
                 {
+                    var user = await userManager.FindByEmailAsync(LoginModel.Email);
+                    await signInManager.RefreshSignInAsync(user);
                     if (returnUrl == null || returnUrl == "/")
                     {
                         return RedirectToPage("/Index");
