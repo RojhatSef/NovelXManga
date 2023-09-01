@@ -51,17 +51,20 @@
     <label for="tags">Tags:</label>
 
     <div id="HideTagsWhen" class=" hidden-tags">
-        @foreach (var tag in Model.Tags)
-        {
-            if (Model.Tags.IndexOf(tag) % 3 == 0)
-            {
-                    @Html.Raw("</div><div class=\"TagGenreSpacer\">")
-            }
-            <div class="">
-                <input type="checkbox" class="" id="tag-@tag.TagId" name="selectedTags" value="@tag.TagId" @(Model.SelectedTags != null && Model.SelectedTags.Contains(tag.TagId) ? "checked" : "")>
-                <label class="" for="tag-@tag.TagId">@tag.TagName</label>
-            </div>
-        }
+
+               
+                @foreach (var tag in Model.Tags ?? new List<TagModel>())  // Handle null Model.Tags
+                {
+                    if ((Model.Tags?.IndexOf(tag) ?? 0) % 3 == 0)
+                    {
+                        @Html.Raw("</div><div class=\"TagGenreSpacer\">")
+                    }
+                    <div class="">
+                        <input type="checkbox" id="tag-@tag.TagId" name="SelectedTags" value="@tag.TagId" @(Model.SelectedTags?.Contains(tag.TagId) ?? false ? "checked" : "")>
+                        <label for="tag-@tag.TagId">@tag.TagName</label>
+
+                    </div>
+                }
 
     </div>
     <button type="button" class="" onclick="handleShowHideTags()">Show/Hide Tags</button>
@@ -84,26 +87,26 @@
             </select>
         </div>
 <button type="button" class="" onclick="showHideGenres()">Show/Hide Genres</button>
-<div class=" showHideGenre">
-    <label for="tags">Genres:</label>
+        <div class="showHideGenre">
+            <label for="genres">Genres:</label>
+            <div id="HideGenresWhen" class="hidden-tags">
+                @foreach (var genre in Model.Genres ?? new List<GenresModel>())
+                {
+                    if ((Model.Genres?.IndexOf(genre) ?? 0) % 3 == 0)
+                    {
+                        @Html.Raw("</div><div class=\"TagGenreSpacer\">")
+                    }
+                    <div class="">
 
-    <div id="HideTagsWhen" class="hidden-tags">
-        @foreach (var genre in Model.Genres)
-        {
-            if (Model.Genres.IndexOf(genre) % 3 == 0)
-            {
-                    @Html.Raw("</div><div class=\"TagGenreSpacer\">")
-            }
-            <div class="">
-                <input type="checkbox" class="" id="tag-@genre.GenresId" name="selectedGenres" value="@genre.GenresId" @(Model.SelectedGenres != null && Model.SelectedGenres.Contains(genre.GenresId) ? "checked" : "")>
-                <label class="" for="tag-@genre.GenresId">@genre.GenreName</label>
+
+                        <input type="checkbox" id="genre-@genre.GenresId" name="SelectedGenres" value="@genre.GenresId" @(Model.SelectedGenres?.Contains(genre.GenresId) ?? false ? "checked" : "")>
+                        <label for="genre-@genre.GenresId">@genre.GenreName</label>
+                    </div>
+                }
             </div>
-        }
+            <button type="button" class="" onclick="showHideGenres()">Show/Hide Genres</button>
+        </div>
 
-    </div>
-    <button type="button" class="" onclick="showHideGenres()">Show/Hide Genres</button>
-
-</div>
 
         <div class="">
             <button type="submit" class="btn btn-primary">Search</button>
@@ -122,7 +125,7 @@
                     <div class="FourOfAKind">
 
                         <a class="ANoneStyle" asp-page="/Manga/CurrentManga" asp-route-id="@book.MangaID">
-                            <img class="BoxImage" src="~/Images/MangaImage/@book.PhotoPath" />
+                        <img class="BoxImage" src="~/Images/GeneratedMangaImage/@book.PhotoPath" />
 
 
                             <div class="FourofKindContent">
@@ -147,3 +150,39 @@
 
 </div>
 <script src="~/js/ShowHideTagsGenres.js" asp-append-version="true"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        function setupMultiStateCheckboxes(selector) {
+            const checkboxes = document.querySelectorAll(`input[type="checkbox"][name="${selector}"]`);
+            checkboxes.forEach((checkbox) => {
+                checkbox.addEventListener('click', function (event) {
+                    let clickCount = Number(this.getAttribute('data-click-count')) || 0;
+                    clickCount++;
+
+                    if (clickCount === 3) clickCount = 0; // Reset back to neutral after third click
+
+                    switch (clickCount) {
+                        case 0:
+                            this.checked = false;
+                            this.nextElementSibling.style.color = "black"; // Neutral
+                            break;
+                        case 1:
+                            this.checked = true;
+                            this.nextElementSibling.style.color = "green"; // Inclusion
+                            break;
+                        case 2:
+                            this.checked = false;
+                            this.nextElementSibling.style.color = "red"; // Exclusion
+                            break;
+                    }
+
+                    this.setAttribute('data-click-count', clickCount);
+                });
+            });
+        }
+
+        setupMultiStateCheckboxes("selectedTags");
+        setupMultiStateCheckboxes("selectedGenres");
+    });
+
+    });</script>

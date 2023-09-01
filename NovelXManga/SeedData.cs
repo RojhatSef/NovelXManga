@@ -53,44 +53,37 @@ namespace NovelXManga
 
         private string ProcessUploadedFile(string filename)
         {
+            return GeneradedUploadedFile(filename, "GeneratedMangaImage");
+        }
+
+        private string GeneradedUploadedFile(string filename, string generatedFolder)
+        {
             string uniqueFileName = null;
             if (filename != null)
             {
-                string uploadsFolder = Path.Combine(webHostEnvironment.WebRootPath, "Images", "MangaImage");
+                string uploadsFolder = Path.Combine(webHostEnvironment.WebRootPath, "Images", generatedFolder);
+
+                // Create the directory if it doesn't exist
+                Directory.CreateDirectory(uploadsFolder);
+
                 string extension = Path.GetExtension(filename);
                 uniqueFileName = Guid.NewGuid().ToString() + extension;
                 string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-                File.Copy(Path.Combine(webHostEnvironment.ContentRootPath, "wwwroot", "Images", "MangaImage", filename), filePath);
+                File.Copy(Path.Combine(webHostEnvironment.ContentRootPath, "wwwroot", "Images", generatedFolder.Replace("Generated", ""), filename), filePath);
             }
             return uniqueFileName;
         }
 
+        // Changes the folder to "GeneratedCharacterImage"
         private string CharacterProcessUploadedFile(string filename)
         {
-            string uniqueFileName = null;
-            if (filename != null)
-            {
-                string uploadsFolder = Path.Combine(webHostEnvironment.WebRootPath, "Images", "CharacterImage");
-                string extension = Path.GetExtension(filename);
-                uniqueFileName = Guid.NewGuid().ToString() + extension;
-                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-                File.Copy(Path.Combine(webHostEnvironment.ContentRootPath, "wwwroot", "Images", "CharacterImage", filename), filePath);
-            }
-            return uniqueFileName;
+            return GeneradedUploadedFile(filename, "GeneratedCharacterImage");
         }
 
+        // Changes the folder to "GeneratedWallpaperImages"
         private string WallProcessUploadedFile(string filename)
         {
-            string uniqueFileName = null;
-            if (filename != null)
-            {
-                string uploadsFolder = Path.Combine(webHostEnvironment.WebRootPath, "Images", "WallpaperImages");
-                string extension = Path.GetExtension(filename);
-                uniqueFileName = Guid.NewGuid().ToString() + extension;
-                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-                File.Copy(Path.Combine(webHostEnvironment.ContentRootPath, "wwwroot", "Images", "WallpaperImages", filename), filePath);
-            }
-            return uniqueFileName;
+            return GeneradedUploadedFile(filename, "GeneratedWallpaperImages");
         }
 
         public void addLanguages()
@@ -230,9 +223,9 @@ namespace NovelXManga
                 "Manipulation", "Manly Gay Couple", "Marriage", "Marriage Proposal", "Married Couple", "Masculine Uke", "Masochist",
 
            "Master-Pet Relationship", "Master-Servant Relationship", "Masturbation", "Mature Child", "Middle School", "Military", "Mind Break", "Mind Control",
-                "Misunderstanding", "Model", "Misunderstood Protagonist","Middle-earth", "Models", "Modeling",
+                "Misunderstanding", "Model", "Misunderstood Protagonist","Middle-earth", "Models", "Modeling", "Monsters",
 
-                 "Monster", "Multiple Couples", "Multiple Protagonists", "Murder", "Music", "Music Band",
+                 "Multiple Couples", "Multiple Protagonists", "Murder", "Music", "Music Band",
                 "Mythos", "Naive Female Lead", "Naive Male Lead", "Near-Death Experience", "Neighbor", "Netorare",
               "Netor", "Netori", "Ninja", "Nobility", "Nudity", "Obsessive Love", "Odd Situation", "Office Love",
                 "Office Worker", "Older Brother", "Older Female Lead", "Older Female Younger Male",
@@ -553,10 +546,14 @@ namespace NovelXManga
         public void AddBerserk()
         {
             var Tag1ToManga2 = context.TagModels.FirstOrDefault(t => t.TagName == "Dark Fantasy");
-            var Tag2ToManga2 = context.TagModels.FirstOrDefault(t => t.TagName == "Horror");
-            var Tag3ToManga2 = context.TagModels.FirstOrDefault(t => t.TagName == "Mature");
+            var Tag2ToManga2 = context.TagModels.FirstOrDefault(t => t.TagName == "Blood and Gore");
+            var Tag3ToManga2 = context.TagModels.FirstOrDefault(t => t.TagName == "Sword and Sorcery");
+            var Tag4ToManga2 = context.TagModels.FirstOrDefault(t => t.TagName == "Violence");
+
             var Gen1ToManga2 = context.GenresModels.FirstOrDefault(t => t.GenreName == "Action");
-            var Gen2ToManga2 = context.GenresModels.FirstOrDefault(t => t.GenreName == "Adventure");
+            var Gen2ToManga2 = context.GenresModels.FirstOrDefault(t => t.GenreName == "Horror");
+            var Gen3ToManga2 = context.GenresModels.FirstOrDefault(t => t.GenreName == "Tragedy");
+            var Gen4ToManga2 = context.GenresModels.FirstOrDefault(t => t.GenreName == "Mature");
 
             MangaModel Berserk = new MangaModel
             {
@@ -610,18 +607,19 @@ new VoiceActorModel { FirstName = "Toshiyuki",LastName = "Morikawa",  Gender = "
 new VoiceActorModel { FirstName = "Yuko ", LastName = "Miyamura", Gender="Female" },
 },
                 GenresModels = new List<GenresModel>
-{
-new GenresModel { GenreName = "Action" },
-new GenresModel { GenreName = "Dark Fantasy" },
-new GenresModel { GenreName = "Epic" },
-new GenresModel { GenreName = "Horror" },
-},
+                {
+                    Gen1ToManga2,
+                    Gen2ToManga2,
+                    Gen3ToManga2,
+                    Gen4ToManga2
+                },
                 TagsModels = new List<TagModel>
-{
-new TagModel { TagName = "Gore" },
-new TagModel { TagName = "Tragedy" },
-new TagModel { TagName = "Violence" },
-},
+                {
+                    Tag1ToManga2,
+                    Tag2ToManga2,
+                    Tag3ToManga2,
+                    Tag4ToManga2
+                },
                 Characters = new List<Character>
 {
   new Character
@@ -2287,7 +2285,7 @@ new Character
         public void CreateSoloLeveling()
         {
             var Tag1ToManga1 = context.TagModels.FirstOrDefault(t => t.TagName == "Level System");
-            var Tag2ToManga1 = context.TagModels.FirstOrDefault(t => t.TagName == "Monster");
+            var Tag2ToManga1 = context.TagModels.FirstOrDefault(t => t.TagName == "Monsters");
             var Tag3ToManga1 = context.TagModels.FirstOrDefault(t => t.TagName == "Weak to Strong");
             var Gen1ToManga1 = context.GenresModels.FirstOrDefault(t => t.GenreName == "Action");
             var Gen2ToManga1 = context.GenresModels.FirstOrDefault(t => t.GenreName == "Fantasy");
@@ -2452,11 +2450,11 @@ new Character
 
         public void CreateTowerOfGod()
         {
-            var Tag1ToManga1 = context.TagModels.FirstOrDefault(t => t.TagName == "Jealousy");
+            var Tag1ToManga1 = context.TagModels.FirstOrDefault(t => t.TagName == "Monsters");
             var Tag2ToManga1 = context.TagModels.FirstOrDefault(t => t.TagName == "Weak to Strong");
             var Tag3ToManga1 = context.TagModels.FirstOrDefault(t => t.TagName == "Hunted Protagonist");
             var Tag4ToManga1 = context.TagModels.FirstOrDefault(t => t.TagName == "Near-Death Experience");
-            var Gen1ToManga1 = context.GenresModels.FirstOrDefault(t => t.GenreName == "Supernatural");
+            var Gen1ToManga1 = context.GenresModels.FirstOrDefault(t => t.GenreName == "Action");
             var Gen2ToManga1 = context.GenresModels.FirstOrDefault(t => t.GenreName == "Fantasy");
             var Gen3ToManga1 = context.GenresModels.FirstOrDefault(t => t.GenreName == "Adventure");
             var GenreAt3 = context.GenresModels.FirstOrDefault(e => e.GenreName == "Shounen");
@@ -2510,16 +2508,15 @@ new Character
                 VoiceActors = new List<VoiceActorModel>(),
                 GenresModels = new List<GenresModel>
         {
-            new GenresModel { GenreName = "Action" },
-            new GenresModel { GenreName = "Adventure" },
-            new GenresModel { GenreName = "Fantasy" },
+          Gen1ToManga1,
+           Gen2ToManga1,Gen3ToManga1,
             GenreAt3
         },
                 TagsModels = new List<TagModel>
         {
-            new TagModel { TagName = "Tower Climbing" },
-            new TagModel { TagName = "Monsters" },
-            new TagModel { TagName = "Magic" },
+           Tag1ToManga1,
+            Tag2ToManga1,
+           Tag3ToManga1,
         },
 
                 Characters = new List<Character>

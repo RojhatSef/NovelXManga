@@ -16,7 +16,7 @@
 
                 <div class="blurredbackground ">
                     <p class="Author_Artist_Characters"> hello WORLDhello hello WORLDhello hello WORLDhello hello WORLDhello  </p>
-                    <img class="BoxImage blurimage SpecialBox" src="/Images/CharacterImage/@Model.CurrentCharacter.PhotoPath" />
+                    <img class="BoxImage blurimage SpecialBox" src="/Images/GeneratedCharacterImage/@Model.CurrentCharacter.PhotoPath" />
                   
                 </div>
 
@@ -28,12 +28,12 @@
                             @if (UpdaterUser)
                             {
                                 <a asp-page="/MangaUpdates/UpdatePhoto" asp-route-id="@Model.CurrentCharacter.CharacterId">
-                                    <img class="manga-img" asp-append-version="true" src="~/Images/CharacterImage/@Model.CurrentCharacter.PhotoPath" alt="NoImage">
+                                    <img class="manga-img" asp-append-version="true" src="~/Images/GeneratedCharacterImage/@Model.CurrentCharacter.PhotoPath" alt="NoImage">
                                 </a>
                             }
                             else
                             {
-                                <img class="manga-img" asp-append-version="true" src="~/Images/CharacterImage/@Model.CurrentCharacter.PhotoPath" alt="NoImage">
+                                <img class="manga-img" asp-append-version="true" src="~/Images/GeneratedCharacterImage/@Model.CurrentCharacter.PhotoPath" alt="NoImage">
                             }
 
                         </div>

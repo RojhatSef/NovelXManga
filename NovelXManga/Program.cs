@@ -13,6 +13,15 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+//Remove if not needed - Remove to text below
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+});
+builder.Services.AddHttpContextAccessor();
+// Remove - End here
+
 builder.Services.Configure<RequestLocalizationOptions>(options =>
 {
     var supportedCultures = new[] { new CultureInfo("en-US") };
@@ -75,6 +84,7 @@ builder.Services.AddScoped<MangaRankingService>();
 builder.Services.AddHostedService<UpdateRankingsBackgroundService>();
 
 var app = builder.Build();
+
 SeedDatainitialize(app);
 
 // Configure the HTTP request pipeline.
@@ -84,7 +94,7 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
-
+app.UseSession();  // remove if not needed Used for the session with above code.
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRequestLocalization();

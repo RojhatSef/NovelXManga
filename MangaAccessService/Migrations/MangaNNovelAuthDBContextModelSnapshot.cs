@@ -820,6 +820,9 @@ namespace MangaAccessService.Migrations
                     b.Property<string>("CompletelyTranslated")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("DailyRead")
+                        .HasColumnType("int");
+
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
@@ -830,6 +833,9 @@ namespace MangaAccessService.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<int?>("FavoritBookListId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ForeverRead")
                         .HasColumnType("int");
 
                     b.Property<int?>("GroupScanlatingID")
@@ -1000,6 +1006,9 @@ namespace MangaAccessService.Migrations
 
                     b.Property<bool>("IsChecked")
                         .HasColumnType("bit");
+
+                    b.Property<DateTime?>("NextAllowedPostTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<int?>("ParentPostId")
                         .HasColumnType("int");
