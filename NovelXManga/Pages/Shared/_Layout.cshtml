@@ -17,6 +17,41 @@
  
 
 </head>
+<style>
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color:#191a1c; 
+        width: 40%; /* Made slightly smaller */
+        top: 100%;
+        right: 3.5%; /* Added margin to the right */
+        z-index: 1;
+    }
+
+    .dropdown-item {
+       
+        display: flex;
+        align-items: center;
+        color: white;
+        font-size: 18px; /* Making the text larger */
+        margin:14px;
+        background-color: #333;
+        border-radius: 3px;
+    }
+
+        .dropdown-item img {
+            margin-right: 20px; /* More space between image and text */
+            max-height: 100px;
+            max-width: 55px;
+            border-radius:2px;
+            margin: 2px;
+        }
+
+        .dropdown-item span {
+            flex-grow: 1;
+        }
+    }
+</style>
 <body>
     <div class="container-custom">
 
@@ -25,8 +60,10 @@
                 <a asp-page="/Index"><h3 id="NovelTitle"> OtakuLibrary</h3></a>
                 <button id="sidebar-toggle" onclick="handleSidebarToggle()" class="sidebar-toggle"><i class="gg-menu-round"></i></button>
             </div>
-            <div class="navbar-right">  <input type="search" id="searchbar" class="searchbar" placeholder="Search"> </div>
-      
+            <div class="navbar-right">
+                <input type="search" id="searchbar" class="searchbar" placeholder="Search" oninput="searchManga(this.value)" />
+                <div id="mangaResultsDropdown" class="dropdown-content"></div>
+            </div>
         </nav>
         <main class="main-content">
             @RenderBody()

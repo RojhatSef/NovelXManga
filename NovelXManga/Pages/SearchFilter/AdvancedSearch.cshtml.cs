@@ -140,10 +140,8 @@ namespace NovelXManga.Pages.SearchFilter
                 list = list.Where(m => m.GenresModels.Any(g => SelectedGenres.Contains(g.GenresId))).ToList();
                 list = list.Where(m => m.TagsModels.Any(t => SelectedTags.Contains(t.TagId))).ToList();
 
-                Console.WriteLine($"SelectedGenres: {string.Join(", ", SelectedGenres)}");
-                Console.WriteLine($"SelectedTags: {string.Join(", ", SelectedTags)}");
                 var sql = query.ToQueryString();
-                Console.WriteLine($"Generated SQL Result:  {sql} ");
+
                 TotalPages = (int)Math.Ceiling(await query.CountAsync() / (double)pageSize);
                 MangaModels = await query.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToListAsync();
                 Tags = await context.TagModels.ToListAsync();
