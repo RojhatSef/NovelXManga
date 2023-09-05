@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using NovelXManga.Pages.SearchFilter;
 using System.Text.Json;
+using System.Web;
 
 namespace NovelXManga.Pages
 {
@@ -31,6 +32,7 @@ namespace NovelXManga.Pages
         //New code
         public JsonResult OnGetSearchManga(string searchTerm)
         {
+            searchTerm = HttpUtility.HtmlEncode(searchTerm);
             var mangaResults = context.mangaModels
       .Where(m => m.MangaName.Contains(searchTerm) || m.ISBN10.Contains(searchTerm) || m.ISBN13.Contains(searchTerm))
       .Select(m => new SearchResult { Id = m.MangaID, Name = m.MangaName, PhotoPath = m.PhotoPath, Type = "Manga" })

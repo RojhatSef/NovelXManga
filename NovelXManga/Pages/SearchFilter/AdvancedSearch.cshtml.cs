@@ -5,7 +5,10 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Distributed;
 using System.ComponentModel.DataAnnotations;
+using System.Net;
+using System.Text.Encodings.Web;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 
 namespace NovelXManga.Pages.SearchFilter
 {
@@ -68,6 +71,11 @@ namespace NovelXManga.Pages.SearchFilter
         public int PageSize { get; set; }
         public int TotalPages { get; set; }
 
+        public string Sanitize(string input)
+        {
+            return WebUtility.HtmlEncode(input);
+        }
+
         public AdvancedSearchModel(MangaNNovelAuthDBContext context, IMangaRepository mangaRepository, IAuthorRepsitory authorRepsitory, IArtistRepsitory artistRepsitory, ITagRepsitory tagRepsitory, IGenreRepsitory genreRepsitory, IChapterModelRepsitory chapterRepsitory, IAssociatedNamesRepsitory associatedNamesRepsitory, ILanguageRepsitory languageRepsitory, IDistributedCache cache, IHttpContextAccessor httpContextAccessor)
         {
             this.context = context;
@@ -84,6 +92,11 @@ namespace NovelXManga.Pages.SearchFilter
             _httpContextAccessor = httpContextAccessor;
         }
 
+        public bool IsYearInRange(DateTime? date, int minYear, int maxYear)
+        {
+            return date.HasValue && date.Value.Year >= minYear && date.Value.Year <= maxYear;
+        }
+
         public async Task<IActionResult> OnPostAsync()
         {
             try
@@ -94,7 +107,20 @@ namespace NovelXManga.Pages.SearchFilter
                 SelectedTags = SelectedTags ?? new List<int>();
                 var selectedTagsSerialized = JsonSerializer.Serialize(SelectedTags); // remove if not needed
                 var selectedGenresSerialized = JsonSerializer.Serialize(SelectedGenres); // remove if not needed
-
+                var search = HtmlEncoder.Default.Encode(Search);
+                var searchAuthor = HtmlEncoder.Default.Encode(SearchAuthor);
+                var searchArtist = HtmlEncoder.Default.Encode(SearchArtist);
+                var searchVoiceActor = HtmlEncoder.Default.Encode(SearchVoiceActor);
+                var searchCharacter = HtmlEncoder.Default.Encode(SearchCharacter);
+                // Input Validation
+                if (!string.IsNullOrEmpty(search) && !Regex.IsMatch(search, @"^[\p{L}\p{N}\s]+$") ||
+        !string.IsNullOrEmpty(searchAuthor) && !Regex.IsMatch(searchAuthor, @"^[\p{L}\p{N}\s]+$") ||
+        !string.IsNullOrEmpty(searchArtist) && !Regex.IsMatch(searchArtist, @"^[\p{L}\p{N}\s]+$") ||
+        !string.IsNullOrEmpty(searchVoiceActor) && !Regex.IsMatch(searchVoiceActor, @"^[\p{L}\p{N}\s]+$") ||
+        !string.IsNullOrEmpty(searchCharacter) && !Regex.IsMatch(searchCharacter, @"^[\p{L}\p{N}\s]+$"))
+                {
+                    return Page();
+                }
                 _httpContextAccessor.HttpContext.Session.SetString("SelectedTags", selectedTagsSerialized);// remove if not needed
                 _httpContextAccessor.HttpContext.Session.SetString("SelectedGenres", selectedGenresSerialized);// remove if not needed
                 var query = context.mangaModels
@@ -106,26 +132,30 @@ namespace NovelXManga.Pages.SearchFilter
              .AsNoTracking()
              .AsQueryable();
 
-                if (!string.IsNullOrEmpty(Search))
-                    query = query.Where(m => m.MangaName.Contains(Search));
+                if (!string.IsNullOrEmpty(search))
+                    query = query.Where(m => m.MangaName.Contains(search));
 
-                if (!string.IsNullOrEmpty(SearchAuthor))
-                    query = query.Where(m => m.Authormodels.Any(a => a.FirstName.Contains(SearchAuthor) || a.LastName.Contains(SearchAuthor)));
+                if (!string.IsNullOrEmpty(searchAuthor))
+                    query = query.Where(m => m.Authormodels.Any(a => a.FirstName.Contains(searchAuthor) || a.LastName.Contains(searchAuthor)));
 
-                if (!string.IsNullOrEmpty(SearchArtist))
-                    query = query.Where(m => m.ArtistModels.Any(a => a.FirstName.Contains(SearchArtist) || a.LastName.Contains(SearchArtist)));
+                if (!string.IsNullOrEmpty(searchArtist))
+                    query = query.Where(m => m.ArtistModels.Any(a => a.FirstName.Contains(searchArtist) || a.LastName.Contains(searchArtist)));
 
-                if (!string.IsNullOrEmpty(SearchVoiceActor))
-                    query = query.Where(m => m.VoiceActors.Any(a => a.FirstName.Contains(SearchVoiceActor) || a.LastName.Contains(SearchVoiceActor)));
+                if (!string.IsNullOrEmpty(searchVoiceActor))
+                    query = query.Where(m => m.VoiceActors.Any(a => a.FirstName.Contains(searchVoiceActor) || a.LastName.Contains(searchVoiceActor)));
 
-                if (!string.IsNullOrEmpty(SearchCharacter))
-                    query = query.Where(m => m.Characters.Any(a => a.CharacterName.Contains(SearchCharacter)));
+                if (!string.IsNullOrEmpty(searchCharacter))
+                    query = query.Where(m => m.Characters.Any(a => a.CharacterName.Contains(searchCharacter)));
 
-                if (SearchReleaseYearStart.HasValue)
+                if (SearchReleaseYearStart.HasValue && IsYearInRange(SearchReleaseYearStart, 0001, DateTime.Now.Year))
+                {
                     query = query.Where(m => m.ReleaseYear >= SearchReleaseYearStart.Value);
+                }
 
-                if (SearchReleaseYearEnd.HasValue)
+                if (SearchReleaseYearEnd.HasValue && IsYearInRange(SearchReleaseYearEnd, 0001, DateTime.Now.Year))
+                {
                     query = query.Where(m => m.ReleaseYear <= SearchReleaseYearEnd.Value);
+                }
 
                 if (SelectedGenres.Count > 0)
                 {
