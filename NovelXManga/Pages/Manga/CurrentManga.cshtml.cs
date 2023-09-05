@@ -5,9 +5,12 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using System.Net;
+using System.Text.RegularExpressions;
 
 namespace NovelXManga.Pages.Manga
 {
+    [ValidateAntiForgeryToken]
     public class CurrentMangaModel : PageModel
     {
         private readonly MangaNNovelAuthDBContext Context;
@@ -106,6 +109,40 @@ namespace NovelXManga.Pages.Manga
 
         public async Task<IActionResult> OnPostPostTotalScoreAsync(int id)
         {
+            bool validScore = (
+    new[] { 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5 }.Contains(_ViewReview.GrammarScore)
+    && new[] { 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5 }.Contains(_ViewReview.StoryScore)
+    && new[] { 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5 }.Contains(_ViewReview.StylesScore)
+    && new[] { 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5 }.Contains(_ViewReview.CharactersScore)
+);
+
+            if (!validScore)
+            {
+                ModelState.AddModelError(string.Empty, "Invalid input or review details. Please try again.");
+                await OnGetAsync(id);
+                return Page();
+            }
+            if (!string.IsNullOrEmpty(_ViewReview.Title))
+            {
+                string sanitizedTitle = WebUtility.HtmlEncode(Regex.Replace(_ViewReview.Title, "<.*?>", string.Empty));
+                if (sanitizedTitle != _ViewReview.Title)
+                {
+                    ModelState.AddModelError(string.Empty, "Harmful content detected in Title.");
+                    await OnGetAsync(id);
+                    return Page();
+                }
+            }
+
+            if (!string.IsNullOrEmpty(_ViewReview.Content))
+            {
+                string sanitizedContent = WebUtility.HtmlEncode(Regex.Replace(_ViewReview.Content, "<.*?>", string.Empty));
+                if (sanitizedContent != _ViewReview.Content)
+                {
+                    ModelState.AddModelError(string.Empty, "Harmful content detected in Content.");
+                    await OnGetAsync(id);
+                    return Page();
+                }
+            }
             if (string.IsNullOrEmpty(_ViewReview.Title)
            || string.IsNullOrEmpty(_ViewReview.Content)
            || _ViewReview.GrammarScore < 0.5
