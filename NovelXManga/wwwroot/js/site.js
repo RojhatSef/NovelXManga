@@ -74,132 +74,79 @@ function TitleupdateCount(value) {
     });
 })();
 
-//function searchManga(searchTerm) {
-//    var dropdown = document.getElementById('mangaResultsDropdown');
-
-//    if (searchTerm.length >= 2) {
-//        fetch(`/Index?handler=SearchManga&searchTerm=${searchTerm}`)
-//            .then(response => response.json())
-//            .then(data => {
-//                dropdown.innerHTML = data.map(manga => `
-//                    <div class="dropdown-item">
-//                        <a href="/Manga/CurrentManga?id=${manga.mangaID}">
-//                    <img src="/Images/GeneratedMangaImage/${manga.photoPath}" alt="${manga.mangaName}">
-//                            <span data-mangaName="${manga.mangaName}">
-//                                ${manga.mangaName}
-//                            </span>
-//                        </a>
-//                    </div>
-//                `).join('');
-//                dropdown.style.display = 'block';
-//            });
-//    } else {
-//        dropdown.innerHTML = "";
-//        dropdown.style.display = 'none';
-//    }
-////}
-
-///*Old searchmanga code*/
+//new Code This is the search for Books/artist/Author/voice actors which is on the layout page SEARCH. Rest of the backend is in the Index page.
 function searchManga(searchTerm) {
     var dropdown = document.getElementById('mangaResultsDropdown');
 
     if (searchTerm.length >= 2) {
-        fetch(`/Index?handler=SearchManga&searchTerm=${searchTerm}`)
+        fetch(`/Index?handler=SearchManga&searchTerm=${sanitizeHTML(searchTerm)}`)
             .then(response => response.json())
             .then(data => {
-                dropdown.innerHTML = data.map(manga => `
-
-                    <div class="dropdown-item">
-                        <a href="/Manga/CurrentManga?id=${manga.mangaID}">
-                    <img src="/Images/GeneratedMangaImage/${manga.photoPath}" alt="${manga.mangaName}">
-                            <span data-mangaName="${manga.mangaName}">
-                                ${manga.mangaName}
+                console.log(data);  // Debugging line
+                let allResults = [];
+                // Manga Results
+                if (data.Manga) {
+                    allResults.push('<h1>Books:</h1>');
+                    let mangaResults = data.Manga.map(manga => `
+                <div class="dropdown-item">
+                    <a href="/Manga/CurrentManga?id=${sanitizeHTML(manga.id)}">
+                        <img src="/Images/GeneratedMangaImage/${sanitizeHTML(manga.photoPath)}" alt="${sanitizeHTML(manga.name)}">
+                        <span data-mangaName="${sanitizeHTML(manga.name)}">
+                            ${sanitizeHTML(manga.name)}
+                        </span>
+                    </a>
+                </div>
+            `);
+                    allResults.push(mangaResults.join(''));
+                }
+                // Author Results
+                if (data.Author) {
+                    allResults.push('<h1>Authors:</h1>');
+                    let authorResults = data.Author.map(author => `
+                        <div class="dropdown-item">
+                            <span data-authorName="${sanitizeHTML(author.name)}">
+                                ${sanitizeHTML(author.name)}
                             </span>
-                        </a>
+                        </div>
+                    `);
+                    allResults.push(authorResults.join(''));
+                }
 
-                    </div>
+                // Artist Results
+                if (data.Artist) {
+                    allResults.push('<h1>Artists:</h1>');
+                    let artistResults = data.Artist.map(artist => `
+                        <div class="dropdown-item">
+                            <span data-artistName="${sanitizeHTML(artist.name)}">
+                                ${sanitizeHTML(artist.name)}
+                            </span>
+                        </div>
+                    `);
+                    allResults.push(artistResults.join(''));
+                }
 
-                `).join('');
+                // Voice Actor Results
+                if (data.VoiceActor) {
+                    allResults.push('<h1>Voice Actors:</h1>');
+                    let voiceActorResults = data.VoiceActor.map(voiceActor => `
+                        <div class="dropdown-item">
+                            <span data-voiceActorName="${sanitizeHTML(voiceActor.name)}">
+                                ${sanitizeHTML(voiceActor.name)}
+                            </span>
+                        </div>
+                    `);
+                    allResults.push(voiceActorResults.join(''));
+                }
+
+                dropdown.innerHTML = allResults.join('');
                 dropdown.style.display = 'block';
             });
     } else {
         dropdown.innerHTML = "";
         dropdown.style.display = 'none';
     }
+} function sanitizeHTML(text) {
+    var element = document.createElement('div');
+    element.textContent = text;
+    return element.innerHTML;
 }
-
-////New Searchmanga code
-//function searchManga(searchTerm) {
-//    var dropdown = document.getElementById('mangaResultsDropdown');
-//    if (searchTerm.length >= 2) {
-//        fetch(`/Index?handler=SearchManga&searchTerm=${searchTerm}`)
-//            .then(response => response.json())
-//            .then(data => {
-//                const books = data.filter(item => item.Type === "Manga");
-//                const authors = data.filter(item => item.Type === "Author");
-//                const artists = data.filter(item => item.Type === "Artist");
-//                const voiceActors = data.filter(item => item.Type === "VoiceActor");
-
-//                let htmlString = '';
-
-//                if (books.length > 0) {
-//                    htmlString += `<h1>Books</h1>`;
-//                    books.forEach(book => {
-//                        htmlString += `
-//                            <div class="dropdown-item Manga">
-//                                <a href="/Manga/Details?id=${book.MangaID}">
-//                                    <img src="/Images/GeneratedMangaImage/${book.PhotoPath}" alt="${book.MangaName}">
-//                                    <span>${book.MangaName}</span>
-//                                </a>
-//                            </div>
-//                        `;
-//                    });
-//                }
-
-//                if (authors.length > 0) {
-//                    htmlString += `<h1>Authors</h1>`;
-//                    authors.forEach(author => {
-//                        htmlString += `
-//                            <div class="dropdown-item Author">
-//                                <a href="/Author/Details?id=${author.AuthorID}">
-//                                    <span>${author.FirstName} ${author.LastName}</span>
-//                                </a>
-//                            </div>
-//                        `;
-//                    });
-//                }
-
-//                if (artists.length > 0) {
-//                    htmlString += `<h1>Artists</h1>`;
-//                    artists.forEach(artist => {
-//                        htmlString += `
-//                            <div class="dropdown-item Artist">
-//                                <a href="/Artist/Details?id=${artist.ArtistId}">
-//                                    <span>${artist.FirstName} ${artist.LastName}</span>
-//                                </a>
-//                            </div>
-//                        `;
-//                    });
-//                }
-
-//                if (voiceActors.length > 0) {
-//                    htmlString += `<h1>Voice Actors</h1>`;
-//                    voiceActors.forEach(voiceActor => {
-//                        htmlString += `
-//                            <div class="dropdown-item VoiceActor">
-//                                <a href="/VoiceActor/Details?id=${voiceActor.VoiceActorId}">
-//                                    <span>${voiceActor.FirstName} ${voiceActor.LastName}</span>
-//                                </a>
-//                            </div>
-//                        `;
-//                    });
-//                }
-
-//                dropdown.innerHTML = htmlString;
-//                dropdown.style.display = 'block';
-//            });
-//    } else {
-//        dropdown.innerHTML = "";
-//        dropdown.style.display = 'none';
-//    }
-//}

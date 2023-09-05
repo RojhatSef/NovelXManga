@@ -3,6 +3,8 @@ using MangaModelService;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using NovelXManga.Pages.SearchFilter;
+using System.Text.Json;
 
 namespace NovelXManga.Pages
 {
@@ -26,47 +28,40 @@ namespace NovelXManga.Pages
         }
 
         // Part of the Search for the _Layout page. This code is for the Search bar
-        //part of the old code
+        //New code
         public JsonResult OnGetSearchManga(string searchTerm)
         {
-            var searchResults = context.mangaModels
-                                .Where(m => m.MangaName.Contains(searchTerm) || m.ISBN10.Contains(searchTerm) || m.ISBN13.Contains(searchTerm))
-                                .Select(m => new { m.MangaID, m.MangaName, m.PhotoPath })
-                                .ToList();
-            return new JsonResult(searchResults);
+            var mangaResults = context.mangaModels
+      .Where(m => m.MangaName.Contains(searchTerm) || m.ISBN10.Contains(searchTerm) || m.ISBN13.Contains(searchTerm))
+      .Select(m => new SearchResult { Id = m.MangaID, Name = m.MangaName, PhotoPath = m.PhotoPath, Type = "Manga" })
+      .ToList();
+
+            var authorResults = context.authorModels
+                .Where(a => a.FirstName.Contains(searchTerm) || a.LastName.Contains(searchTerm))
+                .Select(a => new SearchResult { Id = a.AuthorID, Name = $"{a.FirstName} {a.LastName}", Type = "Author" })
+                .ToList();
+
+            var artistResults = context.artistModels
+                .Where(a => a.FirstName.Contains(searchTerm) || a.LastName.Contains(searchTerm))
+                .Select(a => new SearchResult { Id = a.ArtistId, Name = $"{a.FirstName} {a.LastName}", Type = "Artist" })
+                .ToList();
+
+            var voiceActorResults = context.voiceActorModels
+                .Where(v => v.FirstName.Contains(searchTerm) || v.LastName.Contains(searchTerm))
+                .Select(v => new SearchResult { Id = v.VoiceActorId, Name = $"{v.FirstName} {v.LastName}", Type = "VoiceActor" })
+                .ToList();
+
+            var searchResults = new List<SearchResult>();
+            searchResults.AddRange(mangaResults);
+            searchResults.AddRange(authorResults);
+            searchResults.AddRange(artistResults);
+            searchResults.AddRange(voiceActorResults);
+
+            var groupedResults = searchResults.GroupBy(r => r.Type)
+                                         .ToDictionary(g => g.Key, g => g.ToList());
+
+            return new JsonResult(groupedResults, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
         }
-
-        //public JsonResult OnGetSearchManga(string searchTerm)
-        //{
-        //    var mangaResults = context.mangaModels
-        //                    .Where(m => m.MangaName.Contains(searchTerm) || m.ISBN10.Contains(searchTerm) || m.ISBN13.Contains(searchTerm))
-        //                    .Select(m => new { m.MangaID, m.MangaName, m.PhotoPath, Type = "Manga" })
-        //                    .ToList();
-
-        //    // Similar searches for Authors, Artists, VoiceActors
-        //    var authorResults = context.authorModels
-        //                    .Where(a => a.FirstName.Contains(searchTerm) || a.LastName.Contains(searchTerm))
-        //                    .Select(a => new { a.AuthorID, a.FirstName, a.LastName, Type = "Author" })
-        //                    .ToList();
-
-        //    var artistResults = context.artistModels
-        //                    .Where(a => a.FirstName.Contains(searchTerm) || a.LastName.Contains(searchTerm))
-        //                    .Select(a => new { a.ArtistId, a.FirstName, a.LastName, Type = "Artist" })
-        //                    .ToList();
-
-        //    var voiceActorResults = context.voiceActorModels
-        //                    .Where(v => v.FirstName.Contains(searchTerm) || v.LastName.Contains(searchTerm))
-        //                    .Select(v => new { v.VoiceActorId, v.FirstName, v.LastName, Type = "VoiceActor" })
-        //                    .ToList();
-
-        //    var searchResults = new List<object>();
-        //    searchResults.AddRange(mangaResults);
-        //    searchResults.AddRange(authorResults);
-        //    searchResults.AddRange(artistResults);
-        //    searchResults.AddRange(voiceActorResults);
-
-        //    return new JsonResult(searchResults);
-        //}
 
         public List<MangaModel> AllBooksList { get; set; }
         public IEnumerable<AssociatedNames> associatedNames { get; set; }
