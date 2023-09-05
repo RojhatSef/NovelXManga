@@ -56,12 +56,21 @@ builder.Services.AddScoped<IBuyPageRepsitory, SQLBuyPageRepsitory>();
 builder.Services.AddScoped<IDroppedBookListPageRepsitory, SQLDroppedBookListPageRepsitory>();
 
 builder.Services.AddScoped<SeedData>();
+
+builder.Services.AddHttpClient("configured-client", client =>
+{
+    client.Timeout = TimeSpan.FromMilliseconds(500);
+});
 builder.Services.AddIdentity<UserModel, IdentityRole>(options =>
 {
     options.Password.RequiredLength = 6;
     options.Password.RequiredUniqueChars = 2;
 }).AddEntityFrameworkStores<MangaNNovelAuthDBContext>().AddDefaultTokenProviders();
-
+builder.Services.Configure<IdentityOptions>(options =>
+{
+    options.Lockout.MaxFailedAccessAttempts = 2;
+    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(10);
+});
 builder.Services.Configure<DataProtectionTokenProviderOptions>(opt =>
    opt.TokenLifespan = TimeSpan.FromHours(2));
 
@@ -95,6 +104,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 app.UseSession();  // remove if not needed Used for the session with above code.
+app.UseMiddleware<RateLimitMiddleware>(TimeSpan.FromSeconds(60));
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRequestLocalization();
@@ -115,46 +125,3 @@ static void SeedDatainitialize(IHost host)
         seed.seedData().Wait();
     }
 }
-
-//missing repo
-//studio and BuyPage
-// make or break ToDos
-// Sync all Data for every download page.
-
-//large ToDos
-// fix a forum? <Unsure if we want this> everymanga field is a forumish Done. Chat Will be done on a mangapage instead of using this.
-// Fix private chatrooms?
-// fix Message
-
-//todo
-//User profile,
-
-// fix  Post/forum With comments
-//fix photopath Done
-// fix double loggin problem done
-// fix adding publishers
-// selling Point Book Of the week/ book of the month // book CLUB
-// fix returnURl if user is not allowed on webpage.
-// fix userRoles and users
-// add Roles to users, Done
-// fix Updates work correctly, 50% done
-// fix the GroupScanlation Adds users /Manga Will not be done, as the page wont have scanlations.
-// fix Manga to users / group Done.
-// fix User to Manga and Group,
-// Fix deleting commets // comments can't be delted
-// Fix Update Comments // replies
-
-// fix removing users 60% done
-
-// fix  tags and genres Done
-// link genres to manga Done
-// link tags  to manga Done
-// search filter working with tags, name, genres, language etc
-// Display Mangas Done
-// Display currentManga Done
-// Fix manga links to Author/Artist/Voice To their info Done
-// fix tags/genre/language to search path ? unsure what i wanted here lol
-// fix IBuyPage SQLBuyPage  Done
-// Fix Scope for Buypage. Done
-
-// 
