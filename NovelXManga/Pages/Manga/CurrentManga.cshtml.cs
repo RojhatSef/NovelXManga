@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
 using System;
 using System.Net;
 using System.Text.RegularExpressions;
@@ -22,6 +23,7 @@ namespace NovelXManga.Pages.Manga
         private readonly IBlogRepsitory blogRepsitory;
         private readonly IPostRepsitory postRepsitory;
         private readonly ICharacterRepsitory characterRepsitory;
+        private readonly IMemoryCache _cache;
 
         [BindProperty]
         public MangaModel CurrentManga { get; set; }
@@ -45,7 +47,7 @@ namespace NovelXManga.Pages.Manga
         public bool IsInReadingList { get; set; }
         public IDictionary<int, int> ScoreDistribution { get; set; }
 
-        public CurrentMangaModel(UserManager<UserModel> userManager, IWebHostEnvironment webHostEnvironment, IMangaRepository mangaRepository, MangaNNovelAuthDBContext mangaNNovelAuthDBContext, IBlogRepsitory blogRepsitory, IPostRepsitory postRepsitory, ICharacterRepsitory characterRepsitory, IReviewRepsitory reviewRepsitory)
+        public CurrentMangaModel(UserManager<UserModel> userManager, IWebHostEnvironment webHostEnvironment, IMangaRepository mangaRepository, MangaNNovelAuthDBContext mangaNNovelAuthDBContext, IBlogRepsitory blogRepsitory, IPostRepsitory postRepsitory, ICharacterRepsitory characterRepsitory, IReviewRepsitory reviewRepsitory, IMemoryCache cache)
         {
             this.userManager = userManager;
             this.webHostEnvironment = webHostEnvironment;
@@ -55,6 +57,7 @@ namespace NovelXManga.Pages.Manga
             this.postRepsitory = postRepsitory;
             this.characterRepsitory = characterRepsitory;
             this.reviewRepsitory = reviewRepsitory;
+            _cache = cache;
         }
 
         public IActionResult OnPostMangaPage(int MangaID)
@@ -264,21 +267,21 @@ namespace NovelXManga.Pages.Manga
             ReadingUsersCount = await Context.readingLists
         .Where(rl => rl.MangaModelId == id)
         .CountAsync();
-            if (!CurrentManga.LastReadDate.HasValue)
-            {
-                CurrentManga.LastReadDate = DateTime.UtcNow;
-            }
-            CurrentManga.DailyRead = CurrentManga.DailyRead ?? 0;
-            CurrentManga.WeekRead = CurrentManga.WeekRead ?? 0;
-            CurrentManga.MonthRead = CurrentManga.MonthRead ?? 0;
-            CurrentManga.YearRead = CurrentManga.YearRead ?? 0;
-            CurrentManga.ForeverRead = CurrentManga.ForeverRead ?? 0;
 
-            CurrentManga.DailyRead++;
-            CurrentManga.WeekRead++;
-            CurrentManga.MonthRead++;
-            CurrentManga.YearRead++;
-            CurrentManga.ForeverRead++;
+            string cacheKey = $"DailyRead_{id}";
+            if (!_cache.TryGetValue<int>(cacheKey, out int dailyRead))
+            {
+                dailyRead = CurrentManga.DailyRead ?? 0;
+                // Set cache entry to expire after 24 hours
+                _cache.Set<int>(cacheKey, dailyRead + 1, TimeSpan.FromDays(1));
+            }
+            else
+            {
+                dailyRead++;
+                _cache.Set<int>(cacheKey, dailyRead, TimeSpan.FromDays(1));
+            }
+            CurrentManga.DailyRead = dailyRead;
+
             await mangaRepository.UpdateAsync(CurrentManga);
 
             return Page();

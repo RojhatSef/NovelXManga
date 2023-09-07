@@ -4,6 +4,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using MangaAccessService;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace NovelXManga
 {
@@ -29,9 +30,27 @@ namespace NovelXManga
             {
                 var context = scope.ServiceProvider.GetRequiredService<MangaNNovelAuthDBContext>();
                 var mangaRepo = scope.ServiceProvider.GetRequiredService<IMangaRepository>();
+                var cache = scope.ServiceProvider.GetRequiredService<IMemoryCache>();
                 var now = DateTime.UtcNow;
                 var mangas = context.mangaModels.ToList();
 
+                foreach (var manga in mangas)
+                {
+                    string cacheKey = $"DailyRead_{manga.MangaID}";
+                    if (cache.TryGetValue<int>(cacheKey, out int dailyRead))
+                    {
+                        manga.WeekRead += dailyRead;
+                        manga.MonthRead += dailyRead;
+                        manga.YearRead += dailyRead;
+                        manga.ForeverRead += dailyRead;
+                        mangaRepo.UpdateAsync(manga);
+                    }
+                }
+                foreach (var manga in mangas)
+                {
+                    string cacheKey = $"DailyRead_{manga.MangaID}";
+                    cache.Remove(cacheKey);
+                }
                 foreach (var manga in mangas)
                 {
                     if (!manga.LastDailyReadDate.HasValue || (now - manga.LastDailyReadDate.Value).TotalDays > 1)
