@@ -34,45 +34,30 @@ namespace NovelXManga
 
                 foreach (var manga in mangas)
                 {
-                    bool updateDate = false;
-
-                    // Ensure every manga has a LastReadDate, if not set it to the current date
-                    if (!manga.LastReadDate.HasValue)
+                    if (!manga.LastDailyReadDate.HasValue || (now - manga.LastDailyReadDate.Value).TotalDays > 1)
                     {
-                        manga.LastReadDate = now;
+                        manga.DailyRead = 0;
+                        manga.LastDailyReadDate = now;
                     }
-                    else
+
+                    if (!manga.LastWeeklyReadDate.HasValue || (now - manga.LastWeeklyReadDate.Value).TotalDays > 7)
                     {
-                        if (now.Date > manga.LastReadDate.Value.Date.AddDays(1))
-                        {
-                            manga.DailyRead = 0;
-                            updateDate = true;
-                        }
-
-                        if ((now - manga.LastReadDate.Value).TotalDays > 7)
-                        {
-                            manga.WeekRead = 0;
-                            updateDate = true;
-                        }
-
-                        if ((now - manga.LastReadDate.Value).TotalDays > 30)
-                        {
-                            manga.MonthRead = 0;
-                            updateDate = true;
-                        }
-
-                        if ((now - manga.LastReadDate.Value).TotalDays > 365)
-                        {
-                            manga.YearRead = 0;
-                            updateDate = true;
-                        }
-
-                        // Set LastReadDate to now, if any of the conditions above were true
-                        if (updateDate)
-                        {
-                            manga.LastReadDate = now;
-                        }
+                        manga.WeekRead = 0;
+                        manga.LastWeeklyReadDate = now;
                     }
+
+                    if (!manga.LastMonthlyReadDate.HasValue || (now - manga.LastMonthlyReadDate.Value).TotalDays > 30)
+                    {
+                        manga.MonthRead = 0;
+                        manga.LastMonthlyReadDate = now;
+                    }
+
+                    if (!manga.LastYearlyReadDate.HasValue || (now - manga.LastYearlyReadDate.Value).TotalDays > 365)
+                    {
+                        manga.YearRead = 0;
+                        manga.LastYearlyReadDate = now;
+                    }
+
                     mangaRepo.Update(manga);
                 }
 
