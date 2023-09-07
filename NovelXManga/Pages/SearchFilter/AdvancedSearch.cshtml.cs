@@ -105,32 +105,36 @@ namespace NovelXManga.Pages.SearchFilter
                 int pageSize = 8;  // Number of items per page
                 SelectedGenres = SelectedGenres ?? new List<int>();
                 SelectedTags = SelectedTags ?? new List<int>();
-                var selectedTagsSerialized = JsonSerializer.Serialize(SelectedTags); // remove if not needed
-                var selectedGenresSerialized = JsonSerializer.Serialize(SelectedGenres); // remove if not needed
-                var search = HtmlEncoder.Default.Encode(Search);
-                var searchAuthor = HtmlEncoder.Default.Encode(SearchAuthor);
-                var searchArtist = HtmlEncoder.Default.Encode(SearchArtist);
-                var searchVoiceActor = HtmlEncoder.Default.Encode(SearchVoiceActor);
-                var searchCharacter = HtmlEncoder.Default.Encode(SearchCharacter);
+                var selectedTagsSerialized = JsonSerializer.Serialize(SelectedTags);
+                var selectedGenresSerialized = JsonSerializer.Serialize(SelectedGenres);
+
+                var search = !string.IsNullOrEmpty(Search) ? HtmlEncoder.Default.Encode(Search) : Search;
+                var searchAuthor = !string.IsNullOrEmpty(SearchAuthor) ? HtmlEncoder.Default.Encode(SearchAuthor) : SearchAuthor;
+                var searchArtist = !string.IsNullOrEmpty(SearchArtist) ? HtmlEncoder.Default.Encode(SearchArtist) : SearchArtist;
+                var searchVoiceActor = !string.IsNullOrEmpty(SearchVoiceActor) ? HtmlEncoder.Default.Encode(SearchVoiceActor) : SearchVoiceActor;
+                var searchCharacter = !string.IsNullOrEmpty(SearchCharacter) ? HtmlEncoder.Default.Encode(SearchCharacter) : SearchCharacter;
+
                 // Input Validation
                 if (!string.IsNullOrEmpty(search) && !Regex.IsMatch(search, @"^[\p{L}\p{N}\s]+$") ||
-        !string.IsNullOrEmpty(searchAuthor) && !Regex.IsMatch(searchAuthor, @"^[\p{L}\p{N}\s]+$") ||
-        !string.IsNullOrEmpty(searchArtist) && !Regex.IsMatch(searchArtist, @"^[\p{L}\p{N}\s]+$") ||
-        !string.IsNullOrEmpty(searchVoiceActor) && !Regex.IsMatch(searchVoiceActor, @"^[\p{L}\p{N}\s]+$") ||
-        !string.IsNullOrEmpty(searchCharacter) && !Regex.IsMatch(searchCharacter, @"^[\p{L}\p{N}\s]+$"))
+                    !string.IsNullOrEmpty(searchAuthor) && !Regex.IsMatch(searchAuthor, @"^[\p{L}\p{N}\s]+$") ||
+                    !string.IsNullOrEmpty(searchArtist) && !Regex.IsMatch(searchArtist, @"^[\p{L}\p{N}\s]+$") ||
+                    !string.IsNullOrEmpty(searchVoiceActor) && !Regex.IsMatch(searchVoiceActor, @"^[\p{L}\p{N}\s]+$") ||
+                    !string.IsNullOrEmpty(searchCharacter) && !Regex.IsMatch(searchCharacter, @"^[\p{L}\p{N}\s]+$"))
                 {
                     return Page();
                 }
-                _httpContextAccessor.HttpContext.Session.SetString("SelectedTags", selectedTagsSerialized);// remove if not needed
-                _httpContextAccessor.HttpContext.Session.SetString("SelectedGenres", selectedGenresSerialized);// remove if not needed
+
+                _httpContextAccessor.HttpContext.Session.SetString("SelectedTags", selectedTagsSerialized);
+                _httpContextAccessor.HttpContext.Session.SetString("SelectedGenres", selectedGenresSerialized);
+
                 var query = context.mangaModels
-             .Include(m => m.Authormodels)
-             .Include(m => m.ArtistModels)
-             .Include(m => m.GenresModels)
-             .Include(m => m.TagsModels)
-             .Include(m => m.Characters)
-             .AsNoTracking()
-             .AsQueryable();
+                    .Include(m => m.Authormodels)
+                    .Include(m => m.ArtistModels)
+                    .Include(m => m.GenresModels)
+                    .Include(m => m.TagsModels)
+                    .Include(m => m.Characters)
+                    .AsNoTracking()
+                    .AsQueryable();
 
                 if (!string.IsNullOrEmpty(search))
                     query = query.Where(m => m.MangaName.Contains(search));

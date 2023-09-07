@@ -34,6 +34,9 @@
     <Folder Include="Pages\Studio\" />
     <Folder Include="Pages\Posts\" />
     <Folder Include="wwwroot\Images\AuthorImage\" />
+    <Folder Include="wwwroot\Images\GeneratedCharacterImage\" />
+    <Folder Include="wwwroot\Images\GeneratedMangaImage\" />
+    <Folder Include="wwwroot\Images\GeneratedWallpaperImages\" />
     <Folder Include="wwwroot\Images\GroupImages\" />
     <Folder Include="wwwroot\Images\MangaImage\" />
     <Folder Include="wwwroot\Images\CharacterImage\" />
