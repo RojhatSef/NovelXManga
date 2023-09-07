@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Net;
 using System.Text.RegularExpressions;
 
@@ -263,6 +264,23 @@ namespace NovelXManga.Pages.Manga
             ReadingUsersCount = await Context.readingLists
         .Where(rl => rl.MangaModelId == id)
         .CountAsync();
+            if (!CurrentManga.LastReadDate.HasValue)
+            {
+                CurrentManga.LastReadDate = DateTime.UtcNow;
+            }
+            CurrentManga.DailyRead = CurrentManga.DailyRead ?? 0;
+            CurrentManga.WeekRead = CurrentManga.WeekRead ?? 0;
+            CurrentManga.MonthRead = CurrentManga.MonthRead ?? 0;
+            CurrentManga.YearRead = CurrentManga.YearRead ?? 0;
+            CurrentManga.ForeverRead = CurrentManga.ForeverRead ?? 0;
+
+            CurrentManga.DailyRead++;
+            CurrentManga.WeekRead++;
+            CurrentManga.MonthRead++;
+            CurrentManga.YearRead++;
+            CurrentManga.ForeverRead++;
+            await mangaRepository.UpdateAsync(CurrentManga);
+
             return Page();
         }
     }

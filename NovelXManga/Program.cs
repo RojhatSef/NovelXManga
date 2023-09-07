@@ -91,7 +91,7 @@ builder.Services.ConfigureApplicationCookie(config =>
 });
 builder.Services.AddScoped<MangaRankingService>();
 builder.Services.AddHostedService<UpdateRankingsBackgroundService>();
-
+builder.Services.AddHostedService<MangaReadResetService>();
 var app = builder.Build();
 
 SeedDatainitialize(app);
