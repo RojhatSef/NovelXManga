@@ -1,9 +1,9 @@
-﻿@page
+﻿
 @model NovelXManga.Pages.MangaTry.DumpxModel
 @{
 }
 
-<div class="angry-grid">
+@*<div class="angry-grid">
     <div id="item-0">&nbsp;</div>
     <div id="item-1">&nbsp;</div>
     <div id="item-2">&nbsp;</div>
@@ -12,7 +12,7 @@
     <div id="item-5">&nbsp;</div>
     <div id="item-6">&nbsp;</div>
     <div id="item-7">&nbsp;</div>
-</div>
+</div>*@
 @*<div class="parent">
     <div class="div1">
         <div class="div28">dsadsa </div>
@@ -289,3 +289,332 @@
         </div>
     </div>
   }*@
+
+
+@*
+            THIS IS FROM INDEX PAGE     THIS IS FROM INDEX PAGE    THIS IS FROM INDEX PAGE    THIS IS FROM INDEX PAGE*@
+
+@*<div class="FourOfAKind">
+
+    <a class="ANoneStyle" asp-page="/Manga/CurrentManga" asp-route-id="@Model.AllBooksList[11].MangaID">
+        <img class="BoxImage" src="~/Images/GeneratedMangaImage/@Model.AllBooksList[11].PhotoPath" />
+        <div class="FourofKindContent">
+            @if (Model.AllBooksList[11].MangaName != null)
+            {
+                <h2>@Model.AllBooksList[11].MangaName</h2>
+            }
+            <h2 class="tag-container DisplayWhenHoverFourOfaKind">
+                @if (Model.AllBooksList[11].TagsModels != null)
+                {
+                    @foreach (var tag in Model.AllBooksList[11].TagsModels.Take(5))
+                    {
+                        <span class="tag   ">@tag.TagName  </span>
+                    }
+                }
+                @if (Model.AllBooksList[11].GenresModels != null)
+                {
+                    @foreach (var genre in Model.AllBooksList[11].GenresModels.Take(5))
+                    {
+
+                        <span class="tag  ">  @genre.GenreName  </span>
+
+                    }
+                }
+            </h2>
+            <p class="HideWhenHoverFourOfaKind">@Model.AllBooksList[11].Description</p>
+        </div>
+    </a>
+</div>
+<div class="FourOfAKind">
+    <a class="ANoneStyle" asp-page="/Manga/CurrentManga" asp-route-id="@Model.AllBooksList[10].MangaID">
+        <img class="BoxImage" src="~/Images/GeneratedMangaImage/@Model.AllBooksList[10].PhotoPath" />
+        <div class="FourofKindContent">
+            <h2>@Model.AllBooksList[10].MangaName</h2>
+            <h2 class="tag-container DisplayWhenHoverFourOfaKind">
+                @foreach (var tag in Model.AllBooksList[10].TagsModels.Take(5))
+                {
+                    <span class="tag FourTagsGenreSize  ">@tag.TagName  </span>
+                }
+                @foreach (var genre in Model.AllBooksList[10].GenresModels.Take(5))
+                {
+                    <span class="tag FourTagsGenreSize ">  @genre.GenreName  </span>
+                }
+            </h2>
+            <p class="HideWhenHoverFourOfaKind">@Model.AllBooksList[10].Description</p>
+        </div>
+    </a>
+</div>
+<div class="FourOfAKind">
+
+    <a class="ANoneStyle" asp-page="/Manga/CurrentManga" asp-route-id="@Model.AllBooksList[9].MangaID">
+        <img class="BoxImage" src="~/Images/GeneratedMangaImage/@Model.AllBooksList[9].PhotoPath" />
+        <div class="FourofKindContent">
+            <h2>@Model.AllBooksList[9].MangaName</h2>
+            <h2 class="tag-container DisplayWhenHoverFourOfaKind">
+                @foreach (var tag in Model.AllBooksList[9].TagsModels.Take(5))
+                {
+
+                    <span class="tag FourTagsGenreSize  ">@tag.TagName  </span>
+                }
+
+                @foreach (var genre in Model.AllBooksList[9].GenresModels.Take(5))
+                {
+
+                    <span class="tag FourTagsGenreSize ">  @genre.GenreName  </span>
+                }
+            </h2>
+            <p class="HideWhenHoverFourOfaKind">@Model.AllBooksList[9].Description</p>
+        </div>
+    </a>
+</div>
+<div class="FourOfAKind hide-on-Boxes-on-small">
+
+    <a class="ANoneStyle" asp-page="/Manga/CurrentManga" asp-route-id="@Model.AllBooksList[8].MangaID">
+        <img class="BoxImage" src="~/Images/GeneratedMangaImage/@Model.AllBooksList[8].PhotoPath" />
+        <div class="FourofKindContent">
+            <h2>@Model.AllBooksList[8].MangaName</h2>
+            <h2 class="tag-container DisplayWhenHoverFourOfaKind">
+                @foreach (var tag in Model.AllBooksList[8].TagsModels.Take(5))
+                {
+                    <span class="tag FourTagsGenreSize  ">@tag.TagName  </span>
+
+                }
+
+                @foreach (var genre in Model.AllBooksList[8].GenresModels.Take(5))
+                {
+
+                    <span class="tag FourTagsGenreSize ">  @genre.GenreName  </span>
+
+                }
+            </h2>
+            <p class="HideWhenHoverFourOfaKind">@Model.AllBooksList[8].Description</p>
+        </div>
+    </a>
+</div>
+<div class="FourOfAKind hide-on-Boxes-on-small">
+
+    <a class="ANoneStyle" asp-page="/Manga/CurrentManga" asp-route-id="@Model.AllBooksList[7].MangaID">
+        <img class="BoxImage" src="~/Images/GeneratedMangaImage/@Model.AllBooksList[7].PhotoPath" />
+        <div class="FourofKindContent">
+            <h2>@Model.AllBooksList[7].MangaName</h2>
+            <h2 class="tag-container DisplayWhenHoverFourOfaKind">
+                @foreach (var tag in Model.AllBooksList[7].TagsModels.Take(5))
+                {
+                    <span class="tag FourTagsGenreSize  ">@tag.TagName  </span>
+                }
+
+                @foreach (var genre in Model.AllBooksList[7].GenresModels.Take(5))
+                {
+
+                    <span class="tag FourTagsGenreSize ">  @genre.GenreName  </span>
+
+                }
+            </h2>
+            <p class="HideWhenHoverFourOfaKind">@Model.AllBooksList[7].Description</p>
+        </div>
+    </a>
+</div>
+<div class="FourOfAKind hide-on-Boxes-on-small">
+
+    <a class="ANoneStyle" asp-page="/Manga/CurrentManga" asp-route-id="@Model.AllBooksList[6].MangaID">
+        <img class="BoxImage" src="~/Images/GeneratedMangaImage/@Model.AllBooksList[6].PhotoPath" />
+        <div class="FourofKindContent">
+            <h2>@Model.AllBooksList[6].MangaName</h2>
+            <h2 class="tag-container DisplayWhenHoverFourOfaKind">
+                @foreach (var tag in Model.AllBooksList[6].TagsModels.Take(5))
+                {
+                    <span class="tag FourTagsGenreSize  ">@tag.TagName  </span>
+                }
+
+                @foreach (var genre in Model.AllBooksList[6].GenresModels.Take(5))
+                {
+                    <span class="tag FourTagsGenreSize ">  @genre.GenreName  </span>
+                }
+            </h2>
+            <p class="HideWhenHoverFourOfaKind">@Model.AllBooksList[6].Description</p>
+        </div>
+    </a>
+</div>
+<div class="FourOfAKind hide-on-Boxes-on-medium">
+    <a class="ANoneStyle" asp-page="/Manga/CurrentManga" asp-route-id="@Model.AllBooksList[5].MangaID">
+        <img class="BoxImage" src="~/Images/GeneratedMangaImage/@Model.AllBooksList[5].PhotoPath" />
+        <div class="FourofKindContent">
+            <h2>@Model.AllBooksList[5].MangaName</h2>
+            <h2 class="tag-container DisplayWhenHoverFourOfaKind">
+                @foreach (var tag in Model.AllBooksList[5].TagsModels.Take(5))
+                {
+                    <span class="tag FourTagsGenreSize  ">@tag.TagName  </span>
+                }
+
+                @foreach (var genre in Model.AllBooksList[5].GenresModels.Take(5))
+                {
+
+                    <span class="tag FourTagsGenreSize ">  @genre.GenreName  </span>
+
+                }
+            </h2>
+            <p class="HideWhenHoverFourOfaKind">@Model.AllBooksList[5].Description</p>
+        </div>
+    </a>
+</div>
+<div class="FourOfAKind hide-on-Boxes-on-medium">
+
+    <a class="ANoneStyle" asp-page="/Manga/CurrentManga" asp-route-id="@Model.AllBooksList[4].MangaID">
+        <img class="BoxImage" src="~/Images/GeneratedMangaImage/@Model.AllBooksList[4].PhotoPath" />
+
+
+        <div class="FourofKindContent">
+            <h2>@Model.AllBooksList[4].MangaName</h2>
+            <h2 class="tag-container DisplayWhenHoverFourOfaKind">
+                @foreach (var tag in Model.AllBooksList[4].TagsModels.Take(5))
+                {
+
+                    <span class="tag FourTagsGenreSize  ">@tag.TagName  </span>
+
+
+                }
+
+                @foreach (var genre in Model.AllBooksList[4].GenresModels.Take(5))
+                {
+
+                    <span class="tag FourTagsGenreSize ">  @genre.GenreName  </span>
+
+                }
+
+
+            </h2>
+            <p class="HideWhenHoverFourOfaKind">@Model.AllBooksList[4].Description</p>
+
+
+        </div>
+    </a>
+</div>
+<div class="FourOfAKind hide-on-Boxes-on-medium">
+
+    <a class="ANoneStyle" asp-page="/Manga/CurrentManga" asp-route-id="@Model.AllBooksList[3].MangaID">
+        <img class="BoxImage" src="~/Images/GeneratedMangaImage/@Model.AllBooksList[3].PhotoPath" />
+
+
+        <div class="FourofKindContent">
+            <h2>@Model.AllBooksList[3].MangaName</h2>
+            <h2 class="tag-container DisplayWhenHoverFourOfaKind">
+                @foreach (var tag in Model.AllBooksList[3].TagsModels.Take(5))
+                {
+
+                    <span class="tag FourTagsGenreSize  ">@tag.TagName  </span>
+
+
+                }
+
+                @foreach (var genre in Model.AllBooksList[3].GenresModels.Take(5))
+                {
+
+                    <span class="tag FourTagsGenreSize ">  @genre.GenreName  </span>
+
+                }
+
+
+            </h2>
+            <p class="HideWhenHoverFourOfaKind">@Model.AllBooksList[3].Description</p>
+
+
+        </div>
+    </a>
+</div>
+<div class="FourOfAKind hide-on-Boxes-on-large">
+
+    <a class="ANoneStyle" asp-page="/Manga/CurrentManga" asp-route-id="@Model.AllBooksList[2].MangaID">
+        <img class="BoxImage" src="~/Images/GeneratedMangaImage/@Model.AllBooksList[2].PhotoPath" />
+
+
+        <div class="FourofKindContent">
+            <h2>@Model.AllBooksList[2].MangaName</h2>
+            <h2 class="tag-container DisplayWhenHoverFourOfaKind">
+                @foreach (var tag in Model.AllBooksList[2].TagsModels.Take(5))
+                {
+
+                    <span class="tag FourTagsGenreSize  ">@tag.TagName  </span>
+
+
+                }
+
+                @foreach (var genre in Model.AllBooksList[2].GenresModels.Take(5))
+                {
+
+                    <span class="tag FourTagsGenreSize ">  @genre.GenreName  </span>
+
+                }
+
+
+            </h2>
+            <p class="HideWhenHoverFourOfaKind">@Model.AllBooksList[2].Description</p>
+
+
+        </div>
+    </a>
+</div>
+<div class="FourOfAKind hide-on-Boxes-on-large">
+
+    <a class="ANoneStyle" asp-page="/Manga/CurrentManga" asp-route-id="@Model.AllBooksList[1].MangaID">
+        <img class="BoxImage" src="~/Images/GeneratedMangaImage/@Model.AllBooksList[1].PhotoPath" />
+
+
+        <div class="FourofKindContent">
+            <h2>@Model.AllBooksList[1].MangaName</h2>
+            <h2 class="tag-container DisplayWhenHoverFourOfaKind">
+                @foreach (var tag in Model.AllBooksList[1].TagsModels.Take(5))
+                {
+
+                    <span class="tag FourTagsGenreSize  ">@tag.TagName  </span>
+
+
+                }
+
+                @foreach (var genre in Model.AllBooksList[1].GenresModels.Take(5))
+                {
+
+                    <span class="tag FourTagsGenreSize ">  @genre.GenreName  </span>
+
+                }
+
+
+            </h2>
+            <p class="HideWhenHoverFourOfaKind">@Model.AllBooksList[1].Description</p>
+
+
+        </div>
+    </a>
+</div>
+<div class="FourOfAKind hide-on-Boxes-on-large">
+
+    <a class="ANoneStyle" asp-page="/Manga/CurrentManga" asp-route-id="@Model.AllBooksList[0].MangaID">
+        <img class="BoxImage" src="~/Images/GeneratedMangaImage/@Model.AllBooksList[0].PhotoPath" />
+
+
+        <div class="FourofKindContent">
+            <h2>@Model.AllBooksList[0].MangaName</h2>
+            <h2 class="tag-container DisplayWhenHoverFourOfaKind">
+                @foreach (var tag in Model.AllBooksList[0].TagsModels.Take(5))
+                {
+
+                    <span class="tag FourTagsGenreSize  ">@tag.TagName  </span>
+
+
+                }
+
+                @foreach (var genre in Model.AllBooksList[0].GenresModels.Take(5))
+                {
+
+                    <span class="tag FourTagsGenreSize ">  @genre.GenreName  </span>
+
+                }
+
+
+            </h2>
+            <p class="HideWhenHoverFourOfaKind">@Model.AllBooksList[0].Description</p>
+
+
+        </div>
+    </a>
+</div>*@
+

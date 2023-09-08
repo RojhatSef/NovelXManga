@@ -14,8 +14,6 @@
     });
 })
 
-console.log("Document height: ", document.documentElement.scrollHeight);
-console.log("Window height: ", window.innerHeight);
 window.addEventListener("DOMContentLoaded", (event) => {
     let navbar = document.querySelector('.custom-O-navbar');
     let lastScrollTop = 0;
@@ -150,3 +148,29 @@ function searchManga(searchTerm) {
     element.textContent = text;
     return element.innerHTML;
 }
+document.addEventListener("DOMContentLoaded", function () {
+    const miniCards = document.querySelector(".MiniCards");
+    const leftArrow = document.querySelector(".left-arrow");
+    const rightArrow = document.querySelector(".right-arrow");
+    const items = miniCards.querySelectorAll('.BoxOne');
+    let firstItem = null;
+    let lastItem = null;
+
+    function loopRight() {
+        firstItem = miniCards.querySelector('.BoxOne');
+        miniCards.appendChild(firstItem);
+    }
+
+    function loopLeft() {
+        lastItem = miniCards.querySelectorAll('.BoxOne')[items.length - 1];
+        miniCards.insertBefore(lastItem, miniCards.firstChild);
+    }
+
+    rightArrow.addEventListener('click', function () {
+        loopRight();
+    });
+
+    leftArrow.addEventListener('click', function () {
+        loopLeft();
+    });
+});

@@ -662,23 +662,11 @@ flexLiLayout {
     .card-img-index {
         margin: 10px !important;
     }
-
-    .MiniCards > div {
-        flex-basis: 50%;
-        margin-bottom: 10px;
-    }
 }
 
 @media (max-width: 1400px) {
     .RemoveWhenLarge {
         font-size: 10px;
-    }
-
-    .MiniCards > div {
-        flex: 5%;
-        flex-direction: column;
-        margin-bottom: 10px;
-        flex-wrap: wrap;
     }
 }
 
@@ -861,7 +849,7 @@ flexLiLayout {
     .Content2Cost {
         padding-left: 0; /* If you have any padding, remove it to ensure card touches the sides. */
         padding-right: 0;
-        padding-bottom:10%;
+        padding-bottom: 10%;
     }
 }
 
@@ -999,19 +987,37 @@ flexLiLayout {
 }
 /* INDEX CARD TOP ENDS HERE*/
 /* MINICARDS STARTS HERE*/
+.arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2rem;
+    cursor: pointer;
+    z-index: 10;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px 20px;
+    border-radius: 50%;
+}
+
+.left-arrow {
+    left: 0;
+}
+
+.right-arrow {
+    right: 0;
+}
 
 .MiniCards {
     background-color: rgb(25, 26, 28);
-    flex-grow: 1;
     height: 400px;
     display: flex;
-    flex-wrap: wrap;
-    margin: 0;
-    padding: 0;
-    overflow: visible;
+    flex-wrap: nowrap; /* Prevent wrapping */
+
     position: relative;
     gap: 8px;
     transition: width 0.5s, height 0.5s;
+    width: 100%; /* Full width of the parent */
+    box-sizing: border-box; /* Ensure padding does not increase total width */
 }
 
 .BoxContent {
@@ -1036,14 +1042,15 @@ flexLiLayout {
 }
 
 .BoxOne {
-    flex: 1;
-    margin: 0;
+    flex: none; /* Don't allow flexing to ensure consistent sizing */
+    width: 14%; /* Default to 50% to start */
     transition: width 0.5s, height 0.5s;
 }
 
     .BoxOne:hover {
         transform: scale(1.1);
-        z-index: 2; /* This is to ensure the hovered box overlays the others */
+        position: relative;
+        z-index: 2;
         border-top: solid;
         border-bottom: solid;
         border-color: #ff6740;
@@ -1066,6 +1073,10 @@ flexLiLayout {
     .hide-on-Boxes-on-large {
         display: none;
     }
+
+    .BoxOne {
+        width: 16.66%; /* for showing 6 images */
+    }
 }
 
 @media (max-width: 900px) {
@@ -1085,6 +1096,10 @@ flexLiLayout {
     .tag-container {
         font-size: 12.5px;
     }
+
+    .BoxOne {
+        width: 16.66%; /* for showing 6 images */
+    }
 }
 
 @media (max-width: 599px) {
@@ -1093,9 +1108,13 @@ flexLiLayout {
         max-height: 100%; /* 1 row at widths <= 599px */
     }
 
-    .BoxOne.hide-on-small {
-        display: none;
+    .BoxOne {
+        width: 50%; /* for showing 2 images */
     }
+
+        .BoxOne.hide-on-small {
+            display: none;
+        }
 
     .ContentDescription {
         padding-top: 4.5%;
