@@ -515,9 +515,7 @@
                 <div class="slide">
                             <img class="card-img-background" src="~/Images/GeneratedMangaImage/@book.PhotoPath" />
             <div class="card-body">
-
                                 <img class="card-img-index" src="~/Images/GeneratedMangaImage/@book.PhotoPath" />
-
                 <div class="TitleTagDescriptionCostum">
                     <div class="card-title">
                         <a asp-page="/Manga/CurrentManga" asp-route-id="@book.MangaID">
@@ -525,20 +523,19 @@
                                 @book.MangaName
                             </h1>
                         </a>
-
                     </div>
-
                     <h2 class="tag-container">
                                     @if (book.TagsModels != null)
-                                        { @foreach (var tag in book.TagsModels.Take(6))
+                                    {  
+                                        @foreach (var tag in book.TagsModels.Take(6))
                                         {
                                             <a asp-page="/Manga/CurrentManga" asp-route-id="@book.MangaID">
                                                 <span class="tag RemoveWhenSmall">@tag.TagName</span>
                                             </a>
 
-                                        } }
-
-                                   
+                                        } 
+                                    }
+                                        
                                     @if (book.GenresModels != null)
                                     {
                                             @foreach (var genre in book.GenresModels.Take(6))
@@ -547,9 +544,7 @@
                                                 <span class="tag RemoveWhenSmall">@genre.GenreName</span>
                                             </a>
                                         }
-                                    }
-                     
-
+                                    }                 
                     </h2>
                     <div class="card-description RemoveWhenSmall RemoveWhenLarge RemoveWhenMedium">
                         <p>
@@ -566,7 +561,6 @@
                                         {
                                             @foreach (var author in book.Authormodels)
                                             {
-
                                                 <h2 class="Author_Artist" style="padding-right:7px">
                                                     @author.FirstName @author.LastName
                                                 </h2>
@@ -579,8 +573,6 @@
                                                             <h2 class="Author_Artist">
                                                            |  @artst.FirstName @artst.LastName
                                                             </h2>
-
-
                                                     }
                                                 }
                                             }
@@ -604,23 +596,12 @@
                                                 <h2 class="Author_Artist">
                                                     |  @artst.FirstName @artst.LastName
                                                 </h2>
-
-
                                             }
-                                        }                                  
-                       
-
-                      
+                                        }                                                       
                     </div>
-
                 </div>
-
-
                 <div>
                 </div>
-
-
-
             </div>
             </div>
             </a>
@@ -634,10 +615,7 @@
                 </button>
             </div>
         </div>
-    
-  
 </div>
-
 </div>
 
 

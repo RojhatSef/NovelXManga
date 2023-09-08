@@ -43,8 +43,8 @@
 // search filter working with tags, name, genres, language etc
 // Display Mangas Done
 // Display currentManga Done
-// Fix manga links to Author/Artist/Voice To their info Done
-// fix tags/genre/language to search path ? unsure what i wanted here lol
+// Fix manga links to Author/Artist/Voice To their info
+// fix tags/genre/language to search path ?
 // fix IBuyPage SQLBuyPage  Done
 // Fix Scope for Buypage. Done
 
