@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
-using System;
 using System.Net;
 using System.Text.RegularExpressions;
 
@@ -40,6 +39,7 @@ namespace NovelXManga.Pages.Manga
         [BindProperty]
         public ViewReview _ViewReview { get; set; } = new ViewReview();
 
+
         public IEnumerable<Review> ReivewModel { get; set; }
 
         public IEnumerable<PostModel> Posts { get; set; }
@@ -59,6 +59,8 @@ namespace NovelXManga.Pages.Manga
             this.reviewRepsitory = reviewRepsitory;
             _cache = cache;
         }
+
+
 
         public IActionResult OnPostMangaPage(int MangaID)
         {
@@ -133,6 +135,8 @@ namespace NovelXManga.Pages.Manga
                 {
                     ModelState.AddModelError(string.Empty, "Harmful content detected in Title.");
                     await OnGetAsync(id);
+
+                    TempData["HarmfulContent"] = true;
                     return Page();
                 }
             }
@@ -144,6 +148,8 @@ namespace NovelXManga.Pages.Manga
                 {
                     ModelState.AddModelError(string.Empty, "Harmful content detected in Content.");
                     await OnGetAsync(id);
+
+                    TempData["HarmfulContent"] = true;
                     return Page();
                 }
             }
@@ -159,16 +165,15 @@ namespace NovelXManga.Pages.Manga
             }
             CurrentManga = mangaRepository.GetOneMangaAllIncluded(id);
             var user = await userManager.GetUserAsync(User);
+            if (user.UserActivityTimer.HasValue && (DateTime.Now - user.UserActivityTimer.Value < TimeSpan.FromSeconds(5)))
+            {
+                return RedirectToPage(new { id });  // or some error message page.
+            }
+
+            // CHECK IF USER REVIEWED RECENTLY , IF USER REVIEWED WAIT 30 Sec.
             var existingReview = CurrentManga?.reviews?.FirstOrDefault(r => r.UserModels.Contains(user));
             if (existingReview != null)
             {
-                // To reduce spam, and overflow of information to database.
-                if (DateTime.Now - existingReview.LastUpdated < TimeSpan.FromSeconds(30))
-                {
-                    // Reject the update, user must wait
-                    // You can return an appropriate message or redirect to a different page
-                    return RedirectToPage(new { id });
-                }
                 // User has already reviewed this manga, update the review
                 existingReview.Title = _ViewReview.Title;
                 existingReview.Content = _ViewReview.Content;
@@ -177,7 +182,6 @@ namespace NovelXManga.Pages.Manga
                 existingReview.GrammarScore = _ViewReview.GrammarScore;
                 existingReview.CharactersScore = _ViewReview.CharactersScore;
                 existingReview.LastUpdated = DateTime.Now;
-
                 // Now update the review in the database
                 await reviewRepsitory.UpdateAsync(existingReview);
             }
@@ -209,6 +213,7 @@ namespace NovelXManga.Pages.Manga
                 }
             }
             // Save changes
+            user.UserActivityTimer = DateTime.Now;
             await Context.SaveChangesAsync();
             return RedirectToPage(new { id });
         }

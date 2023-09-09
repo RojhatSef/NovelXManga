@@ -43,7 +43,7 @@ namespace NovelXManga
                     rateLimitInfo.RequestCount++;
                     if (rateLimitInfo.LastRequest.Add(_timeLimit) > DateTime.Now)
                     {
-                        if (rateLimitInfo.RequestCount > 6)  // Allow 3 requests in a 1-minute window
+                        if (rateLimitInfo.RequestCount > 15)  // Allow 6 requests in a 1-minute window
                         {
                             context.Response.StatusCode = 429; // Too Many Requests
                             await context.Response.WriteAsync("Rate limit exceeded. Wait a short while.");

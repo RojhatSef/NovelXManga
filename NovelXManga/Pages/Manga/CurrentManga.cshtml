@@ -1167,6 +1167,19 @@
             <button type="submit">Send</button>
         </form>
     </div>
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <!-- Content will be populated by JavaScript -->
+        </div>
+    </div>
+
 }
 <script src="~/js/ScoreDis.js" asp-append-version="true"></script>
+<script src="~/js/PopUp.js" asp-append-version="true"></script>
+@if (TempData["HarmfulContent"] as bool? == true)
+{
+    <script>
+        showPopup("Harmful content detected/Unrecognized Symbols detected. Please review your input and try again.");
+    </script>
+}
 

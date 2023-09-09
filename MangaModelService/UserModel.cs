@@ -41,6 +41,7 @@ namespace MangaModelService
         [ForeignKey("MangaModel")]
         public int? MangaModelId { get; set; }
 
+        public DateTime? UserActivityTimer { get; set; }
         public virtual ICollection<MangaModel>? MangaModels { get; set; }
         public virtual ICollection<ReadingList>? ReadingList { get; set; }
         public virtual ICollection<CompletedBookList>? CompletedList { get; set; }

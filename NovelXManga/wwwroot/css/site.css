@@ -8,6 +8,28 @@ body, html {
     background-color: #191a1c;
 }
 
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    background-color: rgba(0, 0, 0, 0.85); /* Adjusted for a darker background */
+    transform: translate(-50%, -50%); /* This will center it */
+    z-index: 9999;
+    color: red; /* Setting text color to red */
+    border-radius: 8px; /* Optional: Giving it rounded corners */
+}
+
+.popup-content {
+    background-color: black; /* Black background */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 90%; /* Adjusted to fit better within the popup */
+    margin: auto; /* Centers the content box */
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    text-align: center; /* Optional: To center the text in the content box */
+}
+
 .TagGenreSpacer {
     display: flex;
     flex-wrap: wrap;
@@ -545,13 +567,20 @@ a {
 
     .Custom-o-sidebar .user-section {
         display: flex;
-        justify-content: space-between;
+        justify-content: flex-start;
         align-items: center;
+        border-radius: 10px;
+        padding: 5px;
+        height: 70px;
+        border: 1px solid white; /* Added a white border */
+        box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
     }
 
-    .Custom-o-sidebar .profile-image {
-        margin-left: auto; /* adjust this as per your requirements */
-        margin-right: 10px;
+    .Custom-o-sidebar .profile-image img {
+        width: 50px; /* Change the value as per your requirement */
+        height: 50px; /* Change the value as per your requirement */
+        padding-left: 5px;
+        border-radius: 50%;
     }
 
     .Custom-o-sidebar .user-section .profile-image {
@@ -559,6 +588,57 @@ a {
         margin-right: 10px;
     }
 
+.user-dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: #191a1c;
+    height:70px;
+    width:100px;
+    border-radius: 10px;
+    z-index: 999;
+    right: 0;
+
+}
+
+.user-dropdown-menu {
+    display: none;
+}
+
+    .user-dropdown-menu.show {
+        display: block;
+    }
+
+
+
+.Custom-o-sidebar .user-info {
+    flex-grow: 1;
+    min-width: 50px;
+    max-width: 140px;
+   
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.username{
+    padding-bottom:4px; 
+}
+.username, .role-name {
+    padding-right: 75px;
+    display: block;
+    margin-left: 3px;
+}
+
+.dropdown-arrow {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-color: white;
+    clip-path: polygon(50% 100%, 0% 0%, 100% 0%); /* Adjusted to make arrow point down */
+   
+}
+.gg-arrow-down.dropdown-arrow {
+    flex-shrink: 0;
+   
+}
 .HoverEffektLi a {
     display: flex;
     align-items: center;
