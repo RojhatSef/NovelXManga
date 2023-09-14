@@ -8,59 +8,67 @@
    }
 
 
+<link rel="stylesheet" href="~/css/LoginRegi.css" asp-append-version="true" />
 
-<div class="centralContentCost MassAlignContent">
+<div class="centralContentCost ">
+    <div class="FamilyLoginRegiContainer">
+        <div class="leftLogRegoContainer" id="bookDetails">
 
-    <h1>Otaku Library</h1>
-  
-    <div  asp-validation-summary="ModelOnly"></div>
-    <div class="LoginForgotRegiContainer LoginForgottRegiSolidBorder">
-        <form asp-route-returnurl="@ViewData["ReturnUrl"] method="post">
-            <div class="LoginForgotRegiGroup">
-                <h1>Sign in to continue on Otaku Library</h1>
+            <div class="radio-buttons-container">
+                @for (int i = 0; i < 10; i++)
+                {
+                    <input type="radio" name="bookRadio" id="bookRadio@i" data-index="@i"
+                           onclick="switchBook(this)" @(i == 0 ? "checked" : "") />
+                }
             </div>
-        <div class="LoginForgotRegiGroup LargeLoginSize">
-
-           
-
-               
-                    <label hidden asp-for="@Model.ReturnUrl"> </label>
-                    <div class="">
-                    <label class="LongerInput" asp-for="LoginModel.Email">Email Adress</label> <br />
-                    <input class="LongerInputField" type="text" asp-for="LoginModel.Email" />
-                        <span asp-validation-for="LoginModel.Email" ></span>
-                    </div>
-                    <br />
-                    <div >
-                    <label class="LongerInput" asp-for="LoginModel.Password">Password</label><br />
-                    <input class="LongerInputField" type="password" asp-for="LoginModel.Password" />
-                        <span asp-validation-for="LoginModel.Password"></span>
-                    </div>
-                 
-             
-             
-               
-        </div>
-  
-            <div class="LoginForgotRegiGroup ">
-                <div class="specialButton"><div>
-                        <input type="checkbox" asp-for="LoginModel.RememberMe" />
-                        <label class="LoginRememberMehoverOrangeRed" asp-for="LoginModel.RememberMe">Remember Me</label>
-                        <a class="btn textOrangeRedForgottenPassword" asp-area="" asp-page="/Login/ForgotPassword">Forgot Password</a>
-                </div>
+                @if (Model.AllBooksList.Any())
+                {
+                <img class="BoxImageLogiRegi SpecialBox" src="~/Images/GeneratedMangaImage/@Model.AllBooksList[0].PhotoPath" alt="Manga Cover" />
                   
+                }
+           
+          
+        </div>
+        <div class="rightLogiRegiContainer LoginForgottRegiSolidBorder">
+            <form asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
+                <div class="LoginForgotRegiGroup LargeLoginSize MassAlignContent">
+                    <h1>Sign in to continue on Otaku Library</h1>
+                    <div class="">
+                        <label class="LongerInput" asp-for="LoginModel.Email">Email Address</label><br />
+                        <input class="LongerInputField" type="email" asp-for="LoginModel.Email" />
+                        <span asp-validation-for="LoginModel.Email" class="text-danger"></span>
+                    </div>
                     <br />
-                    <button type="submit" class="btn btn-custom-primary-login-forgott">Login</button>
+                    <div>
+                        <label class="LongerInput" asp-for="LoginModel.Password">Password</label><br />
+                        <input class="LongerInputField" type="password" asp-for="LoginModel.Password" />
+                        <span asp-validation-for="LoginModel.Password" class="text-danger"></span>
+                    </div>
+                    <br />
+                    <div class="LoginForgotRegiGroup ">
+                        <div class="specialButton">
+                            <input type="checkbox" asp-for="LoginModel.RememberMe" />
+                            <label class="LoginRememberMehoverOrangeRed" asp-for="LoginModel.RememberMe">Remember Me</label>
+                            <a class="btn textOrangeRedForgottenPassword" asp-area="" asp-page="/Login/ForgotPassword">Forgot Password</a>
+                            <br />
+                            <button type="submit" class="btn btn-custom-primary-login-forgott">Login</button>
+                        </div>
+                    </div>
+                    <div class="LoginForgotRegiGroup ">
+                        <a asp-page="/Register/UserRegister" class="LoginRegisterAnchor"><p>Register new account</p></a>
+                    </div>
                 </div>
-            </div>
-            <div class="LoginForgotRegiGroup ">
-                <a asp-page="/Register/UserRegister" class="LoginRegisterAnchor"><p>Register new account</p></a>
-            </div>
-
-        </form>
-
+            </form>
+        </div>
     </div>
- 
 </div>
 
 
+
+<script>
+    var books = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.AllBooksList, new Newtonsoft.Json.JsonSerializerSettings
+        {
+        ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+        }));
+</script>
+<script src="~/js/CycklingBooksForLoginRegiForg.js" asp-append-version="true"></script>

@@ -3,6 +3,8 @@
 @inject UserManager<UserModel> UserManager
 @{
     var user = await UserManager.GetUserAsync(User);
+    var roles = user != null ? await UserManager.GetRolesAsync(user) : new List<string>();
+    string roleName = roles.Any() ? string.Join(", ", roles) : "No Roles";
     var UpdaterUser = user != null && await UserManager.IsInRoleAsync(user, "Updater");
     var OwnerUser = user != null && await UserManager.IsInRoleAsync(user, "Owner");
 
@@ -86,8 +88,9 @@
                         </div>
                     </a>
                     <div class="user-info">
-                        <span class="username">Username</span>
-                        <span class="role-name">Role</span>
+                      
+                        <span class="username">@user.Allias</span>
+                        <span class="role-name">@roleName</span>
                     </div>
                     <div class="gg-arrow-down dropdown-arrow" id="dropdownToggle"></div>
                     <div class="user-dropdown-menu" id="userDropdown">

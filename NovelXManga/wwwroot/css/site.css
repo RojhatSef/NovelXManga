@@ -343,13 +343,6 @@ a {
     color: #ff6740;
 }
 
-.LoginForgottRegiSolidBorder {
-    border-top: solid 5px #ff6740;
-    border-bottom: solid 45px rgb(51, 51, 51);
-    box-shadow: 5px 10px 8px black;
-    border-radius: 5px;
-}
-
 .ForgottPasswordReturnback {
     display: flex;
     color: #ff6740;
@@ -372,14 +365,6 @@ a {
     align-items: center;
 }
 
-.specialButtonLoginForgotRegi {
-    width: 100% !important;
-}
-
-.LoginForgotRegiGroup {
-    margin: 10px;
-}
-
 .textOrangeRedForgottenPassword {
     color: #ff6740;
     font-size: 16px;
@@ -389,22 +374,6 @@ a {
     .textOrangeRedForgottenPassword:hover {
         color: white;
     }
-
-.LongerInput {
-    width: 400px;
-    font-size: 15px;
-}
-
-.MassAlignContent {
-    margin-top: 15%;
-}
-
-.LongerInputField {
-    font-size: 20px; /* Change this value to make the label higher or longer */
-    width: 100%;
-    background-color: #444;
-    color: white;
-}
 
 .LoginRegisterAnchor {
     display: flex;
@@ -420,17 +389,6 @@ a {
         color: white;
     }
 
-.LargeLoginSize {
-    margin: 30px;
-    margin-top: 130px;
-}
-
-.centralContentCost {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-}
-
 .LowBackGroundForLoginForgotRegi {
     background-color: rgb(51, 51, 51);
     display: flex;
@@ -443,6 +401,59 @@ a {
 .MassLoginForgottRegiAlignContent {
     margin-top: 12%;
 }
+/*.centralContentCost {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.LongerInput {
+    width: 400px;
+    font-size: 15px;
+}
+
+.MassAlignContent {
+    margin-top: 15%;
+}
+.LoginForgotRegiGroup {
+    margin: 10px;
+}
+.LongerInputField {
+    font-size: 20px;*/ /* Change this value to make the label higher or longer */
+/*width: 100%;
+    background-color: #444;
+    color: white;
+}
+.LargeLoginSize {
+    margin: 30px;
+    margin-top: 130px;
+}
+.specialButtonLoginForgotRegi {
+    width: 100% !important;
+}
+@media (max-width: 1200px) {
+    .LoginForgotRegiContainer {
+        width: 40%;
+    }
+}
+
+@media (max-width: 900px) {
+    .LoginForgotRegiContainer {
+        width: 60% !important;
+    }
+}
+
+@media (max-width: 599px) {
+    .LoginForgotRegiContainer {
+        width: 100% !important;
+    }
+}
+.LoginForgottRegiSolidBorder {
+    border-top: solid 5px #ff6740;
+    border-bottom: solid 45px rgb(51, 51, 51);
+    box-shadow: 5px 10px 8px black;
+    border-radius: 5px;
+}*/
+
 /* Login Ends HERE*/
 /* SIDEbar STARTS HERE*/
 #NovelTitle {
@@ -592,12 +603,11 @@ a {
     display: none;
     position: absolute;
     background-color: #191a1c;
-    height:70px;
-    width:100px;
+    height: 70px;
+    width: 100px;
     border-radius: 10px;
     z-index: 999;
     right: 0;
-
 }
 
 .user-dropdown-menu {
@@ -608,19 +618,18 @@ a {
         display: block;
     }
 
-
-
 .Custom-o-sidebar .user-info {
     flex-grow: 1;
     min-width: 50px;
     max-width: 140px;
-   
     text-overflow: ellipsis;
     white-space: nowrap;
 }
-.username{
-    padding-bottom:4px; 
+
+.username {
+    padding-bottom: 4px;
 }
+
 .username, .role-name {
     padding-right: 75px;
     display: block;
@@ -633,12 +642,12 @@ a {
     height: 16px;
     background-color: white;
     clip-path: polygon(50% 100%, 0% 0%, 100% 0%); /* Adjusted to make arrow point down */
-   
 }
+
 .gg-arrow-down.dropdown-arrow {
     flex-shrink: 0;
-   
 }
+
 .HoverEffektLi a {
     display: flex;
     align-items: center;
@@ -1146,10 +1155,6 @@ flexLiLayout {
         max-height: 50%; /* 2 rows at widths <= 1200px */
     }
 
-    .LoginForgotRegiContainer {
-        width: 40%;
-    }
-
     .hide-on-Boxes-on-large {
         display: none;
     }
@@ -1163,10 +1168,6 @@ flexLiLayout {
     .FourOfAKind {
         flex: 1 0 50%; /* 2 boxes per row at widths <= 900px */
         max-height: 50%; /* 2 rows at widths <= 900px */
-    }
-
-    .LoginForgotRegiContainer {
-        width: 60% !important;
     }
 
     .hide-on-Boxes-on-medium {
@@ -1202,10 +1203,6 @@ flexLiLayout {
 
     .hide-on-Boxes-on-small {
         display: none;
-    }
-
-    .LoginForgotRegiContainer {
-        width: 100% !important;
     }
 
     .Author_Artist {

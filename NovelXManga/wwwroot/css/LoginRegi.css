@@ -1,0 +1,122 @@
+﻿.centralContentCost {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.MassAlignContent {
+    margin-top: 40% !important;
+}
+
+.btn-custom-primary-login-forgott {
+    width: 100%; /* Setting to the same width as the inputs. If there's padding or border affecting it, you might need to adjust. */
+}
+
+@media (max-width: 1200px) {
+    .FamilyLoginRegiContainer {
+        flex-direction: column;
+    }
+
+    .rightLogiRegiContainer {
+        width: 100%;
+    }
+
+    .leftLogRegoContainer {
+        display: none;
+    }
+}
+
+@media (max-width: 900px) {
+    .FamilyLoginRegiContainer {
+        margin-top: 20%;
+    }
+}
+
+.LongerInputField {
+    font-size: 20px;
+    width: 100%;
+    border-radius: 10px; /* Add rounded corners */
+    background-color: #444;
+    color: white;
+}
+
+.btn-custom-primary-login-forgott {
+    font-size: 20px;
+    width: 100%;
+    border-radius: 10px; /* Add rounded corners */
+
+    color: white;
+}
+
+.LongerInput {
+    width: 100%;
+    font-size: 15px;
+}
+
+.LargeLoginSize {
+    margin: 30px;
+}
+
+.FamilyLoginRegiContainer {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin: 0 auto;
+    height: 100vh; /* Set to 100% viewport height */
+    overflow-y: hidden;
+    min-height: 0;
+}
+
+.leftLogRegoContainer,
+.rightLogiRegiContainer {
+    height: 100%;
+}
+
+.rightLogiRegiContainer {
+    width: 40%;
+    margin-right: 15%;
+}
+
+.leftLogRegoContainer {
+    width: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+    .leftLogRegoContainer img.BoxImageLogiRegi {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+.radio-buttons-container {
+    position: absolute;
+    bottom: 3%;
+    left: 50%; /* to horizontally center the radio buttons */
+    transform: translateX(-50%); /* adjustment to ensure true centering */
+    display: flex;
+    gap: 5px; /* for space between radio buttons */
+}
+
+    .radio-buttons-container input[type="radio"] {
+        appearance: none; /* Removes default appearance of radio button */
+        border: 1px solid black; /* Thin black border */
+        width: 20px;
+        height: 20px;
+        border-radius: 50%; /* Makes it circular */
+        margin: 0 2px; /* Small gap between buttons */
+        cursor: pointer;
+        background-color: white;
+    }
+
+        .radio-buttons-container input[type="radio"]:checked {
+            background-color: #ff6740; /* Highlights the selected radio button */
+        }
+
+.BoxImageLogiRegi {
+    border-top-right-radius: 15px; /* Adjust the value as needed */
+    border-bottom-right-radius: 15px; /* Adjust the value as needed */
+}

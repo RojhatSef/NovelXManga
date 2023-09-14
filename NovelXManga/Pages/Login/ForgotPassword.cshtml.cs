@@ -1,4 +1,5 @@
 using EmailService;
+using MangaAccessService;
 using MangaModelService;
 using MangaModelService.ViewModels;
 using Microsoft.AspNetCore.Identity;
@@ -11,14 +12,18 @@ namespace NovelXManga.Pages.Login
     {
         private readonly UserManager<UserModel> userManager;
         private readonly SignInManager<UserModel> signInManager;
-
+        private readonly IMangaRepository mangaRepository;
         private readonly IEmailSender _emailSender;
 
-        public ForgotPasswordModel(UserManager<UserModel> userManager, SignInManager<UserModel> signInManager, IEmailSender emailSender)
+        public List<MangaModel> AllBooksList { get; set; }
+        public IEnumerable<MangaModel> GetAllBooks { get; set; }
+
+        public ForgotPasswordModel(UserManager<UserModel> userManager, SignInManager<UserModel> signInManager, IEmailSender emailSender, IMangaRepository mangaRepository)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             _emailSender = emailSender;
+            this.mangaRepository = mangaRepository;
         }
 
         [BindProperty]
@@ -48,8 +53,11 @@ namespace NovelXManga.Pages.Login
             return Page();
         }
 
-        public void OnGet()
+        public async Task<IActionResult> OnGetAsync()
         {
+            GetAllBooks = await mangaRepository.GetAllModelAsync();
+            AllBooksList = GetAllBooks.ToList();
+            return Page();
         }
     }
 }

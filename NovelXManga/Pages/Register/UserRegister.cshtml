@@ -1,79 +1,67 @@
 ﻿@page
 @model NovelXManga.Pages.Register.UserRegisterModel
 @{
-    //var photoPath = "/Images/AuthorImage/" + ( Model.Authormodel.userPhotoPath ?? "NoPhoto.png");
+    
 }
+<link rel="stylesheet" href="~/css/LoginRegi.css" asp-append-version="true" />
 
 
 
-
-<div class="centralContentCost MassAlignContent">
-
-    <h1>Otaku Library</h1>
-
-    <div asp-validation-summary="ModelOnly"></div>
-    <div class="LoginForgotRegiContainer LoginForgottRegiSolidBorder">
-        <form asp-route-returnurl="@ViewData["ReturnUrl"] method="post">
-            <div class="LoginForgotRegiGroup">
-                <h1>Register a new account to continue on Otaku Library</h1>
-            </div>
-            <div class="LoginForgotRegiGroup LargeLoginSize">
-
-
-                    <div class="">
-        <label class="LongerInput">Role</label><br />
-        <input type="radio" asp-for="@Model.Role" value="Admin" /> Admin<br />
-        <input type="radio" asp-for="@Model.Role" value="NormalUser" /> Normal User<br />
-        <input type="radio" asp-for="@Model.Role" value="Owner" /> Owner<br />
-        <input type="radio" asp-for="@Model.Role" value="AdminControl" /> Admin Control<br />
-        <input type="radio" asp-for="@Model.Role" value="Updater" /> Updater<br />
-        <input type="radio" asp-for="@Model.Role" value="ShadowBanned" /> Shadow Banned<br />
-        <span asp-validation-for="@Model.Role" class="text-danger"></span>
-    </div>
-    <br />
-
-             
-                <div class="">
-
-                    <label class="LongerInput" asp-for="Model.Email">Email Adress</label><br />
-                    <input class="LongerInputField type="email" asp-for="Model.Email" class="form-control" />
-                    <span asp-validation-for="Model.Email" class="text-danger"></span>
-                 
-                </div>
-                <br />
-                <div>
-                    <label class="LongerInput" asp-for="Model.Password">Password</label><br />
-                    <input class="LongerInputField" type="password" asp-for="Model.Password" class="form-control" />
-                    <span asp-validation-for="Model.Password" class="text-danger"></span>
-            
-                </div>
-                <br />
-                <div class="">
-                    <label class="LongerInput" asp-for="Model.ConfirmPassword">ConfirmPassword</label><br />
-                    <input class="LongerInputField" type="password" asp-for="Model.ConfirmPassword" class="form-control" />
-                    <span asp-validation-for="Model.ConfirmPassword" class="text-danger"></span>
-
-                </div>
-                <br />
-
-
-
-
-            </div>
-
-            <div class="LoginForgotRegiGroup ">
-                <div class="specialButton">
+<div class="centralContentCost ">
+    <div class="FamilyLoginRegiContainer">
+        <div class="leftLogRegoContainer">
+            <img class="BoxImageLogiRegi SpecialBox" src="/Images/GeneratedMangaImage/@Model.AllBooksList[1].PhotoPath" />
+        </div>
+        <div class="rightLogiRegiContainer LoginForgottRegiSolidBorder ">
+            <form asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
               
-
+                <div class="LoginForgotRegiGroup LargeLoginSize MassAlignContent">
+                    <h1>Register a new account to continue on Otaku Library</h1>
+                    <div class="">
+                        <label class="LongerInput">Role</label><br />
+                        <input type="radio" asp-for="@Model.Role" value="Admin" /> Admin<br />
+                        <input type="radio" asp-for="@Model.Role" value="NormalUser" /> Normal User<br />
+                        <input type="radio" asp-for="@Model.Role" value="Owner" /> Owner<br />
+                        <input type="radio" asp-for="@Model.Role" value="AdminControl" /> Admin Control<br />
+                        <input type="radio" asp-for="@Model.Role" value="Updater" /> Updater<br />
+                        <input type="radio" asp-for="@Model.Role" value="ShadowBanned" /> Shadow Banned<br />
+                        <span asp-validation-for="@Model.Role" class="text-danger"></span>
+                    </div>
                     <br />
-                    <button type="submit" class="btn btn-custom-primary-login-forgott">Register</button>
+                    <div class="">
+                        <label class="LongerInput" asp-for="Model.Allias">Username</label><br />
+                        <input class="LongerInputField" type="text" asp-for="Model.Allias" autocomplete="nickname" />
+                        <span asp-validation-for="Model.Allias" class="text-danger"></span>
+                    </div>
+                    <br />
+                    <div class="">
+                        <label class="LongerInput" asp-for="Model.Email">Email Adress</label><br />
+                        <input class="LongerInputField" type="email" asp-for="Model.Email" autocomplete="email" />
+                        <span asp-validation-for="Model.Email" class="text-danger"></span>
+                    </div>
+                    <br />
+                    <div>
+                        <label class="LongerInput" asp-for="Model.Password">Password</label><br />
+                        <input class="LongerInputField" type="password" asp-for="Model.Password" />
+                        <span asp-validation-for="Model.Password" class="text-danger"></span>
+                    </div>
+                    <br />
+                    <div class="">
+                        <label class="LongerInput" asp-for="Model.ConfirmPassword">ConfirmPassword</label><br />
+                        <input class="LongerInputField" type="password" asp-for="Model.ConfirmPassword" />
+                        <span asp-validation-for="Model.ConfirmPassword" class="text-danger"></span>
+                    </div>
+                    <br />
+              
+                <div class="LoginForgotRegiGroup ">
+                    <div class="specialButton">
+                        <br />
+                        <button type="submit" class="btn btn-custom-primary-login-forgott">Register</button>
+                    </div>
+                  </div>
                 </div>
-            </div>
-         
-
-        </form>
-
+            </form>
+        </div>
     </div>
-
 </div>
-
+  

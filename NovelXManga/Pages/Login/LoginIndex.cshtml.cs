@@ -1,3 +1,4 @@
+using MangaAccessService;
 using MangaModelService;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -9,27 +10,35 @@ namespace NovelXManga.Pages.Login
     {
         private readonly SignInManager<UserModel> signInManager;
         private readonly UserManager<UserModel> userManager;
+        private readonly IMangaRepository mangaRepository;
 
         [BindProperty]
         public LoginModel LoginModel { get; set; }
 
+        public List<MangaModel> AllBooksList { get; set; }
+        public IEnumerable<MangaModel> GetAllBooks { get; set; }
         public string ReturnUrl { get; set; }
 
-        public LoginIndexModel(SignInManager<UserModel> signInManager, UserManager<UserModel> userManager)
+        public LoginIndexModel(SignInManager<UserModel> signInManager, UserManager<UserModel> userManager, IMangaRepository mangaRepository)
         {
             this.signInManager = signInManager;
             this.userManager = userManager;
+            this.mangaRepository = mangaRepository;
         }
 
-        public IActionResult OnGet(string? returnUrl)
+        public async Task<IActionResult> OnGetAsync(string? returnUrl)
         {
             if (User.Identity.IsAuthenticated)
             {
                 return RedirectToPage("/Index");  // or any other appropriate page
             }
 
-            ReturnUrl = returnUrl;
+            ReturnUrl = returnUrl ?? Url.Content("/");
             ViewData["ReturnUrl"] = ReturnUrl;
+
+            GetAllBooks = await mangaRepository.GetAllModelAsync();
+            AllBooksList = GetAllBooks.ToList();
+
             return Page();
         }
 
@@ -70,6 +79,9 @@ namespace NovelXManga.Pages.Login
 
                 ModelState.AddModelError("", "username or password incorrect");
             }
+            GetAllBooks = await mangaRepository.GetAllModelAsync();
+            AllBooksList = GetAllBooks.ToList();
+
             ReturnUrl = returnUrl;
             return Page();
         }

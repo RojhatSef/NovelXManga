@@ -379,7 +379,7 @@ namespace NovelXManga
             {
                 throw new Exception("Test user not found.");
             }
-            var user2 = new UserModel { UserName = "TestUser2", Email = "TestUser2@hotmail.com" };
+            var user2 = new UserModel { UserName = "TestUser2", Email = "TestUser2@hotmail.com", Allias = "WorldEater" };
             var result2 = await userManager.CreateAsync(user2, "Rojhat123!");
             if (result2.Succeeded)
             {
@@ -419,7 +419,7 @@ namespace NovelXManga
             {
                 throw new Exception("Test user not found.");
             }
-            var user3 = new UserModel { UserName = "TestUser3", Email = "TestUser3@hotmail.com" };
+            var user3 = new UserModel { UserName = "TestUser3", Email = "TestUser3@hotmail.com", Allias = "Fishmuppet" };
             var result5 = await userManager.CreateAsync(user3, "Rojhat123!");
             if (result5.Succeeded)
             {
@@ -510,7 +510,7 @@ namespace NovelXManga
                 //photopath needs fixing real bad
                 string filePath = Path.Combine(webHostEnvironment.WebRootPath, "images/MangaImage/0f3f5666-7cb9-4713-a779-f1e1546a0d5f");
                 // creates a user,
-                var user = new UserModel { UserName = "TestUser", Email = "TestUser@hotmail.com", userPhotoPath = filePath };
+                var user = new UserModel { UserName = "TestUser", Email = "TestUser@hotmail.com", userPhotoPath = filePath, Allias = "MasterUser" };
 
                 context.SaveChanges();
                 AddBerserk();
@@ -525,11 +525,11 @@ namespace NovelXManga
                 CreateLordOfTheRings();
                 CreateSoloLeveling();
                 CreateTowerOfGod();
-                DonQuiXote();
+
                 CreateAirGear();
                 CreateBleach();
                 CreateCodeGeass();
-
+                DonQuiXote();
                 RelatedManga();
 
                 var result = await userManager.CreateAsync(user, "Rojhat123!");
@@ -558,7 +558,7 @@ namespace NovelXManga
             MangaModel Berserk = new MangaModel
             {
                 MangaName = "Berserk",
-                PhotoPath = Path.Combine(ProcessUploadedFile("Berserk.jpeg")),
+                PhotoPath = Path.Combine(ProcessUploadedFile("Berserk.jpg")),
                 ReleaseYear = new DateTime(1989, 8, 25),
                 BlogModel = new BlogModel { mangaName = "Berserk" },
                 Description = "Berserk follows the character of Guts, a lone mercenary warrior, as he travels a medieval-inspired world of dark fantasy in search of revenge against his former friend and ally, who betrayed him and sacrificed their comrades to demons in order to become one himself.",
@@ -1128,7 +1128,7 @@ new VoiceActorModel { FirstName = "Yuko ", LastName = "Miyamura", Gender="Female
             MangaModel MangaDeathNote = new MangaModel
             {
                 MangaName = "Death Note",
-                PhotoPath = Path.Combine(ProcessUploadedFile("DeathNote.jpeg")),
+                PhotoPath = Path.Combine(ProcessUploadedFile("DeathNote.jpg")),
                 ReleaseYear = myDate,
                 BlogModel = new BlogModel { mangaName = "Death Note" },
                 Description = "A young high school student discovers a supernatural notebook that can kill anyone whose name is written in it.",
@@ -1274,7 +1274,7 @@ new Character {
 
                 Type = "Manga",
                 OfficalLanguage = "Japanese",
-                PhotoPath = Path.Combine(ProcessUploadedFile("FullMetal.jpeg")),
+                PhotoPath = Path.Combine(ProcessUploadedFile("FullMetal.jpg")),
                 Description = "Two brothers use alchemy to revive their deceased mother, leading them on a journey to find the Philosopher's Stone and restore their bodies to their original form.",
                 ReleaseYear = new DateTime(2001, 1, 2),
                 EndingYear = new DateTime(2010, 10, 2),
@@ -1865,7 +1865,7 @@ new Character {
 
                 Type = "Manga",
                 OfficalLanguage = "Japanese",
-                PhotoPath = Path.Combine(ProcessUploadedFile("Conan.jpeg")),
+                PhotoPath = Path.Combine(ProcessUploadedFile("Conan.jpg")),
                 Description = "A high school detective who is transformed into a child after being poisoned, solves crimes under a different identity while searching for a cure.",
                 ReleaseYear = new DateTime(1994, 1, 2),
                 EndingYear = new DateTime(),
@@ -2027,7 +2027,7 @@ new AssociatedNames { nameString = "Detective Conan Manga" },
 
                 Type = "Anime",
                 OfficalLanguage = "Japanese",
-                PhotoPath = Path.Combine(ProcessUploadedFile("AttackOnTitan.jpeg")),
+                PhotoPath = Path.Combine(ProcessUploadedFile("AttackOnTitan.jpg")),
                 Description = "The story follows Eren Jeager and Mikasa Ackerman as they join the Scout Regiment to fight against the Titans who threaten their city and the rest of humanity.",
                 ReleaseYear = new DateTime(2013, 4, 7),
                 EndingYear = new DateTime(2013, 9, 29),
@@ -2462,7 +2462,7 @@ new Character
             MangaModel MangaTowerOfGod = new MangaModel
             {
                 MangaName = "Tower of God",
-                PhotoPath = Path.Combine(ProcessUploadedFile("TowerOfGod.jpg")),
+                PhotoPath = Path.Combine(ProcessUploadedFile("TowerOfGod.jpeg")),
                 ReleaseYear = myDate,
                 BlogModel = new BlogModel { mangaName = "Tower of God" },
                 Description = "Bam climbs the Tower of God to reach the top and find his friend Rachel, but the Tower is full of deadly tests and other climbers who will do anything to reach the top.",
