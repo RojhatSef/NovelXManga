@@ -1,3 +1,4 @@
+using MangaAccessService;
 using MangaModelService;
 using MangaModelService.ViewModels;
 using Microsoft.AspNetCore.Identity;
@@ -10,15 +11,18 @@ namespace NovelXManga.Pages.Login
     {
         private readonly UserManager<UserModel> _userManager;
         private readonly SignInManager<UserModel> signInManager;
-
+        private readonly IMangaRepository mangaRepository;
+        public List<MangaModel> AllBooksList { get; set; }
+        public IEnumerable<MangaModel> GetAllBooks { get; set; }
         public ResetPasswordModelView tempResetpass { get; set; }
 
         [TempData]
         public string TempDataSuccededPassWordChange { get; set; }
 
-        public ResetPasswordPageModel(UserManager<UserModel> userManager)
+        public ResetPasswordPageModel(UserManager<UserModel> userManager, IMangaRepository mangaRepository)
         {
             this._userManager = userManager;
+            this.mangaRepository = mangaRepository;
         }
 
         [BindProperty]
@@ -57,9 +61,12 @@ namespace NovelXManga.Pages.Login
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult OnGet(ResetPasswordModelView resetPasswordModel)
+        public async Task<IActionResult> OnGetAsync(ResetPasswordModelView resetPasswordModel)
         {
             tempResetpass = new ResetPasswordModelView { Token = resetPasswordModel.Token, Email = resetPasswordModel.Email };
+
+            GetAllBooks = await mangaRepository.GetAllModelAsync();
+            AllBooksList = GetAllBooks.Take(10).ToList();
             return Page();
         }
     }

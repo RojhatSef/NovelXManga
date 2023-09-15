@@ -30,7 +30,7 @@
           
         </div>
         <div class="rightLogiRegiContainer LoginForgottRegiSolidBorder">
-            <form asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
+            <form asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="backgroundColorForSmallerScreens">
                 <div class="LoginForgotRegiGroup LargeLoginSize MassAlignContent">
                     <h1>Sign in to continue on Otaku Library</h1>
                     <div class="">
@@ -39,20 +39,20 @@
                         <span asp-validation-for="LoginModel.Email" class="text-danger"></span>
                     </div>
                     <br />
-                    <div>
+                    <div >
                         <label class="LongerInput" asp-for="LoginModel.Password">Password</label><br />
                         <input class="LongerInputField" type="password" asp-for="LoginModel.Password" />
                         <span asp-validation-for="LoginModel.Password" class="text-danger"></span>
                     </div>
                     <br />
                     <div class="LoginForgotRegiGroup ">
-                        <div class="specialButton">
+                       
                             <input type="checkbox" asp-for="LoginModel.RememberMe" />
                             <label class="LoginRememberMehoverOrangeRed" asp-for="LoginModel.RememberMe">Remember Me</label>
                             <a class="btn textOrangeRedForgottenPassword" asp-area="" asp-page="/Login/ForgotPassword">Forgot Password</a>
                             <br />
                             <button type="submit" class="btn btn-custom-primary-login-forgott">Login</button>
-                        </div>
+                   
                     </div>
                     <div class="LoginForgotRegiGroup ">
                         <a asp-page="/Register/UserRegister" class="LoginRegisterAnchor"><p>Register new account</p></a>

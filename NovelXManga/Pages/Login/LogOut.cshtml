@@ -3,17 +3,51 @@
 @{
 }
 
-<div class="logout-container">
-    <div class="MarginAutoLogOut">
-        <form method="post" class="account-deletion-form">
-            <h2 class="form-title">Are you sure you want to logout</h2>
-            <p class="form-description">
-                @User.Identity.Name
-            </p>
 
-            <button class="btn btn-custom-primary-login-Cancel" asp-page-handler="DontLogOut">Cancel</button>
-            <button class="btn btn-custom-primary-login-Logout " asp-page-handler="Logout">Logout</button>
-        </form>
+
+<link rel="stylesheet" href="~/css/LoginRegi.css" asp-append-version="true" />
+
+<div class="centralContentCost ">
+    <div class="FamilyLoginRegiContainer">
+        <div class="leftLogRegoContainer" id="bookDetails">
+
+            <div class="radio-buttons-container">
+                @for (int i = 0; i < 10; i++)
+                {
+                    <input type="radio" name="bookRadio" id="bookRadio@i" data-index="@i"
+                           onclick="switchBook(this)" @(i == 0 ? "checked" : "") />
+                }
+            </div>
+            @if (Model.AllBooksList.Any())
+            {
+                <img class="BoxImageLogiRegi SpecialBox" src="~/Images/GeneratedMangaImage/@Model.AllBooksList[0].PhotoPath" alt="Manga Cover" />
+
+            }
+
+
+        </div>
+        <div class="rightLogiRegiContainer LoginForgottRegiSolidBorder">
+            <form asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="backgroundColorForSmallerScreens">
+                <div class="LoginForgotRegiGroup LargeLoginSize MassAlignContent">
+                    <h2 class="form-title">Are you sure you want to logout</h2>
+                    <p class="form-description">
+                        @User.Identity.Name
+                    </p>
+                    <div class="LoginForgotRegiGroup ">
+                        <button asp-page-handler="DontLogOut" class="btn btn-custom-primary-login-forgott">Cancel</button>
+                        <button asp-page-handler="Logout" class="btn btn-custom-primary-login-forgott">Logout</button>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 
+
+<script>
+    var books = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.AllBooksList, new Newtonsoft.Json.JsonSerializerSettings
+        {
+        ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+        }));
+</script>
+<script src="~/js/CycklingBooksForLoginRegiForg.js" asp-append-version="true"></script>

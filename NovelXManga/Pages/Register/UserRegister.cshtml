@@ -1,67 +1,64 @@
 ﻿@page
 @model NovelXManga.Pages.Register.UserRegisterModel
 @{
-    
+
 }
 <link rel="stylesheet" href="~/css/LoginRegi.css" asp-append-version="true" />
 
-
-
 <div class="centralContentCost ">
     <div class="FamilyLoginRegiContainer">
-        <div class="leftLogRegoContainer">
-            <img class="BoxImageLogiRegi SpecialBox" src="/Images/GeneratedMangaImage/@Model.AllBooksList[1].PhotoPath" />
+        <div class="leftLogRegoContainer" id="bookDetails">
+            <div class="radio-buttons-container">
+                @for (int i = 0; i < 10; i++)
+                {
+                    <input type="radio" name="bookRadio" id="bookRadio@i" data-index="@i"
+                           onclick="switchBook(this)" @(i == 0 ? "checked" : "") />
+                }
+            </div>
+            @if (Model.AllBooksList.Any())
+            {
+                <img class="BoxImageLogiRegi SpecialBox" src="~/Images/GeneratedMangaImage/@Model.AllBooksList[0].PhotoPath" alt="Manga Cover" />
+            }
         </div>
-        <div class="rightLogiRegiContainer LoginForgottRegiSolidBorder ">
-            <form asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
-              
+        <div class="rightLogiRegiContainer LoginForgottRegiSolidBorder">
+            <form asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="backgroundColorForSmallerScreens">
                 <div class="LoginForgotRegiGroup LargeLoginSize MassAlignContent">
                     <h1>Register a new account to continue on Otaku Library</h1>
-                    <div class="">
-                        <label class="LongerInput">Role</label><br />
-                        <input type="radio" asp-for="@Model.Role" value="Admin" /> Admin<br />
-                        <input type="radio" asp-for="@Model.Role" value="NormalUser" /> Normal User<br />
-                        <input type="radio" asp-for="@Model.Role" value="Owner" /> Owner<br />
-                        <input type="radio" asp-for="@Model.Role" value="AdminControl" /> Admin Control<br />
-                        <input type="radio" asp-for="@Model.Role" value="Updater" /> Updater<br />
-                        <input type="radio" asp-for="@Model.Role" value="ShadowBanned" /> Shadow Banned<br />
-                        <span asp-validation-for="@Model.Role" class="text-danger"></span>
-                    </div>
-                    <br />
-                    <div class="">
+                    <div>
                         <label class="LongerInput" asp-for="Model.Allias">Username</label><br />
                         <input class="LongerInputField" type="text" asp-for="Model.Allias" autocomplete="nickname" />
                         <span asp-validation-for="Model.Allias" class="text-danger"></span>
                     </div>
-                    <br />
-                    <div class="">
-                        <label class="LongerInput" asp-for="Model.Email">Email Adress</label><br />
+                    <div>
+                        <label class="LongerInput" asp-for="Model.Email">Email Address</label><br />
                         <input class="LongerInputField" type="email" asp-for="Model.Email" autocomplete="email" />
                         <span asp-validation-for="Model.Email" class="text-danger"></span>
                     </div>
-                    <br />
                     <div>
                         <label class="LongerInput" asp-for="Model.Password">Password</label><br />
                         <input class="LongerInputField" type="password" asp-for="Model.Password" />
                         <span asp-validation-for="Model.Password" class="text-danger"></span>
                     </div>
-                    <br />
-                    <div class="">
-                        <label class="LongerInput" asp-for="Model.ConfirmPassword">ConfirmPassword</label><br />
+                    <div>
+                        <label class="LongerInput" asp-for="Model.ConfirmPassword">Confirm Password</label><br />
                         <input class="LongerInputField" type="password" asp-for="Model.ConfirmPassword" />
                         <span asp-validation-for="Model.ConfirmPassword" class="text-danger"></span>
                     </div>
-                    <br />
-              
-                <div class="LoginForgotRegiGroup ">
-                    <div class="specialButton">
-                        <br />
-                        <button type="submit" class="btn btn-custom-primary-login-forgott">Register</button>
+                    <div class="LoginForgotRegiGroup">
+                      <br />
+                            <button type="submit" class="btn btn-custom-primary-login-forgott">Create Account</button>
+                    
                     </div>
-                  </div>
                 </div>
             </form>
         </div>
     </div>
 </div>
-  
+
+<script>
+    var books = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.AllBooksList, new Newtonsoft.Json.JsonSerializerSettings
+        {
+        ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+        }));
+</script>
+<script src="~/js/CycklingBooksForLoginRegiForg.js" asp-append-version="true"></script>

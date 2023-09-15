@@ -37,7 +37,7 @@ namespace NovelXManga.Pages.Login
             ViewData["ReturnUrl"] = ReturnUrl;
 
             GetAllBooks = await mangaRepository.GetAllModelAsync();
-            AllBooksList = GetAllBooks.ToList();
+            AllBooksList = GetAllBooks.Take(10).ToList();
 
             return Page();
         }

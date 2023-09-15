@@ -71,7 +71,7 @@ namespace NovelXManga.Pages.Register
         public async Task<IActionResult> OnGetAsync()
         {
             GetAllBooks = await mangaRepository.GetAllModelAsync();
-            AllBooksList = GetAllBooks.ToList();
+            AllBooksList = GetAllBooks.Take(10).ToList();
 
             return Page();
         }
