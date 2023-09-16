@@ -110,7 +110,7 @@
 @if(Model.GetAllBooks != null){
         @foreach (var book in Model.GetAllBooks.Take(4))
             {
-                           <a  asp-page="/Manga/CurrentManga" asp-route-id="@book.MangaID">
+                           <a asp-page="/Manga/CurrentManga" asp-route-id="@book.MangaID">
                 <div class="slide">
                             <img class="card-img-background" src="~/Images/GeneratedMangaImage/@book.PhotoPath" />
             <div class="card-body">

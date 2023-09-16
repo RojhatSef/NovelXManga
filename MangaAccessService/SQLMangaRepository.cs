@@ -100,6 +100,19 @@ namespace MangaAccessService.Migrations
             return await mangaNNovelAuthDBContext.mangaModels.Include(e => e.reviews).ToListAsync();
         }
 
+        public async Task<IEnumerable<MangaModel>> Get10MangaModelAsync()
+        {
+            return await mangaNNovelAuthDBContext.mangaModels
+                .Include(e => e.reviews.Take(3))
+                .Include(e => e.Authormodels)
+                .Include(e => e.ArtistModels)
+                .Include(e => e.GenresModels)
+                .Include(e => e.TagsModels)
+                .OrderByDescending(m => m.BookAddedToDB) // Assuming you want the latest added books
+                .Take(10)
+                .ToListAsync();
+        }
+
         public async Task<MangaModel> GetModelAsync(int id)
         {
             var CurrentManga = await mangaNNovelAuthDBContext.mangaModels.FindAsync(id);

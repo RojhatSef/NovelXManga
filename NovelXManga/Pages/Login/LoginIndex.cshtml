@@ -9,11 +9,103 @@
 
 
 <link rel="stylesheet" href="~/css/LoginRegi.css" asp-append-version="true" />
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <div class="centralContentCost ">
     <div class="FamilyLoginRegiContainer">
         <div class="leftLogRegoContainer" id="bookDetails">
+            <div class="LoginMangaDetails">
 
+                <!-- Display Genre -->
+                <div class="LoginGenres">
+                    @if (Model.AllBooksList[0].GenresModels != null)
+                    {
+                        foreach (var item in Model.AllBooksList[0].GenresModels)
+                        {
+                            <span>@item.GenreName</span>
+                        }
+                    }
+                </div>
+
+                <!-- Display Tags -->
+                <div class="LoginTags">
+                    @if (Model.AllBooksList[0].TagsModels != null)
+                    {
+                        foreach (var item in Model.AllBooksList[0].TagsModels)
+                        {
+                            <span>@item.TagName</span>
+                        }
+                    }
+                </div>
+
+                <!-- Display Author -->
+                <div class="LoginAuthor">
+                    @if (Model.AllBooksList[0].Authormodels != null)
+                    {
+                        foreach (var author in Model.AllBooksList[0].Authormodels)
+                        {
+                            if (author.FirstName != null && author.LastName != null)
+                            {
+                                @author.FirstName @author.LastName
+                            }
+                            else if (author.FirstName != null)
+                            {
+                                @author.FirstName
+                            }
+                            else if (author.LastName != null)
+                            {
+                                @author.LastName
+                            }
+                        }
+                    }
+                </div>
+
+                <!-- Display Artist -->
+                <div class="LoginArtist">
+                    <div class="LoginArtist">
+                        @if (Model.AllBooksList[0].ArtistModels != null)
+                        {
+                            foreach (var artist in Model.AllBooksList[0].ArtistModels)
+                            {
+                                bool displayArtist = true;
+                                if (Model.AllBooksList[0].Authormodels != null)
+                                {
+                                    foreach (var author in Model.AllBooksList[0].Authormodels)
+                                    {
+                                        if (author.FirstName == artist.FirstName && author.LastName == artist.LastName)
+                                        {
+                                            displayArtist = false;
+                                            break;
+                                        }
+                                    }
+                                }
+                                if (displayArtist)
+                                {
+                                    if (artist.FirstName != null && artist.LastName != null)
+                                    {
+                                        @artist.FirstName @artist.LastName
+                                    }
+                                    else if (artist.FirstName != null)
+                                    {
+                                        @artist.FirstName
+                                    }
+                                    else if (artist.LastName != null)
+                                    {
+                                        @artist.LastName
+                                    }
+                                }
+                            }
+                        }
+                    </div>
+                </div>
+
+                <!-- Display Score -->
+                <div class="LoginScore">
+                    @if (Model.AllBooksList[0].OverAllBookScore != null)
+                    {
+                        <span>     @Model.AllBooksList[0].OverAllBookScore  <i class="fas fa-star active colorstarCurrent"></i> </span>
+                    }
+                </div>
+            </div>
             <div class="radio-buttons-container">
                 @for (int i = 0; i < 10; i++)
                 {

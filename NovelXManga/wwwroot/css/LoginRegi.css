@@ -168,7 +168,7 @@
         }
 
         .backgroundColorForSmallerScreens::before {
-            transform: scaleX(1.3) scaleY(1.75);
+            transform: scaleX(1.3) scaleY(1.05);
         }
 
     .container-custom {
@@ -195,5 +195,54 @@
         display: none;
     }
 
-   
+    .LoginMangaDetails {
+        bottom: calc(2% + 50px) !important;
+    }
 }
+/* General styles for the manga details container */
+/* General styles for the manga details container */
+.LoginMangaDetails {
+    position: absolute;
+    bottom: calc(3% + 30px); /* 3% is the bottom value of .radio-buttons-container + 10px for the gap + 20px as an estimated height of the radio buttons */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    z-index: 2; /* Ensure the details are shown above the background image */
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+/* Specific styles for each detail type */
+.LoginGenres, .LoginTags, .LoginAuthor, .LoginArtist, .LoginScore {
+    margin-bottom: 8px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+    .LoginGenres span, .LoginTags span, .LoginAuthor span, .LoginArtist span {
+        display: inline-block;
+        padding: 2px 6px;
+        background-color: rgba(0, 0, 0, 0.6);
+        border-radius: 4px;
+        margin-right: 5px;
+        transition: background-color 0.3s, transform 0.3s;
+    }
+
+        .LoginGenres span:hover, .LoginTags span:hover, .LoginAuthor span:hover, .LoginArtist span:hover {
+            background-color: rgba(255, 255, 255, 0.8);
+            color: black;
+            transform: scale(1.05);
+        }
+
+.LoginScore {
+    display: inline-block;
+    padding: 4px 8px;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 4px;
+    font-size: 18px;
+}
+
+    .LoginScore i {
+        margin-left: 5px;
+        color: gold; /* Gold color for the star */
+    }
