@@ -1,7 +1,7 @@
 using MangaAccessService;
 using MangaModelService;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
 
 namespace NovelXManga.Pages.Manga
 {
@@ -21,9 +21,10 @@ namespace NovelXManga.Pages.Manga
         public IEnumerable<AssociatedNames> associatedNames { get; set; }
         public IEnumerable<MangaModel> GetAllBooks { get; set; }
 
-        public void OnGet()
+        public async Task<IActionResult> OnGetAsync()
         {
-            GetAllBooks = context.mangaModels.Include(e => e.GenresModels).Include(e => e.TagsModels);
+            GetAllBooks = await mangaRepository.GetAllModelAsync();
+            return Page();
         }
     }
 }

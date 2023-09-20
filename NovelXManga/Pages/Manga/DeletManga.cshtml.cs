@@ -26,9 +26,10 @@ namespace NovelXManga.Pages.Manga
             return Page();
         }
 
-        public void OnPost(int id)
+        public async Task<IActionResult> OnPostAsync(int id)
         {
-            mangaModel = mangaRepository.GetOneMangaAllIncluded(id);
+            mangaModel = await mangaRepository.GetOneMangaAllIncludedAsync(id);
+            return Page();
         }
     }
 }

@@ -32,7 +32,7 @@ namespace NovelXManga.Pages.MangaUpdates
                 return RedirectToPage("/Index");
             }
 
-            mangaModelUpdate = mangaRepository.GetOneMangaAllIncluded(mangaModel.MangaID);
+            mangaModelUpdate = await mangaRepository.GetOneMangaAllIncludedAsync(mangaModel.MangaID);
 
             mangaModelUpdate.Description = mangaModel.Description;
             mangaModelUpdate.ISBN10 = mangaModel.ISBN10;
@@ -44,7 +44,7 @@ namespace NovelXManga.Pages.MangaUpdates
             mangaModelUpdate.OriginalPublisher = mangaModel.OriginalPublisher;
             mangaModelUpdate.OfficalLanguage = mangaModel.OfficalLanguage;
 
-            mangaModelUpdate = mangaRepository.Update(mangaModelUpdate);
+            mangaModelUpdate = await mangaRepository.UpdateAsync(mangaModelUpdate);
 
             return RedirectToPage("/Index");
         }

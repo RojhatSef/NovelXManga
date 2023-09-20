@@ -28,7 +28,7 @@ namespace NovelXManga.Pages.MangaUpdates
             {
                 return RedirectToPage("/Index");
             }
-            mangaModelUpdate = mangaRepository.GetOneMangaAllIncluded(mangaModel.MangaID);
+            mangaModelUpdate = await mangaRepository.GetOneMangaAllIncludedAsync(mangaModel.MangaID);
 
             await context.SaveChangesAsync();
 

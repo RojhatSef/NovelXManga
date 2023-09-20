@@ -27,7 +27,7 @@ namespace NovelXManga.Pages.MangaUpdates
                 return NotFound();
             }
 
-            MangaModelUpdate = mangaRepository.GetOneMangaAllIncluded(id);
+            MangaModelUpdate = await mangaRepository.GetOneMangaAllIncludedAsync(id);
 
             if (MangaModelUpdate == null)
             {
@@ -44,7 +44,7 @@ namespace NovelXManga.Pages.MangaUpdates
                 return Page();
             }
 
-            var manga = mangaRepository.GetOneMangaAllIncluded(MangaModelUpdate.MangaID);
+            var manga = await mangaRepository.GetOneMangaAllIncludedAsync(MangaModelUpdate.MangaID);
 
             if (manga == null)
             {

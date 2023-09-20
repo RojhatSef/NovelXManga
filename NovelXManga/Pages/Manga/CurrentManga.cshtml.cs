@@ -78,7 +78,7 @@ namespace NovelXManga.Pages.Manga
             }
 
             Blog = blogRepsitory.GetModel(CurrentManga.BlogModelId);
-            Posts = postRepsitory.GetAllModels();
+            Posts = await postRepsitory.GetAllModelAsync();
             return Page();
         }
 
@@ -92,7 +92,7 @@ namespace NovelXManga.Pages.Manga
                 // No user is logged in, return the page without making any changes
                 return RedirectToPage(new { id });
             }
-            CurrentManga = mangaRepository.GetOneMangaAllIncluded(id);
+            CurrentManga = await mangaRepository.GetOneMangaAllIncludedAsync(id);
             // Check if the manga is already in the reading list
             var readingListEntry = await Context.readingLists
                 .Where(rl => rl.UserId == user.Id && rl.MangaModelId == id)
@@ -170,7 +170,7 @@ namespace NovelXManga.Pages.Manga
                 OnGetAsync(id);
                 return Page();
             }
-            CurrentManga = mangaRepository.GetOneMangaAllIncluded(id);
+            CurrentManga = await mangaRepository.GetOneMangaAllIncludedAsync(id);
             var user = await userManager.GetUserAsync(User);
             if (user.UserActivityTimer.HasValue && (DateTime.Now - user.UserActivityTimer.Value < TimeSpan.FromSeconds(5)))
             {
@@ -231,12 +231,12 @@ namespace NovelXManga.Pages.Manga
             {
                 NotFound();
             }
-            CurrentManga = mangaRepository.GetOneMangaAllIncluded(id);
+            CurrentManga = await mangaRepository.GetOneMangaAllIncludedAsync(id);
             //Blog = blogRepsitory.GetModel(CurrentManga.BlogModelId);
 
             ReivewModel = reviewRepsitory.GetAllModels()
         .Where(r => r.MangaModels != null && r.MangaModels.Any(m => m.MangaID == id));
-            Posts = postRepsitory.GetAllModels();
+            Posts = await postRepsitory.GetAllModelAsync();
             // Get the logged-in user
             var user = await userManager.GetUserAsync(User);
 

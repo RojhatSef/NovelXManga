@@ -51,7 +51,7 @@ namespace NovelXManga.Pages.Artist
                 {
                     return NotFound();
                 }
-                mangaModelUpdate = mangaRepository.GetOneMangaAllIncluded(mangaModel.MangaID);
+                mangaModelUpdate = await mangaRepository.GetOneMangaAllIncludedAsync(mangaModel.MangaID);
 
                 if (mangaModelUpdate.PhotoPath != null)
                 {
@@ -63,7 +63,7 @@ namespace NovelXManga.Pages.Artist
                 }
 
                 mangaModelUpdate.PhotoPath = ProcessUploadedFile();
-                mangaModelUpdate = mangaRepository.Update(mangaModelUpdate);
+                mangaModelUpdate = await mangaRepository.UpdateAsync(mangaModelUpdate);
 
                 return RedirectToPage("/Index");
             }
