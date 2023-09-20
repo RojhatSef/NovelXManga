@@ -1,29 +1,35 @@
 using MangaAccessService;
 using MangaModelService;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
 
 namespace NovelXManga.Pages.Manga
 {
     public class MoreUpdatesModel : PageModel
     {
         private readonly MangaNNovelAuthDBContext context;
+        private readonly IMangaRepository mangaRepository;
 
-        public MoreUpdatesModel(MangaNNovelAuthDBContext context)
+        public MoreUpdatesModel(MangaNNovelAuthDBContext context, IMangaRepository mangaRepository)
         {
             this.context = context;
+            this.mangaRepository = mangaRepository;
         }
+
+        [BindProperty]
+        public int PageNumber { get; set; }
+
+        [BindProperty]
+        public int PageSize { get; set; }
 
         public List<MangaModel> AllBooksList { get; set; }
 
         public IEnumerable<MangaModel> GetAllBooks { get; set; }
 
-
-        public void OnGet()
+        public async Task<IActionResult> OnGetAsync(int pageNumber = 1, int pageSize = 14)
         {
-            GetAllBooks = context.mangaModels.Include(e => e.GenresModels).Include(e => e.TagsModels).Include(e => e.ArtistModels).Include(e => e.Authormodels);
-            AllBooksList = GetAllBooks.ToList();
-
+            AllBooksList = (await mangaRepository.GetPaginatedMangaModelsAsync(pageNumber, pageSize)).ToList();
+            return Page();
         }
     }
 }

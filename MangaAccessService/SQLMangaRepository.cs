@@ -97,6 +97,18 @@ namespace MangaAccessService.Migrations
             return mangaModel;
         }
 
+        public async Task<IEnumerable<MangaModel>> GetPaginatedMangaModelsAsync(int pageNumber, int pageSize)
+        {
+            return await mangaNNovelAuthDBContext.mangaModels
+                .Include(e => e.GenresModels)
+                .Include(e => e.TagsModels)
+                .Include(e => e.ArtistModels)
+                .Include(e => e.Authormodels)
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+        }
+
         public async Task<IEnumerable<MangaModel>> GetAllModelAsync()
         {
             return await mangaNNovelAuthDBContext.mangaModels.Include(e => e.reviews).ToListAsync();

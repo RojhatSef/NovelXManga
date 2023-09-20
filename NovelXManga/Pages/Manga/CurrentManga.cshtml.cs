@@ -234,8 +234,8 @@ namespace NovelXManga.Pages.Manga
             CurrentManga = await mangaRepository.GetOneMangaAllIncludedAsync(id);
             //Blog = blogRepsitory.GetModel(CurrentManga.BlogModelId);
 
-            ReivewModel = reviewRepsitory.GetAllModels()
-        .Where(r => r.MangaModels != null && r.MangaModels.Any(m => m.MangaID == id));
+            var allReviews = await reviewRepsitory.GetAllModelAsync();
+            ReivewModel = allReviews.Where(r => r.MangaModels != null && r.MangaModels.Any(m => m.MangaID == id));
             Posts = await postRepsitory.GetAllModelAsync();
             // Get the logged-in user
             var user = await userManager.GetUserAsync(User);

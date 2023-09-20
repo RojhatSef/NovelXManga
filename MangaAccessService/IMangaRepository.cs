@@ -34,6 +34,8 @@ namespace MangaAccessService
 
         Task<MangaModel> DeleteAsync(int id);
 
+        Task<IEnumerable<MangaModel>> GetPaginatedMangaModelsAsync(int pageNumber, int pageSize);
+
         Task<IEnumerable<MangaModel>> GetTopRankedMangaAsync(int count);
 
         Task<IEnumerable<MangaModel>> GetMostPopularMangaAsync(int count);

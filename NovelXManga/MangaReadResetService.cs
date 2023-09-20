@@ -46,10 +46,11 @@ namespace NovelXManga
                     string cacheKey = $"DailyRead_{manga.MangaID}";
                     if (cache.TryGetValue<int>(cacheKey, out int dailyRead))
                     {
+                        manga.ForeverRead = (manga.ForeverRead ?? 0) + dailyRead;
                         manga.WeekRead += dailyRead;
                         manga.MonthRead += dailyRead;
                         manga.YearRead += dailyRead;
-                        manga.ForeverRead += dailyRead;
+
                         await mangaRepo.UpdateAsync(manga);
                     }
                 }

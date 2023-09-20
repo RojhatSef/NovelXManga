@@ -1,7 +1,15 @@
 ﻿@page
 @model NovelXManga.Pages.Manga.MoreUpdatesModel
 @{
+    List<string> scoreDistributions = new List<string>();
+    for (int i = 0; i < 12; i++)
+    {
+        scoreDistributions.Add(Json.Serialize(Model.AllBooksList[i].ScoreDistribution).ToString());
+
+    }
 }
+
+
 
 <link rel="stylesheet" href="~/css/MoreUpdatesStyles.css" asp-append-version="true" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -14,10 +22,7 @@
         <div class="MUS-CardFour">
         @for (int i = 0; i < 12; i++)
             {
-                <script>
-                     var scoreDistribution = @Html.Raw(Json.Serialize(Model.AllBooksList[i].ScoreDistribution));
-
-                </script>
+               
             string displayClass = "";
                 if (i >= 0 && i <= 2) displayClass = "MUS-hide-on-Boxes-on-large";
                 else if (i >= 3 && i <= 5) displayClass = "MUS-hide-on-Boxes-on-medium";
@@ -86,6 +91,10 @@
     </div>
   
 
-    </div>  <a class="MoreRecentUpdateStyle" asp-page="/Manga/MoreUpdates">More Updates</a>
-</div>
+    </div>  <a class="MoreRecentUpdateStyle" asp-page="/Manga/MoreUpdates" asp-route-pageNumber="@(@Model.PageNumber + 1)">More Updates</a>
 
+</div>
+<script>
+    var scoreDistributionsList = @Html.Raw(Json.Serialize(scoreDistributions));
+</script>
+<script src="~/js/ScoreDisMoreUpdates.js" asp-append-version="true"></script>
