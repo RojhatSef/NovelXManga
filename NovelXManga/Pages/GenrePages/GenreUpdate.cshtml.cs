@@ -34,7 +34,7 @@ namespace NovelXManga.Pages.GenrePages
             {
                 return RedirectToPage("/Index");
             }
-            mangaModelUpdate = mangaRepository.GetOneMangaAllIncluded(mangaModel.MangaID);
+            mangaModelUpdate = await mangaRepository.GetOneMangaAllIncludedAsync(mangaModel.MangaID);
             Genres = await context.GenresModels.ToListAsync();
 
             // Get the selected tag ids

@@ -60,7 +60,7 @@ namespace NovelXManga.Pages.Register
                 }
                 else
                 {
-                    GetAllBooks = await mangaRepository.GetAllModelAsync();
+                    GetAllBooks = await mangaRepository.Get10MangaModelAsync();
                     AllBooksList = GetAllBooks.ToList();
                     ModelState.AddModelError(string.Empty, "Email is already in use");
                 }
@@ -70,8 +70,8 @@ namespace NovelXManga.Pages.Register
 
         public async Task<IActionResult> OnGetAsync()
         {
-            GetAllBooks = await mangaRepository.GetAllModelAsync();
-            AllBooksList = GetAllBooks.Take(10).ToList();
+            GetAllBooks = await mangaRepository.Get10MangaModelAsync();
+            AllBooksList = GetAllBooks.ToList();
 
             return Page();
         }

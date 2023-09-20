@@ -9,6 +9,7 @@ using System.Web;
 
 namespace NovelXManga.Pages
 {
+    //LAYOUTPAGE needs it's own CSS, Index needs it's own CSS.
     public class IndexModel : PageModel
     {
         private readonly MangaNNovelAuthDBContext context;

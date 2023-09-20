@@ -9,6 +9,16 @@ using Microsoft.Extensions.Caching.Memory;
 using System.Net;
 using System.Text.RegularExpressions;
 
+//Things to do:
+/*
+Fix the styling on the page for larger screens and check for mobile with width only. Height should be okay. for these containers,
+but check for extreme small width if possible. , The Photo , title AddToLibrary container, The tags and Star/reading container.
+The 3 containers should be in 1 container, so it's horizontally aligned.
+Bottom page needs an entire restyling.
+DRAG OUT THE styling names to a new CSS we don't want stylings to be from one page to another.
+
+*/
+
 namespace NovelXManga.Pages.Manga
 {
     [ValidateAntiForgeryToken]
@@ -39,7 +49,6 @@ namespace NovelXManga.Pages.Manga
         [BindProperty]
         public ViewReview _ViewReview { get; set; } = new ViewReview();
 
-
         public IEnumerable<Review> ReivewModel { get; set; }
 
         public IEnumerable<PostModel> Posts { get; set; }
@@ -60,11 +69,9 @@ namespace NovelXManga.Pages.Manga
             _cache = cache;
         }
 
-
-
-        public IActionResult OnPostMangaPage(int MangaID)
+        public async Task<IActionResult> OnPostMangaPage(int MangaID)
         {
-            CurrentManga = mangaRepository.GetOneMangaAllIncluded(MangaID);
+            CurrentManga = await mangaRepository.GetOneMangaAllIncludedAsync(MangaID);
             if (CurrentManga == null)
             {
                 return NotFound();

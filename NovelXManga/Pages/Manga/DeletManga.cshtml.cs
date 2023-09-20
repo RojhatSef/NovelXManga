@@ -1,6 +1,7 @@
 using MangaAccessService;
 using MangaModelService;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace NovelXManga.Pages.Manga
@@ -19,9 +20,10 @@ namespace NovelXManga.Pages.Manga
 
         public MangaModel mangaModel { get; set; }
 
-        public void OnGet(int id)
+        public async Task<IActionResult> OnGetAsync(int id)
         {
-            mangaModel = mangaRepository.GetManga(id);
+            mangaModel = await mangaRepository.GetModelAsync(id);
+            return Page();
         }
 
         public void OnPost(int id)

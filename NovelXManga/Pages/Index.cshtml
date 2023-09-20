@@ -5,7 +5,9 @@
 @{
     ViewData["Title"] = "Home page";
 }
-<script src="~/js/site.js" asp-append-version="true"></script>
+<link rel="stylesheet" href="~/css/IndexStyleSheet.css" asp-append-version="true" />
+
+
 @if (Model.AllBooksList != null)
 {
     <div class="Content1Ex">
@@ -30,9 +32,8 @@
                     <div class="card-description-Ex noBorderStyle">Shoujo </div>
                 </div>
             </div>
-            <div >
-
-            </div>     
+            <div>
+            </div>
         </div>
     </div>
     <div class="Content1Cost">
@@ -80,14 +81,15 @@
                         </a>
                     </div>
                 }
-              
+
 
 
             </div>
+            <a class="MoreRecentUpdateStyle" asp-page="/Manga/MoreUpdates">More Updates</a>
 
         </div>
         <div class="ContentDescription"><h1>Users choice <hr /></h1></div>
-      
+
         <div class="MiniCards">
             <div class="arrow left-arrow">&#9664;</div>
             @for (int i = 0; i <= 14; i++)
@@ -100,63 +102,65 @@
             }
             <div class="arrow right-arrow">&#9654;</div>
         </div>
-      
+
     </div>
 }
 <div class="Content2Cost">
     <div class="ContentDescriptionContent2 "><h1>Best rated <hr /></h1></div>
-        <div class="card MoveUpCardIndexCont2 ">
+    <div class="card MoveUpCardIndexCont2 ">
         <div id="slider">
-@if(Model.GetAllBooks != null){
-        @foreach (var book in Model.GetAllBooks.Take(4))
+            @if (Model.GetAllBooks != null)
             {
-                           <a asp-page="/Manga/CurrentManga" asp-route-id="@book.MangaID">
-                <div class="slide">
+                @foreach (var book in Model.GetAllBooks.Take(4))
+                {
+                    <a asp-page="/Manga/CurrentManga" asp-route-id="@book.MangaID">
+                        <div class="slide">
                             <img class="card-img-background" src="~/Images/GeneratedMangaImage/@book.PhotoPath" />
-            <div class="card-body">
+                            <div class="card-body">
                                 <img class="card-img-index" src="~/Images/GeneratedMangaImage/@book.PhotoPath" />
-                <div class="TitleTagDescriptionCostum">
-                    <div class="card-title">
-                        <a asp-page="/Manga/CurrentManga" asp-route-id="@book.MangaID">
-                            <h1 class="card-title-extra-style">
-                                @book.MangaName
-                            </h1>
-                        </a>
-                    </div>
-                    <h2 class="tag-container">
-                                    @if (book.TagsModels != null)
-                                    {  
-                                        @foreach (var tag in book.TagsModels.Take(6))
+                                <div class="TitleTagDescriptionCostum">
+                                    <div class="card-title">
+                                        <a asp-page="/Manga/CurrentManga" asp-route-id="@book.MangaID">
+                                            <h1 class="card-title-extra-style">
+                                                @book.MangaName
+                                            </h1>
+                                        </a>
+                                    </div>
+                                    <h2 class="tag-container">
+                                        @if (book.TagsModels != null)
                                         {
-                                            <a asp-page="/Manga/CurrentManga" asp-route-id="@book.MangaID">
-                                                <span class="tag RemoveWhenSmall">@tag.TagName</span>
-                                            </a>
+                                            @foreach (var tag in book.TagsModels.Take(6))
+                                            {
+                                                <a asp-page="/Manga/CurrentManga" asp-route-id="@book.MangaID">
+                                                    <span class="tag RemoveWhenSmall">@tag.TagName</span>
+                                                </a>
 
-                                        } 
-                                    }
-                                        
-                                    @if (book.GenresModels != null)
-                                    {
-                                            @foreach (var genre in book.GenresModels.Take(6))
+                                            }
+                                        }
+
+                                        @if (book.GenresModels != null)
                                         {
-                                            <a asp-page="/Manga/CurrentManga" asp-route-id="@book.MangaID">
-                                                <span class="tag RemoveWhenSmall">@genre.GenreName</span>
-                                            </a>
+                                            @foreach (var genre in book.GenresModels.Take(6))
+                                            {
+                                                <a asp-page="/Manga/CurrentManga" asp-route-id="@book.MangaID">
+                                                    <span class="tag RemoveWhenSmall">@genre.GenreName</span>
+                                                </a>
+                                            }
                                         }
-                                    }                 
-                    </h2>
-                    <div class="card-description RemoveWhenSmall RemoveWhenLarge RemoveWhenMedium">
-                        <p>
-                                        @if (book.Description != null){
-                            <a asp-page="/Manga/CurrentManga" asp-route-id="@book.MangaID">
-                                @book.Description
-                            </a>
-                                        }
-                        </p>
-                    </div>
-                    <div class="Index_Artist_Author_Navigation_Arrows ">
-                       
-                                        @if(book.Authormodels != null && book.ArtistModels != null)
+                                    </h2>
+                                    <div class="card-description RemoveWhenSmall RemoveWhenLarge RemoveWhenMedium">
+                                        <p>
+                                            @if (book.Description != null)
+                                            {
+                                                <a asp-page="/Manga/CurrentManga" asp-route-id="@book.MangaID">
+                                                    @book.Description
+                                                </a>
+                                            }
+                                        </p>
+                                    </div>
+                                    <div class="Index_Artist_Author_Navigation_Arrows ">
+
+                                        @if (book.Authormodels != null && book.ArtistModels != null)
                                         {
                                             @foreach (var author in book.Authormodels)
                                             {
@@ -169,14 +173,15 @@
                                                 {
                                                     @if (author.FirstName != artst.FirstName)
                                                     {
-                                                            <h2 class="Author_Artist">
-                                                           |  @artst.FirstName @artst.LastName
-                                                            </h2>
+                                                        <h2 class="Author_Artist">
+                                                            |  @artst.FirstName @artst.LastName
+                                                        </h2>
                                                     }
                                                 }
                                             }
                                         }
-                                        else if(book.Authormodels != null && book.ArtistModels == null){
+                                        else if (book.Authormodels != null && book.ArtistModels == null)
+                                        {
                                             @foreach (var author in book.Authormodels)
                                             {
 
@@ -184,7 +189,7 @@
                                                 <h2 class="Author_Artist" style="padding-right:7px">
                                                     @author.FirstName @author.LastName
                                                 </h2>
-                                               
+
                                             }
                                         }
                                         else if (book.ArtistModels != null)
@@ -196,14 +201,14 @@
                                                     |  @artst.FirstName @artst.LastName
                                                 </h2>
                                             }
-                                        }                                                       
-                    </div>
-                </div>
-                <div>
-                </div>
-            </div>
-            </div>
-            </a>
+                                        }
+                                    </div>
+                                </div>
+                                <div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
                 }}
             <div class="IndexArrowPostition">
                 <button id="prev" class="IndexArrowsPrev">
@@ -214,9 +219,9 @@
                 </button>
             </div>
         </div>
+    </div>
 </div>
-</div>
-
+<script src="~/js/site.js" asp-append-version="true"></script>
 <script src="~/js/IndexJavaScripts.js" asp-append-version="true"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 

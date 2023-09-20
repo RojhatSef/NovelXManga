@@ -51,7 +51,7 @@ namespace NovelXManga.Pages.CharacterPage
             // you loop through each and fetch all related data
             foreach (var manga in CurrentCharacter.MangaModels)
             {
-                var detailedManga = mangaRepository.GetOneMangaAllIncluded(manga.MangaID);
+                var detailedManga = await mangaRepository.GetOneMangaAllIncludedAsync(manga.MangaID);
                 if (detailedManga != null)
                 {
                     CurrentMangas.Add(detailedManga);

@@ -46,17 +46,21 @@ namespace NovelXManga.Pages.Login
         {
             if (User.Identity.IsAuthenticated)
             {
-                return RedirectToPage("/Index");  // or any other appropriate page
+                return RedirectToPage("/Index");
             }
-            returnUrl = ReturnUrl ?? Url.Content("/");
+
+            returnUrl = returnUrl ?? Url.Content("/");
+
             if (ModelState.IsValid)
             {
                 var identityResult = await signInManager.PasswordSignInAsync(LoginModel.Email, LoginModel.Password, LoginModel.RememberMe, false);
+
                 if (identityResult.Succeeded)
                 {
                     var user = await userManager.FindByEmailAsync(LoginModel.Email);
                     await signInManager.RefreshSignInAsync(user);
-                    if (returnUrl == null || returnUrl == "/")
+
+                    if (string.IsNullOrEmpty(returnUrl) || returnUrl == "/")
                     {
                         return RedirectToPage("/Index");
                     }
@@ -65,25 +69,17 @@ namespace NovelXManga.Pages.Login
                         return RedirectToPage(returnUrl);
                     }
                 }
-                if (identityResult.Succeeded)
+                else
                 {
-                    if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
-                    {
-                        return Redirect(returnUrl);
-                    }
-                    else
-                    {
-                        return RedirectToPage("/Index");
-                    }
+                    ModelState.AddModelError("", "username or password incorrect");
                 }
-
-                ModelState.AddModelError("", "username or password incorrect");
             }
+
             GetAllBooks = await mangaRepository.Get10MangaModelAsync();
             AllBooksList = GetAllBooks.ToList();
 
             ReturnUrl = returnUrl;
-            return Page();
+            return RedirectToPage(new { ReturnUrl });
         }
     }
 }

@@ -31,6 +31,26 @@ body, html {
     text-align: center; /* Optional: To center the text in the content box */
 }
 
+.card-ex {
+    position: relative;
+    width: 100%;
+    height: 360px;
+    display: flex;
+    justify-content: center;
+}
+
+.blurredbackground {
+    height: 100%;
+    width: 100%
+}
+
+.card-image-ex {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    overflow: hidden
+}
+
 .TagGenreSpacer {
     display: flex;
     flex-wrap: wrap;
@@ -185,7 +205,6 @@ main {
     padding-top: 1%;
     width: 100%;
     transition: width 0.5s, height 0.5s;
-    margin-top: 40px;
 }
 
 .ContentDescriptionContent2 {
@@ -319,20 +338,6 @@ a {
         color: white;
     }
 
-.LoginRegisterAnchor {
-    display: flex;
-    height: 100%;
-    justify-content: center;
-    align-items: center; /* This will center the text vertically */
-    color: #ff6740;
-    font-size: 15px;
-    height: 30px
-}
-
-    .LoginRegisterAnchor:hover {
-        color: white;
-    }
-
 .LowBackGroundForLoginForgotRegi {
     background-color: rgb(51, 51, 51);
     display: flex;
@@ -342,63 +347,6 @@ a {
     height: 10px;
 }
 
-.MassLoginForgottRegiAlignContent {
-    margin-top: 12%;
-}
-/*.centralContentCost {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-}
-.LongerInput {
-    width: 400px;
-    font-size: 15px;
-}
-
-.MassAlignContent {
-    margin-top: 15%;
-}
-.LoginForgotRegiGroup {
-    margin: 10px;
-}
-.LongerInputField {
-    font-size: 20px;*/ /* Change this value to make the label higher or longer */
-/*width: 100%;
-    background-color: #444;
-    color: white;
-}
-.LargeLoginSize {
-    margin: 30px;
-    margin-top: 130px;
-}
-.specialButtonLoginForgotRegi {
-    width: 100% !important;
-}
-@media (max-width: 1200px) {
-    .LoginForgotRegiContainer {
-        width: 40%;
-    }
-}
-
-@media (max-width: 900px) {
-    .LoginForgotRegiContainer {
-        width: 60% !important;
-    }
-}
-
-@media (max-width: 599px) {
-    .LoginForgotRegiContainer {
-        width: 100% !important;
-    }
-}
-.LoginForgottRegiSolidBorder {
-    border-top: solid 5px #ff6740;
-    border-bottom: solid 45px rgb(51, 51, 51);
-    box-shadow: 5px 10px 8px black;
-    border-radius: 5px;
-}*/
-
-/* Login Ends HERE*/
 /* SIDEbar STARTS HERE*/
 #NovelTitle {
     color: white;
@@ -789,13 +737,6 @@ flexLiLayout {
     justify-content: center;
 }
 
-.card-image-ex {
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
-    overflow: hidden
-}
-
 .CardHeight {
     height: 420px;
     width: 100%;
@@ -901,13 +842,15 @@ flexLiLayout {
     width: 100%;
     height: 100%;
     transition: width 0.5s, height 0.5s;
+    flex-grow: 1;
 }
 
 .cardFourOfaKind {
     width: 100%;
-    height: 620px;
+    height: 690px;
     display: flex;
     overflow: hidden;
+    flex-direction: column;
     border-radius: 20px;
     position: relative;
     transition: width 0.5s, height 0.5s;

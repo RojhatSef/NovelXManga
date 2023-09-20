@@ -41,6 +41,8 @@ namespace NovelXManga.Pages.Login
 
             if (user == null)
             {
+                GetAllBooks = await mangaRepository.Get10MangaModelAsync();
+                AllBooksList = GetAllBooks.ToList();
                 return Page();
             }
 
@@ -49,14 +51,15 @@ namespace NovelXManga.Pages.Login
             var callback = Url.Page("/Login/ResetPasswordPage", "Account", new { token, email = user.Email }, Request.Scheme);
             var message = new Message(new string[] { user.Email }, "Reset password token", callback, null);
             await _emailSender.SendEmailAsync(message);
-
+            GetAllBooks = await mangaRepository.Get10MangaModelAsync();
+            AllBooksList = GetAllBooks.ToList();
             return Page();
         }
 
         public async Task<IActionResult> OnGetAsync()
         {
-            GetAllBooks = await mangaRepository.GetAllModelAsync();
-            AllBooksList = GetAllBooks.Take(10).ToList();
+            GetAllBooks = await mangaRepository.Get10MangaModelAsync();
+            AllBooksList = GetAllBooks.ToList();
             return Page();
         }
     }

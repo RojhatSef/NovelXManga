@@ -76,7 +76,7 @@ namespace NovelXManga.Pages.MangaUpdates
                 manga.Characters.Remove(character);
             }
 
-            mangaRepository.Update(manga);
+            await mangaRepository.UpdateAsync(manga);
 
             return RedirectToPage("/Manga/MangaDetails", new { id = manga.MangaID });
         }

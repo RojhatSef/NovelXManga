@@ -1,9 +1,5 @@
-﻿using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Threading;
-using System.Threading.Tasks;
-using MangaAccessService;
+﻿using MangaAccessService;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
 
 namespace NovelXManga
@@ -20,11 +16,22 @@ namespace NovelXManga
 
         public Task StartAsync(CancellationToken cancellationToken)
         {
-            _timer = new Timer(ResetMangaReadCounts, null, TimeSpan.Zero, TimeSpan.FromDays(1));
+            _timer = new Timer(async state => await ResetMangaReadCountsAsync(state), null, TimeSpan.Zero, TimeSpan.FromSeconds(20));
             return Task.CompletedTask;
         }
 
-        private void ResetMangaReadCounts(object state)
+        //public Task StartAsync(CancellationToken cancellationToken)
+        //{
+        //    _timer = new Timer(ResetMangaReadCounts, null, TimeSpan.Zero, TimeSpan.FromDays(1));
+        //    return Task.CompletedTask;
+        //}
+        //public Task StartAsync(CancellationToken cancellationToken)
+        //{
+        //    _timer = new Timer(ResetMangaReadCounts, null, TimeSpan.Zero, TimeSpan.FromSeconds(20));
+        //    return Task.CompletedTask;
+        //}
+
+        private async Task ResetMangaReadCountsAsync(object state)
         {
             using (var scope = _serviceScopeFactory.CreateScope())
             {
@@ -32,7 +39,7 @@ namespace NovelXManga
                 var mangaRepo = scope.ServiceProvider.GetRequiredService<IMangaRepository>();
                 var cache = scope.ServiceProvider.GetRequiredService<IMemoryCache>();
                 var now = DateTime.UtcNow;
-                var mangas = context.mangaModels.ToList();
+                var mangas = await context.mangaModels.ToListAsync();
 
                 foreach (var manga in mangas)
                 {
@@ -43,7 +50,7 @@ namespace NovelXManga
                         manga.MonthRead += dailyRead;
                         manga.YearRead += dailyRead;
                         manga.ForeverRead += dailyRead;
-                        mangaRepo.UpdateAsync(manga);
+                        await mangaRepo.UpdateAsync(manga);
                     }
                 }
                 foreach (var manga in mangas)
@@ -77,10 +84,10 @@ namespace NovelXManga
                         manga.LastYearlyReadDate = now;
                     }
 
-                    mangaRepo.Update(manga);
+                    await mangaRepo.UpdateAsync(manga);
                 }
 
-                context.SaveChanges();
+                await context.SaveChangesAsync();
             }
         }
 
