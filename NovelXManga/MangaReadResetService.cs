@@ -20,17 +20,6 @@ namespace NovelXManga
             return Task.CompletedTask;
         }
 
-        //public Task StartAsync(CancellationToken cancellationToken)
-        //{
-        //    _timer = new Timer(ResetMangaReadCounts, null, TimeSpan.Zero, TimeSpan.FromDays(1));
-        //    return Task.CompletedTask;
-        //}
-        //public Task StartAsync(CancellationToken cancellationToken)
-        //{
-        //    _timer = new Timer(ResetMangaReadCounts, null, TimeSpan.Zero, TimeSpan.FromSeconds(20));
-        //    return Task.CompletedTask;
-        //}
-
         private async Task ResetMangaReadCountsAsync(object state)
         {
             using (var scope = _serviceScopeFactory.CreateScope())

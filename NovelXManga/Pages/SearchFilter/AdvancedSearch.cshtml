@@ -3,12 +3,50 @@
 @{
 }
 
-@*MangaFilter*@
-<div class="AdvancedResultContent">
+
+<link rel="stylesheet" href="~/css/AdvancedFilter.css" asp-append-version="true" />
+<div class="AdvancedContainerContent ">
 
 
-<form id="AdvancedSearch" method=post asp-page-handler="AdvancedSearch" enctype="multipart/form-data">
-        <div>
+<form id="AdvancedSearch" class="SearchContainer" method=post asp-page-handler="AdvancedSearch" enctype="multipart/form-data">
+    <div class="Row1">
+            <input type="search" id="@Model.SearchAuthor" name="SearchAuthor" class="SearchAuthorClass" placeholder="SearchAuthor">
+            <input type="search" id="@Model.SearchArtist" name="SearchArtist" class="SearchArtistClass" placeholder="SearchArtist">
+            <input type="search" id="@Model.SearchVoiceActor" name="SearchVoiceActor" class="SearchVoiceActorClass" placeholder="SearchVoiceActor">
+        </div>   
+        <div class="Row2">
+            <div class="LeftSide">
+                <label for="TagInclusionMode">Tag Inclusion Mode:</label>
+                <select id="TagInclusionMode" name="TagInclusionMode">
+                    <option value="And">And</option>
+                    <option value="Or">Or</option>
+                </select>
+                <label for="TagExclusionMode">Tag Exclusion Mode:</label>
+                <select id="TagExclusionMode" name="TagExclusionMode">
+                    <option value="And">And</option>
+                    <option value="Or">Or</option>
+                </select>
+                <label for="GenreInclusionMode">Genre Inclusion Mode:</label>
+                <select id="GenreInclusionMode" name="GenreInclusionMode">
+                    <option value="And">And</option>
+                    <option value="Or">Or</option>
+                </select>
+                <label for="GenreExclusionMode">Genre Exclusion Mode:</label>
+                <select id="GenreExclusionMode" name="GenreExclusionMode">
+                    <option value="And">And</option>
+                    <option value="Or">Or</option>
+                </select>
+            </div>
+            <div class="RightSide">
+                <label for="SearchReleaseYearStart" class="CalendarIcon">Search Start Year:
+                    <input type="date" id="SearchReleaseYearStart" name="SearchReleaseYearStart" placeholder="YYYY">
+                </label>
+                 <label for="SearchReleaseYearEnd" class="CalendarIcon">Search End Year:
+                    <input type="date" id="SearchReleaseYearEnd"  name="SearchReleaseYearEnd" placeholder="YYYY">
+                 </label>
+            </div>
+        </div>
+    <div>
             <label for="SearchReleaseYearStart">Search Start Year:</label>
             <input type="date" id="SearchReleaseYearStart" name="SearchReleaseYearStart" placeholder="YYYY">
         </div>
@@ -18,35 +56,36 @@
             <input type="date" id="SearchReleaseYearEnd" name="SearchReleaseYearEnd" placeholder="YYYY">
         </div>
 
-        <!-- Add dropdown for tag inclusion mode -->
-        <div>
-            <label for="TagInclusionMode">Tag Inclusion Mode:</label>
-            <select id="TagInclusionMode" name="TagInclusionMode">
-                <option value="And">And</option>
-                <option value="Or">Or</option>
-            </select>
-        </div>
-        <div>  <input type="search" id="@Model.SearchAuthor" name="SearchAuthor" class="SearchAuthorClass" placeholder="SearchAuthor"> </div>
-        <div>  <input type="search" id="@Model.SearchArtist" name="SearchArtist" class="SearchArtistClass" placeholder="SearchArtist"> </div>
-        <div>  <input type="search" id="@Model.SearchVoiceActor" name="SearchVoiceActor" class="SearchVoiceActorClass" placeholder="SearchVoiceActor"> </div>
-    <button type="button" class="MarginTop50PxAdvancedResult" onclick="handleShowHideTags()">Show/Hide Tags</button>
-        <!-- Add dropdown for tag inclusion mode -->
-        <div>
-            <label for="TagInclusionMode">Tag Inclusion Mode:</label>
-            <select id="TagInclusionMode" name="TagInclusionMode">
-                <option value="And">And</option>
-                <option value="Or">Or</option>
-            </select>
-        </div>
+     
+    <!-- Search input for tags -->
+<div>
+    <input type="text" id="tagSearch" placeholder="Search tags...">
+</div>
 
-        <!-- Add dropdown for tag exclusion mode -->
-        <div>
-            <label for="TagExclusionMode">Tag Exclusion Mode:</label>
-            <select id="TagExclusionMode" name="TagExclusionMode">
-                <option value="And">And</option>
-                <option value="Or">Or</option>
-            </select>
-        </div>
+<!-- Selected Tags Container -->
+<div id="selectedTagsContainer">
+    <label for="selectedTags">Selected Tags:</label>
+    <div id="selectedTags"></div>
+</div>
+
+<!-- All Tags Container -->
+<div class="showHideTags">
+    <label for="tags">Tags:</label>
+    <div id="allTags">
+        @foreach (var tag in Model.Tags ?? new List<TagModel>())
+        {
+            <div class="tagItem" data-tag-id="@tag.TagId">
+                <input type="checkbox" id="tag-@tag.TagId" name="SelectedTags" value="@tag.TagId" @(Model.SelectedTags?.Contains(tag.TagId) ?? false ? "checked" : "")>
+                <label for="tag-@tag.TagId">@tag.TagName</label>
+            </div>
+        }
+    </div>
+</div>
+
+      
+  @*  <button type="button" class="MarginTop50PxAdvancedResult" onclick="handleShowHideTags()">Show/Hide Tags</button>
+        <!-- Add dropdown for tag inclusion mode -->
+       
 <div class="showHideTags ">
     <label for="tags">Tags:</label>
 
@@ -69,23 +108,7 @@
     </div>
     <button type="button" class="" onclick="handleShowHideTags()">Show/Hide Tags</button>
 </div>
-        <!-- Add dropdown for genre inclusion mode -->
-        <div>
-            <label for="GenreInclusionMode">Genre Inclusion Mode:</label>
-            <select id="GenreInclusionMode" name="GenreInclusionMode">
-                <option value="And">And</option>
-                <option value="Or">Or</option>
-            </select>
-        </div>
-
-        <!-- Add dropdown for genre exclusion mode -->
-        <div>
-            <label for="GenreExclusionMode">Genre Exclusion Mode:</label>
-            <select id="GenreExclusionMode" name="GenreExclusionMode">
-                <option value="And">And</option>
-                <option value="Or">Or</option>
-            </select>
-        </div>
+        
 <button type="button" class="" onclick="showHideGenres()">Show/Hide Genres</button>
         <div class="showHideGenre">
             <label for="genres">Genres:</label>
@@ -106,16 +129,16 @@
             </div>
             <button type="button" class="" onclick="showHideGenres()">Show/Hide Genres</button>
         </div>
-
+*@
 
         <div class="">
             <button type="submit" class="btn btn-primary">Search</button>
         </div>
 </form>
 
-@*MangaOutAfterSearchFilter *@
 
 
+<div class="SearchResultContainer">
 
     <div class="CardFour">
             @if (Model.MangaModels.Any())
@@ -147,9 +170,10 @@
     </div>
 
 
-
+    </div>
 </div>
 <script src="~/js/ShowHideTagsGenres.js" asp-append-version="true"></script>
+@*<script src="~/js/AdvancedFilter.js" asp-append-version="true"></script>*@
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         function setupMultiStateCheckboxes(selector) {
