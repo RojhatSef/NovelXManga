@@ -5,29 +5,53 @@
     justify-content: center;
     align-items: center;
     gap: 2%;
-    background-color: #333; /* Optional: background color for the button */
-    color: #fff; /* Optional: text color for the button */
+    background-color: #333;
+    color: #fff;
 }
 
     .MoreRecentUpdateStyle:hover {
-        background-color: #ff6740; /* Optional: background color for the button */
-        color: black; /* Optional: text color for the button */
+        background-color: #ff6740;
+        color: black;
     }
 
+.MoreUpdatContainer {
+    margin-top: 3.5%;
+    transition: margin-top 0.3s ease;
+}
+
+@media only screen and (max-width: 1200px) {
+    .MoreUpdatContainer {
+        margin-top: 8.5%;
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    .MoreUpdatContainer {
+        margin-top: 12.5%;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .MoreUpdatContainer {
+        margin-top: 16%;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .MoreUpdatContainer {
+        margin-top: 18%;
+    }
+}
+
 .MUS-cardFourOfaKind {
-    width: 100%;
-    height: 690px;
     display: flex;
-    overflow: hidden;
-    flex-direction: column;
-    border-radius: 20px;
-    position: relative;
-    transition: width 0.5s, height 0.5s;
+    flex-wrap: wrap;
+    justify-content: flex-start;
 }
 
 .MUS-FourOfAKind {
-    flex: 1 0 25%; /* Each box now takes up a quarter (25%) of the width */
-    max-height: 33.33%; /* And a third (33.33%) of the height */
+    flex: 1 0 25%;
+    max-height: 33.33%;
     display: flex;
     align-items: center;
     position: relative;
@@ -49,13 +73,15 @@
 
 .MUS-FourOfAKind .MUS-FourofKindContent {
     width: 70%;
-    height: 100%; /* Make sure the content fits within its parent div */
-    padding-left: 10px; /* This will give a little space between the image and the text */
+    height: 100%;
+    padding-left: 10px;
 }
 
 .MUS-CardFour {
+    flex: 0 0 calc(25% - 1em); /* 4 cards per row */
+    margin: 0.5em;
     display: flex;
-    flex-wrap: wrap; /* This allows the boxes to wrap onto the next line */
+    flex-wrap: wrap;
     width: 100%;
     height: 100%;
     transition: width 0.5s, height 0.5s;
@@ -114,10 +140,10 @@
 }
 
 .MUS-tag {
-    background-color: rgba(0, 0, 0, 0.1); /* Add a slightly darker background */
-    padding: 2px 5px; /* Add padding around the text */
-    border-radius: 3px; /* Add rounded corners to the background */
-    color: #ff6740; /* Change the text color to OrangeRed */
+    background-color: rgba(0, 0, 0, 0.1);
+    padding: 2px 5px;
+    border-radius: 3px;
+    color: #ff6740;
 }
 
 .MUS-ANoneStyle {
@@ -135,6 +161,13 @@
         border-color: #ff6740;
     }
 
+/* Mobile */
+@media (max-width: 480px) {
+    .MUS-CardFour {
+        flex: 0 0 calc(100% - 1em); /* 1 card per row */
+    }
+}
+
 @media (max-width: 1200px) {
     .MUS-BoxOne.hide-on-medium {
         display: none;
@@ -144,20 +177,12 @@
         flex: 1 0 33.33%; /* 3 boxes per row at widths <= 1200px */
         max-height: 50%; /* 2 rows at widths <= 1200px */
     }
-
-    .MUS-hide-on-Boxes-on-large {
-        display: none;
-    }
 }
 
 @media (max-width: 900px) {
     .MUS-FourOfAKind {
         flex: 1 0 50%; /* 2 boxes per row at widths <= 900px */
         max-height: 50%; /* 2 rows at widths <= 900px */
-    }
-
-    .MUS-hide-on-Boxes-on-medium {
-        display: none;
     }
 
     .MUS-tag-container {
@@ -220,9 +245,5 @@
 
     .MUS-ContentDescription {
         padding-top: 4.5%;
-    }
-
-    .MUS-hide-on-Boxes-on-small {
-        display: none;
     }
 }

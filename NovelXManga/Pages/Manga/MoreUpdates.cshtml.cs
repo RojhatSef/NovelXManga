@@ -26,6 +26,13 @@ namespace NovelXManga.Pages.Manga
 
         public IEnumerable<MangaModel> GetAllBooks { get; set; }
 
+        public async Task<IActionResult> OnGetLoadMoreAsync(int pageNumber, int pageSize)
+        {
+            var skipAmount = (pageNumber - 1) * pageSize;
+            AllBooksList = (await mangaRepository.GetPaginatedMangaModelsAsync(pageNumber, pageSize)).ToList();
+            return new JsonResult(AllBooksList);
+        }
+
         public async Task<IActionResult> OnGetAsync(int pageNumber = 1, int pageSize = 14)
         {
             AllBooksList = (await mangaRepository.GetPaginatedMangaModelsAsync(pageNumber, pageSize)).ToList();
