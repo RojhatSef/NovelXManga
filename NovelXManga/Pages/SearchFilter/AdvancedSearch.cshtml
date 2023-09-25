@@ -8,7 +8,7 @@
 <div class="AdvancedContainerContent ">
 
 
-<form id="AdvancedSearch" class="SearchContainer" method=post asp-page-handler="AdvancedSearch" enctype="multipart/form-data">
+<form id="AdvancedSearch"  method=post asp-page-handler="AdvancedSearch" enctype="multipart/form-data">
     <div class="Row1">
             <input type="search" id="@Model.SearchAuthor" name="SearchAuthor" class="SearchAuthorClass" placeholder="SearchAuthor">
             <input type="search" id="@Model.SearchArtist" name="SearchArtist" class="SearchArtistClass" placeholder="SearchArtist">
@@ -56,63 +56,27 @@
             <input type="date" id="SearchReleaseYearEnd" name="SearchReleaseYearEnd" placeholder="YYYY">
         </div>
 
-     
-    <!-- Search input for tags -->
-<div>
-    <input type="text" id="tagSearch" placeholder="Search tags...">
-</div>
 
-<!-- Selected Tags Container -->
-<div id="selectedTagsContainer">
-    <label for="selectedTags">Selected Tags:</label>
-    <div id="selectedTags"></div>
-</div>
 
-<!-- All Tags Container -->
-<div class="showHideTags">
-    <label for="tags">Tags:</label>
-    <div id="allTags">
-        @foreach (var tag in Model.Tags ?? new List<TagModel>())
-        {
-            <div class="tagItem" data-tag-id="@tag.TagId">
-                <input type="checkbox" id="tag-@tag.TagId" name="SelectedTags" value="@tag.TagId" @(Model.SelectedTags?.Contains(tag.TagId) ?? false ? "checked" : "")>
-                <label for="tag-@tag.TagId">@tag.TagName</label>
-            </div>
-        }
-    </div>
-</div>
+        <div class="MUS-dropdown">
+            <input type="text" id="tagInput" placeholder="Tags">
 
-      
-  @*  <button type="button" class="MarginTop50PxAdvancedResult" onclick="handleShowHideTags()">Show/Hide Tags</button>
-        <!-- Add dropdown for tag inclusion mode -->
-       
-<div class="showHideTags ">
-    <label for="tags">Tags:</label>
-
-    <div id="HideTagsWhen" class=" hidden-tags">
-
-               
-                @foreach (var tag in Model.Tags ?? new List<TagModel>())  // Handle null Model.Tags
+            <div class="MUS-dropdown-content" id="tagDropdown">
+                @foreach (var tag in Model.Tags ?? new List<TagModel>())
                 {
-                    if ((Model.Tags?.IndexOf(tag) ?? 0) % 3 == 0)
-                    {
-                        @Html.Raw("</div><div class=\"TagGenreSpacer\">")
-                    }
-                    <div class="">
-                        <input type="checkbox" id="tag-@tag.TagId" name="SelectedTags" value="@tag.TagId" @(Model.SelectedTags?.Contains(tag.TagId) ?? false ? "checked" : "")>
-                        <label for="tag-@tag.TagId">@tag.TagName</label>
-
+                    <div class="MUS-tag-genre-item" onclick="toggleCheckbox('@tag.TagId')">
+                        <input type="checkbox" class="MUS-hidden-checkbox" id="tag-@tag.TagId" name="SelectedTags" value="@tag.TagId" @(Model.SelectedTags?.Contains(tag.TagId) ?? false ? "checked" : "")>
+                        <label class="MUS-tag-label" for="tag-@tag.TagId">@tag.TagName</label>
                     </div>
                 }
+            </div>
+        </div>
 
-    </div>
-    <button type="button" class="" onclick="handleShowHideTags()">Show/Hide Tags</button>
-</div>
-        
+
 <button type="button" class="" onclick="showHideGenres()">Show/Hide Genres</button>
         <div class="showHideGenre">
             <label for="genres">Genres:</label>
-            <div id="HideGenresWhen" class="hidden-tags">
+            <div @*id="HideGenresWhen" class="hidden-tags"*@>
                 @foreach (var genre in Model.Genres ?? new List<GenresModel>())
                 {
                     if ((Model.Genres?.IndexOf(genre) ?? 0) % 3 == 0)
@@ -129,7 +93,7 @@
             </div>
             <button type="button" class="" onclick="showHideGenres()">Show/Hide Genres</button>
         </div>
-*@
+
 
         <div class="">
             <button type="submit" class="btn btn-primary">Search</button>
@@ -138,20 +102,20 @@
 
 
 
-<div class="SearchResultContainer">
+    <div class="MUS-cardFourOfaKind">
 
-    <div class="CardFour">
+        <div class="MUS-CardFour">
             @if (Model.MangaModels.Any())
             {
                 @foreach (var book in Model.MangaModels)
                 {
-                    <div class="FourOfAKind">
+                    <div class="MUS-FourOfAKind">
 
-                        <a class="ANoneStyle" asp-page="/Manga/CurrentManga" asp-route-id="@book.MangaID">
-                        <img class="BoxImage" src="~/Images/GeneratedMangaImage/@book.PhotoPath" />
+                        <a class="MUS-ANoneStyle" asp-page="/Manga/CurrentManga" asp-route-id="@book.MangaID">
+                            <img class="MUS-BoxImage" src="~/Images/GeneratedMangaImage/@book.PhotoPath" />
 
 
-                            <div class="FourofKindContent">
+                            <div class="MUS-FourofKindContent">
                                 <h2>@book.MangaName</h2>
                                 <p>@book.Description</p>
 
@@ -167,46 +131,12 @@
             }
 
 
-    </div>
+        </div>
 
 
     </div>
 </div>
+
 <script src="~/js/ShowHideTagsGenres.js" asp-append-version="true"></script>
-@*<script src="~/js/AdvancedFilter.js" asp-append-version="true"></script>*@
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        function setupMultiStateCheckboxes(selector) {
-            const checkboxes = document.querySelectorAll(`input[type="checkbox"][name="${selector}"]`);
-            checkboxes.forEach((checkbox) => {
-                checkbox.addEventListener('click', function (event) {
-                    let clickCount = Number(this.getAttribute('data-click-count')) || 0;
-                    clickCount++;
 
-                    if (clickCount === 3) clickCount = 0; // Reset back to neutral after third click
-
-                    switch (clickCount) {
-                        case 0:
-                            this.checked = false;
-                            this.nextElementSibling.style.color = "black"; // Neutral
-                            break;
-                        case 1:
-                            this.checked = true;
-                            this.nextElementSibling.style.color = "green"; // Inclusion
-                            break;
-                        case 2:
-                            this.checked = false;
-                            this.nextElementSibling.style.color = "red"; // Exclusion
-                            break;
-                    }
-
-                    this.setAttribute('data-click-count', clickCount);
-                });
-            });
-        }
-
-        setupMultiStateCheckboxes("selectedTags");
-        setupMultiStateCheckboxes("selectedGenres");
-    });
-
-    });</script>
+*<script src="~/js/AdvancedFilter.js" asp-append-version="true"></script>
