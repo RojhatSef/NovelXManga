@@ -11,45 +11,245 @@
         });
     }
 
-    /*  setupMultiStateCheckboxes("selectedTags");*/
     setupMultiStateCheckboxes("selectedGenres");
 });
-document.addEventListener("DOMContentLoaded", function () {
-    const tagInput = document.getElementById('tagInput');
-    const tagDropdown = document.getElementById('tagDropdown');
-
-    tagInput.addEventListener('focus', function () {
-        tagDropdown.style.display = 'block';
-    });
-
-    tagInput.addEventListener('blur', function () {
-        tagDropdown.style.display = 'none';
-    });
-});
-
 function showHideGenres() {
     const sidebar = document.querySelector(".showHideGenre");
     sidebar.classList.toggle("showGenre");
 }
 
-function toggleCheckbox(tagId) {
-    const checkbox = document.getElementById(`tag-${tagId}`);
-    checkbox.checked = !checkbox.checked;
-
-    const tagItem = document.querySelector(`[onclick="toggleCheckbox('${tagId}')"]`);
-    if (checkbox.checked) {
-        tagItem.classList.add('selected');
-    } else {
-        tagItem.classList.remove('selected');
-    }
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-    const checkboxes = document.querySelectorAll('.MUS-hidden-checkbox');
-    checkboxes.forEach(checkbox => {
-        const tagItem = document.querySelector(`[onclick="toggleCheckbox('${checkbox.value}')"]`);
-        if (checkbox.checked) {
-            tagItem.classList.add('selected');
-        }
+//New
+document.addEventListener("DOMContentLoaded", function () {
+    // Initialize constants and tag data
+    const tagInput = document.getElementById('tagInput');
+    const tagDropdown = document.getElementById('tagDropdown');
+    const selectedTagsList = document.getElementById('selectedTagsList');
+    let allTagsData = Array.from(document.querySelectorAll('.MUS-tag-genre-item')).map(tag => {
+        return {
+            id: tag.querySelector('.MUS-hidden-checkbox').id,
+            name: tag.querySelector('.MUS-tag-label').textContent,
+            checked: tag.querySelector('.MUS-hidden-checkbox').checked
+        };
     });
+
+    // Function to update the display of selected tags
+    function updateSelectedTagsDisplay() {
+        let selectedTags = [];
+        allTagsData.forEach(function (tag) {
+            if (tag.checked) {
+                selectedTags.push(tag.name);
+            }
+        });
+        selectedTagsList.textContent = selectedTags.join(", ");
+    }
+
+    // Function to add click events to checkboxes
+    function addCheckboxEvent(checkbox, tag) {
+        checkbox.addEventListener('change', function () {
+            tag.checked = checkbox.checked;
+            updateSelectedTagsDisplay();
+        });
+    }
+
+    // Function to display tags based on a list
+    function displayTags(tagList) {
+        tagDropdown.innerHTML = '';
+
+        tagList.forEach(tag => {
+            let tagItem = document.createElement('div');
+            tagItem.className = 'MUS-tag-genre-item';
+            tagItem.onclick = function () {
+                document.getElementById(tag.id).click();
+            };
+
+            let checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.className = 'MUS-hidden-checkbox';
+            checkbox.id = tag.id;
+            checkbox.name = 'SelectedTags';
+            checkbox.value = tag.id;
+            checkbox.checked = tag.checked;
+            addCheckboxEvent(checkbox, tag);
+
+            let label = document.createElement('label');
+            label.className = 'MUS-tag-label';
+            label.htmlFor = tag.id;
+            label.textContent = tag.name;
+
+            tagItem.appendChild(checkbox);
+            tagItem.appendChild(label);
+
+            tagDropdown.appendChild(tagItem);
+        });
+    }
+
+    // Function to filter and display tags
+    function filterTags() {
+        let query = tagInput.value.toLowerCase();
+        let filteredTags = allTagsData.filter(tag => tag.name.toLowerCase().includes(query));
+        displayTags(filteredTags);
+    }
+
+    // Event listener for filtering tags on input change
+    tagInput.addEventListener('input', function () {
+        filterTags();
+    });
+
+    // Initial display of tags
+    displayTags(allTagsData);
+    updateSelectedTagsDisplay();
 });
+
+////Middle Old
+//document.addEventListener("DOMContentLoaded", function () {
+//    // Initialize constants and tag data
+//    const tagInput = document.getElementById('tagInput');
+//    const tagDropdown = document.getElementById('tagDropdown');
+//    const selectedTagsList = document.getElementById('selectedTagsList');
+//    let allTagsData = Array.from(document.querySelectorAll('.MUS-tag-genre-item')).map(tag => {
+//        return {
+//            id: tag.querySelector('.MUS-hidden-checkbox').id,
+//            name: tag.querySelector('.MUS-tag-label').textContent,
+//            checked: tag.querySelector('.MUS-hidden-checkbox').checked
+//        };
+//    });
+
+//    // Function to update the display of selected tags
+//    function updateSelectedTagsDisplay() {
+//        let selectedTags = [];
+//        allTagsData.forEach(function (tag) {
+//            if (tag.checked) {
+//                selectedTags.push(tag.name);
+//            }
+//        });
+//        selectedTagsList.textContent = selectedTags.join(", ");
+//    }
+
+//    // Function to add click events to checkboxes
+//    function addCheckboxEvent(checkbox, tag) {
+//        checkbox.addEventListener('change', function () {
+//            tag.checked = checkbox.checked;
+//            updateSelectedTagsDisplay();
+//        });
+//    }
+
+//    // Function to filter and display tags
+//    function filterTags() {
+//        let query = tagInput.value.toLowerCase();
+//        tagDropdown.innerHTML = '';
+
+//        let filteredTags = allTagsData.filter(tag => tag.name.toLowerCase().includes(query));
+
+//        filteredTags.forEach(tag => {
+//            let tagItem = document.createElement('div');
+//            tagItem.className = 'MUS-tag-genre-item';
+//            tagItem.onclick = function () {
+//                document.getElementById(tag.id).click();
+//            };
+
+//            let checkbox = document.createElement('input');
+//            checkbox.type = 'checkbox';
+//            checkbox.className = 'MUS-hidden-checkbox';
+//            checkbox.id = tag.id;
+//            checkbox.name = 'SelectedTags';
+//            checkbox.value = tag.id;
+//            checkbox.checked = tag.checked;
+//            addCheckboxEvent(checkbox, tag);
+
+//            let label = document.createElement('label');
+//            label.className = 'MUS-tag-label';
+//            label.htmlFor = tag.id;
+//            label.textContent = tag.name;
+
+//            tagItem.appendChild(checkbox);
+//            tagItem.appendChild(label);
+
+//            tagDropdown.appendChild(tagItem);
+//        });
+//    }
+
+//    // Event listener for filtering tags on input change
+//    tagInput.addEventListener('input', function () {
+//        filterTags();
+//    });
+
+//    // Initial display of selected tags
+//    updateSelectedTagsDisplay();
+//});
+
+//Old
+//document.addEventListener("DOMContentLoaded", function () {
+//    // Initialize constants and tag data
+//    const tagInput = document.getElementById('tagInput');
+//    const tagDropdown = document.getElementById('tagDropdown');
+//    const selectedTagsList = document.getElementById('selectedTagsList');
+//    let allTagsData = Array.from(document.querySelectorAll('.MUS-tag-genre-item')).map(tag => {
+//        return {
+//            id: tag.querySelector('.MUS-hidden-checkbox').id,
+//            name: tag.querySelector('.MUS-tag-label').textContent
+//        };
+//    });
+
+//    // Function to update the display of selected tags
+//    function updateSelectedTagsDisplay() {
+//        let selectedTags = [];
+//        document.querySelectorAll('.MUS-hidden-checkbox:checked').forEach(function (checkbox) {
+//            let tagName = document.querySelector(`label[for="${checkbox.id}"]`).textContent;
+//            selectedTags.push(tagName);
+//        });
+//        selectedTagsList.textContent = selectedTags.join(", ");
+//    }
+
+//    // Function to add click events to checkboxes
+//    function addCheckboxEvent(checkbox) {
+//        checkbox.addEventListener('change', function () {
+//            updateSelectedTagsDisplay();
+//        });
+//    }
+
+//    // Add event listener to existing checkboxes
+//    document.querySelectorAll('.MUS-hidden-checkbox').forEach(function (checkbox) {
+//        addCheckboxEvent(checkbox);
+//    });
+
+//    // Function to filter and display tags
+//    function filterTags() {
+//        let query = tagInput.value.toLowerCase();
+//        tagDropdown.innerHTML = '';
+//        let filteredTags = allTagsData.filter(tag => tag.name.toLowerCase().includes(query));
+
+//        filteredTags.forEach(tag => {
+//            let tagItem = document.createElement('div');
+//            tagItem.className = 'MUS-tag-genre-item';
+//            tagItem.onclick = function () {
+//                document.getElementById(tag.id).click();
+//            };
+
+//            let checkbox = document.createElement('input');
+//            checkbox.type = 'checkbox';
+//            checkbox.className = 'MUS-hidden-checkbox';
+//            checkbox.id = tag.id;
+//            checkbox.name = 'SelectedTags';
+//            checkbox.value = tag.id;
+//            addCheckboxEvent(checkbox);
+
+//            let label = document.createElement('label');
+//            label.className = 'MUS-tag-label';
+//            label.htmlFor = tag.id;
+//            label.textContent = tag.name;
+
+//            tagItem.appendChild(checkbox);
+//            tagItem.appendChild(label);
+
+//            tagDropdown.appendChild(tagItem);
+//        });
+//    }
+
+//    // Event listener for filtering tags on input change
+//    tagInput.addEventListener('input', function () {
+//        filterTags();
+//    });
+
+//    // Initial display of selected tags
+//    updateSelectedTagsDisplay();
+//});
