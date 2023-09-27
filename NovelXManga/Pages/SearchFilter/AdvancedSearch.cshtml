@@ -56,7 +56,6 @@
             <input type="date" id="SearchReleaseYearEnd" name="SearchReleaseYearEnd" placeholder="YYYY">
         </div>
 
-
         <div id="selectedTagsSection">
             <span>Selected Tags:</span>
             <span id="selectedTagsList"></span>
@@ -64,7 +63,6 @@
 
         <div class="MUS-dropdown">
             <input type="text" id="tagInput" placeholder="Tags">
-
             <div class="MUS-dropdown-content" id="tagDropdown">
                 @foreach (var tag in Model.Tags ?? new List<TagModel>())
                 {
@@ -73,12 +71,11 @@
                         <label class="MUS-tag-label" for="tag-@tag.TagId">@tag.TagName</label>
                     </div>
                 }
-
             </div>
         </div>
+        <div id="hiddenContainer"></div>
 
-
-<button type="button" class="" onclick="showHideGenres()">Show/Hide Genres</button>
+        <button type="button" class="" onclick="showHideGenres()">Show/Hide Genres</button>
         <div class="showHideGenre">
             <label for="genres">Genres:</label>
             <div @*id="HideGenresWhen" class="hidden-tags"*@>
@@ -101,7 +98,7 @@
 
 
         <div class="">
-            <button type="submit" class="btn btn-primary">Search</button>
+            <button type="submit" id="searchButton" class="btn btn-primary">Search</button>
         </div>
 </form>
 

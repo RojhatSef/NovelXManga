@@ -56,7 +56,7 @@ namespace NovelXManga.Pages.SearchFilter
         public MangaModel _MangaModel { get; set; }
 
         [BindProperty]
-        [FromForm(Name = "selectedTags")]
+        [FromForm(Name = "JsSelectedTags")]
         public List<int> SelectedTags { get; set; }
 
         [BindProperty]
@@ -70,6 +70,7 @@ namespace NovelXManga.Pages.SearchFilter
         public int CurrentPage { get; set; }
         public int PageSize { get; set; }
         public int TotalPages { get; set; }
+        public List<int> JsSelectedTags { get; set; }
 
         public string Sanitize(string input)
         {
@@ -101,9 +102,12 @@ namespace NovelXManga.Pages.SearchFilter
         {
             try
             {
+                Console.WriteLine($"SelectedTags: {JsonSerializer.Serialize(SelectedTags)}");
                 int pageIndex = 1; // Set from query string or as a parameter
                 int pageSize = 8;  // Number of items per page
+
                 SelectedGenres = SelectedGenres ?? new List<int>();
+
                 SelectedTags = SelectedTags ?? new List<int>();
                 var selectedTagsSerialized = JsonSerializer.Serialize(SelectedTags);
                 var selectedGenresSerialized = JsonSerializer.Serialize(SelectedGenres);
@@ -168,6 +172,14 @@ namespace NovelXManga.Pages.SearchFilter
 
                 if (SelectedTags.Count > 0)
                 {
+                    //if (TagInclusionMode == "And")
+                    //{
+                    //    query = query.Where(m => SelectedTags.All(t => m.TagsModels.Any(tag => tag.TagId == t)));
+                    //}
+                    //else // "Or"
+                    //{
+                    //    query = query.Where(m => SelectedTags.Any(t => m.TagsModels.Any(tag => tag.TagId == t)));
+                    //}
                     query = query.Where(m => m.TagsModels.Any(t => SelectedTags.Contains(t.TagId)));
                 }
                 var list = query.ToList();
