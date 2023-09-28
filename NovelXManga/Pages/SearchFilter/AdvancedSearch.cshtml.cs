@@ -72,6 +72,12 @@ namespace NovelXManga.Pages.SearchFilter
         public int TotalPages { get; set; }
         public List<int> JsSelectedTags { get; set; }
 
+        [BindProperty]
+        public string TagInclusionMode { get; set; }
+
+        [BindProperty]
+        public string GenreInclusionMode { get; set; }
+
         public string Sanitize(string input)
         {
             return WebUtility.HtmlEncode(input);
@@ -167,20 +173,40 @@ namespace NovelXManga.Pages.SearchFilter
 
                 if (SelectedGenres.Count > 0)
                 {
-                    query = query.Where(m => m.GenresModels.Any(g => SelectedGenres.Contains(g.GenresId)));
+                    if (GenreInclusionMode == "And")
+                    {
+                        var mangaIds = context.mangaModels
+    .Select(m => new { m.MangaID, GenresId = m.GenresModels.Select(t => t.GenresId) })
+    .AsEnumerable()
+    .Where(m => SelectedGenres.All(t => m.GenresId.Contains(t)))
+    .Select(m => m.MangaID)
+    .ToList();
+
+                        query = query.Where(m => mangaIds.Contains(m.MangaID));
+                    }
+                    else // "Or"
+                    {
+                        query = query.Where(m => m.GenresModels.Any(g => SelectedGenres.Contains(g.GenresId)));
+                    }
                 }
 
                 if (SelectedTags.Count > 0)
                 {
-                    //if (TagInclusionMode == "And")
-                    //{
-                    //    query = query.Where(m => SelectedTags.All(t => m.TagsModels.Any(tag => tag.TagId == t)));
-                    //}
-                    //else // "Or"
-                    //{
-                    //    query = query.Where(m => SelectedTags.Any(t => m.TagsModels.Any(tag => tag.TagId == t)));
-                    //}
-                    query = query.Where(m => m.TagsModels.Any(t => SelectedTags.Contains(t.TagId)));
+                    if (TagInclusionMode == "And")
+                    {
+                        var mangaIds = context.mangaModels
+    .Select(m => new { m.MangaID, TagIds = m.TagsModels.Select(t => t.TagId) })
+    .AsEnumerable()
+    .Where(m => SelectedTags.All(t => m.TagIds.Contains(t)))
+    .Select(m => m.MangaID)
+    .ToList();
+
+                        query = query.Where(m => mangaIds.Contains(m.MangaID));
+                    }
+                    else // "Or"
+                    {
+                        query = query.Where(m => m.TagsModels.Any(t => SelectedTags.Contains(t.TagId)));
+                    }
                 }
                 var list = query.ToList();
                 list = list.Where(m => m.GenresModels.Any(g => SelectedGenres.Contains(g.GenresId))).ToList();
@@ -201,7 +227,8 @@ namespace NovelXManga.Pages.SearchFilter
                 // Consider using a logging library like NLog, Serilog, or even ILogger here.
                 Console.WriteLine($"Exception caught: {ex.Message}");
                 Console.WriteLine($"Stacktrace: {ex.StackTrace}");
-
+                Tags = await context.TagModels.ToListAsync();
+                Genres = await context.GenresModels.ToListAsync();
                 return Page(); // Return to the current page to display an error message to the user.
             }
         }
