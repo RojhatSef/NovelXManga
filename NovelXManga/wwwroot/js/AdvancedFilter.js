@@ -1,4 +1,62 @@
-﻿document.addEventListener("DOMContentLoaded", function () {
+﻿//document.addEventListener("DOMContentLoaded", function () {
+//    const form = document.getElementById('genreForm');
+//    const searchButton = document.getElementById('searchButton');
+//    const hiddenContainerPositive = document.getElementById('hiddenContainerPositive');
+//    const hiddenContainerNegative = document.getElementById('hiddenContainerNegative');
+//    const positiveSelectedGenres = new Set();
+//    const negativeSelectedGenres = new Set();
+
+//    function updateSelectedGenresInput(container, selectedGenres) {
+//        container.innerHTML = '';
+//        Array.from(selectedGenres).forEach(genreId => {
+//            let hiddenInput = document.createElement('input');
+//            hiddenInput.type = 'hidden';
+//            hiddenInput.name = container.id === 'hiddenContainerPositive' ? 'PositiveSelectedGenres' : 'NegativeSelectedGenres';
+//            hiddenInput.value = genreId;  // Name as per your server model
+//            hiddenInput.value = genreId;
+//            container.appendChild(hiddenInput);
+//        });
+//    }
+
+//    function setupMultiStateCheckboxes() {
+//        const checkboxes = document.querySelectorAll('.multi-state-checkbox');
+//        checkboxes.forEach((checkbox) => {
+//            checkbox.addEventListener('click', function (event) {
+//                const genreId = this.value;
+//                let clickCount = Number(this.getAttribute('data-click-count')) || 0;
+//                clickCount = (clickCount + 1) % 3;
+
+//                this.setAttribute('data-click-count', clickCount);
+//                this.checked = false;
+//                this.classList.remove("positive");
+//                this.classList.remove("negative");
+
+//                if (clickCount === 1) {
+//                    this.checked = true;
+//                    this.classList.add("positive");
+//                    positiveSelectedGenres.add(genreId);
+//                } else if (clickCount === 2) {
+//                    this.checked = true;
+//                    this.classList.add("negative");
+//                    negativeSelectedGenres.add(genreId);
+//                    positiveSelectedGenres.delete(genreId);
+//                } else if (clickCount === 0) {
+//                    negativeSelectedGenres.delete(genreId);
+//                }
+//            });
+//        });
+//    }
+
+//    searchButton.addEventListener("click", function (e) {
+//        e.preventDefault(); // Prevent default form submission
+//        updateSelectedGenresInput(hiddenContainerPositive, positiveSelectedGenres);
+//        updateSelectedGenresInput(hiddenContainerNegative, negativeSelectedGenres);
+//        form.submit();
+//    });
+
+//    setupMultiStateCheckboxes();
+//});
+document.addEventListener("DOMContentLoaded", function () {
     const form = document.getElementById('genreForm');
     const searchButton = document.getElementById('searchButton');
     const hiddenContainerPositive = document.getElementById('hiddenContainerPositive');
@@ -12,9 +70,46 @@
             let hiddenInput = document.createElement('input');
             hiddenInput.type = 'hidden';
             hiddenInput.name = container.id === 'hiddenContainerPositive' ? 'PositiveSelectedGenres' : 'NegativeSelectedGenres';
-            hiddenInput.value = genreId;  // Name as per your server model
             hiddenInput.value = genreId;
             container.appendChild(hiddenInput);
+        });
+    }
+
+    function saveState() {
+        localStorage.setItem('positiveSelectedGenres', JSON.stringify(Array.from(positiveSelectedGenres)));
+        localStorage.setItem('negativeSelectedGenres', JSON.stringify(Array.from(negativeSelectedGenres)));
+    }
+
+    function loadState() {
+        const savedPositive = localStorage.getItem('positiveSelectedGenres');
+        const savedNegative = localStorage.getItem('negativeSelectedGenres');
+
+        if (savedPositive) {
+            JSON.parse(savedPositive).forEach(id => positiveSelectedGenres.add(id));
+        }
+
+        if (savedNegative) {
+            JSON.parse(savedNegative).forEach(id => negativeSelectedGenres.add(id));
+        }
+    }
+
+    function initializeCheckboxes() {
+        loadState();
+        const checkboxes = document.querySelectorAll('.multi-state-checkbox');
+        checkboxes.forEach((checkbox) => {
+            const genreId = checkbox.value;
+            if (positiveSelectedGenres.has(genreId)) {
+                checkbox.checked = true;
+                checkbox.setAttribute('data-click-count', 1);
+                checkbox.classList.add("positive");
+            } else if (negativeSelectedGenres.has(genreId)) {
+                checkbox.checked = true;
+                checkbox.setAttribute('data-click-count', 2);
+                checkbox.classList.add("negative");
+            } else {
+                checkbox.checked = false;
+                checkbox.setAttribute('data-click-count', 0);
+            }
         });
     }
 
@@ -41,6 +136,7 @@
                     negativeSelectedGenres.add(genreId);
                     positiveSelectedGenres.delete(genreId);
                 } else if (clickCount === 0) {
+                    positiveSelectedGenres.delete(genreId);
                     negativeSelectedGenres.delete(genreId);
                 }
             });
@@ -48,15 +144,16 @@
     }
 
     searchButton.addEventListener("click", function (e) {
-        e.preventDefault(); // Prevent default form submission
+        e.preventDefault();
         updateSelectedGenresInput(hiddenContainerPositive, positiveSelectedGenres);
         updateSelectedGenresInput(hiddenContainerNegative, negativeSelectedGenres);
+        saveState();
         form.submit();
     });
 
+    initializeCheckboxes();
     setupMultiStateCheckboxes();
 });
-
 function showHideGenres() {
     const sidebar = document.querySelector(".showHideGenre");
     sidebar.classList.toggle("showGenre");
