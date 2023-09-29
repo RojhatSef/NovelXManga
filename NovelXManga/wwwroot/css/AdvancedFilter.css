@@ -6,14 +6,24 @@
     transition: margin-top 0.3s ease;
     overflow-y: hidden;
 }
+
 .selected {
     background-color: green;
+}
+
+input[type="checkbox"].positive + label {
+    background-color: green !important;
+}
+
+input[type="checkbox"].negative + label {
+    background-color: red !important;
 }
 
 #selectedTagsSection {
     margin-top: 20px;
     font-size: 16px;
 }
+
 .MUS-hidden-checkbox {
     display: none;
 }

@@ -1,18 +1,62 @@
 ﻿document.addEventListener("DOMContentLoaded", function () {
-    function setupMultiStateCheckboxes(selector) {
-        const checkboxes = document.querySelectorAll(`input[type="checkbox"][name="${selector}"]`);
+    const form = document.getElementById('genreForm');
+    const searchButton = document.getElementById('searchButton');
+    const hiddenContainerPositive = document.getElementById('hiddenContainerPositive');
+    const hiddenContainerNegative = document.getElementById('hiddenContainerNegative');
+    const positiveSelectedGenres = new Set();
+    const negativeSelectedGenres = new Set();
+
+    function updateSelectedGenresInput(container, selectedGenres) {
+        container.innerHTML = '';
+        Array.from(selectedGenres).forEach(genreId => {
+            let hiddenInput = document.createElement('input');
+            hiddenInput.type = 'hidden';
+            hiddenInput.name = container.id === 'hiddenContainerPositive' ? 'PositiveSelectedGenres' : 'NegativeSelectedGenres';
+            hiddenInput.value = genreId;  // Name as per your server model
+            hiddenInput.value = genreId;
+            container.appendChild(hiddenInput);
+        });
+    }
+
+    function setupMultiStateCheckboxes() {
+        const checkboxes = document.querySelectorAll('.multi-state-checkbox');
         checkboxes.forEach((checkbox) => {
             checkbox.addEventListener('click', function (event) {
+                const genreId = this.value;
                 let clickCount = Number(this.getAttribute('data-click-count')) || 0;
-                clickCount++;
+                clickCount = (clickCount + 1) % 3;
 
                 this.setAttribute('data-click-count', clickCount);
+                this.checked = false;
+                this.classList.remove("positive");
+                this.classList.remove("negative");
+
+                if (clickCount === 1) {
+                    this.checked = true;
+                    this.classList.add("positive");
+                    positiveSelectedGenres.add(genreId);
+                } else if (clickCount === 2) {
+                    this.checked = true;
+                    this.classList.add("negative");
+                    negativeSelectedGenres.add(genreId);
+                    positiveSelectedGenres.delete(genreId);
+                } else if (clickCount === 0) {
+                    negativeSelectedGenres.delete(genreId);
+                }
             });
         });
     }
 
-    setupMultiStateCheckboxes("selectedGenres");
+    searchButton.addEventListener("click", function (e) {
+        e.preventDefault(); // Prevent default form submission
+        updateSelectedGenresInput(hiddenContainerPositive, positiveSelectedGenres);
+        updateSelectedGenresInput(hiddenContainerNegative, negativeSelectedGenres);
+        form.submit();
+    });
+
+    setupMultiStateCheckboxes();
 });
+
 function showHideGenres() {
     const sidebar = document.querySelector(".showHideGenre");
     sidebar.classList.toggle("showGenre");

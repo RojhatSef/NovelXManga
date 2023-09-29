@@ -60,8 +60,12 @@ namespace NovelXManga.Pages.SearchFilter
         public List<int> SelectedTags { get; set; }
 
         [BindProperty]
-        [FromForm(Name = "selectedGenres")]
-        public List<int> SelectedGenres { get; set; }
+        [FromForm(Name = "PositiveSelectedGenres")]
+        public List<int> PositiveSelectedGenres { get; set; }
+
+        [BindProperty]
+        [FromForm(Name = "NegativeSelectedGenres")]
+        public List<int> NegativeSelectedGenres { get; set; }
 
         public List<TagModel> Tags { get; set; }
         public List<GenresModel> Genres { get; set; }
@@ -112,11 +116,11 @@ namespace NovelXManga.Pages.SearchFilter
                 int pageIndex = 1; // Set from query string or as a parameter
                 int pageSize = 8;  // Number of items per page
 
-                SelectedGenres = SelectedGenres ?? new List<int>();
-
+                PositiveSelectedGenres = PositiveSelectedGenres ?? new List<int>();
+                NegativeSelectedGenres = NegativeSelectedGenres ?? new List<int>();
                 SelectedTags = SelectedTags ?? new List<int>();
                 var selectedTagsSerialized = JsonSerializer.Serialize(SelectedTags);
-                var selectedGenresSerialized = JsonSerializer.Serialize(SelectedGenres);
+                var selectedGenresSerialized = JsonSerializer.Serialize(PositiveSelectedGenres);
 
                 var search = !string.IsNullOrEmpty(Search) ? HtmlEncoder.Default.Encode(Search) : Search;
                 var searchAuthor = !string.IsNullOrEmpty(SearchAuthor) ? HtmlEncoder.Default.Encode(SearchAuthor) : SearchAuthor;
@@ -171,14 +175,14 @@ namespace NovelXManga.Pages.SearchFilter
                     query = query.Where(m => m.ReleaseYear <= SearchReleaseYearEnd.Value);
                 }
 
-                if (SelectedGenres.Count > 0)
+                if (PositiveSelectedGenres.Count > 0)
                 {
                     if (GenreInclusionMode == "And")
                     {
                         var mangaIds = context.mangaModels
     .Select(m => new { m.MangaID, GenresId = m.GenresModels.Select(t => t.GenresId) })
     .AsEnumerable()
-    .Where(m => SelectedGenres.All(t => m.GenresId.Contains(t)))
+    .Where(m => PositiveSelectedGenres.All(t => m.GenresId.Contains(t)))
     .Select(m => m.MangaID)
     .ToList();
 
@@ -186,7 +190,7 @@ namespace NovelXManga.Pages.SearchFilter
                     }
                     else // "Or"
                     {
-                        query = query.Where(m => m.GenresModels.Any(g => SelectedGenres.Contains(g.GenresId)));
+                        query = query.Where(m => m.GenresModels.Any(g => PositiveSelectedGenres.Contains(g.GenresId)));
                     }
                 }
 
@@ -209,7 +213,7 @@ namespace NovelXManga.Pages.SearchFilter
                     }
                 }
                 var list = query.ToList();
-                list = list.Where(m => m.GenresModels.Any(g => SelectedGenres.Contains(g.GenresId))).ToList();
+                list = list.Where(m => m.GenresModels.Any(g => PositiveSelectedGenres.Contains(g.GenresId))).ToList();
                 list = list.Where(m => m.TagsModels.Any(t => SelectedTags.Contains(t.TagId))).ToList();
 
                 var sql = query.ToQueryString();
@@ -249,7 +253,7 @@ namespace NovelXManga.Pages.SearchFilter
 
             if (!string.IsNullOrEmpty(selectedGenresSession))
             {
-                SelectedGenres = JsonSerializer.Deserialize<List<int>>(selectedGenresSession);
+                PositiveSelectedGenres = JsonSerializer.Deserialize<List<int>>(selectedGenresSession);
             }
             //MangaModels = await mangaRepository.GetAllModelAsync();
 

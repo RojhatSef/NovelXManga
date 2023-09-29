@@ -79,8 +79,8 @@
 
         <button type="button" class="" onclick="showHideGenres()">Show/Hide Genres</button>
         <div class="showHideGenre">
-            <label for="genres">Genres:</label>
-            <div @*id="HideGenresWhen" class="hidden-tags"*@>
+           @* <label for="genres">Genres:</label>
+            <div>
                 @foreach (var genre in Model.Genres ?? new List<GenresModel>())
                 {
                     if ((Model.Genres?.IndexOf(genre) ?? 0) % 3 == 0)
@@ -88,15 +88,31 @@
                         @Html.Raw("</div><div class=\"TagGenreSpacer\">")
                     }
                     <div class="">
-
-
-                        <input type="checkbox" id="genre-@genre.GenresId" name="SelectedGenres" value="@genre.GenresId" @(Model.SelectedGenres?.Contains(genre.GenresId) ?? false ? "checked" : "")>
+                        <input type="checkbox" class="multi-state-checkbox" id="genre-@genre.GenresId" name="SelectedGenres" value="@genre.GenresId" @(Model.SelectedGenres?.Contains(genre.GenresId) ?? false ? "checked" : "") data-click-count="0">
+                        <label for="genre-@genre.GenresId">@genre.GenreName</label>
+                    </div>
+                }
+            </div>*@
+            <label for="genres">Genres:</label>
+            <div>
+                @foreach (var genre in Model.Genres ?? new List<GenresModel>())
+                {
+                    if ((Model.Genres?.IndexOf(genre) ?? 0) % 3 == 0)
+                    {
+                        @Html.Raw("</div><div class=\"TagGenreSpacer\">")
+                    }
+                    <div class="">
+                        <input type="checkbox" class="multi-state-checkbox" id="genre-@genre.GenresId" name="Dummy" value="@genre.GenresId" @(Model.PositiveSelectedGenres?.Contains(genre.GenresId) ?? false ? "checked" : "") data-click-count="0">
                         <label for="genre-@genre.GenresId">@genre.GenreName</label>
                     </div>
                 }
             </div>
+        
+            <div id="hiddenContainerPositive"></div>
+            <div id="hiddenContainerNegative"></div>
             <button type="button" class="" onclick="showHideGenres()">Show/Hide Genres</button>
         </div>
+
 
 
         <div class="">
