@@ -16,27 +16,27 @@
         </div>   
         <div class="Row2">
             <div class="LeftSide">
-                <label for="TagInclusionMode">Tag Inclusion Mode:</label>
-                <select id="TagInclusionMode" name="TagInclusionMode" >
-                    <option value="And">And</option>
-                    <option value="Or">Or</option>
+                <label >Tag Inclusion Mode:</label>
+                <select id="TagInclusionMode" name="TagInclusionMode">
+                    <option value="And" selected="@(Model.TagInclusionMode == "And")">And</option>
+                    <option value="Or" selected="@(Model.TagInclusionMode == "Or")">Or</option>
+                </select>
+                <label >Tag Exclusion Mode:</label>
+                <select id="TagExclusionMode" name="TagExclusionMode">
+                    <option value="And" selected="@(Model.TagExclusionMode == "And")">And</option>
+                    <option value="Or" selected="@(Model.TagExclusionMode == "Or")">Or</option>
+                </select>
+                <label>Genre Inclusion Mode:</label>
+                <select id="GenreInclusionMode" name="GenreInclusionMode">
+                    <option value="And" selected="@(Model.GenreInclusionMode == "And")">And</option>
+                    <option value="Or" selected="@(Model.GenreInclusionMode == "Or")">Or</option>
+                </select>
+                <label>Tag Exclusion Mode:</label>
+                <select id="GenreExclusionMode" name="GenreExclusionMode">
+                    <option value="And" selected="@(Model.GenreExclusionMode == "And")">And</option>
+                    <option value="Or" selected="@(Model.GenreExclusionMode == "Or")">Or</option>
                 </select>
 
-                <label for="TagExclusionMode">Tag Exclusion Mode:</label>
-                <select id="TagExclusionMode" name="TagExclusionMode">
-                    <option value="And">And</option>
-                    <option value="Or">Or</option>
-                </select>
-                <label for="GenreInclusionMode">Genre Inclusion Mode:</label>
-                <select id="GenreInclusionMode" name="GenreInclusionMode">
-                    <option value="And">And</option>
-                    <option value="Or">Or</option>
-                </select>
-                <label for="GenreExclusionMode">Genre Exclusion Mode:</label>
-                <select id="GenreExclusionMode" name="GenreExclusionMode">
-                    <option value="And">And</option>
-                    <option value="Or">Or</option>
-                </select>
             </div>
             <div class="RightSide">
                 <label for="SearchReleaseYearStart" class="CalendarIcon">Search Start Year:
@@ -79,20 +79,7 @@
 
         <button type="button" class="" onclick="showHideGenres()">Show/Hide Genres</button>
         <div class="showHideGenre">
-           @* <label for="genres">Genres:</label>
-            <div>
-                @foreach (var genre in Model.Genres ?? new List<GenresModel>())
-                {
-                    if ((Model.Genres?.IndexOf(genre) ?? 0) % 3 == 0)
-                    {
-                        @Html.Raw("</div><div class=\"TagGenreSpacer\">")
-                    }
-                    <div class="">
-                        <input type="checkbox" class="multi-state-checkbox" id="genre-@genre.GenresId" name="SelectedGenres" value="@genre.GenresId" @(Model.SelectedGenres?.Contains(genre.GenresId) ?? false ? "checked" : "") data-click-count="0">
-                        <label for="genre-@genre.GenresId">@genre.GenreName</label>
-                    </div>
-                }
-            </div>*@
+ 
             <label for="genres">Genres:</label>
             <div>
                 @foreach (var genre in Model.Genres ?? new List<GenresModel>())

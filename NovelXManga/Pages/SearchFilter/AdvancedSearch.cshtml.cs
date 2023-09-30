@@ -80,7 +80,13 @@ namespace NovelXManga.Pages.SearchFilter
         public string TagInclusionMode { get; set; }
 
         [BindProperty]
+        public string TagExclusionMode { get; set; }
+
+        [BindProperty]
         public string GenreInclusionMode { get; set; }
+
+        [BindProperty]
+        public string GenreExclusionMode { get; set; }
 
         public string Sanitize(string input)
         {
@@ -115,7 +121,10 @@ namespace NovelXManga.Pages.SearchFilter
                 Console.WriteLine($"SelectedTags: {JsonSerializer.Serialize(SelectedTags)}");
                 int pageIndex = 1; // Set from query string or as a parameter
                 int pageSize = 8;  // Number of items per page
-
+                _httpContextAccessor.HttpContext.Session.SetString("TagInclusionMode", TagInclusionMode);
+                _httpContextAccessor.HttpContext.Session.SetString("TagExclusionMode", TagExclusionMode);
+                _httpContextAccessor.HttpContext.Session.SetString("GenreInclusionMode", GenreInclusionMode);
+                _httpContextAccessor.HttpContext.Session.SetString("GenreExclusionMode", GenreExclusionMode);
                 PositiveSelectedGenres = PositiveSelectedGenres ?? new List<int>();
                 NegativeSelectedGenres = NegativeSelectedGenres ?? new List<int>();
                 SelectedTags = SelectedTags ?? new List<int>();
@@ -241,7 +250,10 @@ namespace NovelXManga.Pages.SearchFilter
         {
             Tags = await context.TagModels.ToListAsync();
             Genres = await context.GenresModels.ToListAsync();
-
+            TagInclusionMode = _httpContextAccessor.HttpContext.Session.GetString("TagInclusionMode") ?? "And";
+            TagExclusionMode = _httpContextAccessor.HttpContext.Session.GetString("TagExclusionMode") ?? "And";
+            GenreInclusionMode = _httpContextAccessor.HttpContext.Session.GetString("GenreInclusionMode") ?? "And";
+            GenreExclusionMode = _httpContextAccessor.HttpContext.Session.GetString("GenreExclusionMode") ?? "And";
             // Retrieve selected tags and genres from session
             var selectedTagsSession = _httpContextAccessor.HttpContext.Session.GetString("SelectedTags");
             var selectedGenresSession = _httpContextAccessor.HttpContext.Session.GetString("SelectedGenres");
