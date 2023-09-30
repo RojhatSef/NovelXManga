@@ -202,7 +202,9 @@ namespace NovelXManga.Pages.SearchFilter
                         query = query.Where(m => m.GenresModels.Any(g => PositiveSelectedGenres.Contains(g.GenresId)));
                     }
                 }
-
+                if (NegativeSelectedGenres.Count > 0)
+                {
+                }
                 if (SelectedTags.Count > 0)
                 {
                     if (TagInclusionMode == "And")
