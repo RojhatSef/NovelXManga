@@ -77,27 +77,23 @@
         <div id="hiddenContainer"></div>
 
 
-        <button type="button" class="" onclick="showHideGenres()">Show/Hide Genres</button>
-        <div class="showHideGenre">
- 
+        
+        <div>
+
             <label for="genres">Genres:</label>
-            <div>
+            <div class="MUS-genre-container">
                 @foreach (var genre in Model.Genres ?? new List<GenresModel>())
                 {
-                    if ((Model.Genres?.IndexOf(genre) ?? 0) % 3 == 0)
-                    {
-                        @Html.Raw("</div><div class=\"TagGenreSpacer\">")
-                    }
-                    <div class="">
-                        <input type="checkbox" class="multi-state-checkbox" id="genre-@genre.GenresId" name="Dummy" value="@genre.GenresId" @(Model.PositiveSelectedGenres?.Contains(genre.GenresId) ?? false ? "checked" : "") data-click-count="0">
+                    <div class="MUS-genre" data-genre-id="@genre.GenresId">
+                        <input type="checkbox" class="MUS-hidden-checkbox multi-state-checkbox" id="genre-@genre.GenresId" value="@genre.GenresId" @(Model.PositiveSelectedGenres?.Contains(genre.GenresId) ?? false ? "checked" : "") data-click-count="0">
                         <label for="genre-@genre.GenresId">@genre.GenreName</label>
                     </div>
                 }
             </div>
-        
             <div id="hiddenContainerPositive"></div>
             <div id="hiddenContainerNegative"></div>
-            <button type="button" class="" onclick="showHideGenres()">Show/Hide Genres</button>
+
+       
         </div>
 
 
