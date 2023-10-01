@@ -84,12 +84,18 @@ input[type="checkbox"].negative + label {
 }
 
     .MUS-genre label {
-        padding: 10px 20px; /* Padding added here for extending background */
+        padding: 10px 20px;
         margin: 0;
         display: inline-block;
         position: relative;
         z-index: 1;
+        border-radius: 5px;
     }
+
+        .MUS-genre label:hover {
+            border-radius: 0px;
+            transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        }
 
     .MUS-genre::before {
         content: "";

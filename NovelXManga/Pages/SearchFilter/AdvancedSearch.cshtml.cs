@@ -189,11 +189,11 @@ namespace NovelXManga.Pages.SearchFilter
                     if (GenreInclusionMode == "And")
                     {
                         var mangaIds = context.mangaModels
-    .Select(m => new { m.MangaID, GenresId = m.GenresModels.Select(t => t.GenresId) })
-    .AsEnumerable()
-    .Where(m => PositiveSelectedGenres.All(t => m.GenresId.Contains(t)))
-    .Select(m => m.MangaID)
-    .ToList();
+                      .Select(m => new { m.MangaID, GenresId = m.GenresModels.Select(t => t.GenresId) })
+                      .AsEnumerable()
+                      .Where(m => PositiveSelectedGenres.All(t => m.GenresId.Contains(t)))
+                       .Select(m => m.MangaID)
+                       .ToList();
 
                         query = query.Where(m => mangaIds.Contains(m.MangaID));
                     }
@@ -202,9 +202,7 @@ namespace NovelXManga.Pages.SearchFilter
                         query = query.Where(m => m.GenresModels.Any(g => PositiveSelectedGenres.Contains(g.GenresId)));
                     }
                 }
-                if (NegativeSelectedGenres.Count > 0)
-                {
-                }
+
                 if (SelectedTags.Count > 0)
                 {
                     if (TagInclusionMode == "And")
@@ -221,6 +219,31 @@ namespace NovelXManga.Pages.SearchFilter
                     else // "Or"
                     {
                         query = query.Where(m => m.TagsModels.Any(t => SelectedTags.Contains(t.TagId)));
+                    }
+                }
+                if (NegativeSelectedGenres.Count > 0)
+                {
+                    if (GenreExclusionMode == "And")
+                    {
+                        if (PositiveSelectedGenres.Count == 0)
+                        {
+                            var excludeMangaIds = context.mangaModels
+                                .Select(m => new { m.MangaID, GenresId = m.GenresModels.Select(t => t.GenresId) })
+                                .AsEnumerable()
+                                .Where(m => !NegativeSelectedGenres.All(t => m.GenresId.Contains(t)))
+                                .Select(m => m.MangaID)
+                                .ToList();
+
+                            query = query.Where(m => excludeMangaIds.Contains(m.MangaID));
+                        }
+                        else
+                        {
+                            query = query.Where(m => !m.GenresModels.Any(g => NegativeSelectedGenres.Contains(g.GenresId)));
+                        }
+                    }
+                    else // "Or"
+                    {
+                        query = query.Where(m => !m.GenresModels.Any(g => NegativeSelectedGenres.Contains(g.GenresId)));
                     }
                 }
                 var list = query.ToList();
