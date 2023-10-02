@@ -71,15 +71,6 @@ namespace NovelXManga.Pages.SearchFilter
         [FromForm(Name = "NegativeSelectedGenres")]
         public List<int> NegativeSelectedGenres { get; set; }
 
-        public List<TagModel> Tags { get; set; }
-        public List<GenresModel> Genres { get; set; }
-        public IEnumerable<MangaModel> MangaModels { get; set; }
-        public string SearchTerm { get; set; }
-        public int CurrentPage { get; set; }
-        public int PageSize { get; set; }
-        public int TotalPages { get; set; }
-        public List<int> JsSelectedTags { get; set; }
-
         [BindProperty]
         public string TagInclusionMode { get; set; }
 
@@ -91,6 +82,15 @@ namespace NovelXManga.Pages.SearchFilter
 
         [BindProperty]
         public string GenreExclusionMode { get; set; }
+
+        public List<TagModel> Tags { get; set; }
+        public List<GenresModel> Genres { get; set; }
+        public IEnumerable<MangaModel> MangaModels { get; set; }
+        public string SearchTerm { get; set; }
+        public int CurrentPage { get; set; }
+        public int PageSize { get; set; }
+        public int TotalPages { get; set; }
+        public List<int> JsSelectedTags { get; set; }
 
         public string Sanitize(string input)
         {
