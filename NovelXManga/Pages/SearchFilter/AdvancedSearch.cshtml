@@ -56,7 +56,7 @@
             <label for="SearchReleaseYearEnd">Search End Year:</label>
             <input type="date" id="SearchReleaseYearEnd" name="SearchReleaseYearEnd" placeholder="YYYY">
         </div>
-
+@*        Positive Tag*@
         <div id="selectedTagsSection">
             <span>Selected Tags:</span>
             <span id="selectedTagsList"></span>
@@ -76,6 +76,30 @@
         </div>
       
         <div id="hiddenContainer"></div>
+
+        @*Negative Tag*@
+        <div id="negativeSelectedTagsSection">
+            <span>Negative Selected Tags:</span>
+            <span id="negativeSelectedTagsList"></span>
+        </div>
+
+        <div class="MUS-negative-dropdown">
+            <input type="text" id="negativeTagInput" placeholder="Negative Tags">
+            <div class="MUS-negative-dropdown-content" id="negativeTagDropdown">
+                @foreach (var tag in Model.Tags ?? new List<TagModel>())
+                {
+                    <div class="MUS-negative-tag-genre-item" onclick="document.getElementById('negative-tag-@tag.TagId').click();">
+                  <input type="checkbox" class="MUS-hidden-checkbox" id="negative-tag-@tag.TagId" value="@tag.TagId" @(Model.NegativeSelectedTags?.Contains(tag.TagId) ?? false ? "checked" : "")>
+
+
+                        <label class="MUS-negative-tag-label" for="negative-tag-@tag.TagId">@tag.TagName</label>
+                    </div>
+                }
+            </div>
+        </div>
+        <div id="negativeHiddenContainer"></div>
+
+
 
 
         

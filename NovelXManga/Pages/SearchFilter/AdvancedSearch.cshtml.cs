@@ -60,6 +60,10 @@ namespace NovelXManga.Pages.SearchFilter
         public List<int> SelectedTags { get; set; }
 
         [BindProperty]
+        [FromForm(Name = "NegativeSelectedTags")]
+        public List<int> NegativeSelectedTags { get; set; }
+
+        [BindProperty]
         [FromForm(Name = "PositiveSelectedGenres")]
         public List<int> PositiveSelectedGenres { get; set; }
 
@@ -128,8 +132,11 @@ namespace NovelXManga.Pages.SearchFilter
                 PositiveSelectedGenres = PositiveSelectedGenres ?? new List<int>();
                 NegativeSelectedGenres = NegativeSelectedGenres ?? new List<int>();
                 SelectedTags = SelectedTags ?? new List<int>();
+                NegativeSelectedTags = NegativeSelectedTags ?? new List<int>();
                 var selectedTagsSerialized = JsonSerializer.Serialize(SelectedTags);
                 var selectedGenresSerialized = JsonSerializer.Serialize(PositiveSelectedGenres);
+                var negativesSlectedTagsSerialized = JsonSerializer.Serialize(NegativeSelectedTags);
+                var negativesSelectedGenresSerialized = JsonSerializer.Serialize(NegativeSelectedGenres);
 
                 var search = !string.IsNullOrEmpty(Search) ? HtmlEncoder.Default.Encode(Search) : Search;
                 var searchAuthor = !string.IsNullOrEmpty(SearchAuthor) ? HtmlEncoder.Default.Encode(SearchAuthor) : SearchAuthor;
@@ -244,6 +251,31 @@ namespace NovelXManga.Pages.SearchFilter
                     else // "Or"
                     {
                         query = query.Where(m => !m.GenresModels.Any(g => NegativeSelectedGenres.Contains(g.GenresId)));
+                    }
+                }
+                if (NegativeSelectedTags.Count > 0)
+                {
+                    if (TagExclusionMode == "And")
+                    {
+                        if (SelectedTags.Count == 0)
+                        {
+                            var excludeMangaIds = context.mangaModels
+                                .Select(m => new { m.MangaID, TagId = m.TagsModels.Select(t => t.TagId) })
+                                .AsEnumerable()
+                                .Where(m => !NegativeSelectedTags.All(t => m.TagId.Contains(t)))
+                                .Select(m => m.MangaID)
+                                .ToList();
+
+                            query = query.Where(m => excludeMangaIds.Contains(m.MangaID));
+                        }
+                        else
+                        {
+                            query = query.Where(m => !m.TagsModels.Any(g => NegativeSelectedTags.Contains(g.TagId)));
+                        }
+                    }
+                    else // "Or"
+                    {
+                        query = query.Where(m => !m.TagsModels.Any(g => NegativeSelectedTags.Contains(g.TagId)));
                     }
                 }
                 var list = query.ToList();

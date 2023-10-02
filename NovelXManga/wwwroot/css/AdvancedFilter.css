@@ -23,7 +23,7 @@ input[type="checkbox"].negative + label {
     font-size: 16px;
 }
 
-.MUS-hidden-checkbox {
+.MUS-hidden-checkbox, .MUS-hidden-checkbox {
     display: none;
 }
 
@@ -37,16 +37,21 @@ input[type="checkbox"].negative + label {
         background-color: blue;
     }
 
-.MUS-tag-label {
-    flex-grow: 1;
-    text-align: left;
+.MUS-negative-tag-genre-item {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
 }
 
-.MUS-dropdown {
+    .MUS-negative-tag-genre-item.selected {
+        background-color: blue;
+    }
+
+.MUS-dropdown, .MUS-negative-dropdown {
     position: relative;
 }
 
-.MUS-dropdown-content {
+.MUS-dropdown-content, .MUS-negative-dropdown-content {
     position: absolute;
     z-index: 100;
     width: 200px;
@@ -58,6 +63,11 @@ input[type="checkbox"].negative + label {
     transform: translateX(-50%);
     display: none;
     color: black;
+}
+
+.MUS-tag-label, .MUS-negative-tag-label {
+    flex-grow: 1;
+    text-align: left;
 }
 
 .MUS-genre-container {
@@ -129,10 +139,6 @@ input[type="checkbox"].negative + label {
     .MUS-genre {
         flex-direction: row;
     }
-}
-
-.MUS-dropdown:hover .MUS-dropdown-content {
-    display: block;
 }
 
 @media only screen and (max-width: 1200px) {
@@ -321,6 +327,10 @@ input[type="checkbox"].negative + label {
     font-size: 20px;
     background-color: #333;
     height: 26px;
+}
+
+.MUS-negative-dropdown:hover .MUS-negative-dropdown-content, .MUS-dropdown:hover .MUS-dropdown-content {
+    display: block;
 }
 
 .MUS-ANoneStyle {
