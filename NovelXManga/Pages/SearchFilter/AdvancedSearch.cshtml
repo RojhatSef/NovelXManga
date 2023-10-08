@@ -1,6 +1,7 @@
 ﻿@page
 @model NovelXManga.Pages.SearchFilter.AdvancedSearchModel
 @{
+
 }
 
 
@@ -18,13 +19,16 @@
             <div class="LeftSide">
                 <label >Tag Inclusion Mode:</label>
                 <select id="TagInclusionMode" name="TagInclusionMode">
+                  
                     <option value="And" selected="@(Model.TagInclusionMode == "And")">And</option>
                     <option value="Or" selected="@(Model.TagInclusionMode == "Or")">Or</option>
+               
                 </select>
                 <label >Tag Exclusion Mode:</label>
                 <select id="TagExclusionMode" name="TagExclusionMode">
-                    <option value="And" selected="@(Model.TagExclusionMode == "And")">And</option>
                     <option value="Or" selected="@(Model.TagExclusionMode == "Or")">Or</option>
+                    <option value="And" selected="@(Model.TagExclusionMode == "And")">And</option>
+                
                 </select>
                 <label>Genre Inclusion Mode:</label>
                 <select id="GenreInclusionMode" name="GenreInclusionMode">
@@ -33,8 +37,9 @@
                 </select>
                 <label>Tag Exclusion Mode:</label>
                 <select id="GenreExclusionMode" name="GenreExclusionMode">
-                    <option value="And" selected="@(Model.GenreExclusionMode == "And")">And</option>
+                
                     <option value="Or" selected="@(Model.GenreExclusionMode == "Or")">Or</option>
+                    <option value="And" selected="@(Model.GenreExclusionMode == "And")">And</option>
                 </select>
 
             </div>
@@ -124,30 +129,24 @@
 
 
         <div class="">
-            <button type="submit" id="searchButton" class="btn btn-custom-primary-login-forgott">Search</button>
+            <button type="submit" id="searchButton" class="btn btn-custom-primary-Search">Search</button>
         </div>
 </form>
 <hr style="width:100vh"/>
 
 
-    <div class="MUS-cardFourOfaKind">
-
+    <div class="MUS-cardFourOfaKind" id="bookContainer">
         <div class="MUS-CardFour">
             @if (Model.MangaModels.Any())
             {
                 @foreach (var book in Model.MangaModels)
                 {
                     <div class="MUS-FourOfAKind">
-
                         <a class="MUS-ANoneStyle" asp-page="/Manga/CurrentManga" asp-route-id="@book.MangaID">
                             <img class="MUS-BoxImage" src="~/Images/GeneratedMangaImage/@book.PhotoPath" />
-
-
                             <div class="MUS-FourofKindContent">
                                 <h2>@book.MangaName</h2>
-                                <p>@book.Description</p>
-
-
+                                <p class="MUS-description">@book.Description</p>
                             </div>
                         </a>
                     </div>
@@ -157,14 +156,15 @@
             {
                 <p>No manga found for your search criteria.</p>
             }
-
-
         </div>
-
-
     </div>
+    <div id="moreButtonDiv" class="NumberContainer">
+        <button type="button" id="moreButton" class="btn btn-custom-primary-Search">More</button>
+        <input type="hidden" id="totalPages" value="@Model.TotalPages" />
+    </div>
+    
 </div>
 
-<script src="~/js/ShowHideTagsGenres.js" asp-append-version="true"></script>
+
 
 *<script src="~/js/AdvancedFilter.js" asp-append-version="true"></script>

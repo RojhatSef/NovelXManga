@@ -88,7 +88,7 @@ namespace NovelXManga.Pages.SearchFilter
         public IEnumerable<MangaModel> MangaModels { get; set; }
         public string SearchTerm { get; set; }
         public int CurrentPage { get; set; }
-        public int PageSize { get; set; }
+        public int MoreBooksClicks { get; set; }
         public int TotalPages { get; set; }
         public List<int> JsSelectedTags { get; set; }
 
@@ -123,8 +123,8 @@ namespace NovelXManga.Pages.SearchFilter
             try
             {
                 Console.WriteLine($"SelectedTags: {JsonSerializer.Serialize(SelectedTags)}");
-                int pageIndex = 1; // Set from query string or as a parameter
-                int pageSize = 8;  // Number of items per page
+                CurrentPage = 1; // Set from query string or as a parameter
+                MoreBooksClicks = 8;  // Number of items per page
                 _httpContextAccessor.HttpContext.Session.SetString("TagInclusionMode", TagInclusionMode);
                 _httpContextAccessor.HttpContext.Session.SetString("TagExclusionMode", TagExclusionMode);
                 _httpContextAccessor.HttpContext.Session.SetString("GenreInclusionMode", GenreInclusionMode);
@@ -284,8 +284,13 @@ namespace NovelXManga.Pages.SearchFilter
 
                 var sql = query.ToQueryString();
 
-                TotalPages = (int)Math.Ceiling(await query.CountAsync() / (double)pageSize);
-                MangaModels = await query.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToListAsync();
+                TotalPages = (int)Math.Ceiling(await query.CountAsync() / (double)MoreBooksClicks);
+                _httpContextAccessor.HttpContext.Session.SetInt32("TotalPages", TotalPages);
+                _httpContextAccessor.HttpContext.Session.SetString("IsSearchClicked", "true");
+
+                query = query.Skip((CurrentPage - 1) * MoreBooksClicks).Take(MoreBooksClicks);
+                MangaModels = await query.ToListAsync();
+
                 Tags = await context.TagModels.ToListAsync();
                 Genres = await context.GenresModels.ToListAsync();
 
@@ -308,9 +313,9 @@ namespace NovelXManga.Pages.SearchFilter
             Tags = await context.TagModels.ToListAsync();
             Genres = await context.GenresModels.ToListAsync();
             TagInclusionMode = _httpContextAccessor.HttpContext.Session.GetString("TagInclusionMode") ?? "And";
-            TagExclusionMode = _httpContextAccessor.HttpContext.Session.GetString("TagExclusionMode") ?? "And";
+            TagExclusionMode = _httpContextAccessor.HttpContext.Session.GetString("TagExclusionMode") ?? "Or";
             GenreInclusionMode = _httpContextAccessor.HttpContext.Session.GetString("GenreInclusionMode") ?? "And";
-            GenreExclusionMode = _httpContextAccessor.HttpContext.Session.GetString("GenreExclusionMode") ?? "And";
+            GenreExclusionMode = _httpContextAccessor.HttpContext.Session.GetString("GenreExclusionMode") ?? "Or";
             // Retrieve selected tags and genres from session
             var selectedTagsSession = _httpContextAccessor.HttpContext.Session.GetString("SelectedTags");
             var selectedGenresSession = _httpContextAccessor.HttpContext.Session.GetString("SelectedGenres");
@@ -327,6 +332,28 @@ namespace NovelXManga.Pages.SearchFilter
             //MangaModels = await mangaRepository.GetAllModelAsync();
 
             return Page();
+        }
+
+        public async Task<IActionResult> OnGetBooksPage(int currentPage, int pageSiz)
+        {
+            try
+            {
+                var query = context.mangaModels.AsQueryable();
+                int totalCount = await query.CountAsync();
+                query = query.Skip((currentPage - 1) * pageSiz).Take(pageSiz);
+                var mangaModels = await query.ToListAsync();
+
+                int totalPages = (int)Math.Ceiling(totalCount / (double)pageSiz);
+
+                Console.WriteLine($"CurrentPage: {currentPage}, PageSize: {pageSiz}, TotalCount: {totalCount}, TotalPages: {totalPages}");  // Log the values
+
+                return new JsonResult(new { CurrentPage = currentPage, Books = mangaModels, TotalPages = totalPages });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Exception: {ex.Message}");  // Log the exception
+                return StatusCode(500, new { message = "Internal server error" });
+            }
         }
     }
 }

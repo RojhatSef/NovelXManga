@@ -117,55 +117,9 @@ input[type="checkbox"].negative + label {
         z-index: 0;
     }
 
-/* Mobile */
-@media (max-width: 480px) {
-    .MUS-genre {
-        flex-direction: column;
-    }
 
-    .MUS-genre-container {
-        margin-left: 0;
-        margin-right: 0;
-    }
 
-    .btn-custom-primary-login-forgott {
-        margin-right: 0%;
-        margin-left: 0%;
-    }
-}
-
-/* Desktop */
-@media (min-width: 481px) {
-    .MUS-genre {
-        flex-direction: row;
-    }
-}
-
-@media only screen and (max-width: 1200px) {
-    .AdvancedContainerContent {
-        margin-top: 8.5%;
-    }
-}
-
-@media only screen and (max-width: 1000px) {
-    .AdvancedContainerContent {
-        margin-top: 12.5%;
-    }
-}
-
-@media only screen and (max-width: 800px) {
-    .AdvancedContainerContent {
-        margin-top: 16%;
-    }
-}
-
-@media only screen and (max-width: 600px) {
-    .AdvancedContainerContent {
-        margin-top: 18%;
-    }
-}
-
-.btn-custom-primary-login-forgott {
+.btn-custom-primary-Search {
     display: flex;
     color: #fff;
     background-color: #ff6740;
@@ -175,10 +129,11 @@ input[type="checkbox"].negative + label {
     line-height: 1.5;
     border-radius: 0.25rem;
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-    width: 100%;
-    margin-right: 2.5%;
-    margin-left: 2.5%;
-    margin-top: 15px;
+    width: 90%;
+
+
+    margin-left: 5%;
+    margin-top:2%; 
     align-items: center;
     justify-content: center;
 }
@@ -223,11 +178,27 @@ input[type="checkbox"].negative + label {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
+    
 }
 
+.MUS-description {
+    flex: 1;
+    overflow: auto;
+}
+
+
+
+.MUS-FourofKindContent {
+    z-index: 1;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
 .MUS-FourOfAKind {
-    flex: 1 0 25%;
-    max-height: 33.33%;
+    flex: 0 0 calc(25% - 10px); /* Four items per row, subtracting padding */
+    max-height: 400px !important;
+    min-width: 300px;
+    flex-grow:1; 
     display: flex;
     align-items: center;
     position: relative;
@@ -235,15 +206,16 @@ input[type="checkbox"].negative + label {
     padding: 10px;
     transition: width 0.5s, height 0.5s;
 }
+.NumberContainer{
+    height:200px; 
 
-.MUS-FourofKindContent {
-    z-index: 1;
-    position: relative;
 }
-
+.MUS-FourOfAKind .MUS-FourofKindContent h2 {
+    flex: 0;
+}
 .MUS-FourOfAKind img {
     height: 100%;
-    width: 30%;
+    width: 50%;
     object-fit: cover;
 }
 
@@ -353,29 +325,26 @@ input[type="checkbox"].negative + label {
     .MUS-CardFour {
         flex: 0 0 calc(100% - 1em); /* 1 card per row */
     }
-}
-
-@media (max-width: 1200px) {
-    .MUS-BoxOne.hide-on-medium {
-        display: none;
-    }
 
     .MUS-FourOfAKind {
-        flex: 1 0 33.33%; /* 3 boxes per row at widths <= 1200px */
-        max-height: 50%; /* 2 rows at widths <= 1200px */
+        flex-direction: row;
+        flex: 0 0 50%;
+        flex-grow: 1;
+        width: 100%;
+    }
+
+    .MUS-BoxImage {
+        width: 40%;
+        height: 100%;
+    }
+
+    .MUS-FourofKindContent {
+        width: 60%;
+        height: 100%;
     }
 }
 
-@media (max-width: 900px) {
-    .MUS-FourOfAKind {
-        flex: 1 0 50%; /* 2 boxes per row at widths <= 900px */
-        max-height: 50%; /* 2 rows at widths <= 900px */
-    }
 
-    .MUS-tag-container {
-        font-size: 12.5px;
-    }
-}
 
 .MUS-tag-container {
     display: block;
@@ -388,14 +357,70 @@ input[type="checkbox"].negative + label {
     .MUS-tag-container h6 {
         margin-top: 0;
     }
+@media (max-width: 1200px) {
+    .MUS-BoxOne.hide-on-medium {
+        display: none;
+    }
+}
+
+
+
+@media (max-width: 900px) {
+    .MUS-tag-container {
+        font-size: 12.5px;
+    }
+}
+
 
 @media (max-width: 599px) {
-    .MUS-FourOfAKind {
-        flex: 1 0 100%; /* 1 box per row at widths <= 599px */
-        max-height: 100%; /* 1 row at widths <= 599px */
-    }
-
     .MUS-ContentDescription {
         padding-top: 4.5%;
     }
+   
 }
+@media only screen and (max-width: 1200px) {
+    .AdvancedContainerContent {
+        margin-top: 8.5%;
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    .AdvancedContainerContent {
+        margin-top: 12.5%;
+    }
+   
+}
+
+@media only screen and (max-width: 800px) {
+    .AdvancedContainerContent {
+        margin-top: 16%;
+    }
+  
+}
+
+@media only screen and (max-width: 600px) {
+    .AdvancedContainerContent {
+        margin-top: 18%;
+    }
+   
+}
+/* Mobile */
+@media (max-width: 480px) {
+    .MUS-genre {
+        flex-direction: column;
+    }
+
+    .MUS-genre-container {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .btn-custom-primary-Search {
+        margin-right: 0%;
+        margin-left: 0%;
+        width:100%
+    }
+   
+}
+
+/* Desktop */

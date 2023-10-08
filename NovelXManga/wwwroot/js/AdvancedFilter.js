@@ -104,17 +104,11 @@
     setupMultiStateCheckboxes();
 });
 
-function showHideGenres() {
-    const sidebar = document.querySelector(".showHideGenre");
-    sidebar.classList.toggle("showGenre");
-}
-function initializePositiveTags() {
-    // Your existing logic for positive tags here
-}
+//function showHideGenres() {
+//    const sidebar = document.querySelector(".showHideGenre");
+//    sidebar.classList.toggle("showGenre");
+//}
 
-function initializeNegativeTags() {
-    // Your existing logic for negative tags here
-}
 //Positive TAG
 document.addEventListener("DOMContentLoaded", function () {
     const tagInput = document.getElementById('tagInput');
@@ -347,4 +341,153 @@ document.addEventListener("DOMContentLoaded", function () {
     displayNegativeTags(allNegativeTagsData);
     updateNegativeSelectedTagsDisplay();
     updateNegativeSelectedTagsInput();
+});
+
+// More
+
+//document.addEventListener('DOMContentLoaded', function () {
+//    let currentPage = 1;
+//    let pageSize = 8;
+//    let moreButton = document.getElementById('moreButton');
+//    let bookContainer = document.getElementById('bookContainer');
+//    console.log(`More button clicked ${currentPage}`); // Debug line
+//    currentPage++;
+//    async function fetchBooks() {
+//        const response = await fetch(`/SearchFilter/AdvancedSearch?handler=GetBooksPage&currentPage=${currentPage}&pageSize=${pageSize}`);
+//        if (response.ok) {
+//            const result = await response.json();
+
+//            console.log("Result fetched", result);
+
+//            result.Books.forEach(function (book) {
+//                let bookDiv = document.createElement('div');
+//                bookDiv.className = 'MUS-FourOfAKind';
+
+//                let bookLink = document.createElement('a');
+//                bookLink.className = 'MUS-ANoneStyle';
+//                bookLink.href = `/Manga/CurrentManga?id=${book.MangaID}`;
+
+//                let bookImg = document.createElement('img');
+//                bookImg.className = 'MUS-BoxImage';
+//                bookImg.src = `~/Images/GeneratedMangaImage/${book.PhotoPath}`;
+
+//                let contentDiv = document.createElement('div');
+//                contentDiv.className = 'MUS-FourofKindContent';
+
+//                let bookTitle = document.createElement('h2');
+//                bookTitle.innerText = book.MangaName;
+
+//                let bookDesc = document.createElement('p');
+//                bookDesc.className = 'MUS-description';
+//                bookDesc.innerText = book.Description;
+
+//                contentDiv.appendChild(bookTitle);
+//                contentDiv.appendChild(bookDesc);
+
+//                bookLink.appendChild(bookImg);
+//                bookLink.appendChild(contentDiv);
+
+//                bookDiv.appendChild(bookLink);
+//                bookContainer.appendChild(bookDiv);
+//            });
+
+//            if (currentPage >= result.TotalPages) {
+//                moreButton.style.display = 'none';
+//            }
+//        } else {
+//            console.log("Fetch failed", response.status, response.statusText);
+//        }
+//    }
+
+//    moreButton.addEventListener('click', function () {
+//        currentPage++;
+//        fetchBooks();
+//    });
+
+//    fetchBooks();
+//});
+document.addEventListener('DOMContentLoaded', function () {
+    let currentPage = 1;
+    const pageSize = 8;
+    let totalPages = 0;
+    const moreButton = document.getElementById('moreButton');
+    const bookContainer = document.getElementById('bookContainer');
+    const searchButton = document.getElementById('searchButton');
+    const totalPagesElement = document.getElementById('totalPages');
+
+    if (totalPagesElement) {
+        totalPages = parseInt(totalPagesElement.value, 10);
+        updateButtonVisibility();
+    }
+
+    searchButton.addEventListener('click', function () {
+        bookContainer.innerHTML = '';
+        currentPage = 1;
+        totalPages = 0;
+        fetchBooks();
+    });
+
+    moreButton.addEventListener('click', function () {
+        console.log('moreButton clicked');
+        fetchBooks();
+    });
+
+    function updateButtonVisibility() {
+        moreButton.style.display = (currentPage < totalPages) ? 'block' : 'none';
+    }
+
+    async function fetchBooks() {
+        console.log('fetchBooks called, currentPage:', currentPage);
+        currentPage++; 
+        try {
+            const response = await fetch(`/SearchFilter/AdvancedSearch?handler=BooksPage&currentPage=${currentPage}&pageSiz=${pageSize}`);
+
+            console.log('Response status:', response.status);
+            if (response.ok) {
+                const result = await response.json();
+                console.log('Fetched data:', result);
+
+                // This should ensure you fetch the next set of books
+                totalPages = result.totalPages;
+
+                const cardFourDiv = document.querySelector('.MUS-CardFour');
+
+                result.books.forEach(function (book) {
+                    let bookDiv = document.createElement('div');
+                    bookDiv.className = 'MUS-FourOfAKind';
+
+                    let bookLink = document.createElement('a');
+                    bookLink.className = 'MUS-ANoneStyle';
+                    bookLink.href = `/Manga/CurrentManga?id=${book.mangaID}`;
+
+                    let bookImg = document.createElement('img');
+                    bookImg.className = 'MUS-BoxImage';
+                    bookImg.src = `/Images/GeneratedMangaImage/${book.photoPath}`;  // corrected photoPath
+
+                    let contentDiv = document.createElement('div');
+                    contentDiv.className = 'MUS-FourofKindContent';
+
+                    let bookTitle = document.createElement('h2');
+                    bookTitle.textContent = book.mangaName;
+
+                    let bookDescription = document.createElement('p');
+                    bookDescription.className = 'MUS-description';
+                    bookDescription.textContent = book.description;
+
+                    contentDiv.appendChild(bookTitle);
+                    contentDiv.appendChild(bookDescription);
+
+                    bookLink.appendChild(bookImg);
+                    bookLink.appendChild(contentDiv);
+                    bookDiv.appendChild(bookLink);
+                    cardFourDiv.appendChild(bookDiv);
+                });
+                updateButtonVisibility();
+            } else {
+                console.error('Failed to fetch books', response.statusText);
+            }
+        } catch (error) {
+            console.error('Error fetching books:', error);
+        }
+    }
 });
