@@ -343,69 +343,8 @@ document.addEventListener("DOMContentLoaded", function () {
     updateNegativeSelectedTagsInput();
 });
 
-// More
+// More Button
 
-//document.addEventListener('DOMContentLoaded', function () {
-//    let currentPage = 1;
-//    let pageSize = 8;
-//    let moreButton = document.getElementById('moreButton');
-//    let bookContainer = document.getElementById('bookContainer');
-//    console.log(`More button clicked ${currentPage}`); // Debug line
-//    currentPage++;
-//    async function fetchBooks() {
-//        const response = await fetch(`/SearchFilter/AdvancedSearch?handler=GetBooksPage&currentPage=${currentPage}&pageSize=${pageSize}`);
-//        if (response.ok) {
-//            const result = await response.json();
-
-//            console.log("Result fetched", result);
-
-//            result.Books.forEach(function (book) {
-//                let bookDiv = document.createElement('div');
-//                bookDiv.className = 'MUS-FourOfAKind';
-
-//                let bookLink = document.createElement('a');
-//                bookLink.className = 'MUS-ANoneStyle';
-//                bookLink.href = `/Manga/CurrentManga?id=${book.MangaID}`;
-
-//                let bookImg = document.createElement('img');
-//                bookImg.className = 'MUS-BoxImage';
-//                bookImg.src = `~/Images/GeneratedMangaImage/${book.PhotoPath}`;
-
-//                let contentDiv = document.createElement('div');
-//                contentDiv.className = 'MUS-FourofKindContent';
-
-//                let bookTitle = document.createElement('h2');
-//                bookTitle.innerText = book.MangaName;
-
-//                let bookDesc = document.createElement('p');
-//                bookDesc.className = 'MUS-description';
-//                bookDesc.innerText = book.Description;
-
-//                contentDiv.appendChild(bookTitle);
-//                contentDiv.appendChild(bookDesc);
-
-//                bookLink.appendChild(bookImg);
-//                bookLink.appendChild(contentDiv);
-
-//                bookDiv.appendChild(bookLink);
-//                bookContainer.appendChild(bookDiv);
-//            });
-
-//            if (currentPage >= result.TotalPages) {
-//                moreButton.style.display = 'none';
-//            }
-//        } else {
-//            console.log("Fetch failed", response.status, response.statusText);
-//        }
-//    }
-
-//    moreButton.addEventListener('click', function () {
-//        currentPage++;
-//        fetchBooks();
-//    });
-
-//    fetchBooks();
-//});
 document.addEventListener('DOMContentLoaded', function () {
     let currentPage = 1;
     const pageSize = 8;
@@ -438,7 +377,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     async function fetchBooks() {
         console.log('fetchBooks called, currentPage:', currentPage);
-        currentPage++; 
+        currentPage++;
         try {
             const response = await fetch(`/SearchFilter/AdvancedSearch?handler=BooksPage&currentPage=${currentPage}&pageSiz=${pageSize}`);
 

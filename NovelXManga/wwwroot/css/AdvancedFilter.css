@@ -196,15 +196,17 @@ input[type="checkbox"].negative + label {
 }
 .MUS-FourOfAKind {
     flex: 0 0 calc(25% - 10px); /* Four items per row, subtracting padding */
-    max-height: 400px !important;
+    max-height: 450px !important;
+    min-height:320px !important; 
     min-width: 300px;
-    flex-grow:1; 
+    flex-grow: 1;
     display: flex;
     align-items: center;
     position: relative;
     box-sizing: border-box;
     padding: 10px;
     transition: width 0.5s, height 0.5s;
+    
 }
 .NumberContainer{
     height:200px; 
@@ -402,7 +404,7 @@ input[type="checkbox"].negative + label {
     .AdvancedContainerContent {
         margin-top: 18%;
     }
-   
+
 }
 /* Mobile */
 @media (max-width: 480px) {
