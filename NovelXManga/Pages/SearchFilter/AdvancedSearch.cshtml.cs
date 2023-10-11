@@ -125,12 +125,15 @@ namespace NovelXManga.Pages.SearchFilter
                 Console.WriteLine($"SelectedTags: {JsonSerializer.Serialize(SelectedTags)}");
                 CurrentPage = 1; // Set from query string or as a parameter
                 MoreBooksClicks = 8;  // Number of items per page
+                //Strings searches
                 _httpContextAccessor.HttpContext.Session.SetString("TagInclusionMode", TagInclusionMode);
                 _httpContextAccessor.HttpContext.Session.SetString("TagExclusionMode", TagExclusionMode);
                 _httpContextAccessor.HttpContext.Session.SetString("GenreInclusionMode", GenreInclusionMode);
                 _httpContextAccessor.HttpContext.Session.SetString("GenreExclusionMode", GenreExclusionMode);
+                //Genres
                 PositiveSelectedGenres = PositiveSelectedGenres ?? new List<int>();
                 NegativeSelectedGenres = NegativeSelectedGenres ?? new List<int>();
+                //tags
                 SelectedTags = SelectedTags ?? new List<int>();
                 NegativeSelectedTags = NegativeSelectedTags ?? new List<int>();
                 var selectedTagsSerialized = JsonSerializer.Serialize(SelectedTags);

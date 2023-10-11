@@ -115,6 +115,27 @@ document.addEventListener("DOMContentLoaded", function () {
     const tagDropdown = document.getElementById('tagDropdown');
     const selectedTagsList = document.getElementById('selectedTagsList');
     const hiddenContainer = document.getElementById('hiddenContainer');
+    let dropdownOpen = false;
+
+    // Manual dropdown control
+    tagDropdown.addEventListener('focusin', function () {
+        dropdownOpen = true;
+        tagDropdown.style.display = 'block';
+    });
+
+    tagDropdown.addEventListener('focusout', function () {
+        dropdownOpen = false;
+        setTimeout(function () {
+            if (!dropdownOpen) {
+                tagDropdown.style.display = 'none';
+            }
+        }, 100);
+    });
+
+    tagInput.addEventListener('focus', function () {
+        dropdownOpen = true;
+        tagDropdown.style.display = 'block';
+    });
 
     let allTagsData = Array.from(document.querySelectorAll('.MUS-tag-genre-item')).map(tag => {
         return {
@@ -135,7 +156,7 @@ document.addEventListener("DOMContentLoaded", function () {
         selectedTags.forEach((tag, index) => {
             let span = document.createElement('span');
             span.textContent = tag.name;
-            if (index !== 0) { // Add a space before the tag name, except for the first one
+            if (index !== 0) {
                 let space = document.createTextNode(' ');
                 selectedTagsList.appendChild(space);
             }
@@ -152,7 +173,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function updateSelectedTagsInput() {
         let selectedTagIds = allTagsData.filter(tag => checkedState[tag.id]).map(tag => parseInt(tag.id.split('-')[1]));
-
         hiddenContainer.innerHTML = '';
         selectedTagIds.forEach(tagId => {
             let hiddenInput = document.createElement('input');
@@ -181,32 +201,25 @@ document.addEventListener("DOMContentLoaded", function () {
         tagDropdown.innerHTML = '';
         tagList.forEach(tag => {
             tag.checked = checkedState[tag.id];
-
             let tagItem = document.createElement('div');
             tagItem.className = 'MUS-tag-genre-item';
             tagItem.onclick = function () {
                 document.getElementById(tag.id).click();
             };
-
             let checkbox = document.createElement('input');
             checkbox.type = 'checkbox';
             checkbox.className = 'MUS-hidden-checkbox';
             checkbox.id = tag.id;
             checkbox.name = 'SelectedTags';
             checkbox.value = parseInt(tag.id.split('-')[1]);
-
             checkbox.checked = tag.checked;
-
             addCheckboxEvent(checkbox, tag);
-
             let label = document.createElement('label');
             label.className = 'MUS-tag-label';
             label.htmlFor = tag.id;
             label.textContent = tag.name;
-
             tagItem.appendChild(checkbox);
             tagItem.appendChild(label);
-
             tagDropdown.appendChild(tagItem);
         });
     }
@@ -216,7 +229,12 @@ document.addEventListener("DOMContentLoaded", function () {
         let filteredTags = allTagsData.filter(tag => tag.name.toLowerCase().includes(query));
         displayTags(filteredTags);
     }
-
+    document.addEventListener('click', function (e) {
+        if (!tagDropdown.contains(e.target) && e.target !== tagInput) {
+            dropdownOpen = false;
+            tagDropdown.style.display = 'none';
+        }
+    });
     tagInput.addEventListener('input', function () {
         filterTags();
     });
@@ -227,11 +245,33 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 //Negative TAG
+//Negative Tag
 document.addEventListener("DOMContentLoaded", function () {
     const negativeTagInput = document.getElementById('negativeTagInput');
     const negativeTagDropdown = document.getElementById('negativeTagDropdown');
     const negativeSelectedTagsList = document.getElementById('negativeSelectedTagsList');
     const negativeHiddenContainer = document.getElementById('negativeHiddenContainer');
+    let dropdownOpen = false;
+
+    // Manual dropdown control
+    negativeTagDropdown.addEventListener('focusin', function () {
+        dropdownOpen = true;
+        negativeTagDropdown.style.display = 'block';
+    });
+
+    negativeTagDropdown.addEventListener('focusout', function () {
+        dropdownOpen = false;
+        setTimeout(function () {
+            if (!dropdownOpen) {
+                negativeTagDropdown.style.display = 'none';
+            }
+        }, 100);
+    });
+
+    negativeTagInput.addEventListener('focus', function () {
+        dropdownOpen = true;
+        negativeTagDropdown.style.display = 'block';
+    });
 
     let allNegativeTagsData = Array.from(document.querySelectorAll('.MUS-negative-tag-genre-item')).map(tag => {
         return {
@@ -269,7 +309,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function updateNegativeSelectedTagsInput() {
         let selectedTagIds = allNegativeTagsData.filter(tag => negativeCheckedState[tag.id]).map(tag => parseInt(tag.id.split('-')[2]));
-
         negativeHiddenContainer.innerHTML = '';
         selectedTagIds.forEach(tagId => {
             let hiddenInput = document.createElement('input');
@@ -298,32 +337,24 @@ document.addEventListener("DOMContentLoaded", function () {
         negativeTagDropdown.innerHTML = '';
         tagList.forEach(tag => {
             tag.checked = negativeCheckedState[tag.id];
-
             let tagItem = document.createElement('div');
             tagItem.className = 'MUS-negative-tag-genre-item';
             tagItem.onclick = function () {
                 document.getElementById(tag.id).click();
             };
-
             let checkbox = document.createElement('input');
             checkbox.type = 'checkbox';
             checkbox.className = 'MUS-hidden-checkbox';
             checkbox.id = tag.id;
-
             checkbox.value = parseInt(tag.id.split('-')[2]);
-
             checkbox.checked = tag.checked;
-
             addCheckboxEvent(checkbox, tag);
-
             let label = document.createElement('label');
             label.className = 'MUS-negative-tag-label';
             label.htmlFor = tag.id;
             label.textContent = tag.name;
-
             tagItem.appendChild(checkbox);
             tagItem.appendChild(label);
-
             negativeTagDropdown.appendChild(tagItem);
         });
     }
@@ -334,6 +365,13 @@ document.addEventListener("DOMContentLoaded", function () {
         displayNegativeTags(filteredTags);
     }
 
+    document.addEventListener('click', function (e) {
+        if (!negativeTagDropdown.contains(e.target) && e.target !== negativeTagInput) {
+            dropdownOpen = false;
+            negativeTagDropdown.style.display = 'none';
+        }
+    });
+
     negativeTagInput.addEventListener('input', function () {
         filterNegativeTags();
     });
@@ -342,6 +380,7 @@ document.addEventListener("DOMContentLoaded", function () {
     updateNegativeSelectedTagsDisplay();
     updateNegativeSelectedTagsInput();
 });
+
 
 // More Button
 
