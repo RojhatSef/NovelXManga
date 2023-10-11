@@ -10,6 +10,31 @@
     background-color: green;
 }
 
+.MUS-tag-title {
+    font-size: 16px;
+}
+
+#negativeSelectedTagsList .selected-tag-item {
+    background-color: red;
+    font-size: 16px;
+    border-radius: 2px;
+    padding: 2px;
+}
+#selectedTagsList .selected-tag-item {
+    background-color: rgb(255, 103, 64);
+  
+    font-size: 16px;
+    border-radius: 2px;
+    padding: 2px;
+}
+
+.MUS-tag-alignment-container {
+    display: flex;
+    justify-content: center;
+    align-items: baseline; /* Added this line */
+    gap: 20px;
+}
+
 input[type="checkbox"].positive + label {
     background-color: #ff6740 !important;
 }
@@ -21,6 +46,10 @@ input[type="checkbox"].negative + label {
 #selectedTagsSection {
     margin-top: 20px;
     font-size: 16px;
+}
+
+.MUS-tag-genre-item:hover, .MUS-negative-tag-genre-item:hover {
+    background-color: rgba(0, 0, 0, 0.2); /* Add your desired darker shade here */
 }
 
 .MUS-hidden-checkbox, .MUS-hidden-checkbox {
@@ -301,7 +330,6 @@ input[type="checkbox"].negative + label {
 .MUS-negative-dropdown:focus-within .MUS-negative-dropdown-content, .MUS-dropdown:focus-within .MUS-dropdown-content {
     display: block;
 }
-
 
 .MUS-ANoneStyle {
     display: flex;

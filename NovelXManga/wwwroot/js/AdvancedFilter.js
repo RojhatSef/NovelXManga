@@ -244,7 +244,6 @@ document.addEventListener("DOMContentLoaded", function () {
     updateSelectedTagsInput();
 });
 
-//Negative TAG
 //Negative Tag
 document.addEventListener("DOMContentLoaded", function () {
     const negativeTagInput = document.getElementById('negativeTagInput');
@@ -380,7 +379,6 @@ document.addEventListener("DOMContentLoaded", function () {
     updateNegativeSelectedTagsDisplay();
     updateNegativeSelectedTagsInput();
 });
-
 
 // More Button
 

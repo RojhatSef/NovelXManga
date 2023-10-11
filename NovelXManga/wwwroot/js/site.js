@@ -74,6 +74,23 @@ function TitleupdateCount(value) {
 // sidebar click on the dropdown menu
 
 //new Code This is the search for Books/artist/Author/voice actors which is on the layout page SEARCH. Rest of the backend is in the Index page.
+document.addEventListener('click', function (event) {
+    var dropdown = document.getElementById('mangaResultsDropdown');
+    var searchbar = document.getElementById('searchbar');
+
+    var isClickInsideDropdown = dropdown.contains(event.target);
+    var isClickInsideSearchbar = searchbar.contains(event.target);
+
+    if (!isClickInsideDropdown && !isClickInsideSearchbar) {
+        dropdown.style.display = 'none';
+    }
+});
+document.getElementById('searchbar').addEventListener('focus', function () {
+    var dropdown = document.getElementById('mangaResultsDropdown');
+    if (dropdown.innerHTML.trim() !== "") {
+        dropdown.style.display = 'block';
+    }
+});
 function searchManga(searchTerm) {
     var dropdown = document.getElementById('mangaResultsDropdown');
 
