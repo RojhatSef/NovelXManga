@@ -11,12 +11,14 @@
 
 <form id="AdvancedSearch"  method=post asp-page-handler="AdvancedSearch" enctype="multipart/form-data">
     <div class="Row1">
-            <input type="search" id="@Model.SearchAuthor" name="SearchAuthor" class="SearchAuthorClass" placeholder="SearchAuthor">
-            <input type="search" id="@Model.SearchArtist" name="SearchArtist" class="SearchArtistClass" placeholder="SearchArtist">
-            <input type="search" id="@Model.SearchVoiceActor" name="SearchVoiceActor" class="SearchVoiceActorClass" placeholder="SearchVoiceActor">
+            <input type="search" id="@Model.SearchAuthor" name="SearchAuthor" class="SearchAuthorClass" placeholder="Search Author">
+            <input type="search" id="@Model.SearchArtist" name="SearchArtist" class="SearchArtistClass" placeholder="Search Artist">
+            <input type="search" id="@Model.SearchVoiceActor" name="SearchVoiceActor" class="SearchVoiceActorClass" placeholder="Search Voice Actor">
+            <input type="search" id="@Model.SearchBookTitle" name="SearchBookTitle" class="SearchVoiceActorClass" placeholder="Book Title">
         </div>   
         <div class="Row2">
             <div class="LeftSide">
+                <div>
                 <label >Tag Inclusion Mode:</label>
                 <select id="TagInclusionMode" name="TagInclusionMode">
                   
@@ -24,49 +26,53 @@
                     <option value="Or" selected="@(Model.TagInclusionMode == "Or")">Or</option>
                
                 </select>
+                </div>
+                <div>
                 <label >Tag Exclusion Mode:</label>
                 <select id="TagExclusionMode" name="TagExclusionMode">
                     <option value="Or" selected="@(Model.TagExclusionMode == "Or")">Or</option>
                     <option value="And" selected="@(Model.TagExclusionMode == "And")">And</option>
                 
                 </select>
+                </div>
+                <div>
                 <label>Genre Inclusion Mode:</label>
                 <select id="GenreInclusionMode" name="GenreInclusionMode">
                     <option value="And" selected="@(Model.GenreInclusionMode == "And")">And</option>
                     <option value="Or" selected="@(Model.GenreInclusionMode == "Or")">Or</option>
                 </select>
+                </div>
+                <div>
                 <label>Tag Exclusion Mode:</label>
                 <select id="GenreExclusionMode" name="GenreExclusionMode">
                 
                     <option value="Or" selected="@(Model.GenreExclusionMode == "Or")">Or</option>
                     <option value="And" selected="@(Model.GenreExclusionMode == "And")">And</option>
                 </select>
+                </div>
 
             </div>
+          
+        </div>
+        <div class="Row3">
             <div class="RightSide">
-                <label for="SearchReleaseYearStart" class="CalendarIcon">Search Start Year:
+                <label for="SearchReleaseYearStart" class="CalendarIcon">
+                    Search Start Year:
                     <input type="date" id="SearchReleaseYearStart" name="SearchReleaseYearStart" placeholder="YYYY">
                 </label>
-                 <label for="SearchReleaseYearEnd" class="CalendarIcon">Search End Year:
-                    <input type="date" id="SearchReleaseYearEnd"  name="SearchReleaseYearEnd" placeholder="YYYY">
-                 </label>
+                <label for="SearchReleaseYearEnd" class="CalendarIcon">
+                    Search End Year:
+                    <input type="date" id="SearchReleaseYearEnd" name="SearchReleaseYearEnd" placeholder="YYYY">
+                </label>
             </div>
         </div>
-    <div>
-            <label for="SearchReleaseYearStart">Search Start Year:</label>
-            <input type="date" id="SearchReleaseYearStart" name="SearchReleaseYearStart" placeholder="YYYY">
-        </div>
-
-        <div>
-            <label for="SearchReleaseYearEnd">Search End Year:</label>
-            <input type="date" id="SearchReleaseYearEnd" name="SearchReleaseYearEnd" placeholder="YYYY">
-        </div>
+   
         <div class="MUS-tag-alignment-container">
-        <div>
+        <div class="Mus-Tag-Divider" >
 @*        Positive Tag*@
 
         <div id="selectedTagsSection">
-            <span class="MUS-tag-title">Selected Tags:</span>
+            <span class="MUS-tag-title">Include Tags:</span>
             <span id="selectedTagsList"></span>
         </div>
 
@@ -85,10 +91,10 @@
       
         <div id="hiddenContainer"></div>
         </div>
-        <div>
+            <div class ="Mus-Tag-Divider">
         @*Negative Tag*@
         <div id="negativeSelectedTagsSection">
-                    <span class="MUS-tag-title">Negative Tags:</span>
+                    <span class="MUS-tag-title">Exclude Tags:</span>
             <span id="negativeSelectedTagsList"></span>
         </div>
 
@@ -113,9 +119,9 @@
 
 
         
-        <div>
+        <div class="MUS-BlockGenre">
 
-            <label for="genres">Genres:</label>
+            <label for="genres" class="GenresTitle">Genres:</label>
             <div class="MUS-genre-container">
                 @foreach (var genre in Model.Genres ?? new List<GenresModel>())
                 {

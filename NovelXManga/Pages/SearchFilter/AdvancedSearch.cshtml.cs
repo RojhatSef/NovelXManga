@@ -38,7 +38,7 @@ namespace NovelXManga.Pages.SearchFilter
         public DateTime? SearchReleaseYearEnd { get; set; }
 
         [BindProperty]
-        public string Search { get; set; }
+        public string SearchBookTitle { get; set; }
 
         [BindProperty]
         public string SearchAuthor { get; set; }
@@ -141,7 +141,7 @@ namespace NovelXManga.Pages.SearchFilter
                 var negativesSlectedTagsSerialized = JsonSerializer.Serialize(NegativeSelectedTags);
                 var negativesSelectedGenresSerialized = JsonSerializer.Serialize(NegativeSelectedGenres);
 
-                var search = !string.IsNullOrEmpty(Search) ? HtmlEncoder.Default.Encode(Search) : Search;
+                var search = !string.IsNullOrEmpty(SearchBookTitle) ? HtmlEncoder.Default.Encode(SearchBookTitle) : SearchBookTitle;
                 var searchAuthor = !string.IsNullOrEmpty(SearchAuthor) ? HtmlEncoder.Default.Encode(SearchAuthor) : SearchAuthor;
                 var searchArtist = !string.IsNullOrEmpty(SearchArtist) ? HtmlEncoder.Default.Encode(SearchArtist) : SearchArtist;
                 var searchVoiceActor = !string.IsNullOrEmpty(SearchVoiceActor) ? HtmlEncoder.Default.Encode(SearchVoiceActor) : SearchVoiceActor;

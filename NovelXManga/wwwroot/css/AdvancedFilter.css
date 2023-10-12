@@ -5,34 +5,118 @@
     overflow-x: hidden;
     overflow-y: hidden;
 }
-
+.GenresTitle{
+    font-size:24px; 
+   
+}
+.MUS-BlockGenre{
+    margin-top:15px; 
+}
 .selected {
     background-color: green;
 }
 
+.LeftSide label {
+    display: block;
+}
+
+.LeftSide {
+    margin-top:5px; 
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+
+    .LeftSide > div {
+        flex: 1;
+    }
+
+    .LeftSide select {
+        background-color: #333;
+        color: white;
+        border-color: #333;
+    }
+
 .MUS-tag-title {
     font-size: 16px;
+}
+
+input[type="search"].SearchAuthorClass,
+input[type="search"].SearchArtistClass,
+input[type="search"].SearchVoiceActorClass {
+    background-color: #333;
+    color: white;
+    border-color: #333;
+}
+
+#tagInput,
+#negativeTagInput {
+    background-color: #333;
+    color: white;
+    border-color: #333;
 }
 
 #negativeSelectedTagsList .selected-tag-item {
     background-color: red;
     font-size: 16px;
     border-radius: 2px;
+    margin-bottom: 2px;
     padding: 2px;
+    margin-right: 2px;
 }
+
 #selectedTagsList .selected-tag-item {
     background-color: rgb(255, 103, 64);
-  
     font-size: 16px;
     border-radius: 2px;
+    margin-bottom: 2px;
     padding: 2px;
+    margin-right: 2px;
+}
+
+input[type="text"], input[type="checkbox"] {
+    position: sticky;
+}
+
+.MUS-tag {
+    margin: auto; /* Center the tags */
+}
+
+.Mus-Tag-Divider {
+    width: 100%;
+    min-width: 320px;
+    flex-grow: 1
 }
 
 .MUS-tag-alignment-container {
     display: flex;
     justify-content: center;
     align-items: baseline; /* Added this line */
-    gap: 20px;
+}
+
+#negativeSelectedTagsList .selected-tag-item,
+#selectedTagsList .selected-tag-item {
+    display: inline-block;
+    /* rest of your existing CSS */
+}
+
+    #negativeSelectedTagsList .selected-tag-item:hover,
+    #selectedTagsList .selected-tag-item:hover {
+        cursor: pointer;
+        filter: brightness(0.8);
+    }
+
+.MUS-tag-alignment-container > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+}
+
+#selectedTagsSection, #negativeSelectedTagsSection {
+    flex: 1;
 }
 
 input[type="checkbox"].positive + label {
@@ -46,6 +130,7 @@ input[type="checkbox"].negative + label {
 #selectedTagsSection {
     margin-top: 20px;
     font-size: 16px;
+    width: 100%;
 }
 
 .MUS-tag-genre-item:hover, .MUS-negative-tag-genre-item:hover {
@@ -163,23 +248,15 @@ input[type="checkbox"].negative + label {
     justify-content: center;
 }
 
-.Row1,
-.Row2 {
-    display: flex;
-    flex-direction: row;
-    gap: 3%;
-    margin-top: 5%; /* Default margin-top for large screens */
+.Row1 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    margin-top: 5%;
 }
 
-.Row2 {
-    justify-content: space-between;
-}
-
-.LeftSide,
-.RightSide {
-    display: flex;
-    flex-direction: column;
-    gap: 1%;
+.Row3 {
+    margin-top: 10px;
 }
 
 .CalendarIcon input[type="date"]::-webkit-inner-spin-button,
@@ -439,6 +516,10 @@ input[type="checkbox"].negative + label {
         margin-left: 0%;
         width: 100%
     }
-}
 
-/* Desktop */
+    .MUS-tag-alignment-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+}
