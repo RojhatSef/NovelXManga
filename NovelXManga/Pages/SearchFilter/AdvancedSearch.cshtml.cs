@@ -122,7 +122,6 @@ namespace NovelXManga.Pages.SearchFilter
         {
             try
             {
-                Console.WriteLine($"SelectedTags: {JsonSerializer.Serialize(SelectedTags)}");
                 CurrentPage = 1; // Set from query string or as a parameter
                 MoreBooksClicks = 8;  // Number of items per page
                 //Strings searches
@@ -191,7 +190,7 @@ namespace NovelXManga.Pages.SearchFilter
 
                 if (SearchReleaseYearEnd.HasValue && IsYearInRange(SearchReleaseYearEnd, 0001, DateTime.Now.Year))
                 {
-                    query = query.Where(m => m.ReleaseYear <= SearchReleaseYearEnd.Value);
+                    query = query.Where(m => m.ReleaseYear <= SearchReleaseYearEnd.Value || (m.EndingYear == null && DateTime.Now <= SearchReleaseYearEnd.Value));
                 }
 
                 if (PositiveSelectedGenres.Count > 0)
@@ -303,8 +302,7 @@ namespace NovelXManga.Pages.SearchFilter
             {
                 // Log the exception details.
                 // Consider using a logging library like NLog, Serilog, or even ILogger here.
-                Console.WriteLine($"Exception caught: {ex.Message}");
-                Console.WriteLine($"Stacktrace: {ex.StackTrace}");
+
                 Tags = await context.TagModels.ToListAsync();
                 Genres = await context.GenresModels.ToListAsync();
                 return Page(); // Return to the current page to display an error message to the user.
@@ -348,13 +346,10 @@ namespace NovelXManga.Pages.SearchFilter
 
                 int totalPages = (int)Math.Ceiling(totalCount / (double)pageSiz);
 
-                Console.WriteLine($"CurrentPage: {currentPage}, PageSize: {pageSiz}, TotalCount: {totalCount}, TotalPages: {totalPages}");  // Log the values
-
                 return new JsonResult(new { CurrentPage = currentPage, Books = mangaModels, TotalPages = totalPages });
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Exception: {ex.Message}");  // Log the exception
                 return StatusCode(500, new { message = "Internal server error" });
             }
         }
