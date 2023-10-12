@@ -404,7 +404,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     moreButton.addEventListener('click', function () {
-        console.log('moreButton clicked');
         fetchBooks();
     });
 
@@ -413,15 +412,12 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     async function fetchBooks() {
-        console.log('fetchBooks called, currentPage:', currentPage);
         currentPage++;
         try {
             const response = await fetch(`/SearchFilter/AdvancedSearch?handler=BooksPage&currentPage=${currentPage}&pageSiz=${pageSize}`);
 
-            console.log('Response status:', response.status);
             if (response.ok) {
                 const result = await response.json();
-                console.log('Fetched data:', result);
 
                 // This should ensure you fetch the next set of books
                 totalPages = result.totalPages;
