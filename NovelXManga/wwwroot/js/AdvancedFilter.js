@@ -104,11 +104,6 @@
     setupMultiStateCheckboxes();
 });
 
-//function showHideGenres() {
-//    const sidebar = document.querySelector(".showHideGenre");
-//    sidebar.classList.toggle("showGenre");
-//}
-
 //Positive TAG
 document.addEventListener("DOMContentLoaded", function () {
     const tagInput = document.getElementById('tagInput');

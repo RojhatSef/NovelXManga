@@ -12,6 +12,7 @@ using System.Text.RegularExpressions;
 
 namespace NovelXManga.Pages.SearchFilter
 {
+    [ValidateAntiForgeryToken]
     public class AdvancedSearchModel : PageModel
     {
         private readonly MangaNNovelAuthDBContext context;

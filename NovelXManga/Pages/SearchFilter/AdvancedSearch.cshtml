@@ -10,6 +10,7 @@
 
 
 <form id="AdvancedSearch"  method=post asp-page-handler="AdvancedSearch" enctype="multipart/form-data">
+        @Html.AntiForgeryToken()
     <div class="Row1">
             <input type="search" id="@Model.SearchAuthor" name="SearchAuthor" class="SearchAuthorClass" placeholder="Search Author">
             <input type="search" id="@Model.SearchArtist" name="SearchArtist" class="SearchArtistClass" placeholder="Search Artist">

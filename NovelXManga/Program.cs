@@ -93,7 +93,11 @@ builder.Services.AddScoped<MangaRankingService>();
 builder.Services.AddHostedService<UpdateRankingsBackgroundService>();
 builder.Services.AddHostedService<MangaReadResetService>();
 var app = builder.Build();
-
+app.Use(async (context, next) =>
+{
+    context.Response.Headers.Add("X-Frame-Options", "DENY");
+    await next();
+});
 SeedDatainitialize(app);
 
 // Configure the HTTP request pipeline.

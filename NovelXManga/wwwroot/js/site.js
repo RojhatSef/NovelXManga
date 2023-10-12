@@ -5,7 +5,7 @@
             $(this).prop('checked', true);
         }
     });
-    console.log('site.js is function SelectTag loading');
+   
     $('input[type=checkbox]').on('change', function () {
         var selectedTags = $('input[type=checkbox]:checked').map(function () {
             return $(this).val();
@@ -98,7 +98,7 @@ function searchManga(searchTerm) {
         fetch(`/Index?handler=SearchManga&searchTerm=${sanitizeHTML(searchTerm)}`)
             .then(response => response.json())
             .then(data => {
-                console.log(data);  // Debugging line
+                 // Debugging line
                 let allResults = [];
                 // Manga Results
                 if (data.Manga) {
@@ -167,21 +167,33 @@ function searchManga(searchTerm) {
     return element.innerHTML;
 }
 
-document.getElementById('dropdownToggle').addEventListener('click', function () {
-    const dropdown = document.getElementById('userDropdown');
-    if (dropdown.classList.contains('show')) {
-        dropdown.classList.remove('show');
-    } else {
-        dropdown.classList.add('show');
-    }
-});
+if (document.getElementById('dropdownToggle') && document.getElementById('userDropdown')) {
+    document.getElementById('dropdownToggle').addEventListener('click', function () {
+        const dropdown = document.getElementById('userDropdown');
+        if (dropdown.classList.contains('show')) {
+            dropdown.classList.remove('show');
+        } else {
+            dropdown.classList.add('show');
+        }
+    });
 
-// To hide dropdown when clicking outside of it
-document.addEventListener('click', function (event) {
-    const dropdown = document.getElementById('userDropdown');
-    const toggle = document.getElementById('dropdownToggle');
+    // To hide dropdown when clicking outside of it
+    document.addEventListener('click', function (event) {
+        const dropdown = document.getElementById('userDropdown');
+        const toggle = document.getElementById('dropdownToggle');
+        if (!dropdown.contains(event.target) && !toggle.contains(event.target)) {
+            dropdown.classList.remove('show');
+        }
+    });
+}
+// Event handler, if we get an error.
+window.addEventListener('error', function (event) {
+    // Log the error to your internal system
+    console.error('Logged Error: ', event.error);
 
-    if (!dropdown.contains(event.target) && !toggle.contains(event.target)) {
-        dropdown.classList.remove('show');
-    }
+    // Prevent the browser's console from showing the error
+    event.preventDefault();
+
+    // Show a generic message to the user
+    alert('An error occurred. Please try again later.');
 });
