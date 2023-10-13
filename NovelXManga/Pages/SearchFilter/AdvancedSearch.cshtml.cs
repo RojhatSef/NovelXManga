@@ -368,6 +368,9 @@ namespace NovelXManga.Pages.SearchFilter
         {
             try
             {
+                // Reset ItemsAlreadyShown to 0
+                _httpContextAccessor.HttpContext.Session.SetInt32("ItemsAlreadyShown", 0);
+
                 InitializeSettingsBookPages();
                 InitializeSettings();
                 SetSessionState();
