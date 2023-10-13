@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MangaAccessService.Migrations
 {
-    public partial class testy : Migration
+    public partial class Testyyy : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -74,6 +74,7 @@ namespace MangaAccessService.Migrations
                     IsChecked = table.Column<bool>(type: "bit", nullable: true),
                     groupScanlationID = table.Column<int>(type: "int", nullable: true),
                     MangaModelId = table.Column<int>(type: "int", nullable: true),
+                    UserActivityTimer = table.Column<DateTime>(type: "datetime2", nullable: true),
                     postModelID = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),

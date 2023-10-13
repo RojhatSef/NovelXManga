@@ -379,7 +379,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 document.addEventListener('DOMContentLoaded', function () {
     let currentPage = 1;
-    const pageSize = 8;
+    const pageSize = 2;
     let totalPages = 0;
     const moreButton = document.getElementById('moreButton');
     const bookContainer = document.getElementById('bookContainer');
@@ -413,7 +413,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             if (response.ok) {
                 const result = await response.json();
-
+                console.log("Fetched data:", result);
                 // This should ensure you fetch the next set of books
                 totalPages = result.totalPages;
 

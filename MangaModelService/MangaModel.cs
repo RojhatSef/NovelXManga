@@ -58,6 +58,7 @@ namespace MangaModelService
         public virtual ICollection<Review>? reviews { get; set; }
         public virtual ICollection<BuyPage>? BuyPages { get; set; }
         public bool IsChecked { get; set; }
+        // public Dictionary<int, int> NewScore { get; set; }
 
         [NotMapped]
         public Dictionary<int, int> ScoreDistribution

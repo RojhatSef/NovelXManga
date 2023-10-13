@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MangaAccessService.Migrations
 {
     [DbContext(typeof(MangaNNovelAuthDBContext))]
-    [Migration("20230908104458_testy")]
-    partial class testy
+    [Migration("20231013123355_Testyyy")]
+    partial class Testyyy
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -1626,6 +1626,9 @@ namespace MangaAccessService.Migrations
 
                     b.Property<string>("Twitter")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UserActivityTimer")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Zodiac")
                         .HasColumnType("nvarchar(max)");

@@ -114,188 +114,270 @@ namespace NovelXManga.Pages.SearchFilter
             _httpContextAccessor = httpContextAccessor;
         }
 
+        private void DeserializeAndRetrieveSessionData()
+        {
+            var selectedTagsSerialized = _httpContextAccessor.HttpContext.Session.GetString("SelectedTags");
+            SelectedTags = JsonSerializer.Deserialize<List<int>>(selectedTagsSerialized);
+
+            var selectedGenresSerialized = _httpContextAccessor.HttpContext.Session.GetString("SelectedGenres");
+            PositiveSelectedGenres = JsonSerializer.Deserialize<List<int>>(selectedGenresSerialized);
+
+            var negativesSelectedTagsSerialized = _httpContextAccessor.HttpContext.Session.GetString("ExludedSelectedTags");
+            NegativeSelectedTags = JsonSerializer.Deserialize<List<int>>(negativesSelectedTagsSerialized);
+
+            var negativesSelectedGenresSerialized = _httpContextAccessor.HttpContext.Session.GetString("ExludedSelectedGenres");
+            NegativeSelectedGenres = JsonSerializer.Deserialize<List<int>>(negativesSelectedGenresSerialized);
+
+            TagInclusionMode = _httpContextAccessor.HttpContext.Session.GetString("TagInclusionMode");
+            TagExclusionMode = _httpContextAccessor.HttpContext.Session.GetString("TagExclusionMode");
+            GenreInclusionMode = _httpContextAccessor.HttpContext.Session.GetString("GenreInclusionMode");
+            GenreExclusionMode = _httpContextAccessor.HttpContext.Session.GetString("GenreExclusionMode");
+        }
+
         public bool IsYearInRange(DateTime? date, int minYear, int maxYear)
         {
             return date.HasValue && date.Value.Year >= minYear && date.Value.Year <= maxYear;
+        }
+
+        private void InitializeSettingsBookPages()
+        {
+            CurrentPage = 1;
+            //book amounts for the first search click
+            MoreBooksClicks = 2;
+        }
+
+        private void InitializeSettings()
+        {
+            PositiveSelectedGenres ??= new List<int>();
+            NegativeSelectedGenres ??= new List<int>();
+            SelectedTags ??= new List<int>();
+            NegativeSelectedTags ??= new List<int>();
+        }
+
+        private void SetSessionState()
+        {
+            //Strings searches
+            _httpContextAccessor.HttpContext.Session.SetString("TagInclusionMode", TagInclusionMode);
+            _httpContextAccessor.HttpContext.Session.SetString("TagExclusionMode", TagExclusionMode);
+            _httpContextAccessor.HttpContext.Session.SetString("GenreInclusionMode", GenreInclusionMode);
+            _httpContextAccessor.HttpContext.Session.SetString("GenreExclusionMode", GenreExclusionMode);
+        }
+
+        private void SerializeAndStoreSessionData()
+        {
+            var selectedTagsSerialized = JsonSerializer.Serialize(SelectedTags);
+            var selectedGenresSerialized = JsonSerializer.Serialize(PositiveSelectedGenres);
+            var negativesSlectedTagsSerialized = JsonSerializer.Serialize(NegativeSelectedTags);
+            var negativesSelectedGenresSerialized = JsonSerializer.Serialize(NegativeSelectedGenres);
+            _httpContextAccessor.HttpContext.Session.SetString("SelectedTags", selectedTagsSerialized);
+            _httpContextAccessor.HttpContext.Session.SetString("SelectedGenres", selectedGenresSerialized);
+
+            //unsure might not needed
+            _httpContextAccessor.HttpContext.Session.SetString("ExludedSelectedTags", negativesSlectedTagsSerialized);
+            _httpContextAccessor.HttpContext.Session.SetString("ExludedSelectedGenres", negativesSelectedGenresSerialized);
+        }
+
+        private string EncodeIfNotEmpty(string input)
+        {
+            return !string.IsNullOrEmpty(input) ? HtmlEncoder.Default.Encode(input) : input;
+        }
+
+        private bool IsInputValid(string input)
+        {
+            return string.IsNullOrEmpty(input) || Regex.IsMatch(input, @"^[\p{L}\p{N}\s]+$");
+        }
+
+        private IQueryable<MangaModel> ApplyAdditionalFilters(IQueryable<MangaModel> query)
+        {
+            if (PositiveSelectedGenres.Count > 0)
+            {
+                if (GenreInclusionMode == "And")
+                {
+                    var mangaIds = context.mangaModels
+                  .Select(m => new { m.MangaID, GenresId = m.GenresModels.Select(t => t.GenresId) })
+                  .AsEnumerable()
+                  .Where(m => PositiveSelectedGenres.All(t => m.GenresId.Contains(t)))
+                   .Select(m => m.MangaID)
+                   .ToList();
+
+                    query = query.Where(m => mangaIds.Contains(m.MangaID));
+                }
+                else // "Or"
+                {
+                    query = query.Where(m => m.GenresModels.Any(g => PositiveSelectedGenres.Contains(g.GenresId)));
+                }
+            }
+
+            if (SelectedTags.Count > 0)
+            {
+                if (TagInclusionMode == "And")
+                {
+                    var mangaIds = context.mangaModels
+.Select(m => new { m.MangaID, TagIds = m.TagsModels.Select(t => t.TagId) })
+.AsEnumerable()
+.Where(m => SelectedTags.All(t => m.TagIds.Contains(t)))
+.Select(m => m.MangaID)
+.ToList();
+
+                    query = query.Where(m => mangaIds.Contains(m.MangaID));
+                }
+                else // "Or"
+                {
+                    query = query.Where(m => m.TagsModels.Any(t => SelectedTags.Contains(t.TagId)));
+                }
+            }
+            if (NegativeSelectedGenres.Count > 0)
+            {
+                if (GenreExclusionMode == "And")
+                {
+                    if (PositiveSelectedGenres.Count == 0)
+                    {
+                        var excludeMangaIds = context.mangaModels
+                            .Select(m => new { m.MangaID, GenresId = m.GenresModels.Select(t => t.GenresId) })
+                            .AsEnumerable()
+                            .Where(m => !NegativeSelectedGenres.All(t => m.GenresId.Contains(t)))
+                            .Select(m => m.MangaID)
+                            .ToList();
+
+                        query = query.Where(m => excludeMangaIds.Contains(m.MangaID));
+                    }
+                    else
+                    {
+                        query = query.Where(m => !m.GenresModels.Any(g => NegativeSelectedGenres.Contains(g.GenresId)));
+                    }
+                }
+                else // "Or"
+                {
+                    query = query.Where(m => !m.GenresModels.Any(g => NegativeSelectedGenres.Contains(g.GenresId)));
+                }
+            }
+            if (NegativeSelectedTags.Count > 0)
+            {
+                if (TagExclusionMode == "And")
+                {
+                    if (SelectedTags.Count == 0)
+                    {
+                        var excludeMangaIds = context.mangaModels
+                            .Select(m => new { m.MangaID, TagId = m.TagsModels.Select(t => t.TagId) })
+                            .AsEnumerable()
+                            .Where(m => !NegativeSelectedTags.All(t => m.TagId.Contains(t)))
+                            .Select(m => m.MangaID)
+                            .ToList();
+
+                        query = query.Where(m => excludeMangaIds.Contains(m.MangaID));
+                    }
+                    else
+                    {
+                        query = query.Where(m => !m.TagsModels.Any(g => NegativeSelectedTags.Contains(g.TagId)));
+                    }
+                }
+                else // "Or"
+                {
+                    query = query.Where(m => !m.TagsModels.Any(g => NegativeSelectedTags.Contains(g.TagId)));
+                }
+            }
+            return query;
+        }
+
+        private IQueryable<MangaModel> ApplySearchFilters(IQueryable<MangaModel> query)
+        {
+            // Validate and encode search strings
+            var search = EncodeIfNotEmpty(SearchBookTitle);
+            var searchAuthor = EncodeIfNotEmpty(SearchAuthor);
+            var searchArtist = EncodeIfNotEmpty(SearchArtist);
+            var searchVoiceActor = EncodeIfNotEmpty(SearchVoiceActor);
+
+            if (!IsInputValid(search) || !IsInputValid(searchAuthor) || !IsInputValid(searchArtist) ||
+                !IsInputValid(searchVoiceActor))
+            {
+                return query.Where(m => false); // Invalid inputs
+            }
+
+            // Apply search filters
+            if (!string.IsNullOrEmpty(search))
+                query = query.Where(m => m.MangaName.Contains(search));
+
+            if (!string.IsNullOrEmpty(searchAuthor))
+                query = query.Where(m => m.Authormodels.Any(a => a.FirstName.Contains(searchAuthor) || a.LastName.Contains(searchAuthor)));
+            if (!string.IsNullOrEmpty(searchArtist))
+                query = query.Where(m => m.ArtistModels.Any(a => a.FirstName.Contains(searchArtist) || a.LastName.Contains(searchArtist)));
+
+            if (!string.IsNullOrEmpty(searchVoiceActor))
+                query = query.Where(m => m.VoiceActors.Any(a => a.FirstName.Contains(searchVoiceActor) || a.LastName.Contains(searchVoiceActor)));
+
+            if (SearchReleaseYearStart.HasValue && IsYearInRange(SearchReleaseYearStart, 0001, DateTime.Now.Year))
+            {
+                query = query.Where(m => m.ReleaseYear >= SearchReleaseYearStart.Value);
+            }
+
+            if (SearchReleaseYearEnd.HasValue && IsYearInRange(SearchReleaseYearEnd, 0001, DateTime.Now.Year))
+            {
+                query = query.Where(m => m.ReleaseYear <= SearchReleaseYearEnd.Value || (m.EndingYear == null && DateTime.Now <= SearchReleaseYearEnd.Value));
+            }
+            return query;
+        }
+
+        private async Task ExecuteQueryAndSetResults(IQueryable<MangaModel> query)
+        {
+            TotalPages = (int)Math.Ceiling(await query.CountAsync() / (double)MoreBooksClicks);
+            _httpContextAccessor.HttpContext.Session.SetInt32("TotalPages", TotalPages);
+            _httpContextAccessor.HttpContext.Session.SetString("IsSearchClicked", "true");
+
+            query = query.Skip((CurrentPage - 1) * MoreBooksClicks).Take(MoreBooksClicks);
+            MangaModels = await query.ToListAsync();
+
+            Tags = await context.TagModels.ToListAsync();
+            Genres = await context.GenresModels.ToListAsync();
+        }
+
+        private IQueryable<MangaModel> BuildQueryWithFilters()
+        {
+            InitializeSettingsBookPages();
+            DeserializeAndRetrieveSessionData();
+            InitializeSettings();
+            SetSessionState();
+            SerializeAndStoreSessionData();
+            var query = BuildInitialQuery();
+            query = ApplySearchFilters(query);
+            query = ApplyAdditionalFilters(query);
+            return query;
+        }
+
+        private IQueryable<MangaModel> BuildInitialQuery()
+        {
+            return context.mangaModels.AsNoTracking().AsQueryable();
+            //return context.mangaModels
+            //            .Include(m => m.Authormodels)
+            //            .Include(m => m.ArtistModels)
+            //            .Include(m => m.GenresModels)
+            //            .Include(m => m.TagsModels)
+
+            //            .AsNoTracking()
+            //            .AsQueryable();
+        }
+
+        private IQueryable<MangaModel> AddIncludes(IQueryable<MangaModel> query)
+        {
+            return query.Include(m => m.Authormodels)
+                        .Include(m => m.ArtistModels)
+                        .Include(m => m.GenresModels)
+                        .Include(m => m.TagsModels);
         }
 
         public async Task<IActionResult> OnPostAsync()
         {
             try
             {
-                CurrentPage = 1; // Set from query string or as a parameter
-                MoreBooksClicks = 8;  // Number of items per page
-                //Strings searches
-                _httpContextAccessor.HttpContext.Session.SetString("TagInclusionMode", TagInclusionMode);
-                _httpContextAccessor.HttpContext.Session.SetString("TagExclusionMode", TagExclusionMode);
-                _httpContextAccessor.HttpContext.Session.SetString("GenreInclusionMode", GenreInclusionMode);
-                _httpContextAccessor.HttpContext.Session.SetString("GenreExclusionMode", GenreExclusionMode);
-                //Genres
-                PositiveSelectedGenres = PositiveSelectedGenres ?? new List<int>();
-                NegativeSelectedGenres = NegativeSelectedGenres ?? new List<int>();
-                //tags
-                SelectedTags = SelectedTags ?? new List<int>();
-                NegativeSelectedTags = NegativeSelectedTags ?? new List<int>();
-                var selectedTagsSerialized = JsonSerializer.Serialize(SelectedTags);
-                var selectedGenresSerialized = JsonSerializer.Serialize(PositiveSelectedGenres);
-                var negativesSlectedTagsSerialized = JsonSerializer.Serialize(NegativeSelectedTags);
-                var negativesSelectedGenresSerialized = JsonSerializer.Serialize(NegativeSelectedGenres);
+                InitializeSettingsBookPages();
+                InitializeSettings();
+                SetSessionState();
+                SerializeAndStoreSessionData();
+                var query = BuildInitialQuery();
 
-                var search = !string.IsNullOrEmpty(SearchBookTitle) ? HtmlEncoder.Default.Encode(SearchBookTitle) : SearchBookTitle;
-                var searchAuthor = !string.IsNullOrEmpty(SearchAuthor) ? HtmlEncoder.Default.Encode(SearchAuthor) : SearchAuthor;
-                var searchArtist = !string.IsNullOrEmpty(SearchArtist) ? HtmlEncoder.Default.Encode(SearchArtist) : SearchArtist;
-                var searchVoiceActor = !string.IsNullOrEmpty(SearchVoiceActor) ? HtmlEncoder.Default.Encode(SearchVoiceActor) : SearchVoiceActor;
-                var searchCharacter = !string.IsNullOrEmpty(SearchCharacter) ? HtmlEncoder.Default.Encode(SearchCharacter) : SearchCharacter;
+                query = ApplySearchFilters(query);
+                query = ApplyAdditionalFilters(query);
 
-                // Input Validation
-                if (!string.IsNullOrEmpty(search) && !Regex.IsMatch(search, @"^[\p{L}\p{N}\s]+$") ||
-                    !string.IsNullOrEmpty(searchAuthor) && !Regex.IsMatch(searchAuthor, @"^[\p{L}\p{N}\s]+$") ||
-                    !string.IsNullOrEmpty(searchArtist) && !Regex.IsMatch(searchArtist, @"^[\p{L}\p{N}\s]+$") ||
-                    !string.IsNullOrEmpty(searchVoiceActor) && !Regex.IsMatch(searchVoiceActor, @"^[\p{L}\p{N}\s]+$") ||
-                    !string.IsNullOrEmpty(searchCharacter) && !Regex.IsMatch(searchCharacter, @"^[\p{L}\p{N}\s]+$"))
-                {
-                    return Page();
-                }
-
-                _httpContextAccessor.HttpContext.Session.SetString("SelectedTags", selectedTagsSerialized);
-                _httpContextAccessor.HttpContext.Session.SetString("SelectedGenres", selectedGenresSerialized);
-
-                var query = context.mangaModels
-                    .Include(m => m.Authormodels)
-                    .Include(m => m.ArtistModels)
-                    .Include(m => m.GenresModels)
-                    .Include(m => m.TagsModels)
-                    .Include(m => m.Characters)
-                    .AsNoTracking()
-                    .AsQueryable();
-
-                if (!string.IsNullOrEmpty(search))
-                    query = query.Where(m => m.MangaName.Contains(search));
-
-                if (!string.IsNullOrEmpty(searchAuthor))
-                    query = query.Where(m => m.Authormodels.Any(a => a.FirstName.Contains(searchAuthor) || a.LastName.Contains(searchAuthor)));
-
-                if (!string.IsNullOrEmpty(searchArtist))
-                    query = query.Where(m => m.ArtistModels.Any(a => a.FirstName.Contains(searchArtist) || a.LastName.Contains(searchArtist)));
-
-                if (!string.IsNullOrEmpty(searchVoiceActor))
-                    query = query.Where(m => m.VoiceActors.Any(a => a.FirstName.Contains(searchVoiceActor) || a.LastName.Contains(searchVoiceActor)));
-
-                if (!string.IsNullOrEmpty(searchCharacter))
-                    query = query.Where(m => m.Characters.Any(a => a.CharacterName.Contains(searchCharacter)));
-
-                if (SearchReleaseYearStart.HasValue && IsYearInRange(SearchReleaseYearStart, 0001, DateTime.Now.Year))
-                {
-                    query = query.Where(m => m.ReleaseYear >= SearchReleaseYearStart.Value);
-                }
-
-                if (SearchReleaseYearEnd.HasValue && IsYearInRange(SearchReleaseYearEnd, 0001, DateTime.Now.Year))
-                {
-                    query = query.Where(m => m.ReleaseYear <= SearchReleaseYearEnd.Value || (m.EndingYear == null && DateTime.Now <= SearchReleaseYearEnd.Value));
-                }
-
-                if (PositiveSelectedGenres.Count > 0)
-                {
-                    if (GenreInclusionMode == "And")
-                    {
-                        var mangaIds = context.mangaModels
-                      .Select(m => new { m.MangaID, GenresId = m.GenresModels.Select(t => t.GenresId) })
-                      .AsEnumerable()
-                      .Where(m => PositiveSelectedGenres.All(t => m.GenresId.Contains(t)))
-                       .Select(m => m.MangaID)
-                       .ToList();
-
-                        query = query.Where(m => mangaIds.Contains(m.MangaID));
-                    }
-                    else // "Or"
-                    {
-                        query = query.Where(m => m.GenresModels.Any(g => PositiveSelectedGenres.Contains(g.GenresId)));
-                    }
-                }
-
-                if (SelectedTags.Count > 0)
-                {
-                    if (TagInclusionMode == "And")
-                    {
-                        var mangaIds = context.mangaModels
-    .Select(m => new { m.MangaID, TagIds = m.TagsModels.Select(t => t.TagId) })
-    .AsEnumerable()
-    .Where(m => SelectedTags.All(t => m.TagIds.Contains(t)))
-    .Select(m => m.MangaID)
-    .ToList();
-
-                        query = query.Where(m => mangaIds.Contains(m.MangaID));
-                    }
-                    else // "Or"
-                    {
-                        query = query.Where(m => m.TagsModels.Any(t => SelectedTags.Contains(t.TagId)));
-                    }
-                }
-                if (NegativeSelectedGenres.Count > 0)
-                {
-                    if (GenreExclusionMode == "And")
-                    {
-                        if (PositiveSelectedGenres.Count == 0)
-                        {
-                            var excludeMangaIds = context.mangaModels
-                                .Select(m => new { m.MangaID, GenresId = m.GenresModels.Select(t => t.GenresId) })
-                                .AsEnumerable()
-                                .Where(m => !NegativeSelectedGenres.All(t => m.GenresId.Contains(t)))
-                                .Select(m => m.MangaID)
-                                .ToList();
-
-                            query = query.Where(m => excludeMangaIds.Contains(m.MangaID));
-                        }
-                        else
-                        {
-                            query = query.Where(m => !m.GenresModels.Any(g => NegativeSelectedGenres.Contains(g.GenresId)));
-                        }
-                    }
-                    else // "Or"
-                    {
-                        query = query.Where(m => !m.GenresModels.Any(g => NegativeSelectedGenres.Contains(g.GenresId)));
-                    }
-                }
-                if (NegativeSelectedTags.Count > 0)
-                {
-                    if (TagExclusionMode == "And")
-                    {
-                        if (SelectedTags.Count == 0)
-                        {
-                            var excludeMangaIds = context.mangaModels
-                                .Select(m => new { m.MangaID, TagId = m.TagsModels.Select(t => t.TagId) })
-                                .AsEnumerable()
-                                .Where(m => !NegativeSelectedTags.All(t => m.TagId.Contains(t)))
-                                .Select(m => m.MangaID)
-                                .ToList();
-
-                            query = query.Where(m => excludeMangaIds.Contains(m.MangaID));
-                        }
-                        else
-                        {
-                            query = query.Where(m => !m.TagsModels.Any(g => NegativeSelectedTags.Contains(g.TagId)));
-                        }
-                    }
-                    else // "Or"
-                    {
-                        query = query.Where(m => !m.TagsModels.Any(g => NegativeSelectedTags.Contains(g.TagId)));
-                    }
-                }
-                var list = query.ToList();
-                list = list.Where(m => m.GenresModels.Any(g => PositiveSelectedGenres.Contains(g.GenresId))).ToList();
-                list = list.Where(m => m.TagsModels.Any(t => SelectedTags.Contains(t.TagId))).ToList();
-
-                var sql = query.ToQueryString();
-
-                TotalPages = (int)Math.Ceiling(await query.CountAsync() / (double)MoreBooksClicks);
-                _httpContextAccessor.HttpContext.Session.SetInt32("TotalPages", TotalPages);
-                _httpContextAccessor.HttpContext.Session.SetString("IsSearchClicked", "true");
-
-                query = query.Skip((CurrentPage - 1) * MoreBooksClicks).Take(MoreBooksClicks);
-                MangaModels = await query.ToListAsync();
-
-                Tags = await context.TagModels.ToListAsync();
-                Genres = await context.GenresModels.ToListAsync();
+                await ExecuteQueryAndSetResults(query);
 
                 return Page();
             }
@@ -314,6 +396,7 @@ namespace NovelXManga.Pages.SearchFilter
         {
             Tags = await context.TagModels.ToListAsync();
             Genres = await context.GenresModels.ToListAsync();
+
             TagInclusionMode = _httpContextAccessor.HttpContext.Session.GetString("TagInclusionMode") ?? "And";
             TagExclusionMode = _httpContextAccessor.HttpContext.Session.GetString("TagExclusionMode") ?? "Or";
             GenreInclusionMode = _httpContextAccessor.HttpContext.Session.GetString("GenreInclusionMode") ?? "And";
@@ -336,21 +419,68 @@ namespace NovelXManga.Pages.SearchFilter
             return Page();
         }
 
+        //Old  JS fetch for the more button Does not work properly
+        //public async Task<IActionResult> OnGetBooksPage(int currentPage, int pageSiz)
+        //{
+        //    try
+        //    {
+        //        var query = context.mangaModels.AsQueryable();
+        //        int totalCount = await query.CountAsync();
+        //        query = query.Skip((currentPage - 1) * pageSiz).Take(pageSiz);
+        //        var mangaModels = await query.ToListAsync();
+
+        //        int totalPages = (int)Math.Ceiling(totalCount / (double)pageSiz);
+
+        //        return new JsonResult(new { CurrentPage = currentPage, Books = mangaModels, TotalPages = totalPages });
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine($"Exception: {ex.Message}");
+        //        return StatusCode(500, new { message = "Internal server error" });
+        //    }
+        //}
+
+        // New JS fetch for the more button
         public async Task<IActionResult> OnGetBooksPage(int currentPage, int pageSiz)
         {
             try
             {
-                var query = context.mangaModels.AsQueryable();
+                var ItemsAlreadyShown = _httpContextAccessor.HttpContext.Session.GetInt32("ItemsAlreadyShown") ?? 0;
+                Console.WriteLine($"ItemsAlreadyShown before: {ItemsAlreadyShown}");
+
+                var query = BuildQueryWithFilters();
+
                 int totalCount = await query.CountAsync();
-                query = query.Skip((currentPage - 1) * pageSiz).Take(pageSiz);
-                var mangaModels = await query.ToListAsync();
+                Console.WriteLine($"Total Count: {totalCount}");
 
-                int totalPages = (int)Math.Ceiling(totalCount / (double)pageSiz);
+                ItemsAlreadyShown += pageSiz; // Increment the items already shown.
+                _httpContextAccessor.HttpContext.Session.SetInt32("ItemsAlreadyShown", ItemsAlreadyShown);
+                Console.WriteLine($"ItemsAlreadyShown after: {ItemsAlreadyShown}");
 
+                Console.WriteLine($"Current Page: {currentPage}");
+                Console.WriteLine($"Page Size: {pageSiz}");
+
+                if (pageSiz == 0)
+                {
+                    Console.WriteLine("Page size is zero, can't continue.");
+                    return StatusCode(400, new { message = "Invalid page size" });
+                }
+
+                int totalPages = (int)Math.Ceiling((double)totalCount / pageSiz);
+                Console.WriteLine($"Total Pages: {totalPages}");
+                JsonSerializerOptions options = new JsonSerializerOptions
+                {
+                    ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve
+                };
+
+                var mangaModels = await query.Skip(ItemsAlreadyShown).Take(pageSiz).ToListAsync();
+                var json = JsonSerializer.Serialize(new { CurrentPage = currentPage, Books = mangaModels, TotalPages = totalPages }, options);
+                Console.WriteLine($"Serialized JSON: {json}");
                 return new JsonResult(new { CurrentPage = currentPage, Books = mangaModels, TotalPages = totalPages });
             }
             catch (Exception ex)
             {
+                Console.WriteLine($"Exception: {ex.Message}");
                 return StatusCode(500, new { message = "Internal server error" });
             }
         }

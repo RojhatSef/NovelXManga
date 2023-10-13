@@ -1,18 +1,18 @@
-﻿(function () {
-    var selectedTags = $('#selectedTags').val().split(',');
-    $('input[type=checkbox]').each(function () {
-        if (selectedTags.includes($(this).val())) {
-            $(this).prop('checked', true);
-        }
-    });
-   
-    $('input[type=checkbox]').on('change', function () {
-        var selectedTags = $('input[type=checkbox]:checked').map(function () {
-            return $(this).val();
-        }).get();
-        $('#selectedTags').val(selectedTags.join());
-    });
-})
+﻿//(function () {
+//    var selectedTags = $('#selectedTags').val().split(',');
+//    $('input[type=checkbox]').each(function () {
+//        if (selectedTags.includes($(this).val())) {
+//            $(this).prop('checked', true);
+//        }
+//    });
+
+//    $('input[type=checkbox]').on('change', function () {
+//        var selectedTags = $('input[type=checkbox]:checked').map(function () {
+//            return $(this).val();
+//        }).get();
+//        $('#selectedTags').val(selectedTags.join());
+//    });
+//})
 
 window.addEventListener("DOMContentLoaded", (event) => {
     let navbar = document.querySelector('.custom-O-navbar');
@@ -91,6 +91,8 @@ document.getElementById('searchbar').addEventListener('focus', function () {
         dropdown.style.display = 'block';
     }
 });
+
+// fetches data such as books/author/voice/aritst to the searchbar
 function searchManga(searchTerm) {
     var dropdown = document.getElementById('mangaResultsDropdown');
 
@@ -98,7 +100,7 @@ function searchManga(searchTerm) {
         fetch(`/Index?handler=SearchManga&searchTerm=${sanitizeHTML(searchTerm)}`)
             .then(response => response.json())
             .then(data => {
-                 // Debugging line
+                // Debugging line
                 let allResults = [];
                 // Manga Results
                 if (data.Manga) {
@@ -161,7 +163,8 @@ function searchManga(searchTerm) {
         dropdown.innerHTML = "";
         dropdown.style.display = 'none';
     }
-} function sanitizeHTML(text) {
+}// sanitize html, trying to remove injections.
+function sanitizeHTML(text) {
     var element = document.createElement('div');
     element.textContent = text;
     return element.innerHTML;
@@ -187,13 +190,13 @@ if (document.getElementById('dropdownToggle') && document.getElementById('userDr
     });
 }
 // Event handler, if we get an error.
-window.addEventListener('error', function (event) {
-    // Log the error to your internal system
-    console.error('Logged Error: ', event.error);
+//window.addEventListener('error', function (event) {
+//    // Log the error to  internal system
+//    console.error('Logged Error: ', event.error);
 
-    // Prevent the browser's console from showing the error
-    event.preventDefault();
+//    // Prevent the browser's console from showing the error
+//    event.preventDefault();
 
-    // Show a generic message to the user
-    alert('An error occurred. Please try again later.');
-});
+//    // Show a generic message to the user
+//    /* alert('An error occurred. Please try again later.');*/
+//});
