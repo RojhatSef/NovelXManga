@@ -261,8 +261,8 @@ namespace NovelXManga
                 "Straight Seme", "Straight Uke", "Strategic Minds", "Strong Female Lead", "Strong Male Lead",
                 "Student Council", "Student-Student Relationship",
 
-           "Student-Teacher Relationship", "Student", "Subtle Romance", "Sudden Appearance", "Suicide", "Super Heroes",
-                "Super Powers", "Survival", "Swimsuit", "Sword and Sorcery", "Swordplay", "Swordsman",
+           "Student-Teacher Relationship", "Student", "Subtle Romance", "Sudden Appearance", "Suicide", "SuperHeroes",
+                "SuperPowers", "Survival", "Swimsuit", "Sword and Sorcery", "Swordplay", "Swordsman",
 
                 "Swordswoman", "Talented Female Lead", "Talented Male Lead", "Tall Female Lead", "Tall Male Lead",
                 "Tattoo", "Teacher", "Teamwork", "Threesome", "Time Skip", "Time Loop", "Time Travel",
@@ -525,7 +525,7 @@ namespace NovelXManga
                 CreateLordOfTheRings();
                 CreateSoloLeveling();
                 CreateTowerOfGod();
-
+                CreateMyHeroAcademia();
                 CreateAirGear();
                 CreateBleach();
                 CreateCodeGeass();
@@ -2750,6 +2750,145 @@ new Character
 },
             };
             context.mangaModels.Add(DonQuixote);
+            context.SaveChanges();
+        }
+
+        public void CreateMyHeroAcademia()
+        {
+            var Tag1ToManga = context.TagModels.FirstOrDefault(t => t.TagName == "SuperHeroes");
+            var Tag2ToManga = context.TagModels.FirstOrDefault(t => t.TagName == "Weak to Strong");
+            var Gen1ToManga = context.GenresModels.FirstOrDefault(t => t.GenreName == "Action");
+            var Gen2ToManga = context.GenresModels.FirstOrDefault(t => t.GenreName == "Shounen");
+            var Gen3ToManga = context.GenresModels.FirstOrDefault(t => t.GenreName == "Adventure");
+
+            DateTime myDate = DateTime.ParseExact("2014-07-07", "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
+            DateTime started = DateTime.ParseExact("2014-07-07", "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
+
+            MangaModel MyHeroAcademia = new MangaModel
+            {
+                MangaName = "My Hero Academia",
+                PhotoPath = Path.Combine(ProcessUploadedFile("MHA.jpg")),
+                ReleaseYear = myDate,
+                BlogModel = new BlogModel { mangaName = "My Hero Academia" },
+                Description = "In a world where nearly every human has some form of superpower, or 'quirk', aspiring heroes join U.A. High School to learn how to become a superhero.",
+                CompletelyTranslated = "Ongoing",
+                OfficalLanguage = "Japanese",
+                ISBN10 = "9784088802640",
+                ISBN13 = "4088802646",
+                relatedSeries = null,
+                EndingYear = DateTime.Now,
+                StatusInCountryOfOrigin = "Ongoing",
+                Type = "Manga",
+                StudioModels = new List<StudioModel> { new StudioModel { GroupName = "Bones Inc.", Started = started, StudioWebsite = "https://bones.co.jp/", Biography = "N/A" } },
+                OriginalPublisher = "Shueisha",
+                orignalWebtoon = "N/A",
+                AllLanguages = new List<Languages> { JapaneseLanguage, EnglishLanguage },
+                BuyPages = new List<BuyPage> {
+            new BuyPage { BuyWebsite = "https://www.amazon.com/My-Hero-Academia-Vol-1/dp/1421582694", _Languages = new List<Languages> { EnglishLanguage }  },
+            new BuyPage { BuyWebsite = "https://www.amazon.co.jp/僕のヒーローアカデミア-1-ジャンプコミックス-堀越-耕平/dp/4088802646", _Languages = new List<Languages> { JapaneseLanguage }  },
+        },
+                AssociatedNames = new List<AssociatedNames>
+        {
+            new AssociatedNames { nameString = "Boku no Hero Academia"  },
+        },
+                OfficalWebsites = new List<OfficalWebsite>
+        {
+            new OfficalWebsite { OfficalWebsiteString = "https://heroaca.com/", OfficalWebsiteName = "Official Site", Twitter = "N/A", Facebook = "N/A", Line = "N/A" },
+        },
+                Authormodels = new List<AuthorModel>
+        {
+            new AuthorModel { FirstName = "Kohei", LastName = "Horikoshi",  Biography = "A Japanese manga artist known for creating the My Hero Academia series." },
+        },
+                ArtistModels = new List<ArtistModel> {
+            new ArtistModel { FirstName = "Kohei", LastName = "Horikoshi", Biography = "A Japanese manga artist known for creating the My Hero Academia series." }
+        },
+                VoiceActors = new List<VoiceActorModel> {
+            new VoiceActorModel { FirstName = "Daiki", LastName = "Yamashita" },
+            new VoiceActorModel { FirstName = "Kenta", LastName = "Miyake" },
+            new VoiceActorModel { FirstName = "Nobuhiko", LastName = "Okamoto" },
+        },
+                GenresModels = new List<GenresModel>
+        {
+            Gen1ToManga, Gen2ToManga, Gen3ToManga
+        },
+                TagsModels = new List<TagModel>
+        {
+            Tag1ToManga, Tag2ToManga
+        },
+                Characters = new List<Character>
+        {
+            new Character
+            {
+                CharacterName = "Izuku Midoriya",
+                specie = "Human",
+                Gender = "Male",
+                Born = "July 15",
+                PlaceOffResidence = "Japan",
+                World = "My Hero Academia",
+                Nationality = "Japanese",
+                Education = "U.A. High School",
+                Occupation = "Student",
+                Background = "A boy born without superpowers in a world where they are common, but still dreams of becoming a hero.",
+                PhotoPath = Path.Combine(CharacterProcessUploadedFile("IzukuMidoriya.jpg")),
+                Personality = "Kind, Determined, Brave",
+                FamousQuote = "When you have to save someone, they're usually in a scary situation. A true hero saves not only their lives but also their spirits.",
+                EyeColor = "Green",
+                HairColor = "Green",
+                Abilities = "One For All",
+                Hobbies = "Studying Heroes",
+                Likes = "Heroes, Quirks",
+                Dislikes = "Villains, Injustice",
+                PersonalityTraits = "Optimistic, Intelligent, Humble"
+            },
+            new Character
+{
+    CharacterName = "Katsuki Bakugo",
+    specie = "Human",
+    Gender = "Male",
+    Born = "April 20",
+    PlaceOffResidence = "Japan",
+    World = "My Hero Academia",
+    Nationality = "Japanese",
+    Education = "U.A. High School",
+    Occupation = "Student",
+    Background = "A student in Class 1-A at U.A. High School, training to become a Pro Hero. He has a Quirk named Explosion.",
+    PhotoPath = Path.Combine(CharacterProcessUploadedFile("Katsuki-Bakugou.jpg")),
+    Personality = "Arrogant, Short-tempered, Confident",
+    FamousQuote = "I just wanna win the way I wanna win. Is that so wrong?",
+    EyeColor = "Red",
+    HairColor = "Blond",
+    Abilities = "Explosion",
+    Hobbies = "None",
+    Likes = "Victory, Himself",
+    Dislikes = "Losing, Weakness",
+    PersonalityTraits = "Competitive, Aggressive, Driven"
+},
+new Character
+{
+    CharacterName = "All Might",
+    specie = "Human",
+    Gender = "Male",
+    Born = "June 10",
+    PlaceOffResidence = "Japan",
+    World = "My Hero Academia",
+    Nationality = "Japanese",
+    Education = "U.A. High School",
+    Occupation = "Teacher, Former Pro Hero",
+    Background = "The former No. 1 Pro Hero who bore the title of the world's Symbol of Peace. He teaches Foundational Hero Studies at U.A. High School.",
+    PhotoPath = Path.Combine(CharacterProcessUploadedFile("AllMight.jpg")),
+    Personality = "Charismatic, Optimistic, Caring",
+    FamousQuote = "I am here!",
+    EyeColor = "Blue",
+    HairColor = "Blond",
+    Abilities = "One For All",
+    Hobbies = "Training Heroes",
+    Likes = "Peace, Justice",
+    Dislikes = "Villains, Injustice",
+    PersonalityTraits = "Inspirational, Courageous, Kind-hearted"
+}
+        },
+            };
+            context.mangaModels.Add(MyHeroAcademia);
             context.SaveChanges();
         }
 
