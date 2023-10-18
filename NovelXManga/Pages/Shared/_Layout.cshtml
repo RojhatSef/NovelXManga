@@ -15,7 +15,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Otaku Library</title>
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/ChromeStyle.css" asp-append-version="true" />
 
  
 
@@ -107,7 +107,7 @@
 
 
             <div class="sidebar-section">
-                <h2 class="sidebar-title"><i class="material-icons">Follows</i></h2>
+                <h2 class="sidebar-title"><i class="gg-user gap-icon"></i> <span class="sidebar-title-text">Follows</span></h2>
                 <ul>
                 <li class="HoverEffektLi">
                     <a href="#"> <span>Latest Updates</span>  </a>
@@ -122,7 +122,8 @@
 
             </div>
             <div class="sidebar-section">
-                <h2 class="sidebar-title"><i class="material-icons">update</i></h2>
+                <h2 class="sidebar-title"><i class="gg-user gap-icon"></i> <span class="sidebar-title-text">Community</span></h2>
+
                 <ul>
                     <li class="HoverEffektLi">
                         <a href="#"> <span>Forum</span> </a>
@@ -134,14 +135,14 @@
                     {
                         <li class="HoverEffektLi ">
 
-                        <a asp-page="/Roles/UpdateUserRoles">  <i class="gg-user"></i> Users </a>
+                        <a asp-page="/Roles/UpdateUserRoles">  Users </a>
                         </li>
                     }
                         @if (OwnerUser)
                     {
                         <li class="HoverEffektLi ">
 
-                        <a asp-page="/Register/DeleteUserPage">  <i class="gg-user"></i> Delete User </a>
+                        <a asp-page="/Register/DeleteUserPage"> Delete User </a>
                         </li>
                     }
                   
@@ -149,17 +150,12 @@
                     <li class="HoverEffektLi">
                     <a href="#"> <span>Latest Updates</span>  </a>
                 </li>
-                    <li class="HoverEffektLi">
-                    <a asp-page="/Author/CreateAuthor"> <span>AuthorTest</span>  </a>
-                </li>
-                    <li class="HoverEffektLi">
-                    <a asp-page="/Manga/CreateNewManga"> <span>Create New Book</span>  </a>
-                </li>
+                
              </ul>
             </div>
           
             <div class="sidebar-section">
-                <h2 class="sidebar-title"><i class="material-icons">update</i>Latest Updates</h2>
+                <h2 class="sidebar-title"><i class="gg-user gap-icon"></i> <span class="sidebar-title-text">Otaku Library</span></h2>
              <ul>
                     <li class="HoverEffektLi">
                         <a asp-page="/InfoPages/AboutUs"> <span>About us</span> </a>

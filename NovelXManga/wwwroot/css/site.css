@@ -419,7 +419,7 @@ a {
 .Custom-o-sidebar {
     position: fixed;
     top: 0;
-    left: -100%;
+    left: -250%;
     width: 250px;
     height: 100%;
     background-color: #333;
@@ -428,10 +428,12 @@ a {
     z-index: 200;
     overflow-y: auto;
     transition: 0.5s;
+    pointer-events: none;
 }
 
     .Custom-o-sidebar.open {
         left: 0;
+        pointer-events: auto;
     }
 
     .Custom-o-sidebar ul {
@@ -464,32 +466,71 @@ a {
         margin-bottom: 10px;
     }
 
-        .Custom-o-sidebar .sidebar-title i {
+        .Custom-o-sidebar .sidebar-title i,
+        .Custom-o-sidebar .sidebar-title .gg-user {
             margin-right: 10px;
+            color: #ff6740;
         }
 
-    .Custom-o-sidebar .user-section {
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        border-radius: 10px;
-        padding: 5px;
-        height: 70px;
-        border: 1px solid white; /* Added a white border */
-        box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
-    }
+.sidebar-title span {
+    color: #ff6740;
+}
 
-    .Custom-o-sidebar .profile-image img {
-        width: 50px; /* Change the value as per your requirement */
-        height: 50px; /* Change the value as per your requirement */
-        padding-left: 5px;
-        border-radius: 50%;
-    }
+.Custom-o-sidebar .user-section {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    border-radius: 10px;
+    padding: 5px;
+    height: 70px;
+    border: 1px solid white; /* Added a white border */
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+}
 
-    .Custom-o-sidebar .user-section .profile-image {
-        margin-left: auto;
-        margin-right: 10px;
+.Custom-o-sidebar .profile-image img {
+    width: 50px; /* Change the value as per your requirement */
+    height: 50px; /* Change the value as per your requirement */
+    padding-left: 5px;
+    border-radius: 50%;
+}
+
+.Custom-o-sidebar .user-section .profile-image {
+    margin-left: auto;
+    margin-right: 10px;
+}
+
+.Custom-o-sidebar .user-info {
+    flex-grow: 1;
+    min-width: 50px;
+    max-width: 140px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.Custom-o-sidebar li {
+    font-size: 1.2rem;
+    text-align: left;
+    margin-bottom: 8px;
+}
+
+.Custom-o-sidebar a {
+    color: white;
+    text-decoration: none;
+}
+
+.Custom-o-sidebar li.active a {
+    color: orange;
+}
+
+.Custom-o-sidebar li:hover a {
+    color: #ccc;
+}
+
+@media (min-width: 769px) {
+    .Custom-o-sidebar li:hover a {
+        color: #ff6740;
     }
+}
 
 .user-dropdown-menu {
     display: none;
@@ -510,14 +551,6 @@ a {
         display: block;
     }
 
-.Custom-o-sidebar .user-info {
-    flex-grow: 1;
-    min-width: 50px;
-    max-width: 140px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
 .username {
     padding-bottom: 4px;
 }
@@ -526,6 +559,7 @@ a {
     padding-right: 75px;
     display: block;
     margin-left: 3px;
+    color: #ff6740; /* Changed the text color to ff6740 */
 }
 
 .dropdown-arrow {
@@ -566,30 +600,6 @@ a {
         color: black;
     }
 
-.Custom-o-sidebar li {
-    font-size: 1.2rem;
-    text-align: left;
-    margin-bottom: 8px;
-}
-
-.Custom-o-sidebar a {
-    color: white;
-    text-decoration: none;
-}
-
-.Custom-o-sidebar li.active a {
-    color: orange;
-}
-
-.Custom-o-sidebar li:hover a {
-    color: #ccc;
-}
-
-@media (min-width: 769px) {
-    .Custom-o-sidebar li:hover a {
-        color: #ff6740;
-    }
-}
 /* SIDEbar ENDS STARTS HERE*/
 
 @media (max-width: 768px) {

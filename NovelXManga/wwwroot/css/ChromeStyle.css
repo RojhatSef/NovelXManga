@@ -1,0 +1,2618 @@
+﻿@media all and (-webkit-min-device-pixel-ratio:0) and (min-resolution: .001dpcm) {
+    body, html {
+        margin: 0;
+        padding: 0;
+        font-family: Lato !important;
+        font-weight: 800 !important;
+        line-height: normal;
+        font-size: 12px;
+        background-color: #191a1c;
+        overflow-x: hidden;
+    }
+
+    .popup {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        background-color: rgba(0, 0, 0, 0.85); /* Adjusted for a darker background */
+        transform: translate(-50%, -50%); /* This will center it */
+        z-index: 9999;
+        color: red; /* Setting text color to red */
+        border-radius: 8px; /* Optional: Giving it rounded corners */
+    }
+
+    .popup-content {
+        background-color: black; /* Black background */
+        padding: 20px;
+        border: 1px solid #888;
+        width: 90%; /* Adjusted to fit better within the popup */
+        margin: auto; /* Centers the content box */
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        text-align: center; /* Optional: To center the text in the content box */
+    }
+
+    .card-ex {
+        position: relative;
+        width: 100%;
+        height: 360px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .blurredbackground {
+        height: 100%;
+        width: 100%
+    }
+
+    .card-image-ex {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+        overflow: hidden
+    }
+
+    .TagGenreSpacer {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+        .TagGenreSpacer .tag-genre-item {
+            flex: 1 0 calc(33.3333% - 10px); /* 33.3333% is approximately 1/3, and 10px is the desired space between items */
+            margin: 5px; /* Half of the space between items */
+            text-align: center; /* Center the text inside each item */
+            /* Add other styles as necessary */
+        }
+
+    .MoveDownIndexWallPapers {
+        height: 360px;
+        width: 100%;
+    }
+
+    .MarginTop50PxAdvancedResult {
+        margin-top: 50px
+    }
+
+    hr {
+        color: #ff6740;
+    }
+
+    input {
+        outline: none;
+        margin: 0px;
+    }
+
+    ul {
+        list-style: none;
+    }
+
+    .row {
+        padding-right: 0px !important;
+        padding-left: 0px !important;
+        margin: 0px !important;
+    }
+
+    a {
+        padding: 0;
+        margin: 0;
+        text-decoration: none !important;
+        color: inherit;
+    }
+
+    .MoreRecentUpdateStyle {
+        width: 100%;
+        height: 35px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #333; /* Optional: background color for the button */
+        color: #fff; /* Optional: text color for the button */
+    }
+
+        .MoreRecentUpdateStyle:hover {
+            background-color: #ff6740; /* Optional: background color for the button */
+            color: black; /* Optional: text color for the button */
+        }
+
+    .container-custom {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+        font-weight: 800;
+        font-size: 12px;
+        color: whitesmoke;
+        text-align: center;
+        background-color: #191a1c;
+        overflow: visible;
+    }
+
+    main {
+        flex-grow: 1;
+    }
+
+    .main-content > div {
+        background-color: #191a1c;
+    }
+
+    .main-content {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        font-weight: 800;
+        font-size: 12px;
+        color: whitesmoke;
+        text-align: center;
+    }
+
+    .Content1Ex {
+        width: 100%;
+    }
+
+    .content-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .HiddenOverflowContent1Ex {
+    }
+
+    .Content1Cost, .Content2Cost, .Content3Cost, .Content4Cost {
+        flex: 1;
+        background-color: #191a1c;
+        border-radius: var(--main-radius);
+        padding-top: var(--main-padding);
+        display: flex;
+        flex-direction: column;
+        padding: 1rem;
+        padding-left: 2.5%;
+        padding-right: 2.5%;
+    }
+
+    .ContentDescription {
+        display: flex;
+        margin-right: auto;
+        padding-top: 1%;
+        width: 100%;
+        transition: width 0.5s, height 0.5s;
+    }
+
+    .ContentDescriptionContent2 {
+        display: flex;
+        margin-right: auto;
+        width: 100%;
+        transition: width 0.5s, height 0.5s;
+    }
+
+    .custom-O-navbar {
+        grid-area: nav;
+        background-color: transparent;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 100;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.2rem 1rem;
+        height: 65px;
+        border-bottom: none;
+        transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+        display: flex;
+    }
+
+    a {
+        list-style: none;
+    }
+
+    @media (max-width: 680px) {
+        .custom-O-navbar h3 {
+            font-size: 15px;
+        }
+
+        #NovelTitle {
+            color: white;
+            padding-right: 5px;
+            font-size: 28px;
+        }
+
+        .searchbar {
+            padding: 0.3rem;
+            align-self: stretch;
+            transition: width 0.5s; /* Add transition for smooth width change */
+        }
+
+        .sidebar-toggle {
+            padding: 0.3rem 0.6rem;
+            margin-right: 0.5rem;
+        }
+
+        .BoxOne {
+            width: calc(50% - 20px);
+            margin: 10px;
+        }
+    }
+
+    .LayoutXButtonNoBackground {
+        background-color: #333 !important;
+        border-radius: 25px;
+    }
+
+        .LayoutXButtonNoBackground:hover {
+            background-color: #191a1c !important;
+            border-radius: 25px;
+        }
+    /* Login STARTS HERE*/
+    .logout-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 25vh;
+        /* Ensure the container is on top of other content */
+    }
+
+    .MarginAutoLogOut {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        max-width: 400px; /* Adjust the max-width as needed */
+        padding: 20px;
+    }
+
+    .account-deletion-form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+
+    .MarginAutoLogOut btn {
+        width: 15%;
+        margin: 10px;
+    }
+
+    .LoginRememberMehoverOrangeRed:hover {
+        color: #ff6740;
+    }
+
+    .ForgottPasswordReturnback {
+        display: flex;
+        color: #ff6740;
+        width: 30%;
+        border-radius: 5px;
+    }
+
+        .ForgottPasswordReturnback:hover {
+            color: white;
+        }
+
+    .LoginForgotRegiContainer {
+        height: 550px;
+        background-color: #191a1c;
+        width: 30%;
+        justify-content: center;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .textOrangeRedForgottenPassword {
+        color: #ff6740;
+        font-size: 16px;
+        margin-left: 20%;
+    }
+
+        .textOrangeRedForgottenPassword:hover {
+            color: white;
+        }
+
+    .LowBackGroundForLoginForgotRegi {
+        background-color: rgb(51, 51, 51);
+        display: flex;
+        width: 100% !important;
+        padding: 0;
+        margin: 0;
+        height: 10px;
+    }
+
+    /* SIDEbar STARTS HERE*/
+    #NovelTitle {
+        color: white;
+        padding-right: 30px;
+        font-size: 32px;
+        text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    }
+
+        #NovelTitle:hover {
+            color: #ff6740;
+        }
+
+    .navbar-left {
+        display: flex;
+        align-items: center;
+        flex: 1;
+    }
+
+    .navbar-right {
+        display: flex;
+        align-items: end;
+        justify-content: flex-end;
+        flex: 1;
+    }
+
+    .sidebar-toggle {
+        cursor: pointer;
+        background-color: transparent;
+        color: white;
+        border: none;
+        border-radius: 3px;
+        padding: 0.5rem 1rem;
+    }
+
+    .colorSidebarToggle {
+        color: white !important;
+    }
+
+        .colorSidebarToggle:hover {
+            color: black !important;
+        }
+
+    .sidebar-toggle:hover {
+        cursor: pointer;
+        background-color: transparent;
+        color: #ff6740;
+        border: none;
+        border-radius: 3px;
+        padding: 0.5rem 1rem;
+    }
+
+    .searchbar {
+        width: 50%;
+        padding: 0.5rem;
+        border: none;
+        border-radius: 3px;
+        background-color: rgba(68, 68, 68, 0.4);
+        color: white;
+        max-width: 100%;
+        transition: width 0.5s, background-color 0.5s, color 0.5s; /* transition rule for the width property */
+        position: relative;
+        margin-right: 5.5%;
+    }
+
+        .searchbar:focus {
+            width: 100%; /* expanded width */
+            background-color: #444;
+        }
+
+    .Custom-o-sidebar {
+        position: fixed;
+        top: 0;
+        left: -250%;
+        width: 250px;
+        height: 100%;
+        background-color: #333;
+        transition: left 0.3s;
+        padding: 1rem;
+        z-index: 200;
+        overflow-y: auto;
+        transition: 0.5s;
+        pointer-events: none;
+    }
+
+        .Custom-o-sidebar.open {
+            left: 0;
+            pointer-events: auto;
+        }
+
+        .Custom-o-sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+            .Custom-o-sidebar ul li {
+                /* Add your HoverEffektLi styles here. If you have none, you can remove this */
+            }
+
+                .Custom-o-sidebar ul li a {
+                    display: flex;
+                    margin: 10px 0;
+                    padding-left: 10px;
+                }
+
+                    .Custom-o-sidebar ul li a i {
+                        margin-right: 10px;
+                    }
+
+        .Custom-o-sidebar .sidebar-section {
+            margin-bottom: 20px;
+        }
+
+        .Custom-o-sidebar .sidebar-title {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+            .Custom-o-sidebar .sidebar-title i,
+            .Custom-o-sidebar .sidebar-title .gg-user {
+                margin-right: 10px;
+                color: #ff6740;
+            }
+
+    .sidebar-title span {
+        color: #ff6740;
+    }
+
+    .Custom-o-sidebar .user-section {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        border-radius: 10px;
+        padding: 5px;
+        height: 70px;
+        border: 1px solid white; /* Added a white border */
+        box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+    }
+
+    .Custom-o-sidebar .profile-image img {
+        width: 50px; /* Change the value as per your requirement */
+        height: 50px; /* Change the value as per your requirement */
+        padding-left: 5px;
+        border-radius: 50%;
+    }
+
+    .Custom-o-sidebar .user-section .profile-image {
+        margin-left: auto;
+        margin-right: 10px;
+    }
+
+    .Custom-o-sidebar .user-info {
+        flex-grow: 1;
+        min-width: 50px;
+        max-width: 140px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .Custom-o-sidebar li {
+        font-size: 1.2rem;
+        text-align: left;
+        margin-bottom: 8px;
+    }
+
+    .Custom-o-sidebar a {
+        color: white;
+        text-decoration: none;
+    }
+
+    .Custom-o-sidebar li.active a {
+        color: orange;
+    }
+
+    .Custom-o-sidebar li:hover a {
+        color: #ccc;
+    }
+
+    @media (min-width: 769px) {
+        .Custom-o-sidebar li:hover a {
+            color: #ff6740;
+        }
+    }
+
+    .user-dropdown-menu {
+        display: none;
+        position: absolute;
+        background-color: #191a1c;
+        height: 70px;
+        width: 100px;
+        border-radius: 10px;
+        z-index: 999;
+        right: 0;
+    }
+
+    .user-dropdown-menu {
+        display: none;
+    }
+
+        .user-dropdown-menu.show {
+            display: block;
+        }
+
+    .username {
+        padding-bottom: 4px;
+    }
+
+    .username, .role-name {
+        padding-right: 75px;
+        display: block;
+        margin-left: 3px;
+        color: #ff6740; /* Changed the text color to ff6740 */
+    }
+
+    .dropdown-arrow {
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        background-color: white;
+        clip-path: polygon(50% 100%, 0% 0%, 100% 0%); /* Adjusted to make arrow point down */
+    }
+
+    .gg-arrow-down.dropdown-arrow {
+        flex-shrink: 0;
+    }
+
+    .HoverEffektLi a {
+        display: flex;
+        align-items: center;
+        padding-left: 20px; /* Adjust as per your needs for indentation of list items */
+    }
+
+    .PushDownSidebar {
+        margin-bottom: 18px;
+    }
+
+    .logo {
+        font-size: 30px;
+        margin-right: 20px;
+        background-color: #ff6740;
+        width: 100%;
+        border-radius: 2px;
+    }
+
+    #TextChange {
+        color: white;
+    }
+
+        #TextChange:hover {
+            color: black;
+        }
+
+    /* SIDEbar ENDS STARTS HERE*/
+
+    @media (max-width: 768px) {
+        .container-custom {
+            grid-template-columns: 1fr
+        }
+
+        .main-content {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .Author_Artist {
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+    }
+
+    flexLiLayout {
+    }
+
+    @media (max-width: 680px) {
+        .RemoveWhenSmall {
+            display: none;
+        }
+
+        .Content1Cost {
+            gap: 10px !important;
+        }
+
+        .Content2Cost {
+            gap: 10px !important;
+        }
+
+        .Content3Cost {
+            gap: 10px !important;
+        }
+
+        .Content4Cost {
+            gap: 10px !important;
+        }
+
+        .card-img-index {
+            max-width: 150px !important;
+        }
+
+        .card-title {
+            font-size: 15px !important;
+        }
+
+        .card-img-index {
+            margin: 10px !important;
+        }
+    }
+
+    @media (max-width: 1400px) {
+        .RemoveWhenLarge {
+            font-size: 10px;
+        }
+    }
+
+    @media (max-width: 1000px) {
+        .RemoveWhenMedium {
+            display: none;
+        }
+    }
+
+    .IndexTextRightSide {
+        text-align: left;
+        flex: 1; /* This allows the text to take up the remaining space */
+    }
+
+    .tag-container {
+        display: block;
+    }
+
+        .tag-container h5 {
+            margin-bottom: 0;
+        }
+
+        .tag-container h6 {
+            margin-top: 0;
+        }
+
+    .IndexTextRightSide h5,
+    .IndexTextRightSide h6,
+    .IndexTextRightSide .tag {
+        display: inline-block;
+    }
+
+    /* carousel-inner ENDS HERE */
+
+    /* TAGS/GENRE STARTS */
+    .tag-container {
+        display: block;
+        padding: 3px 6px;
+        align-content: center;
+        display: flex;
+        align-self: flex-start;
+        width: 100%;
+    }
+
+    .tag {
+        background-color: rgba(0, 0, 0, 0.1); /* Add a slightly darker background */
+        padding: 2px 5px; /* Add padding around the text */
+        border-radius: 3px; /* Add rounded corners to the background */
+        color: #ff6740; /* Change the text color to OrangeRed */
+    }
+
+    .TitleTagDescriptionCostum {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+    }
+
+    .Index_Artist_Author_Navigation_Arrows {
+        width: 100%;
+        display: flex;
+        margin-top: auto;
+        align-items: center;
+    }
+
+    .IndexArrowPostition {
+        margin: 20px;
+    }
+
+    .card-description {
+        overflow: clip;
+        width: 100%;
+        flex-basis: 40px;
+        flex-shrink: 0;
+        font-size: 19px;
+        display: -webkit-box;
+        -webkit-line-clamp: 4;
+        -webkit-box-orient: vertical;
+    }
+
+    .card-ex {
+        position: relative;
+        width: 100%;
+        height: 360px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .CardHeight {
+        height: 420px;
+        width: 100%;
+        object-fit: cover;
+    }
+
+    .blurredbackground {
+        height: 100%;
+        width: 100%
+    }
+
+    .IndexArrowEx {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        padding: 0 10px; /* optional: adjust as needed */
+    }
+
+    .MidExTop {
+        width: 70%;
+        height: 120px;
+        position: absolute;
+        margin-top: 255px;
+        border-style: solid;
+        border-radius: 10px;
+        border-color: #191a1c;
+        display: flex;
+        align-content: center;
+        align-items: stretch;
+    }
+
+    .CardBody-Ex {
+        display: flex;
+        align-items: center;
+        flex-grow: 1;
+        background-color: white;
+        color: #191a1c;
+    }
+
+        .CardBody-Ex:hover {
+            background-color: #191a1c;
+            color: rgb(255, 103, 64) !important;
+            border-top: solid rgb(255, 103, 64) !important;
+            border-bottom: solid rgb(255, 103, 64) !important;
+            border-radius: 2px;
+        }
+
+    .card-description-Ex {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 1px;
+        border-right: solid;
+        border-color: #191a1c;
+        font-size: 20px;
+    }
+
+    .noBorderStyle {
+        border-right: none !important;
+    }
+
+    .card {
+        width: 100%;
+        height: 320px;
+        display: flex;
+        overflow: hidden;
+        border-radius: 20px;
+        position: relative;
+        margin-bottom: 50px;
+        transition: width 0.5s, height 0.5s; /* Smooth transition for width and height */
+    }
+
+    @media only screen and (max-width: 768px) {
+        .card {
+            width: 100%;
+            margin: 0;
+            border-radius: 0;
+        }
+
+        .Content2Cost {
+            padding-left: 0; /* If you have any padding, remove it to ensure card touches the sides. */
+            padding-right: 0;
+            padding-bottom: 10%;
+        }
+    }
+
+    .card-title {
+        width: 100%;
+        display: flex;
+    }
+
+    .card-title-extra-style:hover {
+        color: #ff6740;
+    }
+
+    .CardFour {
+        display: flex;
+        flex-wrap: wrap; /* This allows the boxes to wrap onto the next line */
+        width: 100%;
+        height: 100%;
+        transition: width 0.5s, height 0.5s;
+        flex-grow: 1;
+    }
+
+    .cardFourOfaKind {
+        width: 100%;
+        height: 690px;
+        display: flex;
+        overflow: hidden;
+        flex-direction: column;
+        border-radius: 20px;
+        position: relative;
+        transition: width 0.5s, height 0.5s;
+    }
+
+    .FourOfAKind {
+        flex: 1 0 25%; /* Each box now takes up a quarter (25%) of the width */
+        max-height: 33.33%; /* And a third (33.33%) of the height */
+        display: flex;
+        align-items: center;
+        position: relative;
+        box-sizing: border-box;
+        padding: 10px;
+        transition: width 0.5s, height 0.5s;
+    }
+
+    .HideWhenHoverFourOfaKind {
+        display: block;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 6;
+        -webkit-box-orient: vertical;
+    }
+
+    .DisplayWhenHoverFourOfaKind {
+        display: none;
+    }
+
+    .FourofKindContent:hover .HideWhenHoverFourOfaKind {
+        display: none;
+    }
+
+    .FourofKindContent:hover .DisplayWhenHoverFourOfaKind {
+        display: block;
+    }
+
+    .ANoneStyle {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        color: inherit;
+        width: 100%;
+        height: 100%;
+    }
+
+        .ANoneStyle:hover {
+            border-top: solid;
+            border-bottom: solid;
+            border-color: #ff6740;
+        }
+
+    .FourOfAKind img {
+        height: 100%;
+        width: 30%;
+        object-fit: cover;
+    }
+
+    .aClassHeight {
+        height: 100%;
+        width: 100%;
+    }
+
+    .FourOfAKind .FourofKindContent {
+        width: 70%;
+        height: 100%; /* Make sure the content fits within its parent div */
+        padding-left: 10px; /* This will give a little space between the image and the text */
+    }
+
+    .card-img-background {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 15px;
+        filter: blur(25px);
+        transition: width 0.5s, height 0.5s;
+    }
+
+    .card-body {
+        width: 100%;
+        height: 100%;
+        top: 0;
+        right: 0;
+        position: absolute;
+        background: #1f3d4738;
+        border-radius: 15px;
+        display: flex;
+        color: white;
+        align-items: flex-start;
+        transition: width 0.5s, height 0.5s;
+    }
+
+    .card-img-index {
+        min-width: 100px; /* Min width */
+        max-width: 200px; /* Max width */
+        min-height: 300px; /* Min height */
+        max-height: 350px; /* Max height */
+        object-fit: cover;
+        margin-left: 30px !important;
+        margin-top: 10px;
+        margin-right: 30px;
+        transition: width 0.5s, height 0.5s;
+        flex-shrink: 0;
+        border-radius: 20px;
+        align-self: center;
+    }
+
+    .IndexArrowPostition {
+        margin-left: auto;
+        flex-shrink: 0;
+    }
+    /* INDEX CARD TOP ENDS HERE*/
+    /* MINICARDS STARTS HERE*/
+    .arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 2rem;
+        cursor: pointer;
+        z-index: 10;
+        background-color: rgba(0, 0, 0, 0.5);
+        padding: 10px 20px;
+        border-radius: 50%;
+    }
+
+    .left-arrow {
+        left: 0;
+    }
+
+    .right-arrow {
+        right: 0;
+    }
+
+    .MiniCards {
+        background-color: rgb(25, 26, 28);
+        height: 400px;
+        display: flex;
+        flex-wrap: nowrap; /* Prevent wrapping */
+
+        position: relative;
+        gap: 8px;
+        transition: width 0.5s, height 0.5s;
+        width: 100%; /* Full width of the parent */
+        box-sizing: border-box; /* Ensure padding does not increase total width */
+    }
+
+    .BoxContent {
+        height: 100%;
+        width: 100%;
+        color: green;
+        transition: width 0.5s, height 0.5s;
+    }
+
+    .BackGroundImageBox {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        transition: width 0.5s, height 0.5s;
+    }
+
+    .BoxImage {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        transition: width 0.5s, height 0.5s;
+    }
+
+    .BoxOne {
+        flex: none; /* Don't allow flexing to ensure consistent sizing */
+        width: 14%; /* Default to 50% to start */
+        transition: width 0.5s, height 0.5s;
+    }
+
+        .BoxOne:hover {
+            transform: scale(1.1);
+            position: relative;
+            z-index: 2;
+            border-top: solid;
+            border-bottom: solid;
+            border-color: #ff6740;
+        }
+
+    @media (max-width: 1200px) {
+        .BoxOne.hide-on-medium {
+            display: none;
+        }
+
+        .FourOfAKind {
+            flex: 1 0 33.33%; /* 3 boxes per row at widths <= 1200px */
+            max-height: 50%; /* 2 rows at widths <= 1200px */
+        }
+
+        .hide-on-Boxes-on-large {
+            display: none;
+        }
+
+        .BoxOne {
+            width: 16.66%; /* for showing 6 images */
+        }
+    }
+
+    @media (max-width: 900px) {
+        .FourOfAKind {
+            flex: 1 0 50%; /* 2 boxes per row at widths <= 900px */
+            max-height: 50%; /* 2 rows at widths <= 900px */
+        }
+
+        .hide-on-Boxes-on-medium {
+            display: none;
+        }
+
+        .tag-container {
+            font-size: 12.5px;
+        }
+
+        .BoxOne {
+            width: 16.66%; /* for showing 6 images */
+        }
+    }
+
+    @media (max-width: 599px) {
+        .FourOfAKind {
+            flex: 1 0 100%; /* 1 box per row at widths <= 599px */
+            max-height: 100%; /* 1 row at widths <= 599px */
+        }
+
+        .BoxOne {
+            width: 50%; /* for showing 2 images */
+        }
+
+            .BoxOne.hide-on-small {
+                display: none;
+            }
+
+        .ContentDescription {
+            padding-top: 4.5%;
+        }
+
+        .hide-on-Boxes-on-small {
+            display: none;
+        }
+
+        .Author_Artist {
+            font-size: 13px !important;
+        }
+    }
+
+    /* MINICARDS ENDS HERE*/
+    /* Card2 Starts HERE*/
+    .card-2-bodyDetails {
+        width: 100%;
+        height: 100%;
+        top: 0;
+        right: 0;
+        position: absolute;
+        display: flex;
+        color: white;
+        align-items: flex-start;
+    }
+
+    /* CurrentMangaPage Starts HERE*/
+    /* Book Starts HERE*/
+    .book-container {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        grid-gap: 20px;
+    }
+
+    .book-title {
+        grid-column: 1 / 3; /* span both columns */
+        /* Add your styles here */
+    }
+
+    .book-img {
+        /* Add your styles here */
+    }
+
+    .book-container-details {
+        display: grid;
+        grid-template-rows: auto auto;
+        grid-gap: 10px;
+    }
+
+    .book-detail {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .book-detail-title {
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    /* Ends Ends HERE*/
+    /* CurrentMangaPage Ends HERE*/
+    /* Book Starts HERE*/
+    .author-form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        width: 500px;
+        margin: auto;
+        padding: 20px;
+        box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+    }
+
+    .author-input {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .add-author {
+        padding: 10px 20px;
+        background-color: #009688;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 20px;
+    }
+
+        .add-author:hover {
+            background-color: #00796b;
+        }
+    /* AuthorStyle Ends HERE*/
+    /* ICONS start HERE*/
+
+    .gg-arrow-left-r {
+        box-sizing: border-box;
+        position: relative;
+        display: block;
+        width: 22px;
+        height: 22px;
+        border: 2px solid;
+        transform: scale(var(--ggs,1));
+        border-radius: 4px;
+        background-color: transparent;
+        margin: 10px;
+        --ggs: 2;
+    }
+
+        .gg-arrow-left-r::after,
+        .gg-arrow-left-r::before {
+            content: "";
+            display: block;
+            box-sizing: border-box;
+            position: absolute;
+            left: 4px
+        }
+
+        .gg-arrow-left-r::after {
+            width: 6px;
+            height: 6px;
+            border-bottom: 2px solid;
+            border-left: 2px solid;
+            transform: rotate(45deg);
+            bottom: 6px
+        }
+
+        .gg-arrow-left-r::before {
+            width: 10px;
+            height: 2px;
+            bottom: 8px;
+            background: currentColor
+        }
+
+    .gg-arrow-right-r {
+        box-sizing: border-box;
+        position: relative;
+        display: block;
+        width: 22px;
+        height: 22px;
+        border: 2px solid;
+        transform: scale(var(--ggs,1));
+        border-radius: 4px;
+        margin: 10px;
+        --ggs: 2;
+    }
+
+        .gg-arrow-right-r::after,
+        .gg-arrow-right-r::before {
+            content: "";
+            display: block;
+            box-sizing: border-box;
+            position: absolute;
+            right: 4px
+        }
+
+        .gg-arrow-right-r::after {
+            width: 6px;
+            height: 6px;
+            border-top: 2px solid;
+            border-right: 2px solid;
+            transform: rotate(45deg);
+            bottom: 6px
+        }
+
+        .gg-arrow-right-r::before {
+            width: 10px;
+            height: 2px;
+            bottom: 8px;
+            background: currentColor
+        }
+
+    .IndexArrowsPrev, .IndexArrowsNext {
+        background: none;
+        border: none;
+        font-size: 2rem; /* adjust as needed */
+        cursor: pointer;
+        margin: 10px 0; /* Adjust as needed */
+    }
+
+        .IndexArrowsPrev:hover {
+            border-radius: 10px;
+            border: 20px;
+        }
+
+        .IndexArrowsNext:hover {
+            border-radius: 10px;
+            border: 20px;
+        }
+
+    .gg-menu-round {
+        box-sizing: border-box;
+        position: relative;
+        display: block;
+        transform: scale(var(--ggs,1));
+        width: 22px;
+        height: 22px;
+        border-radius: 24px;
+        border: 2px solid;
+        --ggs: 1.5;
+        position: relative;
+    }
+
+        .gg-menu-round::before {
+            content: "";
+            display: block;
+            box-sizing: border-box;
+            position: absolute;
+            width: 10px;
+            height: 2px;
+            background: currentColor;
+            border-radius: 3px;
+            top: 4px;
+            left: 4px;
+            box-shadow: 0 4px 0, 0 8px 0;
+        }
+
+        .gg-menu-round::after {
+            content: "";
+            position: absolute;
+            top: -3px; /* Adjust these values as needed */
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            border: 1px solid #191a1c; /* This will be your border */
+            border-radius: inherit; /* This will ensure the border radius matches the parent */
+            z-index: -1; /* This ensures the border is below the main element */
+        }
+
+    .gg-minimize {
+        box-sizing: border-box;
+        position: relative;
+        justify-content: center;
+        align-self: center;
+        display: flex;
+        margin-bottom: 5px;
+        display: block;
+        transform: scale(var(--ggs,1));
+        width: 4px;
+        height: 4px;
+        box-shadow: -8px -4px 0 -1px, -6px -4px 0 -1px, 8px 4px 0 -1px, 6px 4px 0 -1px, 8px -4px 0 -1px, 6px -4px 0 -1px, -8px 4px 0 -1px, -6px 4px 0 -1px
+    }
+
+        .gg-minimize::after,
+        .gg-minimize::before {
+            content: "";
+            display: block;
+            box-sizing: border-box;
+            position: absolute;
+            width: 2px;
+            height: 18px;
+            border-top: 6px solid;
+            border-bottom: 6px solid;
+            box-shadow: 18px 0 0 -2px;
+            top: -7px
+        }
+
+        .gg-minimize::after {
+            left: -3px
+        }
+
+        .gg-minimize::before {
+            right: -3px
+        }
+
+    .gg-user {
+        display: block;
+        transform: scale(var(--ggs,1));
+        box-sizing: border-box;
+        width: 12px;
+        height: 18px
+    }
+
+        .gg-user::after,
+        .gg-user::before {
+            content: "";
+            display: block;
+            box-sizing: border-box;
+            position: absolute;
+            border: 2px solid
+        }
+
+        .gg-user::before {
+            width: 8px;
+            height: 8px;
+            border-radius: 30px;
+            top: 0;
+            left: 2px
+        }
+
+        .gg-user::after {
+            width: 12px;
+            height: 9px;
+            border-bottom: 0;
+            border-top-left-radius: 3px;
+            border-top-right-radius: 3px;
+            top: 9px
+        }
+    /* ICONS End HERE*/
+    /*CreateNewManga Starts here*/
+    .showHideTags {
+        display: none;
+    }
+
+    .showTags {
+        display: block;
+    }
+
+    .showHideGenre {
+        display: none;
+    }
+
+    .showGenre {
+        display: block;
+    }
+
+    @media (max-width: 900px) {
+        #prev {
+            right: 70px; /* Adjust this value to place the left arrow horizontally */
+        }
+
+        #next {
+            right: 10px; /* Adjust this value to place the right arrow horizontally */
+        }
+    }
+
+    @media (max-width: 599px) {
+        #prev, #next {
+            position: absolute;
+            transform: translateY(-50%);
+            z-index: 1;
+            /* Add some padding and background color for visibility */
+            padding: 10px;
+        }
+
+        #prev {
+            left: 10px !important; /* Adjust this value to place the left arrow horizontally */
+            bottom: 10px; /* Adjust this value to place the arrows vertically */
+            display: none;
+        }
+
+        #next {
+            right: -5px !important; /* Adjust this value to place the right arrow horizontally */
+            color: rgba(255,255,255,0.5);
+        }
+    }
+
+    #slider {
+        position: relative;
+        display: flex;
+        overflow: hidden;
+        width: 100%;
+    }
+
+    #prev, #next {
+        position: absolute;
+        bottom: 10px; /* Adjust this value to place the arrows vertically */
+        transform: translateY(50%);
+        z-index: 1;
+        /* Add some padding and background color for visibility */
+        padding: 10px;
+        margin: 20px;
+        color: rgba(255,255,255,0.5);
+    }
+
+        #prev:hover, #next:hover {
+            color: #191a1c !important;
+        }
+
+    #next {
+        margin-left: 30px;
+    }
+
+    #prev {
+        right: 70px; /* Adjust this value to place the left arrow horizontally */
+    }
+
+    #next {
+        right: 10px; /* Adjust this value to place the right arrow horizontally */
+    }
+
+    .slide {
+        min-width: 100%;
+        transition: transform 0.5s;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+
+    /* CurrentManga Page start */
+    .blurimage {
+        height: 100%;
+        width: 100%;
+        filter: blur(15px) !important;
+    }
+
+    .title-wrapper, .img-wrapper {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+    }
+
+    .manga-title {
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical; /* To limit lines vertically */
+        position: absolute;
+        top: calc(20% - 40px);
+        left: calc(12% + 285px - 30px/2); /* Adjust this value based on your design requirements */
+        font-size: 30px;
+        overflow: hidden; /* Hide the overflowing text */
+        transition: top 0.5s, left 0.5s; /* Smooth transition for top and left */
+        -webkit-text-stroke: 0.5px black;
+    }
+
+    .manga-img-container {
+        position: absolute;
+        top: 20%;
+        width: 15%; /* Adjust this value based on your design requirements */
+        height: 200px; /* Adjust this value based on your design requirements */
+        left: 10%;
+        transition: top 0.5s, left 0.5s; /* Smooth transition for top and left */
+    }
+
+    .manga-img {
+        width: 280px;
+        height: 385px;
+        object-fit: cover; /* To maintain image aspect ratio */
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+        transition: width 0.5s, height 0.5s; /* Smooth transition for width and height */
+    }
+
+    .AddEditReportCurrentpage {
+        display: flex;
+        justify-content: start; /* This will align the items horizontally */
+
+        position: absolute;
+        top: calc(25% + 200px); /* The top position is relative to the manga-title's top position */
+        left: calc(11.5% + 285px); /* Adjust this value based on your design requirements */
+        width: 100vh;
+        transition: top 0.5s, left 0.5s;
+        overflow: hidden;
+    }
+
+    .AddSizeCurrentpage {
+        display: inline-block; /* This will ensure the divs are in a line */
+        margin-right: 10px; /* To ensure spacing between the buttons */
+        height: 50px;
+        width: 220px;
+    }
+
+    .book-icon {
+        color: white; /* this will change the color of the icon */
+        font-size: 20px; /* this will change the size of the icon */
+        font-family: FontAwesome;
+        margin-right: 5px; /* this will add a small space between the icon and the text that follows it */
+    }
+
+    .EditSizeCurrentpage {
+        display: inline-block; /* This will ensure the divs are in a line */
+        margin-right: 10px; /* To ensure spacing between the buttons */
+        height: 50px;
+        width: 220px;
+    }
+
+    .ReportSizeCurrentpage {
+        display: inline-block; /* This will ensure the divs are in a line */
+
+        height: 50px;
+        width: 220px;
+    }
+
+    .AddToReadListButton {
+        /* Add any specific button styles here, such as color, padding, font-size, etc. */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 25px 30px;
+        background-color: #ff6740;
+        color: white;
+        font-weight: bold;
+        border: none;
+        border-radius: 5px;
+        letter-spacing: 4px;
+        overflow: hidden;
+        transition: 0.5s;
+        cursor: pointer;
+        height: 100%;
+        width: 100%;
+    }
+
+    .EditBookButton {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        height: 100%;
+        width: 100%;
+        color: white;
+        background-color: rgb(25, 26, 28);
+    }
+
+    .ReportBookButton {
+        padding: 10px;
+        background-color: rgb(25, 26, 28);
+        border: none;
+        cursor: pointer;
+        height: 100%;
+        width: 100%;
+        border: none;
+        color: white;
+        border-radius: 5px;
+    }
+
+        .EditBookButton:hover, .ReportBookButton:hover {
+            background-color: #141414;
+            color: white;
+        }
+
+    .AddToReadListButton:hover {
+        background: #ff6740;
+        color: #050801;
+        box-shadow: 0 0 5px #ff6740, 0 0 25px #ff6740, 0 0 50px #ff6740, 0 0 200px #ff6740;
+        -webkit-box-reflect: below 1px linear-gradient(transparent, #0005);
+    }
+
+    .EditSizeCurrentpage, .ReportSizeCurrentpage {
+        transition: width 0.5s ease, height 0.5s ease;
+    }
+
+    .CurrentMangaTagsContainer {
+        height: auto;
+        width: 60%;
+        margin-left: 25%;
+        border: none;
+        border-radius: 5px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 10px;
+        padding: 5px;
+        box-sizing: border-box;
+        transition: margin-left 0.5s ease;
+        order: 1;
+    }
+
+    .tagsInsideInsideCurrentManga {
+        background-color: #444;
+        padding: 5px;
+        margin: 0;
+        border-radius: 3px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 15px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        min-width: 75px;
+        flex-shrink: 0;
+        border-radius: 5px;
+    }
+
+    .CustomWarningLabel {
+        color: red !important;
+    }
+
+    .CustomHintLabel {
+        color: rgb(255, 103, 64);
+    }
+
+    @media screen and (min-width: 769px) and (max-width: 910px) {
+        .CurrentMangaTagsContainer {
+            margin-left: 40% !important; /* Adjusted to move to the right by setting margin-left to 40% */
+            margin-right: 0; /* Reset margin-right to 0 */
+        }
+    }
+    /* Media queries for responsiveness */
+    @media (max-width: 1800px) {
+        .CurrentMangaTagsContainer {
+            margin-left: 27%; /* Adjusted to move to the right by setting margin-left: auto */
+            margin-right: 0; /* Reset margin-right to 0 */
+        }
+    }
+
+    @media (max-width: 1500px) {
+        .CurrentMangaTagsContainer {
+            margin-left: 35%; /* Adjusted to move to the right by setting margin-left: auto */
+            margin-right: 0; /* Reset margin-right to 0 */
+        }
+    }
+
+    @media (max-width: 768px) {
+        .CurrentMangaTagsContainer {
+            width: 100%; /* Adjust the width to occupy the full available width on smaller screens */
+            margin-left: 0; /* Remove the left margin for better centering on smaller screens */
+            padding: 0 10px; /* Add horizontal padding for spacing */
+        }
+
+        .tagsInsideInsideCurrentManga {
+            min-width: 60px; /* Adjust the minimum width for better responsiveness on smaller screens */
+            font-size: 12px; /* Adjust the font size for better readability on smaller screens */
+        }
+    }
+
+    /* Use media query for smaller screens */
+    @media screen and (max-width: 768px) {
+        .tagsInsideInsideCurrentManga {
+            /* Adjust the styles for smaller screens */
+            font-size: 14px;
+            padding: 3px;
+        }
+
+        .manga-title {
+            top: calc(15% - 40px) !important;
+            left: calc(5% + 140px) !important; /* Adjust these values for smaller screens */
+        }
+
+        .manga-img-container {
+            top: 15.5% !important;
+            left: 2% !important; /* Adjust these values for smaller screens */
+        }
+
+        .manga-img {
+            width: 150px !important; /* Adjust these values for smaller screens */
+            height: 220px !important; /* Adjust these values for smaller screens */
+        }
+
+        div::-webkit-scrollbar {
+            display: none !important;
+        }
+
+        .AddEditReportCurrentpage {
+            /* Adjust these values for smaller screens */
+            left: 2% !important; /* Adjust these values for smaller screens */
+            justify-content: center;
+            width: 400px !important;
+        }
+
+        .EditSizeCurrentpage {
+            margin-right: 5px;
+            width: 18%;
+        }
+
+        .ReportSizeCurrentpage {
+            width: 40%;
+        }
+    }
+
+    @media screen and (max-width: 1200px) {
+        .manga-title {
+            top: calc(15% - 40px);
+            left: calc(17% + 180px ); /* Adjust these values for smaller screens */
+        }
+
+        .manga-img-container {
+            top: 18%;
+            left: 3%; /* Adjust these values for smaller screens */
+        }
+
+        .manga-img {
+            width: 280px;
+            height: 385px;
+            object-fit: cover; /* To maintain image aspect ratio */
+        }
+
+        .AddEditReportCurrentpage {
+            top: calc(25% + 195px); /* Adjust these values for smaller screens */
+            left: 40%; /* Adjust these values for smaller screens */
+            justify-content: center;
+            width: 550px;
+        }
+    }
+
+    @media screen and (min-width: 769px) and (max-width: 910px) {
+        .EditSizeCurrentpage {
+            margin-right: 5px;
+            width: 18%;
+        }
+
+        .ReportSizeCurrentpage {
+            width: 18%;
+        }
+
+        .AddEditReportCurrentpage {
+            width: 50%; /* reduce the width of the container */
+            justify-content: space-between; /* distributes space between items evenly */
+        }
+    }
+
+    .mangaDetailsWrapper {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin-top: 5%;
+        transition: margin-left 0.5s ease;
+        overflow: hidden;
+    }
+
+    /* Individual Content Box */
+
+    .mangaDetailsBox {
+        flex: 1 1 auto; /* Will take up 30% of the container's width when the screen is large */
+        box-sizing: border-box;
+        margin: 1em;
+        padding: 1em;
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Centers the content horizontally */
+        justify-content: center; /* Centers the content vertically */
+        border: 2px solid #ff6740; /* Adds a 2px solid border with color #ff6740 */
+        border-radius: 10px; /* Adds rounded corners to the box */
+        min-width: 30%;
+        background-color: #444;
+        transition: margin-left 0.5s ease, margin-top 0.5s ease;
+    }
+
+        .mangaDetailsBox.bookdescription {
+            flex-grow: 2;
+        }
+
+        .mangaDetailsBox .contentMangaBox-wrapper {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 50%;
+            margin: 0px;
+            padding: 0px;
+        }
+
+    /* When the screen's width is 600px or less, change the boxes to take 100% of the width */
+    @media (max-width: 600px) {
+        .mangaDetailsBox {
+            flex: 1 0 100%;
+            margin: 0.5em; /* reduce margin */
+            padding: 0.5em; /* reduce padding */
+        }
+    }
+
+    .MangaInputText {
+        background-color: #191a1c;
+        padding: 5px;
+        margin: 0;
+        border-radius: 3px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 15px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        min-width: 75px;
+        flex-shrink: 0;
+        border: 2px solid #ff6740; /* Adds a 2px solid border with color #ff6740 */
+        border-radius: 10px;
+    }
+
+    .MangaContainerInput {
+        height: auto;
+        width: 100%; /* Adjust width to take the full width of the parent */
+        border: none;
+        border-radius: 5px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 10px;
+        padding: 5px;
+        box-sizing: border-box;
+        transition: margin-left 0.5s ease;
+        align-items: center; /* Centers the content horizontally */
+        justify-content: center;
+    }
+
+    .MangaInputText:hover {
+        background-color: #ff6740;
+    }
+
+    .commonParentContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Will center align the child containers */
+    }
+
+    .RatingAddToLibbBookTypeContainer {
+        width: 10%;
+        margin: 5px 0 0 30%; /* Adjust the percentage as needed to move the container right */
+        display: flex;
+        margin-right: 49%;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center; /* This will center the child items, reduce the space between items */
+        gap: 5px;
+        transition: margin-right 0.5s ease;
+        order: 2;
+        margin-top: 10px;
+    }
+
+    @media (min-width: 1000px) and (max-width: 1700px) {
+        .RatingAddToLibbBookTypeContainer {
+            margin-right: 40% !important; /* Adjust as necessary */
+        }
+    }
+
+    .RatingAddToLibbBookTypeContainer .RatingAddToLibbBookTypeDetails {
+        /* Styles for the details */
+        padding: 5px;
+        border-radius: 3px;
+        background-color: #444;
+        color: #fff;
+        text-align: center;
+    }
+
+    .RatingAddToLibbBookTypeContainer .ratingStars {
+        /* Styles for the rating stars */
+        display: flex;
+        align-items: center;
+    }
+
+        .RatingAddToLibbBookTypeContainer .ratingStars .fa {
+            /* Styles for each star icon */
+            color: gold;
+            margin-right: 2px;
+        }
+
+    .RatingAddToLibbBookTypeContainer .reviewCount,
+    .RatingAddToLibbBookTypeContainer .addReadingCount,
+    .RatingAddToLibbBookTypeContainer .commentCount {
+        /* Styles for the counts */
+        padding: 5px;
+        border-radius: 3px;
+        background-color: #444;
+        color: #fff;
+        text-align: center;
+    }
+
+    .scoreArea {
+        position: relative; /* Makes scoreArea the reference point for its absolute positioned children */
+    }
+
+    .overFlowFilter-scoring {
+        overflow: hidden;
+    }
+
+    .scoreDistribution {
+        display: none;
+        position: absolute; /* Positions the scoreDistribution element relative to scoreArea */
+        z-index: 1;
+        top: 100%; /* positions the dropdown right below the scoreArea element */
+        width: 400px; /* adjust as necessary */
+    }
+
+    .colorstarCurrent {
+        color: yellow;
+    }
+
+    .scoreArea:hover .scoreDistribution {
+        display: block; /* Shows the dropdown on hover */
+    }
+
+    .colorsForStars1 {
+        --cc: #ff6740;
+    }
+
+    .Score-wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        margin: 10px;
+        overflow: hidden;
+    }
+    /*Score test*/
+    @import url(https://fonts.googleapis.com/css?family=Roboto:100,300,400);
+
+    .starrating-container {
+        width: 400px;
+        margin: 0 auto;
+        margin-top: 2em;
+        background-color: #EFEFEF;
+        padding: 4px;
+        font-family: 'Roboto', Helvetica;
+        color: #737373;
+        font-weight: 300;
+    }
+
+    .inner {
+        padding: 1em;
+        background-color: white;
+        overflow: hidden;
+        position: relative;
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        border-radius: 4px;
+    }
+
+    .rating-staringy {
+        float: left;
+        width: 45%;
+        margin-right: 5%;
+        text-align: center;
+    }
+
+    .rating-num {
+        color: #333333;
+        font-size: 72px;
+        font-weight: 100;
+        line-height: 1em;
+    }
+
+    .rating-stars {
+        font-size: 20px;
+        color: #E3E3E3;
+        margin-bottom: .5em;
+    }
+
+        .rating-stars .active {
+            color: #737373;
+        }
+
+    .rating-users {
+        font-size: 14px;
+    }
+
+    .histo {
+        float: left;
+        width: 50%;
+        font-size: 13px;
+    }
+
+    .histo-star {
+        float: left;
+        padding: 3px;
+    }
+
+    .histo-rate {
+        width: 100%;
+        display: block;
+        clear: both;
+    }
+
+    .bar-block {
+        margin-left: 5px;
+        color: black;
+        display: block;
+        float: left;
+        width: 75%;
+        position: relative;
+    }
+
+    .bar {
+        padding: 4px;
+        display: block;
+    }
+
+    #bar-five {
+        width: 0;
+        background-color: #9FC05A;
+    }
+
+    #bar-four {
+        width: 0;
+        background-color: #ADD633;
+    }
+
+    #bar-three {
+        width: 0;
+        background-color: #FFD834;
+    }
+
+    #bar-two {
+        width: 0;
+        background-color: #FFB234;
+    }
+
+    #bar-one {
+        width: 0;
+        background-color: #FF8B5A;
+    }
+
+    /*score test ends */
+    .wrapperRowCurrent {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        margin: 0px;
+        flex: 0 0 55%;
+    }
+
+        .wrapperRowCurrent .Skills_ {
+            display: flex;
+            justify-content: center;
+            align-content: center;
+            margin: 10px;
+            padding-right: 5px;
+            border-radius: 10px;
+            box-shadow: -1px -1px 2px rgba(255,255,255,0.25), inset -1px -1px 2px rgba(255,255,255,0.25), 8px 30px 30px rgba(0,0,0,0.4), inset -2px -2px 5px rgba(0,0,0,0.3);
+        }
+
+            .wrapperRowCurrent .Skills_ h3 {
+                min-width: 180px;
+                text-align: right;
+                padding-right: 10px;
+                font-size: 20px;
+                letter-spacing: 2px;
+            }
+
+            .wrapperRowCurrent .Skills_ .User_ratings {
+                position: relative;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: row-reverse;
+            }
+
+                .wrapperRowCurrent .Skills_ .User_ratings input {
+                    position: relative;
+                    width: 20px;
+                    height: 40px;
+                    display: flex;
+                    align-items: center;
+                    cursor: pointer;
+                    -webkit-appearance: none;
+                    appearance: none;
+                    overflow: hidden;
+                }
+
+                    .wrapperRowCurrent .Skills_ .User_ratings input::before {
+                        content: "\f005";
+                        position: absolute;
+                        font-family: FontAwesome;
+                        font-size: 34px;
+                        position: absolute;
+                        left: 4px;
+                        color: black;
+                        transition: 0.5s;
+                    }
+
+                    .wrapperRowCurrent .Skills_ .User_ratings input:nth-child(2n+1)::before {
+                        right: 4px;
+                        left: initial;
+                    }
+
+                    .wrapperRowCurrent .Skills_ .User_ratings input:hover ~ input::before,
+                    .wrapperRowCurrent .Skills_ .User_ratings input:hover:before,
+                    .wrapperRowCurrent .Skills_ .User_ratings input:checked ~ input::before,
+                    .wrapperRowCurrent .Skills_ .User_ratings input:checked:before {
+                        color: #ff6740;
+                    }
+
+    .fillerClassIc textarea.TextAreaCurrentReview {
+        width: 50%;
+        max-width: calc(100% - 16px);
+        height: 250px;
+        margin-top: 0px; /* Update or remove this margin as needed */
+        margin-bottom: 20px;
+        resize: none;
+        font-size: 18px;
+        background-color: #191a1c;
+        color: #fff;
+        font-family: Lato !important;
+        border-color: #ff6740;
+        text-decoration: none !important;
+        outline: none;
+    }
+
+    .ReviewTitle {
+        width: 98%;
+        max-width: calc(75% - 16px);
+        height: 40px;
+        margin-bottom: 20px;
+        resize: none;
+        font-size: 18px;
+        background-color: #191a1c;
+        color: #fff;
+        font-family: Lato !important;
+        border-color: #ff6740;
+        text-decoration: none !important;
+        outline: none;
+    }
+
+    .flex-direction-current {
+        display: flex;
+        flex-direction: row;
+        height: 100%;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .fillerClassIc {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        margin: 0px;
+        flex: 0 0 50%;
+    }
+    /*styling star rating*/
+    .rating-wrap {
+        max-width: 480px;
+        margin: auto;
+        padding: 15px;
+        box-shadow: 0 0 3px 0 rgba(0,0,0,.2);
+        text-align: center;
+    }
+
+    .star-center {
+        width: 162px;
+        margin: auto;
+    }
+
+    #rating-value {
+        width: 110px;
+        margin: 40px auto 0;
+        padding: 10px 5px;
+        text-align: center;
+        box-shadow: inset 0 0 2px 1px rgba(46,204,113,.2);
+    }
+
+    .rating-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .star-rating-input {
+        border: none;
+        display: flex;
+        flex-direction: row-reverse;
+    }
+
+        .star-rating-input > input {
+            display: none;
+        }
+
+        .star-rating-input > label:before {
+            content: '\f005';
+            font-family: FontAwesome;
+            margin: 5px;
+            font-size: 1.5rem;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .star-rating-input > .half:before {
+            content: '\f089';
+            position: absolute;
+            cursor: pointer;
+        }
+
+        .star-rating-input > label {
+            color: #ddd;
+            cursor: pointer;
+        }
+
+        .star-rating-input > input:checked ~ label,
+        .star-rating-input:not(:checked) > label:hover,
+        .star-rating-input:not(:checked) > label:hover ~ label {
+            color: #2ce679;
+        }
+
+            .star-rating-input > input:checked + label:hover,
+            .star-rating-input > input:checked ~ label:hover,
+            .star-rating-input > label:hover ~ input:checked ~ label,
+            .star-rating-input > input:checked ~ label:hover ~ label {
+                color: #2ddc76;
+            }
+    /*styling star rating Ends here*/
+    /* CurrentManga Page Ends */
+    /*About page starts here*/
+    .banner-aboutpage {
+        background-image: url('https://cdn.wallpapersafari.com/34/29/8NpjeV.jpg');
+        background-size: cover;
+        background-position: center;
+        overflow: hidden;
+        min-height: 100vh;
+        /*-webkit-text-stroke: 1px white;*/ /* width and color */
+    }
+
+    .BackgroundShader {
+        height: 100%;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.6); /* black with 60% opacity */
+        color: white;
+        width: 100%;
+        display: flex;
+        justify-content: flex-start;
+        overflow: hidden;
+    }
+
+    .AboutButtonSub {
+        background-color: #ff6740;
+    }
+
+    .content-container-aboutpage {
+        max-width: 500px;
+        word-wrap: break-word;
+        font-size: 1.5em;
+        padding-left: 15%;
+        text-align: left;
+        transition: 0.5s;
+        margin-top: 5%;
+    }
+
+    .banner-title-aboutpage {
+        font-size: 2.5em;
+    }
+
+    .banner-text-aboutpage,
+    .info-text-aboutpage {
+        margin: 10px 0;
+    }
+
+    .info-section-aboutpage {
+        margin-bottom: 20px;
+    }
+
+    .contact-form {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+        .contact-form input[type="email"] {
+            width: 70%;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        .contact-form input[type="submit"] {
+            width: 20%;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border: none;
+            cursor: pointer;
+        }
+
+        .contact-form button {
+            width: 200px;
+            height: 55px;
+            border: none;
+            outline: none;
+            background-color: #ff6740;
+            color: #fff;
+            font-size: 22px;
+            border-radius: 40px;
+            text-align: center;
+            box-shadow: 0 6px 20px -5px rgba(0,0,0,0.4);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: width 0.5s ease, height 0.5s ease, font-size 0.5s ease;
+        }
+
+            .contact-form button:hover {
+                background-color: #ff4e40;
+            }
+
+    .fa {
+        padding: 20px;
+        font-size: 30px;
+        width: 30px;
+        text-align: center;
+        text-decoration: none;
+        margin: 5px 2px;
+        border-radius: 50%;
+    }
+
+        .fa:hover {
+            opacity: 0.7;
+        }
+
+    .fa-facebook {
+        background: #3B5998;
+        color: white;
+    }
+
+    .fa-twitter {
+        background: #55ACEE;
+        color: white;
+    }
+
+    .fa-youtube {
+        background: #bb0000;
+        color: white;
+    }
+
+    .fa-instagram {
+        background: #125688;
+        color: white;
+    }
+
+    /* For tablets and small desktops */
+    @media screen and (max-width: 768px) {
+        .banner-title-aboutpage {
+            font-size: 1.5em !important;
+        }
+
+        .content-container-aboutpage {
+            font-size: 1.2em;
+            padding-left: 2% !important;
+            margin-top: 30%;
+        }
+
+        .banner-aboutpage {
+        }
+
+        .contact-form input[type="email"] {
+            width: 100%;
+        }
+
+        .contact-form button {
+            width: 100%;
+            height: 40px; /* reduced button height */
+            font-size: 18px; /* reduced font size */
+        }
+    }
+
+    /* For large desktop screens */
+    @media screen and (max-width: 1200px) {
+        .banner-title-aboutpage {
+            font-size: 2.5em;
+        }
+
+        .content-container-aboutpage {
+            padding-left: 10%;
+        }
+
+        .contact-form input[type="email"] {
+            width: 70%;
+        }
+
+        .contact-form button { /* update the selector here to target the button */
+            width: 45%;
+            height: 40px; /* reduced button height */
+            font-size: 20px; /* reduced font size */
+        }
+    }
+
+    /* about page ends here*/
+    /*Privacy policy Starts here*/
+    .privacy-policy-page {
+        padding: 2rem;
+        max-width: 800px;
+        margin: 0 auto;
+        margin-top: 40px;
+        color: #fff;
+    }
+
+    .privacy-policy-title, .gdpr-statement-title, .form-title, .closing-statement-title {
+        font-size: 2em;
+        margin-bottom: 1rem;
+    }
+
+    .privacy-policy-text, .gdpr-statement-text, .form-description, .closing-statement-text {
+        margin-bottom: 1.5rem;
+        line-height: 1.6;
+    }
+
+    .account-deletion-form {
+        background: rgba(0,0,0,0.1);
+        padding: 1rem;
+        border-radius: 5px;
+    }
+
+        .account-deletion-form input[type="email"],
+        .account-deletion-form input[type="password"] {
+            display: block;
+            width: 100%;
+            padding: 0.5em;
+            margin-bottom: 1em;
+        }
+
+        .account-deletion-form select {
+            display: block;
+            width: 100%;
+            padding: 0.5em;
+            margin-bottom: 1em;
+        }
+
+        .account-deletion-form button[type="submit"] {
+            display: block;
+            width: 100%;
+            padding: 1em;
+            background: #ff6740;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+            .account-deletion-form button[type="submit"]:hover {
+                background: #ff4e40;
+            }
+
+        .account-deletion-form input[type="email"],
+        .account-deletion-form input[type="password"],
+        .account-deletion-form select,
+        .account-deletion-form button[type="submit"] {
+            box-sizing: border-box;
+        }
+    /*Privacy Policy Ends here*/
+    .GridWrapper {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+
+    .GridItem {
+        transition: width 0.5s, height 0.5s;
+        width: 240px;
+        min-width: 160px; /* Set the minimum width */
+        flex: 1; /* Allows the item to grow if there's available space */
+        height: 380px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 8px;
+    }
+
+    .GridImage {
+        width: 100%; /* this will make the image take up the full width of the .GridItem */
+        border-radius: 10px;
+        height: 320px;
+        object-fit: cover;
+        margin-bottom: 5px; /* optional, adds a small space between the image and the name */
+    }
+
+    .MangaInputTextloco p {
+        color: white; /* Adjust the color as per your design */
+        text-align: center;
+        margin: 5px 0; /* Add some spacing around the name */
+    }
+
+    @media (max-width: 768px) {
+        .GridItem {
+            flex: 1 1 calc(33.33% - 8px); /* Taking into consideration the gap */
+            max-width: calc(33.33% - 8px);
+        }
+    }
+    /*Character page
+*/
+    .Author_Artist_Characters {
+    }
+    /*
+    character page end
+*/
+
+    /*Delete Page
+*/
+    .custom-modal-background {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        z-index: 1000;
+    }
+
+    .custom-modal {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 60%;
+        max-width: 500px;
+        background: #fff;
+        padding: 20px;
+        z-index: 1001;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    }
+
+    .custom-modal-header,
+    .custom-modal-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    #closeModalButton {
+        cursor: pointer;
+        background: transparent;
+        border: none;
+        font-size: 20px;
+        line-height: 1;
+        opacity: 0.6;
+        transition: opacity 0.3s ease;
+    }
+
+        #closeModalButton:hover {
+            opacity: 1;
+        }
+
+    .delete-page-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        background-color: #f5f5f5;
+    }
+
+    .delete-init-button {
+        background-color: #e74c3c;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+        .delete-init-button:hover {
+            background-color: #c0392b;
+        }
+
+    #userDetails {
+        border: 1px solid #ddd;
+        padding: 10px;
+        margin-top: 20px;
+    }
+
+    #dropdown {
+        position: absolute;
+        border: 1px solid #ccc;
+        max-height: 200px;
+        overflow-y: auto;
+        width: 250px; /* adjust width accordingly */
+        background-color: #fff;
+        cursor: pointer;
+        z-index: 1000; /* To appear over other elements */
+    }
+
+        #dropdown div:hover {
+            background-color: #f0f0f0;
+        }
+    /*Deletepage ends*/
+}

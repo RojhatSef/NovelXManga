@@ -1,4 +1,8 @@
-﻿document.addEventListener("DOMContentLoaded", function () {
+﻿if (window.chrome) {
+    // Chrome-specific JavaScript here
+}
+
+document.addEventListener("DOMContentLoaded", function () {
     const form = document.getElementById('genreForm');
     const searchButton = document.getElementById('searchButton');
     const hiddenContainerPositive = document.getElementById('hiddenContainerPositive');
