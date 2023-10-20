@@ -1,18 +1,21 @@
-﻿.card-ex {
-    position: relative;
-    width: 100%;
-    height: 360px;
-    display: flex;
-    justify-content: center;
-}
+﻿@media all and (-webkit-min-device-pixel-ratio:0) and (min-resolution: .001dpcm) {
+    /*    .card-ex {
+        position: relative;
+        width: 100%;
+        height: 360px;
+        display: flex;
+        justify-content: center;
+    }
 
-.blurredbackground {
-    height: 100%;
-    width: 100%
-}
-.card-image-ex {
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
-    overflow: hidden
+    .blurredbackground {
+        height: 100%;
+        width: 100%
+    }
+
+    .card-image-ex {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+        overflow: hidden
+    }*/
 }

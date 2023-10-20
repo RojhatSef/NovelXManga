@@ -1,5 +1,4 @@
 ﻿if (window.chrome) {
-    // Chrome-specific JavaScript here
 }
 
 document.addEventListener("DOMContentLoaded", function () {

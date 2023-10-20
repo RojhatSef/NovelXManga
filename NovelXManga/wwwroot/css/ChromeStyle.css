@@ -223,10 +223,7 @@
             transition: width 0.5s; /* Add transition for smooth width change */
         }
 
-        .sidebar-toggle {
-            padding: 0.3rem 0.6rem;
-            margin-right: 0.5rem;
-        }
+       
 
         .BoxOne {
             width: calc(50% - 20px);
@@ -350,6 +347,7 @@
         color: white;
         border: none;
         border-radius: 3px;
+        margin-top:3px; 
         padding: 0.5rem 1rem;
     }
 
@@ -401,6 +399,7 @@
         overflow-y: auto;
         transition: 0.5s;
         pointer-events: none;
+        border-right: 3px solid #444;
     }
 
         .Custom-o-sidebar.open {
@@ -566,6 +565,7 @@
 
     #TextChange {
         color: white;
+        margin-left:3px; 
     }
 
         #TextChange:hover {
@@ -573,10 +573,11 @@
         }
 
     @media (max-width: 290px) {
-        #NovelTitle{
+        #NovelTitle {
             display: none !important;
         }
     }
+
     @media (max-width: 260px) {
         #TextChange {
             display: none !important;
