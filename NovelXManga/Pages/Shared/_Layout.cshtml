@@ -76,7 +76,7 @@
        
             <div class="PushDownSidebar ">
             <div class="logo">
-                <a asp-page="/Index">  <span id="TextChange">OtakuLibrary  </span></a>  <button id="sidebar-toggle" onclick="handleSidebarToggle()" class="sidebar-toggle  colorSidebarToggle"><i class="gg-menu-round"></i></button>
+                <a asp-page="/Index">  <span id="TextChange">OtakuLibrary  </span> </a>  <button id="sidebar-toggle" onclick="handleSidebarToggle()" class="sidebar-toggle  colorSidebarToggle"><i class="gg-menu-round"></i></button>
             </div>              
             </div>              
             @if (SignInManager.IsSignedIn(User))
@@ -183,6 +183,8 @@
             }
             else
             {
+            <div class="sidebar-section">
+                <h2 class="sidebar-title"><i class="gg-user gap-icon"></i> <span class="sidebar-title-text">Follows</span></h2>
                 <ul>
                     <li class="HoverEffektLi">
                         <a href="#"> <span>Latest Updates</span>  </a>
@@ -194,7 +196,11 @@
                         <a asp-page="/Manga/CreateNewManga"> <span>Create New Book</span>  </a>
                     </li>
                 </ul>
-                <hr />
+            </div>
+         
+            <div class="sidebar-section">
+                <h2 class="sidebar-title"><i class="gg-user gap-icon"></i> <span class="sidebar-title-text">Community</span></h2>
+
                 <ul>
                     <li class="HoverEffektLi">
                         <a href="#"> <span>Forum</span> </a>
@@ -204,7 +210,7 @@
                     </li>
                     <li class="HoverEffektLi ">
 
-                        <a class="" href="#">  <i class="gg-user"></i> Users </a>
+                        <a class="" href="#"> Users </a>
                     </li>
                     <li class="HoverEffektLi">
                         <a href="#"> <span>Latest Updates</span>  </a>
@@ -219,14 +225,12 @@
                             <span>Register</span>
                         </a>
                     </li>
-                    <li class="HoverEffektLi">
-                        <a asp-page="/Author/CreateAuthor"> <span>AuthorTest</span>  </a>
-                    </li>
-                    <li class="HoverEffektLi">
-                        <a asp-page="/Manga/CreateNewManga"> <span>Create New Book</span>  </a>
-                    </li>
+                 
                 </ul>
-                <hr />
+            </div>
+            
+            <div class="sidebar-section">
+                <h2 class="sidebar-title"><i class="gg-user gap-icon"></i> <span class="sidebar-title-text">Otaku Library</span></h2>
                 <ul>
                     <li class="HoverEffektLi">
                         <a asp-page="/InfoPages/AboutUs"> <span>About us</span> </a>
@@ -243,7 +247,11 @@
                     <li class="HoverEffektLi">
                         <a href="#"> <span>Announcment</span> </a>
                     </li>
-                </ul> 
+                </ul>
+            </div>
+            <hr />
+            <div class="sidebar-section">
+            </div>
             }
       
     </div>

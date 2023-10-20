@@ -364,7 +364,34 @@ namespace NovelXManga.Pages.SearchFilter
                         .Include(m => m.TagsModels);
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnGetAsync(string searchString)
+        {
+            Tags = await context.TagModels.ToListAsync();
+            Genres = await context.GenresModels.ToListAsync();
+
+            TagInclusionMode = _httpContextAccessor.HttpContext.Session.GetString("TagInclusionMode") ?? "And";
+            TagExclusionMode = _httpContextAccessor.HttpContext.Session.GetString("TagExclusionMode") ?? "Or";
+            GenreInclusionMode = _httpContextAccessor.HttpContext.Session.GetString("GenreInclusionMode") ?? "And";
+            GenreExclusionMode = _httpContextAccessor.HttpContext.Session.GetString("GenreExclusionMode") ?? "Or";
+            // Retrieve selected tags and genres from session
+            var selectedTagsSession = _httpContextAccessor.HttpContext.Session.GetString("SelectedTags");
+            var selectedGenresSession = _httpContextAccessor.HttpContext.Session.GetString("SelectedGenres");
+
+            if (!string.IsNullOrEmpty(selectedTagsSession))
+            {
+                SelectedTags = JsonSerializer.Deserialize<List<int>>(selectedTagsSession);
+            }
+
+            if (!string.IsNullOrEmpty(selectedGenresSession))
+            {
+                PositiveSelectedGenres = JsonSerializer.Deserialize<List<int>>(selectedGenresSession);
+            }
+            //MangaModels = await mangaRepository.GetAllModelAsync();
+
+            return Page();
+        }
+
+        public async Task<IActionResult> OnPostAdvancedSearch()
         {
             try
             {
@@ -394,54 +421,6 @@ namespace NovelXManga.Pages.SearchFilter
                 return Page(); // Return to the current page to display an error message to the user.
             }
         }
-
-        public async Task<IActionResult> OnGetAsync(string searchString)
-        {
-            Tags = await context.TagModels.ToListAsync();
-            Genres = await context.GenresModels.ToListAsync();
-
-            TagInclusionMode = _httpContextAccessor.HttpContext.Session.GetString("TagInclusionMode") ?? "And";
-            TagExclusionMode = _httpContextAccessor.HttpContext.Session.GetString("TagExclusionMode") ?? "Or";
-            GenreInclusionMode = _httpContextAccessor.HttpContext.Session.GetString("GenreInclusionMode") ?? "And";
-            GenreExclusionMode = _httpContextAccessor.HttpContext.Session.GetString("GenreExclusionMode") ?? "Or";
-            // Retrieve selected tags and genres from session
-            var selectedTagsSession = _httpContextAccessor.HttpContext.Session.GetString("SelectedTags");
-            var selectedGenresSession = _httpContextAccessor.HttpContext.Session.GetString("SelectedGenres");
-
-            if (!string.IsNullOrEmpty(selectedTagsSession))
-            {
-                SelectedTags = JsonSerializer.Deserialize<List<int>>(selectedTagsSession);
-            }
-
-            if (!string.IsNullOrEmpty(selectedGenresSession))
-            {
-                PositiveSelectedGenres = JsonSerializer.Deserialize<List<int>>(selectedGenresSession);
-            }
-            //MangaModels = await mangaRepository.GetAllModelAsync();
-
-            return Page();
-        }
-
-        //Old  JS fetch for the more button Does not work properly
-        //public async Task<IActionResult> OnGetBooksPage(int currentPage, int pageSiz)
-        //{
-        //    try
-        //    {
-        //        var query = context.mangaModels.AsQueryable();
-        //        int totalCount = await query.CountAsync();
-        //        query = query.Skip((currentPage - 1) * pageSiz).Take(pageSiz);
-        //        var mangaModels = await query.ToListAsync();
-
-        //        int totalPages = (int)Math.Ceiling(totalCount / (double)pageSiz);
-
-        //        return new JsonResult(new { CurrentPage = currentPage, Books = mangaModels, TotalPages = totalPages });
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Console.WriteLine($"Exception: {ex.Message}");
-        //        return StatusCode(500, new { message = "Internal server error" });
-        //    }
-        //}
 
         // New JS fetch for the more button
         public async Task<IActionResult> OnGetBooksPage(int currentPage, int pageSiz)
@@ -489,3 +468,24 @@ namespace NovelXManga.Pages.SearchFilter
         }
     }
 }
+
+//Old  JS fetch for the more button Does not work properly
+//public async Task<IActionResult> OnGetBooksPage(int currentPage, int pageSiz)
+//{
+//    try
+//    {
+//        var query = context.mangaModels.AsQueryable();
+//        int totalCount = await query.CountAsync();
+//        query = query.Skip((currentPage - 1) * pageSiz).Take(pageSiz);
+//        var mangaModels = await query.ToListAsync();
+
+//        int totalPages = (int)Math.Ceiling(totalCount / (double)pageSiz);
+
+//        return new JsonResult(new { CurrentPage = currentPage, Books = mangaModels, TotalPages = totalPages });
+//    }
+//    catch (Exception ex)
+//    {
+//        Console.WriteLine($"Exception: {ex.Message}");
+//        return StatusCode(500, new { message = "Internal server error" });
+//    }
+//}

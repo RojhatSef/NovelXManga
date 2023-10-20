@@ -195,85 +195,7 @@
 
                 }
             }
-            <div class="RatingAddToLibbBookTypeContainer">
-                <div class="scoreArea">
-                    <div class="ratingStars">
-                        <div class="MangaInputText">
-                            <span>     @Model.CurrentManga.OverAllBookScore  <i class="fas fa-star active colorstarCurrent"></i> </span>
-                        </div>
-                    </div>
-                    <div class="scoreDistribution">
-                        <div class="starrating-container">
-                            <div class="inner">
-                                <div class="rating-staringy">
-                                    <span class="rating-num">@Model.CurrentManga.OverAllBookScore</span>
-                                    <div class="rating-stars">
-                                        @for (var i = 0; i < Model.CurrentManga.OverAllBookScore; i++)
-                                        {
-                                            <span><i class="fas fa-star active"></i></span>
-                                        }
-                                        @for (var i = 0; i < (5 - Model.CurrentManga.OverAllBookScore); i++)
-                                        {
-                                            <span><i class="far fa-star"></i></span>
-                                        }
-                                    </div>
-                                    <div class="rating-users">
-                                        <i class="fas fa-user"></i> @(Model.CurrentManga?.reviews?.Count ?? 0)
-                                    </div>
-                                </div>
-
-                                <div class="histo">
-                                    @foreach (var entry in Model.CurrentManga.ScoreDistribution)
-                                    {
-
-                                        var barId = "bar-";
-                                        switch (entry.Key)
-                                        {
-                                            case 5: barId += "five"; break;
-                                            case 4: barId += "four"; break;
-                                            case 3: barId += "three"; break;
-                                            case 2: barId += "two"; break;
-                                            case 1: barId += "one"; break;
-                                        }
-
-                                        <div class="@entry.Key histo-rate">
-                                            <span class="histo-star">
-                                                <i class="fas fa-star active"></i> @entry.Key
-                                            </span>
-                                            <span class="bar-block">
-                                                <span id="@barId" class="bar">
-                                                    <span>@entry.Value</span>&nbsp;
-                                                </span>
-                                            </span>
-                                        </div>
-                                    }
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-
-                <!-- Show Add Reading Count -->
-                <div class="MangaInputText">
-                    <span>
-                        @Model.ReadingUsersCount &nbsp; <i class="fa-solid fa-book-open-reader book-icon"> </i>
-                    </span>
-                </div>
-
-
-
-                <!-- Show Comment Count -->
-                <div class="MangaInputText">
-                    <span>Rank:#@Model.CurrentManga.Rank</span>
-                </div>
-
-
-            </div>
-        </div>
-
-        <div class="RatingAddToLibbBookTypeContainer">
+            <div class="scoreAndMangaInfoContainer">
             <div class="scoreArea">
                 <div class="ratingStars">
                     <div class="MangaInputText">
@@ -300,32 +222,32 @@
                                 </div>
                             </div>
 
-                           <div class="histo">
-    @foreach (var entry in Model.CurrentManga.ScoreDistribution)
-    {
-       
-            var barId = "bar-";
-            switch (entry.Key)
-            {
-                case 5: barId += "five"; break;
-                case 4: barId += "four"; break;
-                case 3: barId += "three"; break;
-                case 2: barId += "two"; break;
-                case 1: barId += "one"; break;
-            }
-       
-        <div class="@entry.Key histo-rate">
-            <span class="histo-star">
-                <i class="fas fa-star active"></i> @entry.Key
-            </span>
-            <span class="bar-block">
-                <span id="@barId" class="bar">
-                    <span>@entry.Value</span>&nbsp;
-                </span>
-            </span>
-        </div>
-    }
-</div>
+                            <div class="histo">
+                                @foreach (var entry in Model.CurrentManga.ScoreDistribution)
+                                {
+
+                                    var barId = "bar-";
+                                    switch (entry.Key)
+                                    {
+                                        case 5: barId += "five"; break;
+                                        case 4: barId += "four"; break;
+                                        case 3: barId += "three"; break;
+                                        case 2: barId += "two"; break;
+                                        case 1: barId += "one"; break;
+                                    }
+
+                                    <div class="@entry.Key histo-rate">
+                                        <span class="histo-star">
+                                            <i class="fas fa-star active"></i> @entry.Key
+                                        </span>
+                                        <span class="bar-block">
+                                            <span id="@barId" class="bar">
+                                                <span>@entry.Value</span>&nbsp;
+                                            </span>
+                                        </span>
+                                    </div>
+                                }
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -338,7 +260,7 @@
                 <span>
                     @Model.ReadingUsersCount &nbsp; <i class="fa-solid fa-book-open-reader book-icon"> </i>
                 </span>
-            </div> 
+            </div>
 
 
 
@@ -346,9 +268,10 @@
             <div class="MangaInputText">
                 <span>Rank:#@Model.CurrentManga.Rank</span>
             </div>
-          
-
+            </div>
         </div>
+
+     
     </div>
 
       

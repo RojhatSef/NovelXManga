@@ -202,9 +202,9 @@ document.addEventListener("DOMContentLoaded", function () {
             tag.checked = checkedState[tag.id];
             let tagItem = document.createElement('div');
             tagItem.className = 'MUS-tag-genre-item';
-            tagItem.onclick = function () {
-                document.getElementById(tag.id).click();
-            };
+            //tagItem.onclick = function () {
+            //    document.getElementById(tag.id).click();
+            //};
             let checkbox = document.createElement('input');
             checkbox.type = 'checkbox';
             checkbox.className = 'MUS-hidden-checkbox';
@@ -337,9 +337,9 @@ document.addEventListener("DOMContentLoaded", function () {
             tag.checked = negativeCheckedState[tag.id];
             let tagItem = document.createElement('div');
             tagItem.className = 'MUS-negative-tag-genre-item';
-            tagItem.onclick = function () {
-                document.getElementById(tag.id).click();
-            };
+            //tagItem.onclick = function () {
+            //    document.getElementById(tag.id).click();
+            //};
             let checkbox = document.createElement('input');
             checkbox.type = 'checkbox';
             checkbox.className = 'MUS-hidden-checkbox';
