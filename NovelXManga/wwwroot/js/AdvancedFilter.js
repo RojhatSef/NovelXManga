@@ -422,6 +422,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 totalPages = result.totalPages;
 
                 const cardFourDiv = document.querySelector('.MUS-CardFour');
+                console.log(`About to send a request with method POST to /SearchFilter/AdvancedSearch?handler=BooksPage`);
 
                 result.books.forEach(function (book) {
                     let bookDiv = document.createElement('div');
