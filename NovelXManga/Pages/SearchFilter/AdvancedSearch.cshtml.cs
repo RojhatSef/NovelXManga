@@ -10,7 +10,8 @@ using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 
-//bug not FIXED OnGetBooksPage is being called when we do the OnPost. This makes the data fetch happen twice. THis is a bug, unsure how to fix it now. Not on high priority.
+//bug not FIXED OnGetBooksPage is being called when we do the OnPost.
+// This makes the data fetch happen twice. THis is a bug, unsure how to fix it now. Not on high priority.
 namespace NovelXManga.Pages.SearchFilter
 {
     [ValidateAntiForgeryToken]

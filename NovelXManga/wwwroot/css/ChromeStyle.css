@@ -573,8 +573,14 @@
         }
 
     @media (max-width: 290px) {
-        #NovelTitle {
+        #NovelTitle{
             display: none !important;
+        }
+    }
+    @media (max-width: 260px) {
+        #TextChange {
+            display: none !important;
+            transition: ease-in-out 0.7s;
         }
     }
     /* SIDEbar ENDS STARTS HERE*/
@@ -2237,7 +2243,7 @@
 }
 
 .BackgroundShader {
-    height: 100%;
+    height: 100VH;
     width: 100%;
     background-color: rgba(0, 0, 0, 0.6); /* black with 60% opacity */
     color: white;
@@ -2407,14 +2413,49 @@
     color: #fff;
 }
 
+.privacy-policy-page {
+    padding: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+    margin-top: 40px;
+    color: #fff;
+}
+
+.information-collected-title,
 .privacy-policy-title, .gdpr-statement-title, .form-title, .closing-statement-title {
     font-size: 2em;
     margin-bottom: 1rem;
+    font-weight: 600;
 }
 
-.privacy-policy-text, .gdpr-statement-text, .form-description, .closing-statement-text {
+/* Updated Text Sizing for All Paragraphs and Lists */
+.closing-statement-text,
+.consequences-of-violations-text,
+.community-participation-text,
+.code-of-conduct-footer,
+.code-of-conduct-text,
+.privacy-policy-text,
+.information-collected-text, .gdpr-statement-text, .form-description {
+    font-size: 1rem;
+    line-height: 1.5;
     margin-bottom: 1.5rem;
-    line-height: 1.6;
+}
+
+@media screen and (max-width: 768px) {
+    .information-collected-title,
+    .privacy-policy-title {
+        font-size: 1.5em;
+    }
+
+    .closing-statement-text,
+    .consequences-of-violations-text,
+    .community-participation-text,
+    .code-of-conduct-footer,
+    .code-of-conduct-text,
+    .privacy-policy-text,
+    .information-collected-text {
+        font-size: 0.9rem;
+    }
 }
 
 .account-deletion-form {
