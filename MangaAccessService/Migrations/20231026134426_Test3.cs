@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MangaAccessService.Migrations
 {
-    public partial class Testyyy : Migration
+    public partial class Test3 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

@@ -379,7 +379,20 @@
                         </div>
                     }
                 }
-            </div>
+
+
+              
+
+            </div>  @if (Model.CurrentManga.Characters.Count() < 5)
+            {
+
+            }
+            else
+            {
+                <hr class="CUS-custom-hr" />
+                <button id="loadMoreCharacters" class="CUS-load-more-button" data-manga-id="@Model.CurrentManga.MangaID">More Characters</button>
+            }
+            
         </div>
 
 

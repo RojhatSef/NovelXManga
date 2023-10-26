@@ -62,6 +62,29 @@ namespace MangaAccessService.Migrations
             return mangaModel;
         }
 
+        public async Task<MangaModel> GetOneEssentialMangaIncludedAsync(int id)
+        {
+            return await mangaNNovelAuthDBContext.mangaModels
+                .Include(e => e.AllLanguages)
+                .Include(e => e.OfficalWebsites)
+                .Include(e => e.VoiceActors.Take(5))
+                .Include(e => e.ArtistModels.Take(5))
+                .Include(e => e.Authormodels.Take(5))
+                .Include(e => e.TagsModels.Take(10))
+                .Include(e => e.StudioModels)
+                .Include(e => e.reviews.Take(5)).ThenInclude(r => r.UserModels)
+                .Include(e => e.Characters.Take(5))
+                .Include(e => e.GenresModels.Take(10))
+                .Include(e => e.BuyPages).ThenInclude(b => b._Languages)
+                .Include(e => e.AssociatedNames)
+                .Include(e => e.GroupScanlating)
+                .Include(e => e.userModels)
+                .Include(e => e.relatedSeries)
+                .Include(e => e.RecommendedMangaModels)
+                .Include(e => e.BlogModel)
+                .FirstOrDefaultAsync(e => e.MangaID == id);
+        }
+
         public IEnumerable<MangaModel> Search(string searchTerm)
         {
             if (string.IsNullOrEmpty(searchTerm))

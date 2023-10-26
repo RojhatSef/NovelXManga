@@ -14,7 +14,28 @@
     .CUS-CustomHintLabel {
         color: rgb(255, 103, 64);
     }
+    .CUS-custom-hr {
+        border-top: 2px solid #ff6740;
+        border-left: none;
+        border-right: none;
+        border-bottom: none;
+        color: #ff6740;
+        width: 100%;
+        margin: 0px;
+        padding: 0px;
+    }
 
+    .CUS-load-more-button {
+        background-color: #ff6740;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+    }
+
+        .CUS-load-more-button:hover {
+            background-color: #ff5c33;
+        }
     .CUS-CurrentMangaTagsContainer {
         height: auto;
         width: 100%;

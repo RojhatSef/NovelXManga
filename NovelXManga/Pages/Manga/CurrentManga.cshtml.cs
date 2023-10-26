@@ -225,13 +225,26 @@ namespace NovelXManga.Pages.Manga
             return RedirectToPage(new { id });
         }
 
+        public async Task<JsonResult> OnGetLoadMoreCharactersAsync(int mangaId, int skip, int take)
+        {
+            var characters = await Context.Characters
+                .Where(c => c.MangaModels.Any(m => m.MangaID == mangaId))
+                .Skip(skip)
+                .Take(take)
+                .ToListAsync();
+
+            return new JsonResult(characters);
+        }
+
         public async Task<IActionResult> OnGetAsync(int id)
         {
             if (id == 0)
             {
                 NotFound();
             }
-            CurrentManga = await mangaRepository.GetOneMangaAllIncludedAsync(id);
+            CurrentManga = await mangaRepository.GetOneEssentialMangaIncludedAsync(id);
+
+            //CurrentManga = await mangaRepository.GetOneMangaAllIncludedAsync(id);
             //Blog = blogRepsitory.GetModel(CurrentManga.BlogModelId);
 
             var allReviews = await reviewRepsitory.GetAllModelAsync();

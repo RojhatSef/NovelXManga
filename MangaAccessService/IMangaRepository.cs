@@ -30,6 +30,8 @@ namespace MangaAccessService
 
         Task<MangaModel> UpdateAsync(MangaModel updatedManga);
 
+        Task<MangaModel> GetOneEssentialMangaIncludedAsync(int id);
+
         Task<MangaModel> AddAsync(MangaModel NewManga);
 
         Task<MangaModel> DeleteAsync(int id);

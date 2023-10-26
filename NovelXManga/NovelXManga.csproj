@@ -42,7 +42,6 @@
     <Folder Include="wwwroot\Images\GeneratedMangaImage\" />
     <Folder Include="wwwroot\Images\GeneratedWallpaperImages\" />
     <Folder Include="wwwroot\Images\GroupImages\" />
-    <Folder Include="wwwroot\Images\MangaImage\" />
     <Folder Include="wwwroot\Images\CharacterImage\" />
     <Folder Include="wwwroot\Images\UserImage\" />
   </ItemGroup>
