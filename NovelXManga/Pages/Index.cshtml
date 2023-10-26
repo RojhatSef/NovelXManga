@@ -59,14 +59,14 @@
                                 <h2 class="tag-container DisplayWhenHoverFourOfaKind">
                                     @if (Model.AllBooksList[i].TagsModels != null)
                                     {
-                                        @foreach (var tag in Model.AllBooksList[i].TagsModels.Take(5))
+                                        @foreach (var tag in Model.AllBooksList[i].TagsModels.Take(3))
                                         {
                                             <span class="tag   ">@tag.TagName  </span>
                                         }
                                     }
                                     @if (Model.AllBooksList[i].GenresModels != null)
                                     {
-                                        @foreach (var genre in Model.AllBooksList[i].GenresModels.Take(5))
+                                        @foreach (var genre in Model.AllBooksList[i].GenresModels.Take(3))
                                         {
 
                                             <span class="tag  ">  @genre.GenreName  </span>

@@ -58,6 +58,8 @@
     box-sizing: border-box;
     padding: 10px;
     transition: width 0.5s, height 0.5s;
+    overflow: hidden;
+    max-height: calc(100% - 10px);
 }
 
 .MUS-FourofKindContent {
@@ -144,6 +146,10 @@
     padding: 2px 5px;
     border-radius: 3px;
     color: #ff6740;
+    white-space: nowrap; /* Ensures no line breaks within text */
+    overflow: hidden; /* Hide overflowing text */
+    text-overflow: ellipsis; /* Display ... for hidden overflow */
+    max-width: 100%;
 }
 
 .MUS-ANoneStyle {
@@ -153,6 +159,8 @@
     color: inherit;
     width: 100%;
     height: 100%;
+    border-top: solid transparent;
+    border-bottom: solid transparent;
 }
 
     .MUS-ANoneStyle:hover {
@@ -198,6 +206,7 @@
     align-self: flex-start;
     width: 100%;
     font-size: 15px;
+    max-height: 50px;
 }
 
 .MUS-InfoContainer {

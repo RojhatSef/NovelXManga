@@ -189,7 +189,7 @@ if (document.getElementById('dropdownToggle') && document.getElementById('userDr
         }
     });
 }
-// Event handler, if we get an error.
+// Event handler, removes error from console log. Don't remove Comment out in developer phase or bug fixing'
 //window.addEventListener('error', function (event) {
 //    // Log the error to  internal system
 //    console.error('Logged Error: ', event.error);
