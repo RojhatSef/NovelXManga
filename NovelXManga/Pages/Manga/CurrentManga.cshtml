@@ -86,9 +86,9 @@
 <div class="CUS-Content1Cost">
     <div class="CUS-commonParentContainer">
         <div class="CUS-CurrentMangaTagsContainer">
-            @if (Model.CurrentManga.GenresModels != null)
+            @if (Model.CurrentManga2.Genres != null)
             {
-                @foreach (var item in Model.CurrentManga.GenresModels)
+                @foreach (var item in Model.CurrentManga2.Genres)
                 {
                     <div class="CUS-tagsInsideInsideCurrentManga">
                         @if (UpdaterUser)
@@ -126,13 +126,13 @@
                 }
 
             }
-            @if (Model.CurrentManga.TagsModels != null)
+            @if (Model.CurrentManga2.Tags != null)
             {
-                @foreach (var item in Model.CurrentManga.TagsModels)
+                @foreach (var item in Model.CurrentManga2.Tags)
                 {
                     @if (UpdaterUser)
                     {
-                        <a asp-page="/MangaUpdates/UpdateTags" asp-route-id="@Model.CurrentManga.MangaID">
+                        <a asp-page="/MangaUpdates/UpdateTags" asp-route-id="@Model.CurrentManga2.MangaID">
                             <div class="CUS-tagsInsideInsideCurrentManga">
 
                                 @if (item.TagName == "Gore" || item.TagName == "Borderline H" || item.TagName == "Anal Intercourse" ||
@@ -327,26 +327,13 @@
             <h1>CHARACTERS: </h1>
 
             <div class="GridWrapper">
-                @if (Model.CurrentManga.Characters != null || Model.CurrentManga.Characters.Count <= 1)
+                @if (Model.CurrentManga2.Characters != null || Model.CurrentManga2.Characters.Count <= 1)
                 {
-                    @foreach (var character in Model.CurrentManga.Characters)
+                    @foreach (var character in Model.CurrentManga2.Characters.Take(5))
                     {
-                        @if (UpdaterUser)
-                        {
-                            <div class="GridItem">
-                                <a asp-page="/MangaUpdates/UpdateCharacters" asp-route-id="@Model.CurrentManga.MangaID">
-                                    <img class="GridImage" src="~/Images/GeneratedCharacterImage/@character.PhotoPath" />
-                                </a>
-                                <div class="MangaInputText">
-                                    <a asp-page="/MangaUpdates/UpdateCharacters" asp-route-id="@Model.CurrentManga.MangaID">
-                                        <input type="hidden" name="characters" value="@character.CharacterId" />
-                                        <p>@character.CharacterName</p>
-                                    </a>
-                                </div>
-                            </div>
-                        }
-                        else
-                        {
+                        
+                            
+                      
                             <div class="GridItem">
                                 <a asp-page="/CharacterPage/CurrentCharacter" asp-route-id="@character.CharacterId">
                                     <img class="GridImage" src="~/Images/GeneratedCharacterImage/@character.PhotoPath" />
@@ -358,7 +345,7 @@
                                     </a>
                                 </div>
                             </div>
-                        }
+                       
 
                     }
                 }
@@ -366,7 +353,7 @@
                 {
                     @if (UpdaterUser)
                     {
-                        <a asp-page="/MangaUpdates/AddCharacter" asp-route-id="@Model.CurrentManga.MangaID">
+                        <a asp-page="/MangaUpdates/AddCharacter" asp-route-id="@Model.CurrentManga2.MangaID">
                             <div class="MangaInputText">
                                 <p>N/A</p>
                             </div>
@@ -383,14 +370,14 @@
 
               
 
-            </div>  @if (Model.CurrentManga.Characters.Count() < 5)
+            </div>  @if (Model.CurrentManga2.Characters.Count() < 5)
             {
 
             }
             else
             {
                 <hr class="CUS-custom-hr" />
-                <button id="loadMoreCharacters" class="CUS-load-more-button" data-manga-id="@Model.CurrentManga.MangaID">More Characters</button>
+                <button id="loadMoreCharacters" class="CUS-load-more-button" data-manga-id="@Model.CurrentManga2.MangaID">More Characters</button>
             }
             
         </div>
@@ -555,13 +542,13 @@
             <div class="contentMangaBox-wrapper">
                 <h1>Genre/s:</h1>
                 <div class="MangaContainerInput">
-                    @if (Model.CurrentManga.GenresModels != null)
+                    @if (Model.CurrentManga2.Genres != null)
                     {
-                        @foreach (var item in Model.CurrentManga.GenresModels)
+                        @foreach (var item in Model.CurrentManga2.Genres)
                         {
                             @if (UpdaterUser)
                             {
-                                <a asp-page="/MangaUpdates/UpdateTags" asp-route-id="@Model.CurrentManga.MangaID">
+                                <a asp-page="/MangaUpdates/UpdateTags" asp-route-id="@Model.CurrentManga2.MangaID">
                                     <div class="MangaInputText">
                                         @item.GenreName
                                     </div>
@@ -569,7 +556,7 @@
                             }
                             else
                             {
-                                <a asp-page="/SearchFilter/AdvancedSearch" asp-route-id="@Model.CurrentManga.GenresModels">
+                                <a asp-page="/SearchFilter/AdvancedSearch" asp-route-id="@Model.CurrentManga2.Genres">
                                     <div class="MangaInputText">
                                         @item.GenreName
                                     </div>
@@ -608,13 +595,13 @@
                 <h1>Tag/s:</h1>
                 <div class="MangaContainerInput">
 
-                    @if (Model.CurrentManga.TagsModels != null)
+                    @if (Model.CurrentManga2.Tags != null)
                     {
-                        @foreach (var item in Model.CurrentManga.TagsModels)
+                        @foreach (var item in Model.CurrentManga2.Tags)
                         {
                             @if (UpdaterUser)
                             {
-                                <a asp-page="/MangaUpdates/UpdateTags" asp-route-id="@Model.CurrentManga.MangaID">
+                                <a asp-page="/MangaUpdates/UpdateTags" asp-route-id="@Model.CurrentManga2.MangaID">
                                     <div class="MangaInputText">
                                         @item.TagName
                                     </div>
@@ -622,7 +609,7 @@
                             }
                             else
                             {
-                                <a asp-page="/SearchFilter/AdvancedSearch" asp-route-id="@Model.CurrentManga.TagsModels">
+                                <a asp-page="/SearchFilter/AdvancedSearch" asp-route-id="@Model.CurrentManga2.Tags">
                                     <div class="MangaInputText">
                                         @item.TagName
                                     </div>
@@ -636,7 +623,7 @@
                     {
                         @if (UpdaterUser)
                         {
-                            <a asp-page="/MangaUpdates/UpdateTags" asp-route-id="@Model.CurrentManga.MangaID">
+                            <a asp-page="/MangaUpdates/UpdateTags" asp-route-id="@Model.CurrentManga2.MangaID">
                                 <div class="MangaInputText">
                                     TBA
 

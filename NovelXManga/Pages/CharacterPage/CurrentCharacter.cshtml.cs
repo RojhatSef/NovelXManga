@@ -29,34 +29,27 @@ namespace NovelXManga.Pages.CharacterPage
         [BindProperty]
         public Character CurrentCharacter { get; set; }
 
-        [BindProperty]
-        public List<MangaModel> CurrentMangas { get; set; } = new List<MangaModel>();
+        //[BindProperty]
+        //public List<MangaModel> CurrentMangas { get; set; } = new List<MangaModel>();
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
-            if (id == 0 || id == null)
+            if (id == 0)
             {
                 return NotFound();
             }
+
             CurrentCharacter = await Context.Characters
-           .Include(c => c.MangaModels)
-           .FirstOrDefaultAsync(c => c.CharacterId == id);
+               .Include(c => c.MangaModels)
+               .FirstOrDefaultAsync(c => c.CharacterId == id);
 
             if (CurrentCharacter == null)
             {
                 return NotFound();
             }
 
-            // If you have multiple mangas associated with the character,
-            // you loop through each and fetch all related data
-            foreach (var manga in CurrentCharacter.MangaModels)
-            {
-                var detailedManga = await mangaRepository.GetOneMangaAllIncludedAsync(manga.MangaID);
-                if (detailedManga != null)
-                {
-                    CurrentMangas.Add(detailedManga);
-                }
-            }
+            var mangaIds = CurrentCharacter.MangaModels.Select(m => m.MangaID).ToList();
+            //CurrentMangas = await characterRepsitory.GetMangaDtoIncludedAsync(mangaIds);
 
             return Page();
         }

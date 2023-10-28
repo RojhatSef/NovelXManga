@@ -1,4 +1,5 @@
-﻿using MangaModelService;
+﻿using MangaAccessService.DTO;
+using MangaModelService;
 using Microsoft.EntityFrameworkCore;
 
 namespace MangaAccessService.Migrations
@@ -67,14 +68,10 @@ namespace MangaAccessService.Migrations
             return await mangaNNovelAuthDBContext.mangaModels
                 .Include(e => e.AllLanguages)
                 .Include(e => e.OfficalWebsites)
-                .Include(e => e.VoiceActors.Take(5))
-                .Include(e => e.ArtistModels.Take(5))
-                .Include(e => e.Authormodels.Take(5))
-                .Include(e => e.TagsModels.Take(10))
+
                 .Include(e => e.StudioModels)
                 .Include(e => e.reviews.Take(5)).ThenInclude(r => r.UserModels)
-                .Include(e => e.Characters.Take(5))
-                .Include(e => e.GenresModels.Take(10))
+
                 .Include(e => e.BuyPages).ThenInclude(b => b._Languages)
                 .Include(e => e.AssociatedNames)
                 .Include(e => e.GroupScanlating)
@@ -83,6 +80,144 @@ namespace MangaAccessService.Migrations
                 .Include(e => e.RecommendedMangaModels)
                 .Include(e => e.BlogModel)
                 .FirstOrDefaultAsync(e => e.MangaID == id);
+        }
+
+        public async Task<MangaModel> GetLimitedEssentialMangaIncludedAsync(int id)
+        {
+            return await mangaNNovelAuthDBContext.mangaModels
+                .Include(e => e.AllLanguages)
+                .Include(e => e.OfficalWebsites)
+
+                .Include(e => e.StudioModels)
+                .Include(e => e.reviews.Take(5)).ThenInclude(r => r.UserModels)
+                .Include(e => e.BuyPages).ThenInclude(b => b._Languages)
+                .Include(e => e.AssociatedNames)
+                .Include(e => e.GroupScanlating)
+                .Include(e => e.userModels)
+                .Include(e => e.relatedSeries)
+                .Include(e => e.RecommendedMangaModels)
+                .Include(e => e.BlogModel)
+                .FirstOrDefaultAsync(e => e.MangaID == id);
+        }
+
+        public async Task<CurrentMangaDto> GetOneEssentialMangaDtoIncludedAsync(int id)
+        {
+            var query = mangaNNovelAuthDBContext.mangaModels
+
+                        .Include(e => e.VoiceActors.Take(5))
+                        .Include(e => e.ArtistModels.Take(5))
+                        .Include(e => e.Authormodels.Take(5))
+                        .Include(e => e.TagsModels)
+                        .Include(e => e.Characters.Take(5))
+                        .Include(e => e.GenresModels)
+                        .Where(m => m.MangaID == id);
+
+            return await query.Select(m => new CurrentMangaDto
+            {
+                MangaID = m.MangaID,
+
+                Artists = m.ArtistModels.Select(a => new CurrentMangaArtistDto
+                {
+                    ArtistId = a.ArtistId,
+                    FirstName = a.FirstName,
+                    PhotoPath = a.PhotoPath
+                }).Take(5).ToList(),
+
+                Authors = m.Authormodels.Select(a => new CurrentMangaAuthorDto
+                {
+                    AuthorID = a.AuthorID,
+                    FirstName = a.FirstName,
+                    PhotoPath = a.PhotoPath
+                }).Take(5).ToList(),
+
+                Characters = m.Characters.Select(c => new CurrentMangaCharacterDto
+                {
+                    CharacterId = c.CharacterId,
+                    CharacterName = c.CharacterName,
+                    PhotoPath = c.PhotoPath
+                }).Take(5).ToList(),
+
+                VoiceActors = m.VoiceActors.Select(v => new CurrentMangaVoiceActorDto
+                {
+                    VoiceActorId = v.VoiceActorId,
+                    FirstName = v.FirstName,
+                    PhotoPath = v.PhotoPath
+                }).Take(5).ToList(),
+
+                Genres = m.GenresModels.Select(g => new CurrentMangaGenreDto
+                {
+                    GenresId = g.GenresId,
+                    GenreName = g.GenreName,
+                    TagHeavy = g.TagHeavy
+                }).ToList(),
+
+                Tags = m.TagsModels.Select(t => new CurrentMangaTagDto
+                {
+                    TagId = t.TagId,
+                    TagName = t.TagName,
+                    TagHeavy = t.TagHeavy
+                }).ToList()
+            }).FirstOrDefaultAsync();
+        }
+
+        public async Task<CurrentMangaDto> GetAddtionalEssentialMangaDtoIncludedAsync(int id)
+        {
+            var query = mangaNNovelAuthDBContext.mangaModels
+
+                        .Include(e => e.VoiceActors)
+                        .Include(e => e.ArtistModels)
+                        .Include(e => e.Authormodels)
+                        .Include(e => e.TagsModels)
+                        .Include(e => e.Characters)
+                        .Include(e => e.GenresModels)
+                        .Where(m => m.MangaID == id);
+
+            return await query.Select(m => new CurrentMangaDto
+            {
+                MangaID = m.MangaID,
+
+                Artists = m.ArtistModels.Select(a => new CurrentMangaArtistDto
+                {
+                    ArtistId = a.ArtistId,
+                    FirstName = a.FirstName,
+                    PhotoPath = a.PhotoPath
+                }).Take(5).ToList(),
+
+                Authors = m.Authormodels.Select(a => new CurrentMangaAuthorDto
+                {
+                    AuthorID = a.AuthorID,
+                    FirstName = a.FirstName,
+                    PhotoPath = a.PhotoPath
+                }).ToList(),
+
+                Characters = m.Characters.Select(c => new CurrentMangaCharacterDto
+                {
+                    CharacterId = c.CharacterId,
+                    CharacterName = c.CharacterName,
+                    PhotoPath = c.PhotoPath
+                }).ToList(),
+
+                VoiceActors = m.VoiceActors.Select(v => new CurrentMangaVoiceActorDto
+                {
+                    VoiceActorId = v.VoiceActorId,
+                    FirstName = v.FirstName,
+                    PhotoPath = v.PhotoPath
+                }).ToList(),
+
+                Genres = m.GenresModels.Select(g => new CurrentMangaGenreDto
+                {
+                    GenresId = g.GenresId,
+                    GenreName = g.GenreName,
+                    TagHeavy = g.TagHeavy
+                }).ToList(),
+
+                Tags = m.TagsModels.Select(t => new CurrentMangaTagDto
+                {
+                    TagId = t.TagId,
+                    TagName = t.TagName,
+                    TagHeavy = t.TagHeavy
+                }).ToList()
+            }).FirstOrDefaultAsync();
         }
 
         public IEnumerable<MangaModel> Search(string searchTerm)

@@ -1,4 +1,5 @@
-﻿using MangaModelService;
+﻿using MangaAccessService.DTO;
+using MangaModelService;
 
 namespace MangaAccessService
 {
@@ -31,6 +32,12 @@ namespace MangaAccessService
         Task<MangaModel> UpdateAsync(MangaModel updatedManga);
 
         Task<MangaModel> GetOneEssentialMangaIncludedAsync(int id);
+
+        Task<CurrentMangaDto> GetOneEssentialMangaDtoIncludedAsync(int id);
+
+        Task<CurrentMangaDto> GetAddtionalEssentialMangaDtoIncludedAsync(int id);
+
+        Task<MangaModel> GetLimitedEssentialMangaIncludedAsync(int id);
 
         Task<MangaModel> AddAsync(MangaModel NewManga);
 

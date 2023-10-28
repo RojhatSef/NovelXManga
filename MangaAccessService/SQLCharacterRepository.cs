@@ -1,4 +1,5 @@
-﻿using MangaModelService;
+﻿using MangaAccessService.DTO;
+using MangaModelService;
 using Microsoft.EntityFrameworkCore;
 
 namespace MangaAccessService
@@ -67,6 +68,23 @@ namespace MangaAccessService
             await context.Characters.AddAsync(AddAsync);
             await context.SaveChangesAsync();
             return AddAsync;
+        }
+
+        public async Task<CurrentCharacterDto> GetMangaDtoIncludedAsync(int id)
+        {
+            return await context.Characters
+                .Where(c => c.CharacterId == id)
+                .Select(c => new CurrentCharacterDto
+                {
+                    CharacterId = c.CharacterId,
+                    MangaList = c.MangaModels.Select(m => new CurrentCharacterMangaDto
+                    {
+                        MangaID = m.MangaID,
+                        MangaName = m.MangaName,
+                        PhotoPath = m.PhotoPath
+                    }).ToList()
+                })
+                .FirstOrDefaultAsync();
         }
 
         public async Task<Character> DeleteAsync(int idAsync)

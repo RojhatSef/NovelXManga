@@ -28,7 +28,6 @@ function loadMoreCharacters() {
         fetch(`/Manga/CurrentManga?handler=LoadMoreCharacters&mangaId=${mangaId}&skip=${skip}&take=${take}`)
             .then(response => response.json())
             .then(data => {
-                // Remove the Load More button temporarily
                 loadMoreButton.style.display = "none";
                 customHr.style.display = "none";
 
@@ -36,9 +35,14 @@ function loadMoreCharacters() {
                     let gridItem = document.createElement('div');
                     gridItem.className = 'GridItem';
 
+                    let anchor = document.createElement('a');
+                    anchor.href = `/CharacterPage/CurrentCharacter?id=${character.characterId}`;
+
                     let img = document.createElement('img');
                     img.className = 'GridImage';
                     img.src = `/Images/GeneratedCharacterImage/${character.photoPath}`;
+
+                    anchor.appendChild(img);
 
                     let textDiv = document.createElement('div');
                     textDiv.className = 'MangaInputText';
@@ -47,17 +51,15 @@ function loadMoreCharacters() {
                     p.textContent = character.characterName;
 
                     textDiv.appendChild(p);
-                    gridItem.appendChild(img);
-                    gridItem.appendChild(textDiv);
+                    anchor.appendChild(textDiv);
+                    gridItem.appendChild(anchor);
                     gridWrapper.appendChild(gridItem);
                 });
 
-                // Hide the Load More button if there are no more items to load
                 if (data.length < take) {
                     loadMoreButton.style.display = "none";
                     customHr.style.display = "none";
                 } else {
-                    // Show the Load More button again at the end
                     loadMoreButton.style.display = "block";
                     customHr.style.display = "block";
                 }
@@ -71,3 +73,38 @@ function loadMoreCharacters() {
 }
 
 loadMoreCharacters();
+document.addEventListener("DOMContentLoaded", function () {
+    console.log("Console is available.");
+
+    // Make sure mangaId is defined and correctly set
+    let mangaId = document.querySelector("#your-html-element-for-mangaId").value;
+
+    fetch(`/Manga/CurrentManga?handler=AdditionalData&mangaId=${mangaId}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+            return response.json();
+        })
+        .then(data => {
+            // Append genres
+            const genreContainer = document.querySelector(".CUS-CurrentMangaTagsContainer");
+            data.genres.forEach(genre => {
+                let labelClass = genre.isWarning ? 'CUS-CustomWarningLabel' : '';
+                let label = `<label class="${labelClass}">${genre.name}</label>`;
+                genreContainer.innerHTML += label;
+            });
+
+            // Append tags
+            const tagContainer = document.querySelector(".CUS-CurrentMangaTagsContainer");
+            data.tags.forEach(tag => {
+                let labelClass = tag.isWarning ? 'CUS-CustomHintLabel' : '';
+                let label = `<label class="${labelClass}">${tag.name}</label>`;
+                tagContainer.innerHTML += label;
+            });
+            console.log("Page loaded successfully.");
+        })
+        .catch(error => {
+            console.error("Fetch error: ", error);
+        });
+});

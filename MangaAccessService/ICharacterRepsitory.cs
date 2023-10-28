@@ -1,4 +1,5 @@
-﻿using MangaModelService;
+﻿using MangaAccessService.DTO;
+using MangaModelService;
 
 namespace MangaAccessService
 {
@@ -23,6 +24,8 @@ namespace MangaAccessService
         Task<IEnumerable<Character>> GetAllModelAsync();
 
         Task<Character> GetModelAsync(int idAsync);
+
+        Task<CurrentCharacterDto> GetMangaDtoIncludedAsync(int id);
 
         Task<Character> UpdateAsync(Character UpdateModelAsync);
 

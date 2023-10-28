@@ -30,16 +30,16 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
     options.SupportedUICultures = supportedCultures;
 });
 
-//builder.Services.AddDbContext<MangaNNovelAuthDBContext>(options =>
-//    options.UseSqlServer(builder.Configuration.GetConnectionString("AuthConnectionString"),
-//        b => b.MigrationsAssembly("MangaAccessService")));
 builder.Services.AddDbContext<MangaNNovelAuthDBContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("AuthConnectionString"),
-        b =>
-        {
-            b.MigrationsAssembly("MangaAccessService");
-            b.CommandTimeout(120); // set timeout to 120 seconds
-        }));
+        b => b.MigrationsAssembly("MangaAccessService")));
+//builder.Services.AddDbContext<MangaNNovelAuthDBContext>(options =>
+//    options.UseSqlServer(builder.Configuration.GetConnectionString("AuthConnectionString"),
+//        b =>
+//        {
+//            b.MigrationsAssembly("MangaAccessService");
+//            b.CommandTimeout(120); // set timeout to 120 seconds
+//        }));
 
 builder.Services.AddScoped<IGenreRepsitory, SQLGenreRepsitory>();
 builder.Services.AddScoped<ITagRepsitory, SQLTagRepository>();
