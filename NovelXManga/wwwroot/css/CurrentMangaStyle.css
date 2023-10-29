@@ -51,7 +51,13 @@
         transition: margin-left 0.5s ease;
         order: 1;
     }
+    .CUS-CustomWarningLabel {
+        color: #FF9933 !important;
+    }
 
+    .CUS-CustomHintLabel {
+        color: #008000;
+    }
     .scoreAndMangaInfoContainer {
         order: 2;
         height: auto;

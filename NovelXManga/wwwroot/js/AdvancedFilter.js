@@ -382,7 +382,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 document.addEventListener('DOMContentLoaded', function () {
     let currentPage = 1;
-    const pageSize = 2;
+    const pageSize = 8;
     let totalPages = 0;
     const moreButton = document.getElementById('moreButton');
     const bookContainer = document.getElementById('bookContainer');

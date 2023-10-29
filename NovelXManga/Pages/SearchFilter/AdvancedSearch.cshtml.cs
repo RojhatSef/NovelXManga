@@ -145,7 +145,7 @@ namespace NovelXManga.Pages.SearchFilter
         {
             CurrentPage = 1;
             //book amounts for the first search click
-            MoreBooksClicks = 2;
+            MoreBooksClicks = 8;
         }
 
         private void InitializeSettings()

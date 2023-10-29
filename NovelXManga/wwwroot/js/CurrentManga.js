@@ -73,38 +73,3 @@ function loadMoreCharacters() {
 }
 
 loadMoreCharacters();
-document.addEventListener("DOMContentLoaded", function () {
-    console.log("Console is available.");
-
-    // Make sure mangaId is defined and correctly set
-    let mangaId = document.querySelector("#your-html-element-for-mangaId").value;
-
-    fetch(`/Manga/CurrentManga?handler=AdditionalData&mangaId=${mangaId}`)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error("Network response was not ok");
-            }
-            return response.json();
-        })
-        .then(data => {
-            // Append genres
-            const genreContainer = document.querySelector(".CUS-CurrentMangaTagsContainer");
-            data.genres.forEach(genre => {
-                let labelClass = genre.isWarning ? 'CUS-CustomWarningLabel' : '';
-                let label = `<label class="${labelClass}">${genre.name}</label>`;
-                genreContainer.innerHTML += label;
-            });
-
-            // Append tags
-            const tagContainer = document.querySelector(".CUS-CurrentMangaTagsContainer");
-            data.tags.forEach(tag => {
-                let labelClass = tag.isWarning ? 'CUS-CustomHintLabel' : '';
-                let label = `<label class="${labelClass}">${tag.name}</label>`;
-                tagContainer.innerHTML += label;
-            });
-            console.log("Page loaded successfully.");
-        })
-        .catch(error => {
-            console.error("Fetch error: ", error);
-        });
-});

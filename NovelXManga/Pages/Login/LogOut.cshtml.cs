@@ -1,4 +1,5 @@
 using MangaAccessService;
+using MangaAccessService.DTO.LoginRegiForgetDto;
 using MangaModelService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -8,12 +9,16 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 namespace NovelXManga.Pages.Login
 {
     [Authorize]
+    [ValidateAntiForgeryToken]
     public class LogOutModel : PageModel
     {
         private readonly SignInManager<UserModel> signInManager;
         private readonly IMangaRepository mangaRepository;
-        public List<MangaModel> AllBooksList { get; set; }
-        public IEnumerable<MangaModel> GetAllBooks { get; set; }
+
+        [BindProperty]
+        public List<LoginRegiForgetCombineDto> AllBooksList { get; set; }
+
+        public IEnumerable<LoginRegiForgetCombineDto> GetAllBooks { get; set; }
 
         public LogOutModel(SignInManager<UserModel> signInManager, IMangaRepository mangaRepository)
         {
@@ -23,7 +28,7 @@ namespace NovelXManga.Pages.Login
 
         public async Task<IActionResult> OnGetAsync()
         {
-            GetAllBooks = await mangaRepository.Get10MangaModelAsync();
+            GetAllBooks = await mangaRepository.Get10MangaEssentialMangaDtoIncludedAsync();
             AllBooksList = GetAllBooks.ToList();
             return Page();
         }

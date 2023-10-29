@@ -1,4 +1,5 @@
 ﻿using MangaAccessService;
+using MangaAccessService.DTO.IndexDto;
 using MangaModelService;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -127,17 +128,20 @@ namespace NovelXManga.Pages
         //      return new JsonResult(groupedResults, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
         //  }
 
-        public List<MangaModel> AllBooksList { get; set; }
+        public List<IndexDtoManga> AllBooksList { get; set; }
         public IEnumerable<AssociatedNames> associatedNames { get; set; }
-        public IEnumerable<MangaModel> GetAllBooks { get; set; }
+
+        //public IEnumerable<MangaModel> GetAllBooks { get; set; }
         public IEnumerable<WallPapers> WallPapers { get; set; }
+
+        public IEnumerable<IndexDtoManga> GetAllBooks { get; set; }
         public List<WallPapers> WallpaperList { get; set; }
 
-        public void OnGet()
+        public async Task OnGetAsync()
         {
-            GetAllBooks = context.mangaModels.Include(e => e.GenresModels).Include(e => e.TagsModels).Include(e => e.ArtistModels).Include(e => e.Authormodels);
+            GetAllBooks = await mangaRepository.IndexMangaDtoIncludedAsync();
             AllBooksList = GetAllBooks.ToList();
-            WallPapers = context.WallPapers;
+            WallPapers = await context.WallPapers.ToListAsync();
             WallpaperList = WallPapers.ToList();
         }
     }

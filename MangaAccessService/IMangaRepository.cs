@@ -1,4 +1,6 @@
 ﻿using MangaAccessService.DTO;
+using MangaAccessService.DTO.IndexDto;
+using MangaAccessService.DTO.LoginRegiForgetDto;
 using MangaModelService;
 
 namespace MangaAccessService
@@ -38,6 +40,10 @@ namespace MangaAccessService
         Task<CurrentMangaDto> GetAddtionalEssentialMangaDtoIncludedAsync(int id);
 
         Task<MangaModel> GetLimitedEssentialMangaIncludedAsync(int id);
+
+        Task<IEnumerable<LoginRegiForgetCombineDto>> Get10MangaEssentialMangaDtoIncludedAsync();
+
+        Task<IEnumerable<IndexDtoManga>> IndexMangaDtoIncludedAsync();
 
         Task<MangaModel> AddAsync(MangaModel NewManga);
 

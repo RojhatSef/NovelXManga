@@ -35,7 +35,6 @@ namespace NovelXManga.Pages.Manga
         private readonly IPostRepsitory postRepsitory;
         private readonly ICharacterRepsitory characterRepsitory;
         private readonly IMemoryCache _cache;
-        private readonly ILogger<CurrentMangaModel> _logger;
 
         [BindProperty]
         public MangaModel CurrentManga { get; set; }
@@ -62,7 +61,7 @@ namespace NovelXManga.Pages.Manga
         public bool IsInReadingList { get; set; }
         public IDictionary<int, int> ScoreDistribution { get; set; }
 
-        public CurrentMangaModel(UserManager<UserModel> userManager, IWebHostEnvironment webHostEnvironment, IMangaRepository mangaRepository, MangaNNovelAuthDBContext mangaNNovelAuthDBContext, IBlogRepsitory blogRepsitory, IPostRepsitory postRepsitory, ICharacterRepsitory characterRepsitory, IReviewRepsitory reviewRepsitory, IMemoryCache cache, ILogger<CurrentMangaModel> logger)
+        public CurrentMangaModel(UserManager<UserModel> userManager, IWebHostEnvironment webHostEnvironment, IMangaRepository mangaRepository, MangaNNovelAuthDBContext mangaNNovelAuthDBContext, IBlogRepsitory blogRepsitory, IPostRepsitory postRepsitory, ICharacterRepsitory characterRepsitory, IReviewRepsitory reviewRepsitory, IMemoryCache cache)
         {
             this.userManager = userManager;
             this.webHostEnvironment = webHostEnvironment;
@@ -73,13 +72,6 @@ namespace NovelXManga.Pages.Manga
             this.characterRepsitory = characterRepsitory;
             this.reviewRepsitory = reviewRepsitory;
             _cache = cache;
-            _logger = logger;
-        }
-
-        public async Task<IActionResult> OnGetAdditionalDataAsync(int mangaId)
-        {
-            var additionalData = await mangaRepository.GetAddtionalEssentialMangaDtoIncludedAsync(mangaId);
-            return new JsonResult(additionalData);
         }
 
         public async Task<IActionResult> OnPostMangaPage(int MangaID)
@@ -259,14 +251,11 @@ namespace NovelXManga.Pages.Manga
             {
                 NotFound();
             }
-            stopwatch.Start();
+
             CurrentManga = await mangaRepository.GetOneEssentialMangaIncludedAsync(id);
-            stopwatch.Stop();
-            _logger.LogInformation($"Fetching CurrentManga took {stopwatch.ElapsedMilliseconds} ms");
-            stopwatch.Restart();
+
             CurrentManga2 = await mangaRepository.GetOneEssentialMangaDtoIncludedAsync(id);
-            stopwatch.Stop();
-            _logger.LogInformation($"Fetching CurrentManga2 took {stopwatch.ElapsedMilliseconds} ms");
+
             //CurrentManga = await mangaRepository.GetOneMangaAllIncludedAsync(id);
             //Blog = blogRepsitory.GetModel(CurrentManga.BlogModelId);
 
@@ -329,8 +318,7 @@ namespace NovelXManga.Pages.Manga
             CurrentManga.DailyRead = dailyRead;
 
             await mangaRepository.UpdateAsync(CurrentManga);
-            totalStopwatch.Stop();
-            _logger.LogInformation($"Total time for OnGetAsync: {totalStopwatch.ElapsedMilliseconds} ms");
+
             return Page();
         }
     }

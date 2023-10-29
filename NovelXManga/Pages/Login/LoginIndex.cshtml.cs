@@ -1,4 +1,5 @@
 using MangaAccessService;
+using MangaAccessService.DTO.LoginRegiForgetDto;
 using MangaModelService;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -15,10 +16,15 @@ namespace NovelXManga.Pages.Login
         [BindProperty]
         public LoginModel LoginModel { get; set; }
 
-        public List<MangaModel> AllBooksList { get; set; }
-        public IEnumerable<MangaModel> GetAllBooks { get; set; }
         public string ReturnUrl { get; set; }
 
+        [BindProperty]
+        public List<LoginRegiForgetCombineDto> AllBooksList { get; set; }
+
+        public IEnumerable<LoginRegiForgetCombineDto> GetAllBooks { get; set; }
+
+        //public IEnumerable<CurrentMangaDto> CurrentManga2 { get; set; }
+        //public IEnumerable<MangaModel> GetAllBooks { get; set; }
         public LoginIndexModel(SignInManager<UserModel> signInManager, UserManager<UserModel> userManager, IMangaRepository mangaRepository)
         {
             this.signInManager = signInManager;
@@ -35,8 +41,8 @@ namespace NovelXManga.Pages.Login
 
             ReturnUrl = returnUrl ?? Url.Content("/");
             ViewData["ReturnUrl"] = ReturnUrl;
-
-            GetAllBooks = await mangaRepository.Get10MangaModelAsync();
+            //CurrentManga2 = await mangaRepository.Get10MangaEssentialMangaDtoIncludedAsync();
+            GetAllBooks = await mangaRepository.Get10MangaEssentialMangaDtoIncludedAsync();
             AllBooksList = GetAllBooks.ToList();
 
             return Page();
@@ -75,7 +81,7 @@ namespace NovelXManga.Pages.Login
                 }
             }
 
-            GetAllBooks = await mangaRepository.Get10MangaModelAsync();
+            GetAllBooks = await mangaRepository.Get10MangaEssentialMangaDtoIncludedAsync();
             AllBooksList = GetAllBooks.ToList();
 
             ReturnUrl = returnUrl;

@@ -1,4 +1,5 @@
 using MangaAccessService;
+using MangaAccessService.DTO.LoginRegiForgetDto;
 using MangaModelService;
 using MangaModelService.ViewModels;
 using Microsoft.AspNetCore.Identity;
@@ -7,13 +8,17 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace NovelXManga.Pages.Login
 {
+    [ValidateAntiForgeryToken]
     public class ResetPasswordPageModel : PageModel
     {
         private readonly UserManager<UserModel> _userManager;
         private readonly SignInManager<UserModel> signInManager;
         private readonly IMangaRepository mangaRepository;
-        public List<MangaModel> AllBooksList { get; set; }
-        public IEnumerable<MangaModel> GetAllBooks { get; set; }
+
+        [BindProperty]
+        public List<LoginRegiForgetCombineDto> AllBooksList { get; set; }
+
+        public IEnumerable<LoginRegiForgetCombineDto> GetAllBooks { get; set; }
         public ResetPasswordModelView tempResetpass { get; set; }
 
         [TempData]
@@ -28,20 +33,19 @@ namespace NovelXManga.Pages.Login
         [BindProperty]
         public ResetPasswordModelView model { get; set; }
 
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> OnPost(ResetPasswordModelView resetPasswordModelView)
         {
             model.Email = resetPasswordModelView.Email;
             model.Token = resetPasswordModelView.Token;
             if (model.Password == null)
             {
-                GetAllBooks = await mangaRepository.Get10MangaModelAsync();
+                GetAllBooks = await mangaRepository.Get10MangaEssentialMangaDtoIncludedAsync();
                 AllBooksList = GetAllBooks.ToList();
                 return Page();
             }
             if (model.ConfirmPassword == null)
             {
-                GetAllBooks = await mangaRepository.Get10MangaModelAsync();
+                GetAllBooks = await mangaRepository.Get10MangaEssentialMangaDtoIncludedAsync();
                 AllBooksList = GetAllBooks.ToList();
                 return Page();
             }
@@ -60,7 +64,7 @@ namespace NovelXManga.Pages.Login
                     ModelState.TryAddModelError(error.Code, error.Description);
                 }
                 TempDataSuccededPassWordChange = "Password Changed Successfully, Login as usual";
-                GetAllBooks = await mangaRepository.Get10MangaModelAsync();
+                GetAllBooks = await mangaRepository.Get10MangaEssentialMangaDtoIncludedAsync();
                 AllBooksList = GetAllBooks.ToList();
                 return Page();
             }
@@ -71,7 +75,7 @@ namespace NovelXManga.Pages.Login
         {
             tempResetpass = new ResetPasswordModelView { Token = resetPasswordModel.Token, Email = resetPasswordModel.Email };
 
-            GetAllBooks = await mangaRepository.Get10MangaModelAsync();
+            GetAllBooks = await mangaRepository.Get10MangaEssentialMangaDtoIncludedAsync();
             AllBooksList = GetAllBooks.ToList();
             return Page();
         }

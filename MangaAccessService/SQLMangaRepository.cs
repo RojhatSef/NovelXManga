@@ -1,4 +1,6 @@
 ﻿using MangaAccessService.DTO;
+using MangaAccessService.DTO.IndexDto;
+using MangaAccessService.DTO.LoginRegiForgetDto;
 using MangaModelService;
 using Microsoft.EntityFrameworkCore;
 
@@ -275,14 +277,113 @@ namespace MangaAccessService.Migrations
         public async Task<IEnumerable<MangaModel>> Get10MangaModelAsync()
         {
             return await mangaNNovelAuthDBContext.mangaModels
-                .Include(e => e.reviews.Take(3))
-                .Include(e => e.Authormodels)
-                .Include(e => e.ArtistModels)
-                .Include(e => e.GenresModels)
-                .Include(e => e.TagsModels)
+
+                .Include(e => e.Authormodels.Take(2))
+                .Include(e => e.ArtistModels.Take(2))
+                .Include(e => e.GenresModels.Take(5))
+                .Include(e => e.TagsModels.Take(5))
                 .OrderByDescending(m => m.BookAddedToDB) // Assuming you want the latest added books
                 .Take(10)
                 .ToListAsync();
+        }
+
+        public async Task<IEnumerable<IndexDtoManga>> IndexMangaDtoIncludedAsync()
+        {
+            var query = mangaNNovelAuthDBContext.mangaModels
+                             .Include(e => e.ArtistModels)
+                             .Include(e => e.Authormodels)
+                             .Include(e => e.TagsModels.Take(5))
+                             .Include(e => e.GenresModels.Take(5))
+                             .Include(e => e.reviews)
+                             .OrderByDescending(m => m.BookAddedToDB)
+                             ;
+
+            return await query.Select(m => new IndexDtoManga
+            {
+                MangaID = m.MangaID,
+                PhotoPath = m.PhotoPath,
+                ForeverRead = m.ForeverRead,
+                MangaName = m.MangaName,
+                Description = m.Description,
+                ArtistModels = m.ArtistModels.Select(a => new IndexArtistDto
+                {
+                    ArtistId = a.ArtistId,
+                    FirstName = a.FirstName,
+                    PhotoPath = a.PhotoPath,
+                    LastName = a.LastName
+                }).ToList(),
+                Authormodels = m.Authormodels.Select(a => new IndexAuthorDto
+                {
+                    AuthorId = a.AuthorID,
+                    FirstName = a.FirstName,
+                    PhotoPath = a.PhotoPath,
+                    LastName = a.LastName
+                }).ToList(),
+                GenresModels = m.GenresModels.Select(g => new IndexGenreDto
+                {
+                    GenresId = g.GenresId,
+                    GenreName = g.GenreName,
+                    TagHeavy = g.TagHeavy
+                }).Take(5).ToList(),
+
+                TagsModels = m.TagsModels.Select(t => new IndexTagsDto
+                {
+                    TagId = t.TagId,
+                    TagName = t.TagName,
+                    TagHeavy = t.TagHeavy
+                }).Take(5).ToList(),
+                OverAllBookScore = (m.reviews != null && m.reviews.Any())
+                    ? Math.Round(m.reviews.Average(r => (r.StylesScore + r.StoryScore + r.GrammarScore + r.CharactersScore) / 4), 1)
+                    : (double?)null
+            }).ToListAsync();
+        }
+
+        public async Task<IEnumerable<LoginRegiForgetCombineDto>> Get10MangaEssentialMangaDtoIncludedAsync()
+        {
+            var query = mangaNNovelAuthDBContext.mangaModels
+                             .Include(e => e.ArtistModels.Take(5))
+                             .Include(e => e.Authormodels.Take(5))
+                             .Include(e => e.TagsModels.Take(5))
+                             .Include(e => e.GenresModels.Take(5))
+                             .Include(e => e.reviews)
+                             .OrderByDescending(m => m.BookAddedToDB)
+                             .Take(10);
+
+            return await query.Select(m => new LoginRegiForgetCombineDto
+            {
+                MangaID = m.MangaID,
+                PhotoPath = m.PhotoPath,
+                ArtistModels = m.ArtistModels.Select(a => new LoginRegiForgetArtistDto
+                {
+                    ArtistId = a.ArtistId,
+                    FirstName = a.FirstName,
+                    PhotoPath = a.PhotoPath,
+                    LastName = a.LastName
+                }).Take(5).ToList(),
+                Authormodels = m.Authormodels.Select(a => new LoginRegiForgetAuthorDto
+                {
+                    AuthorId = a.AuthorID,
+                    FirstName = a.FirstName,
+                    PhotoPath = a.PhotoPath,
+                    LastName = a.LastName
+                }).Take(5).ToList(),
+                GenresModels = m.GenresModels.Select(g => new LoginRegiForgetGenresDto
+                {
+                    GenresId = g.GenresId,
+                    GenreName = g.GenreName,
+                    TagHeavy = g.TagHeavy
+                }).Take(5).ToList(),
+
+                TagsModels = m.TagsModels.Select(t => new LoginRegiForgetTagsDto
+                {
+                    TagId = t.TagId,
+                    TagName = t.TagName,
+                    TagHeavy = t.TagHeavy
+                }).Take(5).ToList(),
+                OverAllBookScore = (m.reviews != null && m.reviews.Any())
+                    ? Math.Round(m.reviews.Average(r => (r.StylesScore + r.StoryScore + r.GrammarScore + r.CharactersScore) / 4), 1)
+                    : (double?)null
+            }).ToListAsync();
         }
 
         public async Task<MangaModel> GetModelAsync(int id)

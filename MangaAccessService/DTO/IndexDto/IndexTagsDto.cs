@@ -1,6 +1,6 @@
-﻿namespace MangaAccessService.DTO
+﻿namespace MangaAccessService.DTO.IndexDto
 {
-    public class CurrentMangaTagDto
+    public class IndexTagsDto
     {
         public int TagId { get; set; }
 
