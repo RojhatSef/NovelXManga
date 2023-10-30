@@ -12,3 +12,12 @@
         background-color: #ff6740; /* Optional: background color for the button */
         color: black; /* Optional: text color for the button */
     }
+
+.IndexTitleFourOfaKind {
+    display: inline-block;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: calc(100% - 40px); /* Adjust according to your layout */
+}
