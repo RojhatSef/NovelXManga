@@ -412,6 +412,7 @@
             /* Adjust the width to occupy the full available width on smaller screens */
             margin-left: 0 !important; /* Remove the left margin for better centering on smaller screens */
             /* Add horizontal padding for spacing */
+            width:100% !important; 
         }
 
         .CUS-Content1Cost {
@@ -427,6 +428,7 @@
 
         .CUS-AddEditReportCurrentpage {
             margin-left: 1% !important;
+            width:100% !important; 
         }
 
         .CUS-manga-title {

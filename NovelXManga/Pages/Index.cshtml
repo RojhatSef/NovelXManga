@@ -15,7 +15,7 @@
             <div class="card-image-ex">
                 <a asp-page="/Index">
                     <div class="MoveDownIndexWallPapers">
-                        <img class="BoxImage SpecialBox" src="/Images/GeneratedWallpaperImages/@Model.WallpaperList[2].WallPaperPhotoPath" />
+                        <img class="BoxImage " src="/Images/GeneratedWallpaperImages/@Model.WallpaperList[2].WallPaperPhotoPath" />
                     </div>
                 </a>
             </div>
@@ -56,12 +56,13 @@
                                 {
                                     <h2 class="IndexTitleFourOfaKind">@Model.AllBooksList[i].MangaName</h2>
                                 }
+                         
                                 <h2 class="tag-container DisplayWhenHoverFourOfaKind">
                                     @if (Model.AllBooksList[i].TagsModels != null)
                                     {
                                         @foreach (var tag in Model.AllBooksList[i].TagsModels.Take(3))
                                         {
-                                            <span class="tag   ">@tag.TagName  </span>
+                                            <span class="tag">@tag.TagName  </span>
                                         }
                                     }
                                     @if (Model.AllBooksList[i].GenresModels != null)
@@ -69,7 +70,7 @@
                                         @foreach (var genre in Model.AllBooksList[i].GenresModels.Take(3))
                                         {
 
-                                            <span class="tag  ">  @genre.GenreName  </span>
+                                            <span class="tag">  @genre.GenreName  </span>
 
                                         }
                                     }

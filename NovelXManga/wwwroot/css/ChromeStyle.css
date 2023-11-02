@@ -22,6 +22,47 @@
         border-radius: 8px; /* Optional: Giving it rounded corners */
     }
 
+    #mangaResultsDropdown {
+        max-height: 600px;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #191a1c;
+        width: 40%;
+        top: 100%;
+        right: 3.5%;
+        z-index: 1;
+    }
+
+    .dropdown-item {
+        display: flex;
+        align-items: center;
+        color: white;
+        font-size: 18px;
+        margin: 14px;
+        background-color: #333;
+        border-radius: 3px;
+    }
+
+        .dropdown-item img {
+            margin-right: 20px;
+            max-height: 100px;
+            max-width: 55px;
+            border-radius: 2px;
+            margin: 2px;
+        }
+
+        .dropdown-item span {
+            flex-grow: 1;
+            white-space: nowrap; 
+            overflow: hidden; 
+            text-overflow: ellipsis;
+        }
+
     .popup-content {
         background-color: black; /* Black background */
         padding: 20px;
@@ -668,7 +709,6 @@
     white-space: nowrap; /* Ensures no line breaks within text */
     overflow: hidden; /* Hide overflowing text */
     text-overflow: ellipsis; /* Display ... for hidden overflow */
-   
 }
 
 .TitleTagDescriptionCostum {

@@ -30,35 +30,31 @@ namespace NovelXManga.Pages
             this.context = context;
         }
 
-        // Part of the Search for the _Layout page. This code is for the Search bar
-        //New code
-        public JsonResult OnGetSearchManga(string searchTerm)
+        public async Task<JsonResult> OnGetSearchMangaAsync(string searchTerm)
         {
             searchTerm = HttpUtility.HtmlEncode(searchTerm);
             int maxResults = 30;
 
-            // Fetching Results
-            var mangaResults = context.mangaModels
+            var mangaResults = await context.mangaModels
                 .Where(m => m.MangaName.Contains(searchTerm) || m.ISBN10.Contains(searchTerm) || m.ISBN13.Contains(searchTerm))
                 .Select(m => new SearchResult { Id = m.MangaID, Name = m.MangaName, PhotoPath = m.PhotoPath, Type = "Manga" })
-                .ToList();
+                .Take(30).ToListAsync();
 
-            var authorResults = context.authorModels
+            var authorResults = await context.authorModels
                 .Where(a => a.FirstName.Contains(searchTerm) || a.LastName.Contains(searchTerm))
-                .Select(a => new SearchResult { Id = a.AuthorID, Name = $"{a.FirstName} {a.LastName}", Type = "Author" })
-                .ToList();
+                .Select(a => new SearchResult { Id = a.AuthorID, Name = $"{a.FirstName} {a.LastName}", PhotoPath = a.PhotoPath, Type = "Author" })
+                .Take(30).ToListAsync();
 
-            var artistResults = context.artistModels
+            var artistResults = await context.artistModels
                 .Where(a => a.FirstName.Contains(searchTerm) || a.LastName.Contains(searchTerm))
-                .Select(a => new SearchResult { Id = a.ArtistId, Name = $"{a.FirstName} {a.LastName}", Type = "Artist" })
-                .ToList();
+                .Select(a => new SearchResult { Id = a.ArtistId, Name = $"{a.FirstName} {a.LastName}", PhotoPath = a.PhotoPath, Type = "Artist" })
+                .Take(30).ToListAsync();
 
-            var voiceActorResults = context.voiceActorModels
+            var voiceActorResults = await context.voiceActorModels
                 .Where(v => v.FirstName.Contains(searchTerm) || v.LastName.Contains(searchTerm))
-                .Select(v => new SearchResult { Id = v.VoiceActorId, Name = $"{v.FirstName} {v.LastName}", Type = "VoiceActor" })
-                .ToList();
+                .Select(v => new SearchResult { Id = v.VoiceActorId, Name = $"{v.FirstName} {v.LastName}", PhotoPath = v.PhotoPath, Type = "VoiceActor" })
+                .Take(30).ToListAsync();
 
-            // Prioritizing and limiting results
             List<SearchResult> finalResults = new List<SearchResult>();
 
             if (mangaResults.Count >= maxResults)
@@ -70,63 +66,23 @@ namespace NovelXManga.Pages
                 finalResults.AddRange(mangaResults);
                 int remaining = maxResults - mangaResults.Count;
 
-                // Add authors if there is remaining space
                 var authorsToAdd = Math.Min(remaining, authorResults.Count);
                 finalResults.AddRange(authorResults.Take(authorsToAdd));
                 remaining -= authorsToAdd;
 
-                // Add artists if there is remaining space
                 var artistsToAdd = Math.Min(remaining, artistResults.Count);
                 finalResults.AddRange(artistResults.Take(artistsToAdd));
                 remaining -= artistsToAdd;
 
-                // Add voice actors if there is remaining space
                 var voiceActorsToAdd = Math.Min(remaining, voiceActorResults.Count);
                 finalResults.AddRange(voiceActorResults.Take(voiceActorsToAdd));
             }
 
-            // Grouping the final results by type
             var groupedResults = finalResults.GroupBy(r => r.Type)
                                              .ToDictionary(g => g.Key, g => g.ToList());
 
             return new JsonResult(groupedResults, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
         }
-
-        //  public JsonResult OnGetSearchManga(string searchTerm)
-        //  {
-        //      searchTerm = HttpUtility.HtmlEncode(searchTerm);
-        //
-        //      var mangaResults = context.mangaModels
-        //.Where(m => m.MangaName.Contains(searchTerm) || m.ISBN10.Contains(searchTerm) || m.ISBN13.Contains(searchTerm))
-        //.Select(m => new SearchResult { Id = m.MangaID, Name = m.MangaName, PhotoPath = m.PhotoPath, Type = "Manga" })
-        //.ToList();
-
-        //      var authorResults = context.authorModels
-        //          .Where(a => a.FirstName.Contains(searchTerm) || a.LastName.Contains(searchTerm))
-        //          .Select(a => new SearchResult { Id = a.AuthorID, Name = $"{a.FirstName} {a.LastName}", Type = "Author" })
-        //          .ToList();
-
-        //      var artistResults = context.artistModels
-        //          .Where(a => a.FirstName.Contains(searchTerm) || a.LastName.Contains(searchTerm))
-        //          .Select(a => new SearchResult { Id = a.ArtistId, Name = $"{a.FirstName} {a.LastName}", Type = "Artist" })
-        //          .ToList();
-
-        //      var voiceActorResults = context.voiceActorModels
-        //          .Where(v => v.FirstName.Contains(searchTerm) || v.LastName.Contains(searchTerm))
-        //          .Select(v => new SearchResult { Id = v.VoiceActorId, Name = $"{v.FirstName} {v.LastName}", Type = "VoiceActor" })
-        //          .ToList();
-
-        //      var searchResults = new List<SearchResult>();
-        //      searchResults.AddRange(mangaResults);
-        //      searchResults.AddRange(authorResults);
-        //      searchResults.AddRange(artistResults);
-        //      searchResults.AddRange(voiceActorResults);
-
-        //      var groupedResults = searchResults.GroupBy(r => r.Type)
-        //                                   .ToDictionary(g => g.Key, g => g.ToList());
-
-        //      return new JsonResult(groupedResults, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
-        //  }
 
         public List<IndexDtoManga> AllBooksList { get; set; }
         public IEnumerable<AssociatedNames> associatedNames { get; set; }

@@ -2,6 +2,7 @@ using MangaAccessService;
 using MangaModelService;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 
 namespace NovelXManga.Pages.Roles
 {
@@ -19,14 +20,9 @@ namespace NovelXManga.Pages.Roles
             this.userManager = userManager;
         }
 
-        public void OnGet()
+        public async Task OnGetAsync()
         {
-            usersList = userManager.Users;
+            usersList = await userManager.Users.ToListAsync();
         }
-
-        //public async Task<IActionResult> OnPostAsync()
-        //{
-        //    return
-        //}
     }
 }
