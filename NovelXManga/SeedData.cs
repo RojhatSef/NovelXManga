@@ -441,148 +441,6 @@ namespace NovelXManga
 
         #endregion CommonSeed
 
-        //public async Task ReviewSeed()
-        //{
-        //    // Creating or finding a manga
-
-        //    var user = await context.UserModels.FirstOrDefaultAsync(u => u.UserName == "TestUser");
-        //    var manga = context.mangaModels.FirstOrDefault(e => e.MangaName == "Berserk");
-        //    var manga2 = context.mangaModels.FirstOrDefault(e => e.MangaName == "Solo Leveling");
-        //    var manga3 = context.mangaModels.FirstOrDefault(e => e.MangaName == "Tower of God");
-        //    var manga4 = context.mangaModels.FirstOrDefault(e => e.MangaName == "Sailor Moon");
-        //    if (user != null)
-        //    {
-        //        // Find or create manga
-
-        //        // Creating a review
-        //        var review = new Review
-        //        {
-        //            StylesScore = 4.5,
-        //            StoryScore = 4,
-        //            GrammarScore = 4.5,
-        //            CharactersScore = 5,
-        //            Title = "Best Manga EVER",
-        //            Content = "Berserk is a dark and gritty masterpiece. The art style is incredibly detailed, and the story is intense and captivating. The characters are complex and well-developed. This series is a must-read for fans of dark fantasy."
-        //        };
-        //        review.UserModels = new List<UserModel>() { user };
-        //        review.MangaModels = new List<MangaModel>() { manga };
-
-        //        var review2 = new Review
-        //        {
-        //            StylesScore = 4.5,
-        //            StoryScore = 5,
-        //            GrammarScore = 4.5,
-        //            CharactersScore = 5,
-        //            Created = DateTime.Now,
-        //            Title = "Solo Best",
-        //            Content = "Solo Leveling is a highly addictive webtoon. The art is stunning, and the story keeps you hooked with its action-packed sequences and intriguing world-building. The characters are well-designed, and the pacing is great. It's a must-read for fans of the genre."
-        //        };
-        //        review2.UserModels = new List<UserModel>() { user };
-        //        review2.MangaModels = new List<MangaModel>() { manga2 };
-
-        //        var review3 = new Review
-        //        {
-        //            StylesScore = 4.5,
-        //            StoryScore = 3.0,
-        //            GrammarScore = 3.5,
-        //            Created = DateTime.Now,
-        //            CharactersScore = 4.5,
-        //            Title = "Tower Of The G",
-        //            Content = "Tower of God is an epic adventure with a unique premise. The art style may take some getting used to, but the story is engaging and full of twists. The characters are diverse and intriguing. It's a series that keeps you guessing and wanting more."
-        //        };
-        //        review3.UserModels = new List<UserModel>() { user };
-        //        review3.MangaModels = new List<MangaModel>() { manga3 };
-        //        context.Reviews.Add(review);
-        //        context.Reviews.Add(review2);
-        //        context.Reviews.Add(review3);
-        //        await context.SaveChangesAsync();
-        //    }
-        //    else
-        //    {
-        //        throw new Exception("Test user not found.");
-        //    }
-        //    var user2 = new UserModel { UserName = "TestUser2", Email = "TestUser2@hotmail.com", Allias = "WorldEater" };
-        //    var result2 = await userManager.CreateAsync(user2, "Rojhat123!");
-        //    if (result2.Succeeded)
-        //    {
-        //        var resultRole = await userManager.AddToRoleAsync(user2, "Updater");
-        //    }
-        //    if (user2 != null)
-        //    {
-        //        var review4 = new Review
-        //        {
-        //            StylesScore = 2.5,
-        //            StoryScore = 2,
-        //            GrammarScore = 2.4,
-        //            Created = DateTime.Now,
-        //            CharactersScore = 2.9,
-        //            Title = "Mind-Blowing Action",
-        //            Content = "Solo Leveling is an absolute thrill ride! The art is top-notch, with incredibly detailed action scenes that leave you in awe. The story is gripping, filled with intense moments and unexpected twists. The characters are well-developed and have unique abilities. If you're a fan of action-packed manga, Solo Leveling is a must-read!."
-        //        };
-        //        review4.UserModels = new List<UserModel>() { user2 };
-        //        review4.MangaModels = new List<MangaModel>() { manga2 };
-        //        var review5 = new Review
-        //        {
-        //            StylesScore = 1.5,
-        //            StoryScore = 1,
-        //            GrammarScore = 1.4,
-        //            Created = DateTime.Now,
-        //            CharactersScore = 4.9,
-        //            Title = "SailorD",
-        //            Content = "Sailor Miss!."
-        //        };
-        //        review5.UserModels = new List<UserModel>() { user2 };
-        //        review5.MangaModels = new List<MangaModel>() { manga4 };
-        //        context.Reviews.Add(review5);
-        //        context.Reviews.Add(review4);
-        //        await context.SaveChangesAsync();
-        //    }
-        //    else
-        //    {
-        //        throw new Exception("Test user not found.");
-        //    }
-        //    var user3 = new UserModel { UserName = "TestUser3", Email = "TestUser3@hotmail.com", Allias = "Fishmuppet", };
-        //    var result5 = await userManager.CreateAsync(user3, "Rojhat123!");
-        //    if (result5.Succeeded)
-        //    {
-        //        var resultRole = await userManager.AddToRoleAsync(user3, "Updater");
-        //    }
-        //    if (user3 != null)
-        //    {
-        //        var review4 = new Review
-        //        {
-        //            StylesScore = 4.5,
-        //            StoryScore = 5,
-        //            GrammarScore = 4.4,
-        //            Created = DateTime.Now,
-        //            CharactersScore = 4.9,
-        //            Title = "Test Action",
-        //            Content = "Solo Monkey The story is gripping,  The characters are well-developed and have unique abilities. If you're a fan of action-packed manga, Solo Leveling is a must-read!."
-        //        };
-        //        review4.UserModels = new List<UserModel>() { user3 };
-        //        review4.MangaModels = new List<MangaModel>() { manga2 };
-        //        var review5 = new Review
-        //        {
-        //            StylesScore = 4.5,
-        //            StoryScore = 3,
-        //            GrammarScore = 2.4,
-        //            Created = DateTime.Now,
-        //            CharactersScore = 4.9,
-        //            Title = "MySalor",
-        //            Content = "Sailor Miss!"
-        //        };
-        //        review5.UserModels = new List<UserModel>() { user3 };
-        //        review5.MangaModels = new List<MangaModel>() { manga4 };
-        //        context.Reviews.Add(review4);
-        //        context.Reviews.Add(review5);
-        //        await context.SaveChangesAsync();
-        //    }
-        //    else
-        //    {
-        //        throw new Exception("Test user not found.");
-        //    }
-        //}
-
         #region SeedData
 
         public void wallpaperSeed()
@@ -4191,3 +4049,145 @@ new Character
         }
     }
 }
+
+//public async Task ReviewSeed()
+//{
+//    // Creating or finding a manga
+
+//    var user = await context.UserModels.FirstOrDefaultAsync(u => u.UserName == "TestUser");
+//    var manga = context.mangaModels.FirstOrDefault(e => e.MangaName == "Berserk");
+//    var manga2 = context.mangaModels.FirstOrDefault(e => e.MangaName == "Solo Leveling");
+//    var manga3 = context.mangaModels.FirstOrDefault(e => e.MangaName == "Tower of God");
+//    var manga4 = context.mangaModels.FirstOrDefault(e => e.MangaName == "Sailor Moon");
+//    if (user != null)
+//    {
+//        // Find or create manga
+
+//        // Creating a review
+//        var review = new Review
+//        {
+//            StylesScore = 4.5,
+//            StoryScore = 4,
+//            GrammarScore = 4.5,
+//            CharactersScore = 5,
+//            Title = "Best Manga EVER",
+//            Content = "Berserk is a dark and gritty masterpiece. The art style is incredibly detailed, and the story is intense and captivating. The characters are complex and well-developed. This series is a must-read for fans of dark fantasy."
+//        };
+//        review.UserModels = new List<UserModel>() { user };
+//        review.MangaModels = new List<MangaModel>() { manga };
+
+//        var review2 = new Review
+//        {
+//            StylesScore = 4.5,
+//            StoryScore = 5,
+//            GrammarScore = 4.5,
+//            CharactersScore = 5,
+//            Created = DateTime.Now,
+//            Title = "Solo Best",
+//            Content = "Solo Leveling is a highly addictive webtoon. The art is stunning, and the story keeps you hooked with its action-packed sequences and intriguing world-building. The characters are well-designed, and the pacing is great. It's a must-read for fans of the genre."
+//        };
+//        review2.UserModels = new List<UserModel>() { user };
+//        review2.MangaModels = new List<MangaModel>() { manga2 };
+
+//        var review3 = new Review
+//        {
+//            StylesScore = 4.5,
+//            StoryScore = 3.0,
+//            GrammarScore = 3.5,
+//            Created = DateTime.Now,
+//            CharactersScore = 4.5,
+//            Title = "Tower Of The G",
+//            Content = "Tower of God is an epic adventure with a unique premise. The art style may take some getting used to, but the story is engaging and full of twists. The characters are diverse and intriguing. It's a series that keeps you guessing and wanting more."
+//        };
+//        review3.UserModels = new List<UserModel>() { user };
+//        review3.MangaModels = new List<MangaModel>() { manga3 };
+//        context.Reviews.Add(review);
+//        context.Reviews.Add(review2);
+//        context.Reviews.Add(review3);
+//        await context.SaveChangesAsync();
+//    }
+//    else
+//    {
+//        throw new Exception("Test user not found.");
+//    }
+//    var user2 = new UserModel { UserName = "TestUser2", Email = "TestUser2@hotmail.com", Allias = "WorldEater" };
+//    var result2 = await userManager.CreateAsync(user2, "Rojhat123!");
+//    if (result2.Succeeded)
+//    {
+//        var resultRole = await userManager.AddToRoleAsync(user2, "Updater");
+//    }
+//    if (user2 != null)
+//    {
+//        var review4 = new Review
+//        {
+//            StylesScore = 2.5,
+//            StoryScore = 2,
+//            GrammarScore = 2.4,
+//            Created = DateTime.Now,
+//            CharactersScore = 2.9,
+//            Title = "Mind-Blowing Action",
+//            Content = "Solo Leveling is an absolute thrill ride! The art is top-notch, with incredibly detailed action scenes that leave you in awe. The story is gripping, filled with intense moments and unexpected twists. The characters are well-developed and have unique abilities. If you're a fan of action-packed manga, Solo Leveling is a must-read!."
+//        };
+//        review4.UserModels = new List<UserModel>() { user2 };
+//        review4.MangaModels = new List<MangaModel>() { manga2 };
+//        var review5 = new Review
+//        {
+//            StylesScore = 1.5,
+//            StoryScore = 1,
+//            GrammarScore = 1.4,
+//            Created = DateTime.Now,
+//            CharactersScore = 4.9,
+//            Title = "SailorD",
+//            Content = "Sailor Miss!."
+//        };
+//        review5.UserModels = new List<UserModel>() { user2 };
+//        review5.MangaModels = new List<MangaModel>() { manga4 };
+//        context.Reviews.Add(review5);
+//        context.Reviews.Add(review4);
+//        await context.SaveChangesAsync();
+//    }
+//    else
+//    {
+//        throw new Exception("Test user not found.");
+//    }
+//    var user3 = new UserModel { UserName = "TestUser3", Email = "TestUser3@hotmail.com", Allias = "Fishmuppet", };
+//    var result5 = await userManager.CreateAsync(user3, "Rojhat123!");
+//    if (result5.Succeeded)
+//    {
+//        var resultRole = await userManager.AddToRoleAsync(user3, "Updater");
+//    }
+//    if (user3 != null)
+//    {
+//        var review4 = new Review
+//        {
+//            StylesScore = 4.5,
+//            StoryScore = 5,
+//            GrammarScore = 4.4,
+//            Created = DateTime.Now,
+//            CharactersScore = 4.9,
+//            Title = "Test Action",
+//            Content = "Solo Monkey The story is gripping,  The characters are well-developed and have unique abilities. If you're a fan of action-packed manga, Solo Leveling is a must-read!."
+//        };
+//        review4.UserModels = new List<UserModel>() { user3 };
+//        review4.MangaModels = new List<MangaModel>() { manga2 };
+//        var review5 = new Review
+//        {
+//            StylesScore = 4.5,
+//            StoryScore = 3,
+//            GrammarScore = 2.4,
+//            Created = DateTime.Now,
+//            CharactersScore = 4.9,
+//            Title = "MySalor",
+//            Content = "Sailor Miss!"
+//        };
+//        review5.UserModels = new List<UserModel>() { user3 };
+//        review5.MangaModels = new List<MangaModel>() { manga4 };
+//        context.Reviews.Add(review4);
+//        context.Reviews.Add(review5);
+//        await context.SaveChangesAsync();
+//    }
+//    else
+//    {
+//        throw new Exception("Test user not found.");
+//    }
+//}

@@ -17,7 +17,7 @@
         left: 50%;
         background-color: rgba(0, 0, 0, 0.85); /* Adjusted for a darker background */
         transform: translate(-50%, -50%); /* This will center it */
-        z-index: 9999;
+        z-index: 99;
         color: red; /* Setting text color to red */
         border-radius: 8px; /* Optional: Giving it rounded corners */
     }
@@ -168,8 +168,6 @@
         background-color: #191a1c;
         overflow: visible;
     }
-
-    
 
     main {
         flex-grow: 1;
@@ -483,7 +481,7 @@
         color: #ff6740;
     }
 
-    .Custom-o-sidebar .user-section {
+    .Custom-o-sidebar .sidebar-section .user-section {
         display: flex;
         justify-content: flex-start;
         align-items: center;
@@ -540,22 +538,22 @@
     }
 
     .user-dropdown-menu {
-        display: none;
-        position: absolute;
+        display: none; /* Hide by default */
+        position: absolute; /* Positioning relative to its parent */
+        right: 0; /* Align to the right side */
         background-color: #191a1c;
-        height: 70px;
-        width: 100px;
-        border-radius: 10px;
-        z-index: 999;
-        right: 0;
+        color: white;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1000;
     }
 
     .user-dropdown-menu {
-        display: none;
+        display: none; /* Hide by default */
     }
 
         .user-dropdown-menu.show {
-            display: block;
+            display: block; /* Show when 'show' class is added */
         }
 
     .username {
@@ -692,15 +690,15 @@
 /* carousel-inner ENDS HERE */
 
 /* TAGS/GENRE STARTS */
-.tag-container  {
+.tag-container {
     display: block;
     max-height: 50px;
     align-content: center;
     display: flex;
     align-self: flex-start;
     width: 100%;
-
 }
+
 .DescriptionContainerSize {
     display: block;
     align-content: center;
@@ -712,6 +710,7 @@
     -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
 }
+
     .DescriptionContainerSize::after {
         content: "";
         text-align: right;
@@ -720,15 +719,14 @@
         right: 0;
         width: 30px;
         height: 1.5em;
-      
     }
 
-  
 @media screen and (max-width: 600px) { /* Adjust breakpoint as necessary */
-   .DescriptionContainerSize {
+    .DescriptionContainerSize {
         max-height: 6em; /* Continue to enforce 4 lines */
     }
 }
+
 .tag {
     background-color: rgba(0, 0, 0, 0.3); /* Add a slightly darker background */
     padding: 2px 5px; /* Add padding around the text */
@@ -956,12 +954,9 @@
 .FourOfAKind .FourofKindContent {
     width: 100%;
     height: 100%; /* Make sure the content fits within its parent div */
-    overflow:hidden; 
-    flex-shrink:1; 
-  
+    overflow: hidden;
+    flex-shrink: 1;
 }
-
-
 
 .card-img-background {
     width: 100%;

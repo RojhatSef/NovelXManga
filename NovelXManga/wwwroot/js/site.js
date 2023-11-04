@@ -141,12 +141,20 @@ function hideDropdown() {
     dropdown.style.display = 'none';
 }
 
-// Add event listener for focus on the search bar
-document.getElementById('searchBar').addEventListener('focus', function () {
-    let searchTerm = this.value;
-    if (searchTerm.length >= 2) {
-        searchManga(searchTerm); // This will fetch and show the dropdown if the searchTerm is valid
+document.addEventListener('DOMContentLoaded', function () {
+    var searchBar = document.getElementById('searchBar');
+    if (searchBar) {
+        searchBar.addEventListener('focus', function () {
+            let searchTerm = this.value;
+            if (searchTerm.length >= 2) {
+                searchManga(searchTerm); // This will fetch and show the dropdown if the searchTerm is valid
+            }
+        });
+    } else {
+        console.log('searchBar element not found');
     }
+
+    // ... rest of your dropdown related code
 });
 
 ////old
@@ -229,25 +237,21 @@ function sanitizeHTML(text) {
     return element.innerHTML;
 }
 
-if (document.getElementById('dropdownToggle') && document.getElementById('userDropdown')) {
-    document.getElementById('dropdownToggle').addEventListener('click', function () {
-        const dropdown = document.getElementById('userDropdown');
-        if (dropdown.classList.contains('show')) {
-            dropdown.classList.remove('show');
-        } else {
-            dropdown.classList.add('show');
-        }
-    });
+document.addEventListener('click', function (event) {
+    var dropdownMenu = document.getElementById('userDropdown');
+    var isClickInside = document.getElementById('dropdownToggle').contains(event.target);
 
-    // To hide dropdown when clicking outside of it
-    document.addEventListener('click', function (event) {
-        const dropdown = document.getElementById('userDropdown');
-        const toggle = document.getElementById('dropdownToggle');
-        if (!dropdown.contains(event.target) && !toggle.contains(event.target)) {
-            dropdown.classList.remove('show');
-        }
-    });
-}
+    if (!isClickInside && dropdownMenu.classList.contains('show')) {
+        dropdownMenu.classList.remove('show');
+    }
+});
+
+document.getElementById('dropdownToggle').addEventListener('click', function (event) {
+    var dropdownMenu = document.getElementById('userDropdown');
+    dropdownMenu.classList.toggle('show');
+    event.stopPropagation(); // Prevent click event from reaching document
+});
+
 // Event handler, removes error from console log. Don't remove Comment out in developer phase or bug fixing'
 //window.addEventListener('error', function (event) {
 //    // Log the error to  internal system
