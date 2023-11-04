@@ -38,16 +38,43 @@ namespace NovelXManga.Pages.Register
                 var usermail = await userManager.FindByEmailAsync(Model.Email);
                 if (usermail == null)
                 {
-                    var user = new UserModel { UserName = Model.Email, Email = Model.Email, Allias = Model.Allias };
+                    var user = new UserModel { UserName = Model.Email, Email = Model.Email, Allias = Model.Allias, CreatedAcc = DateTime.UtcNow };
+
                     var result = await userManager.CreateAsync(user, Model.Password);
 
                     if (result.Succeeded)
                     {
+                        // Create and associate UserSettings with the new user
+                        var userSettings = new UserSettings
+                        {
+                            UserModelId = user.Id, // Assuming Id is the primary key for UserModel
+                            ShowMatureContent = false, // Set the default value for this setting
+                            ReadingDirection = MangaReadingDirection.LeftToRight,
+                            DarkModeEnabled = true,
+
+                            FontSize = 14, // Set default value
+                            ItemsPerPage = 20, // Set default value
+
+                            // Initialize collections if required
+                            BlockedUsers = new HashSet<UserBlock>(),
+                            PreferredLanguages = new HashSet<Languages>()
+                        };
+
+                        user.UserSettings = userSettings; // Associate UserSettings with the UserModel
+
+                        // Optional: Save the UserSettings if not using cascading adds
+                        context.UserSettings.Add(userSettings);
+
                         await signInManager.SignInAsync(user, isPersistent: false);
                         await signInManager.RefreshSignInAsync(user); // Refresh the sign-in
                         var resultToRole = await userManager.AddToRoleAsync(user, "Owner");
+
+                        // Save any changes made to the context
+                        await context.SaveChangesAsync();
+
                         return RedirectToPage("/Index");
                     }
+
                     foreach (var error in result.Errors)
                     {
                         ModelState.AddModelError(string.Empty, error.Description);

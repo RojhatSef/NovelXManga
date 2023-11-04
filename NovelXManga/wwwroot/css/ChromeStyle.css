@@ -58,8 +58,8 @@
 
         .dropdown-item span {
             flex-grow: 1;
-            white-space: nowrap; 
-            overflow: hidden; 
+            white-space: nowrap;
+            overflow: hidden;
             text-overflow: ellipsis;
         }
 
@@ -169,6 +169,8 @@
         overflow: visible;
     }
 
+    
+
     main {
         flex-grow: 1;
     }
@@ -251,7 +253,6 @@
 
         #NovelTitle {
             color: white;
-            padding-right: 5px;
             font-size: 28px;
         }
 
@@ -355,7 +356,6 @@
     /* SIDEbar STARTS HERE*/
     #NovelTitle {
         color: white;
-        padding-right: 30px;
         font-size: 32px;
         text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
     }
@@ -608,7 +608,7 @@
             color: black;
         }
 
-    @media (max-width: 290px) {
+    @media (max-width: 390px) {
         #NovelTitle {
             display: none !important;
         }
@@ -692,15 +692,43 @@
 /* carousel-inner ENDS HERE */
 
 /* TAGS/GENRE STARTS */
-.tag-container {
+.tag-container  {
     display: block;
     max-height: 50px;
     align-content: center;
     display: flex;
     align-self: flex-start;
     width: 100%;
-}
 
+}
+.DescriptionContainerSize {
+    display: block;
+    align-content: center;
+    width: 100%;
+    line-height: 1.5em; /* Adjust the line height as needed */
+    max-height: 6em; /* 4 lines of text, considering the line height */
+    overflow: hidden; /* Hide the overflow text */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+}
+    .DescriptionContainerSize::after {
+        content: "";
+        text-align: right;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 30px;
+        height: 1.5em;
+      
+    }
+
+  
+@media screen and (max-width: 600px) { /* Adjust breakpoint as necessary */
+   .DescriptionContainerSize {
+        max-height: 6em; /* Continue to enforce 4 lines */
+    }
+}
 .tag {
     background-color: rgba(0, 0, 0, 0.3); /* Add a slightly darker background */
     padding: 2px 5px; /* Add padding around the text */
@@ -875,7 +903,7 @@
     transition: width 0.5s, height 0.5s;
     overflow: hidden;
 }
-
+/*
 .HideWhenHoverFourOfaKind {
     display: block;
     overflow: hidden;
@@ -883,7 +911,7 @@
     -webkit-line-clamp: 6;
     -webkit-box-orient: vertical;
 }
-
+*/
 .DisplayWhenHoverFourOfaKind {
     display: none;
 }
@@ -917,6 +945,7 @@
     height: 100%;
     width: 30%;
     object-fit: cover;
+    flex-shrink: 0;
 }
 
 .aClassHeight {
@@ -925,10 +954,14 @@
 }
 
 .FourOfAKind .FourofKindContent {
-    width: 70%;
+    width: 100%;
     height: 100%; /* Make sure the content fits within its parent div */
-    padding-left: 10px; /* This will give a little space between the image and the text */
+    overflow:hidden; 
+    flex-shrink:1; 
+  
 }
+
+
 
 .card-img-background {
     width: 100%;
@@ -2261,6 +2294,11 @@
     color: white; /* Adjust the color as per your design */
     text-align: center;
     margin: 5px 0; /* Add some spacing around the name */
+}
+
+@media (max-width: 754px) {
+    .sidebar-toggle {
+    }
 }
 
 @media (max-width: 768px) {

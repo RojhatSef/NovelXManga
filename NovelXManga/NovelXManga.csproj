@@ -46,6 +46,7 @@
     <Folder Include="wwwroot\Images\GeneratedArtistImages\" />
     <Folder Include="wwwroot\Images\GeneratedAuthorImage\" />
     <Folder Include="wwwroot\Images\GeneratedVoiceActorImage\" />
+    <Folder Include="wwwroot\Images\GeneratedUserImage\" />
     <Folder Include="wwwroot\Images\UserImage\" />
   </ItemGroup>
 

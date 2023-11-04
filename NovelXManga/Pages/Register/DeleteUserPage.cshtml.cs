@@ -45,20 +45,16 @@ namespace NovelXManga.Pages.Register
                 user.NormalizedEmail = user.Email.ToUpper();
                 user.NormalizedUserName = user.UserName.ToUpper();
                 // Set a complex random password
-                var randomPassword = GenerateRandomPassword(6, 2);
+                var randomPassword = GenerateRandomPassword(15, 3);
                 var token = await _userManager.GeneratePasswordResetTokenAsync(user);
                 await _userManager.ResetPasswordAsync(user, token, randomPassword);
 
                 // Obfuscate other user data
                 user.ForumName = "Deleted User";
                 user.Allias = "N/A";
-                user.ForgottPasswordFavoritAnimal = "N/A";
-                user.ForgottPasswordFavActor = "N/A";
-                user.ForgottPasswordFavoritPlace = "N/A";
+
                 user.userPhotoPath = "N/A";
-                user.nameInNativeLanguage = "N/A";
-                user.placeOfBirth = "N/A";
-                user.Zodiac = "N/A";
+
                 user.Description = "N/A";
                 user.Twitter = "N/A";
                 user.IsShadowBanned = true;
@@ -140,20 +136,24 @@ namespace NovelXManga.Pages.Register
             return new JsonResult(userRoles);
         }
 
-        private string GenerateRandomPassword(int minLength = 6, int minUniqueChars = 2)
+        private string GenerateRandomPassword(int minLength = 15, int minUniqueChars = 3)
         {
             if (minUniqueChars > minLength)
                 throw new ArgumentException("The number of unique chars can't be greater than the overall password length.");
 
-            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+            const string digits = "0123456789";
             var random = new Random();
 
             string result;
             do
             {
                 int length = random.Next(minLength, minLength + 5);
-                result = new string(Enumerable.Repeat(chars, length)
-                    .Select(s => s[random.Next(s.Length)]).ToArray());
+                var randomChars = Enumerable.Repeat(chars, length - minUniqueChars)
+                    .Select(s => s[random.Next(s.Length)]).ToArray();
+                var randomDigits = Enumerable.Repeat(digits, minUniqueChars)
+                    .Select(s => s[random.Next(s.Length)]).ToArray();
+                result = new string(randomChars.Concat(randomDigits).OrderBy(s => random.Next()).ToArray());
             } while (result.Distinct().Count() < minUniqueChars);
 
             return result;

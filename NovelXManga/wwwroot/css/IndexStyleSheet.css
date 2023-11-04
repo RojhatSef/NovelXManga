@@ -19,5 +19,5 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: calc(100% - 40px); /* Adjust according to your layout */
+  /* Adjust according to your layout */
 }

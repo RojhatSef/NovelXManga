@@ -73,7 +73,9 @@
         box-sizing: border-box;
         transition: margin-left 0.5s ease;
     }
-
+    .Cus-TitleWhenSmallCurrentManga{
+        display:none; 
+    }
     .CUS-card-ex {
         position: relative;
         width: 100%;
@@ -296,7 +298,9 @@
         min-width: 60px;
         font-size: 12px
     }
-
+    CUS-ShowTitleOnSmall{
+        display:none; 
+    }
     .CUS-manga-title {
         display: -webkit-box;
         -webkit-line-clamp: 3;
@@ -308,6 +312,8 @@
         overflow: hidden; /* Hide the overflowing text */
         transition: top 0.5s, left 0.5s; /* Smooth transition for top and left */
         -webkit-text-stroke: 0.5px black;
+        word-break: break-all;
+        height: 250px;
     }
 
     @media screen and (min-width: 769px) and (max-width: 849px) {
@@ -425,12 +431,21 @@
         .mangaDetailsBox {
             padding: 0em;
         }
-
+        .CUS-HideTitleCurrentMangaOnSmall{
+            display:none;  
+        }
         .CUS-AddEditReportCurrentpage {
             margin-left: 1% !important;
-            width:100% !important; 
+            width: 100% !important;
         }
-
+        .CUS-ShowTitleOnSmall{
+            display:contents; 
+        }
+        .Cus-TitleWhenSmallCurrentManga {
+            display: block;
+            width: 100%;
+            word-wrap: break-word;
+        }
         .CUS-manga-title {
             top: calc(15% - 40px) !important;
             left: calc(5% + 140px) !important; /* Adjust these values for smaller screens */

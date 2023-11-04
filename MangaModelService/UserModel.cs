@@ -11,19 +11,8 @@ namespace MangaModelService
         [Required]
         public string ForumName { get; set; }
 
-        [Required]
-        public string? ForgottPasswordFavoritAnimal { get; set; }
-
-        [Required]
-        public string? ForgottPasswordFavActor { get; set; }
-
-        [Required]
-        public string? ForgottPasswordFavoritPlace { get; set; }
-
         public string? userPhotoPath { get; set; }
-        public string? nameInNativeLanguage { get; set; }
-        public string? placeOfBirth { get; set; }
-        public string? Zodiac { get; set; }
+
         public string? Description { get; set; }
         public bool IsShadowBanned { get; set; }
         public bool IsDeleted { get; set; }
@@ -52,5 +41,11 @@ namespace MangaModelService
         public string? postModelID { get; set; }
 
         public virtual ICollection<PostModel>? PostModel { get; set; }
+        public virtual ICollection<UserBlock>? BlockedUsers { get; set; }
+
+        public virtual ICollection<PrivateConversation>? ConversationsAsUserOne { get; set; }
+
+        public virtual ICollection<PrivateConversation>? ConversationsAsUserTwo { get; set; }
+        public virtual UserSettings UserSettings { get; set; }
     }
 }
