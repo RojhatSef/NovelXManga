@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MangaAccessService.Migrations
 {
     [DbContext(typeof(MangaNNovelAuthDBContext))]
-    [Migration("20231104164523_TestNewModels")]
+    [Migration("20231104210810_TestNewModels")]
     partial class TestNewModels
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -1372,8 +1372,12 @@ namespace MangaAccessService.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("UserSettingsUserModelId")
+                    b.Property<string>("UserModelId")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("UserSettingsId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("BlockId");
 
@@ -1381,7 +1385,7 @@ namespace MangaAccessService.Migrations
 
                     b.HasIndex("BlockerId");
 
-                    b.HasIndex("UserSettingsUserModelId");
+                    b.HasIndex("UserModelId");
 
                     b.ToTable("UserBlocks");
                 });
@@ -2411,9 +2415,9 @@ namespace MangaAccessService.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("MangaModelService.UserSettings", null)
-                        .WithMany("BlockedUsers")
-                        .HasForeignKey("UserSettingsUserModelId");
+                    b.HasOne("MangaModelService.UserModel", null)
+                        .WithMany("BlockedByUsers")
+                        .HasForeignKey("UserModelId");
 
                     b.Navigation("BlockedUser");
 
@@ -2691,8 +2695,6 @@ namespace MangaAccessService.Migrations
 
             modelBuilder.Entity("MangaModelService.UserSettings", b =>
                 {
-                    b.Navigation("BlockedUsers");
-
                     b.Navigation("PreferredLanguages");
                 });
 
@@ -2710,6 +2712,8 @@ namespace MangaAccessService.Migrations
 
             modelBuilder.Entity("MangaModelService.UserModel", b =>
                 {
+                    b.Navigation("BlockedByUsers");
+
                     b.Navigation("BlockedUsers");
 
                     b.Navigation("ConversationsAsUserOne");

@@ -51,6 +51,16 @@ builder.Services.AddScoped<IStudioRepsitory, SQLStudioRepsitory>();
 builder.Services.AddScoped<ILanguageRepsitory, SQLLanguageRepsitory>();
 builder.Services.AddScoped<IMangaRepository, SQLMangaRepository>();
 builder.Services.AddScoped<IBlogRepsitory, SQLBlogRepsitory>();
+
+builder.Services.AddScoped<IAttachmentRepository, SQLAttachmentRepository>();
+builder.Services.AddScoped<IUserBlockRepository, SQLUserBlockRepository>();
+builder.Services.AddScoped<IReportUpdateLogRepository, SQLReportUpdateLogRepository>();
+builder.Services.AddScoped<IUserSettingsRepository, SQLUserSettingsRepository>();
+builder.Services.AddScoped<IReportAssignmentRepository, SQLReportAssignmentRepository>();
+builder.Services.AddScoped<IPrivateMessageRepository, SQLPrivateMessageRepository>();
+builder.Services.AddScoped<IPrivateMessageReportRepository, SQLPrivateMessageReportRepository>();
+builder.Services.AddScoped<IPrivateConversationRepository, SQLPrivateConversationRepository>();
+
 builder.Services.AddScoped<IChapterModelRepsitory, SQLChapterModelRepsitory>();
 builder.Services.AddScoped<IPostRepsitory, SQLPostRepsitory>();
 builder.Services.AddScoped<IAssociatedNamesRepsitory, SQLAssociatedNamesRepsitory>();

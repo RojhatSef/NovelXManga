@@ -306,29 +306,33 @@ namespace NovelXManga
                 Email = email,
                 Allias = alias,
                 userPhotoPath = photoPath,
-                CreatedAcc = DateTime.UtcNow, // Assuming you want to set this as the account creation time
-                UserSettings = new UserSettings // Initializing UserSettings with default values
-                {
-                    ShowMatureContent = false, // Set default value
-                    DarkModeEnabled = false, // Set default value
-                    FontSize = 14, // Set default value
-                    ItemsPerPage = 20, // Set default value
-                    ReadingDirection = MangaReadingDirection.LeftToRight, // Set default value
-
-                    BlockedUsers = new HashSet<UserBlock>(),
-                    PreferredLanguages = new HashSet<Languages>()
-                }
-                // Initialize other properties if necessary
+                CreatedAcc = DateTime.UtcNow
+                // UserSettings is not initialized here anymore
             };
 
             var result = await userManager.CreateAsync(user, password);
             if (result.Succeeded)
             {
                 await userManager.AddToRoleAsync(user, role);
-                // Assuming context is your database context and it has a Users property
-                user.UserSettings.UserModelId = user.Id; // Ensuring the FK is set
-                context.UserSettings.Add(user.UserSettings); // Add UserSettings to the context
-                await context.SaveChangesAsync(); // Save changes for UserSettings
+
+                // Now the user is created and has an ID, we can create UserSettings
+                var userSettings = new UserSettings
+                {
+                    UserModelId = user.Id, // Assign the newly created User ID
+                    ShowMatureContent = false,
+                    DarkModeEnabled = false,
+                    FontSize = 14,
+                    ItemsPerPage = 20,
+                    ReadingDirection = MangaReadingDirection.LeftToRight,
+                    // Initialize other properties and collections if necessary
+                };
+
+                // Assign the UserSettings to the user
+                user.UserSettings = userSettings;
+
+                // Save UserSettings to the database
+                context.UserSettings.Add(userSettings);
+                await context.SaveChangesAsync();
             }
             return user;
         }

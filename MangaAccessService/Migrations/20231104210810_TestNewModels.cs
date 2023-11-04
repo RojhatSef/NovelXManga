@@ -542,6 +542,39 @@ namespace MangaAccessService.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "UserBlocks",
+                columns: table => new
+                {
+                    BlockId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    BlockerId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    BlockedUserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    UserSettingsId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UserModelId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserBlocks", x => x.BlockId);
+                    table.ForeignKey(
+                        name: "FK_UserBlocks_AspNetUsers_BlockedUserId",
+                        column: x => x.BlockedUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_UserBlocks_AspNetUsers_BlockerId",
+                        column: x => x.BlockerId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_UserBlocks_AspNetUsers_UserModelId",
+                        column: x => x.UserModelId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "UserSettings",
                 columns: table => new
                 {
@@ -892,38 +925,6 @@ namespace MangaAccessService.Migrations
                         column: x => x.PrivateConversationId,
                         principalTable: "PrivateConversations",
                         principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "UserBlocks",
-                columns: table => new
-                {
-                    BlockId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    BlockerId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    BlockedUserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    UserSettingsUserModelId = table.Column<string>(type: "nvarchar(450)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UserBlocks", x => x.BlockId);
-                    table.ForeignKey(
-                        name: "FK_UserBlocks_AspNetUsers_BlockedUserId",
-                        column: x => x.BlockedUserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_UserBlocks_AspNetUsers_BlockerId",
-                        column: x => x.BlockerId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_UserBlocks_UserSettings_UserSettingsUserModelId",
-                        column: x => x.UserSettingsUserModelId,
-                        principalTable: "UserSettings",
-                        principalColumn: "UserModelId");
                 });
 
             migrationBuilder.CreateTable(
@@ -1903,9 +1904,9 @@ namespace MangaAccessService.Migrations
                 column: "BlockerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserBlocks_UserSettingsUserModelId",
+                name: "IX_UserBlocks_UserModelId",
                 table: "UserBlocks",
-                column: "UserSettingsUserModelId");
+                column: "UserModelId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserModelWishBookList_WishListWishBookListId",

@@ -22,55 +22,50 @@ namespace NovelXManga.Pages.Register
         public List<MangaModel> AllBooksList { get; set; }
         public IEnumerable<MangaModel> GetAllBooks { get; set; }
 
-        public UserRegisterModel(UserManager<UserModel> userManager, SignInManager<UserModel> signInManager, IMangaRepository mangaRepository)
+        public UserRegisterModel(UserManager<UserModel> userManager, SignInManager<UserModel> signInManager, IMangaRepository mangaRepository, MangaNNovelAuthDBContext context)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
 
             this.mangaRepository = mangaRepository;
+            this.context = context;
         }
 
         public async Task<IActionResult> OnPostAsync()
         {
             if (ModelState.IsValid)
             {
-                //this might be wrong, as we are creating a userModel and we're looking for identityUsers. Need to check this later
-                var usermail = await userManager.FindByEmailAsync(Model.Email);
+                var usermail = await userManager.FindByEmailAsync(Model?.Email); // Added null-conditional operator
                 if (usermail == null)
                 {
-                    var user = new UserModel { UserName = Model.Email, Email = Model.Email, Allias = Model.Allias, CreatedAcc = DateTime.UtcNow };
+                    var user = new UserModel
+                    {
+                        UserName = Model.Email,
+                        Email = Model.Email,
+                        Allias = Model.Allias,
+                        CreatedAcc = DateTime.UtcNow
+                    };
 
                     var result = await userManager.CreateAsync(user, Model.Password);
-
                     if (result.Succeeded)
                     {
-                        // Create and associate UserSettings with the new user
+                        // Initialize the user's settings after confirming the user is successfully created.
                         var userSettings = new UserSettings
                         {
-                            UserModelId = user.Id, // Assuming Id is the primary key for UserModel
-                            ShowMatureContent = false, // Set the default value for this setting
-                            ReadingDirection = MangaReadingDirection.LeftToRight,
+                            UserModelId = user.Id,
+                            ShowMatureContent = false,
                             DarkModeEnabled = true,
-
-                            FontSize = 14, // Set default value
-                            ItemsPerPage = 20, // Set default value
-
-                            // Initialize collections if required
-                            BlockedUsers = new HashSet<UserBlock>(),
-                            PreferredLanguages = new HashSet<Languages>()
+                            FontSize = 14,
+                            ItemsPerPage = 20,
                         };
 
-                        user.UserSettings = userSettings; // Associate UserSettings with the UserModel
-
-                        // Optional: Save the UserSettings if not using cascading adds
+                        user.UserSettings = userSettings;
                         context.UserSettings.Add(userSettings);
+                        // Save changes to the context
+                        await context.SaveChangesAsync(); // Assuming context is not null
 
-                        await signInManager.SignInAsync(user, isPersistent: false);
-                        await signInManager.RefreshSignInAsync(user); // Refresh the sign-in
-                        var resultToRole = await userManager.AddToRoleAsync(user, "Owner");
-
-                        // Save any changes made to the context
-                        await context.SaveChangesAsync();
+                        await signInManager.SignInAsync(user, isPersistent: false); // Assuming signInManager is not null
+                        await userManager.AddToRoleAsync(user, "Owner"); // Assuming userManager is not null
 
                         return RedirectToPage("/Index");
                     }
@@ -85,8 +80,11 @@ namespace NovelXManga.Pages.Register
                     ModelState.AddModelError(string.Empty, "Email is already in use");
                 }
             }
+
+            // Assuming mangaRepository is not null
             GetAllBooks = await mangaRepository.Get10MangaModelAsync();
-            AllBooksList = GetAllBooks.ToList();
+            AllBooksList = GetAllBooks?.ToList(); // Added null-conditional operator
+
             return Page();
         }
 

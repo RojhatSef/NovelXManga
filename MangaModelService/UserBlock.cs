@@ -10,6 +10,9 @@ namespace MangaModelService
         public string BlockerId { get; set; }
         public string BlockedUserId { get; set; }
 
+        // Foreign key for UserSettings
+        public string UserSettingsId { get; set; }
+
         public virtual UserModel Blocker { get; set; }
         public virtual UserModel BlockedUser { get; set; }
     }

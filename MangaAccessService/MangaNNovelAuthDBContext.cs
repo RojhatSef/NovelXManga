@@ -88,11 +88,20 @@ namespace MangaAccessService
 
             // Configures a one-to-many relationship between UserBlock and UserModel for Blocker.
             // Prevents cascade deletion to avoid deleting blocks when the blocker is deleted.
+            // Configure UserBlock relationship with Blocker
             modelBuilder.Entity<UserBlock>()
-        .HasOne(ub => ub.Blocker)
-        .WithMany(u => u.BlockedUsers)
-        .HasForeignKey(ub => ub.BlockerId)
-        .OnDelete(DeleteBehavior.Restrict);
+                  .HasOne(ub => ub.Blocker)
+                  .WithMany(u => u.BlockedUsers)
+                  .HasForeignKey(ub => ub.BlockerId)
+                  .OnDelete(DeleteBehavior.Restrict); // Prevents cascade delete
+
+            // Configure UserBlock relationship with BlockedUser
+            modelBuilder.Entity<UserBlock>()
+                .HasOne(ub => ub.BlockedUser)
+                .WithMany(u => u.BlockedByUsers)
+                .HasForeignKey(ub => ub.BlockedUserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
             // Configures a many-to-one relationship between ReportAssignment and UserModel for Admin.
             // Prevents cascade deletion to avoid deleting assignments when the admin is deleted.
             modelBuilder.Entity<ReportAssignment>()

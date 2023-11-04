@@ -42,7 +42,7 @@ namespace MangaModelService
 
         public virtual ICollection<PostModel>? PostModel { get; set; }
         public virtual ICollection<UserBlock>? BlockedUsers { get; set; }
-
+        public virtual ICollection<UserBlock>? BlockedByUsers { get; set; }
         public virtual ICollection<PrivateConversation>? ConversationsAsUserOne { get; set; }
 
         public virtual ICollection<PrivateConversation>? ConversationsAsUserTwo { get; set; }
