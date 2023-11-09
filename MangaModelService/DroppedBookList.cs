@@ -8,15 +8,18 @@ namespace MangaModelService
         [Key]
         public int DroppedId { get; set; }
 
+        public string CompletedList { get; set; } = "Dropped Book List";
+
         [ForeignKey("MangaModel")]
         public int? MangaModelId { get; set; }
 
-        public virtual ICollection<MangaModel> _DroppedBooks { get; set; }
+        public virtual ICollection<MangaModel>? _DroppedBooks { get; set; }
 
         [ForeignKey("UserModel")]
         public string? UserId { get; set; }
 
         public virtual ICollection<UserModel> UserModels { get; set; }
         public bool isChecked { get; set; }
+        public bool ShowDroppedList { get; set; } = true;
     }
 }

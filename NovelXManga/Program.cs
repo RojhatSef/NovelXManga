@@ -48,9 +48,11 @@ builder.Services.AddScoped<IVoiceRepsitory, SQLVoiceRepsitorycs>();
 builder.Services.AddScoped<IArtistRepsitory, SQLArtistRepsitory>();
 builder.Services.AddScoped<IWallPaperRepsitory, SQLWallPaperRepsitory>();
 builder.Services.AddScoped<IStudioRepsitory, SQLStudioRepsitory>();
-builder.Services.AddScoped<ILanguageRepsitory, SQLLanguageRepsitory>();
+builder.Services.AddScoped<IChapterModelRepsitory, SQLChapterModelRepsitory>();
 builder.Services.AddScoped<IMangaRepository, SQLMangaRepository>();
 builder.Services.AddScoped<IBlogRepsitory, SQLBlogRepsitory>();
+builder.Services.AddScoped<ICharacterRepsitory, SQLCharacterRepository>();
+builder.Services.AddScoped<IAssociatedNamesRepsitory, SQLAssociatedNamesRepsitory>();
 
 builder.Services.AddScoped<IAttachmentRepository, SQLAttachmentRepository>();
 builder.Services.AddScoped<IUserBlockRepository, SQLUserBlockRepository>();
@@ -61,15 +63,16 @@ builder.Services.AddScoped<IPrivateMessageRepository, SQLPrivateMessageRepositor
 builder.Services.AddScoped<IPrivateMessageReportRepository, SQLPrivateMessageReportRepository>();
 builder.Services.AddScoped<IPrivateConversationRepository, SQLPrivateConversationRepository>();
 
-builder.Services.AddScoped<IChapterModelRepsitory, SQLChapterModelRepsitory>();
-builder.Services.AddScoped<IPostRepsitory, SQLPostRepsitory>();
-builder.Services.AddScoped<IAssociatedNamesRepsitory, SQLAssociatedNamesRepsitory>();
 builder.Services.AddScoped<IReviewRepsitory, SQLReviewRepsitorycs>();
-builder.Services.AddScoped<ICharacterRepsitory, SQLCharacterRepository>();
+builder.Services.AddScoped<IPostRepsitory, SQLPostRepsitory>();
+
+builder.Services.AddScoped<ILanguageRepsitory, SQLLanguageRepsitory>();
 builder.Services.AddScoped<IOfficalWebsiteRepsitory, SQLOfficalWebsiteRepsitory>();
-builder.Services.AddScoped<IReadingListPageRepsitory, SQLReadingListPageRepsitory>();
-builder.Services.AddScoped<IFavoritListPageRepsitory, SQLFavoritListPageRepsitory>();
 builder.Services.AddScoped<IBuyPageRepsitory, SQLBuyPageRepsitory>();
+builder.Services.AddScoped<IReadingListPageRepsitory, SQLReadingListPageRepsitory>();
+builder.Services.AddScoped<IWishListRepository, SQLWishListRepository>();
+builder.Services.AddScoped<ICompletedBookListPageRepsitory, SQLCompletedBookListPageRepsitory>();
+builder.Services.AddScoped<IFavoritListPageRepsitory, SQLFavoritListPageRepsitory>();
 builder.Services.AddScoped<IDroppedBookListPageRepsitory, SQLDroppedBookListPageRepsitory>();
 
 builder.Services.AddScoped<SeedData>();

@@ -48,5 +48,7 @@ namespace MangaModelService
                 return Math.Round((StylesScore + StoryScore + GrammarScore + CharactersScore) / 4.0, 1);
             }
         }
+
+        public bool ShowReview { get; set; } = true;
     }
 }

@@ -1,0 +1,41 @@
+﻿@page
+@model NovelXManga.Pages.UserInteractions.ConversationModel
+@{
+}
+
+<!-- Chat container -->
+<div class="COV-chat-container">
+    <!-- Chat list -->
+    <div class="COV-chat-list">
+      @*  @foreach (var conversation in Model.Conversations)
+        {
+            <div class="COV-chat-preview">
+                <span>@conversation.UserTwo.UserName</span>
+                <span class="COV-chat-time">@conversation.PrivateMessages.Last().SentTime.ToShortTimeString()</span>
+            </div>
+        }*@
+    </div>
+
+    <!-- Active chat -->
+    <div class="COV-active-chat">
+     @*   @foreach (var message in Model.ActiveConversation.PrivateMessages)
+        {
+            <div class="COV-message @(message.SenderId == User.Identity.Name ? "COV-sent" : "COV-received")">
+                <p>@message.Content</p>
+                <span class="COV-time">@message.SentTime.ToShortTimeString()</span>
+            </div>
+        }*@
+    </div>
+
+    <!-- Message input -->
+    <div class="COV-message-input">
+        <input type="text" id="COV-messageBox" placeholder="Type a message...">
+        <button id="COV-sendButton">Send</button>
+    </div>
+
+    <!-- Report and block section -->
+    <div class="COV-report-block">
+        <button id="COV-reportButton">Report</button>
+        <button id="COV-blockButton">Block</button>
+    </div>
+</div>

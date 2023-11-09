@@ -153,8 +153,6 @@ document.addEventListener('DOMContentLoaded', function () {
     } else {
         console.log('searchBar element not found');
     }
-
-    // ... rest of your dropdown related code
 });
 
 ////old

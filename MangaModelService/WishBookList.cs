@@ -18,5 +18,6 @@ namespace MangaModelService
 
         public virtual ICollection<UserModel> UserModels { get; set; }
         public bool? IsChecked { get; set; }
+        public bool ShowWishList { get; set; } = true;
     }
 }

@@ -1,0 +1,78 @@
+﻿.COV-chat-container {
+    display: flex;
+    flex-direction: row;
+    max-height: calc(100vh - 4rem);
+}
+
+.COV-chat-list {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.COV-chat-preview {
+    padding: 0.5rem;
+    cursor: pointer;
+    border-bottom: 1px solid #333;
+}
+
+    .COV-chat-preview:hover {
+        background-color: #222;
+    }
+
+.COV-active-chat {
+    flex: 3;
+    padding: 0.5rem;
+    overflow-y: auto;
+    border-left: 1px solid #333;
+}
+
+.COV-message {
+    margin-bottom: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    background-color: #333;
+    display: inline-block;
+}
+
+.COV-sent {
+    align-self: flex-end;
+}
+
+.COV-received {
+    align-self: flex-start;
+}
+
+.COV-time {
+    display: block;
+    font-size: 0.75rem;
+}
+
+.COV-message-input {
+    position: fixed;
+    bottom: 0;
+    width: calc(100% - 4rem);
+    padding: 1rem 2rem;
+    background-color: #191a1c;
+    display: flex;
+}
+
+#COV-messageBox {
+    flex: 1;
+    padding: 0.5rem;
+    margin-right: 0.5rem;
+}
+
+#COV-sendButton {
+    padding: 0.5rem 1rem;
+}
+
+.COV-report-block {
+    position: fixed;
+    right: 1rem;
+    bottom: 1rem;
+}
+
+#COV-reportButton, #COV-blockButton {
+    padding: 0.5rem;
+    margin-left: 0.5rem;
+}
