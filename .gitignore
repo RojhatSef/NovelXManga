@@ -361,3 +361,7 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/NovelXManga/wwwroot/Images/GeneratedCharacterImage
+/NovelXManga/wwwroot/Images/GeneratedMangaImage
+/NovelXManga/wwwroot/Images/GeneratedWallpaperImages
+/NovelXManga/wwwroot/Images/GeneratedUserImage
