@@ -5,6 +5,7 @@ using MangaModelService.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
 using System.Diagnostics;
@@ -249,61 +250,51 @@ namespace NovelXManga.Pages.Manga
 
             if (id == 0)
             {
-                NotFound();
+                return NotFound();
             }
 
             CurrentManga = await mangaRepository.GetOneEssentialMangaIncludedAsync(id);
-
             CurrentManga2 = await mangaRepository.GetOneEssentialMangaDtoIncludedAsync(id);
 
-            //CurrentManga = await mangaRepository.GetOneMangaAllIncludedAsync(id);
-            //Blog = blogRepsitory.GetModel(CurrentManga.BlogModelId);
-
+            // Fetch all reviews and posts
             var allReviews = await reviewRepsitory.GetAllModelAsync();
             ReivewModel = allReviews.Where(r => r.MangaModels != null && r.MangaModels.Any(m => m.MangaID == id));
             Posts = await postRepsitory.GetAllModelAsync();
+
             // Get the logged-in user
             var user = await userManager.GetUserAsync(User);
 
-            // If the user is logged in, check if the manga is in their reading list
+            // If the user is logged in, prepare lists for the dropdown
             if (user != null)
             {
-                var userWithReviews = await userManager.Users
-       .Include(u => u.Reviews)
-       .SingleOrDefaultAsync(u => u.Id == user.Id);
-                if (CurrentManga == null)
-                {
-                    throw new Exception("CurrentManga is null");
-                }
-                if (CurrentManga.reviews == null)
-                {
-                    throw new Exception("reviews in CurrentManga is null");
-                }
-                foreach (var review in CurrentManga.reviews)
-                {
-                    if (review.UserModels == null)
-                    {
-                        throw new Exception("UserModels in a review is null");
-                    }
-                }
+                // Fetch user's ReadingLists
+                UserReadingLists = await Context.readingLists
+                    .Where(rl => rl.UserId == user.Id)
+                    .ToListAsync();
 
-                var userReview = CurrentManga?.reviews?.FirstOrDefault(r => r.UserModels?.Contains(user) ?? false);
-                if (userReview != null)
-                {
-                    _ViewReview.Title = userReview.Title;
-                    _ViewReview.Content = userReview.Content;
-                    _ViewReview.StylesScore = userReview.StylesScore;
-                    _ViewReview.StoryScore = userReview.StoryScore;
-                    _ViewReview.GrammarScore = userReview.GrammarScore;
-                    _ViewReview.CharactersScore = userReview.CharactersScore;
-                }
-                IsInReadingList = await Context.readingLists
+                // Prepare dropdown list options
+                List<SelectListItem> listOptions = UserReadingLists
+                    .Select(rl => new SelectListItem { Value = rl.ReadingListName, Text = rl.ReadingListName })
+                    .ToList();
+
+                // Add standard lists
+                listOptions.Add(new SelectListItem { Value = "Wish", Text = "Wish" });
+                listOptions.Add(new SelectListItem { Value = "Dropped", Text = "Dropped" });
+                listOptions.Add(new SelectListItem { Value = "Favorite", Text = "Favorite" });
+                listOptions.Add(new SelectListItem { Value = "Completed", Text = "Completed" });
+
+                ListOptions = new SelectList(listOptions, "Value", "Text");
+
+                // Check if the manga is in any user's list
+                IsInReadingList = await Context.ReadingLists
                     .Where(rl => rl.UserId == user.Id && rl.MangaModelId == id)
                     .AnyAsync();
+                // Additional logic for other lists if needed
             }
+
             ReadingUsersCount = await Context.readingLists
-        .Where(rl => rl.MangaModelId == id)
-        .CountAsync();
+                .Where(rl => rl.MangaModelId == id)
+                .CountAsync();
             string cacheKey = $"DailyRead_{id}";
             if (!_cache.TryGetValue<int>(cacheKey, out int dailyRead))
             {

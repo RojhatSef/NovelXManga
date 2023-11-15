@@ -49,13 +49,13 @@
         {
             <div class="sidebar-section">
                 <div class="user-section">
-                    <div id="log" class="sidebar-image">
-                        <a asp-page="/UserInteractions/UserProfile" asp-route-userId="@user?.Id" class="profile-image">
-                            <img asp-append-version="true"
-                             src="@(!string.IsNullOrEmpty(user?.userPhotoPath) ? "/Images/GeneratedUserImage/" + user.userPhotoPath : "~/Images/UserImage/NoPhoto.png")"
-                                 alt="User Photo">
-                        </a>
-                    </div>
+                    <a id="log" class="sidebar-image"  asp-route-userId="@user.Id" asp-page="/UserInteractions/UserProfile">
+                        <div class="profile-image">
+              <img asp-append-version="true"
+     src="@(!string.IsNullOrEmpty(user.userPhotoPath) ? "/Images/GeneratedUserImage/" + user.userPhotoPath : "~/Images/UserImage/NoPhoto.png")"
+     alt="User Photo">
+                        </div>
+                    </a>
                     <div class="user-info">
                         <span class="username">@user?.Allias</span>
                         <span class="role-name">@roleName</span>

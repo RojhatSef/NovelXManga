@@ -50,6 +50,7 @@ namespace NovelXManga.Pages.Register
                     if (result.Succeeded)
                     {
                         // Initialize the user's settings after confirming the user is successfully created.
+
                         var userSettings = new UserSettings
                         {
                             UserModelId = user.Id,
@@ -66,7 +67,22 @@ namespace NovelXManga.Pages.Register
 
                         await signInManager.SignInAsync(user, isPersistent: false); // Assuming signInManager is not null
                         await userManager.AddToRoleAsync(user, "Owner"); // Assuming userManager is not null
+                        var wishBookList = new WishBookList { UserId = user.Id };
+                        var readingList = new ReadingList { UserId = user.Id, ReadingListName = "Reading List" };
+                        var droppedBookList = new DroppedBookList { UserId = user.Id };
+                        var completedBookList = new CompletedBookList { UserId = user.Id };
+                        var favoritBookList = new FavoritBookList { UserId = user.Id };
 
+                        // Add these lists to the user's collection
+                        user.WishList = new List<WishBookList> { wishBookList };
+                        user.ReadingList = new List<ReadingList> { readingList };
+                        user.DroppedList = new List<DroppedBookList> { droppedBookList };
+                        user.CompletedList = new List<CompletedBookList> { completedBookList };
+                        user.FavoritList = new List<FavoritBookList> { favoritBookList };
+
+                        // Save the user and the lists to the context
+                        context.Users.Update(user);
+                        await context.SaveChangesAsync();
                         return RedirectToPage("/Index");
                     }
 

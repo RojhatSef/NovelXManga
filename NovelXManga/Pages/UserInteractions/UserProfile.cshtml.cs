@@ -23,6 +23,7 @@ namespace NovelXManga.Pages.UserInteractions
         public UserModel UserProfile { get; set; }
         public bool IsProfileOwner { get; set; }
         public bool IsLoggedIn { get; set; }
+        public string UserRole { get; set; }
 
         public async Task<IActionResult> OnGetAsync(string userId)
         {
@@ -31,9 +32,10 @@ namespace NovelXManga.Pages.UserInteractions
             {
                 return NotFound();
             }
-
+            var roles = await _userManager.GetRolesAsync(user);
+            string roleName = roles.Any() ? string.Join(", ", roles) : "No Roles";
             UserProfile = user; // Here we're setting the user directly
-
+            UserRole = roleName;
             IsLoggedIn = User.Identity.IsAuthenticated;
             IsProfileOwner = User.FindFirstValue(ClaimTypes.NameIdentifier) == userId;
 
