@@ -1436,7 +1436,25 @@ namespace MangaAccessService.Migrations
                     b.Property<int>("ReadingDirection")
                         .HasColumnType("int");
 
+                    b.Property<bool>("ShowCompletedList")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("ShowDroppedList")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("ShowFavoritList")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("ShowMatureContent")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("ShowReadingList")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("ShowReviews")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("ShowWishList")
                         .HasColumnType("bit");
 
                     b.HasKey("UserModelId");
@@ -1915,24 +1933,6 @@ namespace MangaAccessService.Migrations
 
                     b.Property<int?>("MangaModelId")
                         .HasColumnType("int");
-
-                    b.Property<bool>("ShowCompletedList")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("ShowDroppedList")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("ShowFavoritList")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("ShowReadingList")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("ShowReviews")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("ShowWishList")
-                        .HasColumnType("bit");
 
                     b.Property<string>("Twitter")
                         .HasColumnType("nvarchar(max)");

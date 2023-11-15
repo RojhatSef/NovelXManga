@@ -20,10 +20,7 @@
  
 
 </head>
-<style>
-  
-    }
-</style>
+
 <body>
     <div class="container-custom">
 
@@ -52,9 +49,11 @@
             {
             <div class="sidebar-section">
                 <div class="user-section">
-                    <a id="log" class="sidebar-image" asp-page="/profile/UserProfile">
+                    <a id="log" class="sidebar-image"  asp-route-userId="@user.Id" asp-page="/UserInteractions/UserProfile">
                         <div class="profile-image">
-                            <img asp-append-version="true" src="https://www.w3schools.com/images/w3schools_green.jpg" alt="">
+              <img asp-append-version="true"
+     src="@(!string.IsNullOrEmpty(user.userPhotoPath) ? "/Images/GeneratedUserImage/" + user.userPhotoPath : "~/Images/UserImage/NoPhoto.png")"
+     alt="User Photo">
                         </div>
                     </a>
                     <div class="user-info">

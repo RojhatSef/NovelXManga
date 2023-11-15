@@ -53,22 +53,25 @@
                 </div>
                 <div class="CUS-AddEditReportCurrentpage">
                
-                <form class="CUS-AddSizeCurrentpage" method="post" asp-page-handler="AddToReadingList" asp-route-id="@Model.CurrentManga.MangaID" enctype="multipart/form-data">
-                     
-                    
-                        <input type="hidden" asp-for="CurrentManga.MangaID" />
-                            <button type="submit" class="CUS-AddToReadListButton">
-                                @if (Model.IsInReadingList)
-                                {
-                                    <text>Remove From Library</text>
-                                }
-                                else
-                                {
-                                    <text>Add To Library</text>
-                                }
-                            </button>
+               <form class="CUS-AddSizeCurrentpage" method="post" asp-page-handler="AddToReadingList" asp-route-id="@Model.CurrentManga.MangaID" enctype="multipart/form-data">
+    <input type="hidden" asp-for="CurrentManga.MangaID" />
 
-                    </form>
+    <select asp-for="SelectedList" asp-items="Model.ListOptions">
+        <option value="">Select a list</option>
+    </select>
+
+    <button type="submit" class="CUS-AddToReadListButton">
+        @if (Model.IsInSelectedList)
+        {
+            <text>Remove From Selected List</text>
+        }
+        else
+        {
+            <text>Add To Selected List</text>
+        }
+    </button>
+</form>
+
                     <div class="CUS-EditSizeCurrentpage">
                         <button type="submit" class="CUS-EditBookButton">
                             Edit
