@@ -3,29 +3,27 @@
 @{
   
 }
-@*<div class="user-profile">
-    <h2>@Model.ForumName (@Model.Allias)</h2>
-    <img src="@Model.userPhotoPath" alt="User Photo" class="user-photo" />
+<link rel="stylesheet" href="~/css/UserProfile.css" asp-append-version="true" />
 
-    <section class="user-information">
-        <p>@Model.Description</p>
-        <p><strong>Twitter:</strong> @Model.Twitter</p>
-        <p>Member since: @Model.CreatedAcc?.ToString("MMMM dd, yyyy")</p>
-    </section>
+<div class="CUS-Content1Cost">
+    hello world
+<div class="UPI-container">
+    <div class="UPI-header">
+        <img src="{{userPhotoPath}}" alt="User Photo" class="UPI-userPhoto">
+        <div class="UPI-userDetails">
+            <div class="UPI-userName">{{Allias}} - {{ForumName}}</div>
+            <div class="UPI-description">{{Description}}</div>
+        </div>
+        <button class="UPI-blockBtn">Block User</button>
+    </div>
 
-    <form method="post">
-        <label for="showReadingList">Show Reading List</label>
-        <input type="checkbox" id="showReadingList" name="ShowReadingList" checked="@Model.ShowReadingList" />
+    <!-- Reviews List -->
+    <div class="UPI-list">
+        <!-- Dynamic items here -->
+    </div>
+    <button class="UPI-moreBtn">More</button>
 
-   
+    <!-- Similar structure for MangaList, ReadingList, etc. -->
 
-        <label for="showReviews">Show Reviews</label>
-        <input type="checkbox" id="showReviews" name="ShowReviews" checked="@Model.ShowReviews" />
-
-        <button type="submit">Save Preferences</button>
-    </form>
-
-    <button onclick="startConversation('@userId', '@Model.Id')">Start Conversation</button>
-    <button onclick="blockUser('@userId', '@Model.Id')" class="block-user">Block User</button>
+    </div>
 </div>
-*@

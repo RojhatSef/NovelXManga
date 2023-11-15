@@ -20,10 +20,7 @@
  
 
 </head>
-<style>
-  
-    }
-</style>
+
 <body>
     <div class="container-custom">
 
@@ -47,24 +44,26 @@
             <div class="logo">
                 <a asp-page="/Index">  <span id="TextChange">OtakuLibrary  </span> </a>  <button id="sidebar-toggle" onclick="handleSidebarToggle()" class="sidebar-toggle  colorSidebarToggle"><i class="gg-menu-round"></i></button>
             </div>              
-            </div>              
-            @if (SignInManager.IsSignedIn(User))
-            {
+            </div>
+        @if (SignInManager.IsSignedIn(User))
+        {
             <div class="sidebar-section">
                 <div class="user-section">
-                    <a id="log" class="sidebar-image" asp-page="/profile/UserProfile">
-                        <div class="profile-image">
-                            <img asp-append-version="true" src="https://www.w3schools.com/images/w3schools_green.jpg" alt="">
-                        </div>
-                    </a>
+                    <div id="log" class="sidebar-image">
+                        <a asp-page="/UserInteractions/UserProfile" asp-route-userId="@user?.Id" class="profile-image">
+                            <img asp-append-version="true"
+                             src="@(!string.IsNullOrEmpty(user?.userPhotoPath) ? "/Images/GeneratedUserImage/" + user.userPhotoPath : "~/Images/UserImage/NoPhoto.png")"
+                                 alt="User Photo">
+                        </a>
+                    </div>
                     <div class="user-info">
-                        <span class="username">@user.Allias</span>
+                        <span class="username">@user?.Allias</span>
                         <span class="role-name">@roleName</span>
                     </div>
                     <div class="gg-arrow-down dropdown-arrow" id="dropdownToggle"></div>
                     <div class="user-dropdown-menu" id="userDropdown">
                         <ul>
-                            <li class="HoverEffektLi"><a id="log" asp-page="/profile/UserProfile"><span> User Profile   </span></a></li>
+                            <li class="HoverEffektLi"><a id="log" asp-page="/profile/UserProfile" asp-route-userId="@user?.Id"><span>User Profile</span></a></li>
                             <li class="HoverEffektLi"><a asp-page="/Login/LogOut">Sign out</a></li>
                         </ul>
                     </div>

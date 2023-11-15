@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MangaAccessService.Migrations
 {
     [DbContext(typeof(MangaNNovelAuthDBContext))]
-    [Migration("20231107152708_Test")]
+    [Migration("20231110132102_Test")]
     partial class Test
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -1438,7 +1438,25 @@ namespace MangaAccessService.Migrations
                     b.Property<int>("ReadingDirection")
                         .HasColumnType("int");
 
+                    b.Property<bool>("ShowCompletedList")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("ShowDroppedList")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("ShowFavoritList")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("ShowMatureContent")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("ShowReadingList")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("ShowReviews")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("ShowWishList")
                         .HasColumnType("bit");
 
                     b.HasKey("UserModelId");
@@ -1917,24 +1935,6 @@ namespace MangaAccessService.Migrations
 
                     b.Property<int?>("MangaModelId")
                         .HasColumnType("int");
-
-                    b.Property<bool>("ShowCompletedList")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("ShowDroppedList")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("ShowFavoritList")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("ShowReadingList")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("ShowReviews")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("ShowWishList")
-                        .HasColumnType("bit");
 
                     b.Property<string>("Twitter")
                         .HasColumnType("nvarchar(max)");

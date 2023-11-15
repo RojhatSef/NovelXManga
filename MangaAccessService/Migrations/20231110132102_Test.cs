@@ -70,12 +70,6 @@ namespace MangaAccessService.Migrations
                     MangaModelId = table.Column<int>(type: "int", nullable: true),
                     UserActivityTimer = table.Column<DateTime>(type: "datetime2", nullable: true),
                     postModelID = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ShowReadingList = table.Column<bool>(type: "bit", nullable: true),
-                    ShowCompletedList = table.Column<bool>(type: "bit", nullable: true),
-                    ShowDroppedList = table.Column<bool>(type: "bit", nullable: true),
-                    ShowWishList = table.Column<bool>(type: "bit", nullable: true),
-                    ShowFavoritList = table.Column<bool>(type: "bit", nullable: true),
-                    ShowReviews = table.Column<bool>(type: "bit", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -599,7 +593,13 @@ namespace MangaAccessService.Migrations
                     DarkModeEnabled = table.Column<bool>(type: "bit", nullable: false),
                     FontSize = table.Column<int>(type: "int", nullable: false),
                     ItemsPerPage = table.Column<int>(type: "int", nullable: false),
-                    ReadingDirection = table.Column<int>(type: "int", nullable: false)
+                    ReadingDirection = table.Column<int>(type: "int", nullable: false),
+                    ShowReadingList = table.Column<bool>(type: "bit", nullable: false),
+                    ShowCompletedList = table.Column<bool>(type: "bit", nullable: false),
+                    ShowDroppedList = table.Column<bool>(type: "bit", nullable: false),
+                    ShowWishList = table.Column<bool>(type: "bit", nullable: false),
+                    ShowFavoritList = table.Column<bool>(type: "bit", nullable: false),
+                    ShowReviews = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {

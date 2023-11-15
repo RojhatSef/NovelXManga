@@ -1,5 +1,6 @@
 using MangaAccessService;
 using MangaModelService; // Import the namespace where UserModel is located if it's different
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -7,6 +8,7 @@ using System.Security.Claims;
 
 namespace NovelXManga.Pages.UserInteractions
 {
+    [Authorize]
     public class UserProfileModel : PageModel
     {
         private readonly UserManager<UserModel> _userManager;
@@ -24,11 +26,6 @@ namespace NovelXManga.Pages.UserInteractions
 
         public async Task<IActionResult> OnGetAsync(string userId)
         {
-            if (string.IsNullOrWhiteSpace(userId))
-            {
-                return NotFound();
-            }
-
             var user = await _userManager.FindByIdAsync(userId);
             if (user == null)
             {

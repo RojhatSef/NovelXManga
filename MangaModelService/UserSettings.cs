@@ -19,6 +19,12 @@ namespace MangaModelService
         public MangaReadingDirection ReadingDirection { get; set; }
 
         public virtual UserModel UserModel { get; set; }
+        public bool ShowReadingList { get; set; } = true;
+        public bool ShowCompletedList { get; set; } = true;
+        public bool ShowDroppedList { get; set; } = true;
+        public bool ShowWishList { get; set; } = true;
+        public bool ShowFavoritList { get; set; } = true;
+        public bool ShowReviews { get; set; } = true;
     }
 
     public enum MangaReadingDirection
