@@ -2286,7 +2286,7 @@ namespace MangaAccessService.Migrations
                         .IsRequired();
 
                     b.HasOne("MangaModelService.CompletedBookList", null)
-                        .WithMany("ReadingMangaList")
+                        .WithMany("CompleteBookList")
                         .HasForeignKey("CompletedBookListID");
 
                     b.HasOne("MangaModelService.DroppedBookList", null)
@@ -2681,7 +2681,7 @@ namespace MangaAccessService.Migrations
 
             modelBuilder.Entity("MangaModelService.CompletedBookList", b =>
                 {
-                    b.Navigation("ReadingMangaList");
+                    b.Navigation("CompleteBookList");
                 });
 
             modelBuilder.Entity("MangaModelService.DroppedBookList", b =>

@@ -13,7 +13,7 @@ namespace MangaModelService
         [ForeignKey("MangaModel")]
         public int? MangaModelId { get; set; }
 
-        public virtual ICollection<MangaModel>? ReadingMangaList { get; set; }
+        public virtual ICollection<MangaModel>? CompleteBookList { get; set; }
 
         [ForeignKey("UserModel")]
         public string? UserId { get; set; }

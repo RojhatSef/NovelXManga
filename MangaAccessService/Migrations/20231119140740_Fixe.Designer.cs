@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MangaAccessService.Migrations
 {
     [DbContext(typeof(MangaNNovelAuthDBContext))]
-    [Migration("20231117130925_Test44444")]
-    partial class Test44444
+    [Migration("20231119140740_Fixe")]
+    partial class Fixe
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -2288,7 +2288,7 @@ namespace MangaAccessService.Migrations
                         .IsRequired();
 
                     b.HasOne("MangaModelService.CompletedBookList", null)
-                        .WithMany("ReadingMangaList")
+                        .WithMany("CompleteBookList")
                         .HasForeignKey("CompletedBookListID");
 
                     b.HasOne("MangaModelService.DroppedBookList", null)
@@ -2683,7 +2683,7 @@ namespace MangaAccessService.Migrations
 
             modelBuilder.Entity("MangaModelService.CompletedBookList", b =>
                 {
-                    b.Navigation("ReadingMangaList");
+                    b.Navigation("CompleteBookList");
                 });
 
             modelBuilder.Entity("MangaModelService.DroppedBookList", b =>

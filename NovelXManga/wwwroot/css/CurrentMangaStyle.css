@@ -203,39 +203,6 @@
         flex: 1;
     }
 
-    .CUS-DropdownContainer {
-        position: relative;
-        display: inline-block;
-        margin-right: 10px;
-        width: 100%;
-        z-index: 9900;
-        flex: 2;
-        overflow-y: auto;
-        max-height: 400px;
-    }
-
-    .CUS-DropdownButton {
-        width: 100%;
-        padding: 10px;
-        height: 50px;
-        background-color: #ff6740;
-        color: white;
-        border: none;
-        cursor: pointer;
-        border-radius: 5px;
-        outline: none;
-    }
-    /*.CUS-AddSizeCurrentpage {
-        display: inline-block;*/ /* This will ensure the divs are in a line */
-    /*margin-right: 10px;*/ /* To ensure spacing between the buttons */
-    /*height: 50px;
-        width: 100%;
-        flex: 2;
-        justify-content: center;
-        align-items: center;
-        background-color: orange;
-        outline: none;
-    }*/
 
     .CUS-AddSizeCurrentpage {
         margin-right: 10px; /* To ensure spacing between the buttons */
@@ -244,9 +211,7 @@
         flex: 2;
         justify-content: center;
         align-items: center;
-        background-color: orange;
         outline: none;
-        background-color: #f9f9f9;
         box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
         width: 100%;
         box-sizing: border-box;
@@ -261,49 +226,6 @@
             display: block;
         }
 
-    .CUS-DropdownButton:focus + .CUS-AddSizeCurrentpage {
-        display: contents !important
-    }
-
-    .CUS-DropdownContainer:hover .CUS-DropdownContent,
-    .CUS-DropdownContainer:focus-within .CUS-DropdownContent {
-        visibility: visible;
-        opacity: 1;
-    }
-
-    .CUS-DropdownContainer .CUS-DropdownContent {
-        visibility: hidden;
-        opacity: 0;
-        transition: visibility 0s, opacity 0.5s linear;
-    }
-
-    .CUS-ListOptionButton {
-        width: 100%;
-        padding: 10px;
-        color: black;
-        border: none;
-        cursor: pointer;
-        text-align: left;
-        background-color: rgb(255, 113, 85);
-    }
-
-        .CUS-ListOptionButton:hover {
-            background-color: #ccc;
-        }
-
-    .CUS-DropdownContent {
-        display: none;
-        position: absolute;
-        background-color: #f9f9f9;
-        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-        width: 100%;
-        box-sizing: border-box;
-        z-index: 9999;
-        max-height: 400px; /* Set a maximum height */
-        overflow-y: auto; /* Enable scrolling for long lists */
-        padding-bottom: 10px; /* Space at the bottom */
-        transition: visibility 0s, opacity 0.5s linear;
-    }
 
     .CUS-AddToReadListButton {
         /* Add any specific button styles here, such as color, padding, font-size, etc. */
@@ -370,7 +292,7 @@
 
     .CUS-ReportBookButton {
         padding: 10px;
-        background-color: rgb(25, 26, 28);
+        background-color: red;
         border: none;
         cursor: pointer;
         height: 100%;
