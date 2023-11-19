@@ -8,7 +8,7 @@ namespace MangaModelService
         [Key]
         public int DroppedId { get; set; }
 
-        public string CompletedList { get; set; } = "Dropped Book List";
+        public string DroppedNameList { get; set; } = "Dropped Book List";
 
         [ForeignKey("MangaModel")]
         public int? MangaModelId { get; set; }

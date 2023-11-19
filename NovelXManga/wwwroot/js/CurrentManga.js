@@ -73,3 +73,31 @@ function loadMoreCharacters() {
 }
 
 loadMoreCharacters();
+document.addEventListener('DOMContentLoaded', function () {
+    function toggleDropdown() {
+        var dropdown = document.getElementById('listOptionsDropdown');
+        var isDisplayed = dropdown.style.display === 'block';
+
+        // Log to the console when the button is pressed
+        console.log('Manage Lists Button Pressed');
+
+        dropdown.style.display = isDisplayed ? 'none' : 'block';
+
+        // If the dropdown is being shown, set a timeout to hide it
+        if (!isDisplayed) {
+            setTimeout(function () {
+                if (dropdown.style.display === 'block') {
+                    dropdown.style.display = 'none';
+                }
+            }, 800); // Adjust the delay as needed
+        }
+    }
+
+    // Event listener for the manage lists button
+    var manageListsButton = document.getElementById('manageListsButton');
+    if (manageListsButton) {
+        manageListsButton.addEventListener('click', toggleDropdown);
+    }
+
+    // Rest of your existing code...
+});

@@ -5,7 +5,6 @@ using MangaModelService.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
 using System.Diagnostics;
@@ -56,9 +55,9 @@ namespace NovelXManga.Pages.Manga
         public ViewReview _ViewReview { get; set; } = new ViewReview();
 
         public IEnumerable<Review> ReivewModel { get; set; }
-
         public IEnumerable<PostModel> Posts { get; set; }
         public int ReadingUsersCount { get; set; }
+        [BindProperty]
         public bool IsInReadingList { get; set; }
         public IDictionary<int, int> ScoreDistribution { get; set; }
 
@@ -88,40 +87,49 @@ namespace NovelXManga.Pages.Manga
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAddToReadingListAsync(int id)
+        private async Task ManageReadingListAndStatusAsync(string userId, int mangaId, string readingListName)
         {
-            // Get the logged-in user
-            var user = await userManager.GetUserAsync(User);
+            // Fetch the specific reading list by name and user ID.
+            var userReadingList = await Context.readingLists
+                                                .Include(rl => rl.ReadingMangaList)
+                                                .FirstOrDefaultAsync(rl => rl.UserId == userId && rl.ReadingListName == readingListName);
 
+            if (userReadingList != null)
+            {
+                // Check if the manga is already in the reading list.
+                var mangaInList = userReadingList.ReadingMangaList.FirstOrDefault(m => m.MangaID == mangaId);
+
+                if (mangaInList == null)
+                {
+                    // Add the manga to the reading list if it's not already there.
+                    var mangaToAdd = await Context.mangaModels.FindAsync(mangaId);
+                    if (mangaToAdd != null)
+                    {
+                        userReadingList.ReadingMangaList.Add(mangaToAdd);
+                    }
+                }
+                else
+                {
+                    // Remove the manga from the reading list if it's already there.
+                    userReadingList.ReadingMangaList.Remove(mangaInList);
+                }
+
+                // Save the changes to the database.
+
+                await Context.SaveChangesAsync();
+                IsInReadingList = await CheckIfMangaInReadingListAsync(userId, mangaId);
+            }
+        }
+
+        public async Task<IActionResult> OnPostAddToReadingListAsync(int id, string readingListName)
+        {
+            var user = await userManager.GetUserAsync(User);
             if (user == null)
             {
-                // No user is logged in, return the page without making any changes
                 return RedirectToPage(new { id });
             }
-            CurrentManga = await mangaRepository.GetOneMangaAllIncludedAsync(id);
-            // Check if the manga is already in the reading list
-            var readingListEntry = await Context.readingLists
-                .Where(rl => rl.UserId == user.Id && rl.MangaModelId == id)
-                .FirstOrDefaultAsync();
-            // If the manga is not in the reading list, add it
-            if (readingListEntry == null)
-            {
-                var newReadingListEntry = new ReadingList
-                {
-                    UserId = user.Id,
-                    MangaModelId = id,
-                    IsChecked = true,
-                };
 
-                Context.readingLists.Add(newReadingListEntry);
-                await Context.SaveChangesAsync();
-            }
-            else
-            {
-                // If the manga is in the reading list, remove it
-                Context.readingLists.Remove(readingListEntry);
-                await Context.SaveChangesAsync();
-            }
+            await ManageReadingListAndStatusAsync(user.Id, id, readingListName);
 
             return RedirectToPage(new { id });
         }
@@ -242,6 +250,15 @@ namespace NovelXManga.Pages.Manga
             return new JsonResult(characters);
         }
 
+        private async Task<bool> CheckIfMangaInReadingListAsync(string userId, int mangaId)
+        {
+            var userReadingList = await Context.readingLists
+                                                .Include(rl => rl.ReadingMangaList)
+                                                .FirstOrDefaultAsync(rl => rl.UserId == userId && rl.ReadingListName == "Reading List");
+
+            return userReadingList?.ReadingMangaList.Any(m => m.MangaID == mangaId) ?? false;
+        }
+
         public async Task<IActionResult> OnGetAsync(int id)
         {
             var totalStopwatch = new Stopwatch();
@@ -267,34 +284,41 @@ namespace NovelXManga.Pages.Manga
             // If the user is logged in, prepare lists for the dropdown
             if (user != null)
             {
-                // Fetch user's ReadingLists
-                UserReadingLists = await Context.readingLists
-                    .Where(rl => rl.UserId == user.Id)
-                    .ToListAsync();
+                IsInReadingList = await CheckIfMangaInReadingListAsync(user.Id, id);
 
-                // Prepare dropdown list options
-                List<SelectListItem> listOptions = UserReadingLists
-                    .Select(rl => new SelectListItem { Value = rl.ReadingListName, Text = rl.ReadingListName })
-                    .ToList();
+                var userWithReviews = await userManager.Users
+       .Include(u => u.Reviews)
+       .SingleOrDefaultAsync(u => u.Id == user.Id);
+                if (CurrentManga == null)
+                {
+                    throw new Exception("CurrentManga is null");
+                }
+                if (CurrentManga.reviews == null)
+                {
+                    throw new Exception("reviews in CurrentManga is null");
+                }
+                foreach (var review in CurrentManga.reviews)
+                {
+                    if (review.UserModels == null)
+                    {
+                        throw new Exception("UserModels in a review is null");
+                    }
+                }
+                var userReview = CurrentManga?.reviews?.FirstOrDefault(r => r.UserModels?.Contains(user) ?? false);
+                if (userReview != null)
+                {
+                    _ViewReview.Title = userReview.Title;
+                    _ViewReview.Content = userReview.Content;
+                    _ViewReview.StylesScore = userReview.StylesScore;
+                    _ViewReview.StoryScore = userReview.StoryScore;
+                    _ViewReview.GrammarScore = userReview.GrammarScore;
+                    _ViewReview.CharactersScore = userReview.CharactersScore;
+                }
 
-                // Add standard lists
-                listOptions.Add(new SelectListItem { Value = "Wish", Text = "Wish" });
-                listOptions.Add(new SelectListItem { Value = "Dropped", Text = "Dropped" });
-                listOptions.Add(new SelectListItem { Value = "Favorite", Text = "Favorite" });
-                listOptions.Add(new SelectListItem { Value = "Completed", Text = "Completed" });
-
-                ListOptions = new SelectList(listOptions, "Value", "Text");
-
-                // Check if the manga is in any user's list
-                IsInReadingList = await Context.ReadingLists
-                    .Where(rl => rl.UserId == user.Id && rl.MangaModelId == id)
-                    .AnyAsync();
-                // Additional logic for other lists if needed
             }
-
             ReadingUsersCount = await Context.readingLists
-                .Where(rl => rl.MangaModelId == id)
-                .CountAsync();
+        .Where(rl => rl.MangaModelId == id)
+        .CountAsync();
             string cacheKey = $"DailyRead_{id}";
             if (!_cache.TryGetValue<int>(cacheKey, out int dailyRead))
             {

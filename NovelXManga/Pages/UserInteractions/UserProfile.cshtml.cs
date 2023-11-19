@@ -1,6 +1,5 @@
 using MangaAccessService;
-using MangaModelService; // Import the namespace where UserModel is located if it's different
-using Microsoft.AspNetCore.Authorization;
+using MangaModelService;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -8,7 +7,6 @@ using System.Security.Claims;
 
 namespace NovelXManga.Pages.UserInteractions
 {
-    [Authorize]
     public class UserProfileModel : PageModel
     {
         private readonly UserManager<UserModel> _userManager;

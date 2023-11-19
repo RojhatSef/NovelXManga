@@ -9,7 +9,6 @@
 
   <ItemGroup>
     <_ContentIncludedByDefault Remove="wwwroot\css\ChromeStyle.css" />
-    <_ContentIncludedByDefault Remove="wwwroot\css\UserProfile.css" />
   </ItemGroup>
 
   <ItemGroup>

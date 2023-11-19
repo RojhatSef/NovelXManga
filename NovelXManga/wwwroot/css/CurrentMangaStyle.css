@@ -14,6 +14,7 @@
     .CUS-CustomHintLabel {
         color: rgb(255, 103, 64);
     }
+
     .CUS-custom-hr {
         border-top: 2px solid #ff6740;
         border-left: none;
@@ -36,6 +37,7 @@
         .CUS-load-more-button:hover {
             background-color: #ff5c33;
         }
+
     .CUS-CurrentMangaTagsContainer {
         height: auto;
         width: 100%;
@@ -51,6 +53,7 @@
         transition: margin-left 0.5s ease;
         order: 1;
     }
+
     .CUS-CustomWarningLabel {
         color: #FF9933 !important;
     }
@@ -58,6 +61,7 @@
     .CUS-CustomHintLabel {
         color: #008000;
     }
+
     .scoreAndMangaInfoContainer {
         order: 2;
         height: auto;
@@ -73,9 +77,11 @@
         box-sizing: border-box;
         transition: margin-left 0.5s ease;
     }
-    .Cus-TitleWhenSmallCurrentManga{
-        display:none; 
+
+    .Cus-TitleWhenSmallCurrentManga {
+        display: none;
     }
+
     .CUS-card-ex {
         position: relative;
         width: 100%;
@@ -190,19 +196,113 @@
         width: 70%;
         transition: top 0.5s, left 0.5s;
         overflow: hidden;
-      
     }
 
     .CUS-EditSizeCurrentpage,
     .CUS-ReportSizeCurrentpage {
         flex: 1;
     }
-    .CUS-AddSizeCurrentpage {
-        display: inline-block; /* This will ensure the divs are in a line */
-        margin-right: 10px; /* To ensure spacing between the buttons */
+
+    .CUS-DropdownContainer {
+        position: relative;
+        display: inline-block;
+        margin-right: 10px;
+        width: 100%;
+        z-index: 9900;
+        flex: 2;
+        overflow-y: auto;
+        max-height: 400px;
+    }
+
+    .CUS-DropdownButton {
+        width: 100%;
+        padding: 10px;
         height: 50px;
+        background-color: #ff6740;
+        color: white;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        outline: none;
+    }
+    /*.CUS-AddSizeCurrentpage {
+        display: inline-block;*/ /* This will ensure the divs are in a line */
+    /*margin-right: 10px;*/ /* To ensure spacing between the buttons */
+    /*height: 50px;
         width: 100%;
         flex: 2;
+        justify-content: center;
+        align-items: center;
+        background-color: orange;
+        outline: none;
+    }*/
+
+    .CUS-AddSizeCurrentpage {
+        margin-right: 10px; /* To ensure spacing between the buttons */
+        height: 50px;
+        width: 100% !important;
+        flex: 2;
+        justify-content: center;
+        align-items: center;
+        background-color: orange;
+        outline: none;
+        background-color: #f9f9f9;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        width: 100%;
+        box-sizing: border-box;
+        z-index: 9999;
+        padding-bottom: 20px; /* Extra space at the bottom */
+    }
+
+        .CUS-AddSizeCurrentpage form {
+            background-color: #ff6740;
+            color: white;
+            text-decoration: none;
+            display: block;
+        }
+
+    .CUS-DropdownButton:focus + .CUS-AddSizeCurrentpage {
+        display: contents !important
+    }
+
+    .CUS-DropdownContainer:hover .CUS-DropdownContent,
+    .CUS-DropdownContainer:focus-within .CUS-DropdownContent {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    .CUS-DropdownContainer .CUS-DropdownContent {
+        visibility: hidden;
+        opacity: 0;
+        transition: visibility 0s, opacity 0.5s linear;
+    }
+
+    .CUS-ListOptionButton {
+        width: 100%;
+        padding: 10px;
+        color: black;
+        border: none;
+        cursor: pointer;
+        text-align: left;
+        background-color: rgb(255, 113, 85);
+    }
+
+        .CUS-ListOptionButton:hover {
+            background-color: #ccc;
+        }
+
+    .CUS-DropdownContent {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        width: 100%;
+        box-sizing: border-box;
+        z-index: 9999;
+        max-height: 400px; /* Set a maximum height */
+        overflow-y: auto; /* Enable scrolling for long lists */
+        padding-bottom: 10px; /* Space at the bottom */
+        transition: visibility 0s, opacity 0.5s linear;
     }
 
     .CUS-AddToReadListButton {
@@ -215,7 +315,7 @@
         color: white;
         font-weight: bold;
         border: none;
-        border-radius: 5px;    
+        border-radius: 5px;
         overflow: hidden;
         transition: 0.5s;
         cursor: pointer;
@@ -298,9 +398,11 @@
         min-width: 60px;
         font-size: 12px
     }
-    CUS-ShowTitleOnSmall{
-        display:none; 
+
+    CUS-ShowTitleOnSmall {
+        display: none;
     }
+
     .CUS-manga-title {
         display: -webkit-box;
         -webkit-line-clamp: 3;
@@ -335,7 +437,7 @@
     @media screen (max-width: 910px) {
         .CUS-AddEditReportCurrentpage {
             margin-left: 40% !important;
-            width:70%; 
+            width: 70%;
         }
     }
     /* Media queries for responsiveness */
@@ -352,6 +454,7 @@
             margin-left: 29% !important; /* Adjusted to move to the right by setting margin-left: auto */
             margin-right: 0; /* Reset margin-right to 0 */
         }
+
         .CUS-AddEditReportCurrentpage {
             margin-left: 30% !important;
             width: 60%;
@@ -418,7 +521,7 @@
             /* Adjust the width to occupy the full available width on smaller screens */
             margin-left: 0 !important; /* Remove the left margin for better centering on smaller screens */
             /* Add horizontal padding for spacing */
-            width:100% !important; 
+            width: 100% !important;
         }
 
         .CUS-Content1Cost {
@@ -431,21 +534,26 @@
         .mangaDetailsBox {
             padding: 0em;
         }
-        .CUS-HideTitleCurrentMangaOnSmall{
-            display:none;  
+
+        .CUS-HideTitleCurrentMangaOnSmall {
+            display: none;
         }
+
         .CUS-AddEditReportCurrentpage {
             margin-left: 1% !important;
             width: 100% !important;
         }
-        .CUS-ShowTitleOnSmall{
-            display:contents; 
+
+        .CUS-ShowTitleOnSmall {
+            display: contents;
         }
+
         .Cus-TitleWhenSmallCurrentManga {
             display: block;
             width: 100%;
             word-wrap: break-word;
         }
+
         .CUS-manga-title {
             top: calc(15% - 40px) !important;
             left: calc(5% + 140px) !important; /* Adjust these values for smaller screens */
@@ -465,31 +573,25 @@
             display: none !important;
         }
 
-    
-
-       
-
         .CUS-tagsInsideInsideCurrentManga {
             /* Adjust the styles for smaller screens */
             font-size: 14px;
             padding: 3px;
         }
 
-
         CUS-EditSizeCurrentpage {
             padding-right: 5px !important;
         }
+
         .CUS-EditBookButton,
         .CUS-ReportBookButton {
             width: 100% !important; /* Both equal and smaller compared to AddSizeCurrentpage */
-          
         }
 
         .CUS-AddEditReportCurrentpage {
             justify-content: space-between; /* Distribute items evenly */
             letter-spacing: 0px !important;
-            width:90%; 
+            width: 90%;
         }
-
     }
 }

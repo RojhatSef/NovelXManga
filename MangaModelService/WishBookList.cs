@@ -8,6 +8,8 @@ namespace MangaModelService
         [Key]
         public int WishBookListId { get; set; }
 
+        public string WishNameList { get; set; } = "Wish List";
+
         [ForeignKey("MangaModel")]
         public int? MangaModelId { get; set; }
 

@@ -51,38 +51,44 @@
                         <h1 class="">@Model.CurrentManga.MangaName</h1>
                     }
                 </div>
-                <div class="CUS-AddEditReportCurrentpage">
-               
-               <form class="CUS-AddSizeCurrentpage" method="post" asp-page-handler="AddToReadingList" asp-route-id="@Model.CurrentManga.MangaID" enctype="multipart/form-data">
-    <input type="hidden" asp-for="CurrentManga.MangaID" />
+            <div class="CUS-AddEditReportCurrentpage">
 
-    <select asp-for="SelectedList" asp-items="Model.ListOptions">
-        <option value="">Select a list</option>
-    </select>
+                <form class="CUS-AddSizeCurrentpage" method="post" asp-page-handler="AddToReadingList" asp-route-id="@Model.CurrentManga.MangaID" enctype="multipart/form-data">
+                    <input type="hidden" asp-for="CurrentManga.MangaID" />
+                    <input type="hidden" name="ReadingListName" value="Reading List" /> 
+                    <button type="submit" class="CUS-AddToReadListButton">
+                      @if (SignInManager.IsSignedIn(User))
+                        {
+                        @if (Model.IsInReadingList == true)
+                        {
+                            <span>Remove From Library</span>
+                             
+                        }
+                        else
+                        {
+                            <span>Add To Library</span>
+                              
 
-    <button type="submit" class="CUS-AddToReadListButton">
-        @if (Model.IsInSelectedList)
-        {
-            <text>Remove From Selected List</text>
-        }
-        else
-        {
-            <text>Add To Selected List</text>
-        }
-    </button>
-</form>
+                        }
+                     }
+                     else
+                        {
+                            <span>Login To Add</span>
+                        }
+                    </button>
+                </form>
 
-                    <div class="CUS-EditSizeCurrentpage">
-                        <button type="submit" class="CUS-EditBookButton">
-                            Edit
-                        </button>
-                    </div>
-                    <div class="CUS-ReportSizeCurrentpage">
-                        <button type="submit" class="CUS-ReportBookButton">
-                            Report
-                        </button>
-                    </div>
+
+
+                <div class="CUS-EditSizeCurrentpage">
+                    <button type="submit" class="CUS-EditBookButton">Edit</button>
                 </div>
+                <div class="CUS-ReportSizeCurrentpage">
+                    <button type="submit" class="CUS-ReportBookButton">Report</button>
+                </div>
+            </div>
+
+
             </div>
         </div>
     </div>
