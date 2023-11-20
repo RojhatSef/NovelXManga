@@ -1,8 +1,10 @@
 using MangaAccessService;
+using MangaAccessService.DTO.UserProfileMangaDTO;
 using MangaModelService;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
 namespace NovelXManga.Pages.UserInteractions
@@ -12,10 +14,20 @@ namespace NovelXManga.Pages.UserInteractions
         private readonly UserManager<UserModel> _userManager;
         private readonly MangaNNovelAuthDBContext Context;
 
-        public UserProfileModel(UserManager<UserModel> userManager, MangaNNovelAuthDBContext context)
+        private readonly UserBookListService _bookListService; // Add this line
+
+        // Properties to hold the DTOs
+        public IEnumerable<UserMangaImageDto> ReadingListDtos { get; private set; }
+
+        public IEnumerable<UserMangaImageDto> CompletedListDtos { get; private set; }
+        public IEnumerable<UserMangaImageDto> DroppedListDtos { get; private set; }
+        public IEnumerable<UserMangaImageDto> FavoriteListDtos { get; private set; }
+        public IEnumerable<UserMangaImageDto> WishListDtos { get; private set; }
+
+        public UserProfileModel(UserManager<UserModel> userManager, UserBookListService bookListService)
         {
             _userManager = userManager;
-            Context = context;
+            _bookListService = bookListService; // Add this line
         }
 
         public UserModel UserProfile { get; set; }
@@ -25,17 +37,29 @@ namespace NovelXManga.Pages.UserInteractions
 
         public async Task<IActionResult> OnGetAsync(string userId)
         {
-            var user = await _userManager.FindByIdAsync(userId);
-            if (user == null)
+            if (string.IsNullOrEmpty(userId))
             {
                 return NotFound();
             }
-            var roles = await _userManager.GetRolesAsync(user);
-            string roleName = roles.Any() ? string.Join(", ", roles) : "No Roles";
-            UserProfile = user; // Here we're setting the user directly
-            UserRole = roleName;
+
+            UserProfile = await _userManager.FindByIdAsync(userId);
+
+            if (UserProfile == null)
+            {
+                return NotFound();
+            }
+
+            var roles = await _userManager.GetRolesAsync(UserProfile);
+            UserRole = roles.Any() ? string.Join(", ", roles) : "No Roles";
             IsLoggedIn = User.Identity.IsAuthenticated;
             IsProfileOwner = User.FindFirstValue(ClaimTypes.NameIdentifier) == userId;
+
+            // Use the service to get DTOs for each list
+            ReadingListDtos = await _bookListService.GetReadingListMangaImages(userId);
+            CompletedListDtos = await _bookListService.GetCompletedListMangaImages(userId);
+            DroppedListDtos = await _bookListService.GetDroppedListMangaImages(userId);
+            FavoriteListDtos = await _bookListService.GetFavoriteListMangaImages(userId);
+            WishListDtos = await _bookListService.GetWishListMangaImages(userId);
 
             return Page();
         }

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using NovelXManga;
+using NovelXManga.Pages.UserInteractions;
 using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -66,6 +67,7 @@ builder.Services.AddScoped<IPrivateConversationRepository, SQLPrivateConversatio
 builder.Services.AddScoped<IReviewRepsitory, SQLReviewRepsitorycs>();
 builder.Services.AddScoped<IPostRepsitory, SQLPostRepsitory>();
 
+builder.Services.AddScoped<UserBookListService>();
 builder.Services.AddScoped<ILanguageRepsitory, SQLLanguageRepsitory>();
 builder.Services.AddScoped<IOfficalWebsiteRepsitory, SQLOfficalWebsiteRepsitory>();
 builder.Services.AddScoped<IBuyPageRepsitory, SQLBuyPageRepsitory>();

@@ -16,6 +16,8 @@
     margin: 10px auto;
 }
 
+
+
 .UPI-userName {
     font-size: 20px;
     font-weight: bold;
@@ -63,4 +65,43 @@
     border-radius: 5px;
     display: block;
     margin: 20px auto;
+}
+.UPI-bookList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around; /* Adjusts the items spacing */
+    max-width: 620px; /* Adjust based on the total width of two items and gap */
+}
+
+
+
+.UPI-listItem {
+    width: 300px; /* Width of each item */
+    height: 300px;
+    margin-bottom: 10px; /* Space between rows */
+    overflow: hidden;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #ddd; /* Optional: for border */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Optional: for shadow */
+}
+
+    .UPI-listItem img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: cover; /* This will cover the area without stretching the image */
+    }
+
+    .UPI-listItem span {
+        margin-top: 5px; /* Spacing between image and text */
+        text-align: center; /* Center the text */
+    }
+@media (max-width: 768px) {
+    .UPI-bookList {
+        flex-direction: row;
+        overflow-x: auto;
+    }
 }
