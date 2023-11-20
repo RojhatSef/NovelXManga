@@ -1,12 +1,14 @@
 ﻿.UPI-container {
-    max-width: 600px;
+    width: 100%;
     margin: auto;
     padding: 10px;
     text-align: center;
+   
 }
 
 .UPI-header {
     position: relative;
+    margin-top:5em; 
 }
 
 .UPI-userPhoto {
@@ -15,8 +17,6 @@
     border-radius: 50%;
     margin: 10px auto;
 }
-
-
 
 .UPI-userName {
     font-size: 20px;
@@ -66,42 +66,110 @@
     display: block;
     margin: 20px auto;
 }
+
 .UPI-bookList {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around; /* Adjusts the items spacing */
-    max-width: 620px; /* Adjust based on the total width of two items and gap */
+    max-width: 670px; /* Adjust based on the total width of two items and gap */
 }
-
-
 
 .UPI-listItem {
-    width: 300px; /* Width of each item */
+    width: 300px;
     height: 300px;
-    margin-bottom: 10px; /* Space between rows */
     overflow: hidden;
-    margin: 10px;
+    position: relative;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    border: 1px solid #ddd; /* Optional: for border */
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Optional: for shadow */
+    margin: 5px;
+    position: relative;
 }
 
-    .UPI-listItem img {
-        max-width: 100%;
-        max-height: 100%;
-        object-fit: cover; /* This will cover the area without stretching the image */
+    .UPI-listItem span {
+        position: absolute;
+        bottom: 0; /* Position at the bottom of the item */
+        left: 0;
+        width: 100%; /* Span the full width of the item */
+        background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+        color: white; /* Text color */
+        text-align: center;
+        padding: 5px 0; /* Padding for top and bottom */
+        font-size: 14px; /* Adjust font size as needed */
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis; /* In case the text is too long */
     }
 
-    .UPI-listItem span {
-        margin-top: 5px; /* Spacing between image and text */
-        text-align: center; /* Center the text */
+    .UPI-listItem img {
+        width: 100%; /* Set width to fill container */
+        height: 100%; /* Set height to fill container */
+        object-fit: cover;
     }
+
+.UPI-listContainer {
+    text-align: center; /* Center the title */
+}
+
+.UPI-listTitle {
+    margin-bottom: 2px; /* Spacing between title and list */
+}
+
+.UPI-listItem span {
+    margin-top: 5px; /* Spacing between image and text */
+    text-align: center; /* Center the text */
+}
+
 @media (max-width: 768px) {
     .UPI-bookList {
         flex-direction: row;
         overflow-x: auto;
+    }
+}
+@media (min-width: 1300px) {
+    .UPI-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+    }
+
+    .UPI-listContainer {
+        width: 48%; /* Adjust the width for side-by-side layout */
+        margin-bottom: 20px; /* Spacing between rows of lists */
+    }
+
+    .UPI-bookList {
+        max-width: 100%; /* Allow book list to fill container */
+    }
+}
+@media (max-width: 1299px) {
+    .UPI-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Center the list containers */
+    }
+
+    .UPI-listContainer {
+     
+        margin-bottom: 20px; /* Spacing between each list container */
+    }
+}
+@media (max-width: 619px){
+    .UPI-listItem {
+        width: 150px;
+        height: 150px;
+        overflow: hidden;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 2.5px;
+        position: relative;
+    }
+    .UPI-bookList {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around; /* Adjusts the items spacing */
+        max-width: 335px; /* Adjust based on the total width of two items and gap */
     }
 }
