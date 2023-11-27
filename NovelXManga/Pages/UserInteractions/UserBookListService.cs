@@ -1,9 +1,6 @@
-﻿using MangaAccessService.DTO.UserProfileMangaDTO;
-using MangaAccessService;
+﻿using MangaAccessService;
+using MangaAccessService.DTO.UserProfileMangaDTO;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace NovelXManga.Pages.UserInteractions
 {
@@ -14,6 +11,22 @@ namespace NovelXManga.Pages.UserInteractions
         public UserBookListService(MangaNNovelAuthDBContext context)
         {
             _context = context;
+        }
+
+        public async Task<IEnumerable<UserMangaImageDto>> GetReadingListMangaImages(string userId, int skip, int take)
+        {
+            return await _context.readingLists
+                .Where(rl => rl.UserId == userId)
+                .SelectMany(rl => rl.ReadingMangaList)
+                .Skip(skip)
+                .Take(take)
+                .Select(m => new UserMangaImageDto
+                {
+                    MangaID = m.MangaID,
+                    MangaName = m.MangaName,
+                    PhotoPath = m.PhotoPath
+                })
+                .ToListAsync();
         }
 
         public async Task<IEnumerable<UserMangaImageDto>> GetReadingListMangaImages(string userId)

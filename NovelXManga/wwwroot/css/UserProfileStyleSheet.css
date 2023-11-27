@@ -3,12 +3,11 @@
     margin: auto;
     padding: 10px;
     text-align: center;
-   
 }
 
 .UPI-header {
     position: relative;
-    margin-top:5em; 
+    margin-top: 5em;
 }
 
 .UPI-userPhoto {
@@ -86,26 +85,49 @@
     position: relative;
 }
 
-    .UPI-listItem span {
-        position: absolute;
-        bottom: 0; /* Position at the bottom of the item */
-        left: 0;
-        width: 100%; /* Span the full width of the item */
-        background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-        color: white; /* Text color */
-        text-align: center;
-        padding: 5px 0; /* Padding for top and bottom */
-        font-size: 14px; /* Adjust font size as needed */
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis; /* In case the text is too long */
+.UPI-custom-hr {
+    border-top: 2px solid #ff6740;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+    color: #ff6740;
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+
+.UPI-load-more-button {
+    background-color: #ff6740;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+    .UPI-load-more-button:hover {
+        background-color: #ff5c33;
     }
 
-    .UPI-listItem img {
-        width: 100%; /* Set width to fill container */
-        height: 100%; /* Set height to fill container */
-        object-fit: cover;
-    }
+.UPI-listItem span {
+    position: absolute;
+    bottom: 0; /* Position at the bottom of the item */
+    left: 0;
+    width: 100%; /* Span the full width of the item */
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    color: white; /* Text color */
+    text-align: center;
+    padding: 5px 0; /* Padding for top and bottom */
+    font-size: 14px; /* Adjust font size as needed */
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis; /* In case the text is too long */
+}
+
+.UPI-listItem img {
+    width: 100%; /* Set width to fill container */
+    height: 100%; /* Set height to fill container */
+    object-fit: cover;
+}
 
 .UPI-listContainer {
     text-align: center; /* Center the title */
@@ -126,6 +148,7 @@
         overflow-x: auto;
     }
 }
+
 @media (min-width: 1300px) {
     .UPI-container {
         display: flex;
@@ -142,6 +165,7 @@
         max-width: 100%; /* Allow book list to fill container */
     }
 }
+
 @media (max-width: 1299px) {
     .UPI-container {
         display: flex;
@@ -150,11 +174,11 @@
     }
 
     .UPI-listContainer {
-     
         margin-bottom: 20px; /* Spacing between each list container */
     }
 }
-@media (max-width: 619px){
+
+@media (max-width: 619px) {
     .UPI-listItem {
         width: 150px;
         height: 150px;
@@ -166,6 +190,7 @@
         margin: 2.5px;
         position: relative;
     }
+
     .UPI-bookList {
         display: flex;
         flex-wrap: wrap;

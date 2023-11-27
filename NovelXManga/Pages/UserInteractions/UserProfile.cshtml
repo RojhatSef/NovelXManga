@@ -1,7 +1,8 @@
 ﻿@page
 @model NovelXManga.Pages.UserInteractions.UserProfileModel
 @{
-       var topReadingListDtos = Model.ReadingListDtos.Take(4);
+    var totalReadingListCount = Model.ReadingListDtos;
+    var topReadingListDtos = Model.ReadingListDtos.Take(4);
 }
 <link rel="stylesheet" href="~/css/UserProfileStyleSheet.css" asp-append-version="true" />
 
@@ -28,7 +29,7 @@
 <div class="UPI-container">
  
 
-  <!-- Reviews List -->
+  <!-- Reading List -->
 @if (topReadingListDtos != null && topReadingListDtos.Any())
 {
     <div class="UPI-listContainer">  <h3 class="UPI-listTitle">Reading List</h3><hr>
@@ -41,9 +42,14 @@
                <span>@item.MangaName</span>
             </div>
         }
-    </div>
-    
-</div>
+            </div>
+            @if (totalReadingListCount.Count() > 4)
+        {
+                <hr class="UPI-custom-hr" />
+                <button id="UPI-loadMoreReading" class="UPI-load-more-button" data-current-count="@totalReadingListCount.Count()">More</button>
+        }
+
+        </div>
 }
 
    <!-- Completed Book List -->
@@ -121,3 +127,5 @@
   <button class="UPI-moreBtn">More</button>
 
     <button class="UPI-blockBtn">Block User</button>
+
+<script src="~/js/UserProfile.js" asp-append-version="true"></script>

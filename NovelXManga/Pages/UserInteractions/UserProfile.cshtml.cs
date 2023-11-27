@@ -4,7 +4,6 @@ using MangaModelService;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
 namespace NovelXManga.Pages.UserInteractions
@@ -15,6 +14,7 @@ namespace NovelXManga.Pages.UserInteractions
         private readonly MangaNNovelAuthDBContext Context;
 
         private readonly UserBookListService _bookListService; // Add this line
+        private const string UserIdSessionKey = "UserProfile_UserId";
 
         // Properties to hold the DTOs
         public IEnumerable<UserMangaImageDto> ReadingListDtos { get; private set; }
@@ -35,6 +35,12 @@ namespace NovelXManga.Pages.UserInteractions
         public bool IsLoggedIn { get; set; }
         public string UserRole { get; set; }
 
+        public async Task<JsonResult> OnGetLoadMoreReadingAsync(string userId, int skip, int take)
+        {
+            var additionalBooks = await _bookListService.GetReadingListMangaImages(userId, skip, take);
+            return new JsonResult(additionalBooks);
+        }
+
         public async Task<IActionResult> OnGetAsync(string userId)
         {
             if (string.IsNullOrEmpty(userId))
@@ -48,14 +54,15 @@ namespace NovelXManga.Pages.UserInteractions
             {
                 return NotFound();
             }
-
+            HttpContext.Session.SetString(UserIdSessionKey, userId);
             var roles = await _userManager.GetRolesAsync(UserProfile);
             UserRole = roles.Any() ? string.Join(", ", roles) : "No Roles";
             IsLoggedIn = User.Identity.IsAuthenticated;
             IsProfileOwner = User.FindFirstValue(ClaimTypes.NameIdentifier) == userId;
 
             // Use the service to get DTOs for each list
-            ReadingListDtos = await _bookListService.GetReadingListMangaImages(userId);
+            ReadingListDtos = await _bookListService.GetReadingListMangaImages(userId); // Adjust skip and take as needed
+
             CompletedListDtos = await _bookListService.GetCompletedListMangaImages(userId);
             DroppedListDtos = await _bookListService.GetDroppedListMangaImages(userId);
             FavoriteListDtos = await _bookListService.GetFavoriteListMangaImages(userId);
