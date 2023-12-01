@@ -35,9 +35,17 @@ namespace NovelXManga.Pages.UserInteractions
         public bool IsLoggedIn { get; set; }
         public string UserRole { get; set; }
 
+        //Reading
         public async Task<JsonResult> OnGetLoadMoreReadingAsync(string userId, int skip, int take)
         {
             var additionalBooks = await _bookListService.GetReadingListMangaImages(userId, skip, take);
+            return new JsonResult(additionalBooks);
+        }
+
+        //complete
+        public async Task<JsonResult> OnGetLoadMoreCompletedAsync(string userId, int skip, int take)
+        {
+            var additionalBooks = await _bookListService.GetCompletedListMangaImages(userId, skip, take);
             return new JsonResult(additionalBooks);
         }
 

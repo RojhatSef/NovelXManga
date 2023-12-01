@@ -29,6 +29,17 @@ namespace NovelXManga.Pages.UserInteractions
                 .ToListAsync();
         }
 
+        public async Task<IEnumerable<UserMangaImageDto>> GetCompletedListMangaImages(string userId, int skip, int take)
+        {
+            return await _context.completedBookLists
+                .Where(cl => cl.UserId == userId)
+                .SelectMany(cl => cl.CompleteBookList)
+                .Skip(skip)
+                .Take(take)
+                .Select(m => new UserMangaImageDto { MangaID = m.MangaID, MangaName = m.MangaName, PhotoPath = m.PhotoPath })
+                .ToListAsync();
+        }
+
         public async Task<IEnumerable<UserMangaImageDto>> GetReadingListMangaImages(string userId)
         {
             return await _context.readingLists

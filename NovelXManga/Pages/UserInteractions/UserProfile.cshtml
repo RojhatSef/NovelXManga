@@ -34,40 +34,48 @@
 {
     <div class="UPI-listContainer">  <h3 class="UPI-listTitle">Reading List</h3><hr>
     <div class="UPI-bookList UPI-readingList">
-        
-        @foreach (var item in topReadingListDtos)
-        {
-            <div class="UPI-listItem">
-                <img src="@Url.Content($"~/Images/GeneratedMangaImage/{item.PhotoPath}")" alt="@item.MangaName">
-               <span>@item.MangaName</span>
-            </div>
-        }
+
+                @foreach (var item in topReadingListDtos.Take(4))
+                {
+                    <a class="UPI-listItem" asp-page="/Manga/CurrentManga" asp-route-id="@item.MangaID">
+                        <img src="@Url.Content($"~/Images/GeneratedMangaImage/{item.PhotoPath}")" alt="@item.MangaName">
+                        <span>@item.MangaName</span>
+                    </a>
+                }
             </div>
             @if (totalReadingListCount.Count() > 4)
         {
                 <hr class="UPI-custom-hr" />
-                <button id="UPI-loadMoreReading" class="UPI-load-more-button" data-current-count="@totalReadingListCount.Count()">More</button>
+                <button id="UPI-loadMoreReading" class="UPI-load-more-button" data-user-id="@Model.UserProfile.Id">More</button>
+
         }
 
         </div>
 }
 
    <!-- Completed Book List -->
-@if (Model.CompletedListDtos != null && Model.CompletedListDtos.Any())
-{
-    <div class="UPI-listContainer">
-        <h3 class="UPI-listTitle">Completed List</h3><hr>
-        <div class="UPI-bookList UPI-completedList">
-            @foreach (var item in Model.CompletedListDtos)
+    @if (Model.CompletedListDtos != null && Model.CompletedListDtos.Any())
+    {
+        <div class="UPI-listContainer">
+            <h3 class="UPI-listTitle">Completed List</h3><hr>
+            <div class="UPI-bookList UPI-completedList">
+                @foreach (var item in Model.CompletedListDtos.Take(4))
+                {
+                    <a class="UPI-listItem" asp-page="/Manga/CurrentManga" asp-route-id="@item.MangaID">
+                        <img src="~/Images/GeneratedMangaImage/@item.PhotoPath" alt="@item.MangaName">
+                        <span>@item.MangaName</span>
+                    
+                    </a>
+                }
+            </div>
+            @if (Model.CompletedListDtos.Count() > 4)
             {
-                <div class="UPI-listItem">
-                    <img src="~/Images/GeneratedMangaImage/@item.PhotoPath" alt="@item.MangaName">
-                    <span>@item.MangaName</span>
-                </div>
+                <hr class="UPI-custom-hr" />
+                <button id="UPI-loadMoreCompleted" class="UPI-load-more-button" data-user-id="@Model.UserProfile.Id">More</button>
             }
         </div>
-    </div>
-}
+    }
+
 
 
   <!-- Dropped Book List -->
@@ -78,10 +86,10 @@
         <div class="UPI-bookList UPI-droppedList">
             @foreach (var item in Model.DroppedListDtos)
             {
-                <div class="UPI-listItem">
+                    <a class="UPI-listItem" asp-page="/Manga/CurrentManga" asp-route-id="@item.MangaID">
                     <img src="~/Images/GeneratedMangaImage/@item.PhotoPath" alt="@item.MangaName">
                     <span>@item.MangaName</span>
-                </div>
+                </a>
             }
         </div>
     </div>
