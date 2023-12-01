@@ -142,6 +142,66 @@
     text-align: center; /* Center the text */
 }
 
+.UPI-listContainer.expanded-list {
+    width: 100%;
+    max-width: none; /* Override any max-width set previously */
+    display: block; /* Change display to block for full width */
+}
+
+    /* Adjust .UPI-bookList within an expanded list container */
+    .UPI-listContainer.expanded-list .UPI-bookList {
+        justify-content: start; /* Align items to the start */
+        flex-wrap: wrap; /* Allow wrapping to a new line */
+        overflow-x: hidden; /* Disable horizontal scrolling */
+    }
+
+        /* Ensure .UPI-listItem takes appropriate space */
+        .UPI-listContainer.expanded-list .UPI-bookList .UPI-listItem {
+            flex: 1 0 21%; /* Take up 1/4th of the space per item, adjust as needed */
+            margin: 5px; /* Adjust margin for spacing */
+        }
+@media (min-width: 1400px) {
+    .UPI-listContainer.expanded-list .UPI-bookList {
+        justify-content: space-around; /* Adjust the items spacing */
+    }
+
+        .UPI-listContainer.expanded-list .UPI-bookList .UPI-listItem {
+            flex: 1 0 12%; /* Each item takes about 12% of the space */
+            max-width: 12%; /* Max width set to align with flex basis */
+            margin: 5px; /* Adjust margin for spacing */
+        }
+}
+@media (min-width: 345px) and (max-width: 1300px) {
+    .UPI-listContainer.expanded-list {
+   
+        justify-content: center; /* Center the content horizontally */
+        width: 100%; /* Ensure the list container takes full width */
+    }
+
+        .UPI-listContainer.expanded-list .UPI-bookList {
+            justify-content: center; /* Center items inside the book list */
+            flex-wrap: wrap; /* Wrap items to new line as needed */
+            max-width: 100% !important; /* Ensure the book list takes full width of the container */
+        }
+
+        .UPI-listContainer.expanded-list .UPI-listItem {
+            margin: 5px; /* Adjust margin for spacing */
+            width: auto; /* Width of each item will be auto to fit content */
+        }
+}
+@media (max-width: 768px) {
+    .UPI-listContainer.expanded-list .UPI-bookList .UPI-listItem {
+        flex: 1 0 46%; /* Take up nearly half the space per item */
+    }
+}
+
+/* Adjustments for very small screens */
+@media (max-width: 480px) {
+    .UPI-listContainer.expanded-list .UPI-bookList .UPI-listItem {
+        flex: 1 0 96%; /* Each item takes almost full width */
+    }
+}
+
 @media (max-width: 768px) {
     .UPI-bookList {
         flex-direction: row;

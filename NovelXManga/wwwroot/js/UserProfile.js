@@ -9,6 +9,7 @@ function loadMoreReading() {
     const userId = loadMoreButton.getAttribute('data-user-id');
 
     loadMoreButton.addEventListener("click", function () {
+        adjustLayoutForExpandedList(loadMoreButton.closest('.UPI-listContainer'));
         fetch(`/UserInteractions/UserProfile?handler=LoadMoreReading&userId=${userId}&skip=${skip}&take=${take}`)
             .then(response => response.json())
             .then(data => {
@@ -50,15 +51,15 @@ function loadMoreReading() {
 
 loadMoreReading();
 function loadMoreCompleted() {
-
     let skip = 4; // Starting point for additional items
     const take = 100; // Number of additional items to take
     const loadMoreButton = document.getElementById("UPI-loadMoreCompleted");
-    const customHr = document.querySelector('.UPI-custom-hr'); 
+    const customHr = document.querySelector('.UPI-custom-hr');
     const bookList = document.querySelector('.UPI-completedList');
     const userId = loadMoreButton.getAttribute('data-user-id');
 
     loadMoreButton.addEventListener("click", function () {
+        adjustLayoutForExpandedList(loadMoreButton.closest('.UPI-listContainer'));
         fetch(`/UserInteractions/UserProfile?handler=LoadMoreCompleted&userId=${userId}&skip=${skip}&take=${take}`)
             .then(response => response.json())
             .then(data => {
@@ -99,3 +100,16 @@ function loadMoreCompleted() {
 }
 
 loadMoreCompleted();
+
+function adjustLayoutForExpandedList(currentListContainer) {
+    // Expanding the current list container
+    currentListContainer.classList.add('expanded-list');
+
+    // Hiding other list containers
+    let allListContainers = document.querySelectorAll('.UPI-container .UPI-listContainer');
+    allListContainers.forEach(container => {
+        if (container !== currentListContainer) {
+            container.style.display = 'none';
+        }
+    });
+}
