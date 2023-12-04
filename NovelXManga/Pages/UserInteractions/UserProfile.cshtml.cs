@@ -29,10 +29,11 @@ namespace NovelXManga.Pages.UserInteractions
 
         #endregion Properties to hold the DTOs
 
-        public UserProfileModel(UserManager<UserModel> userManager, UserBookListService bookListService)
+        public UserProfileModel(UserManager<UserModel> userManager, UserBookListService bookListService, MangaNNovelAuthDBContext context)
         {
             _userManager = userManager;
             _bookListService = bookListService; // Add this line
+            Context = context;
         }
 
         [BindProperty]
@@ -89,14 +90,16 @@ namespace NovelXManga.Pages.UserInteractions
             }
 
             UserProfile = await _userManager.Users
-                    .Include(u => u.UserSettings)
-                    .FirstOrDefaultAsync(u => u.Id == userId);
+                       .FirstOrDefaultAsync(u => u.Id == userId);
 
             if (UserProfile == null)
             {
                 return NotFound();
             }
-            UserSettings = await Context.UserSettings.FirstOrDefaultAsync(us => us.UserModelId == userId);
+            UserSettings = await Context.UserSettings
+                               .Include(us => us.UserModel)
+                               .FirstOrDefaultAsync(us => us.UserModelId == UserProfile.Id);
+
             HttpContext.Session.SetString(UserIdSessionKey, userId);
             var roles = await _userManager.GetRolesAsync(UserProfile);
             UserRole = roles.Any() ? string.Join(", ", roles) : "No Roles";

@@ -33,7 +33,7 @@
 
   <!-- Reading List -->
 
- @if(Model.UserProfile?.UserSettings != null && Model.UserProfile.UserSettings.ShowReadingList && Model.ReadingListDtos != null && Model.ReadingListDtos.Any())
+@if(Model.UserSettings != null && Model.UserSettings.ShowReadingList && Model.ReadingListDtos != null && Model.ReadingListDtos.Any())
     {
         <div class="UPI-listContainer">
             <h3 class="UPI-listTitle">Reading List</h3><hr>
@@ -57,7 +57,7 @@
 
 
    <!-- Completed Book List -->
-  @if(Model.UserProfile?.UserSettings != null && Model.UserProfile.UserSettings.ShowCompletedList && Model.CompletedListDtos != null && Model.CompletedListDtos.Any())
+  @if(Model.UserSettings != null && Model.UserSettings.ShowCompletedList && Model.CompletedListDtos != null && Model.CompletedListDtos.Any())
     {
         <div class="UPI-listContainer">
             <h3 class="UPI-listTitle">Completed List</h3><hr>
@@ -82,7 +82,7 @@
 
 
   <!-- Dropped Book List -->
-       @if (Model.DroppedListDtos != null && Model.DroppedListDtos.Any())
+   @if(Model.UserSettings != null && Model.UserSettings.ShowDroppedList && Model.DroppedListDtos != null && Model.DroppedListDtos.Any())
     {
         <div class="UPI-listContainer">
             <h3 class="UPI-listTitle">Dropped List</h3><hr>
@@ -106,7 +106,7 @@
 
 
   <!-- Favorite Book List -->
-      @if (Model.FavoriteListDtos != null && Model.FavoriteListDtos.Any())
+    @if(Model.UserSettings != null && Model.UserSettings.ShowFavoritList && Model.FavoriteListDtos != null && Model.FavoriteListDtos.Any())
     {
         <div class="UPI-listContainer">
             <h3 class="UPI-listTitle">Favorite List</h3><hr>
@@ -131,7 +131,7 @@
 
 
  <!-- Wish Book List -->
-      @if (Model.WishListDtos != null && Model.WishListDtos.Any())
+    @if(Model.UserSettings != null && Model.UserSettings.ShowWishList && Model.WishListDtos != null && Model.WishListDtos.Any())
     {
         <div class="UPI-listContainer">
             <h3 class="UPI-listTitle">Wish List</h3><hr>
@@ -153,8 +153,6 @@
         </div>
     }
 </div>
-  <button class="UPI-moreBtn">More</button>
-
-    <button class="UPI-blockBtn">Block User</button>
-
+<button class="UPI-moreBtn"> <a asp-page="/UserInteractions/UserSettingsPage">Settings</a> </button>
+<button class="UPI-blockBtn">Block User</button>
 <script src="~/js/UserProfile.js" asp-append-version="true"></script>
