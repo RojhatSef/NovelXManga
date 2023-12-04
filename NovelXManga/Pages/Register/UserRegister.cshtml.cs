@@ -58,10 +58,12 @@ namespace NovelXManga.Pages.Register
                             DarkModeEnabled = true,
                             FontSize = 14,
                             ItemsPerPage = 20,
+                            ReadingDirection = MangaReadingDirection.Webtoon,
                         };
 
+                        await context.UserSettings.AddAsync(userSettings); // Using AddAsync with await
                         user.UserSettings = userSettings;
-                        context.UserSettings.Add(userSettings);
+
                         // Save changes to the context
                         await context.SaveChangesAsync(); // Assuming context is not null
 

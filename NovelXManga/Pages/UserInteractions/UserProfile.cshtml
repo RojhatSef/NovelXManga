@@ -1,8 +1,7 @@
 ﻿@page
 @model NovelXManga.Pages.UserInteractions.UserProfileModel
 @{
-    var totalReadingListCount = Model.ReadingListDtos;
-    var topReadingListDtos = Model.ReadingListDtos.Take(4);
+    
 }
 <link rel="stylesheet" href="~/css/UserProfileStyleSheet.css" asp-append-version="true" />
 
@@ -33,31 +32,32 @@
  
 
   <!-- Reading List -->
-@if (topReadingListDtos != null && topReadingListDtos.Any())
-{
-    <div class="UPI-listContainer">  <h3 class="UPI-listTitle">Reading List</h3><hr>
-    <div class="UPI-bookList UPI-readingList">
 
-                @foreach (var item in topReadingListDtos.Take(4))
+ @if(Model.UserProfile?.UserSettings != null && Model.UserProfile.UserSettings.ShowReadingList && Model.ReadingListDtos != null && Model.ReadingListDtos.Any())
+    {
+        <div class="UPI-listContainer">
+            <h3 class="UPI-listTitle">Reading List</h3><hr>
+            <div class="UPI-bookList UPI-readingList">
+                @foreach (var item in Model.ReadingListDtos.Take(4))
                 {
                     <a class="UPI-listItem" asp-page="/Manga/CurrentManga" asp-route-id="@item.MangaID">
-                        <img src="@Url.Content($"~/Images/GeneratedMangaImage/{item.PhotoPath}")" alt="@item.MangaName">
+                        <img src="~/Images/GeneratedMangaImage/@item.PhotoPath" alt="@item.MangaName">
                         <span>@item.MangaName</span>
+                    
                     </a>
                 }
             </div>
-            @if (totalReadingListCount.Count() > 4)
-        {
+            @if (Model.ReadingListDtos.Count() > 4)
+            {
                 <hr class="UPI-custom-hr" />
                 <button id="UPI-loadMoreReading" class="UPI-load-more-button" data-user-id="@Model.UserProfile.Id">More</button>
-
-        }
-
+            }
         </div>
-}
+    }
+
 
    <!-- Completed Book List -->
-    @if (Model.CompletedListDtos != null && Model.CompletedListDtos.Any())
+  @if(Model.UserProfile?.UserSettings != null && Model.UserProfile.UserSettings.ShowCompletedList && Model.CompletedListDtos != null && Model.CompletedListDtos.Any())
     {
         <div class="UPI-listContainer">
             <h3 class="UPI-listTitle">Completed List</h3><hr>

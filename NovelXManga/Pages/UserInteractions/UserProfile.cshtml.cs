@@ -4,6 +4,7 @@ using MangaModelService;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
 namespace NovelXManga.Pages.UserInteractions
@@ -15,8 +16,10 @@ namespace NovelXManga.Pages.UserInteractions
 
         private readonly UserBookListService _bookListService; // Add this line
         private const string UserIdSessionKey = "UserProfile_UserId";
+        public UserSettings UserSettings { get; set; }
 
-        // Properties to hold the DTOs
+        #region Properties to hold the DTOs
+
         public IEnumerable<UserMangaImageDto> ReadingListDtos { get; private set; }
 
         public IEnumerable<UserMangaImageDto> CompletedListDtos { get; private set; }
@@ -24,16 +27,22 @@ namespace NovelXManga.Pages.UserInteractions
         public IEnumerable<UserMangaImageDto> FavoriteListDtos { get; private set; }
         public IEnumerable<UserMangaImageDto> WishListDtos { get; private set; }
 
+        #endregion Properties to hold the DTOs
+
         public UserProfileModel(UserManager<UserModel> userManager, UserBookListService bookListService)
         {
             _userManager = userManager;
             _bookListService = bookListService; // Add this line
         }
 
+        [BindProperty]
         public UserModel UserProfile { get; set; }
+
         public bool IsProfileOwner { get; set; }
         public bool IsLoggedIn { get; set; }
         public string UserRole { get; set; }
+
+        #region OnGetLoadMore Asyncs for Reading, Wish, Dropped, Complete, & Favorite
 
         //Reading
         public async Task<JsonResult> OnGetLoadMoreReadingAsync(string userId, int skip, int take)
@@ -70,6 +79,8 @@ namespace NovelXManga.Pages.UserInteractions
             return new JsonResult(additionalBooks);
         }
 
+        #endregion OnGetLoadMore Asyncs for Reading, Wish, Dropped, Complete, & Favorite
+
         public async Task<IActionResult> OnGetAsync(string userId)
         {
             if (string.IsNullOrEmpty(userId))
@@ -77,12 +88,15 @@ namespace NovelXManga.Pages.UserInteractions
                 return NotFound();
             }
 
-            UserProfile = await _userManager.FindByIdAsync(userId);
+            UserProfile = await _userManager.Users
+                    .Include(u => u.UserSettings)
+                    .FirstOrDefaultAsync(u => u.Id == userId);
 
             if (UserProfile == null)
             {
                 return NotFound();
             }
+            UserSettings = await Context.UserSettings.FirstOrDefaultAsync(us => us.UserModelId == userId);
             HttpContext.Session.SetString(UserIdSessionKey, userId);
             var roles = await _userManager.GetRolesAsync(UserProfile);
             UserRole = roles.Any() ? string.Join(", ", roles) : "No Roles";
