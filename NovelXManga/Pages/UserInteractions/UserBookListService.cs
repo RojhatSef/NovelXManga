@@ -29,6 +29,52 @@ namespace NovelXManga.Pages.UserInteractions
                 .ToListAsync();
         }
 
+        //wish
+        public async Task<IEnumerable<UserMangaImageDto>> GetWishListMangaImages(string userId, int skip, int take)
+        {
+            return await _context.wishBookLists
+                .Where(wl => wl.UserId == userId)
+                .SelectMany(wl => wl.WishBooks)
+                .Skip(skip)
+                .Take(take)
+                .Select(m => new UserMangaImageDto
+                {
+                    MangaID = m.MangaID,
+                    MangaName = m.MangaName,
+                    PhotoPath = m.PhotoPath
+                })
+                .ToListAsync();
+        }
+
+        //Dropped
+        public async Task<IEnumerable<UserMangaImageDto>> GetDroppedListMangaImages(string userId, int skip, int take)
+        {
+            return await _context.droppedBookLists
+                .Where(dl => dl.UserId == userId)
+                .SelectMany(dl => dl._DroppedBooks)
+                .Skip(skip)
+                .Take(take)
+                .Select(m => new UserMangaImageDto
+                {
+                    MangaID = m.MangaID,
+                    MangaName = m.MangaName,
+                    PhotoPath = m.PhotoPath
+                })
+                .ToListAsync();
+        }
+
+        //Favorite
+        public async Task<IEnumerable<UserMangaImageDto>> GetFavoriteListMangaImages(string userId, int skip, int take)
+        {
+            return await _context.favoritBookLists
+                .Where(fl => fl.UserId == userId)
+                .SelectMany(fl => fl.FavoritBooks)
+                .Skip(skip)
+                .Take(take)
+                .Select(m => new UserMangaImageDto { MangaID = m.MangaID, MangaName = m.MangaName, PhotoPath = m.PhotoPath })
+                .ToListAsync();
+        }
+
         public async Task<IEnumerable<UserMangaImageDto>> GetCompletedListMangaImages(string userId, int skip, int take)
         {
             return await _context.completedBookLists

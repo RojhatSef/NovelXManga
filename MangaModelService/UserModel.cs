@@ -13,7 +13,9 @@ namespace MangaModelService
 
         public string? userPhotoPath { get; set; }
 
+        [StringLength(500, ErrorMessage = "Description cannot be more than 500 characters.")]
         public string? Description { get; set; }
+
         public bool IsShadowBanned { get; set; }
         public bool IsDeleted { get; set; }
 

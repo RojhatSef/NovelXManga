@@ -100,7 +100,156 @@ function loadMoreCompleted() {
 }
 
 loadMoreCompleted();
+function loadMoreFavorite() {
+    let skip = 4;
+    const take = 100;
+    const loadMoreButton = document.getElementById("UPI-loadMoreFavorite");
+    const customHr = document.querySelector('.UPI-custom-hr');
+    const bookList = document.querySelector('.UPI-favoriteList');
+    const userId = loadMoreButton.getAttribute('data-user-id');
 
+    loadMoreButton.addEventListener("click", function () {
+        adjustLayoutForExpandedList(loadMoreButton.closest('.UPI-listContainer'));
+        fetch(`/UserInteractions/UserProfile?handler=LoadMoreFavorite&userId=${userId}&skip=${skip}&take=${take}`)
+            .then(response => response.json())
+            .then(data => {
+                loadMoreButton.style.display = "none";
+                customHr.style.display = "none";
+
+                data.forEach(book => {
+                    let anchor = document.createElement('a');
+                    anchor.className = 'UPI-listItem';
+                    anchor.href = `/Manga/CurrentManga?id=${book.mangaID}`;
+
+                    let img = document.createElement('img');
+                    img.src = `/Images/GeneratedMangaImage/${book.photoPath}`;
+                    img.alt = book.mangaName;
+                    anchor.appendChild(img);
+
+                    let span = document.createElement('span');
+                    span.textContent = book.mangaName;
+                    anchor.appendChild(span);
+
+                    bookList.appendChild(anchor);
+                });
+
+                if (data.length < take) {
+                    loadMoreButton.style.display = "none";
+                    customHr.style.display = "none";
+                } else {
+                    loadMoreButton.style.display = "block";
+                    customHr.style.display = "block";
+                }
+
+                skip += take;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    });
+}
+
+loadMoreFavorite();
+function loadMoreDropped() {
+    let skip = 4; // Starting point for additional items
+    const take = 100; // Number of additional items to take
+    const loadMoreButton = document.getElementById("UPI-loadMoreDropped");
+    const customHr = document.querySelector('.UPI-custom-hr');
+    const bookList = document.querySelector('.UPI-droppedList');
+    const userId = loadMoreButton.getAttribute('data-user-id');
+
+    loadMoreButton.addEventListener("click", function () {
+        adjustLayoutForExpandedList(loadMoreButton.closest('.UPI-listContainer'));
+        fetch(`/UserInteractions/UserProfile?handler=LoadMoreDropped&userId=${userId}&skip=${skip}&take=${take}`)
+            .then(response => response.json())
+            .then(data => {
+                loadMoreButton.style.display = "none";
+                customHr.style.display = "none";
+
+                data.forEach(book => {
+                    let anchor = document.createElement('a');
+                    anchor.className = 'UPI-listItem';
+                    anchor.href = `/Manga/CurrentManga?id=${book.mangaID}`;
+
+                    let img = document.createElement('img');
+                    img.src = `/Images/GeneratedMangaImage/${book.photoPath}`;
+                    img.alt = book.mangaName;
+                    anchor.appendChild(img);
+
+                    let span = document.createElement('span');
+                    span.textContent = book.mangaName;
+                    anchor.appendChild(span);
+
+                    bookList.appendChild(anchor);
+                });
+
+                if (data.length < take) {
+                    loadMoreButton.style.display = "none";
+                    customHr.style.display = "none";
+                } else {
+                    loadMoreButton.style.display = "block";
+                    customHr.style.display = "block";
+                }
+
+                skip += take;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    });
+}
+
+loadMoreDropped();
+function loadMoreWish() {
+    let skip = 4; // Starting point for additional items
+    const take = 100; // Number of additional items to take
+    const loadMoreButton = document.getElementById("UPI-loadMoreWish");
+    const customHr = document.querySelector('.UPI-custom-hr');
+    const bookList = document.querySelector('.UPI-wishList');
+    const userId = loadMoreButton.getAttribute('data-user-id');
+
+    loadMoreButton.addEventListener("click", function () {
+        adjustLayoutForExpandedList(loadMoreButton.closest('.UPI-listContainer'));
+        fetch(`/UserInteractions/UserProfile?handler=LoadMoreWish&userId=${userId}&skip=${skip}&take=${take}`)
+            .then(response => response.json())
+            .then(data => {
+                loadMoreButton.style.display = "none";
+                customHr.style.display = "none";
+
+                data.forEach(book => {
+                    let anchor = document.createElement('a');
+                    anchor.className = 'UPI-listItem';
+                    anchor.href = `/Manga/CurrentManga?id=${book.mangaID}`;
+
+                    let img = document.createElement('img');
+                    img.src = `/Images/GeneratedMangaImage/${book.photoPath}`;
+                    img.alt = book.mangaName;
+                    anchor.appendChild(img);
+
+                    let span = document.createElement('span');
+                    span.textContent = book.mangaName;
+                    anchor.appendChild(span);
+
+                    bookList.appendChild(anchor);
+                });
+
+                if (data.length < take) {
+                    loadMoreButton.style.display = "none";
+                    customHr.style.display = "none";
+                } else {
+                    loadMoreButton.style.display = "block";
+                    customHr.style.display = "block";
+                }
+
+                skip += take;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    });
+}
+
+loadMoreWish();
 function adjustLayoutForExpandedList(currentListContainer) {
     // Expanding the current list container
     currentListContainer.classList.add('expanded-list');

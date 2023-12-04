@@ -7,20 +7,23 @@
 <link rel="stylesheet" href="~/css/UserProfileStyleSheet.css" asp-append-version="true" />
 
  <div class="UPI-header">
-        <img asp-append-version="true"
+      
+  <a asp-route-userId="@Model.UserProfile.Id" asp-page="/UserInteractions/UserProfile">  <img asp-append-version="true"
      src="@(!string.IsNullOrEmpty(@Model.UserProfile.userPhotoPath) ? "/Images/GeneratedUserImage/" + @Model.UserProfile.userPhotoPath : "~/Images/UserImage/NoPhoto.png")"
      alt="User Photo" class="UPI-userPhoto">
+</a>
 
     <div class="UPI-userDetails">
       <div class="UPI-userName">@Model.UserProfile.Allias - @Model.UserRole</div>
       <div class="UPI-description">
                 @if (!string.IsNullOrWhiteSpace(Model.UserProfile.Description))
                 {
-                    @Model.UserProfile.Description
+                   @Html.Raw(Model.UserProfile.Description)
+                    <span> dasdsa dasdasdas dasdasdsa dsadasdsad asdasdsadsa dsadsadsad dasdasdasdas </span>
                 }
                 else
                 {
-
+                    <span> No description provided. </span>
                 }
       </div>
     </div>
@@ -79,58 +82,76 @@
 
 
   <!-- Dropped Book List -->
-@if (Model.DroppedListDtos != null && Model.DroppedListDtos.Any())
-{
-    <div class="UPI-listContainer">
-        <h3 class="UPI-listTitle">Dropped List</h3><hr>
-        <div class="UPI-bookList UPI-droppedList">
-            @foreach (var item in Model.DroppedListDtos)
-            {
+       @if (Model.DroppedListDtos != null && Model.DroppedListDtos.Any())
+    {
+        <div class="UPI-listContainer">
+            <h3 class="UPI-listTitle">Dropped List</h3><hr>
+            <div class="UPI-bookList UPI-droppedList">
+                @foreach (var item in Model.DroppedListDtos.Take(4))
+                {
                     <a class="UPI-listItem" asp-page="/Manga/CurrentManga" asp-route-id="@item.MangaID">
-                    <img src="~/Images/GeneratedMangaImage/@item.PhotoPath" alt="@item.MangaName">
-                    <span>@item.MangaName</span>
-                </a>
+                        <img src="~/Images/GeneratedMangaImage/@item.PhotoPath" alt="@item.MangaName">
+                        <span>@item.MangaName</span>
+                    
+                    </a>
+                }
+            </div>
+            @if (Model.DroppedListDtos.Count() > 4)
+            {
+                <hr class="UPI-custom-hr" />
+                <button id="UPI-loadMoreDropped" class="UPI-load-more-button" data-user-id="@Model.UserProfile.Id">More</button>
             }
         </div>
-    </div>
-}
+    }
 
 
   <!-- Favorite Book List -->
-@if (Model.FavoriteListDtos != null && Model.FavoriteListDtos.Any())
-{
-    <div class="UPI-listContainer">
-        <h3 class="UPI-listTitle">Favorite List </h3><hr>
-        <div class="UPI-bookList UPI-favoriteList">
-            @foreach (var item in Model.FavoriteListDtos)
+      @if (Model.FavoriteListDtos != null && Model.FavoriteListDtos.Any())
+    {
+        <div class="UPI-listContainer">
+            <h3 class="UPI-listTitle">Favorite List</h3><hr>
+            <div class="UPI-bookList UPI-favoriteList">
+                @foreach (var item in Model.FavoriteListDtos.Take(4))
+                {
+                    <a class="UPI-listItem" asp-page="/Manga/CurrentManga" asp-route-id="@item.MangaID">
+                        <img src="~/Images/GeneratedMangaImage/@item.PhotoPath" alt="@item.MangaName">
+                        <span>@item.MangaName</span>
+                    
+                    </a>
+                }
+            </div>
+            @if (Model.FavoriteListDtos.Count() > 4)
             {
-                <div class="UPI-listItem">
-                    <img src="~/Images/GeneratedMangaImage/@item.PhotoPath" alt="@item.MangaName">
-                    <span>@item.MangaName</span>
-                </div>
+                <hr class="UPI-custom-hr" />
+                <button id="UPI-loadMoreFavorite" class="UPI-load-more-button" data-user-id="@Model.UserProfile.Id">More</button>
             }
         </div>
-    </div>
-}
+    }
 
 
-  <!-- Wish Book List -->
-@if (Model.WishListDtos != null && Model.WishListDtos.Any())
-{
-    <div class="UPI-listContainer">
-        <h3 class="UPI-listTitle">Wish List</h3><hr>
-        <div class="UPI-bookList UPI-wishList">
-            @foreach (var item in Model.WishListDtos)
+
+ <!-- Wish Book List -->
+      @if (Model.WishListDtos != null && Model.WishListDtos.Any())
+    {
+        <div class="UPI-listContainer">
+            <h3 class="UPI-listTitle">Wish List</h3><hr>
+            <div class="UPI-bookList UPI-wishList">
+                @foreach (var item in Model.WishListDtos.Take(4))
+                {
+                    <a class="UPI-listItem" asp-page="/Manga/CurrentManga" asp-route-id="@item.MangaID">
+                        <img src="~/Images/GeneratedMangaImage/@item.PhotoPath" alt="@item.MangaName">
+                        <span>@item.MangaName</span>
+                    
+                    </a>
+                }
+            </div>
+            @if (Model.WishListDtos.Count() > 4)
             {
-                <div class="UPI-listItem">
-                    <img src="~/Images/GeneratedMangaImage/@item.PhotoPath" alt="@item.MangaName">
-                    <span>@item.MangaName</span>
-                </div>
+                <hr class="UPI-custom-hr" />
+                <button id="UPI-loadMoreWish" class="UPI-load-more-button" data-user-id="@Model.UserProfile.Id">More</button>
             }
         </div>
-    </div>
-}
-
+    }
 </div>
   <button class="UPI-moreBtn">More</button>
 

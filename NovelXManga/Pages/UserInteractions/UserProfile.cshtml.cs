@@ -49,6 +49,27 @@ namespace NovelXManga.Pages.UserInteractions
             return new JsonResult(additionalBooks);
         }
 
+        //Dropped
+        public async Task<JsonResult> OnGetLoadMoreDroppedAsync(string userId, int skip, int take)
+        {
+            var additionalBooks = await _bookListService.GetDroppedListMangaImages(userId, skip, take);
+            return new JsonResult(additionalBooks);
+        }
+
+        //Wish
+        public async Task<JsonResult> OnGetLoadMoreWishAsync(string userId, int skip, int take)
+        {
+            var additionalBooks = await _bookListService.GetWishListMangaImages(userId, skip, take);
+            return new JsonResult(additionalBooks);
+        }
+
+        //Favorite
+        public async Task<JsonResult> OnGetLoadMoreFavoriteAsync(string userId, int skip, int take)
+        {
+            var additionalBooks = await _bookListService.GetFavoriteListMangaImages(userId, skip, take);
+            return new JsonResult(additionalBooks);
+        }
+
         public async Task<IActionResult> OnGetAsync(string userId)
         {
             if (string.IsNullOrEmpty(userId))
