@@ -66,7 +66,7 @@ builder.Services.AddScoped<IPrivateConversationRepository, SQLPrivateConversatio
 
 builder.Services.AddScoped<IReviewRepsitory, SQLReviewRepsitorycs>();
 builder.Services.AddScoped<IPostRepsitory, SQLPostRepsitory>();
-
+builder.Services.AddScoped<CheckUserSettings>();
 builder.Services.AddScoped<UserBookListService>();
 builder.Services.AddScoped<ILanguageRepsitory, SQLLanguageRepsitory>();
 builder.Services.AddScoped<IOfficalWebsiteRepsitory, SQLOfficalWebsiteRepsitory>();

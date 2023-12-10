@@ -1,63 +1,56 @@
+using MangaAccessService;
+using MangaModelService;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using MangaModelService;
-using Microsoft.AspNetCore.Identity;
-using MangaAccessService;
 
 namespace NovelXManga.Pages.UserInteractions
 {
     public class UserSettingsPageModel : PageModel
     {
-        private readonly UserManager<UserModel> _userManager;
+        private readonly CheckUserSettings _checkUserSettings;
         private readonly MangaNNovelAuthDBContext _context;
 
+        [BindProperty]
         public UserSettings UserSettings { get; set; }
 
-        public UserSettingsPageModel(UserManager<UserModel> userManager, MangaNNovelAuthDBContext context)
+        public UserSettingsPageModel(CheckUserSettings checkUserSettings, MangaNNovelAuthDBContext context)
         {
-            _userManager = userManager;
+            _checkUserSettings = checkUserSettings;
             _context = context;
         }
 
         public async Task<IActionResult> OnGetAsync()
         {
-            var user = await _userManager.GetUserAsync(User);
-            if (user == null)
-            {
-                return RedirectToPage("/Index");
-            }
+            UserSettings = await _checkUserSettings.GetUserSettingsAsync(User);
 
-            UserSettings = await _context.UserSettings.FindAsync(user.Id);
             if (UserSettings == null)
             {
-                // Handle the case where UserSettings is not found
+                var referer = Request.Headers["Referer"].ToString();
+                return !string.IsNullOrEmpty(referer) ? Redirect(referer) : RedirectToPage("/Index");
             }
 
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(UserSettings settings)
+        public async Task<IActionResult> OnPostAsync()
         {
-            var user = await _userManager.GetUserAsync(User);
-            if (user == null)
+            var existingSettings = await _checkUserSettings.GetUserSettingsAsync(User);
+
+            if (existingSettings == null)
             {
-                return RedirectToPage("/Index");
+                var referer = Request.Headers["Referer"].ToString();
+                return !string.IsNullOrEmpty(referer) ? Redirect(referer) : RedirectToPage("/Index");
             }
 
-            var currentSettings = await _context.UserSettings.FindAsync(user.Id);
-            if (currentSettings == null)
-            {
-                // Handle the case where UserSettings is not found
-            }
+            // Update the properties of the existing settings
+            existingSettings.DarkModeEnabled = UserSettings.DarkModeEnabled;
+            existingSettings.ShowMatureContent = UserSettings.ShowMatureContent;
+            // ... update other properties as needed ...
 
-            // Update settings
-            currentSettings.DarkModeEnabled = UserSettings.DarkModeEnabled;
-            currentSettings.ShowMatureContent = settings.ShowMatureContent;
-            // ... update other settings ...
+            _context.UserSettings.Update(existingSettings); // Explicitly mark the entity as modified
+            await _context.SaveChangesAsync(); // Save the changes
 
-            await _context.SaveChangesAsync();
-
-            return RedirectToPage("/UserSettingsPage");
+            return Page(); // Redirect to the same page or another page as desired
         }
     }
 }
