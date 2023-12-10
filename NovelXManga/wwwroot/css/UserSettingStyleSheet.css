@@ -3,39 +3,29 @@
 }
 
 .wrapper {
-    padding-top: 40px;
+    padding-top: 24px; /* Adjusted for new toggle size */
     text-align: center;
 }
 
-/* Day State */
+/* Adjusted Toggle Size */
 .toggle {
     position: relative;
     display: inline-block;
-    width: 100px;
-    margin-left: 100px;
-    padding: 4px;
-    border-radius: 40px;
+    width: 60px; /* Reduced from 100px */
+    margin-left: 60px; /* Adjusted proportionally */
+    padding: 2.4px; /* Adjusted proportionally */
+    border-radius: 24px; /* Adjusted for aesthetics */
 }
-
-    .toggle:before,
-    .toggle:after {
-        content: '';
-        display: table;
-    }
-
-    .toggle:after {
-        clear: both;
-    }
 
 .toggle-bg {
     position: absolute;
-    top: -4px;
-    left: -4px;
+    top: -2.4px; /* Adjusted proportionally */
+    left: -2.4px; /* Adjusted proportionally */
     width: 100%;
     height: 100%;
     background-color: #C0E6F6;
-    border-radius: 40px;
-    border: 4px solid #81C0D5;
+    border-radius: 24px; /* Adjusted for aesthetics */
+    border: 2.4px solid #81C0D5; /* Adjusted proportionally */
     transition: all .1s cubic-bezier(0.250, 0.460, 0.450, 0.940);
 }
 
@@ -46,31 +36,30 @@
     width: 100%;
     height: 100%;
     border: 1px solid red;
-    border-radius: 40px;
+    border-radius: 24px; /* Adjusted for aesthetics */
     z-index: 2;
     opacity: 0;
 }
 
 .toggle-switch {
     position: relative;
-    width: 40px;
-    height: 40px;
-    margin-left: 50px;
+    width: 24px; /* Reduced from 40px */
+    height: 24px; /* Reduced from 40px */
+    margin-left: 30px; /* Adjusted proportionally */
     background-color: #F5EB42;
-    border: 4px solid #E4C74D;
+    border: 2px solid #E4C74D; /* Adjusted proportionally */
     border-radius: 50%;
     transition: all .1s cubic-bezier(0.250, 0.460, 0.450, 0.940);
 }
 
 .toggle-switch-figure {
     position: absolute;
-    bottom: -14px;
-    left: -50px;
-    display: block;
-    width: 80px;
-    height: 30px;
-    border: 8px solid #D4D4D2;
-    border-radius: 20px;
+    bottom: -7px; /* Adjusted proportionally */
+    left: -25px; /* Adjusted proportionally */
+    width: 40px; /* Adjusted proportionally */
+    height: 15px; /* Adjusted proportionally */
+    border: 4px solid #D4D4D2; /* Adjusted proportionally */
+    border-radius: 10px; /* Adjusted for aesthetics */
     background-color: #fff;
     transform: scale(0.4);
     transition: all .12s cubic-bezier(0.250, 0.460, 0.450, 0.940);
@@ -80,11 +69,11 @@
         content: '';
         display: block;
         position: relative;
-        top: -65px;
-        right: -42px;
-        width: 15px;
-        height: 15px;
-        border: 8px solid #D4D4D2;
+        top: -33px; /* Adjusted from -65px */
+        right: -21px; /* Adjusted from -42px */
+        width: 8px; /* Adjusted from 15px */
+        height: 8px; /* Adjusted from 15px */
+        border: 4px solid #D4D4D2; /* Adjusted proportionally */
         border-radius: 100%;
         border-right-color: transparent;
         border-bottom-color: transparent;
@@ -96,11 +85,11 @@
         content: '';
         display: block;
         position: relative;
-        top: -25px;
-        right: -10px;
-        width: 30px;
-        height: 30px;
-        border: 8px solid #D4D4D2;
+        top: -13px; /* Adjusted from -25px */
+        right: -5px; /* Adjusted from -10px */
+        width: 15px; /* Adjusted from 30px */
+        height: 15px; /* Adjusted from 30px */
+        border: 4px solid #D4D4D2; /* Adjusted proportionally */
         border-radius: 100%;
         border-right-color: transparent;
         border-bottom-color: transparent;
@@ -109,47 +98,49 @@
     }
 
 .toggle-switch-figureAlt {
-    content: '';
-    position: absolute;
-    top: 5px;
-    left: 2px;
-    width: 2px;
-    height: 2px;
+    top: 1.5px; /* Proportionally adjusted */
+    left: 1px; /* Proportionally adjusted */
+    width: 1px; /* Proportionally adjusted */
+    height: 1px; /* Proportionally adjusted */
     background-color: #EFEEDA;
     border-radius: 100%;
-    border: 4px solid #DEE1C5;
-    box-shadow: 42px -7px 0 -3px #FCFCFC, 75px -10px 0 -3px #FCFCFC, 54px 4px 0 -4px #FCFCFC, 83px 7px 0 -2px #FCFCFC, 63px 18px 0 -4px #FCFCFC, 44px 28px 0 -2px #FCFCFC, 78px 23px 0 -3px #FCFCFC;
+    border: 2px solid #DEE1C5; /* Proportionally adjusted */
+    box-shadow: 21px -3.5px 0 -1.5px #FCFCFC, /* Proportionally adjusted */
+    37.5px -5px 0 -1.5px #FCFCFC, /* Proportionally adjusted */
+    27px 2px 0 -2px #FCFCFC, /* Proportionally adjusted */
+    41.5px 3.5px 0 -1px #FCFCFC, /* Proportionally adjusted */
+    31.5px 9px 0 -2px #FCFCFC, /* Proportionally adjusted */
+    22px 14px 0 -1px #FCFCFC, /* Proportionally adjusted */
+    39px 11.5px 0 -1.5px #FCFCFC; /* Proportionally adjusted */
     transition: all .12s cubic-bezier(0.250, 0.460, 0.450, 0.940);
-    transform: scale(0);
+    transform: scale(0); /* Initial state is scaled down */
 }
-
     .toggle-switch-figureAlt:before {
         content: '';
         position: absolute;
-        top: -6px;
-        left: 18px;
-        width: 7px;
-        height: 7px;
+        top: -1.5px; /* Proportionally adjusted */
+        left: 9px; /* Proportionally adjusted */
+        width: 3.5px; /* Proportionally adjusted */
+        height: 3.5px; /* Proportionally adjusted */
         background-color: #EFEEDA;
         border-radius: 100%;
-        border: 4px solid #DEE1C5;
+        border: 2px solid #DEE1C5; /* Proportionally adjusted */
     }
 
     .toggle-switch-figureAlt:after {
         content: '';
         position: absolute;
-        top: 19px;
-        left: 15px;
-        width: 2px;
-        height: 2px;
+        top: 9.5px; /* Proportionally adjusted */
+        left: 7.5px; /* Proportionally adjusted */
+        width: 1px; /* Proportionally adjusted */
+        height: 1px; /* Proportionally adjusted */
         background-color: #EFEEDA;
         border-radius: 100%;
-        border: 4px solid #DEE1C5;
+        border: 2px solid #DEE1C5; /* Proportionally adjusted */
     }
-
-/* Night State */
+/* Night State Styles */
 .toggle-input:checked ~ .toggle-switch {
-    margin-left: 0;
+    margin-left: 0; /* Remains the same */
     border-color: #DEE1C5;
     background-color: #FFFDF2;
 }
@@ -160,7 +151,7 @@
 }
 
 .toggle-input:checked ~ .toggle-switch .toggle-switch-figure {
-    margin-left: 40px;
+    margin-left: 24px; /* Adjusted from 40px */
     opacity: 0;
     transform: scale(0.1);
 }
