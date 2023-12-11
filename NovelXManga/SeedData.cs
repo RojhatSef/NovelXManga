@@ -93,15 +93,39 @@ namespace NovelXManga
 
         public void addLanguages()
         {
-            string[] LanguagesInput = { "English", "Japanese", "Spanish", "Chinese", "Russian", "French", "Arabic", "Korean", "Hindi", "Bengali", "Portuguese", "Indonesian", "Urdu", };
-            string[] FlaguniCode = { "🇺🇸", "🇯🇵", "🇪🇸", "🇨🇳", "🇷🇺", "🇫🇷", "🇸🇦", "🇰🇷", "🇮🇳", "🇧🇩", "🇵🇹", "🇮🇩", "🇵🇰", };
+            string[] LanguagesInput = {
+        // Add the top 150 languages in alphabetical order here
+        "Ainu", "Azerbaijani", "Arabic", "Armenian", "Baltic", "Bashkir", "Bengali", "Bulgarian", "Burmese", "Croatian",
+        "Chukotko-Kamchatkan", "Chinese", "Czech", "Danish", "Dravidian", "Dutch", "English", "Eskimo-Aleut", "Estonian",
+        "Farsi", "Finnish", "French", "Georgian", "German", "Greek", "Gujarati", "Hebrew", "Hindi", "Hungarian", "Indo-Aryan",
+        "Indonesian", "Italian", "Icelandic", "Japanese", "Japonic", "Khmer", "Khoisan", "Kazakh", "Kordofanian", "Korean",
+        "Kurdish", "Kyrgyz", "Lao", "Latvian", "Lithuanian", "Malay", "Malayo-Polynesian", "Marathi", "Mongolic", "Mongolian",
+        "Nepali", "Niger-Congo", "Nilo-Saharan", "Norwegian", "Omotic", "Pashto", "Polish", "Portuguese", "Punjabi", "Romanian",
+        "Russian", "Semitic", "Serbian", "Sinhalese", "Slovak", "Slovenian", "Sino-Tibetan", "Slavic", "Spanish", "Swahili",
+        "Swedish", "Semitic", "Tai-Kadai", "Tadjik", "Tagalog", "Tamil", "Turkic", "Turkmen", "Tungusic", "Tibetic", "Tatar",
+        "Thai", "Uighur", "Ukrainian", "Urdu", "Uralic", "Uzbek", "Vietnamese"
+    };
+            string[] FlagUnicode = {
+    "🇦🇫", "🇦🇿", "🇸🇦", "🇦🇲", "🇱🇧", "🇧🇷", "🇧🇬", "🇧🇩", "🇧🇾", "🇧🇪", "🇷🇺", "🇨🇳", "🇮🇷", "🇵🇰",
+    "🇰🇭", "🇨🇲", "🇨🇦", "🇨🇫", "🇹🇩", "🇨🇴", "🇨🇬", "🇨🇷", "🇭🇷", "🇨🇺", "🇨🇾", "🇨🇿", "🇩🇰", "🇩🇯",
+    "🇳🇱", "🇩🇲", "🇪🇨", "🇪🇬", "🇸🇻", "🇬🇮", "🇬🇷", "🇬🇵", "🇬🇪", "🇬🇹", "🇭🇳", "🇭🇰", "🇭🇺", "🇮🇸",
+    "🇮🇩", "🇮🇪", "🇮🇱", "🇮🇳", "🇮🇶", "🇮🇹", "🇨🇮", "🇯🇲", "🇯🇵", "🇯🇪", "🇯🇴", "🇰🇿", "🇰🇪", "🇰🇮",
+    "🇰🇼", "🇰🇬", "🇱🇦", "🇱🇻", "🇱🇧", "🇱🇸", "🇱🇷", "🇱🇾", "🇱🇹", "🇱🇺", "🇲🇰", "🇲🇬", "🇲🇾", "🇲🇻",
+    "🇲🇱", "🇲🇹", "🇲🇷", "🇲🇺", "🇲🇽", "🇲🇩", "🇲🇳", "🇲🇲", "🇲🇪", "🇳🇦", "🇳🇷", "🇳🇵", "🇳🇮", "🇳🇪",
+    "🇳🇬", "🇳🇴", "🇴🇲", "🇵🇰", "🇵🇦", "🇵🇬", "🇵🇾", "🇵🇪", "🇵🇭", "🇵🇱", "🇵🇹", "🇵🇷", "🇶🇦", "🇷🇴",
+    "🇷🇺", "🇷🇼", "🇼🇸", "🇸🇲", "🇸🇦", "🇷🇸", "🇸🇨", "🇸🇱", "🇸🇬", "🇸🇰", "🇸🇮", "🇬🇸", "🇸🇴", "🇿🇦",
+    "🇰🇷", "🇸🇸", "🇪🇸", "🇱🇰", "🇸🇭", "🇰🇳", "🇵🇲", "🇻🇨", "🇸🇩", "🇸🇷", "🇸🇿", "🇸🇪", "🇨🇭", "🇸🇾",
+    "🇹🇼", "🇹🇯", "🇹🇲", "🇹🇬", "🇹🇭", "🇹🇱", "🇹🇳", "🇹🇷", "🇹🇷", "🇹🇻", "🇺🇦", "🇦🇪", "🇬🇧", "🇹🇿",
+    "🇺🇬", "🇺🇾", "🇺🇿", "🇻🇦", "🇻🇨", "🇻🇪", "🇻🇳", "🇾🇪", "🇿🇲", "🇿🇼"
+};
+
             var LangList = new List<Languages>();
             for (int i = 0; i < LanguagesInput.Length; i++)
             {
                 Languages newLang = new Languages();
 
                 newLang.LanguageName = LanguagesInput[i];
-                newLang.FlagUniCode = FlaguniCode[i];
+                newLang.FlagUniCode = FlagUnicode[i];
                 LangList.Add(newLang);
             }
             context.Languages_.AddRange(LangList);

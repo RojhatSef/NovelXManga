@@ -16,9 +16,37 @@
     <form method="post" class="USI-form">
         <div class="form-group">
             <label>Show Mature Content</label>
-            <input type="checkbox" asp-for="UserSettings.ShowMatureContent" />
+            <input class="USE-Switch" type="checkbox" asp-for="UserSettings.ShowMatureContent" />
+             
+
         </div>
-        <div class="wrapper">
+         <div class="form-group">
+            <label>Show Favorite List</label>
+            <input class="USE-Switch" type="checkbox" asp-for="UserSettings.ShowFavoritList" />
+        </div>
+           <div class="form-group">
+            <label>Show Dropped List</label>
+            <input class="USE-Switch" type="checkbox" asp-for="UserSettings.ShowDroppedList" />
+        </div>
+           <div class="form-group">
+            <label>Show Reading List</label>
+            <input class="USE-Switch" type="checkbox" asp-for="UserSettings.ShowReadingList" />
+        </div>
+         <div class="form-group">
+            <label>Show Wish List</label>
+            <input class="USE-Switch" type="checkbox" asp-for="UserSettings.ShowWishList" />
+        </div>
+         <div class="form-group">
+            <label>Show Completed List</label>
+            <input class="USE-Switch" type="checkbox" asp-for="UserSettings.ShowCompletedList" />
+        </div>
+                 <div class="form-group">
+            <label>Show Review/s</label>
+            <input class="USE-Switch" type="checkbox" asp-for="UserSettings.ShowReviews" />
+        </div>
+        <div class="form-group">
+            <label>Dark Mode Enabled</label>
+             <div class="wrapper">
             <div class="toggle">
                 <input type="checkbox" asp-for="UserSettings.DarkModeEnabled" class="toggle-input" />
 
@@ -29,6 +57,26 @@
                 </div>
             </div>
         </div>
+        </div>
+
+        <!-- Font Size Dropdown -->
+      <div class="form-group">
+    <label>Font Size</label>
+    <select asp-for="UserSettings.FontSize" asp-items="Model.FontSizes"></select>
+</div>
+
+        <!-- Items Per Page Dropdown -->
+        <div class="form-group">
+    <label>Items Per Page</label>
+    <select asp-for="UserSettings.ItemsPerPage" asp-items="Model.ItemsPerPageOptions"></select>
+</div>
+
+        <!-- Manga Reading Direction Dropdown -->
+        <div class="form-group">
+            <label>Manga Reading Direction</label>
+            <select asp-for="UserSettings.ReadingDirection" asp-items="Html.GetEnumSelectList<MangaReadingDirection>()"></select>
+        </div>
+      
         <!-- Repeat for other settings as needed -->
 
         <button type="submit" class="btn btn-primary">Save Settings</button>
