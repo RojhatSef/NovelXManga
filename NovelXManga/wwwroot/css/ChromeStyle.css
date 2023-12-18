@@ -6,10 +6,26 @@
         font-weight: 800 !important;
         line-height: normal;
         font-size: 12px;
-        background-color: #191a1c;
+        background-color: var(--background-color);
         overflow-x: hidden;
+        color: var(--text-color);
     }
 
+    :root {
+        --background-color: #191a1c; /* Default background color for dark mode */
+        --text-color: white; /* Default text color for dark mode */
+        --card-body-bg: white;
+        --card-body-color: #191a1c;
+        --card-body-hover-bg: #191a1c;
+        --card-body-hover-color: rgb(255, 103, 64);
+    }
+    .light-mode {
+        /* Light mode theme */
+        --card-body-bg: #191a1c;
+        --card-body-color: white;
+        --card-body-hover-bg: white;
+        --card-body-hover-color: #191a1c;
+    }
     .popup {
         display: none;
         position: fixed;
@@ -31,7 +47,7 @@
     .dropdown-content {
         display: none;
         position: absolute;
-        background-color: #191a1c;
+        background-color: var(--background-color);
         width: 40%;
         top: 100%;
         right: 3.5%;
@@ -165,7 +181,7 @@
         font-size: 12px;
         color: whitesmoke;
         text-align: center;
-        background-color: #191a1c;
+        background-color: var(--background-color);
         overflow: visible;
     }
 
@@ -174,7 +190,7 @@
     }
 
     .main-content > div {
-        background-color: #191a1c;
+        background-color: var(--background-color);
     }
 
     .main-content {
@@ -199,7 +215,7 @@
 
     .Content1Cost, .Content2Cost, .Content3Cost, .Content4Cost {
         flex: 1;
-        background-color: #191a1c;
+        background-color: var(--background-color);
         border-radius: var(--main-radius);
         padding-top: var(--main-padding);
         display: flex;
@@ -207,6 +223,7 @@
         padding: 1rem;
         padding-left: 2.5%;
         padding-right: 2.5%;
+        color: var(--text-color);
     }
 
     .ContentDescription {
@@ -272,7 +289,7 @@
     }
 
         .LayoutXButtonNoBackground:hover {
-            background-color: #191a1c !important;
+             background-color: var(--background-color) !important;
             border-radius: 25px;
         }
     /* Login STARTS HERE*/
@@ -323,7 +340,7 @@
 
     .LoginForgotRegiContainer {
         height: 550px;
-        background-color: #191a1c;
+        background-color: var(--background-color);
         width: 30%;
         justify-content: center;
         display: flex;
@@ -541,7 +558,7 @@
         display: none; /* Hide by default */
         position: absolute; /* Positioning relative to its parent */
         right: 0; /* Align to the right side */
-        background-color: #191a1c;
+        background-color: var(--background-color);
         color: white;
         min-width: 160px;
         box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
@@ -801,22 +818,22 @@
     justify-content: space-evenly;
     --dynamic-font-size: min(calc(1em + 1vw), 24px);
 }
-
 .CardBody-Ex {
     display: flex;
     align-items: center;
     flex-grow: 1;
     flex: 1 1 auto;
     text-align: center;
-    background-color: white;
-    color: #191a1c;
+    background-color: var(--card-body-bg);
+    color: var(--card-body-color);
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition */
 }
 
     .CardBody-Ex:hover {
-        background-color: #191a1c;
-        color: rgb(255, 103, 64) !important;
-        border-top: solid rgb(255, 103, 64) !important;
-        border-bottom: solid rgb(255, 103, 64) !important;
+        background-color: var(--card-body-hover-bg);
+        color: var(--card-body-hover-color);
+        border-top: solid var(--card-body-hover-color);
+        border-bottom: solid var(--card-body-hover-color);
         border-radius: 2px;
     }
 
@@ -1877,7 +1894,7 @@
     margin-bottom: 20px;
     resize: none;
     font-size: 18px;
-    background-color: #191a1c;
+    --background-color: #191a1c;
     color: #fff;
     font-family: Lato !important;
     border-color: #ff6740;
@@ -1892,7 +1909,7 @@
     margin-bottom: 20px;
     resize: none;
     font-size: 18px;
-    background-color: #191a1c;
+    --background-color: #191a1c;
     color: #fff;
     font-family: Lato !important;
     border-color: #ff6740;

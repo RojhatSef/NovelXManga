@@ -15,40 +15,54 @@
 
     <form method="post" class="USI-form">
         <div class="form-group">
-            <label>Show Mature Content</label>
+            <div class="USI-label-input-pair">
+                <label class="=TextColor">Show Mature Content</label>
             <input class="USE-Switch" type="checkbox" asp-for="UserSettings.ShowMatureContent" />
              
-
+            </div>
         </div>
          <div class="form-group">
-            <label>Show Favorite List</label>
+            <div class="USI-label-input-pair">
+                <label class="=TextColor">Show Favorite List</label>
             <input class="USE-Switch" type="checkbox" asp-for="UserSettings.ShowFavoritList" />
+            </div>
         </div>
            <div class="form-group">
-            <label>Show Dropped List</label>
+            <div class="USI-label-input-pair">
+                <label class="=TextColor">Show Dropped List</label>
             <input class="USE-Switch" type="checkbox" asp-for="UserSettings.ShowDroppedList" />
+            </div>
         </div>
            <div class="form-group">
-            <label>Show Reading List</label>
+            <div class="USI-label-input-pair">
+                <label class="=TextColor">Show Reading List</label>
             <input class="USE-Switch" type="checkbox" asp-for="UserSettings.ShowReadingList" />
+            </div>
         </div>
          <div class="form-group">
-            <label>Show Wish List</label>
+                  <div class="USI-label-input-pair">
+                <label class="=TextColor">Show Wish List</label>
             <input class="USE-Switch" type="checkbox" asp-for="UserSettings.ShowWishList" />
+            </div>
         </div>
          <div class="form-group">
-            <label>Show Completed List</label>
+            <div class="USI-label-input-pair">
+                <label class="=TextColor">>Show Completed List</label>
             <input class="USE-Switch" type="checkbox" asp-for="UserSettings.ShowCompletedList" />
+            </div>
         </div>
                  <div class="form-group">
-            <label>Show Review/s</label>
+            <div class="USI-label-input-pair">
+                <label class="=TextColor">Show Review/s</label>
             <input class="USE-Switch" type="checkbox" asp-for="UserSettings.ShowReviews" />
+            </div>
         </div>
         <div class="form-group">
-            <label>Dark Mode Enabled</label>
+            <div class="USI-dark-mode-toggle">
+                <label class="=TextColor">Dark Mode Enabled</label>
              <div class="wrapper">
             <div class="toggle">
-                <input type="checkbox" asp-for="UserSettings.DarkModeEnabled" class="toggle-input" />
+                        <input type="checkbox" asp-for="UserSettings.DarkModeEnabled" class="toggle-input TextColor" />
 
                 <div class="toggle-bg"></div>
                 <div class="toggle-switch">
@@ -57,6 +71,7 @@
                 </div>
             </div>
         </div>
+            </div>
         </div>
 
         <!-- Font Size Dropdown -->
@@ -83,5 +98,4 @@
     </form>
 </div>
 
-
-<script src="~/js/UserSettings.JavaScript.js" asp-append-version="true"></script>
+<script src="~/js/UserSettingToggle.js" asp-append-version="true"></script>

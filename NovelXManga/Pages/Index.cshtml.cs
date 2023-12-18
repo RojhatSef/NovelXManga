@@ -17,17 +17,22 @@ namespace NovelXManga.Pages
         private readonly IMangaRepository mangaRepository;
         private readonly IWebHostEnvironment webHostEnvironment;
         private readonly ILogger<IndexModel> _logger;
+        private readonly CheckUserSettings _checkUserSettings;
 
         [BindProperty]
         [TempData]
         public string SucessFulManga { get; set; }
 
-        public IndexModel(ILogger<IndexModel> logger, IMangaRepository mangaRepository, IWebHostEnvironment webHostEnvironment, MangaNNovelAuthDBContext context)
+        [BindProperty]
+        public UserSettings UserSettings { get; set; }
+
+        public IndexModel(ILogger<IndexModel> logger, IMangaRepository mangaRepository, IWebHostEnvironment webHostEnvironment, MangaNNovelAuthDBContext context, CheckUserSettings checkUserSettings)
         {
             _logger = logger;
             this.mangaRepository = mangaRepository;
             this.webHostEnvironment = webHostEnvironment;
             this.context = context;
+            _checkUserSettings = checkUserSettings;
         }
 
         public async Task<JsonResult> OnGetSearchMangaAsync(string searchTerm)
@@ -95,6 +100,23 @@ namespace NovelXManga.Pages
 
         public async Task OnGetAsync()
         {
+            UserSettings = await _checkUserSettings.GetUserSettingsAsync(User);
+
+            // If UserSettings is null (i.e., the user is not logged in or no settings are saved), set defaults
+            if (UserSettings == null)
+            {
+                // Set default UserSettings values for a guest or when settings are not found
+                UserSettings = new UserSettings
+                {
+                    DarkModeEnabled = true, // Default to dark mode
+                                            // Set other default values as needed
+                };
+            }
+
+            // Pass the dark mode setting to the frontend via ViewData or a model property
+            ViewData["IsDarkModeEnabled"] = UserSettings.DarkModeEnabled;
+
+            // Continue with your existing code
             GetAllBooks = await mangaRepository.IndexMangaDtoIncludedAsync();
             AllBooksList = GetAllBooks.ToList();
             WallPapers = await context.WallPapers.ToListAsync();

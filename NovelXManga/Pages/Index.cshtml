@@ -2,10 +2,15 @@
 @model IndexModel
 @using Microsoft.AspNetCore.Identity
 @inject SignInManager<UserModel> SignInManager
+@inject CheckUserSettings UserSettingsService
 @{
     ViewData["Title"] = "Home page";
+    var isDarkModeEnabled = ViewData["IsDarkModeEnabled"] as bool? ?? true;
 }
 <link rel="stylesheet" href="~/css/IndexStyleSheet.css" asp-append-version="true" />
+
+<div class="theme-container" data-dark-mode="@isDarkModeEnabled">
+
 
 
 @if (Model.AllBooksList != null)
@@ -220,6 +225,8 @@
         </div>
     </div>
 </div>
+</div>
+<script src="~/js/UserSettings.JavaScript.js" asp-append-version="true"></script>
 <script src="~/js/site.js" asp-append-version="true"></script>
 <script src="~/js/IndexJavaScripts.js" asp-append-version="true"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

@@ -78,7 +78,6 @@ namespace NovelXManga.Pages.UserInteractions
             existingSettings.ShowFavoritList = UserSettings.ShowFavoritList;
             existingSettings.FontSize = UserSettings.FontSize;
             existingSettings.ItemsPerPage = UserSettings.ItemsPerPage;
-            existingSettings. = UserSettings.ItemsPerPage;
 
             // ... update other properties as needed ...
 
