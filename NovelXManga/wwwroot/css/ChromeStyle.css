@@ -19,13 +19,25 @@
         --card-body-hover-bg: #191a1c;
         --card-body-hover-color: rgb(255, 103, 64);
     }
-    .light-mode {
-        /* Light mode theme */
-        --card-body-bg: #191a1c;
-        --card-body-color: white;
-        --card-body-hover-bg: white;
-        --card-body-hover-color: #191a1c;
+
+    body.dark-mode {
+        --background-color: #191a1c;
+        --text-color: whitesmoke;
     }
+
+        body.dark-mode .main-content {
+            --text-color: whitesmoke; /* Text color for dark mode */
+        }
+
+    body.light-mode .main-content {
+        --text-color: black; /* Text color for light mode */
+    }
+
+    body.light-mode {
+        --background-color: white;
+        --text-color: black;
+    }
+
     .popup {
         display: none;
         position: fixed;
@@ -199,7 +211,7 @@
         height: 100%;
         font-weight: 800;
         font-size: 12px;
-        color: whitesmoke;
+        color: var(--text-color);
         text-align: center;
     }
 
@@ -289,7 +301,7 @@
     }
 
         .LayoutXButtonNoBackground:hover {
-             background-color: var(--background-color) !important;
+            background-color: var(--background-color) !important;
             border-radius: 25px;
         }
     /* Login STARTS HERE*/
@@ -395,7 +407,7 @@
     .sidebar-toggle {
         cursor: pointer;
         background-color: transparent;
-        color: white;
+        color: whitesmoke;
         border: none;
         border-radius: 3px;
         margin-top: 3px;
@@ -818,6 +830,7 @@
     justify-content: space-evenly;
     --dynamic-font-size: min(calc(1em + 1vw), 24px);
 }
+
 .CardBody-Ex {
     display: flex;
     align-items: center;

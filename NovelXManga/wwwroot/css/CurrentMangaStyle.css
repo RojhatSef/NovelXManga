@@ -14,6 +14,59 @@
     .CUS-CustomHintLabel {
         color: rgb(255, 103, 64);
     }
+    /* Add some styles for the dropdown button and content */
+    .CUS-dropbtn {
+        background-color: #ff6740;
+        color: white;
+        padding: 16px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+        
+    }
+
+    .CUS-dropdown {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 9999; /* High z-index to ensure it's on top */
+        transition: 0.5s;
+        border-radius: 5px;
+    }
+
+    .CUS-dropdown-content {
+        cursor: pointer;
+        display: none;
+        min-width: 160px;
+        border-radius: 5px;
+        z-index: 9999; /* Ensuring dropdown content is also on top */
+    }
+
+        .CUS-dropdown-content .CUS-dropdown-item {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            background-color: #ff6740;
+            display: block;
+            border:none; 
+            width: 100%;
+            cursor: pointer;
+           
+      
+          
+        }
+
+            .CUS-dropdown-content .CUS-dropdown-item:hover {
+                background-color: #e94e24;
+            }
+
+    .CUS-show {
+        display: block;
+    }
+    .CUS-dropdown-content .CUS-dropdown-item:last-child {
+        border-bottom: none; /* No border for the last item */
+    }
 
     .CUS-custom-hr {
         border-top: 2px solid #ff6740;
@@ -203,7 +256,6 @@
         flex: 1;
     }
 
-
     .CUS-AddSizeCurrentpage {
         margin-right: 10px; /* To ensure spacing between the buttons */
         height: 50px;
@@ -215,42 +267,18 @@
         box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
         width: 100%;
         box-sizing: border-box;
-        z-index: 9999;
+        z-index: 10;
         padding-bottom: 20px; /* Extra space at the bottom */
     }
 
         .CUS-AddSizeCurrentpage form {
             background-color: #ff6740;
-            color: white;
+            color: black;
             text-decoration: none;
             display: block;
         }
 
 
-    .CUS-AddToReadListButton {
-        /* Add any specific button styles here, such as color, padding, font-size, etc. */
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 25px 30px;
-        background-color: #ff6740;
-        color: white;
-        font-weight: bold;
-        border: none;
-        border-radius: 5px;
-        overflow: hidden;
-        transition: 0.5s;
-        cursor: pointer;
-        height: 100%;
-        width: 100%;
-    }
-
-        .CUS-AddToReadListButton:hover {
-            background: #ff6740;
-            color: #050801;
-            box-shadow: 0 0 5px #ff6740, 0 0 25px #ff6740, 0 0 50px #ff6740, 0 0 200px #ff6740;
-            -webkit-box-reflect: below 1px linear-gradient(transparent, #0005);
-        }
 
     .CUS-EditSizeCurrentpage {
         display: inline-block; /* This will ensure the divs are in a line */

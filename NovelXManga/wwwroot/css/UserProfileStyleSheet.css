@@ -1,4 +1,18 @@
-﻿.UPI-container {
+﻿:root {
+    /* Define color variables for easy theme management */
+    --background-color: #ffffff; /* Light mode background */
+    --text-color: #000000; /* Light mode text */
+    --primary-color: #ff6740; /* Primary accent color */
+    --secondary-color: #ff5c33; /* Secondary accent color */
+}
+
+[data-theme='dark'] {
+    /* Dark theme variables */
+    --background-color: #191a1c; /* Dark mode background */
+    --text-color: #ffffff; /* Dark mode text */
+}
+
+.UPI-container {
     width: 100%;
     margin: auto;
     padding: 10px;
@@ -160,6 +174,7 @@
             flex: 1 0 21%; /* Take up 1/4th of the space per item, adjust as needed */
             margin: 5px; /* Adjust margin for spacing */
         }
+
 @media (min-width: 1400px) {
     .UPI-listContainer.expanded-list .UPI-bookList {
         justify-content: space-around; /* Adjust the items spacing */
@@ -171,9 +186,9 @@
             margin: 5px; /* Adjust margin for spacing */
         }
 }
+
 @media (min-width: 345px) and (max-width: 1300px) {
     .UPI-listContainer.expanded-list {
-   
         justify-content: center; /* Center the content horizontally */
         width: 100%; /* Ensure the list container takes full width */
     }
@@ -189,6 +204,7 @@
             width: auto; /* Width of each item will be auto to fit content */
         }
 }
+
 @media (max-width: 768px) {
     .UPI-listContainer.expanded-list .UPI-bookList .UPI-listItem {
         flex: 1 0 46%; /* Take up nearly half the space per item */

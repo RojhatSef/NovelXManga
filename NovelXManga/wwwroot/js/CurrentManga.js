@@ -101,3 +101,44 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Rest of your existing code...
 });
+function toggleDropdown() {
+    var dropdown = document.getElementById("myDropdown");
+    var dropbtn = document.querySelector('.CUS-dropbtn'); // Get the dropdown button
+
+    // Toggle the 'show' class for the dropdown content
+    dropdown.classList.toggle("CUS-show");
+
+    // Toggle a 'hidden' class for the dropdown button
+    dropbtn.classList.toggle("CUS-hidden");
+
+    // If the dropdown is shown, add an event listener to the document
+    if (dropdown.classList.contains("CUS-show")) {
+        function handleClickOutside(event) {
+            if (!dropdown.contains(event.target) && !event.target.matches('.CUS-dropbtn')) {
+                // If the clicked element isn't the dropdown or the button, hide the dropdown content and show the button
+                dropdown.classList.remove("CUS-show");
+                dropbtn.classList.remove("CUS-hidden"); // Show the button again
+                document.removeEventListener('click', handleClickOutside);
+            }
+        }
+        document.addEventListener('click', handleClickOutside);
+    } else {
+        // If the dropdown is not shown (meaning it was just hidden), ensure the button is visible
+        dropbtn.classList.remove("CUS-hidden");
+    }
+}
+
+window.onclick = function (event) {
+    if (!event.target.matches('.CUS-dropbtn')) {
+        var dropdowns = document.getElementsByClassName("CUS-dropdown-content");
+        var buttons = document.getElementsByClassName("CUS-dropbtn");
+        for (var i = 0; i < dropdowns.length; i++) {
+            var openDropdown = dropdowns[i];
+            var button = buttons[i]; // Assuming there's one button per dropdown
+            if (openDropdown.classList.contains('CUS-show')) {
+                openDropdown.classList.remove('CUS-show');
+                button.classList.remove('CUS-hidden'); // Show the button when dropdown is hidden
+            }
+        }
+    }
+};

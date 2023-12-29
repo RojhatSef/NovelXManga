@@ -5,11 +5,11 @@
 @inject CheckUserSettings UserSettingsService
 @{
     ViewData["Title"] = "Home page";
-    var isDarkModeEnabled = ViewData["IsDarkModeEnabled"] as bool? ?? true;
+   
 }
 <link rel="stylesheet" href="~/css/IndexStyleSheet.css" asp-append-version="true" />
 
-<div class="theme-container" data-dark-mode="@isDarkModeEnabled">
+
 
 
 
@@ -225,7 +225,7 @@
         </div>
     </div>
 </div>
-</div>
+
 <script src="~/js/UserSettings.JavaScript.js" asp-append-version="true"></script>
 <script src="~/js/site.js" asp-append-version="true"></script>
 <script src="~/js/IndexJavaScripts.js" asp-append-version="true"></script>

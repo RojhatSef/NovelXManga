@@ -52,104 +52,91 @@
                     }
                 </div>
             <div class="CUS-AddEditReportCurrentpage">
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <div class="CUS-dropdown">
+                        <button class="CUS-dropbtn" onclick="toggleDropdown()">Manage Lists</button>
+                        <div id="myDropdown" class="CUS-dropdown-content">
+                            <!-- Toggle Reading List -->
+                            <form method="post" asp-page-handler="AddToReadingList" asp-route-id="@Model.CurrentManga.MangaID">
+                                <input type="hidden" asp-for="CurrentManga.MangaID" />
+                                <input type="hidden" name="readingListName" value="Reading List" />
+                                <button type="submit" class="CUS-dropdown-item">
+                                    @if (Model.IsInReadingList)
+                                    {
+                                        <span>Remove from Library</span>
+                                    }
+                                    else
+                                    {
+                                        <span>Add to Library</span>
+                                    }
+                                </button>
+                            </form>
+                            <!-- Toggle Completed List -->
+                            <form method="post" asp-page-handler="ToggleCompletedList" asp-route-id="@Model.CurrentManga.MangaID">
+                                <input type="hidden" asp-for="CurrentManga.MangaID" />
+                                <button type="submit" class="CUS-dropdown-item">
+                                    @if (Model.IsInCompletedList)
+                                    {
+                                        <span>Remove from Completed List</span>
+                                    }
+                                    else
+                                    {
+                                        <span>Add to Completed List</span>
+                                    }
+                                </button>
+                            </form>
+                            <!-- Toggle Dropped List -->
+                            <form method="post" asp-page-handler="ToggleDroppedList" asp-route-id="@Model.CurrentManga.MangaID">
+                                <input type="hidden" asp-for="CurrentManga.MangaID" />
+                                <button type="submit" class="CUS-dropdown-item">
+                                    @if (Model.IsInDroppedList)
+                                    {
+                                        <span>Remove from Dropped List</span>
+                                    }
+                                    else
+                                    {
+                                        <span>Add to Dropped List</span>
+                                    }
+                                </button>
+                            </form>
+                            <!-- Toggle Favorite List -->
+                            <form method="post" asp-page-handler="ToggleFavoriteList" asp-route-id="@Model.CurrentManga.MangaID">
+                                <input type="hidden" asp-for="CurrentManga.MangaID" />
+                                <button type="submit" class="CUS-dropdown-item">
+                                    @if (Model.IsInFavoriteList)
+                                    {
+                                        <span>Remove from Favorite List</span>
+                                    }
+                                    else
+                                    {
+                                        <span>Add to Favorite List</span>
+                                    }
+                                </button>
+                            </form>
+                            <!-- Toggle Wish List -->
+                            <form method="post" asp-page-handler="ToggleWishList" asp-route-id="@Model.CurrentManga.MangaID">
+                                <input type="hidden" asp-for="CurrentManga.MangaID" />
+                                <button type="submit" class="CUS-dropdown-item">
+                                    @if (Model.IsInWishList)
+                                    {
+                                        <span>Remove from Wish List</span>
+                                    }
+                                    else
+                                    {
+                                        <span>Add to Wish List</span>
+                                    }
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                
+                }else {
 
-                <form class="CUS-AddSizeCurrentpage" method="post" asp-page-handler="AddToReadingList" asp-route-id="@Model.CurrentManga.MangaID" enctype="multipart/form-data">
-                    <input type="hidden" asp-for="CurrentManga.MangaID" />
-                    <input type="hidden" name="ReadingListName" value="Reading List" /> 
-                    <button type="submit" class="CUS-AddToReadListButton">
-                      @if (SignInManager.IsSignedIn(User))
-                        {
-                        @if (Model.IsInReadingList == true)
-                        {
-                            <span>Remove From Library</span>
-                             
-                        }
-                        else
-                        {
-                            <span>Add To Library</span>
-                              
+                    <div class="CUS-dropdown">  <a class="CUS-dropbtn"  asp-page="/Login/LoginIndex">Sign in to manage list</a> </div>
+                }
 
-                        }
-                     }
-                     else
-                        {
-                            <span>Login To Add</span>
-                        }
-                    </button>
-                </form>
-                <form class="CUS-AddSizeCurrentpage" method="post" asp-page-handler="ToggleCompletedList" asp-route-id="@Model.CurrentManga.MangaID">
-                    <input type="hidden" asp-for="CurrentManga.MangaID" />
-                    <input type="hidden" name="ReadingListName" value="Completed List"/>
-                    <button type="submit">
-                     @if (SignInManager.IsSignedIn(User))
-                        {
-                            @if (Model.IsInCompletedList)
-                            {
-                                <span>Remove from Completed List</span>
-                            }
-                            else
-                            {
-                                <span>Add to Completed List</span>
-                            }
-
-                        }
-                    </button>
-                </form>
-                <form class="CUS-AddSizeCurrentpage" method="post" asp-page-handler="ToggleDroppedList" asp-route-id="@Model.CurrentManga.MangaID">
-                    <input type="hidden" asp-for="CurrentManga.MangaID" />
-                    <input type="hidden" name="ReadingListName" value="Dropped Book List" />
-                    <button type="submit">
-                        @if (SignInManager.IsSignedIn(User))
-                        {
-                            @if (Model.IsInDroppedList)
-                            {
-                                <span>Remove from Dropped List</span>
-                            }
-                            else
-                            {
-                                <span>Add to Dropped List</span>
-                            }
-                        }
-                    </button>
-                </form>
-                <form class="CUS-AddSizeCurrentpage" method="post" asp-page-handler="ToggleFavoriteList" asp-route-id="@Model.CurrentManga.MangaID">
-                    <input type="hidden" asp-for="CurrentManga.MangaID" />
-                    <input type="hidden" name="ReadingListName" value="Favorite List" />
-                    <button type="submit">
-                        @if (SignInManager.IsSignedIn(User))
-                        {
-                            @if (Model.IsInFavoriteList)
-                            {
-                                <span>Remove from Favorite List</span>
-                            }
-                            else
-                            {
-                                <span>Add to Favorite List</span>
-                            }
-                        }
-                    </button>
-                </form>
-                <form class="CUS-AddSizeCurrentpage" method="post" asp-page-handler="ToggleWishList" asp-route-id="@Model.CurrentManga.MangaID">
-                    <input type="hidden" asp-for="CurrentManga.MangaID" />
-                    <input type="hidden" name="ReadingListName" value="Wish List" />
-                    <button type="submit">
-                        @if (SignInManager.IsSignedIn(User))
-                        {
-                            @if (Model.IsInWishList)
-                            {
-                                <span>Remove from Wish List</span>
-                            }
-                            else
-                            {
-                                <span>Add to Wish List</span>
-                            }
-                        }
-                    </button>
-                </form>
-
-
-
-
+                <!-- Other buttons like Edit and Report can stay outside the dropdown -->
                 <div class="CUS-EditSizeCurrentpage">
                     <button type="submit" class="CUS-EditBookButton">Edit</button>
                 </div>

@@ -13,13 +13,13 @@ document.addEventListener('DOMContentLoaded', function () {
     var isDarkModeEnabled = themeContainer.getAttribute('data-dark-mode') === 'True';
 
     function applyTheme(darkMode) {
-        var root = document.documentElement;
+        var body = document.body;
         if (darkMode) {
-            root.style.setProperty('--background-color', '#191a1c');
-            root.style.setProperty('--text-color', 'white');
+            body.classList.remove('light-theme');
+            body.classList.add('dark-theme');
         } else {
-            root.style.setProperty('--background-color', 'white');
-            root.style.setProperty('--text-color', 'black');
+            body.classList.remove('dark-theme');
+            body.classList.add('light-theme');
         }
     }
 

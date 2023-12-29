@@ -1,12 +1,15 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @inject SignInManager<UserModel> SignInManager
 @inject UserManager<UserModel> UserManager
+@inject CheckUserSettings UserSettingsService
 @{
     var user = await UserManager.GetUserAsync(User);
     var roles = user != null ? await UserManager.GetRolesAsync(user) : new List<string>();
     string roleName = roles.Any() ? string.Join(", ", roles) : "No Roles";
     var UpdaterUser = user != null && await UserManager.IsInRoleAsync(user, "Updater");
     var OwnerUser = user != null && await UserManager.IsInRoleAsync(user, "Owner");
+    var userSettings = await UserSettingsService.GetUserSettingsAsync(User);
+    var isDarkModeEnabled = user != null ? userSettings?.DarkModeEnabled ?? true : true;
 
 }
 <!DOCTYPE html>
@@ -21,7 +24,7 @@
 
 </head>
 
-<body>
+<body class="@(isDarkModeEnabled ? "dark-mode" : "light-mode")">
     <div class="container-custom">
 
         <nav class="custom-O-navbar">
