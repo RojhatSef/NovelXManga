@@ -4,14 +4,17 @@
     transition: margin-top 0.3s ease;
     overflow-x: hidden;
     overflow-y: hidden;
+    color: var(--text-color);
 }
-.GenresTitle{
-    font-size:24px; 
-   
+
+.GenresTitle {
+    font-size: 24px;
 }
-.MUS-BlockGenre{
-    margin-top:15px; 
+
+.MUS-BlockGenre {
+    margin-top: 15px;
 }
+
 .selected {
     background-color: green;
 }
@@ -21,7 +24,7 @@
 }
 
 .LeftSide {
-    margin-top:5px; 
+    margin-top: 5px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -189,6 +192,7 @@ input[type="checkbox"].negative + label {
     border-radius: 5px;
     margin-left: 2.5%;
     margin-right: 2.5%;
+    color:whitesmoke;
 }
 
 .MUS-genre-container,

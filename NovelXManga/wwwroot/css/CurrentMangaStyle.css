@@ -22,7 +22,6 @@
         font-size: 16px;
         border: none;
         cursor: pointer;
-        
     }
 
     .CUS-dropdown {
@@ -49,12 +48,9 @@
             text-decoration: none;
             background-color: #ff6740;
             display: block;
-            border:none; 
+            border: none;
             width: 100%;
             cursor: pointer;
-           
-      
-          
         }
 
             .CUS-dropdown-content .CUS-dropdown-item:hover {
@@ -64,6 +60,7 @@
     .CUS-show {
         display: block;
     }
+
     .CUS-dropdown-content .CUS-dropdown-item:last-child {
         border-bottom: none; /* No border for the last item */
     }
@@ -222,6 +219,7 @@
         border: 2px solid #ff6740; /* Adds a 2px solid border with color #ff6740 */
         border-radius: 10px;
         font-family: Lato !important;
+     
     }
 
     .CUS-scoreArea:hover .CUS-scoreDistribution {
@@ -277,8 +275,6 @@
             text-decoration: none;
             display: block;
         }
-
-
 
     .CUS-EditSizeCurrentpage {
         display: inline-block; /* This will ensure the divs are in a line */

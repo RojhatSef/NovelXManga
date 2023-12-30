@@ -14,85 +14,109 @@
     <h2>User Settings</h2>
 
     <form method="post" class="USI-form">
-        <div class="form-group">
-            <div class="USI-label-input-pair">
-                <label class="=TextColor">Show Mature Content</label>
-            <input class="USE-Switch" type="checkbox" asp-for="UserSettings.ShowMatureContent" />
-             
-            </div>
-        </div>
-         <div class="form-group">
-            <div class="USI-label-input-pair">
-                <label class="=TextColor">Show Favorite List</label>
-            <input class="USE-Switch" type="checkbox" asp-for="UserSettings.ShowFavoritList" />
-            </div>
-        </div>
-           <div class="form-group">
-            <div class="USI-label-input-pair">
-                <label class="=TextColor">Show Dropped List</label>
-            <input class="USE-Switch" type="checkbox" asp-for="UserSettings.ShowDroppedList" />
-            </div>
-        </div>
-           <div class="form-group">
-            <div class="USI-label-input-pair">
-                <label class="=TextColor">Show Reading List</label>
-            <input class="USE-Switch" type="checkbox" asp-for="UserSettings.ShowReadingList" />
-            </div>
-        </div>
-         <div class="form-group">
-                  <div class="USI-label-input-pair">
-                <label class="=TextColor">Show Wish List</label>
-            <input class="USE-Switch" type="checkbox" asp-for="UserSettings.ShowWishList" />
-            </div>
-        </div>
-         <div class="form-group">
-            <div class="USI-label-input-pair">
-                <label class="=TextColor">>Show Completed List</label>
-            <input class="USE-Switch" type="checkbox" asp-for="UserSettings.ShowCompletedList" />
-            </div>
-        </div>
-                 <div class="form-group">
-            <div class="USI-label-input-pair">
-                <label class="=TextColor">Show Review/s</label>
-            <input class="USE-Switch" type="checkbox" asp-for="UserSettings.ShowReviews" />
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="USI-dark-mode-toggle">
-                <label class="=TextColor">Dark Mode Enabled</label>
-             <div class="wrapper">
-            <div class="toggle">
-                        <input type="checkbox" asp-for="UserSettings.DarkModeEnabled" class="toggle-input TextColor" />
+        <div class="form-group-row">
+            <div class="form-group">
+                <div class="USI-label-input-pair">
+                    <label class="=TextColor">Show Mature Content</label>
+                    <input class="USE-Switch" type="checkbox" asp-for="UserSettings.ShowMatureContent" />
 
-                <div class="toggle-bg"></div>
-                <div class="toggle-switch">
-                    <div class="toggle-switch-figure"></div>
-                    <div class="toggle-switch-figureAlt"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="USI-label-input-pair">
+                    <label class="=TextColor">Show Favorite List</label>
+                    <input class="USE-Switch" type="checkbox" asp-for="UserSettings.ShowFavoritList" />
+                </div>
+            </div>
+
+        </div>
+
+         <div class="form-group-row">
+            <div class="form-group">
+                <div class="USI-label-input-pair">
+                    <label class="=TextColor">Show Dropped List</label>
+                    <input class="USE-Switch" type="checkbox" asp-for="UserSettings.ShowDroppedList" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="USI-label-input-pair">
+                    <label class="=TextColor">Show Reading List</label>
+                    <input class="USE-Switch" type="checkbox" asp-for="UserSettings.ShowReadingList" />
+                </div>
+            </div>
+
+        </div>
+        <div class="form-group-row">
+            <div class="form-group">
+                <div class="USI-label-input-pair">
+                    <label class="=TextColor">Show Wish List</label>
+                    <input class="USE-Switch" type="checkbox" asp-for="UserSettings.ShowWishList" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="USI-label-input-pair">
+                    <label class="=TextColor">>Show Completed List</label>
+                    <input class="USE-Switch" type="checkbox" asp-for="UserSettings.ShowCompletedList" />
                 </div>
             </div>
         </div>
+        <div class="form-group-row">
+            <div class="form-group">
+                <div class="USI-label-input-pair">
+                    <label class="=TextColor">Show Review/s</label>
+                    <input class="USE-Switch" type="checkbox" asp-for="UserSettings.ShowReviews" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="USI-dark-mode-toggle">
+                    <label class="=TextColor">Dark Mode Enabled</label>
+                    <div class="wrapper">
+                        <div class="toggle">
+                            <input type="checkbox" asp-for="UserSettings.DarkModeEnabled" class="toggle-input TextColor" />
+
+                            <div class="toggle-bg"></div>
+                            <div class="toggle-switch">
+                                <div class="toggle-switch-figure"></div>
+                                <div class="toggle-switch-figureAlt"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- Font Size Dropdown -->
-      <div class="form-group">
-    <label>Font Size</label>
-    <select asp-for="UserSettings.FontSize" asp-items="Model.FontSizes"></select>
-</div>
 
-        <!-- Items Per Page Dropdown -->
-        <div class="form-group">
-    <label>Items Per Page</label>
-    <select asp-for="UserSettings.ItemsPerPage" asp-items="Model.ItemsPerPageOptions"></select>
-</div>
 
-        <!-- Manga Reading Direction Dropdown -->
-        <div class="form-group">
-            <label>Manga Reading Direction</label>
-            <select asp-for="UserSettings.ReadingDirection" asp-items="Html.GetEnumSelectList<MangaReadingDirection>()"></select>
+
+        <div class="form-group-row">
+            <div class="form-group">
+                <div class="USI-label-input-pair">
+                    <label>Font Size</label>
+                    <select asp-for="UserSettings.FontSize" asp-items="Model.FontSizes"></select>
+                </div>
+            </div>
+
+            <!-- Items Per Page Dropdown -->
+            <div class="form-group">
+                <div class="USI-label-input-pair">
+                <label>Items Per Page</label>
+                <select asp-for="UserSettings.ItemsPerPage" asp-items="Model.ItemsPerPageOptions"></select>
+                </div>
+            </div>
+
+            <!-- Manga Reading Direction Dropdown -->
+            <div class="form-group">
+                <div class="USI-label-input-pair">
+                <label>Manga Reading Direction</label>
+                <select asp-for="UserSettings.ReadingDirection" asp-items="Html.GetEnumSelectList<MangaReadingDirection>()"></select>
+                    </div>
+            </div>
+
         </div>
+
+
       
-        <!-- Repeat for other settings as needed -->
+    
 
         <button type="submit" class="btn btn-primary">Save Settings</button>
     </form>

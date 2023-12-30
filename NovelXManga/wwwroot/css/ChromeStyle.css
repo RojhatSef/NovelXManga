@@ -30,7 +30,7 @@
         }
 
     body.light-mode .main-content {
-        --text-color: black; /* Text color for light mode */
+     /*   --text-color: black; *//* Text color for light mode */
     }
 
     body.light-mode {
@@ -211,7 +211,7 @@
         height: 100%;
         font-weight: 800;
         font-size: 12px;
-        color: var(--text-color);
+     /*   color: var(--text-color);*/
         text-align: center;
     }
 
@@ -2196,7 +2196,7 @@
     max-width: 800px;
     margin: 0 auto;
     margin-top: 40px;
-    color: #fff;
+    color: var(--text-color);
 }
 
 .privacy-policy-page {
@@ -2204,7 +2204,7 @@
     max-width: 800px;
     margin: 0 auto;
     margin-top: 40px;
-    color: #fff;
+    color: var(--text-color);
 }
 
 .information-collected-title,

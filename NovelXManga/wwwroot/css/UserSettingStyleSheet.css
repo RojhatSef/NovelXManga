@@ -233,8 +233,23 @@
         }
 
 .form-group {
-    margin-bottom: 20px; /* Spacing between each group */
+    flex: 1 1 45%; /* Allows the item to grow and shrink but start with 45% of the container's width */
+    max-width: 45%; /* Maximum width of each form group */
+    box-sizing: border-box; /* Ensures padding and borders are included in the width calculation */
+    padding: 0 10px; /* Spacing inside each form group */
 }
+
+.form-group-row {
+    display: flex;
+    justify-content: center; /* Centers the form groups in the row */
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+    .form-group-row:last-child .form-group {
+        flex: 1 1 30%; /* Adjusts to allow three items per row */
+        max-width: 30%;
+    }
 
 .USI-label-input-pair label {
     margin-bottom: 10px; /* Spacing between label and input */
