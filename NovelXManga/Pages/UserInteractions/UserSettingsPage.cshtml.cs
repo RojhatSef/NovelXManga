@@ -69,6 +69,7 @@ namespace NovelXManga.Pages.UserInteractions
 
             // Update the properties of the existing settings
             existingSettings.DarkModeEnabled = UserSettings.DarkModeEnabled;
+            existingSettings.showAdultContent = UserSettings.showAdultContent;
             existingSettings.ShowMatureContent = UserSettings.ShowMatureContent;
             existingSettings.ShowCompletedList = UserSettings.ShowCompletedList;
             existingSettings.ShowReviews = UserSettings.ShowReviews;

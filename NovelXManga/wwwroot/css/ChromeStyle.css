@@ -30,7 +30,7 @@
         }
 
     body.light-mode .main-content {
-     /*   --text-color: black; *//* Text color for light mode */
+        /*   --text-color: black; */ /* Text color for light mode */
     }
 
     body.light-mode {
@@ -191,7 +191,7 @@
         gap: 0.3rem;
         font-weight: 800;
         font-size: 12px;
-        color: whitesmoke;
+        /*  color: whitesmoke;*/
         text-align: center;
         background-color: var(--background-color);
         overflow: visible;
@@ -211,7 +211,7 @@
         height: 100%;
         font-weight: 800;
         font-size: 12px;
-     /*   color: var(--text-color);*/
+        /*   color: var(--text-color);*/
         text-align: center;
     }
 

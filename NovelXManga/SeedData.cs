@@ -244,7 +244,7 @@ namespace NovelXManga
                 "Inferiority Complex", "Injury", "Inner Demon", "Innocent Female Lead", "Innocent Male Lead",
                 "Insecurity", "Isekai", "Island", "Japan",
               "Jealousy", "Kidnapping", "Kind Female Lead", "Kind Male Lead", "Knight", "Level System",
-                "LGBT Parent", "LGBT Scenes", "Lifestyle Change", "Live-in Lover", "Loneliness", "Loner Protagonist", "Love at First Sight",
+                "LGBT Parent", "LGBT Scenes", "Lifestyle Change", "Live-in Lover", "Loneliness", "Loner Protagonist", "Lolicon", "Love at First Sight",
 
            "Love Confession", "Love Interests Who Don't Get Along", "Love Polygon", "Love Triangle", "Love-Hate Relationship",
                 "Lust", "Mafia", "Magic", "Magic Schoo", "Magical Creature", "Male Lead", "Magical Girl", "Magical Boy",
@@ -281,7 +281,7 @@ namespace NovelXManga
                 "Old Classmate - Younger Classmate Relationship", "Serial Killer", "Studious Character",
                 "Sex Addict", "Sex Friends Become Lovers", "Sex Toy", "Sex", "Sexual Abuse",
 
-             "Sexual Assault", "Sexual Innuendo", "Shameless Female Lead", "Shinigami", "Short Chapter",
+             "Sexual Assault", "Sexual Innuendo", "Shameless Female Lead", "Shinigami", "Short Chapter","Shotacon",
                 "Short Female Lead", "Short Male Lead", "Showbiz", "Shy Female Lead", "Shy Protagonist", "Sibling", "Single Parent",
 
            "Sister Complex", "Sister", "Slaves", "Slow Romance", "Small Breasts", "Smart Female Lead", "Smart Male Lead"

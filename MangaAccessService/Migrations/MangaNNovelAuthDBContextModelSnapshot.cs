@@ -1457,6 +1457,9 @@ namespace MangaAccessService.Migrations
                     b.Property<bool>("ShowWishList")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("showAdultContent")
+                        .HasColumnType("bit");
+
                     b.HasKey("UserModelId");
 
                     b.ToTable("UserSettings");
@@ -1920,7 +1923,8 @@ namespace MangaAccessService.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("ForumName")
                         .IsRequired()

@@ -7,6 +7,7 @@ namespace MangaModelService
         [Key]
         public string UserModelId { get; set; }
 
+        public bool showAdultContent { get; set; }
         public bool ShowMatureContent { get; set; }
 
         // Additional settings properties here

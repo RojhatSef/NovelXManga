@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MangaAccessService.Migrations
 {
     [DbContext(typeof(MangaNNovelAuthDBContext))]
-    [Migration("20231204103856_TestUnit")]
-    partial class TestUnit
+    [Migration("20240101162550_testobject300")]
+    partial class testobject300
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -1459,6 +1459,9 @@ namespace MangaAccessService.Migrations
                     b.Property<bool>("ShowWishList")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("showAdultContent")
+                        .HasColumnType("bit");
+
                     b.HasKey("UserModelId");
 
                     b.ToTable("UserSettings");
@@ -1922,7 +1925,8 @@ namespace MangaAccessService.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("ForumName")
                         .IsRequired()

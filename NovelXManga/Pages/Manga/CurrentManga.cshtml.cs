@@ -21,6 +21,9 @@ DRAG OUT THE styling names to a new CSS we don't want stylings to be from one pa
 
 */
 
+// incorrect, we need to check if the manga even needs an update, if it does not why should we update it.
+//fix a bool that checks if it's a need of update.
+
 namespace NovelXManga.Pages.Manga
 {
     [ValidateAntiForgeryToken]

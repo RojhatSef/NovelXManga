@@ -25,6 +25,8 @@ namespace MangaAccessService
 
         Task<IEnumerable<MangaModel>> GetAllModelAsync();
 
+        Task<IEnumerable<MangaModel>> GetAllUserModelAsync(UserModel currentUser);
+
         Task<IEnumerable<MangaModel>> Get10MangaModelAsync();
 
         Task<MangaModel> GetModelAsync(int id);

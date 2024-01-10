@@ -20,6 +20,8 @@ namespace NovelXManga
             return Task.CompletedTask;
         }
 
+        //what if the book does not have any users going to that page, now we are updating a page with nothing.
+        // Also this needs a DTO, why are we fetching the entire mangamodels?
         private async Task ResetMangaReadCountsAsync(object state)
         {
             using (var scope = _serviceScopeFactory.CreateScope())

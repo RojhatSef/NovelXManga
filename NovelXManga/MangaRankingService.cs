@@ -15,6 +15,8 @@ namespace NovelXManga
             this.reviewRepsitory = reviewRepsitory;
         }
 
+        // incorrect, we need to check if the manga even needs an update, if it does not why should we update it.
+        //fix a bool that checks if it's a need of update.
         public async Task UpdateRankingsAsync()
         {
             var allManga = await _mangaRepository.GetAllModelAsync();

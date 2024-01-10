@@ -10,6 +10,29 @@ namespace MangaAccessService.Migrations
     {
         private readonly MangaNNovelAuthDBContext mangaNNovelAuthDBContext;
 
+        private string[] adultSensetivContent = {
+    "Adult", "Mature", "Ecchi", "Hentai", "Smut","Horror","Psychological",
+    "Rape", "Sexual Abuse", "BDSM", "Erotic", "Anal Intercourse",  "Anilingus", "Attempted Murder", "Attempted Rape",
+     "Attempted Suicide", "Bathroom Intercourse", "Big Breasts","Blackmail", "Blood and Gore","Bondage","Borderline H",
+      "Caught in the Act", "Child Abuse", "Cunnilingus","Double Penetration", "Drunken Intercourse","Dubious Consent",
+      "Exhibitionism","Fellatio", "Fetishes","First-Time Intercourse", "Futanari", "Gang Rape","Glasses-Wearing Uke God",
+       "Groping", "Group Intercourse", "Handjob","Incest",  "Lust", "Mind Break", "Mind Control", "Murder","Netorare",
+        "Netor", "Netori", "Older Seme Younger Uke","Older Uke Younger Seme", "Outdoor Intercourse", "Paizuri", "Titty Fuck", "Panchira",
+         "Prostitute", "Prostitution", "Public Sex","Sadist","School Intercourse","Sex Addict", "Sex Friends Become Lovers", "Sex Toy", "Sex", "Sexual Abuse",
+           "Straight Seme", "Straight Uke","Suicide", "Threesome", "Undergarment","Urination", "Lolicon", "Shotacon"
+
+}; private string[] MatureSensetivContent = {
+
+    "Adult", "Hentai", "Smut",
+    "Rape", "Sexual Abuse",  "Erotic", "Anal Intercourse",  "Anilingus", "Attempted Murder",
+     "Bathroom Intercourse", "Big Breasts","Bondage",
+      "Caught in the Act",  "Cunnilingus","Double Penetration", "Drunken Intercourse",
+      "Exhibitionism","Fellatio", "Fetishes","First-Time Intercourse", "Futanari", "Gang Rape",
+       "Groping", "Group Intercourse", "Handjob","Incest",  "Lust", "Mind Break", "Mind Control", "Netorare",
+        "Netor", "Netori","Outdoor Intercourse", "Paizuri", "Titty Fuck", "Panchira","Urination",
+        "Public Sex","Sadist","School Intercourse","Sex Addict", "Sex Friends Become Lovers", "Sex Toy", "Sex", "Sexual Abuse", "Lolicon", "Shotacon"
+};
+
         public SQLMangaRepository(MangaNNovelAuthDBContext mangaNNovelAuthDBContext)
         {
             this.mangaNNovelAuthDBContext = mangaNNovelAuthDBContext;
@@ -269,6 +292,21 @@ namespace MangaAccessService.Migrations
                 .ToListAsync();
         }
 
+        public async Task<IEnumerable<MangaModel>> GetAllUserModelAsync(UserModel currentUser)
+        {
+            IQueryable<MangaModel> query = mangaNNovelAuthDBContext.mangaModels.Include(e => e.reviews);
+
+            // Fetch user settings or set to default if user is null
+            bool showMatureContent = currentUser?.UserSettings.ShowMatureContent ?? false;
+            bool showAdultContent = currentUser?.UserSettings.showAdultContent ?? false;
+
+            // Apply filters based on user settings
+            query = ApplyMatureContentFilter(query, showMatureContent);
+            query = ApplyAdultContentFilter(query, showAdultContent);
+
+            return await query.ToListAsync();
+        }
+
         public async Task<IEnumerable<MangaModel>> GetAllModelAsync()
         {
             return await mangaNNovelAuthDBContext.mangaModels.Include(e => e.reviews).ToListAsync();
@@ -442,6 +480,28 @@ namespace MangaAccessService.Migrations
             manga.Rank = rank;
             mangaNNovelAuthDBContext.mangaModels.Update(manga);
             await mangaNNovelAuthDBContext.SaveChangesAsync();
+        }
+
+        private IQueryable<MangaModel> ApplyMatureContentFilter(IQueryable<MangaModel> query, bool showMatureContent)
+        {
+            if (!showMatureContent)
+            {
+                // Assuming MatureSensitiveContent is a list of tag names considered mature
+                query = query.Where(m => !m.GenresModels.Any(g => MatureSensetivContent.Contains(g.GenreName))
+                                         && !m.TagsModels.Any(t => MatureSensetivContent.Contains(t.TagName)));
+            }
+            return query;
+        }
+
+        private IQueryable<MangaModel> ApplyAdultContentFilter(IQueryable<MangaModel> query, bool showAdultContent)
+        {
+            if (!showAdultContent)
+            {
+                // Assuming AdultSensitiveContent is a list of tag names considered adult
+                query = query.Where(m => !m.GenresModels.Any(g => adultSensetivContent.Contains(g.GenreName))
+                                         && !m.TagsModels.Any(t => adultSensetivContent.Contains(t.TagName)));
+            }
+            return query;
         }
     }
 }

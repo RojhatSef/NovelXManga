@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MangaAccessService.Migrations
 {
-    public partial class TestUnit : Migration
+    public partial class testobject300 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -60,7 +60,7 @@ namespace MangaAccessService.Migrations
                     Allias = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ForumName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     userPhotoPath = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
                     IsShadowBanned = table.Column<bool>(type: "bit", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: true),
                     Twitter = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -590,6 +590,7 @@ namespace MangaAccessService.Migrations
                 columns: table => new
                 {
                     UserModelId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    showAdultContent = table.Column<bool>(type: "bit", nullable: false),
                     ShowMatureContent = table.Column<bool>(type: "bit", nullable: false),
                     DarkModeEnabled = table.Column<bool>(type: "bit", nullable: false),
                     FontSize = table.Column<int>(type: "int", nullable: false),
