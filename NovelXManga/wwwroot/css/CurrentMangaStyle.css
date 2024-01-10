@@ -203,7 +203,7 @@
     }
 
     .CUS-MangaInputText {
-        background-color: #191a1c;
+        background-color: #444;
         padding: 5px;
         margin: 0;
         border-radius: 3px;
@@ -219,7 +219,6 @@
         border: 2px solid #ff6740; /* Adds a 2px solid border with color #ff6740 */
         border-radius: 10px;
         font-family: Lato !important;
-     
     }
 
     .CUS-scoreArea:hover .CUS-scoreDistribution {

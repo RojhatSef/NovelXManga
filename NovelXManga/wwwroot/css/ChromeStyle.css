@@ -2000,21 +2000,21 @@
     }
 
     .star-rating-input > label {
-        color: #ddd;
+        color: var(--text-color);
         cursor: pointer;
     }
 
     .star-rating-input > input:checked ~ label,
     .star-rating-input:not(:checked) > label:hover,
     .star-rating-input:not(:checked) > label:hover ~ label {
-        color: #2ce679;
+        color: #ff6740;
     }
 
         .star-rating-input > input:checked + label:hover,
         .star-rating-input > input:checked ~ label:hover,
         .star-rating-input > label:hover ~ input:checked ~ label,
         .star-rating-input > input:checked ~ label:hover ~ label {
-            color: #2ddc76;
+            color: #ff6740;
         }
 /*styling star rating Ends here*/
 /* CurrentManga Page Ends */
