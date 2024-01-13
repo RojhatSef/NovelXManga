@@ -1,4 +1,5 @@
 ﻿using MangaAccessService;
+using MangaModelService;
 
 namespace NovelXManga
 {
@@ -20,19 +21,36 @@ namespace NovelXManga
         public async Task UpdateRankingsAsync()
         {
             var allManga = await _mangaRepository.GetAllModelAsync();
-            var rankedManga = allManga
-                .Select(manga => new
+
+            // Calculate the score distribution for each manga
+            foreach (var manga in allManga)
+            {
+                var newOrUpdatedReviews = manga.reviews.Where(r => r.LastUpdated > manga.LastScoreUpdate).ToList();
+                manga.ScoreDistribution = new List<ScoreDistributionEntry>();
+                for (int i = 1; i <= 5; i++)
                 {
-                    Manga = manga,
-                    Score = manga.reviews.Count() + (manga.OverAllBookScore ?? 0)
-                })
-                .OrderByDescending(manga => manga.Score)
+                    manga.ScoreDistribution.Add(new ScoreDistributionEntry
+                    {
+                        Score = i,
+                        Count = manga.reviews.Count(r => Math.Round((r.StylesScore + r.StoryScore + r.GrammarScore + r.CharactersScore) / 4.0) == i)
+                    });
+                }
+            }
+
+            // Rank the manga based on a calculated score
+            var rankedManga = allManga
+                .OrderByDescending(manga => manga.reviews.Count() + (manga.OverAllBookScore ?? 0))
                 .ToList();
 
             for (int i = 0; i < rankedManga.Count; i++)
             {
-                rankedManga[i].Manga.Rank = i + 1;
-                await _mangaRepository.UpdateMangaRankingAsync(rankedManga[i].Manga, rankedManga[i].Manga.Rank.Value);
+                rankedManga[i].Rank = i + 1;
+            }
+
+            // Update each manga record in the database
+            foreach (var manga in allManga)
+            {
+                await _mangaRepository.UpdateAsync(manga);
             }
         }
     }

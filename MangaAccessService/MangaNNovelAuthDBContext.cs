@@ -33,6 +33,7 @@ namespace MangaAccessService
         public DbSet<BlogModel> blogModels { get; set; }
         public DbSet<MangaModel> mangaModels { get; set; }
         public DbSet<BuyPage> BuyPages { get; set; }
+        public DbSet<ScoreDistributionEntry> ScoreDistributionEntry { get; set; }
 
         public DbSet<WallPapers> WallPapers { get; set; }
 
@@ -125,6 +126,10 @@ namespace MangaAccessService
                 .HasForeignKey(ub => ub.BlockedUserId)
                 .OnDelete(DeleteBehavior.Restrict);
             base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<ScoreDistributionEntry>()
+       .HasOne(s => s.MangaModel)
+       .WithMany(m => m.ScoreDistribution)
+       .HasForeignKey(s => s.MangaModelId);
 
             #region AutoNavagtions not needed
 

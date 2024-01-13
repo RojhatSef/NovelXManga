@@ -3,7 +3,9 @@
     public class UpdateRankingsBackgroundService : BackgroundService
     {
         private readonly IServiceScopeFactory _scopeFactory;
-        private const int Daily = 24 * 60 * 60 * 1000; // milliseconds in a day
+
+        //private const int Daily = 24 * 60 * 60 * 1000; // milliseconds in a day
+        private const int Daily = 10 * 1000; //TestingEvery 10 sec
 
         public UpdateRankingsBackgroundService(IServiceScopeFactory scopeFactory)
         {

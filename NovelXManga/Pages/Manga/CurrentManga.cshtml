@@ -300,31 +300,43 @@
                             </div>
 
                             <div class="CUS-histo">
-                                @foreach (var entry in Model.CurrentManga.ScoreDistribution)
+                                @if (Model.CurrentManga?.ScoreDistribution != null)
                                 {
 
-                                    var barId = "bar-";
-                                    switch (entry.Key)
+                                    foreach (var entry in Model.CurrentManga.ScoreDistribution)
                                     {
-                                        case 5: barId += "five"; break;
-                                        case 4: barId += "four"; break;
-                                        case 3: barId += "three"; break;
-                                        case 2: barId += "two"; break;
-                                        case 1: barId += "one"; break;
-                                    }
+                                        System.Diagnostics.Debug.WriteLine($"Score: {entry.Score}, Count: {entry.Count}");
 
-                                    <div class="@entry.Key histo-rate">
-                                        <span class="histo-star">
-                                            <i class="fas fa-star active"></i> @entry.Key
-                                        </span>
-                                        <span class="bar-block">
-                                            <span id="@barId" class="bar">
-                                                <span>@entry.Value</span>&nbsp;
+                                        var barId = "bar-";
+                                        switch (entry.Score)
+                                        {
+                                            case 5: barId += "five"; break;
+                                            case 4: barId += "four"; break;
+                                            case 3: barId += "three"; break;
+                                            case 2: barId += "two"; break;
+                                            case 1: barId += "one"; break;
+                                        }
+
+                                        <div class="@($"histo-rate-{entry.Score}")">
+                                            <span class="histo-star">
+                                                <i class="fas fa-star active"></i> @entry.Score
                                             </span>
-                                        </span>
-                                    </div>
+                                            <span class="bar-block">
+                                                <span id="@barId" class="bar" style="width:0%">
+                                                    <span>@entry.Count</span>&nbsp;
+                                                </span>
+                                            </span>
+                                        </div>
+                                    }
+                                }
+                                else
+                                {
+                                    <p>Score distribution data is not available.</p>
                                 }
                             </div>
+
+
+
                         </div>
                     </div>
                 </div>
@@ -1135,10 +1147,7 @@
     </div>
 
 }
-<script>
-    var scoreDistribution = @Html.Raw(Json.Serialize(Model.CurrentManga.ScoreDistribution));
 
-</script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="~/js/CurrentManga.js" asp-append-version="true"></script>
 <script src="~/js/ScoreDis.js" asp-append-version="true"></script>

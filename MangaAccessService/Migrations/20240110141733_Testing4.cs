@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MangaAccessService.Migrations
 {
-    public partial class testobject300 : Migration
+    public partial class Testing4 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -1215,6 +1215,27 @@ namespace MangaAccessService.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ScoreDistributionEntry",
+                columns: table => new
+                {
+                    ScoreDistributionEntryID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Score = table.Column<int>(type: "int", nullable: false),
+                    Count = table.Column<int>(type: "int", nullable: false),
+                    MangaModelId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ScoreDistributionEntry", x => x.ScoreDistributionEntryID);
+                    table.ForeignKey(
+                        name: "FK_ScoreDistributionEntry_mangaModels_MangaModelId",
+                        column: x => x.MangaModelId,
+                        principalTable: "mangaModels",
+                        principalColumn: "MangaID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Attachments",
                 columns: table => new
                 {
@@ -1912,6 +1933,11 @@ namespace MangaAccessService.Migrations
                 column: "UserModelsId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ScoreDistributionEntry_MangaModelId",
+                table: "ScoreDistributionEntry",
+                column: "MangaModelId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_UserBlocks_BlockedUserId",
                 table: "UserBlocks",
                 column: "BlockedUserId");
@@ -2026,6 +2052,9 @@ namespace MangaAccessService.Migrations
 
             migrationBuilder.DropTable(
                 name: "ReviewUserModel");
+
+            migrationBuilder.DropTable(
+                name: "ScoreDistributionEntry");
 
             migrationBuilder.DropTable(
                 name: "UserBlocks");

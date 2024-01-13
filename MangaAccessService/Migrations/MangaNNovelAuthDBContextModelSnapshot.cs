@@ -1356,6 +1356,30 @@ namespace MangaAccessService.Migrations
                     b.ToTable("Reviews");
                 });
 
+            modelBuilder.Entity("MangaModelService.ScoreDistributionEntry", b =>
+                {
+                    b.Property<int>("ScoreDistributionEntryID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ScoreDistributionEntryID"), 1L, 1);
+
+                    b.Property<int>("Count")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MangaModelId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Score")
+                        .HasColumnType("int");
+
+                    b.HasKey("ScoreDistributionEntryID");
+
+                    b.HasIndex("MangaModelId");
+
+                    b.ToTable("ScoreDistributionEntry");
+                });
+
             modelBuilder.Entity("MangaModelService.TagModel", b =>
                 {
                     b.Property<int>("TagId")
@@ -2459,6 +2483,17 @@ namespace MangaAccessService.Migrations
                     b.Navigation("UpdatedByAdmin");
                 });
 
+            modelBuilder.Entity("MangaModelService.ScoreDistributionEntry", b =>
+                {
+                    b.HasOne("MangaModelService.MangaModel", "MangaModel")
+                        .WithMany("ScoreDistribution")
+                        .HasForeignKey("MangaModelId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("MangaModel");
+                });
+
             modelBuilder.Entity("MangaModelService.UserBlock", b =>
                 {
                     b.HasOne("MangaModelService.UserModel", "BlockedUser")
@@ -2710,6 +2745,8 @@ namespace MangaAccessService.Migrations
                     b.Navigation("AssociatedNames");
 
                     b.Navigation("OfficalWebsites");
+
+                    b.Navigation("ScoreDistribution");
 
                     b.Navigation("StudioModels");
                 });

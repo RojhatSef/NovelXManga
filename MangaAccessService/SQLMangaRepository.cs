@@ -104,6 +104,7 @@ namespace MangaAccessService.Migrations
                 .Include(e => e.relatedSeries)
                 .Include(e => e.RecommendedMangaModels)
                 .Include(e => e.BlogModel)
+                .Include(e => e.ScoreDistribution)
                 .FirstOrDefaultAsync(e => e.MangaID == id);
         }
 

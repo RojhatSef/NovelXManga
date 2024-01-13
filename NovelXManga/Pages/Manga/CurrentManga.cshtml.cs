@@ -76,8 +76,6 @@ namespace NovelXManga.Pages.Manga
         [BindProperty]
         public bool IsInWishList { get; set; }
 
-        public IDictionary<int, int> ScoreDistribution { get; set; }
-
         public CurrentMangaModel(UserManager<UserModel> userManager, IWebHostEnvironment webHostEnvironment, IMangaRepository mangaRepository, MangaNNovelAuthDBContext mangaNNovelAuthDBContext, IBlogRepsitory blogRepsitory, IPostRepsitory postRepsitory, ICharacterRepsitory characterRepsitory, IReviewRepsitory reviewRepsitory, IMemoryCache cache)
         {
             this.userManager = userManager;

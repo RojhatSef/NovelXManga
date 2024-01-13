@@ -54,6 +54,7 @@ builder.Services.AddScoped<IMangaRepository, SQLMangaRepository>();
 builder.Services.AddScoped<IBlogRepsitory, SQLBlogRepsitory>();
 builder.Services.AddScoped<ICharacterRepsitory, SQLCharacterRepository>();
 builder.Services.AddScoped<IAssociatedNamesRepsitory, SQLAssociatedNamesRepsitory>();
+builder.Services.AddScoped<IScoreDistributionEntry, SQLScoreDistributionEntry>();
 
 builder.Services.AddScoped<IAttachmentRepository, SQLAttachmentRepository>();
 builder.Services.AddScoped<IUserBlockRepository, SQLUserBlockRepository>();
