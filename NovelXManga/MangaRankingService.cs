@@ -25,15 +25,25 @@ namespace NovelXManga
             // Calculate the score distribution for each manga
             foreach (var manga in allManga)
             {
-                var newOrUpdatedReviews = manga.reviews.Where(r => r.LastUpdated > manga.LastScoreUpdate).ToList();
-                manga.ScoreDistribution = new List<ScoreDistributionEntry>();
-                for (int i = 1; i <= 5; i++)
+                // Check if there are any new or updated reviews
+                var newOrUpdatedReviews = manga.reviews.Where(r => r.LastUpdated > manga.BookUpdated).ToList();
+
+                if (newOrUpdatedReviews.Any())
                 {
-                    manga.ScoreDistribution.Add(new ScoreDistributionEntry
+                    // Recalculate the score distribution
+                    var newScoreDistribution = new List<ScoreDistributionEntry>();
+                    for (int i = 1; i <= 5; i++)
                     {
-                        Score = i,
-                        Count = manga.reviews.Count(r => Math.Round((r.StylesScore + r.StoryScore + r.GrammarScore + r.CharactersScore) / 4.0) == i)
-                    });
+                        newScoreDistribution.Add(new ScoreDistributionEntry
+                        {
+                            Score = i,
+                            Count = newOrUpdatedReviews.Count(r => Math.Round((r.StylesScore + r.StoryScore + r.GrammarScore + r.CharactersScore) / 4.0) == i)
+                        });
+                    }
+
+                    // Update the manga's score distribution
+                    manga.ScoreDistribution = newScoreDistribution;
+                    manga.BookUpdated = DateTime.Now; // Update the last score calculation time
                 }
             }
 

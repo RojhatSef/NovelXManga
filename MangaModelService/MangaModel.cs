@@ -36,6 +36,7 @@ namespace MangaModelService
         public DateTime? ReleaseYear { get; set; }
         public DateTime? EndingYear { get; set; }
         public DateTime? BookAddedToDB { get; set; }
+        public DateTime? BookUpdated { get; set; }
         public virtual List<MangaModel>? relatedSeries { get; set; }
         public virtual ICollection<AssociatedNames>? AssociatedNames { get; set; }
         public virtual ICollection<Languages>? AllLanguages { get; set; }
@@ -57,10 +58,9 @@ namespace MangaModelService
         public virtual ICollection<Review>? reviews { get; set; }
         public virtual ICollection<BuyPage>? BuyPages { get; set; }
         public bool IsChecked { get; set; }
-        // public Dictionary<int, int> NewScore { get; set; }
 
         public ICollection<ScoreDistributionEntry> ScoreDistribution { get; set; }
-
+        // public Dictionary<int, int> NewScore { get; set; }
         //[NotMapped]
         //public Dictionary<int, int> ScoreDistribution
         //{
