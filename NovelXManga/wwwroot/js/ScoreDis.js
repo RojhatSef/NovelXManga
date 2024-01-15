@@ -1,29 +1,34 @@
-﻿var pageNumber = 1;
-$(document).ready(function () {
-    // Hide the bar values initially
-    console.log("JavaScript execution started");
-    pageNumber = pageNumber + 1;
+﻿$(document).ready(function () {
     $('.bar span').hide();
 
-    // Calculate the maximum count for scaling the bars
-    var maxCount = 0;
-    $('.bar').each(function () {
-        var count = parseInt($(this).text());
-        if (count > maxCount) {
-            maxCount = count;
-        }
-    });
+    var maxReviews = 0;
 
-    // Animate the bars based on their count
-    $('.bar').each(function () {
-        var count = parseInt($(this).text());
-        var percentage = (count / maxCount) * 100;
-        $(this).css('width', '0%').animate({
+    for (var score in scoreDistribution) {
+        if (scoreDistribution[score] > maxReviews) {
+            maxReviews = scoreDistribution[score];
+        }
+    }
+
+    console.log("Max Reviews: ", maxReviews);
+
+    for (var score in scoreDistribution) {
+        var percentage = (scoreDistribution[score] / maxReviews) * 100;
+        var barId = '#bar-';
+        switch (parseInt(score)) {
+            case 5: barId += 'five'; break;
+            case 4: barId += 'four'; break;
+            case 3: barId += 'three'; break;
+            case 2: barId += 'two'; break;
+            case 1: barId += 'one'; break;
+        }
+
+        console.log("Score: " + score + ", Count: " + scoreDistribution[score] + ", Percentage: " + percentage + "%, Bar ID: " + barId);
+
+        $(barId).animate({
             width: percentage + '%'
         }, 1000);
-    });
+    }
 
-    // Fade in the bar values after the animation
     setTimeout(function () {
         $('.bar span').fadeIn('slow');
     }, 1000);

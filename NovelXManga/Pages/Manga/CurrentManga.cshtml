@@ -300,51 +300,39 @@
                             </div>
 
                             <div class="CUS-histo">
-                                @if (Model.CurrentManga?.ScoreDistribution != null)
+                                @foreach (var entry in Model.CurrentManga.ScoreDistribution)
                                 {
 
-                                    foreach (var entry in Model.CurrentManga.ScoreDistribution)
+                                    var barId = "bar-";
+                                    switch (entry.Key)
                                     {
-                                        System.Diagnostics.Debug.WriteLine($"Score: {entry.Score}, Count: {entry.Count}");
-
-                                        var barId = "bar-";
-                                        switch (entry.Score)
-                                        {
-                                            case 5: barId += "five"; break;
-                                            case 4: barId += "four"; break;
-                                            case 3: barId += "three"; break;
-                                            case 2: barId += "two"; break;
-                                            case 1: barId += "one"; break;
-                                        }
-
-                                        <div class="@($"histo-rate-{entry.Score}")">
-                                            <span class="histo-star">
-                                                <i class="fas fa-star active"></i> @entry.Score
-                                            </span>
-                                            <span class="bar-block">
-                                                <span id="@barId" class="bar" style="width:0%">
-                                                    <span>@entry.Count</span>&nbsp;
-                                                </span>
-                                            </span>
-                                        </div>
+                                        case 5: barId += "five"; break;
+                                        case 4: barId += "four"; break;
+                                        case 3: barId += "three"; break;
+                                        case 2: barId += "two"; break;
+                                        case 1: barId += "one"; break;
                                     }
+
+                                    <div class="@entry.Key histo-rate">
+                                        <span class="histo-star">
+                                            <i class="fas fa-star active"></i> @entry.Key
+                                        </span>
+                                        <span class="bar-block">
+                                            <span id="@barId" class="bar">
+                                                <span>@entry.Value</span>&nbsp;
+                                            </span>
+                                        </span>
+                                    </div>
                                 }
-                                else
-                                {
-                                    <p>Score distribution data is not available.</p>
-                                }
-                            </div>
+                        </div>
+                    </div>
+                </div>
 
 
 
                         </div>
+
                     </div>
-                </div>
-            </div>
-
-
-
-            <!-- Show Add Reading Count -->
             <div class="CUS-MangaInputText">
                 <span>
                     @Model.ReadingUsersCount &nbsp; <i class="fa-solid fa-book-open-reader book-icon"> </i>
@@ -357,9 +345,16 @@
             <div class="CUS-MangaInputText">
                 <span>Rank:#@Model.CurrentManga.Rank</span>
             </div>
+                </div>
+            </div>
+
+
+
+            <!-- Show Add Reading Count -->
+          
         </div>
 
-
+        
     </div>
 
 
@@ -1147,6 +1142,9 @@
     </div>
 
 }
+<script>
+    var scoreDistribution = @Html.Raw(Json.Serialize(Model.CurrentManga.ScoreDistribution));
+</script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="~/js/CurrentManga.js" asp-append-version="true"></script>

@@ -1,5 +1,4 @@
 ﻿using MangaAccessService;
-using MangaModelService;
 
 namespace NovelXManga
 {
@@ -23,29 +22,6 @@ namespace NovelXManga
             var allManga = await _mangaRepository.GetAllModelAsync();
 
             // Calculate the score distribution for each manga
-            foreach (var manga in allManga)
-            {
-                // Check if there are any new or updated reviews
-                var newOrUpdatedReviews = manga.reviews.Where(r => r.LastUpdated > manga.BookUpdated).ToList();
-
-                if (newOrUpdatedReviews.Any())
-                {
-                    // Recalculate the score distribution
-                    var newScoreDistribution = new List<ScoreDistributionEntry>();
-                    for (int i = 1; i <= 5; i++)
-                    {
-                        newScoreDistribution.Add(new ScoreDistributionEntry
-                        {
-                            Score = i,
-                            Count = newOrUpdatedReviews.Count(r => Math.Round((r.StylesScore + r.StoryScore + r.GrammarScore + r.CharactersScore) / 4.0) == i)
-                        });
-                    }
-
-                    // Update the manga's score distribution
-                    manga.ScoreDistribution = newScoreDistribution;
-                    manga.BookUpdated = DateTime.Now; // Update the last score calculation time
-                }
-            }
 
             // Rank the manga based on a calculated score
             var rankedManga = allManga
