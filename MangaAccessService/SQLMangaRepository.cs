@@ -293,17 +293,40 @@ namespace MangaAccessService.Migrations
                 .ToListAsync();
         }
 
+        public async Task<UserSettingsDTO> GetUserSettingsAsync(string userId)
+        {
+            var userSettings = await mangaNNovelAuthDBContext.UserSettings
+                .Where(us => us.UserModelId == userId)
+                .Select(us => new UserSettingsDTO
+                {
+                    UserModelId = us.UserModelId,
+                    ShowAdultContent = us.showAdultContent,
+                    ShowMatureContent = us.ShowMatureContent
+                })
+                .FirstOrDefaultAsync();
+
+            return userSettings ?? new UserSettingsDTO(); // Return empty settings if not found
+        }
+
         public async Task<IEnumerable<MangaModel>> GetAllUserModelAsync(UserModel currentUser)
         {
             IQueryable<MangaModel> query = mangaNNovelAuthDBContext.mangaModels.Include(e => e.reviews);
 
-            // Fetch user settings or set to default if user is null
-            bool showMatureContent = currentUser?.UserSettings.ShowMatureContent ?? false;
-            bool showAdultContent = currentUser?.UserSettings.showAdultContent ?? false;
+            // Default settings for guests (or when there's no user)
+            UserSettingsDTO defaultSettings = new UserSettingsDTO
+            {
+                ShowAdultContent = false,
+                ShowMatureContent = false
+            };
 
-            // Apply filters based on user settings
-            query = ApplyMatureContentFilter(query, showMatureContent);
-            query = ApplyAdultContentFilter(query, showAdultContent);
+            // Fetch user settings if a user is logged in, otherwise use default settings
+            UserSettingsDTO userSettings = currentUser != null
+                ? await GetUserSettingsAsync(currentUser.Id)
+                : defaultSettings;
+
+            // Apply filters based on user settings or default settings
+            query = ApplyMatureContentFilter(query, userSettings.ShowMatureContent);
+            query = ApplyAdultContentFilter(query, userSettings.ShowAdultContent);
 
             return await query.ToListAsync();
         }
@@ -326,18 +349,26 @@ namespace MangaAccessService.Migrations
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<IndexDtoManga>> IndexMangaDtoIncludedAsync()
+        public async Task<IEnumerable<IndexDtoManga>> IndexMangaDtoIncludedAsync(UserModel currentUser)
         {
-            var query = mangaNNovelAuthDBContext.mangaModels
-                             .Include(e => e.ArtistModels)
-                             .Include(e => e.Authormodels)
-                             .Include(e => e.TagsModels.Take(5))
-                             .Include(e => e.GenresModels.Take(5))
-                             .Include(e => e.reviews)
-                             .OrderByDescending(m => m.BookAddedToDB)
-                             ;
+            IQueryable<MangaModel> baseQuery = mangaNNovelAuthDBContext.mangaModels
+                            .Include(e => e.ArtistModels)
+                            .Include(e => e.Authormodels)
+                            .Include(e => e.TagsModels.Take(5))
+                            .Include(e => e.GenresModels.Take(5))
+                            .Include(e => e.reviews);
 
-            return await query.Select(m => new IndexDtoManga
+            UserSettingsDTO userSettings = currentUser != null
+              ? await GetUserSettingsAsync(currentUser.Id)
+              : new UserSettingsDTO { ShowAdultContent = false, ShowMatureContent = false };
+
+            // Apply filters based on user settings or default settings
+            IQueryable<MangaModel> filteredQuery = ApplyMatureContentFilter(baseQuery, userSettings.ShowMatureContent);
+            filteredQuery = ApplyAdultContentFilter(filteredQuery, userSettings.ShowAdultContent);
+
+            // Apply ordering after the filters
+            IOrderedQueryable<MangaModel> orderedQuery = filteredQuery.OrderByDescending(m => m.BookAddedToDB);
+            return await orderedQuery.Select(m => new IndexDtoManga
             {
                 MangaID = m.MangaID,
                 PhotoPath = m.PhotoPath,
@@ -498,7 +529,7 @@ namespace MangaAccessService.Migrations
         {
             if (!showAdultContent)
             {
-                // Assuming AdultSensitiveContent is a list of tag names considered adult
+                // Assuming AdultSensitiveContent is a list of tag or genre names considered adult
                 query = query.Where(m => !m.GenresModels.Any(g => adultSensetivContent.Contains(g.GenreName))
                                          && !m.TagsModels.Any(t => adultSensetivContent.Contains(t.TagName)));
             }

@@ -1,6 +1,7 @@
 ﻿using MangaAccessService;
 using MangaAccessService.DTO.IndexDto;
 using MangaModelService;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -18,6 +19,7 @@ namespace NovelXManga.Pages
         private readonly IWebHostEnvironment webHostEnvironment;
         private readonly ILogger<IndexModel> _logger;
         private readonly CheckUserSettings _checkUserSettings;
+        private readonly UserManager<UserModel> userManager;
 
         [BindProperty]
         [TempData]
@@ -26,13 +28,14 @@ namespace NovelXManga.Pages
         [BindProperty]
         public UserSettings UserSettings { get; set; }
 
-        public IndexModel(ILogger<IndexModel> logger, IMangaRepository mangaRepository, IWebHostEnvironment webHostEnvironment, MangaNNovelAuthDBContext context, CheckUserSettings checkUserSettings)
+        public IndexModel(ILogger<IndexModel> logger, IMangaRepository mangaRepository, IWebHostEnvironment webHostEnvironment, MangaNNovelAuthDBContext context, CheckUserSettings checkUserSettings, UserManager<UserModel> userManager)
         {
             _logger = logger;
             this.mangaRepository = mangaRepository;
             this.webHostEnvironment = webHostEnvironment;
             this.context = context;
             _checkUserSettings = checkUserSettings;
+            this.userManager = userManager;
         }
 
         public async Task<JsonResult> OnGetSearchMangaAsync(string searchTerm)
@@ -101,7 +104,7 @@ namespace NovelXManga.Pages
         public async Task OnGetAsync()
         {
             UserSettings = await _checkUserSettings.GetUserSettingsAsync(User);
-
+            UserModel user = await userManager.GetUserAsync(User);
             // If UserSettings is null (i.e., the user is not logged in or no settings are saved), set defaults
             if (UserSettings == null)
             {
@@ -117,7 +120,7 @@ namespace NovelXManga.Pages
             ViewData["IsDarkModeEnabled"] = UserSettings.DarkModeEnabled;
 
             // Continue with your existing code
-            GetAllBooks = await mangaRepository.IndexMangaDtoIncludedAsync();
+            GetAllBooks = await mangaRepository.IndexMangaDtoIncludedAsync(user);
             AllBooksList = GetAllBooks.ToList();
             WallPapers = await context.WallPapers.ToListAsync();
             WallpaperList = WallPapers.ToList();

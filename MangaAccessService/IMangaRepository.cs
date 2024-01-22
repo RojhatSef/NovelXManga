@@ -45,7 +45,7 @@ namespace MangaAccessService
 
         Task<IEnumerable<LoginRegiForgetCombineDto>> Get10MangaEssentialMangaDtoIncludedAsync();
 
-        Task<IEnumerable<IndexDtoManga>> IndexMangaDtoIncludedAsync();
+        Task<IEnumerable<IndexDtoManga>> IndexMangaDtoIncludedAsync(UserModel currentUser);
 
         Task<MangaModel> AddAsync(MangaModel NewManga);
 
