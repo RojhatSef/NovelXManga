@@ -1,5 +1,7 @@
 using MangaAccessService;
+using MangaAccessService.DTO;
 using MangaModelService;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -29,6 +31,10 @@ namespace NovelXManga.Pages.SearchFilter
         private readonly IStudioRepsitory studioRepsitory;
         private readonly IDistributedCache _cache; // remove if not needed
         private readonly IHttpContextAccessor _httpContextAccessor; // remove if not needed
+        private readonly UserManager<UserModel> userManager;
+        private readonly IUserSettingsRepository _userSettingsRepository;
+
+        #region Properties
 
         [BindProperty]
         [DataType(DataType.Date)]
@@ -95,12 +101,20 @@ namespace NovelXManga.Pages.SearchFilter
         public int TotalPages { get; set; }
         public List<int> JsSelectedTags { get; set; }
 
+        [BindProperty]
+        public bool showAdultContentForGuests { get; set; }
+
+        [BindProperty]
+        public bool showMatureContentForGuests { get; set; }
+
+        #endregion Properties
+
         public string Sanitize(string input)
         {
             return WebUtility.HtmlEncode(input);
         }
 
-        public AdvancedSearchModel(MangaNNovelAuthDBContext context, IMangaRepository mangaRepository, IAuthorRepsitory authorRepsitory, IArtistRepsitory artistRepsitory, ITagRepsitory tagRepsitory, IGenreRepsitory genreRepsitory, IChapterModelRepsitory chapterRepsitory, IAssociatedNamesRepsitory associatedNamesRepsitory, ILanguageRepsitory languageRepsitory, IDistributedCache cache, IHttpContextAccessor httpContextAccessor)
+        public AdvancedSearchModel(MangaNNovelAuthDBContext context, IMangaRepository mangaRepository, IAuthorRepsitory authorRepsitory, IArtistRepsitory artistRepsitory, ITagRepsitory tagRepsitory, IGenreRepsitory genreRepsitory, IChapterModelRepsitory chapterRepsitory, IAssociatedNamesRepsitory associatedNamesRepsitory, ILanguageRepsitory languageRepsitory, IDistributedCache cache, IHttpContextAccessor httpContextAccessor, UserManager<UserModel> userManager)
         {
             this.context = context;
             this.mangaRepository = mangaRepository;
@@ -114,6 +128,7 @@ namespace NovelXManga.Pages.SearchFilter
             this.MangaModels = new List<MangaModel>();
             _cache = cache;
             _httpContextAccessor = httpContextAccessor;
+            this.userManager = userManager;
         }
 
         private void DeserializeAndRetrieveSessionData()
@@ -393,34 +408,109 @@ namespace NovelXManga.Pages.SearchFilter
             return Page();
         }
 
+        public async Task<UserSettingsDTO> GetUserSettingsAsync()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                var currentUser = await userManager.GetUserAsync(User);
+                var userSettings = await _userSettingsRepository.GetAsync(currentUser.Id);
+                return new UserSettingsDTO
+                {
+                    UserModelId = userSettings.UserModelId,
+                    ShowAdultContent = userSettings.showAdultContent,
+                    ShowMatureContent = userSettings.ShowMatureContent
+                };
+            }
+            else
+            {
+                // For guests, use the settings they selected on the page (if provided)
+                return new UserSettingsDTO { ShowAdultContent = showAdultContentForGuests, ShowMatureContent = showMatureContentForGuests };
+            }
+        }
+
+        private string[] adultSensetivContent = {
+    "Adult", "Mature", "Ecchi", "Hentai", "Smut","Horror","Psychological",
+    "Rape", "Sexual Abuse", "BDSM", "Erotic", "Anal Intercourse",  "Anilingus", "Attempted Murder", "Attempted Rape",
+     "Attempted Suicide", "Bathroom Intercourse", "Big Breasts","Blackmail", "Blood and Gore","Bondage","Borderline H",
+      "Caught in the Act", "Child Abuse", "Cunnilingus","Double Penetration", "Drunken Intercourse","Dubious Consent",
+      "Exhibitionism","Fellatio", "Fetishes","First-Time Intercourse", "Futanari", "Gang Rape","Glasses-Wearing Uke God",
+       "Groping", "Group Intercourse", "Handjob","Incest",  "Lust", "Mind Break", "Mind Control", "Murder","Netorare",
+        "Netor", "Netori", "Older Seme Younger Uke","Older Uke Younger Seme", "Outdoor Intercourse", "Paizuri", "Titty Fuck", "Panchira",
+         "Prostitute", "Prostitution", "Public Sex","Sadist","School Intercourse","Sex Addict", "Sex Friends Become Lovers", "Sex Toy", "Sex", "Sexual Abuse",
+           "Straight Seme", "Straight Uke","Suicide", "Threesome", "Undergarment","Urination", "Lolicon", "Shotacon"
+
+}; private string[] MatureSensetivContent = {
+
+    "Adult", "Hentai", "Smut",
+    "Rape", "Sexual Abuse",  "Erotic", "Anal Intercourse",  "Anilingus", "Attempted Murder",
+     "Bathroom Intercourse", "Big Breasts","Bondage",
+      "Caught in the Act",  "Cunnilingus","Double Penetration", "Drunken Intercourse",
+      "Exhibitionism","Fellatio", "Fetishes","First-Time Intercourse", "Futanari", "Gang Rape",
+       "Groping", "Group Intercourse", "Handjob","Incest",  "Lust", "Mind Break", "Mind Control", "Netorare",
+        "Netor", "Netori","Outdoor Intercourse", "Paizuri", "Titty Fuck", "Panchira","Urination",
+        "Public Sex","Sadist","School Intercourse","Sex Addict", "Sex Friends Become Lovers", "Sex Toy", "Sex", "Sexual Abuse", "Lolicon", "Shotacon"
+};
+
+        private IQueryable<MangaModel> ApplyMatureContentFilter(IQueryable<MangaModel> query, bool showMatureContent)
+        {
+            if (!showMatureContent)
+            {
+                // Assuming MatureSensitiveContent is a list of tag names considered mature
+                query = query.Where(m => !m.GenresModels.Any(g => MatureSensetivContent.Contains(g.GenreName))
+                                         && !m.TagsModels.Any(t => MatureSensetivContent.Contains(t.TagName)));
+            }
+            return query;
+        }
+
+        private IQueryable<MangaModel> ApplyAdultContentFilter(IQueryable<MangaModel> query, bool showAdultContent)
+        {
+            if (!showAdultContent)
+            {
+                // Assuming AdultSensitiveContent is a list of tag or genre names considered adult
+                query = query.Where(m => !m.GenresModels.Any(g => adultSensetivContent.Contains(g.GenreName))
+                                         && !m.TagsModels.Any(t => adultSensetivContent.Contains(t.TagName)));
+            }
+            return query;
+        }
+
         public async Task<IActionResult> OnPostAsync()
         {
             try
             {
                 // Reset ItemsAlreadyShown to 0
                 _httpContextAccessor.HttpContext.Session.SetInt32("ItemsAlreadyShown", 0);
-
                 InitializeSettingsBookPages();
                 InitializeSettings();
                 SetSessionState();
                 SerializeAndStoreSessionData();
+
+                UserSettingsDTO userSettings = await GetUserSettingsAsync();
+
+                // Store user settings in session for retrieval in OnGetBooksPage
+                var userSettingsSerialized = JsonSerializer.Serialize(userSettings);
+                _httpContextAccessor.HttpContext.Session.SetString("UserSettings", userSettingsSerialized);
+
                 var query = BuildInitialQuery();
 
+                // Apply content filters based on user settings
+                query = ApplyMatureContentFilter(query, userSettings.ShowMatureContent);
+                query = ApplyAdultContentFilter(query, userSettings.ShowAdultContent);
+
+                // Apply search and additional filters
                 query = ApplySearchFilters(query);
                 query = ApplyAdditionalFilters(query);
 
+                // Execute query and set results
                 await ExecuteQueryAndSetResults(query);
 
                 return Page();
             }
             catch (Exception ex)
             {
-                // Log the exception details.
-                // Consider using a logging library like NLog, Serilog, or even ILogger here.
-
+                // Log the exception details and return to the current page
                 Tags = await context.TagModels.ToListAsync();
                 Genres = await context.GenresModels.ToListAsync();
-                return Page(); // Return to the current page to display an error message to the user.
+                return Page();
             }
         }
 
@@ -430,28 +520,27 @@ namespace NovelXManga.Pages.SearchFilter
             try
             {
                 var ItemsAlreadyShown = _httpContextAccessor.HttpContext.Session.GetInt32("ItemsAlreadyShown") ?? 0;
-                Console.WriteLine($"ItemsAlreadyShown before: {ItemsAlreadyShown}");
+                var userSettingsSerialized = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+                UserSettingsDTO userSettings = userSettingsSerialized != null ? JsonSerializer.Deserialize<UserSettingsDTO>(userSettingsSerialized) : new UserSettingsDTO();
 
-                var query = BuildQueryWithFilters();
+                var query = BuildInitialQuery();
+
+                // Apply content filters based on user settings stored in session
+                query = ApplyMatureContentFilter(query, userSettings.ShowMatureContent);
+                query = ApplyAdultContentFilter(query, userSettings.ShowAdultContent);
+
+                // Apply search and additional filters stored in session
+                DeserializeAndRetrieveSessionData();
+                query = ApplySearchFilters(query);
+                query = ApplyAdditionalFilters(query);
 
                 int totalCount = await query.CountAsync();
-                Console.WriteLine($"Total Count: {totalCount}");
 
                 ItemsAlreadyShown += pageSiz; // Increment the items already shown.
                 _httpContextAccessor.HttpContext.Session.SetInt32("ItemsAlreadyShown", ItemsAlreadyShown);
-                Console.WriteLine($"ItemsAlreadyShown after: {ItemsAlreadyShown}");
-
-                Console.WriteLine($"Current Page: {currentPage}");
-                Console.WriteLine($"Page Size: {pageSiz}");
-
-                if (pageSiz == 0)
-                {
-                    Console.WriteLine("Page size is zero, can't continue.");
-                    return StatusCode(400, new { message = "Invalid page size" });
-                }
 
                 int totalPages = (int)Math.Ceiling((double)totalCount / pageSiz);
-                Console.WriteLine($"Total Pages: {totalPages}");
+
                 JsonSerializerOptions options = new JsonSerializerOptions
                 {
                     ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve
@@ -459,12 +548,11 @@ namespace NovelXManga.Pages.SearchFilter
 
                 var mangaModels = await query.Skip(ItemsAlreadyShown).Take(pageSiz).ToListAsync();
                 var json = JsonSerializer.Serialize(new { CurrentPage = currentPage, Books = mangaModels, TotalPages = totalPages }, options);
-                Console.WriteLine($"Serialized JSON: {json}");
+
                 return new JsonResult(new { CurrentPage = currentPage, Books = mangaModels, TotalPages = totalPages });
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Exception: {ex.Message}");
                 return StatusCode(500, new { message = "Internal server error" });
             }
         }

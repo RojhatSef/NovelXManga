@@ -20,6 +20,10 @@
         <div class="Row2">
             <div class="LeftSide">
                 <div>
+                    @if (User.Identity.IsAuthenticated == false) // Show this section only for guests
+{
+  
+}
                 <label >Tag Inclusion Mode:</label>
                 <select id="TagInclusionMode" name="TagInclusionMode">
                   
@@ -89,7 +93,16 @@
                 }
             </div>
         </div>
-      
+        <div class="opt-in-section">
+        <label>
+            <input asp-for="showMatureContentForGuests" type="checkbox" />
+            Show Mature Content
+        </label>
+        <label>
+            <input asp-for="showAdultContentForGuests" type="checkbox" />
+            Show Adult Content
+        </label>
+    </div>
         <div id="hiddenContainer"></div>
         </div>
             <div class ="Mus-Tag-Divider">

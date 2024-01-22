@@ -32,18 +32,12 @@ namespace MangaAccessService
 
         public async Task<UserSettings> GetAsync(string userModelId)
         {
-            return await context.UserSettings
-                .Include(us => us.PreferredLanguages)
-
-                .SingleOrDefaultAsync(us => us.UserModelId == userModelId);
+            return await context.UserSettings.FindAsync(userModelId);
         }
 
         public async Task<IEnumerable<UserSettings>> GetAllAsync()
         {
-            return await context.UserSettings
-                .Include(us => us.PreferredLanguages)
-
-                .ToListAsync();
+            return await context.UserSettings.ToListAsync();
         }
 
         public async Task<UserSettings> UpdateAsync(UserSettings userSettings)
