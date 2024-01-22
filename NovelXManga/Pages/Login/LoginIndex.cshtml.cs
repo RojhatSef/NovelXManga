@@ -38,11 +38,11 @@ namespace NovelXManga.Pages.Login
             {
                 return RedirectToPage("/Index");  // or any other appropriate page
             }
-
+            UserModel activeUser = await userManager.GetUserAsync(User);
             ReturnUrl = returnUrl ?? Url.Content("/");
             ViewData["ReturnUrl"] = ReturnUrl;
             //CurrentManga2 = await mangaRepository.Get10MangaEssentialMangaDtoIncludedAsync();
-            GetAllBooks = await mangaRepository.Get10MangaEssentialMangaDtoIncludedAsync();
+            GetAllBooks = await mangaRepository.Get10MangaEssentialMangaDtoIncludedAsync(activeUser);
             AllBooksList = GetAllBooks.ToList();
 
             return Page();
@@ -80,8 +80,8 @@ namespace NovelXManga.Pages.Login
                     ModelState.AddModelError("", "username or password incorrect");
                 }
             }
-
-            GetAllBooks = await mangaRepository.Get10MangaEssentialMangaDtoIncludedAsync();
+            UserModel activeUser = await userManager.GetUserAsync(User);
+            GetAllBooks = await mangaRepository.Get10MangaEssentialMangaDtoIncludedAsync(activeUser);
             AllBooksList = GetAllBooks.ToList();
 
             ReturnUrl = returnUrl;

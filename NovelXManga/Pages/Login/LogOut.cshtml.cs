@@ -14,21 +14,24 @@ namespace NovelXManga.Pages.Login
     {
         private readonly SignInManager<UserModel> signInManager;
         private readonly IMangaRepository mangaRepository;
+        private readonly UserManager<UserModel> userManager;
 
         [BindProperty]
         public List<LoginRegiForgetCombineDto> AllBooksList { get; set; }
 
         public IEnumerable<LoginRegiForgetCombineDto> GetAllBooks { get; set; }
 
-        public LogOutModel(SignInManager<UserModel> signInManager, IMangaRepository mangaRepository)
+        public LogOutModel(SignInManager<UserModel> signInManager, IMangaRepository mangaRepository, UserManager<UserModel> userManager)
         {
             this.signInManager = signInManager;
             this.mangaRepository = mangaRepository;
+            this.userManager = userManager;
         }
 
         public async Task<IActionResult> OnGetAsync()
         {
-            GetAllBooks = await mangaRepository.Get10MangaEssentialMangaDtoIncludedAsync();
+            UserModel user = await userManager.GetUserAsync(User);
+            GetAllBooks = await mangaRepository.Get10MangaEssentialMangaDtoIncludedAsync(user);
             AllBooksList = GetAllBooks.ToList();
             return Page();
         }

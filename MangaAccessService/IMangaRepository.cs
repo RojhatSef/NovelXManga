@@ -43,7 +43,7 @@ namespace MangaAccessService
 
         Task<MangaModel> GetLimitedEssentialMangaIncludedAsync(int id);
 
-        Task<IEnumerable<LoginRegiForgetCombineDto>> Get10MangaEssentialMangaDtoIncludedAsync();
+        Task<IEnumerable<LoginRegiForgetCombineDto>> Get10MangaEssentialMangaDtoIncludedAsync(UserModel currentUser);
 
         Task<IEnumerable<IndexDtoManga>> IndexMangaDtoIncludedAsync(UserModel currentUser);
 

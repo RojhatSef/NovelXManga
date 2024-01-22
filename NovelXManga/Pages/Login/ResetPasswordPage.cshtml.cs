@@ -35,17 +35,18 @@ namespace NovelXManga.Pages.Login
 
         public async Task<IActionResult> OnPost(ResetPasswordModelView resetPasswordModelView)
         {
+            UserModel activeuser = await _userManager.GetUserAsync(User);
             model.Email = resetPasswordModelView.Email;
             model.Token = resetPasswordModelView.Token;
             if (model.Password == null)
             {
-                GetAllBooks = await mangaRepository.Get10MangaEssentialMangaDtoIncludedAsync();
+                GetAllBooks = await mangaRepository.Get10MangaEssentialMangaDtoIncludedAsync(activeuser);
                 AllBooksList = GetAllBooks.ToList();
                 return Page();
             }
             if (model.ConfirmPassword == null)
             {
-                GetAllBooks = await mangaRepository.Get10MangaEssentialMangaDtoIncludedAsync();
+                GetAllBooks = await mangaRepository.Get10MangaEssentialMangaDtoIncludedAsync(activeuser);
                 AllBooksList = GetAllBooks.ToList();
                 return Page();
             }
@@ -64,7 +65,7 @@ namespace NovelXManga.Pages.Login
                     ModelState.TryAddModelError(error.Code, error.Description);
                 }
                 TempDataSuccededPassWordChange = "Password Changed Successfully, Login as usual";
-                GetAllBooks = await mangaRepository.Get10MangaEssentialMangaDtoIncludedAsync();
+                GetAllBooks = await mangaRepository.Get10MangaEssentialMangaDtoIncludedAsync(activeuser);
                 AllBooksList = GetAllBooks.ToList();
                 return Page();
             }
@@ -74,8 +75,8 @@ namespace NovelXManga.Pages.Login
         public async Task<IActionResult> OnGetAsync(ResetPasswordModelView resetPasswordModel)
         {
             tempResetpass = new ResetPasswordModelView { Token = resetPasswordModel.Token, Email = resetPasswordModel.Email };
-
-            GetAllBooks = await mangaRepository.Get10MangaEssentialMangaDtoIncludedAsync();
+            UserModel activeuser = await _userManager.GetUserAsync(User);
+            GetAllBooks = await mangaRepository.Get10MangaEssentialMangaDtoIncludedAsync(activeuser);
             AllBooksList = GetAllBooks.ToList();
             return Page();
         }

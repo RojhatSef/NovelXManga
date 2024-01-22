@@ -408,18 +408,28 @@ namespace MangaAccessService.Migrations
             }).ToListAsync();
         }
 
-        public async Task<IEnumerable<LoginRegiForgetCombineDto>> Get10MangaEssentialMangaDtoIncludedAsync()
+        public async Task<IEnumerable<LoginRegiForgetCombineDto>> Get10MangaEssentialMangaDtoIncludedAsync(UserModel currentUser)
         {
-            var query = mangaNNovelAuthDBContext.mangaModels
-                             .Include(e => e.ArtistModels.Take(5))
-                             .Include(e => e.Authormodels.Take(5))
-                             .Include(e => e.TagsModels.Take(5))
-                             .Include(e => e.GenresModels.Take(5))
-                             .Include(e => e.reviews)
-                             .OrderByDescending(m => m.BookAddedToDB)
-                             .Take(10);
+            IQueryable<MangaModel> baseQuery = mangaNNovelAuthDBContext.mangaModels
+                                 .Include(e => e.ArtistModels.Take(5))
+                                 .Include(e => e.Authormodels.Take(5))
+                                 .Include(e => e.TagsModels.Take(5))
+                                 .Include(e => e.GenresModels.Take(5))
+                                 .Include(e => e.reviews);
 
-            return await query.Select(m => new LoginRegiForgetCombineDto
+            // Fetch user settings or set to default if user is null
+            UserSettingsDTO userSettings = currentUser != null
+              ? await GetUserSettingsAsync(currentUser.Id)
+              : new UserSettingsDTO { ShowAdultContent = false, ShowMatureContent = false };
+
+            // Apply filters based on user settings or default settings
+            IQueryable<MangaModel> filteredQuery = ApplyMatureContentFilter(baseQuery, userSettings.ShowMatureContent);
+            filteredQuery = ApplyAdultContentFilter(filteredQuery, userSettings.ShowAdultContent);
+
+            // Apply ordering and limit the results to 10 after applying filters
+            IQueryable<MangaModel> finalQuery = filteredQuery.OrderByDescending(m => m.BookAddedToDB).Take(10);
+
+            return await finalQuery.Select(m => new LoginRegiForgetCombineDto
             {
                 MangaID = m.MangaID,
                 PhotoPath = m.PhotoPath,
