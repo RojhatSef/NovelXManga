@@ -362,7 +362,22 @@
         word-break: break-all;
         height: 250px;
     }
-
+    .CUS-Row3 {
+        display: flex;
+        justify-content: center;
+        align-items: baseline;
+    }
+    .CUS-Row3LeftSide,
+    .CUS-Row3RightSide {
+        min-width: 320px;
+        flex-grow: 1;
+    }
+        .CUS-Row3LeftSide label,
+        .CUS-Row3RightSide label {
+            display: block; 
+            margin: 8px 0; 
+        }
+      
     @media screen and (min-width: 769px) and (max-width: 849px) {
         .CUS-commonParentContainer {
             margin-left: 44% !important; /* Adjusted to move to the right by setting margin-left to 40% */
@@ -537,6 +552,16 @@
             justify-content: space-between; /* Distribute items evenly */
             letter-spacing: 0px !important;
             width: 90%;
+        }
+    }
+    @media screen and (max-width: 768px) { /* Adjust the max-width as per your breakpoint for mobile or laptop screens */
+        .CUS-Row3 {
+            flex-direction: column;
+        }
+
+        .CUS-Row3LeftSide,
+        .CUS-Row3RightSide {
+            flex: 0 0 100%;
         }
     }
 }

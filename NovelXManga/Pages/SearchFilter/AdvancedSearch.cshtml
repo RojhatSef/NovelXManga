@@ -59,8 +59,21 @@
             </div>
           
         </div>
-        <div class="Row3">
-            <div class="RightSide">
+        <div class="CUS-Row3">
+            <div class="CUS-Row3LeftSide">
+                <div class="checkbox-wrapper-3">
+                    <input type="checkbox" id="showMatureContentForGuests" asp-for="showMatureContentForGuests" />
+                    <label for="showMatureContentForGuests" class="toggle"><span></span></label>
+                    <span>Show Mature Content</span>
+                </div>
+                <div class="checkbox-wrapper-3">
+                    <input type="checkbox" id="showAdultContentForGuests" asp-for="showAdultContentForGuests" />
+                    <label for="showAdultContentForGuests" class="toggle"><span></span></label>
+                    <span>Show Adult Content</span>
+                </div>
+            </div>
+
+            <div class="CUS-Row3RightSide">
                 <label for="SearchReleaseYearStart" class="CalendarIcon">
                     Search Start Year:
                     <input type="date" id="SearchReleaseYearStart" name="SearchReleaseYearStart" placeholder="YYYY">
@@ -93,16 +106,7 @@
                 }
             </div>
         </div>
-        <div class="opt-in-section">
-        <label>
-            <input asp-for="showMatureContentForGuests" type="checkbox" />
-            Show Mature Content
-        </label>
-        <label>
-            <input asp-for="showAdultContentForGuests" type="checkbox" />
-            Show Adult Content
-        </label>
-    </div>
+            
         <div id="hiddenContainer"></div>
         </div>
             <div class ="Mus-Tag-Divider">

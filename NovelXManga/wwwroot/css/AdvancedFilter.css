@@ -192,7 +192,7 @@ input[type="checkbox"].negative + label {
     border-radius: 5px;
     margin-left: 2.5%;
     margin-right: 2.5%;
-    color:whitesmoke;
+    color: whitesmoke;
 }
 
 .MUS-genre-container,
@@ -258,11 +258,98 @@ input[type="checkbox"].negative + label {
     gap: 16px;
     margin-top: 5%;
 }
-
-.Row3 {
-    margin-top: 10px;
+/* start for adult/content styling */
+.checkbox-wrapper-3 {
+    display: flex; /* Use flexbox for layout */
+    align-items: center; /* Vertically center the flex items */
+    margin-right: 15px; /* Spacing between checkboxes, adjust as needed */
+}
+.checkbox-wrapper-3 input[type="checkbox"] {
+    visibility: hidden;
+    display: none;
 }
 
+    .checkbox-wrapper-3 .toggle {
+        position: relative;
+        display: inline-block; /* Changed from block to inline-block for label text alignment */
+        width: 40px;
+        height: 20px;
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
+        transform: translate3d(0, 0, 0);
+        margin-right: 8px;
+    }
+
+    .checkbox-wrapper-3 .toggle:before {
+        content: "";
+        position: relative;
+        top: 3px;
+        left: 3px;
+        width: 34px;
+        height: 14px;
+        display: block;
+        background: #9A9999;
+        border-radius: 8px;
+        transition: background 0.2s ease;
+    }
+
+    .checkbox-wrapper-3 .toggle span {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        height: 20px;
+        display: block;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 3px 8px rgba(154, 153, 153, 0.5);
+        transition: all 0.2s ease;
+    }
+
+.checkbox-wrapper-3 input[type="checkbox"]:checked + .toggle:before {
+    background: #947ADA;
+}
+
+    .checkbox-wrapper-3 input[type="checkbox"]:checked + .toggle span {
+        background: #ff6740;
+        transform: translateX(20px); /* Moves the toggle to the right */
+        transition: all 0.2s cubic-bezier(0.8, 0.4, 0.3, 1.25), background 0.15s ease;
+        box-shadow: 0 3px 8px rgba(79, 46, 220, 0.2);
+    }
+
+    .checkbox-wrapper-3 input[type="checkbox"]:checked + .toggle span:before {
+        transform: scale(1);
+        opacity: 0;
+        transition: all 0.4s ease;
+    }
+
+.CUS-Row3 {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.CUS-Row3LeftSide {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping if needed */
+    align-items: center; /* Align items vertically */
+    justify-content: center; /* Center items horizontally */
+    flex: 0 0 50%; /* Do not grow or shrink, and base width is 50% */
+    box-sizing: border-box;
+}
+
+.CUS-Row3RightSide {
+    flex: 0 0 50%; /* Do not grow or shrink, and base width is 50% */
+    box-sizing: border-box; /* Include padding and borders in the element's total width and height */
+}
+
+.Row3LeftSide label,
+.Row3RightSide label {
+    display: block; /* Make label take the full width */
+    margin: 8px 0; /* Adjust as per requirement */
+}
+
+/* End for adult/content styling */
 .CalendarIcon input[type="date"]::-webkit-inner-spin-button,
 .CalendarIcon input[type="date"]::-webkit-calendar-picker-indicator {
     display: none;
@@ -525,5 +612,16 @@ input[type="checkbox"].negative + label {
         display: flex;
         flex-wrap: wrap;
         gap: 10px;
+    }
+}
+
+@media screen and (max-width: 768px) { /* Adjust the max-width as per your breakpoint for mobile or laptop screens */
+    .CUS-Row3 {
+        flex-direction: column;
+    }
+
+    .CUS-Row3LeftSide,
+    .CUS-Row3RightSide {
+        flex: 0 0 100%; /* Do not grow or shrink, and base width is 100% */
     }
 }
