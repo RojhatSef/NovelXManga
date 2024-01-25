@@ -431,14 +431,20 @@ document.addEventListener('DOMContentLoaded', function () {
                     bookLink.className = 'MUS-ANoneStyle';
                     bookLink.href = `/Manga/CurrentManga?id=${book.mangaID}`;
 
+                    let imageContainer = document.createElement('div');
+                    imageContainer.className = 'MUS-ImageContainer';
+
                     let bookImg = document.createElement('img');
                     bookImg.className = 'MUS-BoxImage';
-                    bookImg.src = `/Images/GeneratedMangaImage/${book.photoPath}`;  // corrected photoPath
+                    bookImg.src = `/Images/GeneratedMangaImage/${book.photoPath}`;
+
+                    imageContainer.appendChild(bookImg);
 
                     let contentDiv = document.createElement('div');
                     contentDiv.className = 'MUS-FourofKindContent';
 
                     let bookTitle = document.createElement('h2');
+                    bookTitle.className = 'MUS-TitleFourOfaKind';
                     bookTitle.textContent = book.mangaName;
 
                     let bookDescription = document.createElement('p');
@@ -448,7 +454,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     contentDiv.appendChild(bookTitle);
                     contentDiv.appendChild(bookDescription);
 
-                    bookLink.appendChild(bookImg);
+                    bookLink.appendChild(imageContainer);
                     bookLink.appendChild(contentDiv);
                     bookDiv.appendChild(bookLink);
                     cardFourDiv.appendChild(bookDiv);

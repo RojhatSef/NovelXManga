@@ -47,16 +47,28 @@
 }
 
 .MUS-FourOfAKind .MUS-FourofKindContent .MUS-TitleFourOfaKind {
-    background-color: yellow; /* Temporary: For debugging */
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Number of lines after which to truncate text */
+    -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap;
-    display: block;
-    width: calc(100% - 20px); /* Adjust the width if there's padding */
+    width: 100%; /* Adjust the width if there's padding */
     max-width: 100%;
-    box-sizing: border-box; /* Include padding and border in the width and height */
+    box-sizing: border-box;
     margin: 0;
-    padding: 10px; /* Adjust as needed */
+    line-height: 1.2em; /* Adjust the space between lines */
+    max-height: calc(1.2em * 3);
+    height: 60px; /* Adjust as needed */
+}
+
+.MUS-ImageContainer {
+    max-width: 40%;
+    min-width: 40%;
+    height: 100%; /* Adjust based on your design */
+    overflow: hidden; /* Ensures content doesn't spill out */
+    display: flex;
+    justify-content: center; /* Center image horizontally */
+    align-items: center; /* Center image vertically */
 }
 
 input[type="search"].SearchAuthorClass,
@@ -389,18 +401,18 @@ input[type="checkbox"].negative + label {
 
 .MUS-FourOfAKind .MUS-FourofKindContent .MUS-description {
     flex: 1;
-    overflow: auto;
-    /*test here*/
-    background-color: lightblue; /* Temporary: For debugging */
+    display: -webkit-box;
+    -webkit-line-clamp: 10; /* Adjust the number of lines */
+    -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap;
-    display: block;
-    width: calc(100% - 20px); /* Adjust the width if there's padding */
-    max-width: 100%;
-    box-sizing: border-box; /* Include padding and border in the width and height */
+    width: 100%; /* Full width */
+    box-sizing: border-box;
     margin: 0;
-    padding: 10px; /* Adjust as needed */
+    line-height: 1.2em; /* Space between lines */
+    max-height: calc(1.2em * 18);
+    width: 100%;
+    /* Adjust as needed */
 }
 
 .MUS-FourofKindContent {
@@ -408,6 +420,8 @@ input[type="checkbox"].negative + label {
     position: relative;
     display: flex;
     flex-direction: column;
+    justify-content: center; /* Center content vertically */
+    overflow: hidden;
 }
 
 .MUS-FourOfAKind {
@@ -420,30 +434,26 @@ input[type="checkbox"].negative + label {
     align-items: center;
     position: relative;
     box-sizing: border-box;
-    padding: 10px;
+    padding-bottom: 10px;
     transition: width 0.5s, height 0.5s;
+    padding-bottom: 5px;
     /* Ensure content doesn't overflow */
-    overflow: hidden; /* Add this line */
 }
 
 .NumberContainer {
     height: 200px;
 }
 
-.MUS-FourOfAKind .MUS-FourofKindContent h2 {
-    flex: 0;
-}
-
 .MUS-FourOfAKind img {
     height: 100%;
-    width: 50%;
+    width: 100%;
     object-fit: cover;
 }
 
 .MUS-FourOfAKind .MUS-FourofKindContent {
-    width: 70%;
+    max-width: 60%;
+    min-width: 60%;
     height: 100%;
-    padding-left: 10px;
     display: flex;
     flex-direction: column;
 }
@@ -528,20 +538,27 @@ input[type="checkbox"].negative + label {
     display: block;
 }
 
+.MUS-ANoneStyle,
+.MUS-BoxImage,
+.MUS-FourofKindContent,
+.MUS-TitleFourOfaKind,
+.MUS-description {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Include padding and border in the element's total dimensions */
+}
+
 .MUS-ANoneStyle {
     display: flex;
     align-items: center;
+    justify-content: center;
     text-decoration: none;
     color: inherit;
-    width: 100%;
-    height: 100%;
+    width: 100%; /* Full width of its parent */
+    height: 100%; /* Full height of its parent */
+    max-width: 100%; /* Ensure it doesn't grow beyond 100% */
+    box-sizing: border-box;
 }
-
-    .MUS-ANoneStyle:hover {
-        border-top: solid;
-        border-bottom: solid;
-        border-color: #ff6740;
-    }
 
 /* Mobile */
 @media (max-width: 480px) {
