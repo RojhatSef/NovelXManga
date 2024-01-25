@@ -46,6 +46,19 @@
     font-size: 16px;
 }
 
+.MUS-FourOfAKind .MUS-FourofKindContent .MUS-TitleFourOfaKind {
+    background-color: yellow; /* Temporary: For debugging */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: block;
+    width: calc(100% - 20px); /* Adjust the width if there's padding */
+    max-width: 100%;
+    box-sizing: border-box; /* Include padding and border in the width and height */
+    margin: 0;
+    padding: 10px; /* Adjust as needed */
+}
+
 input[type="search"].SearchAuthorClass,
 input[type="search"].SearchArtistClass,
 input[type="search"].SearchVoiceActorClass {
@@ -264,10 +277,11 @@ input[type="checkbox"].negative + label {
     align-items: center; /* Vertically center the flex items */
     margin-right: 15px; /* Spacing between checkboxes, adjust as needed */
 }
-.checkbox-wrapper-3 input[type="checkbox"] {
-    visibility: hidden;
-    display: none;
-}
+
+    .checkbox-wrapper-3 input[type="checkbox"] {
+        visibility: hidden;
+        display: none;
+    }
 
     .checkbox-wrapper-3 .toggle {
         position: relative;
@@ -280,35 +294,35 @@ input[type="checkbox"].negative + label {
         margin-right: 8px;
     }
 
-    .checkbox-wrapper-3 .toggle:before {
-        content: "";
-        position: relative;
-        top: 3px;
-        left: 3px;
-        width: 34px;
-        height: 14px;
-        display: block;
-        background: #9A9999;
-        border-radius: 8px;
-        transition: background 0.2s ease;
-    }
+        .checkbox-wrapper-3 .toggle:before {
+            content: "";
+            position: relative;
+            top: 3px;
+            left: 3px;
+            width: 34px;
+            height: 14px;
+            display: block;
+            background: #9A9999;
+            border-radius: 8px;
+            transition: background 0.2s ease;
+        }
 
-    .checkbox-wrapper-3 .toggle span {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 20px;
-        height: 20px;
-        display: block;
-        background: white;
-        border-radius: 10px;
-        box-shadow: 0 3px 8px rgba(154, 153, 153, 0.5);
-        transition: all 0.2s ease;
-    }
+        .checkbox-wrapper-3 .toggle span {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 20px;
+            height: 20px;
+            display: block;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 3px 8px rgba(154, 153, 153, 0.5);
+            transition: all 0.2s ease;
+        }
 
-.checkbox-wrapper-3 input[type="checkbox"]:checked + .toggle:before {
-    background: #947ADA;
-}
+    .checkbox-wrapper-3 input[type="checkbox"]:checked + .toggle:before {
+        background: #ff6740;
+    }
 
     .checkbox-wrapper-3 input[type="checkbox"]:checked + .toggle span {
         background: #ff6740;
@@ -317,11 +331,11 @@ input[type="checkbox"].negative + label {
         box-shadow: 0 3px 8px rgba(79, 46, 220, 0.2);
     }
 
-    .checkbox-wrapper-3 input[type="checkbox"]:checked + .toggle span:before {
-        transform: scale(1);
-        opacity: 0;
-        transition: all 0.4s ease;
-    }
+        .checkbox-wrapper-3 input[type="checkbox"]:checked + .toggle span:before {
+            transform: scale(1);
+            opacity: 0;
+            transition: all 0.4s ease;
+        }
 
 .CUS-Row3 {
     margin-top: 10px;
@@ -373,9 +387,20 @@ input[type="checkbox"].negative + label {
     justify-content: flex-start;
 }
 
-.MUS-description {
+.MUS-FourOfAKind .MUS-FourofKindContent .MUS-description {
     flex: 1;
     overflow: auto;
+    /*test here*/
+    background-color: lightblue; /* Temporary: For debugging */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: block;
+    width: calc(100% - 20px); /* Adjust the width if there's padding */
+    max-width: 100%;
+    box-sizing: border-box; /* Include padding and border in the width and height */
+    margin: 0;
+    padding: 10px; /* Adjust as needed */
 }
 
 .MUS-FourofKindContent {
@@ -387,8 +412,8 @@ input[type="checkbox"].negative + label {
 
 .MUS-FourOfAKind {
     flex: 0 0 calc(25% - 10px); /* Four items per row, subtracting padding */
-    max-height: 450px !important;
-    min-height: 320px !important;
+    max-height: 450px;
+    min-height: 320px;
     min-width: 300px;
     flex-grow: 1;
     display: flex;
@@ -397,6 +422,8 @@ input[type="checkbox"].negative + label {
     box-sizing: border-box;
     padding: 10px;
     transition: width 0.5s, height 0.5s;
+    /* Ensure content doesn't overflow */
+    overflow: hidden; /* Add this line */
 }
 
 .NumberContainer {
@@ -417,6 +444,8 @@ input[type="checkbox"].negative + label {
     width: 70%;
     height: 100%;
     padding-left: 10px;
+    display: flex;
+    flex-direction: column;
 }
 
 .MUS-CardFour {
