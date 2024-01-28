@@ -33,7 +33,7 @@ function loadMoreCharacters() {
 
                 data.forEach(character => {
                     let gridItem = document.createElement('div');
-                    gridItem.className = 'GridItem';
+                    gridItem.className = 'CUS-GridItem';
 
                     let anchor = document.createElement('a');
                     anchor.href = `/CharacterPage/CurrentCharacter?id=${character.characterId}`;
@@ -45,7 +45,7 @@ function loadMoreCharacters() {
                     anchor.appendChild(img);
 
                     let textDiv = document.createElement('div');
-                    textDiv.className = 'MangaInputText';
+                    textDiv.className = 'CUS-MangaInputText';
 
                     let p = document.createElement('p');
                     p.textContent = character.characterName;
