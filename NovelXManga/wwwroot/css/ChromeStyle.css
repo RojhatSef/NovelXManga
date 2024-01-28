@@ -177,6 +177,10 @@
         align-items: center;
         background-color: #333; /* Optional: background color for the button */
         color: #fff; /* Optional: text color for the button */
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 30px; /* Adjust as needed */
+        border-bottom-left-radius: 30px; /* Adjust as needed */
     }
 
         .MoreRecentUpdateStyle:hover {
