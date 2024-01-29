@@ -49,7 +49,6 @@
         justify-content: space-between; /* Distributes space evenly between the rating containers */
         align-items: center; /* Aligns items vertically in the center */
         gap: 1em; /* Space between each rating container */
-       
     }
 
     .CUS-LeftSidemangaDetailsBox {
@@ -111,7 +110,12 @@
         overflow: hidden;
     }
 
-  
+    .CUS-CommonContainer {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+    }
+
     .CUS-ratingLeftSide {
         width: 35%;
         display: flex;
@@ -121,12 +125,15 @@
 
     .CUS-LeftSide {
         width: 35%;
+        flex: 1 1 auto;
+        max-height: fit-content;
         display: flex;
         flex-wrap: wrap;
         justify-content: flex-start;
     }
+
     .CUS-ReviewTitleCenter {
-        width:100%; 
+        width: 100%;
     }
 
     .CUS-RatingRightSide {
@@ -138,6 +145,7 @@
 
     .CUS-RightSide {
         width: 65%;
+        flex: 2 1 auto;
         /* Optional: background color for the right side */
     }
 
