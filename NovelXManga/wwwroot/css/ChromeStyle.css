@@ -1904,8 +1904,8 @@
                 }
 
 .fillerClassIc textarea.TextAreaCurrentReview {
-    width: 50%;
-    max-width: calc(100% - 16px);
+   width:100%; 
+   
     height: 250px;
     margin-top: 0px; /* Update or remove this margin as needed */
     margin-bottom: 20px;
@@ -1917,13 +1917,13 @@
     border-color: #ff6740;
     text-decoration: none !important;
     outline: none;
+    margin-left:3px; 
 }
 
 .ReviewTitle {
-    width: 98%;
-    max-width: calc(75% - 16px);
+    width:100%; 
     height: 40px;
-    margin-bottom: 20px;
+    margin-left:3px; 
     resize: none;
     font-size: 18px;
     --background-color: #191a1c;
@@ -1943,7 +1943,7 @@
 }
 
 .fillerClassIc {
-    display: flex;
+    width:100%; 
     justify-content: center;
     align-items: center;
     flex-direction: column;

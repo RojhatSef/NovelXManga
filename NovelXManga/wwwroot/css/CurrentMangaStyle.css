@@ -14,6 +14,7 @@
     .CUS-CustomHintLabel {
         color: rgb(255, 103, 64);
     }
+
     .CUS-GridItem {
         transition: width 0.5s, height 0.5s;
         width: 240px;
@@ -27,6 +28,7 @@
         justify-content: center;
         margin: 8px;
     }
+
     .CUS-mangaDetailsBox {
         flex: 1 1 auto; /* Will take up 30% of the container's width when the screen is large */
         box-sizing: border-box;
@@ -36,26 +38,53 @@
         flex-direction: column;
         align-items: center; /* Centers the content horizontally */
         justify-content: center; /* Centers the content vertically */
-     
+
         border-radius: 10px; /* Adds rounded corners to the box */
         min-width: 30%;
-     
         transition: margin-left 0.5s ease, margin-top 0.5s ease;
     }
 
-        .CUS-mangaDetailsBox.CUS-bookdescription {
-            flex-grow: 2;
+    .CUS-ratingContainer {
+        display: flex;
+        justify-content: space-between; /* Distributes space evenly between the rating containers */
+        align-items: center; /* Aligns items vertically in the center */
+        gap: 1em; /* Space between each rating container */
+       
+    }
+
+    .CUS-LeftSidemangaDetailsBox {
+        flex: 1 1 auto;
+        box-sizing: border-box;
+        margin: 1em;
+        padding: 1em;
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Centers the content horizontally */
+        justify-content: center; /* Centers the content vertically */
+
+        border-radius: 10px; /* Adds rounded corners to the box */
+
+        transition: margin-left 0.5s ease, margin-top 0.5s ease;
+    }
+
+        .CUS-LeftSidemangaDetailsBox h3 {
         }
 
-        .CUS-mangaDetailsBox .CUS-contentMangaBox-wrapper {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 50%;
-            margin: 0px;
-            padding: 0px;
-        }
+    .CUS-mangaDetailsBox.CUS-bookdescription {
+        flex-grow: 2;
+        width: 100%;
+    }
+
+    .CUS-mangaDetailsBox .CUS-contentMangaBox-wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 50%;
+        margin: 0px;
+        padding: 0px;
+    }
+
     .CUS-MangaContainerInput {
         height: auto;
         width: 100%; /* Adjust width to take the full width of the parent */
@@ -80,6 +109,42 @@
         margin-top: 5%;
         transition: margin-left 0.5s ease;
         overflow: hidden;
+    }
+
+  
+    .CUS-ratingLeftSide {
+        width: 35%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+    }
+
+    .CUS-LeftSide {
+        width: 35%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+    }
+    .CUS-ReviewTitleCenter {
+        width:100%; 
+    }
+
+    .CUS-RatingRightSide {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 65%;
+    }
+
+    .CUS-RightSide {
+        width: 65%;
+        /* Optional: background color for the right side */
+    }
+
+    @media (max-width: 768px) { /* Adjust breakpoint as needed for tablet size */
+        .CUS-LeftSide, .CUS-RightSide {
+            width: 100%;
+        }
     }
     /* When the screen's width is 600px or less, change the boxes to take 100% of the width */
     @media (max-width: 600px) {
@@ -640,6 +705,24 @@
         .CUS-Row3LeftSide,
         .CUS-Row3RightSide {
             flex: 0 0 100%;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .CUS-ratingContainer {
+            flex-direction: column;
+        }
+
+        .CUS-RatingRightSide {
+            order: 1; /* Makes the right side come first */
+            width: 100%; /* Take full width */
+        }
+
+        .CUS-ratingLeftSide {
+            order: 2; /* Makes the left side come after the right side */
+            width: 100%; /* Take full width */
+
+            justify-content: center;
         }
     }
 }
