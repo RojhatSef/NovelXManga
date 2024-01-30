@@ -52,21 +52,18 @@
     }
 
     .CUS-LeftSidemangaDetailsBox {
-        flex: 1 1 auto;
+        /*flex: 1 1 auto;*/
         box-sizing: border-box;
-        flex-direction:column; 
+        flex-direction: column;
         display: flex;
         flex-direction: column;
-        align-items:flex-start; 
+        align-items: flex-start;
         justify-content: center; /* Centers the content vertically */
 
         border-radius: 10px; /* Adds rounded corners to the box */
 
         transition: margin-left 0.5s ease, margin-top 0.5s ease;
     }
-
-        .CUS-LeftSidemangaDetailsBox h3 {
-        }
 
     .CUS-mangaDetailsBox.CUS-bookdescription {
         flex-grow: 2;
@@ -83,6 +80,43 @@
         padding: 0px;
     }
 
+    .CUS-MangaDetaiDescription {
+        flex: 1 1 auto; /* Will take up 30% of the container's width when the screen is large */
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Centers the content horizontally */
+        justify-content: center; /* Centers the content vertically */
+
+        transition: margin-left 0.5s ease, margin-top 0.5s ease;
+    }
+
+    .CUS-MangaDescriptionContainerInput {
+        height: auto;
+        border: none;
+        border-radius: 5px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 5px;
+        box-sizing: border-box;
+        transition: margin-left 0.5s ease;
+        align-items: center; /* Centers the content horizontally */
+    }
+
+    .CUS-LeftSidemangaDetailsBox h3 {
+        display: block;
+        font-size: 1.17em;
+        margin-block-start: 0.3em;
+        margin-right: 5px;
+        margin-block-end: 0.3em;
+        margin-inline-start: 0px;
+        margin-inline-end: 0px;
+        font-weight: bold;
+        padding-right: 5px;
+    }
+
     .CUS-MangaContainerInput {
         height: auto;
         width: 100%; /* Adjust width to take the full width of the parent */
@@ -91,13 +125,11 @@
         display: flex;
         flex-wrap: wrap;
         align-items: flex-start;
-    
         gap: 10px;
         padding: 5px;
         box-sizing: border-box;
         transition: margin-left 0.5s ease;
         align-items: center; /* Centers the content horizontally */
-      
     }
 
     .CUS-mangaDetailsWrapper {
@@ -471,8 +503,42 @@
         border-radius: 5px;
     }
 
+    body.light-mode .CUS-tagsInsideInsideCurrentManga {
+        background-color: var(--tag-bg-light); /* Use light mode variable */
+    }
+
+    body.light-mode .CUS-MangaInputText {
+        background-color: var(--tag-bg-light); /* Use light mode variable */
+    }
+
+        body.light-mode .CUS-MangaInputText i {
+            color: var(--tag-bg-dark); /* Use light mode variable */
+        }
+
+    body.light-mode .ReviewTitle {
+        color: var(--tag-bg-dark); /* Use light mode variable */
+    }
+
+    body.light-mode .CUS-MangaInputText .colorstarCurrent {
+        color: yellow;
+    }
+
+    .ReviewTitle {
+        width: 100%;
+        height: 40px;
+        margin-left: 3px;
+        resize: none;
+        font-size: 18px;
+        --background-color: #191a1c;
+        color: white;
+        font-family: Lato !important;
+        border-color: #ff6740;
+        text-decoration: none !important;
+        outline: none;
+    }
+
     .CUS-tagsInsideInsideCurrentManga {
-        background-color: #444;
+        background-color: var(--tag-bg-dark);
         padding: 5px;
         margin: 0;
         border-radius: 3px;
@@ -493,12 +559,15 @@
     CUS-ShowTitleOnSmall {
         display: none;
     }
-    .CUS-DescriptionDiver{
-        width:100%
+
+    .CUS-DescriptionDiver {
+        width: 100%
     }
+
     .CUS-manga-title {
         display: -webkit-box;
         -webkit-line-clamp: 3;
+        color: white;
         -webkit-box-orient: vertical; /* To limit lines vertically */
         position: absolute;
         top: calc(20% - 40px);
@@ -734,6 +803,7 @@
             justify-content: center;
         }
     }
+
     @media (max-width: 768px) {
         .CUS-CommonContainer {
             flex-direction: column; /* Stack children vertically */

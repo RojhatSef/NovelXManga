@@ -363,10 +363,10 @@
 
     <div class="CUS-mangaDetailsWrapper">
          
-    <div class="CUS-mangaDetailsBox CUS-bookdescription">
+    <div class="CUS-MangaDetaiDescription CUS-bookdescription">
       
 
-            <div class="CUS-MangaContainerInput">
+            <div class="CUS-MangaDescriptionContainerInput">
 
                 @if (Model.CurrentManga.Description != null)
                 {
@@ -381,6 +381,7 @@
                     }
                     else
                     {
+                   
                         @Model.CurrentManga.Description
                     }
                 }
@@ -595,83 +596,11 @@
 
             </div>
        
-          <div class="CUS-LeftSidemangaDetailsBox">
-          
-         
-         
-                <h3>ISBN:</h3>
-                <div class="CUS-MangaContainerInput">
-
-                    @if (Model.CurrentManga.ISBN13 != null || Model.CurrentManga.ISBN10 != null)
-                    {
-
-                        @if (UpdaterUser)
-                        {
-                            @if (Model.CurrentManga.ISBN13 != null)
-                            {
-
-                            }
-                        <div class="CUS-MangaInputText">
-                                <a asp-page="/MangaUpdates/UpdateDescription" asp-route-id="@Model.CurrentManga.MangaID">
-                                    ISBN13: @Model.CurrentManga.ISBN13
-                                </a>
-                            </div>
-                            <p>     </p>
-                            <a asp-page="/MangaUpdates/UpdateDescription" asp-route-id="@Model.CurrentManga.MangaID">
-                            <div class="CUS-MangaInputText">
-                                    ISBN10: @Model.CurrentManga.ISBN10
-
-                                </div>
-                            </a>
-                        }
-                        else
-                        {
-                        <div class="CUS-MangaInputText">
-                                ISBN13: @Model.CurrentManga.ISBN13
-
-                            </div>
-                            <p>     </p>
-                        <div class="CUS-MangaInputText">
-                                ISBN10: @Model.CurrentManga.ISBN10
-
-                            </div>
-                        }
-                    }
-                    else
-                    {
-                        @if (UpdaterUser)
-                        {
-                            <a asp-page="/MangaUpdates/UpdateDescription" asp-route-id="@Model.CurrentManga.MangaID">
-                            <div class="CUS-MangaInputText">
-                                    TBA ISBN13
-                                </div>
-                            </a>
-                            <a asp-page="/MangaUpdates/UpdateDescription" asp-route-id="@Model.CurrentManga.MangaID">
-                                <div class="CUS-MangaInputText">
-                                    TBA ISBN10
-                                </div>
-                            </a>
-                        }
-                        else
-                        {
-                            <div class="CUS-MangaInputText">
-                                ISBN13: TBA
-                            </div>
-                        <div class="CUS-MangaInputText">
-                                ISBN10: TBA
-                            </div>
-                        }
-                    }
-
-
-                </div>
-
-         
-        </div> 
+   
 
             <div class="CUS-LeftSidemangaDetailsBox">     <h3>Original Publisher:</h3>
                 <div class="CUS-MangaContainerInput">
-                    @if (Model.CurrentManga.ISBN13 != null)
+                    @if (Model.CurrentManga.OriginalPublisher != null)
                     {
                         @if (UpdaterUser)
                         {
@@ -809,7 +738,80 @@
 
           
         </div>
-      @*  LeftSideEndhere*@
+            <div class="CUS-LeftSidemangaDetailsBox">
+
+
+
+                <h3>ISBN:</h3>
+                <div class="CUS-MangaContainerInput">
+
+                    @if (Model.CurrentManga.ISBN13 != null || Model.CurrentManga.ISBN10 != null)
+                    {
+
+                        @if (UpdaterUser)
+                        {
+                            @if (Model.CurrentManga.ISBN13 != null)
+                            {
+
+                            }
+                            <div class="CUS-MangaInputText">
+                                <a asp-page="/MangaUpdates/UpdateDescription" asp-route-id="@Model.CurrentManga.MangaID">
+                                    ISBN13: @Model.CurrentManga.ISBN13
+                                </a>
+                            </div>
+                            <p>     </p>
+                            <a asp-page="/MangaUpdates/UpdateDescription" asp-route-id="@Model.CurrentManga.MangaID">
+                                <div class="CUS-MangaInputText">
+                                    ISBN10: @Model.CurrentManga.ISBN10
+
+                                </div>
+                            </a>
+                        }
+                        else
+                        {
+                            <div class="CUS-MangaInputText">
+                                ISBN13: @Model.CurrentManga.ISBN13
+
+                            </div>
+                            <p>     </p>
+                            <div class="CUS-MangaInputText">
+                                ISBN10: @Model.CurrentManga.ISBN10
+
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        @if (UpdaterUser)
+                        {
+                            <a asp-page="/MangaUpdates/UpdateDescription" asp-route-id="@Model.CurrentManga.MangaID">
+                                <div class="CUS-MangaInputText">
+                                    TBA ISBN13
+                                </div>
+                            </a>
+                            <a asp-page="/MangaUpdates/UpdateDescription" asp-route-id="@Model.CurrentManga.MangaID">
+                                <div class="CUS-MangaInputText">
+                                    TBA ISBN10
+                                </div>
+                            </a>
+                        }
+                        else
+                        {
+                            <div class="CUS-MangaInputText">
+                                ISBN13: TBA
+                            </div>
+                            <div class="CUS-MangaInputText">
+                                ISBN10: TBA
+                            </div>
+                        }
+                    }
+
+
+                </div>
+
+
+            </div>
+            @*  LeftSideEndhere*@
          </div>
           @if (Model.CurrentManga2.Characters != null || Model.CurrentManga2.Characters.Count <= 1 && Model.CurrentManga.OverAllBookScore != null)
                 {
