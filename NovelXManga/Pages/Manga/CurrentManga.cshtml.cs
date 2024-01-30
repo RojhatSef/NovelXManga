@@ -12,14 +12,6 @@ using System.Net;
 using System.Text.RegularExpressions;
 
 //Things to do:
-/*
-Fix the styling on the page for larger screens and check for mobile with width only. Height should be okay. for these containers,
-but check for extreme small width if possible. , The Photo , title AddToLibrary container, The tags and Star/reading container.
-The 3 containers should be in 1 container, so it's horizontally aligned.
-Bottom page needs an entire restyling.
-DRAG OUT THE styling names to a new CSS we don't want stylings to be from one page to another.
-
-*/
 
 // incorrect, we need to check if the manga even needs an update, if it does not why should we update it.
 //fix a bool that checks if it's a need of update.

@@ -15,6 +15,8 @@
         });
     });
 })();
+
+
 function loadMoreCharacters() {
     let skip = 5;
     const take = 100;
