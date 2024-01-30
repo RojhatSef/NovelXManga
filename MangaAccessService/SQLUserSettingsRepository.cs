@@ -35,6 +35,12 @@ namespace MangaAccessService
             return await context.UserSettings.FindAsync(userModelId);
         }
 
+        public async Task<UserSettings> GetUserAsync(string userModelId)
+        {
+            return await context.UserSettings
+                       .FirstOrDefaultAsync(us => us.UserModelId == userModelId);
+        }
+
         public async Task<IEnumerable<UserSettings>> GetAllAsync()
         {
             return await context.UserSettings.ToListAsync();

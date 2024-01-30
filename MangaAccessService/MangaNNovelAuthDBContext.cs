@@ -127,6 +127,11 @@ namespace MangaAccessService
                 .OnDelete(DeleteBehavior.Restrict);
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Entity<UserModel>()
+       .HasOne(us => us.UserSettings)
+       .WithOne(u => u.UserModel)
+       .HasForeignKey<UserSettings>(us => us.UserModelId);
+
             //Maybe using, unsure For score distruibution
             //     modelBuilder.Entity<ScoreDistributionEntry>()
             //.HasOne(s => s.MangaModel)

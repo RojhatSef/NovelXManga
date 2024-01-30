@@ -13,5 +13,7 @@ namespace MangaAccessService
         Task<IEnumerable<UserSettings>> GetAllAsync();
 
         Task<UserSettings> UpdateAsync(UserSettings userSettings);
+
+        Task<UserSettings> GetUserAsync(string userModelId);
     }
 }

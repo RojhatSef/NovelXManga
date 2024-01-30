@@ -413,7 +413,22 @@ namespace NovelXManga.Pages.SearchFilter
             if (User.Identity.IsAuthenticated)
             {
                 var currentUser = await userManager.GetUserAsync(User);
-                var userSettings = await _userSettingsRepository.GetAsync(currentUser.Id);
+                if (currentUser == null)
+                {
+                    // Handle the case where the user is not found
+                    throw new Exception("User not found.");
+                }
+
+                context.Entry(currentUser).Reference(u => u.UserSettings).Load();
+
+                var userSettings = currentUser.UserSettings;
+                if (userSettings == null)
+                {
+                    // Handle the case where user settings are not found
+                    // You might want to create default settings here if that's the desired behavior
+                    throw new Exception("User settings not found.");
+                }
+
                 return new UserSettingsDTO
                 {
                     UserModelId = userSettings.UserModelId,

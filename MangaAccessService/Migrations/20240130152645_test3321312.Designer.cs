@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MangaAccessService.Migrations
 {
     [DbContext(typeof(MangaNNovelAuthDBContext))]
-    [Migration("20240115123249_Test321321321")]
-    partial class Test321321321
+    [Migration("20240130152645_test3321312")]
+    partial class test3321312
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -1361,30 +1361,6 @@ namespace MangaAccessService.Migrations
                     b.ToTable("Reviews");
                 });
 
-            modelBuilder.Entity("MangaModelService.ScoreDistributionEntry", b =>
-                {
-                    b.Property<int>("ScoreDistributionEntryID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ScoreDistributionEntryID"), 1L, 1);
-
-                    b.Property<int>("Count")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MangaModelId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Score")
-                        .HasColumnType("int");
-
-                    b.HasKey("ScoreDistributionEntryID");
-
-                    b.HasIndex("MangaModelId");
-
-                    b.ToTable("ScoreDistributionEntry");
-                });
-
             modelBuilder.Entity("MangaModelService.TagModel", b =>
                 {
                     b.Property<int>("TagId")
@@ -2486,17 +2462,6 @@ namespace MangaAccessService.Migrations
                     b.Navigation("ReportAssignment");
 
                     b.Navigation("UpdatedByAdmin");
-                });
-
-            modelBuilder.Entity("MangaModelService.ScoreDistributionEntry", b =>
-                {
-                    b.HasOne("MangaModelService.MangaModel", "MangaModel")
-                        .WithMany()
-                        .HasForeignKey("MangaModelId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("MangaModel");
                 });
 
             modelBuilder.Entity("MangaModelService.UserBlock", b =>
