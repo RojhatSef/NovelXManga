@@ -9,6 +9,8 @@ namespace MangaModelService
         public int AssociatedNamesId { get; set; }
 
         [Required]
+        [MinLength(1, ErrorMessage = "Name must contain at least 1 characters")]
+        [MaxLength(1500, ErrorMessage = "Alternative name must not exceed 1500 characters")]
         public string? nameString { get; set; }
 
         public int? MangaID { get; set; }

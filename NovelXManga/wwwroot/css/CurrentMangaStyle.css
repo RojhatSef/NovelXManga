@@ -535,6 +535,7 @@
         border-color: #ff6740;
         text-decoration: none !important;
         outline: none;
+        border-radius:10px; 
     }
 
     .CUS-tagsInsideInsideCurrentManga {

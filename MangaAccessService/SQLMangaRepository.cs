@@ -146,14 +146,14 @@ namespace MangaAccessService.Migrations
                 {
                     ArtistId = a.ArtistId,
                     FirstName = a.FirstName,
-                    PhotoPath = a.PhotoPath
+                    LastName = a.LastName
                 }).Take(5).ToList(),
 
                 Authors = m.Authormodels.Select(a => new CurrentMangaAuthorDto
                 {
                     AuthorID = a.AuthorID,
                     FirstName = a.FirstName,
-                    PhotoPath = a.PhotoPath
+                    LastName = a.LastName
                 }).Take(5).ToList(),
 
                 Characters = m.Characters.Select(c => new CurrentMangaCharacterDto
@@ -167,7 +167,7 @@ namespace MangaAccessService.Migrations
                 {
                     VoiceActorId = v.VoiceActorId,
                     FirstName = v.FirstName,
-                    PhotoPath = v.PhotoPath
+                    LastName = v.LastName
                 }).Take(5).ToList(),
 
                 Genres = m.GenresModels.Select(g => new CurrentMangaGenreDto
@@ -206,14 +206,14 @@ namespace MangaAccessService.Migrations
                 {
                     ArtistId = a.ArtistId,
                     FirstName = a.FirstName,
-                    PhotoPath = a.PhotoPath
+                    LastName = a.LastName
                 }).Take(5).ToList(),
 
                 Authors = m.Authormodels.Select(a => new CurrentMangaAuthorDto
                 {
                     AuthorID = a.AuthorID,
                     FirstName = a.FirstName,
-                    PhotoPath = a.PhotoPath
+                    LastName = a.LastName
                 }).ToList(),
 
                 Characters = m.Characters.Select(c => new CurrentMangaCharacterDto
@@ -227,7 +227,7 @@ namespace MangaAccessService.Migrations
                 {
                     VoiceActorId = v.VoiceActorId,
                     FirstName = v.FirstName,
-                    PhotoPath = v.PhotoPath
+                    LastName = v.LastName
                 }).ToList(),
 
                 Genres = m.GenresModels.Select(g => new CurrentMangaGenreDto

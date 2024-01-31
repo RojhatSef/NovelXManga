@@ -8,21 +8,41 @@ namespace MangaModelService
         [Key]
         public int MangaID { get; set; }
 
-        [Required(ErrorMessage = "Name is requried"),
-        MinLength(2, ErrorMessage = "Name must contain at least 2 characters")]
+        [Required(ErrorMessage = "Name is requried")]
+        [MinLength(2, ErrorMessage = "Name must contain at least 2 characters")]
+        [MaxLength(255, ErrorMessage = "Name must not exceed 255 characters")]
         public string MangaName { get; set; }
 
+        [StringLength(10, ErrorMessage = "ISBN10 must be 10 characters", MinimumLength = 10)]
         public string? ISBN10 { get; set; }
+
+        [StringLength(13, ErrorMessage = "ISBN13 must be 13 characters", MinimumLength = 13)]
         public string? ISBN13 { get; set; }
+
+        [MaxLength(1000, ErrorMessage = "futureEvents must not exceed 1000 characters")]
         public string? futureEvents { get; set; }
+
+        [MaxLength(100, ErrorMessage = "StatusInCountryOfOrigin must not exceed 100 characters")]
         public string? StatusInCountryOfOrigin { get; set; }
+
+        [MaxLength(100, ErrorMessage = "CompletelyTranslated must not exceed 100 characters")]
         public string? CompletelyTranslated { get; set; }
+
+        [MaxLength(500, ErrorMessage = "orignalWebtoon must not exceed 500 characters")]
         public string? orignalWebtoon { get; set; }
+
+        [MaxLength(200, ErrorMessage = "OriginalPublisher must not exceed 200 characters")]
         public string? OriginalPublisher { get; set; }
+
         public int? Rank { get; set; }
         public int? PageView { get; set; }
+
+        [MaxLength(100, ErrorMessage = "Type must not exceed 100 characters")]
         public string? Type { get; set; }
+
+        [MaxLength(100, ErrorMessage = "OfficalLanguage must not exceed 100 characters")]
         public string? OfficalLanguage { get; set; }
+
         public string? PhotoPath { get; set; }
         public DateTime? LastDailyReadDate { get; set; }
         public DateTime? LastWeeklyReadDate { get; set; }
@@ -33,7 +53,10 @@ namespace MangaModelService
         public int? MonthRead { get; set; }
         public int? YearRead { get; set; }
         public int? ForeverRead { get; set; }
+
+        [MaxLength(5000, ErrorMessage = "Description must not exceed 5000 characters")]
         public string? Description { get; set; }
+
         public DateTime? ReleaseYear { get; set; }
         public DateTime? EndingYear { get; set; }
         public DateTime? BookAddedToDB { get; set; }

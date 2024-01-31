@@ -488,7 +488,7 @@ namespace NovelXManga.Pages.Manga
                 }
             }
             // Save changes
-            CurrentManga.BookUpdated = DateTime.UtcNow;
+
             user.UserActivityTimer = DateTime.Now;
             await Context.SaveChangesAsync();
             return RedirectToPage(new { id });

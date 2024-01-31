@@ -425,6 +425,7 @@ namespace NovelXManga
             var soloLeveling = await GetOrCreateMangaAsync("Solo Leveling");
             var towerOfGod = await GetOrCreateMangaAsync("Tower of God");
             var sailorMoon = await GetOrCreateMangaAsync("Sailor Moon");
+            var Testbook = await GetOrCreateMangaAsync("ThisIsACharacterTestToCheckIfATitleCouldbeLongerThanItShouldBePossibleToViewWhenWatchingThisFromANormalUsersperspectiveNowIamJustWritingThisFortheFunOfItHoweverItsEssentialThatThisTitleIsWorkingAsIntendedLaterOnWhenIseeThisKindOfCrappyLongTittlesInBookSIfThisHappensWeNeedSomething");
 
             // Seed user reviews
             var testUser = await context.UserModels.FirstOrDefaultAsync(u => u.UserName == "TestUser");
@@ -445,6 +446,9 @@ namespace NovelXManga
             CreateReview(4.5, 3.0, 3.5, 4.5, "Tower Of The G", "Tower of God is an epic adventure with a unique premise." +
                 " The art style may take some getting used to, but the story is engaging and full of twists." +
                 " The characters are diverse and intriguing. It's a series that keeps you guessing and wanting more.", testUser, towerOfGod);
+            CreateReview(4.5, 3.0, 3.5, 4.5, "Tower Of The G", "Tower of God is an epic adventure with a unique premise." +
+               " The art style may take some getting used to, but the story is engaging and full of twists." +
+               " The characters are diverse and intriguing. It's a series that keeps you guessing and wanting more.", testUser, Testbook);
             await context.SaveChangesAsync();
 
             // Seed user2 reviews
@@ -453,13 +457,46 @@ namespace NovelXManga
             CreateReview(2.5, 2, 2.4, 2.9, "Mind-Blowing Action", "Solo Leveling is a highly addictive webtoon. The art is stunning," +
                 " and the story keeps you hooked with its action-packed sequences and intriguing world-building. The characters are well-designed," +
                 " and the pacing is great. It's a must-read for fans of the genre.", testUser2, soloLeveling);
+            CreateReview(2.5, 2, 2.4, 2.9, "Mind-Blowing Action", "Solo Leveling is a highly addictive webtoon. The art is stunning," +
+               " and the story keeps you hooked with its action-packed sequences and intriguing world-building. The characters are well-designed," +
+               " and the pacing is great. It's a must-read for fans of the genre.", testUser2, Testbook);
             CreateReview(1.5, 1, 1.4, 4.9, "SailorD", "Sailor Miss!...", testUser2, sailorMoon);
             await context.SaveChangesAsync();
             // Seed user3 reviews
             string filePath3 = Path.Combine(UserProfileProcessUploadedFile("NoPhoto.png"));
-            var testUser3 = await CreateAndAddRoleToUserAsync("TestUser3", "testuser3@example.com", "Fishmuppet", "Password123!", "NormalUser", filePath3);
+            var testUser3 = await CreateAndAddRoleToUserAsync("TestUser3", "testuser3@example.com", "Fishmudsappet", "Password123!", "NormalUser", filePath3);
             CreateReview(4.5, 3, 2.4, 4.9, "MySalor", "Sailor Miss!...", testUser3, sailorMoon);
+            CreateReview(4.5, 3, 2.4, 4.9, "MySalor", "Sailor Miss!...", testUser3, Testbook);
 
+            await context.SaveChangesAsync();
+            //testuser4
+            string filePath4 = Path.Combine(UserProfileProcessUploadedFile("NoPhoto.png"));
+            var testUser4 = await CreateAndAddRoleToUserAsync("TestUser4", "testuser4@example.com", "Fishm44uppet", "Password123!", "NormalUser", filePath4);
+            CreateReview(2.5, 2, 2.4, 2.9, "Mind-Blowing Action", "Solo Leveling is a highly addictive webtoon. The art is stunning," +
+             " and the story keeps you hooked with its action-packed sequences and intriguing world-building. The characters are well-designed," +
+             " and the pacing is great. It's a must-read for fans of the genre. Solo Leveling is a highly addictive webtoon. The art is stunning," +
+             " Solo Leveling is a highly addictive webtoon. The art is stunning, Solo Leveling is a highly addictive webtoon. The art is stunning," +
+             "Solo Leveling is a highly addictive webtoon. The art is stunning, Solo Leveling is a highly addictive webtoon. The art is stunning," +
+             "Solo Leveling is a highly addictive webtoon. The art is stunning, Solo Leveling is a highly addictive webtoon. sdsadasdsadasdsa", testUser4, Testbook);
+            await context.SaveChangesAsync();
+            //testuser5
+            string filePath5 = Path.Combine(UserProfileProcessUploadedFile("NoPhoto.png"));
+            var testUser5 = await CreateAndAddRoleToUserAsync("TestUser5", "testuser5@example.com", "Fishmup55pest", "Password123!", "NormalUser", filePath5);
+            CreateReview(2.5, 2, 2.4, 2.9, "Mind-Blowing Action", "Solo Leveling is a highly addictive webtoon. The art is stunning," +
+             " and the story keeps you hooked with its action-packed sequences and intriguing world-building. The characters are well-designed," +
+             " and the pacing is great. It's a must-read for fans of the genre. Solo Leveling is a highly addictive webtoon. The art is stunning," +
+             " Solo Leveling is a highly addictive webtoon. The art is stunning, Solo Leveling is a highly addictive webtoon. The art is stunning," +
+             "Solo Leveling is a highly addictive webtoon. The art is stunning, Solo Leveling is a highly addictive webtoon. The art is stunning," +
+             "Solo Leveling is a highly addictive webtoon. The art is stunning, Solo Leveling is a highly addictive webtoon. sdsadasdsadasdsa", testUser5, Testbook);
+            await context.SaveChangesAsync();
+            string filePath6 = Path.Combine(UserProfileProcessUploadedFile("NoPhoto.png"));
+            var testUser6 = await CreateAndAddRoleToUserAsync("TestUser6", "testuser6@example.com", "Fishmup66pest", "Password123!", "NormalUser", filePath6);
+            CreateReview(2.5, 2, 2.4, 2.9, "Mind-Blowing Action", "Solo Leveling is a highly addictive webtoon. The art is stunning," +
+             " and the story keeps you hooked with its action-packed sequences and intriguing world-building. The characters are well-designed," +
+             " and the pacing is great. It's a must-read for fans of the genre. Solo Leveling is a highly addictive webtoon. The art is stunning," +
+             " Solo Leveling is a highly addictive webtoon. The art is stunning, Solo Leveling is a highly addictive webtoon. The art is stunning," +
+             "Solo Leveling is a highly addictive webtoon. The art is stunning, Solo Leveling is a highly addictive webtoon. The art is stunning," +
+             "Solo Leveling is a highly addictive webtoon. The art is stunning, Solo Leveling is a highly addictive webtoon. sdsadasdsadasdsa", testUser6, Testbook);
             await context.SaveChangesAsync();
         }
 

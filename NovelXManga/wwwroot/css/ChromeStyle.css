@@ -1922,6 +1922,7 @@
     text-decoration: none !important;
     outline: none;
     margin-left:3px; 
+    border-radius:10px; 
 }
 
 

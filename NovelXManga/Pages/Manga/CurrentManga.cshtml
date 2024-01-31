@@ -6,6 +6,9 @@
 @{
     var user = await UserManager.GetUserAsync(User);
     var UpdaterUser = user != null && await UserManager.IsInRoleAsync(user, "NormalUser");
+     bool showAuthors = Model.CurrentManga2.Authors != null && Model.CurrentManga2.Authors.Any();
+    bool showArtists = Model.CurrentManga2.Artists != null && Model.CurrentManga2.Artists.Any();
+    bool showVoiceActors = Model.CurrentManga2.VoiceActors != null && Model.CurrentManga2.VoiceActors.Any();
 
 }
 
@@ -811,6 +814,66 @@
 
 
             </div>
+         @if (showAuthors)
+{
+    <div class="CUS-LeftSidemangaDetailsBox">
+        <h3>Authors:</h3>
+        <div class="CUS-MangaContainerInput">
+            @foreach (var author in Model.CurrentManga2.Authors)
+            {
+                <div class="CUS-MangaInputText">
+                    <a asp-page="/Author/CurrentAuthor" asp-route-id="@author.AuthorID">
+                        <p>
+                            @author.FirstName
+                            @(string.IsNullOrEmpty(author.LastName) ? "" : " " + author.LastName)
+                        </p>
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+}
+
+@if (showArtists)
+{
+    <div class="CUS-LeftSidemangaDetailsBox">
+        <h3>Artists:</h3>
+        <div class="CUS-MangaContainerInput">
+            @foreach (var artist in Model.CurrentManga2.Artists)
+            {
+                <div class="CUS-MangaInputText">
+                    <a asp-page="/Artist/CurrentArtist" asp-route-id="@artist.ArtistId">
+                        <p>
+                            @artist.FirstName
+                            @(string.IsNullOrEmpty(artist.LastName) ? "" : " " + artist.LastName)
+                        </p>
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+}
+
+@if (showVoiceActors)
+{
+    <div class="CUS-LeftSidemangaDetailsBox">
+        <h3>Voice Actors:</h3>
+        <div class="CUS-MangaContainerInput">
+            @foreach (var voiceActor in Model.CurrentManga2.VoiceActors)
+            {
+                <div class="CUS-MangaInputText">
+                    <a asp-page="/Voice/CurrentVoice" asp-route-id="@voiceActor.VoiceActorId">
+                        <p>
+                            @voiceActor.FirstName
+                            @(string.IsNullOrEmpty(voiceActor.LastName) ? "" : " " + voiceActor.LastName)
+                        </p>
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+}
+
             @*  LeftSideEndhere*@
          </div>
           @if (Model.CurrentManga2.Characters != null || Model.CurrentManga2.Characters.Count <= 1 && Model.CurrentManga.OverAllBookScore != null)
