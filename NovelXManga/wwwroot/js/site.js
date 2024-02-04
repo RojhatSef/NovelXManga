@@ -155,6 +155,44 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
+
+// sanitize html, trying to remove injections.
+function sanitizeHTML(text) {
+    var element = document.createElement('div');
+    element.textContent = text;
+    return element.innerHTML;
+}
+
+document.addEventListener('click', function (event) {
+    var dropdownMenu = document.getElementById('userDropdown');
+    var isClickInside = document.getElementById('dropdownToggle').contains(event.target);
+
+    if (!isClickInside && dropdownMenu.classList.contains('show')) {
+        dropdownMenu.classList.remove('show');
+    }
+});
+
+// Event handler, removes error from console log. Don't remove Comment out in developer phase or bug fixing'
+//window.addEventListener('error', function (event) {
+//    // Log the error to  internal system
+//    console.error('Logged Error: ', event.error);
+
+//    // Prevent the browser's console from showing the error
+//    event.preventDefault();
+
+//    // Show a generic message to the user
+//    /* alert('An error occurred. Please try again later.');*/
+//});
+
+document.getElementById('dropdownToggle').addEventListener('click', function (event) {
+    var dropdownMenu = document.getElementById('userDropdown');
+    dropdownMenu.classList.toggle('show');
+    event.stopPropagation(); // Prevent click event from reaching document
+});
+
+
+
+
 ////old
 //function searchManga(searchTerm) {
 //    var dropdown = document.getElementById('mangaResultsDropdown');
@@ -227,37 +265,3 @@ document.addEventListener('DOMContentLoaded', function () {
 //        dropdown.style.display = 'none';
 //    }
 //}
-
-// sanitize html, trying to remove injections.
-function sanitizeHTML(text) {
-    var element = document.createElement('div');
-    element.textContent = text;
-    return element.innerHTML;
-}
-
-document.addEventListener('click', function (event) {
-    var dropdownMenu = document.getElementById('userDropdown');
-    var isClickInside = document.getElementById('dropdownToggle').contains(event.target);
-
-    if (!isClickInside && dropdownMenu.classList.contains('show')) {
-        dropdownMenu.classList.remove('show');
-    }
-});
-
-document.getElementById('dropdownToggle').addEventListener('click', function (event) {
-    var dropdownMenu = document.getElementById('userDropdown');
-    dropdownMenu.classList.toggle('show');
-    event.stopPropagation(); // Prevent click event from reaching document
-});
-
-// Event handler, removes error from console log. Don't remove Comment out in developer phase or bug fixing'
-//window.addEventListener('error', function (event) {
-//    // Log the error to  internal system
-//    console.error('Logged Error: ', event.error);
-
-//    // Prevent the browser's console from showing the error
-//    event.preventDefault();
-
-//    // Show a generic message to the user
-//    /* alert('An error occurred. Please try again later.');*/
-//});

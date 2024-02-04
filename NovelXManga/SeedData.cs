@@ -1485,8 +1485,8 @@ new Character {
                     },
                 BuyPages = new List<BuyPage>
                     {
-                        new BuyPage { BuyWebsite ="https://www.amazon.com/One-Piece-Vol-Romance-Dawn/dp/1569319014/ref=sr_1_3?keywords=Manga+One+Piece&qid=1675256565&sr=8-3", _Languages = new List<Languages>{  }},
-                        new BuyPage {  BuyWebsite = "https://www.amazon.com/One-Piece-Vol-1-Japanese/dp/4088725093", _Languages = new List<Languages>{  } }
+                        new BuyPage { BuyWebsite ="https://www.amazon.com/One-Piece-Vol-Romance-Dawn/dp/1569319014/ref=sr_1_3?keywords=Manga+One+Piece&qid=1675256565&sr=8-3", _Languages = new List<Languages>{ EnglishLanguage  }},
+                        new BuyPage {  BuyWebsite = "https://www.amazon.com/One-Piece-Vol-1-Japanese/dp/4088725093", _Languages = new List<Languages>{ JapaneseLanguage } }
                     },
                 ArtistModels = new List<ArtistModel>
                     {

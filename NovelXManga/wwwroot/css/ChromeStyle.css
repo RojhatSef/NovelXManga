@@ -18,7 +18,7 @@
         --card-body-color: #191a1c;
         --card-body-hover-bg: #191a1c;
         --card-body-hover-color: rgb(255, 103, 64);
-        --tag-bg-dark: #444; 
+        --tag-bg-dark: #444;
         --tag-bg-light: #ccc;
     }
 
@@ -69,31 +69,59 @@
         right: 3.5%;
         z-index: 1;
     }
-
+    #mangaResultsDropdown h1 {
+        text-align: left; /* Aligns the text to the left */
+        margin-left: 15px; /* Adds some space from the left edge, adjust as needed */
+      
+    }
     .dropdown-item {
         display: flex;
         align-items: center;
         color: white;
         font-size: 18px;
-        margin: 14px;
+        margin-bottom: 14px;
+        margin-left: 14px;
+        margin-right:14px; 
         background-color: #333;
         border-radius: 3px;
+
     }
 
         .dropdown-item img {
-            margin-right: 20px;
+            margin-left: 20px;
             max-height: 100px;
             max-width: 55px;
             border-radius: 2px;
-            margin: 2px;
+            margin: 10px 20px 10px 10px;
         }
 
-        .dropdown-item span {
-            flex-grow: 1;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+    @media (max-width: 768px) {
+        .dropdown-item {
+            width: 100%; /* 100% of the parent width minus some padding */
+            margin-right:0px; 
         }
+        #mangaResultsDropdown{
+            width:100%;
+            max-height:450px; 
+            overflow-x:hidden; 
+        }
+        .dropdown-item img {
+            margin-left: 0px; /* Adjust as needed, this pushes the image to the right */
+        }
+        #mangaResultsDropdown h1 {
+            width: 100%; /* 100% of the parent width minus some padding */
+      
+            margin-left: 15px; /* Adds some space from the left edge, adjust as needed */
+        }
+    }
+
+    .dropdown-item span {
+        flex-grow: 1;
+      
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
 
     .popup-content {
         background-color: black; /* Black background */
@@ -705,6 +733,12 @@
     }
 }
 
+@media (max-width: 300px) {
+    .HideIndexBottomImage {
+        display: none;
+    }
+}
+
 .IndexTextRightSide {
     text-align: left;
     flex: 1; /* This allows the text to take up the remaining space */
@@ -727,13 +761,18 @@
 /* carousel-inner ENDS HERE */
 
 /* TAGS/GENRE STARTS */
-.tag-container {
-    display: block;
-    max-height: 50px;
-    align-content: center;
+.tag-container, .card-description {
     display: flex;
+    flex-wrap: wrap;
+}
+
+.tag-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
     align-self: flex-start;
     width: 100%;
+    overflow: hidden;
 }
 
 .DescriptionContainerSize {
@@ -762,6 +801,11 @@
     .DescriptionContainerSize {
         max-height: 6em; /* Continue to enforce 4 lines */
     }
+}
+
+.tag-container .tag {
+    margin: 2px; /* Add margin for spacing between tags */
+    white-space: nowrap; /* Ensure tags don't break into multiple lines */
 }
 
 .tag {
@@ -901,6 +945,7 @@
 
 .card-title {
     width: 100%;
+    height: 95px;
     display: flex;
 }
 
@@ -1908,8 +1953,7 @@
                 }
 
 .fillerClassIc textarea.TextAreaCurrentReview {
-   width:100%; 
-   
+    width: 100%;
     height: 250px;
     margin-top: 0px; /* Update or remove this margin as needed */
     margin-bottom: 20px;
@@ -1921,11 +1965,9 @@
     border-color: #ff6740;
     text-decoration: none !important;
     outline: none;
-    margin-left:3px; 
-    border-radius:10px; 
+    margin-left: 3px;
+    border-radius: 10px;
 }
-
-
 
 .flex-direction-current {
     display: flex;
@@ -1936,7 +1978,7 @@
 }
 
 .fillerClassIc {
-    width:100%; 
+    width: 100%;
     justify-content: center;
     align-items: center;
     flex-direction: column;
@@ -1948,7 +1990,6 @@
     max-width: 480px;
     margin: auto;
     padding: 15px;
-   
     text-align: center;
 }
 
