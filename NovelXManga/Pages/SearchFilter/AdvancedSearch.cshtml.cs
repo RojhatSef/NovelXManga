@@ -109,6 +109,29 @@ namespace NovelXManga.Pages.SearchFilter
 
         #endregion Properties
 
+        private string[] adultSensetivContent = {
+    "Adult", "Mature", "Ecchi", "Hentai", "Smut","Horror","Psychological",
+    "Rape", "Sexual Abuse", "BDSM", "Erotic", "Anal Intercourse",  "Anilingus", "Attempted Murder", "Attempted Rape",
+     "Attempted Suicide", "Bathroom Intercourse", "Big Breasts","Blackmail", "Blood and Gore","Bondage","Borderline H",
+      "Caught in the Act", "Child Abuse", "Cunnilingus","Double Penetration", "Drunken Intercourse","Dubious Consent",
+      "Exhibitionism","Fellatio", "Fetishes","First-Time Intercourse", "Futanari", "Gang Rape","Glasses-Wearing Uke God",
+       "Groping", "Group Intercourse", "Handjob","Incest",  "Lust", "Mind Break", "Mind Control", "Murder","Netorare",
+        "Netor", "Netori", "Older Seme Younger Uke","Older Uke Younger Seme", "Outdoor Intercourse", "Paizuri", "Titty Fuck", "Panchira",
+         "Prostitute", "Prostitution", "Public Sex","Sadist","School Intercourse","Sex Addict", "Sex Friends Become Lovers", "Sex Toy", "Sex", "Sexual Abuse",
+           "Straight Seme", "Straight Uke","Suicide", "Threesome", "Undergarment","Urination", "Lolicon", "Shotacon"
+
+}; private string[] MatureSensetivContent = {
+
+    "Adult", "Hentai", "Smut",
+    "Rape", "Sexual Abuse",  "Erotic", "Anal Intercourse",  "Anilingus", "Attempted Murder",
+     "Bathroom Intercourse", "Big Breasts","Bondage",
+      "Caught in the Act",  "Cunnilingus","Double Penetration", "Drunken Intercourse",
+      "Exhibitionism","Fellatio", "Fetishes","First-Time Intercourse", "Futanari", "Gang Rape",
+       "Groping", "Group Intercourse", "Handjob","Incest",  "Lust", "Mind Break", "Mind Control", "Netorare",
+        "Netor", "Netori","Outdoor Intercourse", "Paizuri", "Titty Fuck", "Panchira","Urination",
+        "Public Sex","Sadist","School Intercourse","Sex Addict", "Sex Friends Become Lovers", "Sex Toy", "Sex", "Sexual Abuse", "Lolicon", "Shotacon"
+};
+
         public string Sanitize(string input)
         {
             return WebUtility.HtmlEncode(input);
@@ -202,6 +225,11 @@ namespace NovelXManga.Pages.SearchFilter
         private bool IsInputValid(string input)
         {
             return string.IsNullOrEmpty(input) || Regex.IsMatch(input, @"^[\p{L}\p{N}\s]+$");
+        }
+
+        private void SetSessionState(string sortOrder)
+        {
+            _httpContextAccessor.HttpContext.Session.SetString("SortOrder", sortOrder);
         }
 
         private IQueryable<MangaModel> ApplyAdditionalFilters(IQueryable<MangaModel> query)
@@ -347,18 +375,78 @@ namespace NovelXManga.Pages.SearchFilter
             Genres = await context.GenresModels.ToListAsync();
         }
 
-        private IQueryable<MangaModel> BuildQueryWithFilters()
+        private IQueryable<MangaModel> ApplySorting(IQueryable<MangaModel> query, string sortOrder)
         {
-            InitializeSettingsBookPages();
-            DeserializeAndRetrieveSessionData();
-            InitializeSettings();
-            SetSessionState();
-            SerializeAndStoreSessionData();
-            var query = BuildInitialQuery();
-            query = ApplySearchFilters(query);
-            query = ApplyAdditionalFilters(query);
+            switch (sortOrder)
+            {
+                case "TrendingDaily":
+                    query = query.OrderByDescending(m => m.DailyRead);
+                    break;
+
+                case "TrendingWeekly":
+                    query = query.OrderByDescending(m => m.WeekRead);
+                    break;
+
+                case "TrendingMonthly":
+                    query = query.OrderByDescending(m => m.MonthRead);
+                    break;
+
+                case "TrendingYearly":
+                    query = query.OrderByDescending(m => m.YearRead);
+                    break;
+
+                case "TrendingForever":
+                    query = query.OrderByDescending(m => m.ForeverRead);
+                    break;
+
+                case "LatestUpdate":
+                    query = query.OrderByDescending(m => m.BookUpdated);
+                    break;
+
+                case "OldestUpdate":
+                    query = query.OrderBy(m => m.BookUpdated);
+                    break;
+
+                case "RecentlyAdded":
+                    query = query.OrderByDescending(m => m.BookAddedToDB);
+                    break;
+
+                case "OldestAdded":
+                    query = query.OrderBy(m => m.BookAddedToDB);
+                    break;
+
+                case "TitleAscending":
+                    query = query.OrderBy(m => m.MangaName);
+                    break;
+
+                case "TitleDescending":
+                    query = query.OrderByDescending(m => m.MangaName);
+                    break;
+
+                default:
+                    query = query.OrderBy(m => m.MangaName);
+                    break;
+            }
             return query;
         }
+
+
+        //private IQueryable<MangaModel> BuildQueryWithFilters()
+        //{
+        //    InitializeSettingsBookPages();
+        //    DeserializeAndRetrieveSessionData();
+        //    InitializeSettings();
+
+        //    SetSessionState();
+        //    SerializeAndStoreSessionData();
+        //    string sortOrder = Request.Form["SortOrder"];
+        //    var query = BuildInitialQuery();
+        //    query = ApplySearchFilters(query);
+        //    query = ApplyAdditionalFilters(query);
+        //    query = ApplySorting(query, sortOrder);
+
+        //    return query;
+        //}
 
         private IQueryable<MangaModel> BuildInitialQuery()
         {
@@ -443,29 +531,6 @@ namespace NovelXManga.Pages.SearchFilter
             }
         }
 
-        private string[] adultSensetivContent = {
-    "Adult", "Mature", "Ecchi", "Hentai", "Smut","Horror","Psychological",
-    "Rape", "Sexual Abuse", "BDSM", "Erotic", "Anal Intercourse",  "Anilingus", "Attempted Murder", "Attempted Rape",
-     "Attempted Suicide", "Bathroom Intercourse", "Big Breasts","Blackmail", "Blood and Gore","Bondage","Borderline H",
-      "Caught in the Act", "Child Abuse", "Cunnilingus","Double Penetration", "Drunken Intercourse","Dubious Consent",
-      "Exhibitionism","Fellatio", "Fetishes","First-Time Intercourse", "Futanari", "Gang Rape","Glasses-Wearing Uke God",
-       "Groping", "Group Intercourse", "Handjob","Incest",  "Lust", "Mind Break", "Mind Control", "Murder","Netorare",
-        "Netor", "Netori", "Older Seme Younger Uke","Older Uke Younger Seme", "Outdoor Intercourse", "Paizuri", "Titty Fuck", "Panchira",
-         "Prostitute", "Prostitution", "Public Sex","Sadist","School Intercourse","Sex Addict", "Sex Friends Become Lovers", "Sex Toy", "Sex", "Sexual Abuse",
-           "Straight Seme", "Straight Uke","Suicide", "Threesome", "Undergarment","Urination", "Lolicon", "Shotacon"
-
-}; private string[] MatureSensetivContent = {
-
-    "Adult", "Hentai", "Smut",
-    "Rape", "Sexual Abuse",  "Erotic", "Anal Intercourse",  "Anilingus", "Attempted Murder",
-     "Bathroom Intercourse", "Big Breasts","Bondage",
-      "Caught in the Act",  "Cunnilingus","Double Penetration", "Drunken Intercourse",
-      "Exhibitionism","Fellatio", "Fetishes","First-Time Intercourse", "Futanari", "Gang Rape",
-       "Groping", "Group Intercourse", "Handjob","Incest",  "Lust", "Mind Break", "Mind Control", "Netorare",
-        "Netor", "Netori","Outdoor Intercourse", "Paizuri", "Titty Fuck", "Panchira","Urination",
-        "Public Sex","Sadist","School Intercourse","Sex Addict", "Sex Friends Become Lovers", "Sex Toy", "Sex", "Sexual Abuse", "Lolicon", "Shotacon"
-};
-
         private IQueryable<MangaModel> ApplyMatureContentFilter(IQueryable<MangaModel> query, bool showMatureContent)
         {
             if (!showMatureContent)
@@ -496,7 +561,13 @@ namespace NovelXManga.Pages.SearchFilter
                 _httpContextAccessor.HttpContext.Session.SetInt32("ItemsAlreadyShown", 0);
                 InitializeSettingsBookPages();
                 InitializeSettings();
+                // Retrieve the sort order from the form or session
+                string sortOrder = Request.Form["SortOrder"].FirstOrDefault() ??
+                                   _httpContextAccessor.HttpContext.Session.GetString("SortOrder") ??
+                                   "TitleAscending";
                 SetSessionState();
+
+                SetSessionState(sortOrder);
                 SerializeAndStoreSessionData();
 
                 UserSettingsDTO userSettings = await GetUserSettingsAsync();
@@ -514,7 +585,7 @@ namespace NovelXManga.Pages.SearchFilter
                 // Apply search and additional filters
                 query = ApplySearchFilters(query);
                 query = ApplyAdditionalFilters(query);
-
+                query = ApplySorting(query, sortOrder);
                 // Execute query and set results
                 await ExecuteQueryAndSetResults(query);
 
@@ -538,6 +609,7 @@ namespace NovelXManga.Pages.SearchFilter
                 var userSettingsSerialized = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
                 UserSettingsDTO userSettings = userSettingsSerialized != null ? JsonSerializer.Deserialize<UserSettingsDTO>(userSettingsSerialized) : new UserSettingsDTO();
 
+                string sortOrder = _httpContextAccessor.HttpContext.Session.GetString("SortOrder") ?? "TitleAscending";
                 var query = BuildInitialQuery();
 
                 // Apply content filters based on user settings stored in session
@@ -548,6 +620,8 @@ namespace NovelXManga.Pages.SearchFilter
                 DeserializeAndRetrieveSessionData();
                 query = ApplySearchFilters(query);
                 query = ApplyAdditionalFilters(query);
+
+                query = ApplySorting(query, sortOrder);
 
                 int totalCount = await query.CountAsync();
 

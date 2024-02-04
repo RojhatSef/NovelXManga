@@ -20,10 +20,8 @@
         <div class="Row2">
             <div class="LeftSide">
                 <div>
-                    @if (User.Identity.IsAuthenticated == false) // Show this section only for guests
-{
-  
-}
+                 
+
                 <label >Tag Inclusion Mode:</label>
                 <select id="TagInclusionMode" name="TagInclusionMode">
                   
@@ -60,8 +58,12 @@
           
         </div>
         <div class="CUS-Row3">
+
             <div class="CUS-Row3LeftSide">
-                <div class="checkbox-wrapper-3">
+                @if (User.Identity.IsAuthenticated == false)
+                {
+                    <div class="checkbox-wrapper-3">
+
                     <input type="checkbox" id="showMatureContentForGuests" asp-for="showMatureContentForGuests" />
                     <label for="showMatureContentForGuests" class="toggle"><span></span></label>
                     <span>Show Mature Content</span>
@@ -71,7 +73,24 @@
                     <label for="showAdultContentForGuests" class="toggle"><span></span></label>
                     <span>Show Adult Content</span>
                 </div>
+                }
+                <select id="sortOrder" name="SortOrder">
+                    <option value="TitleAscending">Title Ascending</option>
+                    <option value="TitleDescending">Title Descending</option>
+                    <option value="RecentlyAdded">Recently Added</option>
+                    <option value="OldestAdded">Oldest Added</option>
+                    <option value="TrendingDaily">Trending Daily</option>
+                    <option value="TrendingWeekly">Trending Weekly</option>
+                    <option value="TrendingMonthly">Trending Monthly</option>
+                    <option value="TrendingYearly">Trending Yearly</option>
+                    <option value="TrendingForever">Trending Forever</option>
+                    <option value="LatestUpdate">Latest Update</option>
+                    <option value="OldestUpdate">Oldest Update</option>
+                  
+                </select>
+
             </div>
+           
 
             <div class="CUS-Row3RightSide">
                 <label for="SearchReleaseYearStart" class="CalendarIcon">
