@@ -194,13 +194,17 @@ namespace NovelXManga.Pages.SearchFilter
             NegativeSelectedTags ??= new List<int>();
         }
 
-        private void SetSessionState()
+        private void SetSessionState(string sortOrder = null)
         {
             //Strings searches
             _httpContextAccessor.HttpContext.Session.SetString("TagInclusionMode", TagInclusionMode);
             _httpContextAccessor.HttpContext.Session.SetString("TagExclusionMode", TagExclusionMode);
             _httpContextAccessor.HttpContext.Session.SetString("GenreInclusionMode", GenreInclusionMode);
             _httpContextAccessor.HttpContext.Session.SetString("GenreExclusionMode", GenreExclusionMode);
+            if (!string.IsNullOrEmpty(sortOrder))
+            {
+                _httpContextAccessor.HttpContext.Session.SetString("SortOrder", sortOrder);
+            }
         }
 
         private void SerializeAndStoreSessionData()
@@ -225,11 +229,6 @@ namespace NovelXManga.Pages.SearchFilter
         private bool IsInputValid(string input)
         {
             return string.IsNullOrEmpty(input) || Regex.IsMatch(input, @"^[\p{L}\p{N}\s]+$");
-        }
-
-        private void SetSessionState(string sortOrder)
-        {
-            _httpContextAccessor.HttpContext.Session.SetString("SortOrder", sortOrder);
         }
 
         private IQueryable<MangaModel> ApplyAdditionalFilters(IQueryable<MangaModel> query)
@@ -430,7 +429,6 @@ namespace NovelXManga.Pages.SearchFilter
             return query;
         }
 
-
         //private IQueryable<MangaModel> BuildQueryWithFilters()
         //{
         //    InitializeSettingsBookPages();
@@ -565,7 +563,6 @@ namespace NovelXManga.Pages.SearchFilter
                 string sortOrder = Request.Form["SortOrder"].FirstOrDefault() ??
                                    _httpContextAccessor.HttpContext.Session.GetString("SortOrder") ??
                                    "TitleAscending";
-                SetSessionState();
 
                 SetSessionState(sortOrder);
                 SerializeAndStoreSessionData();
