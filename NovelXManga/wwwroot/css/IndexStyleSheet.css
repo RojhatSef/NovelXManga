@@ -19,5 +19,23 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-  /* Adjust according to your layout */
+    /* Adjust according to your layout */
 }
+
+.MUS-InfoContainer,
+.MUS-Score {
+    z-index: 3;
+    position: relative;
+}
+
+.MUS-FourofKindContent:hover .MUS-Score {
+    display: block !important;
+}
+
+.MUS-InfoContainer {
+    margin-top: 4px;
+}
+
+    .MUS-InfoContainer .MUS-Score span {
+        color: #ff6740
+    }

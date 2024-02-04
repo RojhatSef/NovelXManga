@@ -461,13 +461,11 @@
                 </div>
             </div>
         }
-           @if (Model.CurrentManga.BuyPages != null && Model.CurrentManga.BuyPages?.Count > 0)
+            @if (Model.CurrentManga.BuyPages != null && Model.CurrentManga.BuyPages.Any(bp => bp._Languages != null && bp._Languages.Count > 0))
         {
             <div class="CUS-LeftSidemangaDetailsBox">
                 <h3>Buy At:</h3>
-                <div class="CUS-MangaContainerInput">
-               
-
+                <div class="CUS-MangaContainerInput">              
                         @foreach (var item in Model.CurrentManga.BuyPages)
                         {
 
@@ -478,22 +476,11 @@
                                 {
 
                                     <div class="CUS-MangaInputText">
-
                                         <p>@Html.Raw(lang.FlagUniCode) @lang.LanguageName</p>
-
                                     </div>
-
                                 }
-
                             </a>
-
-
-                        }
-
-
-
-                    
-                 
+                        }                 
             </div>
         </div>
         }

@@ -114,6 +114,10 @@
     position: relative;
 }
 
+.MUS-ANoneStyle {
+    min-height: 190px;
+}
+
 .MUS-FourofKindContent:hover .MUS-DisplayWhenHoverFourOfaKind,
 .MUS-FourofKindContent:hover .MUS-InfoContainer,
 .MUS-FourofKindContent:hover .MUS-Score {

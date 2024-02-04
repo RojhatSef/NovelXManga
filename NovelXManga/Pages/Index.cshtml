@@ -8,7 +8,7 @@
    
 }
 <link rel="stylesheet" href="~/css/IndexStyleSheet.css" asp-append-version="true" />
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 
 
@@ -79,6 +79,32 @@
 
                                         }
                                     }
+                                    <div class="MUS-InfoContainer">
+                                        <div class="MUS-Score">
+                                            @if (Model.AllBooksList[i].OverAllBookScore != null)
+                                            {
+                                                <span>     @Model.AllBooksList[i].OverAllBookScore  <i class="fas fa-star active colorstarCurrent"></i> </span>
+                                            }
+                                            else
+                                            {
+                                                <span>   <i class="fas fa-star active colorstarCurrent"></i>   N/A  </span>
+                                            }
+                                            @if (Model.AllBooksList[i].ForeverRead != null)
+                                            {
+                                                <span>
+                                                    <i class="fa-solid fa-eye"></i>   @Model.AllBooksList[i].ForeverRead &nbsp;
+                                                </span>
+                                            }
+                                            else
+                                            {
+                                                <span>
+                                                    N/A <i class="fa-solid fa-eye"></i>
+                                                </span>
+                                            }
+                                        </div>
+
+
+                                    </div>
                                 </h2>
                                 <p class="DescriptionContainerSize HideWhenHoverFourOfaKind">@Model.AllBooksList[i].Description</p>
                             </div>

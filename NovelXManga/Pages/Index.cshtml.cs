@@ -115,10 +115,8 @@ namespace NovelXManga.Pages
                                             // Set other default values as needed
                 };
             }
-
             // Pass the dark mode setting to the frontend via ViewData or a model property
             ViewData["IsDarkModeEnabled"] = UserSettings.DarkModeEnabled;
-
             // Continue with your existing code
             GetAllBooks = await mangaRepository.IndexMangaDtoIncludedAsync(user);
             AllBooksList = GetAllBooks.ToList();
