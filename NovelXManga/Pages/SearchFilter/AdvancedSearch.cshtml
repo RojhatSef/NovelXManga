@@ -74,18 +74,21 @@
                     <span>Show Adult Content</span>
                 </div>
                 }
-                <select id="sortOrder" name="SortOrder">
-                    <option value="TitleAscending">Title Ascending</option>
-                    <option value="TitleDescending">Title Descending</option>
-                    <option value="RecentlyAdded">Recently Added</option>
-                    <option value="OldestAdded">Oldest Added</option>
-                    <option value="TrendingDaily">Trending Daily</option>
-                    <option value="TrendingWeekly">Trending Weekly</option>
-                    <option value="TrendingMonthly">Trending Monthly</option>
-                    <option value="TrendingYearly">Trending Yearly</option>
-                    <option value="TrendingForever">Trending Forever</option>
-                    <option value="LatestUpdate">Latest Update</option>
-                    <option value="OldestUpdate">Oldest Update</option>
+               
+                   <select id="sortOrder" name="SortOrder">
+    <option value="TitleAscending" selected="@(Model.SortOrder == "TitleAscending")">Title Ascending</option>
+    <option value="TitleDescending" selected="@(Model.SortOrder == "TitleDescending")">Title Descending</option>
+    <option value="RecentlyAdded" selected="@(Model.SortOrder == "RecentlyAdded")">Recently Added</option>
+    <option value="OldestAdded" selected="@(Model.SortOrder == "OldestAdded")">Oldest Added</option>
+    <option value="TrendingDaily" selected="@(Model.SortOrder == "TrendingDaily")">Trending Daily</option>
+    <option value="TrendingWeekly" selected="@(Model.SortOrder == "TrendingWeekly")">Trending Weekly</option>
+    <option value="TrendingMonthly" selected="@(Model.SortOrder == "TrendingMonthly")">Trending Monthly</option>
+    <option value="TrendingYearly" selected="@(Model.SortOrder == "TrendingYearly")">Trending Yearly</option>
+    <option value="TrendingForever" selected="@(Model.SortOrder == "TrendingForever")">Trending Forever</option>
+    <option value="LatestUpdate" selected="@(Model.SortOrder == "LatestUpdate")">Latest Update</option>
+    <option value="OldestUpdate" selected="@(Model.SortOrder == "OldestUpdate")">Oldest Update</option>
+</select>
+
                   
                 </select>
 

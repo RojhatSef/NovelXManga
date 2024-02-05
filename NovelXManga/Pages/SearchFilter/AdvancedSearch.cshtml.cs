@@ -92,6 +92,9 @@ namespace NovelXManga.Pages.SearchFilter
         [BindProperty]
         public string GenreExclusionMode { get; set; }
 
+        [BindProperty]
+        public string SortOrder { get; set; }
+
         public List<TagModel> Tags { get; set; }
         public List<GenresModel> Genres { get; set; }
         public IEnumerable<MangaModel> MangaModels { get; set; }
@@ -194,17 +197,14 @@ namespace NovelXManga.Pages.SearchFilter
             NegativeSelectedTags ??= new List<int>();
         }
 
-        private void SetSessionState(string sortOrder = null)
+        private void SetSessionState()
         {
             //Strings searches
             _httpContextAccessor.HttpContext.Session.SetString("TagInclusionMode", TagInclusionMode);
             _httpContextAccessor.HttpContext.Session.SetString("TagExclusionMode", TagExclusionMode);
             _httpContextAccessor.HttpContext.Session.SetString("GenreInclusionMode", GenreInclusionMode);
             _httpContextAccessor.HttpContext.Session.SetString("GenreExclusionMode", GenreExclusionMode);
-            if (!string.IsNullOrEmpty(sortOrder))
-            {
-                _httpContextAccessor.HttpContext.Session.SetString("SortOrder", sortOrder);
-            }
+            _httpContextAccessor.HttpContext.Session.SetString("SortOrder", SortOrder);
         }
 
         private void SerializeAndStoreSessionData()
@@ -476,6 +476,7 @@ namespace NovelXManga.Pages.SearchFilter
             TagExclusionMode = _httpContextAccessor.HttpContext.Session.GetString("TagExclusionMode") ?? "Or";
             GenreInclusionMode = _httpContextAccessor.HttpContext.Session.GetString("GenreInclusionMode") ?? "And";
             GenreExclusionMode = _httpContextAccessor.HttpContext.Session.GetString("GenreExclusionMode") ?? "Or";
+            SortOrder = _httpContextAccessor.HttpContext.Session.GetString("SortOrder") ?? "TitleAscending";
             // Retrieve selected tags and genres from session
             var selectedTagsSession = _httpContextAccessor.HttpContext.Session.GetString("SelectedTags");
             var selectedGenresSession = _httpContextAccessor.HttpContext.Session.GetString("SelectedGenres");
@@ -560,11 +561,11 @@ namespace NovelXManga.Pages.SearchFilter
                 InitializeSettingsBookPages();
                 InitializeSettings();
                 // Retrieve the sort order from the form or session
-                string sortOrder = Request.Form["SortOrder"].FirstOrDefault() ??
-                                   _httpContextAccessor.HttpContext.Session.GetString("SortOrder") ??
-                                   "TitleAscending";
+                SortOrder = Request.Form["SortOrder"].FirstOrDefault() ?? _httpContextAccessor.HttpContext.Session.GetString("SortOrder") ?? "TitleAscending";
+                _httpContextAccessor.HttpContext.Session.SetString("SortOrder", SortOrder);
 
-                SetSessionState(sortOrder);
+
+                SetSessionState();
                 SerializeAndStoreSessionData();
 
                 UserSettingsDTO userSettings = await GetUserSettingsAsync();
@@ -582,7 +583,7 @@ namespace NovelXManga.Pages.SearchFilter
                 // Apply search and additional filters
                 query = ApplySearchFilters(query);
                 query = ApplyAdditionalFilters(query);
-                query = ApplySorting(query, sortOrder);
+                query = ApplySorting(query, SortOrder);
                 // Execute query and set results
                 await ExecuteQueryAndSetResults(query);
 
@@ -606,7 +607,7 @@ namespace NovelXManga.Pages.SearchFilter
                 var userSettingsSerialized = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
                 UserSettingsDTO userSettings = userSettingsSerialized != null ? JsonSerializer.Deserialize<UserSettingsDTO>(userSettingsSerialized) : new UserSettingsDTO();
 
-                string sortOrder = _httpContextAccessor.HttpContext.Session.GetString("SortOrder") ?? "TitleAscending";
+                SortOrder = _httpContextAccessor.HttpContext.Session.GetString("SortOrder") ?? "TitleAscending";
                 var query = BuildInitialQuery();
 
                 // Apply content filters based on user settings stored in session
@@ -618,7 +619,7 @@ namespace NovelXManga.Pages.SearchFilter
                 query = ApplySearchFilters(query);
                 query = ApplyAdditionalFilters(query);
 
-                query = ApplySorting(query, sortOrder);
+                query = ApplySorting(query, SortOrder);
 
                 int totalCount = await query.CountAsync();
 
