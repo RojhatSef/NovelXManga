@@ -966,7 +966,7 @@
 
 .cardFourOfaKind {
     width: 100%;
-   /* height: 690px;*/
+    /* height: 690px;*/
     display: flex;
     overflow: hidden;
     flex-direction: column;
@@ -1014,15 +1014,15 @@
     color: inherit;
     width: 100%;
     height: 100%;
-    /*border-top: solid transparent;*/ /* Added */
-    /*border-bottom: solid transparent;*/ /* Added */
+    border-top: solid transparent;
+    border-bottom: solid transparent;
 }
 
-/*  .ANoneStyle:hover {
+    .ANoneStyle:hover {
         border-top: solid;
         border-bottom: solid;
         border-color: #ff6740;
-    }*/
+    }
 
 .FourOfAKind img {
     height: 100%;
