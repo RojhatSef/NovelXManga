@@ -69,11 +69,12 @@
         right: 3.5%;
         z-index: 1;
     }
+
     #mangaResultsDropdown h1 {
         text-align: left; /* Aligns the text to the left */
         margin-left: 15px; /* Adds some space from the left edge, adjust as needed */
-      
     }
+
     .dropdown-item {
         display: flex;
         align-items: center;
@@ -81,10 +82,9 @@
         font-size: 18px;
         margin-bottom: 14px;
         margin-left: 14px;
-        margin-right:14px; 
+        margin-right: 14px;
         background-color: #333;
         border-radius: 3px;
-
     }
 
         .dropdown-item img {
@@ -98,26 +98,28 @@
     @media (max-width: 768px) {
         .dropdown-item {
             width: 100%; /* 100% of the parent width minus some padding */
-            margin-right:0px; 
+            margin-right: 0px;
         }
-        #mangaResultsDropdown{
-            width:100%;
-            max-height:450px; 
-            overflow-x:hidden; 
+
+        #mangaResultsDropdown {
+            width: 100%;
+            max-height: 450px;
+            overflow-x: hidden;
         }
+
         .dropdown-item img {
             margin-left: 0px; /* Adjust as needed, this pushes the image to the right */
         }
+
         #mangaResultsDropdown h1 {
             width: 100%; /* 100% of the parent width minus some padding */
-      
+
             margin-left: 15px; /* Adds some space from the left edge, adjust as needed */
         }
     }
 
     .dropdown-item span {
         flex-grow: 1;
-      
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -964,7 +966,7 @@
 
 .cardFourOfaKind {
     width: 100%;
-    height: 690px;
+   /* height: 690px;*/
     display: flex;
     overflow: hidden;
     flex-direction: column;
@@ -1012,15 +1014,15 @@
     color: inherit;
     width: 100%;
     height: 100%;
-    border-top: solid transparent; /* Added */
-    border-bottom: solid transparent; /* Added */
+    /*border-top: solid transparent;*/ /* Added */
+    /*border-bottom: solid transparent;*/ /* Added */
 }
 
-    .ANoneStyle:hover {
+/*  .ANoneStyle:hover {
         border-top: solid;
         border-bottom: solid;
         border-color: #ff6740;
-    }
+    }*/
 
 .FourOfAKind img {
     height: 100%;
@@ -1036,7 +1038,7 @@
 
 .FourOfAKind .FourofKindContent {
     width: 100%;
-    height: 100%; /* Make sure the content fits within its parent div */
+    min-height: 250px; /* Make sure the content fits within its parent div */
     overflow: hidden;
     flex-shrink: 1;
 }
