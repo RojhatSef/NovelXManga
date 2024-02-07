@@ -1137,6 +1137,7 @@
 .BoxImage {
     height: 100%;
     width: 100%;
+    min-width:125px; 
     object-fit: cover;
     transition: width 0.5s, height 0.5s;
 }

@@ -51,6 +51,8 @@ namespace NovelXManga.Pages.Manga
 
         public IEnumerable<Review> ReivewModel { get; set; }
         public IEnumerable<PostModel> Posts { get; set; }
+
+        [BindProperty]
         public int ReadingUsersCount { get; set; }
 
         [BindProperty]
@@ -96,6 +98,60 @@ namespace NovelXManga.Pages.Manga
             return Page();
         }
 
+        private async Task AddMangaToUserAsync(string userId, int mangaId)
+        {
+            var user = await Context.UserModels
+                                    .Include(u => u.MangaModels)
+                                    .FirstOrDefaultAsync(u => u.Id == userId);
+            var manga = await Context.mangaModels.FindAsync(mangaId);
+
+            if (user != null && manga != null && !user.MangaModels.Contains(manga))
+            {
+                user.MangaModels.Add(manga);
+                await Context.SaveChangesAsync();
+            }
+        }
+
+        private async Task RemoveMangaFromUserAsync(string userId, int mangaId)
+        {
+            var user = await Context.UserModels
+                                    .Include(u => u.MangaModels)
+                                    .FirstOrDefaultAsync(u => u.Id == userId);
+            var manga = user?.MangaModels.FirstOrDefault(m => m.MangaID == mangaId);
+
+            if (manga != null && !await IsMangaInAnyUserListAsync(userId, mangaId))
+            {
+                user.MangaModels.Remove(manga);
+                await Context.SaveChangesAsync();
+            }
+        }
+
+        private async Task<bool> IsMangaInAnyUserListAsync(string userId, int mangaId)
+        {
+            var userWithLists = await Context.UserModels
+        .Where(u => u.Id == userId)
+        .Select(u => new
+        {
+            ReadingList = u.ReadingList.Select(rl => rl.MangaModelId),
+            FavoritList = u.FavoritList.Select(fl => fl.MangaModelId),
+            WishList = u.WishList.Select(wl => wl.MangaModelId),
+            CompletedList = u.CompletedList.Select(cl => cl.MangaModelId),
+            DroppedList = u.DroppedList.Select(dl => dl.MangaModelId)
+        })
+        .FirstOrDefaultAsync();
+
+            if (userWithLists == null)
+            {
+                return false;
+            }
+
+            return userWithLists.ReadingList.Contains(mangaId)
+                || userWithLists.FavoritList.Contains(mangaId)
+                || userWithLists.WishList.Contains(mangaId)
+                || userWithLists.CompletedList.Contains(mangaId)
+                || userWithLists.DroppedList.Contains(mangaId);
+        }
+
         #region Add/Remove WishList
 
         private async Task<bool> CheckIfMangaInWishListAsync(string userId, int mangaId)
@@ -112,6 +168,7 @@ namespace NovelXManga.Pages.Manga
             var userWishList = await Context.wishBookLists
                                             .Include(wbl => wbl.WishBooks)
                                             .FirstOrDefaultAsync(wbl => wbl.UserId == userId);
+            var isMangaInAnyList = await IsMangaInAnyUserListAsync(userId, mangaId);
 
             if (userWishList != null)
             {
@@ -123,11 +180,19 @@ namespace NovelXManga.Pages.Manga
                     if (mangaToAdd != null)
                     {
                         userWishList.WishBooks.Add(mangaToAdd);
+                        if (!isMangaInAnyList)
+                        {
+                            await AddMangaToUserAsync(userId, mangaId); // Add the manga only if it's not in any list
+                        }
                     }
                 }
                 else
                 {
                     userWishList.WishBooks.Remove(mangaInList);
+                    if (!await IsMangaInAnyUserListAsync(userId, mangaId)) // Check if the manga is in any other list
+                    {
+                        await RemoveMangaFromUserAsync(userId, mangaId); // Remove the manga from the user's general manga collection
+                    }
                 }
 
                 await Context.SaveChangesAsync();
@@ -168,6 +233,7 @@ namespace NovelXManga.Pages.Manga
             var userFavoriteList = await Context.favoritBookLists
                                                 .Include(fbl => fbl.FavoritBooks)
                                                 .FirstOrDefaultAsync(fbl => fbl.UserId == userId);
+            var isMangaInAnyList = await IsMangaInAnyUserListAsync(userId, mangaId);
 
             if (userFavoriteList != null)
             {
@@ -179,11 +245,19 @@ namespace NovelXManga.Pages.Manga
                     if (mangaToAdd != null)
                     {
                         userFavoriteList.FavoritBooks.Add(mangaToAdd);
+                        if (!isMangaInAnyList)
+                        {
+                            await AddMangaToUserAsync(userId, mangaId); // Add the manga to the user's general manga collection only if it's not in any list
+                        }
                     }
                 }
                 else
                 {
                     userFavoriteList.FavoritBooks.Remove(mangaInList);
+                    if (!await IsMangaInAnyUserListAsync(userId, mangaId)) // Check if the manga is in any other list
+                    {
+                        await RemoveMangaFromUserAsync(userId, mangaId); // Remove the manga from the user's general manga collection
+                    }
                 }
 
                 await Context.SaveChangesAsync();
@@ -224,6 +298,7 @@ namespace NovelXManga.Pages.Manga
             var userDroppedList = await Context.droppedBookLists
                                                .Include(dbl => dbl._DroppedBooks)
                                                .FirstOrDefaultAsync(dbl => dbl.UserId == userId);
+            var isMangaInAnyList = await IsMangaInAnyUserListAsync(userId, mangaId);
 
             if (userDroppedList != null)
             {
@@ -235,11 +310,19 @@ namespace NovelXManga.Pages.Manga
                     if (mangaToAdd != null)
                     {
                         userDroppedList._DroppedBooks.Add(mangaToAdd);
+                        if (!isMangaInAnyList)
+                        {
+                            await AddMangaToUserAsync(userId, mangaId); // Add the manga only if it's not in any list
+                        }
                     }
                 }
                 else
                 {
                     userDroppedList._DroppedBooks.Remove(mangaInList);
+                    if (!await IsMangaInAnyUserListAsync(userId, mangaId)) // Check if the manga is in any other list
+                    {
+                        await RemoveMangaFromUserAsync(userId, mangaId); // Remove the manga if it's not in any list
+                    }
                 }
 
                 await Context.SaveChangesAsync();
@@ -280,6 +363,7 @@ namespace NovelXManga.Pages.Manga
             var userCompletedList = await Context.completedBookLists
                                                  .Include(cl => cl.CompleteBookList)
                                                  .FirstOrDefaultAsync(cl => cl.UserId == userId);
+            var isMangaInAnyList = await IsMangaInAnyUserListAsync(userId, mangaId);
 
             if (userCompletedList != null)
             {
@@ -291,11 +375,19 @@ namespace NovelXManga.Pages.Manga
                     if (mangaToAdd != null)
                     {
                         userCompletedList.CompleteBookList.Add(mangaToAdd);
+                        if (!isMangaInAnyList)
+                        {
+                            await AddMangaToUserAsync(userId, mangaId); // Add the manga only if it's not in any list
+                        }
                     }
                 }
                 else
                 {
                     userCompletedList.CompleteBookList.Remove(mangaInList);
+                    if (!await IsMangaInAnyUserListAsync(userId, mangaId)) // Check if the manga is in any other list
+                    {
+                        await RemoveMangaFromUserAsync(userId, mangaId); // Remove the manga if it's not in any list
+                    }
                 }
 
                 await Context.SaveChangesAsync();
@@ -324,33 +416,36 @@ namespace NovelXManga.Pages.Manga
 
         private async Task ManageReadingListAndStatusAsync(string userId, int mangaId, string readingListName)
         {
-            // Fetch the specific reading list by name and user ID.
             var userReadingList = await Context.readingLists
-                                                .Include(rl => rl.ReadingMangaList)
-                                                .FirstOrDefaultAsync(rl => rl.UserId == userId && rl.ReadingListName == readingListName);
+                                               .Include(rl => rl.ReadingMangaList)
+                                               .FirstOrDefaultAsync(rl => rl.UserId == userId && rl.ReadingListName == readingListName);
+            var isMangaInAnyList = await IsMangaInAnyUserListAsync(userId, mangaId);
 
             if (userReadingList != null)
             {
-                // Check if the manga is already in the reading list.
                 var mangaInList = userReadingList.ReadingMangaList.FirstOrDefault(m => m.MangaID == mangaId);
 
                 if (mangaInList == null)
                 {
-                    // Add the manga to the reading list if it's not already there.
                     var mangaToAdd = await Context.mangaModels.FindAsync(mangaId);
                     if (mangaToAdd != null)
                     {
                         userReadingList.ReadingMangaList.Add(mangaToAdd);
+                        if (!isMangaInAnyList)
+                        {
+                            await AddMangaToUserAsync(userId, mangaId); // Add the manga only if it's not in any list
+                        }
                     }
                 }
                 else
                 {
-                    // Remove the manga from the reading list if it's already there.
                     userReadingList.ReadingMangaList.Remove(mangaInList);
+                    if (!await IsMangaInAnyUserListAsync(userId, mangaId)) // Check if the manga is in any other list
+                    {
+                        await RemoveMangaFromUserAsync(userId, mangaId); // Remove the manga if it's not in any list
+                    }
                 }
 
-                // Save the changes to the database.
-                await LoadAddRemove(userId, mangaId);
                 await Context.SaveChangesAsync();
             }
         }
@@ -505,6 +600,68 @@ namespace NovelXManga.Pages.Manga
             return new JsonResult(characters);
         }
 
+        private async Task<List<UserListDto>> GetUsersInListAsync(int mangaId, DbSet<MangaModel> mangaDbSet)
+        {
+            return await mangaDbSet
+          .AsNoTracking()
+          .Where(m => m.MangaID == mangaId)
+          .SelectMany(m => m.userModels) // Use the correct navigation property name
+          .Distinct() // Ensure distinct users are selected
+          .Select(u => new UserListDto { UserId = u.Id })
+          .ToListAsync();
+        }
+
+        private async Task<List<UserListDto>> GetFavoriteUsersInListAsync(int mangaId)
+        {
+            return await Context.favoritBookLists
+                .AsNoTracking()
+                .Where(fl => fl.MangaModelId == mangaId)
+                .SelectMany(fl => fl.UserModels)
+                .Distinct()
+                .Select(u => new UserListDto { UserId = u.Id })
+                .ToListAsync();
+        }
+
+        private async Task<List<UserListDto>> GetCompletedUsersInListAsync(int mangaId)
+        {
+            return await Context.completedBookLists
+                .AsNoTracking()
+                .Where(fl => fl.MangaModelId == mangaId)
+                .SelectMany(fl => fl.UserModels)
+                .Distinct()
+                .Select(u => new UserListDto { UserId = u.Id })
+                .ToListAsync();
+        }
+
+        private async Task<List<UserListDto>> GetWishUsersInListAsync(int mangaId)
+        {
+            return await Context.wishBookLists
+                .AsNoTracking()
+                .Where(fl => fl.MangaModelId == mangaId)
+                .SelectMany(fl => fl.UserModels)
+                .Distinct()
+                .Select(u => new UserListDto { UserId = u.Id })
+                .ToListAsync();
+        }
+
+        private async Task RecalculateReadingUsersCount(int mangaId)
+        {
+            // Fetch user lists associated with the manga
+            var readingListUserIds = await GetUsersInListAsync(mangaId, Context.mangaModels); // Adjusted to use the method
+            var favoriteListUserIds = await GetFavoriteUsersInListAsync(mangaId); // Specific method for favorite lists
+            var completedListUserIds = await GetCompletedUsersInListAsync(mangaId); // Specific method for completed lists
+            var wishListUserIds = await GetWishUsersInListAsync(mangaId);
+
+            // Calculate unique user count
+            ReadingUsersCount = readingListUserIds
+                .Union(favoriteListUserIds)
+                .Union(completedListUserIds)
+                .Union(wishListUserIds)
+                .GroupBy(u => u.UserId)
+                .Select(group => group.First())
+                .Count();
+        }
+
         public async Task<IActionResult> OnGetAsync(int id)
         {
             var totalStopwatch = new Stopwatch();
@@ -560,9 +717,9 @@ namespace NovelXManga.Pages.Manga
                     _ViewReview.CharactersScore = userReview.CharactersScore;
                 }
             }
-            ReadingUsersCount = await Context.readingLists
-        .Where(rl => rl.MangaModelId == id)
-        .CountAsync();
+
+            await RecalculateReadingUsersCount(id);
+
             string cacheKey = $"DailyRead_{id}";
             if (!_cache.TryGetValue<int>(cacheKey, out int dailyRead))
             {
