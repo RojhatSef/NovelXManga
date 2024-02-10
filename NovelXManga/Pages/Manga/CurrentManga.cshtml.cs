@@ -128,28 +128,25 @@ namespace NovelXManga.Pages.Manga
 
         private async Task<bool> IsMangaInAnyUserListAsync(string userId, int mangaId)
         {
-            var userWithLists = await Context.UserModels
-        .Where(u => u.Id == userId)
-        .Select(u => new
-        {
-            ReadingList = u.ReadingList.Select(rl => rl.MangaModelId),
-            FavoritList = u.FavoritList.Select(fl => fl.MangaModelId),
-            WishList = u.WishList.Select(wl => wl.MangaModelId),
-            CompletedList = u.CompletedList.Select(cl => cl.MangaModelId),
-            DroppedList = u.DroppedList.Select(dl => dl.MangaModelId)
-        })
-        .FirstOrDefaultAsync();
+            var user = await Context.UserModels
+                .Include(u => u.ReadingList).ThenInclude(rl => rl.ReadingMangaList)
+                .Include(u => u.FavoritList).ThenInclude(fl => fl.FavoritBooks)
+                .Include(u => u.WishList).ThenInclude(wl => wl.WishBooks)
+                .Include(u => u.CompletedList).ThenInclude(cl => cl.CompleteBookList)
 
-            if (userWithLists == null)
+                .FirstOrDefaultAsync(u => u.Id == userId);
+
+            if (user == null)
             {
                 return false;
             }
 
-            return userWithLists.ReadingList.Contains(mangaId)
-                || userWithLists.FavoritList.Contains(mangaId)
-                || userWithLists.WishList.Contains(mangaId)
-                || userWithLists.CompletedList.Contains(mangaId)
-                || userWithLists.DroppedList.Contains(mangaId);
+            bool isInReadingList = user.ReadingList.Any(rl => rl.ReadingMangaList.Any(m => m.MangaID == mangaId));
+            bool isInFavoritList = user.FavoritList.Any(fl => fl.FavoritBooks.Any(m => m.MangaID == mangaId));
+            bool isInWishList = user.WishList.Any(wl => wl.WishBooks.Any(m => m.MangaID == mangaId));
+            bool isInCompletedList = user.CompletedList.Any(cl => cl.CompleteBookList.Any(m => m.MangaID == mangaId));
+
+            return isInReadingList || isInFavoritList || isInWishList || isInCompletedList;
         }
 
         #region Add/Remove WishList
