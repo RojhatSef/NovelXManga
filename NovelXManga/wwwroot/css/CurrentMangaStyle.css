@@ -15,6 +15,24 @@
         color: rgb(255, 103, 64);
     }
 
+    #zViewReview_Title {
+        color: black;
+    }
+
+    .UserReview {
+        margin: 10px;
+        padding: 5px;
+        border: 1px solid #ccc;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        max-width: 100%;
+    }
+
+    .UserReviewcontent {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        max-width: 100%;
+    }
+
     .CUS-GridItem {
         transition: width 0.5s, height 0.5s;
         width: 240px;
@@ -535,7 +553,7 @@
         border-color: #ff6740;
         text-decoration: none !important;
         outline: none;
-        border-radius:10px; 
+        border-radius: 10px;
     }
 
     .CUS-tagsInsideInsideCurrentManga {

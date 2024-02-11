@@ -943,13 +943,13 @@
                                 {
                                     <div class="UserReview">
                                         <h2>@review.Title</h2>
-                                        <h3>By @review.UserModels.FirstOrDefault()?.UserName</h3>
-                                        <div>Style Score: @review.StylesScore</div>
-                                        <div>Story Score: @review.StoryScore</div>
-                                        <div>Grammar Score: @review.GrammarScore</div>
-                                        <div>Character Score: @review.CharactersScore</div>
-                                        <div>Overall Score: @review.OverAllBookScore</div>
-                                        <div class="UserReviewcontent">
+                                        <h3>By @review.UserModels.FirstOrDefault()?.Allias</h3>
+                                                <div>Style Score: @review.StylesScore <i class="fas fa-star active"></i></div>
+                                                <div>Story Score: @review.StoryScore  <i class="fas fa-star active"></i></div>
+                                                <div>Grammar Score: @review.GrammarScore  <i class="fas fa-star active"></i></div>
+                                                <div>Character Score: @review.CharactersScore <i class="fas fa-star active"></i></div>
+                                                <div>Overall Score: @review.OverAllBookScore  <i class="fas fa-star active"></i></div>
+                                             <div class="UserReviewcontent">
                                             @review.Content
                                         </div>
                                     </div>
