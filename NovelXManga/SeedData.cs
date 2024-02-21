@@ -555,7 +555,7 @@ namespace NovelXManga
                 var user = await CreateAndAddRoleToUserAsync("TestUser", "TestUser@hotmail.com", "MasterUser", "Password123!", "Owner", filePath);
 
                 context.SaveChanges();
-                UltraLongBOokTester();
+
                 AddBerserk();
                 CreateNaruto();
                 CreateDeathNote();
@@ -574,7 +574,7 @@ namespace NovelXManga
                 CreateCodeGeass();
                 DonQuiXote();
                 RelatedManga();
-
+                UltraLongBOokTester();
                 await ReviewSeed();
             }
         }
@@ -2322,6 +2322,8 @@ new Character
 
         public void UltraLongBOokTester()
         {
+            #region Tags
+
             var tag1 = context.TagModels.FirstOrDefault(t => t.TagName == "Emotionally Strong Male Lead");
             var tag2 = context.TagModels.FirstOrDefault(t => t.TagName == "Sword and Sorcery");
             var tag3 = context.TagModels.FirstOrDefault(t => t.TagName == "Princess");
@@ -2349,6 +2351,11 @@ new Character
             var tag25 = context.TagModels.FirstOrDefault(t => t.TagName == "Play or Die Situation");
             var tag26 = context.TagModels.FirstOrDefault(t => t.TagName == "Older Sister");
             var tag27 = context.TagModels.FirstOrDefault(t => t.TagName == "Mythos");
+
+            #endregion Tags
+
+            #region genre
+
             var genre1 = context.GenresModels.FirstOrDefault(t => t.GenreName == "Adventure");
             var genre2 = context.GenresModels.FirstOrDefault(t => t.GenreName == "Fantasy");
             var genre3 = context.GenresModels.FirstOrDefault(t => t.GenreName == "Adult");
@@ -2380,6 +2387,55 @@ new Character
             var genre29 = context.GenresModels.FirstOrDefault(t => t.GenreName == "Wuxia");
             var genre30 = context.GenresModels.FirstOrDefault(t => t.GenreName == "Xuanhuan");
 
+            #endregion genre
+
+            var Artist1 = context.artistModels.FirstOrDefault(a => a.FirstName == "Alan" && a.LastName == "Lee");
+            var Artist2 = context.artistModels.FirstOrDefault(a => a.FirstName == "John" && a.LastName == "Howe");
+            var Artist3 = context.artistModels.FirstOrDefault(a => a.FirstName == "Ted" && a.LastName == "Nasmith");
+            var Artist4 = context.artistModels.FirstOrDefault(a => a.FirstName == "Roger" && a.LastName == "Garland");
+            var Artist5 = context.artistModels.FirstOrDefault(a => a.FirstName == "Donato" && a.LastName == "Giancola");
+            var Artist6 = context.artistModels.FirstOrDefault(a => a.FirstName == "Michael" && a.LastName == "Hague");
+            var Author1 = context.authorModels.FirstOrDefault(at => at.FirstName == "J.R.R.");
+            var voiceactor1 = context.voiceActorModels.FirstOrDefault(v => v.FirstName == "Rob Inglis");
+            var voiceactor2 = context.voiceActorModels.FirstOrDefault(v => v.FirstName == "Ian Holm");
+            var voiceactor3 = context.voiceActorModels.FirstOrDefault(v => v.FirstName == "Andy Serkis");
+            var voiceactor4 = context.voiceActorModels.FirstOrDefault(v => v.FirstName == "Christopher Lee");
+            var assoicatedNames = context.AssociatedNames.FirstOrDefault(an => an.nameString == "LOTR");
+            var assoicatedNames2 = context.AssociatedNames.FirstOrDefault(an => an.nameString == "In the Name of the King");
+
+            #region chars
+
+            var Character1 = context.Characters.FirstOrDefault(c => c.CharacterName == "Puck");
+            var Character2 = context.Characters.FirstOrDefault(c => c.CharacterName == "Frodo Baggins");
+            var Character3 = context.Characters.FirstOrDefault(c => c.CharacterName == "Roronoa Zoro");
+            var Character4 = context.Characters.FirstOrDefault(c => c.CharacterName == "Guts");
+            var Character5 = context.Characters.FirstOrDefault(c => c.CharacterName == "Griffith");
+            var Character6 = context.Characters.FirstOrDefault(c => c.CharacterName == "Casca");
+            var Character7 = context.Characters.FirstOrDefault(c => c.CharacterName == "Zodd the Immortal");
+            var Character8 = context.Characters.FirstOrDefault(c => c.CharacterName == "Farnese de Vandimion");
+            var Character9 = context.Characters.FirstOrDefault(c => c.CharacterName == "Serpico");
+            var Character10 = context.Characters.FirstOrDefault(c => c.CharacterName == "Ivalera");
+            var Character11 = context.Characters.FirstOrDefault(c => c.CharacterName == "Usopp");
+            var Character12 = context.Characters.FirstOrDefault(c => c.CharacterName == "Sanji");
+            var Character13 = context.Characters.FirstOrDefault(c => c.CharacterName == "Tony Tony Chopper");
+            var Character14 = context.Characters.FirstOrDefault(c => c.CharacterName == "Nico Robin");
+            var Character15 = context.Characters.FirstOrDefault(c => c.CharacterName == "Franky");
+            var Character16 = context.Characters.FirstOrDefault(c => c.CharacterName == "Portgas D. Ace");
+            var Character17 = context.Characters.FirstOrDefault(c => c.CharacterName == "Edward Newgate (Whitebeard)");
+            var Character18 = context.Characters.FirstOrDefault(c => c.CharacterName == "Boa Hancock");
+            var Character19 = context.Characters.FirstOrDefault(c => c.CharacterName == "Brook");
+            var Character20 = context.Characters.FirstOrDefault(c => c.CharacterName == "Izuku Midoriya");
+            var Character21 = context.Characters.FirstOrDefault(c => c.CharacterName == "Rukia Kuchiki");
+            var Character22 = context.Characters.FirstOrDefault(c => c.CharacterName == "Orihime Inoue");
+            var Character23 = context.Characters.FirstOrDefault(c => c.CharacterName == "Uryuu Ishida");
+            var Character24 = context.Characters.FirstOrDefault(c => c.CharacterName == "Katsuki Bakugo");
+            var Character25 = context.Characters.FirstOrDefault(c => c.CharacterName == "All Might");
+            var Character26 = context.Characters.FirstOrDefault(c => c.CharacterName == "Gandalf");
+            var Character27 = context.Characters.FirstOrDefault(c => c.CharacterName == "Aragorn");
+            var Character28 = context.Characters.FirstOrDefault(c => c.CharacterName == "Legolas");
+
+            #endregion chars
+
             MangaModel lotr = new MangaModel
             {
                 MangaName = "ThisIsACharacterTestToCheckIfATitleCouldbeLongerThanItShouldBePossibleToViewWhenWatchingThisFromANormalUsersperspectiveNowIamJustWritingThisFortheFunOfItHoweverItsEssentialThatThisTitleIsWorkingAsIntendedLaterOnWhenIseeThisKindOfCrappyLongTittlesInBookSIfThisHappensWeNeedSomething",
@@ -2408,8 +2464,7 @@ new Character
         },
                 AssociatedNames = new List<AssociatedNames>
         {
-            new AssociatedNames { nameString = "LOTR" },
-            new AssociatedNames { nameString = "In the Name of the King" }
+           assoicatedNames, assoicatedNames2
         },
                 OfficalWebsites = new List<OfficalWebsite>
         {
@@ -2417,23 +2472,15 @@ new Character
         },
                 Authormodels = new List<AuthorModel>
         {
-            new AuthorModel { FirstName = "J.R.R.", LastName = "Tolkien", Biography = "John Ronald Reuel Tolkien CBE FRSL (3 January 1892 – 2 September 1973) was an English writer, poet, philologist, and academic. He is best known as the author of the high fantasy works The Hobbit, The Lord of the Rings, and The Silmarillion." }
+           Author1
         },
                 ArtistModels = new List<ArtistModel>
 {
-    new ArtistModel { FirstName = "Alan", LastName = "Lee", Biography = "Alan Lee is an English artist and writer. He is best known for his illustration work based on J. R. R. Tolkien's Middle-earth fantasy writings. He won an Academy Award for Best Art Direction for his work on the 2003 film The Lord of the Rings: The Return of the King." },
-    new ArtistModel { FirstName = "John", LastName = "Howe", Biography = "John Howe is a Canadian book illustrator, living in Neuchâtel, Switzerland. One year after studying in a college in Oakville, Howe moved to France. He has illustrated many fantasy books, including The Lord of the Rings and The Hobbit by J. R. R. Tolkien, and is one of the conceptual designers employed by Peter Jackson's The Lord of the Rings film trilogy." },
-    new ArtistModel { FirstName = "Ted", LastName = "Nasmith", Biography = "Ted Nasmith is a Canadian artist and illustrator. He is best known for his illustration work based on J. R. R. Tolkien's Middle-earth fantasy writings, and has produced several Tolkien-themed calendars and illustrated editions of The Silmarillion, The Lord of the Rings and The Hobbit." },
-    new ArtistModel { FirstName = "Roger", LastName = "Garland", Biography = "Roger Garland is an artist and illustrator from the United Kingdom. He is known for his illustration work based on J. R. R. Tolkien's Middle-earth fantasy writings, and has created artwork for various editions of The Hobbit and The Lord of the Rings, as well as other fantasy works." },
-    new ArtistModel { FirstName = "Donato", LastName = "Giancola", Biography = "Donato Giancola is an American artist and illustrator, best known for his work in the science fiction and fantasy genres. He has created artwork for a number of book covers, including editions of The Lord of the Rings and The Hobbit, as well as works by other authors in the genre." },
-    new ArtistModel { FirstName = "Michael", LastName = "Hague", Biography = "Michael Hague is an American illustrator and author, known for his work in the fantasy genre. He has created artwork for numerous children's books, including editions of The Hobbit and The Lord of the Rings, as well as works by other authors." }
+                    Artist1, Artist2, Artist3, Artist4, Artist5, Artist6
 },
                 VoiceActors = new List<VoiceActorModel>
 {
-    new VoiceActorModel { FirstName = "Rob Inglis", CharacterName = "Narrator" },
-    new VoiceActorModel { FirstName = "Ian Holm", CharacterName = "Bilbo Baggins" },
-    new VoiceActorModel { FirstName = "Andy Serkis", CharacterName = "Gollum" },
-    new VoiceActorModel { FirstName = "Christopher Lee", CharacterName = "Saruman" }
+ voiceactor1, voiceactor2, voiceactor3, voiceactor4
 },
                 GenresModels = new List<GenresModel>
         {
@@ -2445,570 +2492,10 @@ new Character
     },
                 Characters = new List<Character>
     {
-   new Character
-{
-    CharacterName = "Frodo Baggins",
-    specie = "Hobbit",
-    Gender = "Male",
-    Born = "September 22, T.A. 2968",
-    PlaceOffResidence = "Shire",
-    World = "Middle-earth",
-    Nationality = "Shire",
-    Education = "Private tutor",
-    Occupation = "Ring-bearer",
-    PhotoPath = Path.Combine(CharacterProcessUploadedFile("FrodoBaggins.jpg")),
-    Personality = "Courageous, Resilient, Determined",
-    FamousQuote = "I wish it need not have happened in my time.",
-    EyeColor = "Blue",
-    HairColor = "Brown",
-    Abilities = "Ring-bearer resilience, Resourcefulness",
-    Hobbies = "Reading, Exploring",
-    Likes = "Adventure, Friendship",
-    Dislikes = "Sauron, Dark magic",
-    PersonalityTraits = "Brave, Selfless, Humble"
-}, new Character { CharacterName = "Roronoa Zoro",
-        specie = "Human",
-        Gender = "Male",
-        World = "One Piece",
-        Abilities = "Swordsmanship, Haki",
-        PhotoPath = Path.Combine(CharacterProcessUploadedFile("Zoro.jpeg")),
-        Personality = "Serious, Determined, Loyal",
-        FamousQuote = "I don't want to become the world's greatest swordsman to protect you or anyone else. I'm doing it because I want to be the best, period.",
-        EyeColor = "Black",
-        HairColor = "Green",
-        Hobbies = "Sword training, Sleeping",
-        Likes = "Swords, Strong opponents",
-        Dislikes = "Getting lost, Dishonorable actions",
-        PersonalityTraits = "Focused, Strong-willed, Honorable" },
-                        new Character {  CharacterName = "Nami",
-        specie = "Human",
-        Gender = "Female",
-        World = "One Piece",
-        Occupation = "Navigator",
-        Abilities = "Cartography, Weather manipulation (with the Clima-Tact)",
-        PhotoPath = Path.Combine(CharacterProcessUploadedFile("Nami.jpeg")),
-        Personality = "Clever, Greedy, Compassionate",
-        FamousQuote = "I want money!",
-        EyeColor = "Orange",
-        HairColor = "Orange",
-        Hobbies = "Navigation, Drawing maps",
-        Likes = "Tangerines, Money",
-        Dislikes = "Thieving pirates, Unfair deals",
-        PersonalityTraits = "Resourceful, Opportunistic, Caring"},new Character
-    {
-        CharacterName = "Guts",
-        specie = "Human",
-        Gender = "Male",
-        Born = "Unknown",
-        PlaceOffResidence = "Midland",
-        World = "Berserk",
-        Nationality = "Unknown",
-        Education = "Self-taught",
-        Occupation = "Mercenary, Swordsman, Leader",
-        PhotoPath = Path.Combine(CharacterProcessUploadedFile("Guts.jpg")),
-        Personality = "Determined, Stoic, Fierce",
-        FamousQuote = "I will fight. That's who I am.",
-        EyeColor = "Brown",
-        HairColor = "Black",
-        Abilities = "Exceptional swordsmanship, Indomitable will",
-        Hobbies = "Sword training, Protecting loved ones",
-        Likes = "Freedom, Battle",
-        Dislikes = "Demons, Betrayal",
-        PersonalityTraits = "Resilient, Independent, Protective"
-    },
-    new Character
-    {
-        CharacterName = "Griffith",
-        specie = "Human",
-        Gender = "Male",
-        Born = "Unknown",
-        PlaceOffResidence = "Midland",
-        World = "Berserk",
-        Nationality = "Unknown",
-        Education = "Unknown",
-        Occupation = "Founder and leader of the Band of the Hawk",
-        PhotoPath = Path.Combine(CharacterProcessUploadedFile("Griffith.jpg")),
-        Personality = "Charismatic, Ambitious, Enigmatic",
-        FamousQuote = "I will have my own kingdom. And I will name it Falconia.",
-        EyeColor = "Violet",
-        HairColor = "White",
-        Hobbies = "Strategizing, Aspiring to greatness",
-        Likes = "Destiny, Achieving his dream",
-        Dislikes = "Weakness, Setbacks",
-        PersonalityTraits = "Calculated, Visionary, Determined"
-    },
-    new Character
-    {
-        CharacterName = "Casca",
-        specie = "Human",
-        Gender = "Female",
-        Born = "Unknown",
-        PlaceOffResidence = "Midland",
-        World = "Berserk",
-        Nationality = "Unknown",
-        Education = "Unknown",
-        Occupation = "Commander of the Band of the Hawk",
-        PhotoPath = Path.Combine(CharacterProcessUploadedFile("Casca.jpeg")),
-        Personality = "Brave, Loyal, Complex",
-        FamousQuote = "Even if it's scary, even if it's painful, I don't want to be weak anymore.",
-        EyeColor = "Brown",
-        HairColor = "Black",
-        Hobbies = "Swordsmanship, Protecting loved ones",
-        Likes = "Griffith, Overcoming challenges",
-        Dislikes = "Vulnerability, Trauma",
-        PersonalityTraits = "Caring, Determined, Scarred"
-    },
-    new Character
-    {
-        CharacterName = "Zodd the Immortal",
-        specie = "Unknown",
-        Gender = "Male",
-        Born = "Unknown",
-        PlaceOffResidence = "Unknown",
-        World = "Berserk",
-        Nationality = "Unknown",
-        Education = "Unknown",
-        Occupation = "Mercenary",
-        PhotoPath = Path.Combine(CharacterProcessUploadedFile("Zodd.jpg")),
-        Personality = "Ferocious, Mysterious, Mighty",
-        FamousQuote = "This is the battlefield where humans and apostles meet!",
-        Abilities = "Superhuman strength, Immortality",
-        Hobbies = "Battle, Testing his might",
-        Likes = "Chaos, Fighting strong opponents",
-        Dislikes = "Weakness, Submission",
-        PersonalityTraits = "Savage, Unyielding, Ruthless"
-    },
-   new Character
-    {
-        CharacterName = "Puck",
-        specie = "Elf",
-        Gender = "Male",
-        Born = "Unknown",
-        PlaceOffResidence = "Midland",
-        World = "Berserk",
-        Nationality = "Unknown",
-        Education = "Unknown",
-        Occupation = "Comic relief character",
-        PhotoPath = Path.Combine(CharacterProcessUploadedFile("Puck.jpg")),
-        Personality = "Lively, Cheerful, Curious",
-        FamousQuote = "I'm Puck, a wandering elf! Nice to meet you, Mr. Ogre!",
-        EyeColor = "Blue",
-        HairColor = "Green",
-        Hobbies = "Adventuring, Teasing Guts",
-        Likes = "Fun, Kind-hearted people",
-        Dislikes = "Suffering, Evil beings",
-        PersonalityTraits = "Playful, Helpful, Inquisitive"
-    },
-    new Character
-    {
-        CharacterName = "Farnese de Vandimion",
-        specie = "Human",
-        Gender = "Female",
-        Born = "Unknown",
-        PlaceOffResidence = "Midland",
-        World = "Berserk",
-        Nationality = "Vandimion family",
-        Education = "Unknown",
-        Occupation = "Leader of the Holy See's Chain Knights",
-        PhotoPath = Path.Combine(CharacterProcessUploadedFile("Farnese.jpg")),
-        Personality = "Resolute, Seeking, Conflicted",
-        FamousQuote = "I will find my own path.",
-        EyeColor = "Brown",
-        HairColor = "Blonde",
-        Hobbies = "Religious devotion, Seeking redemption",
-        Likes = "Authority, Purpose",
-        Dislikes = "Doubt, Weakness",
-        PersonalityTraits = "Determined, Devoted, Complex"
-    },
-    new Character
-    {
-        CharacterName = "Serpico",
-        specie = "Human",
-        Gender = "Male",
-        Born = "Unknown",
-        PlaceOffResidence = "Midland",
-        World = "Berserk",
-        Nationality = "Unknown",
-        Education = "Unknown",
-        Occupation = "Member of the Holy See's Chain Knights",
-        PhotoPath = Path.Combine(CharacterProcessUploadedFile("Serpico.jpg")),
-        Personality = "Calm, Observant, Loyal",
-        FamousQuote = "It's just my personality to follow behind like a shadow.",
-        EyeColor = "Blue",
-        HairColor = "Blonde",
-        Hobbies = "Swordsmanship, Protecting Farnese",
-        Likes = "Nature, Strategy",
-        Dislikes = "Arrogance, Danger to Farnese",
-        PersonalityTraits = "Reserved, Dedicated, Analytical"
-    },
-    new Character
-    {
-        CharacterName = "Ivalera",
-        specie = "Elf",
-        Gender = "Female",
-        Born = "Unknown",
-        PlaceOffResidence = "Midland",
-        World = "Berserk",
-        Nationality = "Unknown",
-        Education = "Unknown",
-        Occupation = "Elf guide and spiritual guide to Schierke",
-        PhotoPath = Path.Combine(CharacterProcessUploadedFile("Ivalera.jpg")),
-        Personality = "Wisdom, Ethereal, Supportive",
-        EyeColor = "Blue",
-        HairColor = "Green",
-        Hobbies = "Guiding, Offering insight",
-        Likes = "Spiritual growth, Balance",
-        Dislikes = "Destruction, Corruption",
-        PersonalityTraits = "Sage-like, Tranquil, Nurturing"
-    },
-
-                        new Character { CharacterName = "Usopp",
-        specie = "Human",
-        Gender = "Male",
-        World = "One Piece",
-        Occupation = "Sniper",
-        Abilities = "Sharpshooting, Creativity",
-        PhotoPath = Path.Combine(CharacterProcessUploadedFile("Usopp.jpeg")),
-        Personality = "Cowardly, Imaginative, Brave",
-        FamousQuote = "I'm not gonna die! Because I'm the brave warrior of the sea!",
-        EyeColor = "Black",
-        HairColor = "Black",
-        Hobbies = "Telling tall tales, Inventing",
-        Likes = "Bravery, Adventure",
-        Dislikes = "Confrontation, Dishonesty",
-        PersonalityTraits = "Inventive, Loyal, Overactive imagination" },
-                        new Character { CharacterName = "Sanji",
-        specie = "Human",
-        Gender = "Male",
-        World = "One Piece",
-        Occupation = "Cook",
-        Abilities = "Diable Jambe, Haki",
-        PhotoPath = Path.Combine(CharacterProcessUploadedFile("Sanji.jpg")),
-        Personality = "Chivalrous, Flirtatious, Determined",
-        FamousQuote = "Love-cooked meals suit me best.",
-        EyeColor = "Black",
-        HairColor = "Black",
-        Hobbies = "Cooking, Flirting with women",
-        Likes = "Women, Cooking, Suits",
-        Dislikes = "Injustice, Hurting women",
-        PersonalityTraits = "Passionate, Gentlemanly, Competitive" },
-                        new Character {  CharacterName = "Tony Tony Chopper",
-        specie = "Reindeer",
-        Gender = "Male",
-        World = "One Piece",
-        Occupation = "Doctor",
-        Abilities = "Human-Human Fruit transformations, Medical skills",
-        PhotoPath = Path.Combine(CharacterProcessUploadedFile("Chopper.jpg")),
-        Personality = "Innocent, Curious, Caring",
-        FamousQuote = "I want to become a doctor who can cure any disease!",
-        EyeColor = "Black",
-        HairColor = "Blue",
-        Hobbies = "Reading, Learning about medicine",
-        Likes = "Cotton candy, Friends",
-        Dislikes = "Being treated like a pet, Bullies",
-        PersonalityTraits = "Naive, Optimistic, Kind-hearted" },
-                        new Character {CharacterName = "Nico Robin",
-        specie = "Human",
-        Gender = "Female",
-        World = "One Piece",
-        Occupation = "Archaeologist",
-        Abilities = "Hana-Hana Fruit powers, Haki",
-        PhotoPath = Path.Combine(CharacterProcessUploadedFile("Robin.jpg")),
-        Personality = "Reserved, Intellectual, Mysterious",
-        FamousQuote = "I want to live!",
-        EyeColor = "Black",
-        HairColor = "Black",
-        Hobbies = "Reading, Historical research",
-        Likes = "Poneglyphs, Knowledge",
-        Dislikes = "Isolation, Misunderstanding",
-        PersonalityTraits = "Calm, Analytical, Determined" },
-                        new Character {  CharacterName = "Franky",
-        specie = "Human",
-        Gender = "Male",
-        World = "One Piece",
-        Occupation = "Shipwright",
-        Abilities = "Cyborg enhancements, Ship engineering",
-        PhotoPath = Path.Combine(CharacterProcessUploadedFile("Franky.jpeg")),
-        Personality = "Eccentric, Loyal, Boisterous",
-        FamousQuote = "I'm super, and I'm cyborg!",
-        EyeColor = "Blue",
-        HairColor = "Bald with a blue crew cut",
-        Hobbies = "Building gadgets, Dancing",
-        Likes = "Cola, Mechanics",
-        Dislikes = "Insults about his appearance, Pirates who harm ships",
-        PersonalityTraits = "Energetic, Inventive, Fearless" },new Character
-    {
-        CharacterName = "Portgas D. Ace",
-        specie = "Human",
-        Gender = "Male",
-        World = "One Piece",
-        Occupation = "Pirate",
-        Abilities = "Mera-Mera Fruit powers",
-        PhotoPath = Path.Combine(CharacterProcessUploadedFile("Ace.jpg")),
-        Personality = "Lively, Hot-headed, Protective",
-        FamousQuote = "I don't want to live a thousand years. If I just live through today, that'll be enough.",
-        EyeColor = "Black",
-        HairColor = "Black",
-        Hobbies = "Eating, Training",
-        Likes = "Freedom, Adventure",
-        Dislikes = "Being called weak, Losing loved ones",
-        PersonalityTraits = "Passionate, Reckless, Caring"
-    },
-    new Character
-    {
-        CharacterName = "Edward Newgate (Whitebeard)",
-        specie = "Human",
-        Gender = "Male",
-        World = "One Piece",
-        Occupation = "Pirate Captain",
-        Abilities = "Tremor-Tremor Fruit powers, Haki",
-        PhotoPath = Path.Combine(CharacterProcessUploadedFile("Whitebeard.jpeg")),
-        Personality = "Respected, Caring, Fearless",
-        FamousQuote = "When do you think people die? When they are shot by a bullet? No! When they eat a soup made from a poisonous mushroom? No! People die...when they are forgotten!",
-        EyeColor = "Black",
-        HairColor = "White",
-        Hobbies = "Protecting his crew, Napping",
-        Likes = "Family, Protecting his loved ones",
-        Dislikes = "Injustice, Threats to his family",
-        PersonalityTraits = "Wise, Fatherly, Indomitable"
-    },
-    new Character
-    {
-        CharacterName = "Boa Hancock",
-        specie = "Human",
-        Gender = "Female",
-        World = "One Piece",
-        Occupation = "Pirate Empress, Snake Princess",
-        Abilities = "Love-Love Fruit powers, Haki",
-        PhotoPath = Path.Combine(CharacterProcessUploadedFile("Hancock.jpeg")),
-        Personality = "Proud, Confident, Doting",
-        FamousQuote = "A strong heart will always overpower a strong body.",
-        EyeColor = "Purple",
-        HairColor = "Black",
-        Hobbies = "Admiring Luffy, Bathing",
-        Likes = "Luffy, Beauty, Freedom",
-        Dislikes = "Disrespect, Slavery",
-        PersonalityTraits = "Charismatic, Strong-willed, Romantic"
-    },
-                        new Character { CharacterName = "Brook",
-        specie = "Living Skeleton",
-        Gender = "Male",
-        World = "One Piece",
-        Occupation = "Musician",
-        Abilities = "Revive-Revive Fruit powers, Swordsmanship",
-        PhotoPath = Path.Combine(CharacterProcessUploadedFile("Brook.jpg")),
-        Personality = "Cheerful, Musical, Lively",
-        FamousQuote = "Yohohoho!",
-        EyeColor = "Empty eye sockets (white light)",
-        HairColor = "Black",
-        Hobbies = "Playing music, Jokes",
-        Likes = "Music, Tea parties",
-        Dislikes = "Pudding being wasted, Cold weather",
-        PersonalityTraits = "Jovial, Artistic, Optimistic" },
-     new Character
-            {
-                CharacterName = "Izuku Midoriya",
-                specie = "Human",
-                Gender = "Male",
-                Born = "July 15",
-                PlaceOffResidence = "Japan",
-                World = "My Hero Academia",
-                Nationality = "Japanese",
-                Education = "U.A. High School",
-                Occupation = "Student",
-                Background = "A boy born without superpowers in a world where they are common, but still dreams of becoming a hero.",
-                PhotoPath = Path.Combine(CharacterProcessUploadedFile("IzukuMidoriya.jpg")),
-                Personality = "Kind, Determined, Brave",
-                FamousQuote = "When you have to save someone, they're usually in a scary situation. A true hero saves not only their lives but also their spirits.",
-                EyeColor = "Green",
-                HairColor = "Green",
-                Abilities = "One For All",
-                Hobbies = "Studying Heroes",
-                Likes = "Heroes, Quirks",
-                Dislikes = "Villains, Injustice",
-                PersonalityTraits = "Optimistic, Intelligent, Humble"
-            },
-    new Character
-    {
-        CharacterName = "Rukia Kuchiki",
-        specie = "Shinigami",
-        Gender = "Female",
-        Born = "January 14",
-        PlaceOffResidence = "Soul Society",
-        World = "Bleach",
-        Nationality = "Japanese",
-        Occupation = "Soul Reaper",
-        Height = 144,
-        Weight = 42,
-        PhotoPath = Path.Combine(CharacterProcessUploadedFile("Rukia.jpg")),
-        Personality = "Serious, Caring, Skilled",
-        FamousQuote = "If you were to turn into a snake tomorrow, and began devouring humans, and from the same mouth you started devouring humans, you cried out to me 'I love you', would I still be able to say 'I love you' the same way I do today?",
-        EyeColor = "Violet",
-        HairColor = "Black",
-        Abilities = "Kidou, Zanpakuto",
-        Hobbies = "Training, Reading",
-        Likes = "Teaching, Helping",
-        Dislikes = "Soul Society's rules, Injustice",
-        PersonalityTraits = "Responsible, Stern, Dedicated"
-    },
-    new Character
-    {
-        CharacterName = "Orihime Inoue",
-        specie = "Human",
-        Gender = "Female",
-        Born = "September 3",
-        PlaceOffResidence = "Karakura Town",
-        World = "Bleach",
-        Nationality = "Japanese",
-        Occupation = "High School Student",
-        Height = 157,
-        Weight = 45,
-        PhotoPath = Path.Combine(CharacterProcessUploadedFile("Orihime.jpeg")),
-        Personality = "Kind-hearted, Naive, Optimistic",
-        FamousQuote = "I chose this. I chose all of this. This time, I want to protect Ichigo.",
-        EyeColor = "Brown",
-        HairColor = "Orange",
-        Abilities = "Santen Kesshun, Shun Shun Rikka",
-        Hobbies = "Cooking, Drawing",
-        Likes = "Friends, Peace",
-        Dislikes = "Conflict, Sadness",
-        PersonalityTraits = "Empathetic, Cheerful, Supportive"
-    },
-    new Character
-    {
-        CharacterName = "Uryuu Ishida",
-        specie = "Human",
-        Gender = "Male",
-        Born = "November 6",
-        PlaceOffResidence = "Karakura Town",
-        World = "Bleach",
-        Nationality = "Japanese",
-        Occupation = "High School Student, Quincy",
-        Height = 182,
-        Weight = 68,
-        PhotoPath = Path.Combine(CharacterProcessUploadedFile("Uryuu.jpeg")),
-        Personality = "Proud, Analytical, Stern",
-        FamousQuote = "I don't have to win. But I have to fight.",
-        EyeColor = "Blue",
-        HairColor = "Blue",
-        Abilities = "Spiritual energy manipulation, Quincy techniques",
-        Hobbies = "Sewing, Studying",
-        Likes = "Independence, Justice",
-        Dislikes = "Hollows, Arrogance",
-        PersonalityTraits = "Determined, Intelligent, Self-reliant"
-    },
-            new Character
-{
-    CharacterName = "Katsuki Bakugo",
-    specie = "Human",
-    Gender = "Male",
-    Born = "April 20",
-    PlaceOffResidence = "Japan",
-    World = "My Hero Academia",
-    Nationality = "Japanese",
-    Education = "U.A. High School",
-    Occupation = "Student",
-    Background = "A student in Class 1-A at U.A. High School, training to become a Pro Hero. He has a Quirk named Explosion.",
-    PhotoPath = Path.Combine(CharacterProcessUploadedFile("Katsuki-Bakugou.jpg")),
-    Personality = "Arrogant, Short-tempered, Confident",
-    FamousQuote = "I just wanna win the way I wanna win. Is that so wrong?",
-    EyeColor = "Red",
-    HairColor = "Blond",
-    Abilities = "Explosion",
-    Hobbies = "None",
-    Likes = "Victory, Himself",
-    Dislikes = "Losing, Weakness",
-    PersonalityTraits = "Competitive, Aggressive, Driven"
-},
-new Character
-{
-    CharacterName = "All Might",
-    specie = "Human",
-    Gender = "Male",
-    Born = "June 10",
-    PlaceOffResidence = "Japan",
-    World = "My Hero Academia",
-    Nationality = "Japanese",
-    Education = "U.A. High School",
-    Occupation = "Teacher, Former Pro Hero",
-    Background = "The former No. 1 Pro Hero who bore the title of the world's Symbol of Peace. He teaches Foundational Hero Studies at U.A. High School.",
-    PhotoPath = Path.Combine(CharacterProcessUploadedFile("AllMight.jpg")),
-    Personality = "Charismatic, Optimistic, Caring",
-    FamousQuote = "I am here!",
-    EyeColor = "Blue",
-    HairColor = "Blond",
-    Abilities = "One For All",
-    Hobbies = "Training Heroes",
-    Likes = "Peace, Justice",
-    Dislikes = "Villains, Injustice",
-    PersonalityTraits = "Inspirational, Courageous, Kind-hearted"
-},
-new Character
-{
-    CharacterName = "Gandalf",
-    specie = "Maiar",
-    Gender = "Male",
-    Born = "Unknown",
-    PlaceOffResidence = "Middle-earth",
-    World = "Middle-earth",
-    Nationality = "Unknown",
-    Education = "Unknown",
-    Occupation = "Wizard",
-    PhotoPath = Path.Combine(CharacterProcessUploadedFile("Gandalf.jpeg")),
-    Personality = "Wise, Mysterious, Compassionate",
-    FamousQuote = "A wizard is never late, nor is he early, he arrives precisely when he means to.",
-    EyeColor = "Blue",
-    HairColor = "Grey",
-    Abilities = "Powerful magic, Wisdom",
-    Hobbies = "Advising, Exploring",
-    Likes = "Helping others, Solving riddles",
-    Dislikes = "Dark forces, Ignorance",
-    PersonalityTraits = "Knowledgeable, Caring, Enigmatic"
-},
-new Character
-{
-    CharacterName = "Aragorn",
-    specie = "Human",
-    Gender = "Male",
-    Born = "March 1, T.A. 2931",
-    PlaceOffResidence = "Gondor",
-    World = "Middle-earth",
-    Nationality = "Dúnedain",
-    Education = "Ranger training",
-    Occupation = "King of Gondor",
-    PhotoPath = Path.Combine(CharacterProcessUploadedFile("Aragorn.jpg")),
-    Personality = "Noble, Brave, Determined",
-    FamousQuote = "I do not love the bright sword for its sharpness, nor the arrow for its swiftness, nor the warrior for his glory. I love only that which they defend.",
-    EyeColor = "Grey",
-    HairColor = "Dark",
-    Abilities = "Swordsmanship, Leadership",
-    Hobbies = "Exploring, Studying history",
-    Likes = "Protecting, Justice",
-    Dislikes = "Sauron, Injustice",
-    PersonalityTraits = "Honorable, Compassionate, Regal"
-},
-new Character
-{
-    CharacterName = "Legolas",
-    specie = "Elf",
-    Gender = "Male",
-    Born = "Third Age, 87",
-    PlaceOffResidence = "Mirkwood",
-    World = "Middle-earth",
-    Nationality = "Woodland Realm",
-    Education = "Unknown",
-    Occupation = "Prince of Mirkwood",
-    PhotoPath = Path.Combine(CharacterProcessUploadedFile("Legolas.jpg")),
-    Personality = "Graceful, Agile, Optimistic",
-    FamousQuote = "Final count, forty-two.",
-    EyeColor = "Blue",
-    HairColor = "Blonde",
-    Abilities = "Archery, Acrobatics",
-    Hobbies = "Exploring, Archery contests",
-    Likes = "Nature, Fellowship",
-    Dislikes = "Orcs, Destruction",
-    PersonalityTraits = "Loyal, Light-hearted, Skilled"
-},
+    Character1, Character2,Character3,Character4,
+   Character5,Character6
+   ,Character7, Character8,Character9, Character10,Character11, Character12,Character13, Character14,  Character15, Character16, Character17, Character18, Character19, Character20, Character21,
+   Character21, Character22, Character23, Character24, Character25, Character26, Character27, Character28
     },
             };
             context.mangaModels.Add(lotr);
