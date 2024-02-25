@@ -9,20 +9,18 @@
 }
 
 <link rel="stylesheet" href="~/css/CurrentCharacter.css" asp-append-version="true" />
-<div class="parent-div">
-    <div class="Content1Ex HiddenOverflowContent1Ex">
+
+<div class="CUS-Content1Ex">
 
 
-        <div class="card-ex">
-            <div class="card-image-ex">
-
-                <div class="blurredbackground ">
-                    <p class="Author_Artist_Characters"> hello WORLDhello hello WORLDhello hello WORLDhello hello WORLDhello  </p>
-                    <img class="BoxImage blurimage SpecialBox" src="/Images/GeneratedCharacterImage/@Model.CurrentCharacter.PhotoPath" />
+         <div class="CUS-card-ex">
+          <div class="CUS-card-image-ex">
+            <div class="CUS-blurredbackground ">
+                <img class="CUS-BoxImage CUS-blurimage" src="/Images/GeneratedCharacterImage/@Model.CurrentCharacter.PhotoPath" />
                   
                 </div>
 
-                <div class="manga-img-container">
+            <div class="CUS-manga-img-container">
                     <!-- Manga image goes here -->
                     @if (@Model.CurrentCharacter.PhotoPath != string.Empty)
                     {
@@ -30,26 +28,26 @@
                             @if (UpdaterUser)
                             {
                                 <a asp-page="/MangaUpdates/UpdatePhoto" asp-route-id="@Model.CurrentCharacter.CharacterId">
-                                    <img class="manga-img" asp-append-version="true" src="~/Images/GeneratedCharacterImage/@Model.CurrentCharacter.PhotoPath" alt="NoImage">
+                                <img class="CUS-manga-img" asp-append-version="true" src="~/Images/GeneratedCharacterImage/@Model.CurrentCharacter.PhotoPath" alt="NoImage">
                                 </a>
                             }
                             else
                             {
-                                <img class="manga-img" asp-append-version="true" src="~/Images/GeneratedCharacterImage/@Model.CurrentCharacter.PhotoPath" alt="NoImage">
+                            <img class="CUS-manga-img" asp-append-version="true" src="~/Images/GeneratedCharacterImage/@Model.CurrentCharacter.PhotoPath" alt="NoImage">
                             }
 
                         </div>
                     }
                     else
                     {
-                        <img class="manga-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png" alt="BookImage">
+                    <img class="CUS-manga-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png" alt="BookImage">
                     }
                 </div>
-                <div class="manga-title">
+            <div class="CUS-manga-title CUS-HideTitleCurrentMangaOnSmall">
                     <!-- Manga title goes here -->
                     @if (@Model.CurrentCharacter.CharacterName != null)
                     {
-                        <h1 class="FontSizeCurrentBook">@Model.CurrentCharacter.CharacterName</h1>
+                        <h1 class="">@Model.CurrentCharacter.CharacterName</h1>
                     }
                 </div>
 
@@ -60,8 +58,58 @@
         </div>
 
     </div>
+
+<div class="CUS-Content1Cost">
+    <div class="CUS-commonParentContainer">
+
+       
+   
+    </div>
+
 </div>
-<div class="Content1Cost">
+<div class="CUS-mangaDetailsWrapper">
+    <div class="CUS-MangaDetaiDescription CUS-bookdescription">
 
 
+        <div class="CUS-MangaDescriptionContainerInput">
+
+            @if (Model.CurrentCharacter.Background != null)
+            {
+                @if (UpdaterUser)
+                {
+
+                    <a asp-page="/MangaUpdates/UpdateCharacter" asp-route-id="@Model.CurrentCharacter.CharacterId">
+                        @Model.CurrentCharacter.Background
+
+                    </a>
+
+                }
+                else
+                {
+
+                    @Model.CurrentCharacter.Background
+                }
+            }
+            else
+            {
+                @if (UpdaterUser)
+                {
+
+                    <a asp-page="/MangaUpdates/UpdateCharacter" asp-route-id="@Model.CurrentCharacter.CharacterId">
+                        <div class="CUS-MangaInputText"> <p> N/A Please update data</p></div>
+                    </a>
+                }
+                else
+                {
+                    
+                }
+
+
+            }
+
+
+        </div>
+
+    </div>
+    <hr / class="CUS-DescriptionDiver">
 </div>

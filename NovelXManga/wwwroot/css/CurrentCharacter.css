@@ -1,11 +1,836 @@
-﻿.blurredbackground {
-    height: 100%;
-    width: 100%
-}
+﻿@media all and (-webkit-min-device-pixel-ratio:0) and (min-resolution: .001dpcm) {
+    .CUS-Content1Ex {
+        width: 100%;
+    }
 
-.card-image-ex {
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
-    overflow: hidden
+    .CUS-Content1Cost, CUS-Content2Cost, CUS-Content3Cost, CUS-Content4Cost {
+        gap: 10px !important;
+    }
+
+    CUS-.CustomWarningLabel {
+        color: red !important;
+    }
+
+    .CUS-CustomHintLabel {
+        color: rgb(255, 103, 64);
+    }
+
+    #zViewReview_Title {
+        color: black;
+    }
+
+    .UserReview {
+        margin: 10px;
+        padding: 5px;
+        border: 1px solid #ccc;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        max-width: 100%;
+    }
+
+    .UserReviewcontent {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        max-width: 100%;
+    }
+
+    .CUS-GridItem {
+        transition: width 0.5s, height 0.5s;
+        width: 240px;
+        min-width: 160px; /* Set the minimum width */
+        flex: 1; /* Allows the item to grow if there's available space */
+        height: 380px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 8px;
+    }
+
+    .CUS-mangaDetailsBox {
+        flex: 1 1 auto; /* Will take up 30% of the container's width when the screen is large */
+        box-sizing: border-box;
+        margin: 1em;
+        padding: 1em;
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Centers the content horizontally */
+        justify-content: center; /* Centers the content vertically */
+
+        border-radius: 10px; /* Adds rounded corners to the box */
+        min-width: 30%;
+        transition: margin-left 0.5s ease, margin-top 0.5s ease;
+    }
+
+    .CUS-ratingContainer {
+        display: flex;
+        justify-content: space-between; /* Distributes space evenly between the rating containers */
+        align-items: center; /* Aligns items vertically in the center */
+        gap: 1em; /* Space between each rating container */
+    }
+
+    .CUS-LeftSidemangaDetailsBox {
+        /*flex: 1 1 auto;*/
+        box-sizing: border-box;
+        flex-direction: column;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center; /* Centers the content vertically */
+
+        border-radius: 10px; /* Adds rounded corners to the box */
+
+        transition: margin-left 0.5s ease, margin-top 0.5s ease;
+    }
+
+    .CUS-mangaDetailsBox.CUS-bookdescription {
+        flex-grow: 2;
+        width: 100%;
+    }
+
+    .CUS-mangaDetailsBox .CUS-contentMangaBox-wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 50%;
+        margin: 0px;
+        padding: 0px;
+    }
+
+    .CUS-MangaDetaiDescription {
+        flex: 1 1 auto; /* Will take up 30% of the container's width when the screen is large */
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Centers the content horizontally */
+        justify-content: center; /* Centers the content vertically */
+
+        transition: margin-left 0.5s ease, margin-top 0.5s ease;
+    }
+
+    .CUS-MangaDescriptionContainerInput {
+        height: auto;
+        border: none;
+        border-radius: 5px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 5px;
+        box-sizing: border-box;
+        transition: margin-left 0.5s ease;
+        align-items: center; /* Centers the content horizontally */
+    }
+
+    .CUS-LeftSidemangaDetailsBox h3 {
+        display: block;
+        font-size: 1.17em;
+        margin-block-start: 0.3em;
+        margin-right: 5px;
+        margin-block-end: 0.3em;
+        margin-inline-start: 0px;
+        margin-inline-end: 0px;
+        font-weight: bold;
+        padding-right: 5px;
+    }
+
+    .CUS-MangaContainerInput {
+        height: auto;
+        width: 100%; /* Adjust width to take the full width of the parent */
+        border: none;
+        border-radius: 5px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 5px;
+        box-sizing: border-box;
+        transition: margin-left 0.5s ease;
+        align-items: center; /* Centers the content horizontally */
+    }
+
+    .CUS-mangaDetailsWrapper {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin-top: 5%;
+        transition: margin-left 0.5s ease;
+        overflow: hidden;
+    }
+
+    .CUS-CommonContainer {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+    }
+
+    .CUS-ratingLeftSide {
+        width: 35%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+    }
+
+    .CUS-LeftSide {
+        width: 35%;
+        flex: 1 1 auto;
+        max-height: fit-content;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+    }
+
+    .CUS-ReviewTitleCenter {
+        width: 100%;
+    }
+
+    .CUS-RatingRightSide {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 65%;
+    }
+
+    .CUS-RightSide {
+        width: 65%;
+        flex: 2 1 auto;
+        /* Optional: background color for the right side */
+    }
+
+    @media (max-width: 768px) { /* Adjust breakpoint as needed for tablet size */
+        .CUS-LeftSide, .CUS-RightSide {
+            width: 100%;
+        }
+    }
+    /* When the screen's width is 600px or less, change the boxes to take 100% of the width */
+    @media (max-width: 600px) {
+        .CUS-mangaDetailsBox {
+            margin: 0.5em; /* reduce margin */
+            padding: 0.5em; /* reduce padding */
+            overflow: hidden;
+        }
+    }
+    /* Add some styles for the dropdown button and content */
+    .CUS-dropbtn {
+        background-color: #ff6740;
+        color: white;
+        padding: 16px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+    }
+
+    .CUS-dropdown {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 22; /* High z-index to ensure it's on top */
+        transition: 0.5s;
+        border-radius: 5px;
+    }
+
+    .CUS-dropdown-content {
+        cursor: pointer;
+        display: none;
+        min-width: 160px;
+        border-radius: 5px;
+    }
+
+        .CUS-dropdown-content .CUS-dropdown-item {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            background-color: #ff6740;
+            display: block;
+            border: none;
+            width: 100%;
+            cursor: pointer;
+        }
+
+            .CUS-dropdown-content .CUS-dropdown-item:hover {
+                background-color: #e94e24;
+            }
+
+    .CUS-show {
+        display: block;
+    }
+
+    .CUS-dropdown-content .CUS-dropdown-item:last-child {
+        border-bottom: none; /* No border for the last item */
+    }
+
+    .CUS-custom-hr {
+        border-top: 2px solid #ff6740;
+        border-left: none;
+        border-right: none;
+        border-bottom: none;
+        color: #ff6740;
+        width: 100%;
+        margin: 0px;
+        padding: 0px;
+    }
+
+    .CUS-load-more-button {
+        background-color: #ff6740;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+    }
+
+        .CUS-load-more-button:hover {
+            background-color: #ff5c33;
+        }
+
+    .CUS-CurrentMangaTagsContainer {
+        height: auto;
+        width: 100%;
+        border: none;
+        border-radius: 5px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: 10px;
+        padding: 5px;
+        box-sizing: border-box;
+        transition: margin-left 0.5s ease;
+        order: 1;
+    }
+
+    .CUS-CustomWarningLabel {
+        color: #FF9933 !important;
+    }
+
+    .CUS-CustomHintLabel {
+        color: #008000;
+    }
+
+    .scoreAndMangaInfoContainer {
+        order: 2;
+        height: auto;
+        width: 100%;
+        border: none;
+        border-radius: 5px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: 10px;
+        padding: 5px;
+        box-sizing: border-box;
+        transition: margin-left 0.5s ease;
+    }
+
+    .Cus-TitleWhenSmallCurrentManga {
+        display: none;
+    }
+
+    .CUS-card-ex {
+        position: relative;
+        width: 100%;
+        height: 360px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .CUS-commonParentContainer {
+        display: flex;
+        margin-left: 25% !important;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start !important; /* Will center align the child containers */
+    }
+
+    .CUS-blurredbackground {
+        height: 100%;
+        width: 100%
+    }
+
+    .CUS-card-image-ex {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+        overflow: hidden
+    }
+
+    .CUS-BoxImage {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        transition: width 0.5s, height 0.5s;
+    }
+
+    .CUS-blurimage {
+        height: 100%;
+        width: 100%;
+        filter: blur(15px) !important;
+    }
+
+    .CUS-manga-img-container {
+        position: absolute;
+        top: 20%;
+        width: 15%; /* Adjust this value based on your design requirements */
+        height: 200px; /* Adjust this value based on your design requirements */
+        left: 10%;
+        transition: top 0.5s, left 0.5s; /* Smooth transition for top and left */
+    }
+
+    .CUS-manga-img {
+        width: 280px;
+        height: 385px;
+        object-fit: cover; /* To maintain image aspect ratio */
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+        transition: width 0.5s, height 0.5s; /* Smooth transition for width and height */
+        border-radius: 3px;
+    }
+
+    .CUS-Content1Cost, .CUS-Content2Cost, .CUS-Content3Cost, .CUS-Content4Cost {
+        flex: 1;
+        background-color: #191a1c;
+        border-radius: var(--main-radius);
+        padding-top: var(--main-padding);
+        display: flex;
+        flex-direction: column;
+        padding: 1rem;
+        padding-left: 2.5%;
+        padding-right: 2.5%;
+    }
+
+    .CUS-MangaInputText {
+        background-color: #444;
+        padding: 5px;
+        margin: 0;
+        border-radius: 3px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 15px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        min-width: 75px;
+        flex-shrink: 0;
+        border: 2px solid #ff6740; /* Adds a 2px solid border with color #ff6740 */
+        border-radius: 5px;
+        font-family: Lato !important;
+    }
+
+    .CUS-scoreArea:hover .CUS-scoreDistribution {
+        display: block; /* Shows the dropdown on hover */
+    }
+
+    .CUS-scoreArea {
+        position: relative; /* Makes scoreArea the reference point for its absolute positioned children */
+    }
+
+    .CUS-histo {
+        float: left;
+        width: 50%;
+        font-size: 13px;
+    }
+
+    .CUS-AddEditReportCurrentpage {
+        display: flex;
+        justify-content: start; /* This will align the items horizontally */
+
+        position: absolute;
+        top: calc(25% + 200px); /* The top position is relative to the manga-title's top position */
+        /*left: calc(11.5% + 285px);*/ /* Adjust this value based on your design requirements */
+        margin-left: 26.5%;
+        width: 70%;
+        transition: top 0.5s, left 0.5s;
+        overflow: hidden;
+    }
+
+    .CUS-EditSizeCurrentpage,
+    .CUS-ReportSizeCurrentpage {
+        flex: 1;
+    }
+
+    .CUS-AddSizeCurrentpage {
+        margin-right: 10px; /* To ensure spacing between the buttons */
+        height: 50px;
+        width: 100% !important;
+        flex: 2;
+        justify-content: center;
+        align-items: center;
+        outline: none;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        width: 100%;
+        box-sizing: border-box;
+        /* z-index: 10;*/
+        padding-bottom: 20px; /* Extra space at the bottom */
+    }
+
+        .CUS-AddSizeCurrentpage form {
+            background-color: #ff6740;
+            color: black;
+            text-decoration: none;
+            display: block;
+        }
+
+    .CUS-EditSizeCurrentpage {
+        display: inline-block; /* This will ensure the divs are in a line */
+        margin-right: 10px; /* To ensure spacing between the buttons */
+        height: 50px;
+        width: 220px;
+    }
+
+    .CUS-EditSizeCurrentpage, .ReportSizeCurrentpage {
+        transition: width 0.5s ease, height 0.5s ease;
+        flex: 1;
+    }
+
+    .CUS-ReportSizeCurrentpage {
+        display: inline-block; /* This will ensure the divs are in a line */
+
+        height: 50px;
+        width: 220px;
+    }
+
+    .CUS-EditBookButton {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        height: 100%;
+        width: 100%;
+        color: white;
+        background-color: rgb(25, 26, 28);
+    }
+
+        .CUS-EditBookButton:hover, .CUS-ReportBookButton:hover {
+            background-color: #141414;
+            color: white;
+        }
+
+    .CUS-ReportBookButton {
+        padding: 10px;
+        background-color: red;
+        border: none;
+        cursor: pointer;
+        height: 100%;
+        width: 100%;
+        border: none;
+        color: white;
+        border-radius: 5px;
+    }
+
+    body.light-mode .CUS-tagsInsideInsideCurrentManga {
+        background-color: var(--tag-bg-light); /* Use light mode variable */
+    }
+
+    body.light-mode .CUS-MangaInputText {
+        background-color: var(--tag-bg-light); /* Use light mode variable */
+    }
+
+        body.light-mode .CUS-MangaInputText i {
+            color: var(--tag-bg-dark); /* Use light mode variable */
+        }
+
+    body.light-mode .ReviewTitle {
+        color: var(--tag-bg-dark); /* Use light mode variable */
+    }
+
+    body.light-mode .CUS-MangaInputText .colorstarCurrent {
+        color: yellow;
+    }
+
+    .ReviewTitle {
+        width: 100%;
+        height: 40px;
+        margin-left: 3px;
+        resize: none;
+        font-size: 18px;
+        --background-color: #191a1c;
+        color: white;
+        font-family: Lato !important;
+        border-color: #ff6740;
+        text-decoration: none !important;
+        outline: none;
+        border-radius: 10px;
+    }
+
+    .CUS-tagsInsideInsideCurrentManga {
+        background-color: var(--tag-bg-dark);
+        padding: 5px;
+        margin: 0;
+        border-radius: 3px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 15px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        min-width: 75px;
+        flex-shrink: 0;
+        border-radius: 5px;
+        min-width: 60px;
+        font-size: 12px
+    }
+
+    CUS-ShowTitleOnSmall {
+        display: none;
+    }
+
+    .CUS-DescriptionDiver {
+        width: 100%
+    }
+
+    .CUS-manga-title {
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        color: white;
+        -webkit-box-orient: vertical; /* To limit lines vertically */
+        position: absolute;
+        top: calc(20% - 40px);
+        left: calc(12% + 285px - 30px/2); /* Adjust this value based on your design requirements */
+        font-size: 30px;
+        overflow: hidden; /* Hide the overflowing text */
+        transition: top 0.5s, left 0.5s; /* Smooth transition for top and left */
+        -webkit-text-stroke: 0.5px black;
+        word-break: break-all;
+        height: 250px;
+    }
+
+    .CUS-Row3 {
+        display: flex;
+        justify-content: center;
+        align-items: baseline;
+    }
+
+    .CUS-Row3LeftSide,
+    .CUS-Row3RightSide {
+        min-width: 320px;
+        flex-grow: 1;
+    }
+
+        .CUS-Row3LeftSide label,
+        .CUS-Row3RightSide label {
+            display: block;
+            margin: 8px 0;
+        }
+
+    @media screen and (min-width: 769px) and (max-width: 849px) {
+        .CUS-commonParentContainer {
+            margin-left: 44% !important; /* Adjusted to move to the right by setting margin-left to 40% */
+            margin-right: 0; /* Reset margin-right to 0 */
+        }
+
+        .CUS-EditSizeCurrentpage {
+            margin-right: 5px;
+            width: 18%;
+        }
+
+        .CUS-ReportSizeCurrentpage {
+            width: 18%;
+        }
+    }
+
+    @media screen (max-width: 910px) {
+        .CUS-AddEditReportCurrentpage {
+            margin-left: 40% !important;
+            width: 70%;
+        }
+    }
+    /* Media queries for responsiveness */
+    @media (max-width: 1600px) {
+        .CUS-commonParentContainer {
+            margin-left: 27% !important; /* Adjusted to move to the right by setting margin-left: auto */
+            margin-right: 0; /* Reset margin-right to 0 */
+            width: 60% !important;
+        }
+    }
+
+    @media (max-width: 1800px) {
+        .CUS-commonParentContainer {
+            margin-left: 29% !important; /* Adjusted to move to the right by setting margin-left: auto */
+            margin-right: 0; /* Reset margin-right to 0 */
+        }
+
+        .CUS-AddEditReportCurrentpage {
+            margin-left: 30% !important;
+            width: 60%;
+        }
+    }
+
+    @media (max-width: 1200px) {
+        .CUS-commonParentContainer {
+            margin-left: 30% !important; /* Adjusted to move to the right by setting margin-left: auto */
+            margin-right: 0; /* Reset margin-right to 0 */
+        }
+
+        .CUS-manga-title {
+            top: calc(15% - 40px);
+            left: calc(17% + 180px ); /* Adjust these values for smaller screens */
+        }
+
+        .CUS-manga-img-container {
+            top: 18%;
+            left: 3%; /* Adjust these values for smaller screens */
+        }
+
+        .CUS-manga-img {
+            width: 280px;
+            height: 385px;
+            object-fit: cover; /* To maintain image aspect ratio */
+        }
+    }
+
+    @media (max-width: 1500px) {
+        .CUS-commonParentContainer {
+            margin-left: 32% !important; /* Adjusted to move to the right by setting margin-left: auto */
+            margin-right: 0; /* Reset margin-right to 0 */
+        }
+
+        .CUS-AddEditReportCurrentpage {
+            margin-left: 33.5% !important;
+        }
+    }
+
+    @media (max-width: 950px) {
+        .CUS-commonParentContainer {
+            margin-left: 35% !important;
+        }
+
+        .CUS-AddEditReportCurrentpage {
+            margin-left: 36% !important;
+            width: 45%;
+        }
+    }
+
+    @media (max-width: 868px) {
+        .CUS-AddEditReportCurrentpage {
+            margin-left: 42% !important;
+        }
+
+        .CUS-commonParentContainer {
+            margin-left: 41% !important;
+        }
+    }
+
+    @media (max-width: 754px) {
+        .CUS-commonParentContainer {
+            /* Adjust the width to occupy the full available width on smaller screens */
+            margin-left: 0 !important; /* Remove the left margin for better centering on smaller screens */
+            /* Add horizontal padding for spacing */
+            width: 100% !important;
+        }
+
+        .CUS-Content1Cost {
+            padding-right: 0% !important;
+            padding-left: 0% !important;
+            padding: 0;
+            padding-top: 1em !important;
+        }
+
+        .mangaDetailsBox {
+            padding: 0em;
+        }
+
+        .CUS-HideTitleCurrentMangaOnSmall {
+            display: none;
+        }
+
+        .CUS-AddEditReportCurrentpage {
+            margin-left: 1% !important;
+            width: 100% !important;
+        }
+
+        .CUS-ShowTitleOnSmall {
+            display: contents;
+        }
+
+        .Cus-TitleWhenSmallCurrentManga {
+            display: block;
+            width: 100%;
+            word-wrap: break-word;
+        }
+
+        .CUS-manga-title {
+            top: calc(15% - 40px) !important;
+            left: calc(5% + 140px) !important; /* Adjust these values for smaller screens */
+        }
+
+        .CUS-manga-img-container {
+            top: 15.5% !important;
+            left: 2% !important; /* Adjust these values for smaller screens */
+        }
+
+        .CUS-manga-img {
+            width: 150px !important; /* Adjust these values for smaller screens */
+            height: 220px !important; /* Adjust these values for smaller screens */
+        }
+
+        div::-webkit-scrollbar {
+            display: none !important;
+        }
+
+        .CUS-tagsInsideInsideCurrentManga {
+            /* Adjust the styles for smaller screens */
+            font-size: 14px;
+            padding: 3px;
+        }
+
+        CUS-EditSizeCurrentpage {
+            padding-right: 5px !important;
+        }
+
+        .CUS-EditBookButton,
+        .CUS-ReportBookButton {
+            width: 100% !important; /* Both equal and smaller compared to AddSizeCurrentpage */
+        }
+
+        .CUS-AddEditReportCurrentpage {
+            justify-content: space-between; /* Distribute items evenly */
+            letter-spacing: 0px !important;
+            width: 90%;
+        }
+    }
+
+    @media screen and (max-width: 768px) { /* Adjust the max-width as per your breakpoint for mobile or laptop screens */
+        .CUS-Row3 {
+            flex-direction: column;
+        }
+
+        .CUS-Row3LeftSide,
+        .CUS-Row3RightSide {
+            flex: 0 0 100%;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .CUS-ratingContainer {
+            flex-direction: column;
+        }
+
+        .CUS-RatingRightSide {
+            order: 1; /* Makes the right side come first */
+            width: 100%; /* Take full width */
+        }
+
+        .CUS-ratingLeftSide {
+            order: 2; /* Makes the left side come after the right side */
+            width: 100%; /* Take full width */
+
+            justify-content: center;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .CUS-CommonContainer {
+            flex-direction: column; /* Stack children vertically */
+        }
+
+        .CUS-LeftSide, .CUS-RightSide {
+            width: 100%; /* Full width for small screens */
+        }
+    }
 }
