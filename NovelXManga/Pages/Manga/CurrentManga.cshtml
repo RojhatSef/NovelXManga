@@ -927,6 +927,32 @@
             }
             
         </div>
+                @if (Model.CurrentManga.relatedSeries.Count <= 1)
+                {
+                    <div class="CUS-mangaDetailsBox">
+                        @foreach (var relatedManga in Model.CurrentManga.relatedSeries.Take(5))
+                        {
+
+
+
+                            <div class="CUS-GridItem">
+                                <a asp-page="/Manga/CurrentManga" asp-route-id="@relatedManga.MangaID">
+                                    <img class="GridImage" src="~/Images/GeneratedMangaImage/@relatedManga.PhotoPath"   />
+                                </a>
+                                <div class="CUS-MangaInputText">
+                                    <a asp-page="/Manga/CurrentManga" asp-route-id="@relatedManga.MangaID">
+                                        <input type="hidden" name="characters" value="@relatedManga.MangaID" />
+                                        <p>@relatedManga.MangaName</p>
+                                    </a>
+                                </div>
+                            </div>
+
+
+                        }
+                        
+                        
+                    </div>
+                }
           @if (Model.CurrentManga.OverAllBookScore != null)
         {
         <div class="CUS-mangaDetailsBox">

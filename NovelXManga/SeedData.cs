@@ -558,6 +558,7 @@ namespace NovelXManga
 
                 AddBerserk();
                 CreateNaruto();
+                CreateBuroto();
                 CreateDeathNote();
                 CreateHarryPotter();
                 CreateFullMetal();
@@ -575,11 +576,64 @@ namespace NovelXManga
                 DonQuiXote();
                 RelatedManga();
                 UltraLongBOokTester();
+                CreateRelated();
                 await ReviewSeed();
             }
         }
 
         #endregion SeedData
+
+        public void CreateRelated()
+        {
+            var Naruto = context.mangaModels
+                .Include(m => m.relatedSeries)
+                .Include(m => m.Characters)
+                .FirstOrDefault(n => n.MangaName == "Naruto");
+
+            var Boruto = context.mangaModels
+                .Include(m => m.relatedSeries)
+                .Include(m => m.Characters)
+                .FirstOrDefault(n => n.MangaName == "Boruto");
+
+            var CharBoruto = context.Characters
+                .Include(c => c.MangaModels)
+                .FirstOrDefault(c => c.CharacterName == "Uzumaki Boruto");
+
+            if (Naruto != null && Boruto != null)
+            {
+                if (Naruto.relatedSeries == null)
+                {
+                    Naruto.relatedSeries = new List<MangaModel>();
+                }
+                if (!Naruto.relatedSeries.Contains(Boruto))
+                {
+                    Naruto.relatedSeries.Add(Boruto);
+                }
+
+                if (Boruto.relatedSeries == null)
+                {
+                    Boruto.relatedSeries = new List<MangaModel>();
+                }
+                if (!Boruto.relatedSeries.Contains(Naruto))
+                {
+                    Boruto.relatedSeries.Add(Naruto);
+                }
+
+                if (CharBoruto != null)
+                {
+                    if (!CharBoruto.MangaModels.Any(m => m.MangaID == Naruto.MangaID))
+                    {
+                        CharBoruto.MangaModels.Add(Naruto);
+                    }
+                    if (!CharBoruto.MangaModels.Any(m => m.MangaID == Boruto.MangaID))
+                    {
+                        CharBoruto.MangaModels.Add(Boruto);
+                    }
+                }
+
+                context.SaveChanges();
+            }
+        }
 
         public void AddBerserk()
         {
@@ -998,6 +1052,107 @@ new VoiceActorModel { FirstName = "Yuko ", LastName = "Miyamura", Gender="Female
                 },
             };
             context.mangaModels.Add(MangaNaruto);
+            context.SaveChanges();
+        }
+
+        public void CreateBuroto()
+        {
+            var Tag1ToManga1 = context.TagModels.FirstOrDefault(t => t.TagName == "Ninja");
+            var Tag2ToManga1 = context.TagModels.FirstOrDefault(t => t.TagName == "Adapted to Anime");
+            var Gen1ToManga1 = context.GenresModels.FirstOrDefault(t => t.GenreName == "Action");
+            var Gen2ToManga1 = context.GenresModels.FirstOrDefault(t => t.GenreName == "Adventure");
+            var NarutoRelated = context.mangaModels.FirstOrDefault(t => t.MangaName == "Naruto");
+            var Author = context.authorModels.FirstOrDefault(a => a.FirstName == "Masashi" && a.LastName == "Kishimoto");
+            var NarutoCharacter = context.Characters.FirstOrDefault(c => c.CharacterName == "Uzumaki Naruto");
+            //first
+            DateTime myDate = DateTime.ParseExact("1991-05-08", "yyyy-MM-dd",
+                                     System.Globalization.CultureInfo.InvariantCulture);
+            DateTime started = DateTime.ParseExact("1979-05-08", "yyyy-MM-dd",
+                                  System.Globalization.CultureInfo.InvariantCulture);
+            MangaModel MangaBoruto = new MangaModel
+            {
+                MangaName = "Boruto",
+
+                PhotoPath = Path.Combine(ProcessUploadedFile("Boruto.jpg")),
+                ReleaseYear = myDate,
+                BlogModel = new BlogModel { mangaName = "Boruto" },
+                Description = "A Kid who carries on his father's legacy",
+                CompletelyTranslated = "Ongoing",
+                OfficalLanguage = "Japanese",
+                ISBN10 = "142158493X",
+                ISBN13 = "978-1421584935",
+
+                relatedSeries = new List<MangaModel> { NarutoRelated },
+                EndingYear = null, // Assuming ongoing
+                StatusInCountryOfOrigin = "Ongoing",
+                Type = "Manga",
+                StudioModels = new List<StudioModel> { new StudioModel { GroupName = "Pierrot", Started = started, StudioWebsite = "https://en.pierrot.jp/", Biography = "Pierrot Co., Ltd. is a Japanese animation studio." } },
+                OriginalPublisher = "Shueisha",
+                orignalWebtoon = "N/A",
+                AllLanguages = new List<Languages> { JapaneseLanguage, EnglishLanguage },
+                BuyPages = new List<BuyPage> {
+      new BuyPage { BuyWebsite = "https://www.amazon.com/Boruto-Vol-1-Naruto-Generations/dp/142158493X", _Languages = new List<Languages> { EnglishLanguage } },
+      new BuyPage { BuyWebsite = "https://www.amazon.co.jp/-/en/Ukyo-Kodachi/dp/4088807230", _Languages = new List<Languages> { JapaneseLanguage } },
+    },
+
+                AssociatedNames = new List<AssociatedNames>
+    {
+        new AssociatedNames { nameString = "Boruto: Naruto Next Generations" },
+    },
+                OfficalWebsites = new List<OfficalWebsite>
+    {
+        new OfficalWebsite { OfficalWebsiteString = "https://boruto-official.com", OfficalWebsiteName = "Boruto-Official", Twitter = "https://twitter.com/BORUTO_info", Facebook = "https://www.facebook.com/BorutoOfficial", Line = "N/A" },
+    },
+                Authormodels = new List<AuthorModel>
+    {
+       { Author },
+    },
+                ArtistModels = new List<ArtistModel>
+    {
+        new ArtistModel { FirstName = "Mikio", LastName = "Ikemoto", Biography = "Apprentice of Masashi Kishimoto, illustrator of Boruto." },
+    },
+                VoiceActors = new List<VoiceActorModel>
+    {
+        new VoiceActorModel { FirstName = "Yuko", LastName = "Sanpei" },
+        new VoiceActorModel { FirstName = "Kokoro", LastName = "Kikuchi" },
+    },
+                GenresModels = new List<GenresModel>
+    {
+        Gen1ToManga1, Gen2ToManga1
+    },
+                TagsModels = new List<TagModel>
+    {
+        Tag1ToManga1, Tag2ToManga1
+    },
+                Characters = new List<Character>
+    {
+        new Character
+        {
+            CharacterName = "Uzumaki Boruto",
+            specie = "Human",
+            Gender = "Male",
+            Born = "March 27",
+            PlaceOffResidence = "Konoha",
+            World = "Naruto",
+            Background ="",
+            Family = new List<Character> {NarutoCharacter },
+
+            Nationality = "Japanese",
+            Education = "Genin",
+            Occupation = "Ninja",
+            PhotoPath = Path.Combine(CharacterProcessUploadedFile("boruto.jpg")),
+            Personality = "Energetic, Rebellious, Talented",
+            FamousQuote = "I'm not going to choose the path my parents walked. I'm going to choose the path I walk!",
+            EyeColor = "Blue",
+            HairColor = "Blonde",
+            Hobbies = "Video games, Training",
+            Likes = "His friends, Adventures",
+            Dislikes = "Being compared to his father, Cheating",
+            PersonalityTraits = "Confident, Spirited, Independent"
+        },
+    },
+            };
+            context.mangaModels.Add(MangaBoruto);
             context.SaveChanges();
         }
 

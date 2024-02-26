@@ -1,4 +1,131 @@
 ﻿@page
 @model NovelXManga.Pages.Artist.CurrentArtistModel
+@inject UserManager<UserModel> UserManager
+@inject SignInManager<UserModel> SignInManager
 @{
+    var user = await UserManager.GetUserAsync(User);
+    var UpdaterUser = user != null && await UserManager.IsInRoleAsync(user, "NormalUser");
+
 }
+<link rel="stylesheet" href="~/css/CurrentCharacter.css" asp-append-version="true" />
+
+
+<div class="CUS-Content1Ex">
+
+
+    <div class="CUS-card-ex">
+        <div class="CUS-card-image-ex">
+            <div class="CUS-blurredbackground ">
+                  @if (!string.IsNullOrEmpty(Model.CurrentArtist.PhotoPath))
+                {
+                    <img class="CUS-BoxImage CUS-blurimage" src="/Images/GeneratedArtistImages/"@Model.CurrentArtist.PhotoPath />
+                }
+                else
+                {
+                    <img class="CUS-BoxImage CUS-blurimage" src="~/Images/ArtistImage/NoPhoto.png" alt="No Artist Image Available">
+                }
+            </div>
+
+            <div class="CUS-manga-img-container">
+                <!-- Manga image goes here -->
+                @if (!string.IsNullOrEmpty(Model.CurrentArtist.PhotoPath))
+                {
+                    <div>
+                        @if (UpdaterUser)
+                        {
+                            <a asp-page="/MangaUpdates/UpdatePhoto" asp-route-id="@Model.CurrentArtist.ArtistId">
+                                <img class="CUS-manga-img" asp-append-version="true" src="~/Images/GeneratedArtistImages/@Model.CurrentArtist.PhotoPath" alt= src="~/Images/AuthorImage/NoPhoto.png">
+                            </a>
+                        }
+                        else
+                        {
+                            <img class="CUS-manga-img" asp-append-version="true" src="~/Images/GeneratedArtistImages/@Model.CurrentArtist.PhotoPath" alt= src="~/Images/AuthorImage/NoPhoto.png">
+                        }
+
+                    </div>
+                }
+                else
+                {
+                    <img class="CUS-manga-img" src="~/Images/ArtistImage/NoPhoto.png" alt="No Author Image Available">
+                }
+            </div>
+            <div class="CUS-manga-title CUS-HideTitleCurrentMangaOnSmall">
+                <!-- Manga title goes here -->
+                @if (@Model.CurrentArtist.FirstName != null && @Model.CurrentArtist.LastName != null)
+                {
+                    <h1 class="">@Model.CurrentArtist.FirstName @Model.CurrentArtist.LastName</h1>
+                }
+                else if (@Model.CurrentArtist.FirstName != null)
+                {
+                    <h1 class="">@Model.CurrentArtist.FirstName</h1>
+                }
+                else
+                {
+                    
+                }
+            </div>
+
+
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="CUS-Content1Cost">
+    <div class="CUS-commonParentContainer">
+    </div>
+
+</div>
+<div class="CUS-mangaDetailsWrapper">
+    <div class="CUS-MangaDetaiDescription CUS-bookdescription">
+
+
+        <div class="CUS-MangaDescriptionContainerInput">
+
+            @if (Model.CurrentArtist.Biography != null)
+            {
+                @if (UpdaterUser)
+                {
+
+                    <a asp-page="/MangaUpdates/UpdateCharacter" asp-route-id="@Model.CurrentArtist.ArtistId">
+                        @Model.CurrentArtist.Biography
+
+                    </a>
+
+                }
+                else
+                {
+
+                    @Model.CurrentArtist.Biography
+                }
+            }
+            else
+            {
+                @if (UpdaterUser)
+                {
+
+                    <a asp-page="/MangaUpdates/UpdateCharacter" asp-route-id="@Model.CurrentArtist.ArtistId">
+                        <div class="CUS-MangaInputText"> <p> N/A Please update data</p></div>
+                    </a>
+                }
+                else
+                {
+
+                }
+
+
+            }
+
+
+        </div>
+
+    </div>
+    <hr / class="CUS-DescriptionDiver">
+    <div class="CUS-LeftSide">
+        <div class="CUS-LeftSidemangaDetailsBox">
+        </div>
+    </div>
+    <div class="CUS-RightSide"></div>
+</div>
