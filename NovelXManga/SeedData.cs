@@ -585,54 +585,138 @@ namespace NovelXManga
 
         public void CreateRelated()
         {
+            var CharBoruto = context.Characters
+                        .Include(c => c.MangaModels)
+                        .FirstOrDefault(c => c.CharacterName == "Uzumaki Boruto");
+            var NarutoChar = context.Characters.FirstOrDefault(e => e.CharacterName == "Uzumaki Naruto");
+
+            var Uchia = context.Characters.FirstOrDefault(e => e.CharacterName == "Uchiha Sasuke");
+            var Kakashi = context.Characters.FirstOrDefault(e => e.CharacterName == "Hatake Kakashi");
+            var Sakura = context.Characters.FirstOrDefault(e => e.CharacterName == "Haruno Sakura");
+            var Guts = context.Characters.FirstOrDefault(e => e.CharacterName == "Guts");
+            var Griffith = context.Characters.FirstOrDefault(e => e.CharacterName == "Griffith");
+            var Casca = context.Characters.FirstOrDefault(e => e.CharacterName == "Casca");
+            var Puck = context.Characters.FirstOrDefault(e => e.CharacterName == "Puck");
+            var Zodd = context.Characters.FirstOrDefault(e => e.CharacterName == "Zodd the Immortal");
+            var Luffy = context.Characters.FirstOrDefault(e => e.CharacterName == "Monkey D. Luffy");
+            var Ace = context.Characters.FirstOrDefault(e => e.CharacterName == "Portgas D. Ace");
+            var Newgate = context.Characters.FirstOrDefault(e => e.CharacterName == "Edward Newgate (Whitebeard)");
+            var Edward = context.Characters.FirstOrDefault(e => e.CharacterName == "Edward Elric");
+            var Alphonse = context.Characters.FirstOrDefault(e => e.CharacterName == "Alphonse Elric");
+            var Winry = context.Characters.FirstOrDefault(e => e.CharacterName == "Winry Rockbell");
+            var eren = context.Characters.FirstOrDefault(e => e.CharacterName == "Eren Yeager");
+            var Mikasa = context.Characters.FirstOrDefault(e => e.CharacterName == "Mikasa Ackerman");
+            var Ichigo = context.Characters.FirstOrDefault(e => e.CharacterName == "Ichigo Kurosaki");
+            var Orihime = context.Characters.FirstOrDefault(e => e.CharacterName == "Orihime Inoue");
+            var Kudo = context.Characters.FirstOrDefault(e => e.CharacterName == "Shinichi Kudo (Conan Edogawa)");
+            var CharConan = context.Characters.FirstOrDefault(e => e.CharacterName == "Conan Edogawa (Shinichi Kudo)");
+
             var Naruto = context.mangaModels
                 .Include(m => m.relatedSeries)
                 .Include(m => m.Characters)
+                .Include(r => r.RecommendedMangaModels)
                 .FirstOrDefault(n => n.MangaName == "Naruto");
+
+            var Berserk = context.mangaModels
+               .Include(m => m.relatedSeries)
+               .Include(m => m.Characters)
+               .Include(r => r.RecommendedMangaModels)
+               .FirstOrDefault(n => n.MangaName == "Berserk");
+            var OnePiece = context.mangaModels
+          .Include(m => m.relatedSeries)
+          .Include(m => m.Characters)
+          .Include(r => r.RecommendedMangaModels)
+          .FirstOrDefault(n => n.MangaName == "One Piece");
+
+            var FullMetal = context.mangaModels
+   .Include(m => m.relatedSeries)
+   .Include(m => m.Characters)
+   .Include(r => r.RecommendedMangaModels)
+   .FirstOrDefault(n => n.MangaName == "Fullmetal Alchemist");
+            var Conan = context.mangaModels
+   .Include(m => m.relatedSeries)
+   .Include(m => m.Characters)
+   .Include(r => r.RecommendedMangaModels)
+   .FirstOrDefault(n => n.MangaName == "Detective Conan");
+            var Bleach = context.mangaModels
+   .Include(m => m.relatedSeries)
+   .Include(m => m.Characters)
+   .Include(r => r.RecommendedMangaModels)
+   .FirstOrDefault(n => n.MangaName == "Bleach");
+            var Titan = context.mangaModels
+.Include(m => m.relatedSeries)
+.Include(m => m.Characters)
+.Include(r => r.RecommendedMangaModels)
+.FirstOrDefault(n => n.MangaName == "Attack on Titan");
 
             var Boruto = context.mangaModels
                 .Include(m => m.relatedSeries)
                 .Include(m => m.Characters)
+                 .Include(r => r.RecommendedMangaModels)
                 .FirstOrDefault(n => n.MangaName == "Boruto");
 
-            var CharBoruto = context.Characters
-                .Include(c => c.MangaModels)
-                .FirstOrDefault(c => c.CharacterName == "Uzumaki Boruto");
+            var Solo = context.mangaModels
+.Include(m => m.relatedSeries)
+.Include(m => m.Characters)
+.Include(r => r.RecommendedMangaModels)
+.FirstOrDefault(n => n.MangaName == "Solo Leveling");
+            var Testbook = context.mangaModels
+.Include(m => m.relatedSeries)
+.Include(m => m.Characters)
+.Include(r => r.RecommendedMangaModels)
+.FirstOrDefault(n => n.MangaName == "ThisIsACharacterTestToCheckIfATitleCouldbeLongerThanItShouldBePossibleToViewWhenWatchingThisFromANormalUsersperspectiveNowIamJustWritingThisFortheFunOfItHoweverItsEssentialThatThisTitleIsWorkingAsIntendedLaterOnWhenIseeThisKindOfCrappyLongTittlesInBookSIfThisHappensWeNeedSomething");
+            var Death = context.mangaModels
+       .Include(m => m.relatedSeries)
+       .Include(m => m.Characters)
+       .Include(r => r.RecommendedMangaModels)
+       .FirstOrDefault(n => n.MangaName == "Death Note");
 
-            if (Naruto != null && Boruto != null)
-            {
-                if (Naruto.relatedSeries == null)
-                {
-                    Naruto.relatedSeries = new List<MangaModel>();
-                }
-                if (!Naruto.relatedSeries.Contains(Boruto))
-                {
-                    Naruto.relatedSeries.Add(Boruto);
-                }
+            var Hero = context.mangaModels
+       .Include(m => m.relatedSeries)
+       .Include(m => m.Characters)
+       .Include(r => r.RecommendedMangaModels)
+       .FirstOrDefault(n => n.MangaName == "My Hero Academia");
+            var Air = context.mangaModels
+       .Include(m => m.relatedSeries)
+       .Include(m => m.Characters)
+       .Include(r => r.RecommendedMangaModels)
+       .FirstOrDefault(n => n.MangaName == "Air Gear");
 
-                if (Boruto.relatedSeries == null)
-                {
-                    Boruto.relatedSeries = new List<MangaModel>();
-                }
-                if (!Boruto.relatedSeries.Contains(Naruto))
-                {
-                    Boruto.relatedSeries.Add(Naruto);
-                }
+            Naruto.relatedSeries = new List<MangaModel> { Boruto, Testbook };
+            Testbook.relatedSeries = new List<MangaModel> { Conan, OnePiece, Bleach, FullMetal, Berserk, Titan, Boruto, Death, Hero, Air, Solo };
+            Naruto.RecommendedMangaModels = new List<MangaModel> { OnePiece, Bleach, FullMetal, Berserk, Titan, Boruto, Testbook };
+            Berserk.RecommendedMangaModels = new List<MangaModel> { Naruto, FullMetal, Titan };
+            OnePiece.RecommendedMangaModels = new List<MangaModel> { Bleach, FullMetal, Berserk, Titan, Boruto };
+            Testbook.RecommendedMangaModels = new List<MangaModel> { Conan, OnePiece, Bleach, FullMetal, Berserk, Titan, Boruto, Death, Hero, Air, Solo };
+            FullMetal.RecommendedMangaModels = new List<MangaModel> { Naruto, Titan, Air, Hero, Solo };
+            Conan.RecommendedMangaModels = new List<MangaModel> { Death };
+            Air.RecommendedMangaModels = new List<MangaModel> { FullMetal, Naruto };
 
-                if (CharBoruto != null)
-                {
-                    if (!CharBoruto.MangaModels.Any(m => m.MangaID == Naruto.MangaID))
-                    {
-                        CharBoruto.MangaModels.Add(Naruto);
-                    }
-                    if (!CharBoruto.MangaModels.Any(m => m.MangaID == Boruto.MangaID))
-                    {
-                        CharBoruto.MangaModels.Add(Boruto);
-                    }
-                }
+            Solo.RecommendedMangaModels = new List<MangaModel> { Death, Berserk, Hero, Bleach, FullMetal };
+            Bleach.RecommendedMangaModels = new List<MangaModel> { Naruto, Hero, Solo, Air, FullMetal };
+            Titan.RecommendedMangaModels = new List<MangaModel> { Naruto, Berserk, Death, Solo };
+            NarutoChar.Family = new List<Character> { CharBoruto };
+            Uchia.Family = new List<Character> { Sakura };
+            Sakura.Family = new List<Character> { Uchia };
+            Guts.Family = new List<Character> { Casca, Puck };
+            Casca.Family = new List<Character> { Guts };
+            Griffith.Family = new List<Character> { Zodd };
+            Puck.Family = new List<Character> { Guts };
+            Zodd.Family = new List<Character> { Griffith };
+            Luffy.Family = new List<Character> { Ace, Newgate };
+            Newgate.Family = new List<Character> { Ace };
+            Ace.Family = new List<Character> { Luffy, Newgate };
+            Alphonse.Family = new List<Character> { Edward, Winry };
+            Winry.Family = new List<Character> { Alphonse, Edward };
+            Edward.Family = new List<Character> { Alphonse, Winry };
+            eren.Family = new List<Character> { Mikasa };
+            Mikasa.Family = new List<Character> { eren };
+            Ichigo.Family = new List<Character> { Orihime };
+            Orihime.Family = new List<Character> { Ichigo };
+            Kudo.Family = new List<Character> { CharConan };
+            CharConan.Family = new List<Character> { Kudo };
 
-                context.SaveChanges();
-            }
+            context.SaveChanges();
         }
 
         public void AddBerserk()

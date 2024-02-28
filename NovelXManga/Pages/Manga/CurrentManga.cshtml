@@ -869,8 +869,8 @@
             <div class="CUS-RightSide">     
                 <div class="CUS-mangaDetailsBox">
 
-         
 
+                    <h1> Characters: </h1>
             <div class="GridWrapper">
                 @if (Model.CurrentManga2.Characters != null || Model.CurrentManga2.Characters.Count <= 1)
                 {
@@ -927,9 +927,11 @@
             }
             
         </div>
-                @if (Model.CurrentManga.relatedSeries.Count <= 1)
+                @if (Model.CurrentManga.relatedSeries.Count >= 1)
                 {
                     <div class="CUS-mangaDetailsBox">
+                        <h1> Related Books:</h1>
+                        <div class="GridWrapper">
                         @foreach (var relatedManga in Model.CurrentManga.relatedSeries.Take(5))
                         {
 
@@ -950,7 +952,7 @@
 
                         }
                         
-                        
+                        </div>
                     </div>
                 }
           @if (Model.CurrentManga.OverAllBookScore != null)
