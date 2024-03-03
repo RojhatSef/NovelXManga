@@ -21,7 +21,10 @@ namespace MangaModelService
         public string? Biography { get; set; }
         public string? NameInNative { get; set; }
         public string? WikiPedia { get; set; }
+
+        // Missing data Icollection of Character
         public virtual ICollection<AssociatedNames>? AssociatedNames { get; set; }
+
         public int? AmountOfWork { get; set; }
         public string? WorkingAt { get; set; }
         public DateTime? LastUpdate { get; set; }

@@ -34,7 +34,11 @@ namespace MangaModelService
         public string? Likes { get; set; }
         public string? PersonalityTraits { get; set; }
         public bool isChecked { get; set; }
+
+        // Missing data Icollection of Artist/Author/Voice Actor. When pressing a character
+        // the user should be able to see who drew this character, who voice acted, and who wrote it.
         public virtual ICollection<OfficalWebsite>? OfficalWebsites { get; set; }
+
         public virtual ICollection<Character>? Partner_s { get; set; }
         public virtual ICollection<Character>? Family { get; set; }
 

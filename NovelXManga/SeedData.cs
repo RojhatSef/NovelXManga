@@ -611,6 +611,11 @@ namespace NovelXManga
             var Kudo = context.Characters.FirstOrDefault(e => e.CharacterName == "Shinichi Kudo (Conan Edogawa)");
             var CharConan = context.Characters.FirstOrDefault(e => e.CharacterName == "Conan Edogawa (Shinichi Kudo)");
 
+            var AuthorFullmetal = context.authorModels.FirstOrDefault(e => e.FirstName == "Hiromu");
+            var AuthorDeathNote = context.authorModels.FirstOrDefault(e => e.FirstName == "Tsugumi");
+            var AuthorNaruto = context.authorModels.FirstOrDefault(e => e.FirstName == "");
+            var AuthorBoruto = context.authorModels.FirstOrDefault(e => e.FirstName == "");
+            var AuthorBerserk = context.authorModels.FirstOrDefault(e => e.FirstName == "");
             var Naruto = context.mangaModels
                 .Include(m => m.relatedSeries)
                 .Include(m => m.Characters)
@@ -682,6 +687,8 @@ namespace NovelXManga
        .Include(r => r.RecommendedMangaModels)
        .FirstOrDefault(n => n.MangaName == "Air Gear");
 
+            AuthorFullmetal.MangaModels = new List<MangaModel> { FullMetal };
+            AuthorDeathNote.MangaModels = new List<MangaModel> { Death };
             Naruto.relatedSeries = new List<MangaModel> { Boruto, Testbook };
             Testbook.relatedSeries = new List<MangaModel> { Conan, OnePiece, Bleach, FullMetal, Berserk, Titan, Boruto, Death, Hero, Air, Solo };
             Naruto.RecommendedMangaModels = new List<MangaModel> { OnePiece, Bleach, FullMetal, Berserk, Titan, Boruto, Testbook };
@@ -768,19 +775,101 @@ new OfficalWebsite { OfficalWebsiteString = "https://www.younganimal.com/magazin
 },
                 Authormodels = new List<AuthorModel>
 {
-new AuthorModel { FirstName = "Kentaro", LastName = "Miura" },
+    new AuthorModel
+    {
+        FirstName = "Kentaro",
+        LastName = "Miura",
+        Biography = "Renowned manga artist best known for creating the epic dark fantasy series Berserk.",
+        BirthPlace = "Chiba, Japan",
+        Gender = "Male",
+        AuthorBorn = new DateTime(1966, 7, 11),
+        AuthorDeath = new DateTime(2021, 5, 6),
+        AmountOfWork = 1, // Assuming Berserk as the primary work
+        WorkingAt = "Hakusensha",
+        Twitter = null,
+        reddit = null,
+        WikiPedia = "https://en.wikipedia.org/wiki/Kentaro_Miura",
+    }
 },
+
                 ArtistModels = new List<ArtistModel>
 {
-new ArtistModel { FirstName = "Kentaro", LastName = "Miura" },
+    new ArtistModel
+    {
+        FirstName = "Kentaro",
+        LastName = "Miura",
+        Biography = "Kentaro Miura was a Japanese manga artist, best known for his magnum opus Berserk, which started serialization in 1989 and continued until his death in 2021.",
+        BirthPlace = "Chiba, Japan",
+        Gender = "Male",
+        ArtistBorn = new DateTime(1966, 7, 11),
+        ArtistDeath = new DateTime(2021, 5, 6),
+        AmountOfWork = 1, // Assuming Berserk as the primary work
+        WorkingAt = "Hakusensha",
+        Twitter = null,
+        reddit = null,
+        WikiPedia = "https://en.wikipedia.org/wiki/Kentaro_Miura",
+    }
 },
 
                 VoiceActors = new List<VoiceActorModel>
 {
-new VoiceActorModel { FirstName = "Canna", LastName = "Nobutoshi", Gender = "Male" },
-new VoiceActorModel { FirstName = "Kenji",LastName="Utsumi", Gender = "Male" },
-new VoiceActorModel { FirstName = "Toshiyuki",LastName = "Morikawa",  Gender = "Male" },
-new VoiceActorModel { FirstName = "Yuko ", LastName = "Miyamura", Gender="Female" },
+    new VoiceActorModel
+    {
+        FirstName = "Canna",
+        LastName = "Nobutoshi",
+        Gender = "Male",
+        Biography = "A Japanese voice actor known for his versatile roles in anime and video games.",
+        BirthPlace = "Tokyo, Japan",
+        VoiceBorn = new DateTime(1968, 6, 10),
+        Twitter = "@CannaNobutoshi",
+        reddit = null,
+        WikiPedia = "https://en.wikipedia.org/wiki/Nobutoshi_Canna",
+        AmountOfWork = 100,
+        WorkingAt = "Freelance",
+    },
+    new VoiceActorModel
+    {
+        FirstName = "Kenji",
+        LastName = "Utsumi",
+        Gender = "Male",
+        Biography = "Late Japanese voice actor renowned for his deep, powerful voice and iconic roles.",
+        BirthPlace = "Kitakyushu, Japan",
+        VoiceBorn = new DateTime(1937, 8, 26),
+        VoiceDeath = new DateTime(2013, 6, 13),
+        Twitter = null,
+        reddit = null,
+        WikiPedia = "https://en.wikipedia.org/wiki/Kenji_Utsumi",
+        AmountOfWork = 150,
+        WorkingAt = "Aoni Production",
+    },
+    new VoiceActorModel
+    {
+        FirstName = "Toshiyuki",
+        LastName = "Morikawa",
+        Gender = "Male",
+        Biography = "A prominent Japanese voice actor known for his roles in major anime series and films.",
+        BirthPlace = "Kawasaki, Kanagawa, Japan",
+        VoiceBorn = new DateTime(1967, 1, 26),
+        Twitter = "@ToshiyukiMorikawa",
+        reddit = null,
+        WikiPedia = "https://en.wikipedia.org/wiki/Toshiyuki_Morikawa",
+        AmountOfWork = 200,
+        WorkingAt = "Freelance",
+    },
+    new VoiceActorModel
+    {
+        FirstName = "Yuko",
+        LastName = "Miyamura",
+        Gender = "Female",
+        Biography = "A Japanese actress, voice actress, and singer, known for her work in anime and video games.",
+        BirthPlace = "Kobe, Hyogo, Japan",
+        VoiceBorn = new DateTime(1972, 12, 4),
+        Twitter = "@YukoMiyamura",
+        reddit = null,
+        WikiPedia = "https://en.wikipedia.org/wiki/Yūko_Miyamura",
+        AmountOfWork = 120,
+        WorkingAt = "Freelance",
+    },
 },
                 GenresModels = new List<GenresModel>
                 {
@@ -1444,17 +1533,17 @@ Facebook = "https://www.facebook.com/deathnote.official", Instagram = "https://w
 },
                 Authormodels = new List<AuthorModel>
 {
-new AuthorModel { FirstName = "Tsugumi ", LastName = "Ohba", Biography = "Unknown" },
+  new AuthorModel { FirstName = "Tsugumi", LastName = "Ohba", Biography = "Japanese manga artist best known for the manga series Death Note" },
 },
                 ArtistModels = new List<ArtistModel>
 {
-new ArtistModel { FirstName = "Takeshi ", LastName = "Obata", Biography = "Graduated from the Graphic Design Program at Nagoya University of Arts" },
+ new ArtistModel { FirstName = "Takeshi", LastName = "Obata", Biography = "Japanese manga artist known for his work on Death Note, Hikaru no Go, and Bakuman", Gender = "Male", BirthPlace = "Niigata, Japan", ArtistBorn = new DateTime(1969, 2, 11) },
 },
                 VoiceActors = new List<VoiceActorModel>
 {
-new VoiceActorModel { FirstName = "Miyano Mamoru" },
-new VoiceActorModel { FirstName = "Miyuki Sawashiro" },
-new VoiceActorModel { FirstName = "Kappei Yamaguchi" },
+  new VoiceActorModel { FirstName = "Mamoru", LastName = "Miyano", Biography = "Japanese actor, voice actor, and singer", Gender = "Male", BirthPlace = "Saitama, Japan", VoiceBorn = new DateTime(1983, 6, 8), Twitter = "@miyanomamoru_PR" },
+    new VoiceActorModel { FirstName = "Miyuki", LastName = "Sawashiro", Biography = "Japanese voice actress and singer", Gender = "Female", BirthPlace = "Tokyo, Japan", VoiceBorn = new DateTime(1985, 6, 2), Twitter = "@sawashiro_staff" },
+    new VoiceActorModel { FirstName = "Kappei", LastName = "Yamaguchi", Biography = "Japanese voice actor and actor", Gender = "Male", BirthPlace = "Fukuoka, Japan", VoiceBorn = new DateTime(1965, 5, 23), Twitter = "@ENma_Dororon" },
 },
                 GenresModels = new List<GenresModel>
 {
@@ -1568,17 +1657,17 @@ new Character {
                 },
                 Authormodels = new List<AuthorModel>
                 {
-                new AuthorModel { FirstName = "Hiromu Arakawa" },
+                new AuthorModel { FirstName = "Hiromu", LastName = "Arakawa", Biography = "Known for Fullmetal Alchemist and Silver Spoon.", BirthPlace = "Tokachi, Hokkaido, Japan", AuthorBorn = new DateTime(1973, 5, 8) },
                 },
                 ArtistModels = new List<ArtistModel>
                 {
-                new ArtistModel { FirstName = "Hiromu Arakawa" },
+                new ArtistModel { FirstName = "Hiromu", LastName = "Arakawa", Biography = "Famous for her work on Fullmetal Alchemist.", BirthPlace = "Tokachi, Hokkaido, Japan", ArtistBorn = new DateTime(1973, 5, 8) },
                 },
                 VoiceActors = new List<VoiceActorModel>
                 {
-                new VoiceActorModel { FirstName = "Romi Park" },
-                new VoiceActorModel { FirstName = "Rie Kugimiya" },
-                new VoiceActorModel { FirstName = "Vic Mignogna" },
+                 new VoiceActorModel { FirstName = "Romi", LastName = "Park", Biography = "Best known for voicing Edward Elric in Fullmetal Alchemist.", BirthPlace = "Edogawa, Tokyo, Japan", VoiceBorn = new DateTime(1972, 1, 22) },
+    new VoiceActorModel { FirstName = "Rie", LastName = "Kugimiya", Biography = "Famous for voicing Alphonse Elric in Fullmetal Alchemist and Happy in Fairy Tail.", BirthPlace = "Kumamoto, Japan", VoiceBorn = new DateTime(1979, 5, 30) },
+    new VoiceActorModel { FirstName = "Vic", LastName = "Mignogna", Biography = "Known for his English voice work as Edward Elric in Fullmetal Alchemist.", BirthPlace = "Greensburg, Pennsylvania, USA", VoiceBorn = new DateTime(1962, 8, 27) },
                 },
                 GenresModels = new List<GenresModel>
                 {

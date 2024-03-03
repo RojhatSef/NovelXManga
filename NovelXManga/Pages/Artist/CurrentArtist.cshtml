@@ -125,7 +125,71 @@
     <hr / class="CUS-DescriptionDiver">
     <div class="CUS-LeftSide">
         <div class="CUS-LeftSidemangaDetailsBox">
+            @if (Model.CurrentArtist.Twitter != null)
+            {
+                <h3>Twitter</h3>
+                @if (UpdaterUser)
+                {
+                    <div class="CUS-MangaInputText">
+                        <a asp-page="/MangaUpdates/UpdateDescription" asp-route-id="@Model.CurrentArtist.ArtistId">
+                            Twitter: @Model.CurrentArtist.Twitter
+                        </a>
+                    </div>
+                }
+                else
+                {
+                    <div class="CUS-MangaInputText">
+                        Twitter: @Model.CurrentArtist.Twitter
+
+                    </div>
+                }
+            }
+          
+        </div>
+        <div class="CUS-LeftSidemangaDetailsBox">
+            @if (Model.CurrentArtist.Twitter != null)
+            {
+                <h3>Twitter</h3>
+                @if (UpdaterUser)
+                {
+                    <div class="CUS-MangaInputText">
+                        <a asp-page="/MangaUpdates/UpdateDescription" asp-route-id="@Model.CurrentArtist.ArtistId">
+                            Twitter: @Model.CurrentArtist.reddit
+                        </a>
+                    </div>
+                }
+                else
+                {
+                    <div class="CUS-MangaInputText">
+                        Twitter: @Model.CurrentArtist.reddit
+
+                    </div>
+                }
+            }
+        </div>
+        <div class="CUS-LeftSidemangaDetailsBox">
+            @if (Model.CurrentArtist.Gender != null)
+            {
+                <h3>Twitter</h3>
+                @if (UpdaterUser)
+                {
+                    <div class="CUS-MangaInputText">
+                        <a asp-page="/MangaUpdates/UpdateDescription" asp-route-id="@Model.CurrentArtist.ArtistId">
+                            Twitter: @Model.CurrentArtist.Gender
+                        </a>
+                    </div>
+                }
+                else
+                {
+                    <div class="CUS-MangaInputText">
+                        Twitter: @Model.CurrentArtist.Gender
+
+                    </div>
+                }
+            }
         </div>
     </div>
-    <div class="CUS-RightSide"></div>
+    <div class="CUS-RightSide">
+
+    </div>
 </div>
