@@ -75,8 +75,125 @@
 </div>
 
 <div class="CUS-Content1Cost">
-    <div class="CUS-commonParentContainer">
-    </div>
+      <div class="CUS-commonParentContainer">
+      
+        <div class="CUS-CurrentMangaTagsContainer">
+            <div class="Cus-TitleWhenSmallCurrentManga">
+              
+            </div>
+          @if (Model.AuthorGenresAndTags.Genres.Any())
+            {
+             @foreach (var genreName in Model.AuthorGenresAndTags.Genres)
+                {
+                    <div class="CUS-tagsInsideInsideCurrentManga">
+                        @if (UpdaterUser)
+                        {
+                         
+                                @if (genreName == "Adult" || genreName == "Smut" || genreName == "Mature")
+                                {
+                                    <label class="CUS-CustomWarningLabel">
+                                      @genreName
+                                    </label>
+                                }
+                                else
+                                {
+                                    <label>
+                                        @genreName
+                                    </label>
+                                }
+                      
+                        }
+                        else
+                        {      @if (genreName == "Adult" || genreName == "Smut" || genreName == "Mature")
+                            {
+                                <label class="CUS-CustomWarningLabel">
+                                    @genreName
+                                </label>
+                            }
+                            else
+                            {
+                                <label>
+                                    @genreName
+                                </label>
+                            }   }
+
+                    </div>
+                }
+
+            }
+           @if (Model.AuthorGenresAndTags.Tags.Any())
+            {
+                @foreach (var TagName in Model.AuthorGenresAndTags.Tags)
+                {
+                    @if (UpdaterUser)
+                    {
+               
+                            <div class="CUS-tagsInsideInsideCurrentManga">
+
+                                @if (TagName == "Gore" || TagName == "Borderline H" || TagName == "Anal Intercourse" ||
+                               TagName== "Blood and Gore" || TagName == "Blackmail" || TagName == "Bathroom Intercourse" ||
+                              TagName== "Child Abuse" || TagName== "Double Penetration" || TagName== "Fellatio"
+                               || TagName== "Group Intercourse" || TagName == "Gang Rape" || TagName == "Futanari"
+                               || TagName == "Groping" || TagName == "Handjob" || TagName == "Masturbation"
+                               || TagName == "Netorare" || TagName == "Netor" || TagName == "Netori"
+                               || TagName == "Titty Fuck" || TagName == "Paizuri" || TagName == "Outdoor Intercourse"
+                               || TagName == "Panchira" || TagName == "Rape" || TagName == "School Intercourse"
+                               || TagName == "Sexual Abuse" || TagName == "Sex" || TagName == "Sex Toy"
+                               || TagName == "Sexual Assault" || TagName == "Sexual Innuendo" || TagName == "Threesome"
+                               || TagName == "Torture" || TagName == "Urination" || TagName == "Public Sex"
+                               )
+                                {
+                                    <p class="CUS-CustomHintLabel">
+                                        @TagName
+                                    </p>
+                                }
+                                else
+                                {
+                                    <label>
+                                        @TagName
+                                    </label>
+                                }
+
+                            </div>
+                 
+                    }
+                    else
+                    {
+                        <div class="CUS-tagsInsideInsideCurrentManga">
+
+                              @if (TagName == "Gore" || TagName == "Borderline H" || TagName == "Anal Intercourse" ||
+                               TagName== "Blood and Gore" || TagName == "Blackmail" || TagName == "Bathroom Intercourse" ||
+                              TagName== "Child Abuse" || TagName== "Double Penetration" || TagName== "Fellatio"
+                               || TagName== "Group Intercourse" || TagName == "Gang Rape" || TagName == "Futanari"
+                               || TagName == "Groping" || TagName == "Handjob" || TagName == "Masturbation"
+                               || TagName == "Netorare" || TagName == "Netor" || TagName == "Netori"
+                               || TagName == "Titty Fuck" || TagName == "Paizuri" || TagName == "Outdoor Intercourse"
+                               || TagName == "Panchira" || TagName == "Rape" || TagName == "School Intercourse"
+                               || TagName == "Sexual Abuse" || TagName == "Sex" || TagName == "Sex Toy"
+                               || TagName == "Sexual Assault" || TagName == "Sexual Innuendo" || TagName == "Threesome"
+                               || TagName == "Torture" || TagName == "Urination" || TagName == "Public Sex"
+                               )
+                            {
+                                <p class="CUS-CustomHintLabel">
+                                        @TagName
+                                </p>
+                            }
+                            else
+                            {
+                                <label>
+                                          @TagName
+                                </label>
+                            }
+
+                        </div>
+                    }
+
+                }
+            }
+         
+        </div> 
+    
+            </div>
 
 </div>
 <div class="CUS-mangaDetailsWrapper">

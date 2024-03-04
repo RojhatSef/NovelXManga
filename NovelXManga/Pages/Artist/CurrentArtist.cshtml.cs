@@ -1,4 +1,5 @@
 using MangaAccessService;
+using MangaAccessService.DTO;
 using MangaModelService;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -29,6 +30,24 @@ namespace NovelXManga.Pages.Artist
         [BindProperty]
         public ArtistModel CurrentArtist { get; set; }
 
+        [BindProperty]
+        public CreatorGenresAndTagsDto ArtistGenresAndTags { get; set; }
+
+        public async Task<CreatorGenresAndTagsDto> GetArtistGenresAndTagsAsync(int artistId)
+        {
+            var artistWithGenresAndTags = await Context.artistModels
+                .Where(a => a.ArtistId == artistId)
+                .Select(a => new CreatorGenresAndTagsDto
+                {
+                    CreatorId = a.ArtistId,
+
+                    Genres = a.MangaModels.SelectMany(m => m.GenresModels.Select(g => g.GenreName)).Distinct(),
+                    Tags = a.MangaModels.SelectMany(m => m.TagsModels.Select(t => t.TagName)).Distinct(),
+                }).FirstOrDefaultAsync();
+
+            return artistWithGenresAndTags;
+        }
+
         public async Task<IActionResult> OnGetAsync(int id)
         {
             if (id == 0)
@@ -44,7 +63,7 @@ namespace NovelXManga.Pages.Artist
             {
                 return NotFound();
             }
-
+            ArtistGenresAndTags = await GetArtistGenresAndTagsAsync(id);
             var mangaIds = CurrentArtist.MangaModels.Select(m => m.MangaID).ToList();
             //CurrentMangas = await characterRepsitory.GetMangaDtoIncludedAsync(mangaIds);
 

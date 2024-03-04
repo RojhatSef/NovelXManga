@@ -1236,6 +1236,7 @@ new OfficalWebsite { OfficalWebsiteString = "https://www.younganimal.com/magazin
             var Gen2ToManga1 = context.GenresModels.FirstOrDefault(t => t.GenreName == "Adventure");
             var NarutoRelated = context.mangaModels.FirstOrDefault(t => t.MangaName == "Naruto");
             var Author = context.authorModels.FirstOrDefault(a => a.FirstName == "Masashi" && a.LastName == "Kishimoto");
+            var Artist = context.artistModels.FirstOrDefault(a => a.FirstName == "Masashi" && a.LastName == "Kishimoto");
             var NarutoCharacter = context.Characters.FirstOrDefault(c => c.CharacterName == "Uzumaki Naruto");
             //first
             DateTime myDate = DateTime.ParseExact("1991-05-08", "yyyy-MM-dd",
@@ -1282,7 +1283,7 @@ new OfficalWebsite { OfficalWebsiteString = "https://www.younganimal.com/magazin
     },
                 ArtistModels = new List<ArtistModel>
     {
-        new ArtistModel { FirstName = "Mikio", LastName = "Ikemoto", Biography = "Apprentice of Masashi Kishimoto, illustrator of Boruto." },
+        new ArtistModel { FirstName = "Mikio", LastName = "Ikemoto", Biography = "Apprentice of Masashi Kishimoto, illustrator of Boruto." }, Artist
     },
                 VoiceActors = new List<VoiceActorModel>
     {
