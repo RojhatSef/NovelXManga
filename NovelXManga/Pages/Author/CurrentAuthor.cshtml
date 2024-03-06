@@ -7,7 +7,8 @@
     var UpdaterUser = user != null && await UserManager.IsInRoleAsync(user, "NormalUser");
 
 }
-<link rel="stylesheet" href="~/css/CurrentCharacter.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/CreatorStyle.css" asp-append-version="true" />
+
 
 
 <div class="CUS-Content1Ex">
@@ -241,11 +242,375 @@
 
     </div>
     <hr / class="CUS-DescriptionDiver">
-    <div class="CUS-LeftSide">
-        <div class="CUS-LeftSidemangaDetailsBox">
-        </div>
-    </div>
-    <div class="CUS-RightSide">
+    <div class="CUS-CommonContainer">
+        <div class="CUS-LeftSide">
 
+            <div class="CUS-LeftSidemangaDetailsBox">
+
+                @if (Model.CurrentAuthor.Twitter != null)
+                {
+                    <h3>Twitter</h3>
+                    <div class="CUS-MangaContainerInput">
+
+                        @if (UpdaterUser)
+                        {
+                            <div class="CUS-MangaInputText">
+                                <a asp-page="/MangaUpdates/UpdateDescription" asp-route-id="@Model.CurrentAuthor.AuthorID">
+                                    @Model.CurrentAuthor.Twitter
+                                </a>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="CUS-MangaInputText">
+                                @Model.CurrentAuthor.Twitter
+
+                            </div>
+                        }
+                    </div>
+                }
+
+
+
+            </div>
+            <div class="CUS-LeftSidemangaDetailsBox">
+
+                @if (Model.CurrentAuthor.reddit != null)
+                {
+                    <h3>Reddit:</h3>
+                    <div class="CUS-MangaContainerInput">
+
+                        @if (UpdaterUser)
+                        {
+                            <div class="CUS-MangaInputText">
+                                <a asp-page="/MangaUpdates/UpdateDescription" asp-route-id="@Model.CurrentAuthor.AuthorID">
+                                    @Model.CurrentAuthor.reddit
+                                </a>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="CUS-MangaInputText">
+                                @Model.CurrentAuthor.reddit
+
+                            </div>
+                        }
+                    </div>
+                }
+
+            </div>
+            <div class="CUS-LeftSidemangaDetailsBox">
+
+                @if (Model.CurrentAuthor.Gender != null)
+                {
+                    <h3>Gender</h3>
+                    <div class="CUS-MangaContainerInput">
+
+                        @if (UpdaterUser)
+                        {
+                            <div class="CUS-MangaInputText">
+                                <a asp-page="/MangaUpdates/UpdateDescription" asp-route-id="@Model.CurrentAuthor.AuthorID">
+                                    @Model.CurrentAuthor.Gender
+                                </a>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="CUS-MangaInputText">
+                                @Model.CurrentAuthor.Gender
+
+                            </div>
+                        }
+                    </div>
+                }
+
+            </div>
+            <div class="CUS-LeftSidemangaDetailsBox">
+
+                @if (Model.CurrentAuthor.AuthorBorn != null)
+                {
+                    <h3>Birth:</h3>
+                    <div class="CUS-MangaContainerInput">
+                        @if (UpdaterUser)
+                        {
+                            <div class="CUS-MangaInputText">
+                                <a asp-page="/MangaUpdates/UpdateDescription" asp-route-id="@Model.CurrentAuthor.AuthorID">
+                                    @Model.CurrentAuthor.AuthorBorn.Value.ToString("dd/MM/yyyy")
+                                </a>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="CUS-MangaInputText">
+                                @Model.CurrentAuthor.AuthorBorn.Value.ToString("dd/MM/yyyy")
+
+                            </div>
+                        }
+                    </div>
+                }
+
+            </div>
+            <div class="CUS-LeftSidemangaDetailsBox">
+
+                @if (Model.CurrentAuthor.AuthorDeath != null)
+                {
+                    <h3>Death: </h3>
+                    <div class="CUS-MangaContainerInput">
+                        @if (UpdaterUser)
+                        {
+                            <div class="CUS-MangaInputText">
+                                <a asp-page="/MangaUpdates/UpdateDescription" asp-route-id="@Model.CurrentAuthor.AuthorID">
+                                    @Model.CurrentAuthor.AuthorDeath.Value.ToString("dd/MM/yyyy")
+                                </a>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="CUS-MangaInputText">
+                                @Model.CurrentAuthor.AuthorDeath.Value.ToString("dd/MM/yyyy")
+
+                            </div>
+                        }
+                    </div>
+                }
+
+            </div>
+            <div class="CUS-LeftSidemangaDetailsBox">
+
+                @if (Model.CurrentAuthor.WorkingAt != null)
+                {
+                    <h3>Working at: </h3>
+                    <div class="CUS-MangaContainerInput">
+                        @if (UpdaterUser)
+                        {
+                            <div class="CUS-MangaInputText">
+                                <a asp-page="/MangaUpdates/UpdateDescription" asp-route-id="@Model.CurrentAuthor.AuthorID">
+                                    @Model.CurrentAuthor.WorkingAt
+                                </a>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="CUS-MangaInputText">
+                                @Model.CurrentAuthor.WorkingAt
+
+                            </div>
+                        }
+                    </div>
+                }
+
+            </div>
+            <div class="CUS-LeftSidemangaDetailsBox">
+
+                @if (Model.CurrentAuthor.WikiPedia != null)
+                {
+                    <h3>Wiki: </h3>
+                    <div class="CUS-MangaContainerInput">
+                        @if (UpdaterUser)
+                        {
+                            <div class="CUS-MangaInputText">
+                                <a asp-page="/MangaUpdates/UpdateDescription" asp-route-id="@Model.CurrentAuthor.AuthorID">
+                                    @Model.CurrentAuthor.WikiPedia
+                                </a>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="CUS-MangaInputText">
+                                <a href="@Model.CurrentAuthor.WikiPedia">
+                                    @Model.CurrentAuthor.FirstName Wiki
+                                </a>
+
+                            </div>
+                        }
+                    </div>
+                }
+
+            </div>
+            <div class="CUS-LeftSidemangaDetailsBox">
+
+                @if (Model.CurrentAuthor.BirthPlace != null)
+                {
+                    <h3>Birth Place: </h3>
+                    <div class="CUS-MangaContainerInput">
+                        @if (UpdaterUser)
+                        {
+                            <div class="CUS-MangaInputText">
+                                <a asp-page="/MangaUpdates/UpdateDescription" asp-route-id="@Model.CurrentAuthor.AuthorID">
+                                    @Model.CurrentAuthor.BirthPlace
+                                </a>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="CUS-MangaInputText">
+                                @Model.CurrentAuthor.BirthPlace
+
+                            </div>
+                        }
+                    </div>
+                }
+
+            </div>
+            <div class="CUS-LeftSidemangaDetailsBox">
+
+                @if (Model.CurrentAuthor.NameInNative != null)
+                {
+                    <h3>Birth Place: </h3>
+                    <div class="CUS-MangaContainerInput">
+                        @if (UpdaterUser)
+                        {
+                            <div class="CUS-MangaInputText">
+                                <a asp-page="/MangaUpdates/UpdateDescription" asp-route-id="@Model.CurrentAuthor.AuthorID">
+                                    @Model.CurrentAuthor.NameInNative
+                                </a>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="CUS-MangaInputText">
+                                @Model.CurrentAuthor.NameInNative
+
+                            </div>
+                        }
+                    </div>
+                }
+
+            </div>
+            <div class="CUS-LeftSidemangaDetailsBox">
+
+                @if (Model.CurrentAuthor.Contact != null)
+                {
+                    <h3>Contact: </h3>
+                    <div class="CUS-MangaContainerInput">
+
+                        @if (UpdaterUser)
+                        {
+                            <div class="CUS-MangaInputText">
+                                <a asp-page="/MangaUpdates/UpdateDescription" asp-route-id="@Model.CurrentAuthor.AuthorID">
+                                    @Model.CurrentAuthor.Contact
+                                </a>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="CUS-MangaInputText">
+                                @Model.CurrentAuthor.Contact
+
+                            </div>
+                        }
+                    </div>
+                }
+
+            </div>
+            <div class="CUS-LeftSidemangaDetailsBox">
+
+                @if (Model.CurrentAuthor.MangaModels != null)
+                {
+                    <h3>Works: </h3>
+                    <div class="CUS-MangaContainerInput">
+                        @if (UpdaterUser)
+                        {
+                            <div class="CUS-MangaInputText">
+                                <a asp-page="/MangaUpdates/UpdateDescription" asp-route-id="@Model.CurrentAuthor.AuthorID">
+                                    @Model.CurrentAuthor.MangaModels.Count
+                                </a>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="CUS-MangaInputText">
+                                @Model.CurrentAuthor.MangaModels.Count
+
+                            </div>
+                        }
+                    </div>
+                }
+
+            </div>
+
+
+            <div class="CUS-LeftSidemangaDetailsBox">
+
+
+
+
+                @if (Model.CurrentAuthor.AssociatedNames != null)
+                {
+                    <h3>Associated names:</h3>
+                    <div class="CUS-MangaContainerInput">
+                        @if (UpdaterUser)
+                        {
+                            <a asp-page="/MangaUpdates/CHANGE" asp-route-id="@Model.CurrentAuthor.AuthorID">
+                                @foreach (var item in Model.CurrentAuthor.AssociatedNames)
+                                {
+                                    <div class="CUS-MangaInputText">@item.nameString</div>
+
+                                }
+                            </a>
+                        }
+                        else
+                        {
+                            @foreach (var item in Model.CurrentAuthor.AssociatedNames)
+                            {
+                                <div class="CUS-MangaInputText">@item.nameString</div>
+
+                            }
+                        }
+                    </div>
+                }
+                else
+                {
+                    <div class="CUS-MangaContainerInput">
+                        @if (UpdaterUser)
+                        {
+
+                            <a asp-page="/MangaUpdates/CHANGE" asp-route-id="@Model.CurrentAuthor.AuthorID">
+                                <div class="CUS-MangaInputText">
+                                    <p>N/A</p>
+                                </div>
+
+                            </a>
+
+                        }
+                    </div>
+                }
+
+            </div>
+
+
+        </div>
+        <div class="CUS-RightSide">
+
+            @if (Model.CurrentAuthor.MangaModels.Count >= 1)
+            {
+                <h1> Books:</h1>
+                <div class="CUS-mangaDetailsBox">
+
+                    <div class="GridWrapper">
+                        @foreach (var relatedManga in Model.CurrentAuthor.MangaModels.Take(5))
+                        {
+
+
+
+                            <div class="CUS-GridItem">
+                                <a asp-page="/Manga/CurrentManga" asp-route-id="@relatedManga.MangaID">
+                                    <img class="GridImage" src="~/Images/GeneratedMangaImage/@relatedManga.PhotoPath" />
+                                </a>
+                                <div class="CUS-MangaInputText">
+                                    <a asp-page="/Manga/CurrentManga" asp-route-id="@relatedManga.MangaID">
+                                        <input type="hidden" name="characters" value="@relatedManga.MangaID" />
+                                        <p>@relatedManga.MangaName</p>
+                                    </a>
+                                </div>
+                            </div>
+
+
+                        }
+
+                    </div>
+                </div>
+            }
+        </div>
     </div>
 </div>

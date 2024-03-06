@@ -462,6 +462,60 @@
                 </div>
             </div>
         }
+            @if (Model.CurrentManga.AllLanguages != null)
+            {
+                <div class="CUS-LeftSidemangaDetailsBox">
+
+                    <h3>Translated Languages:</h3>
+                    <div class="CUS-MangaContainerInput">
+                        @if (Model.CurrentManga.AllLanguages != null)
+                        {
+                            @if (UpdaterUser)
+                            {
+                                <a asp-page="/MangaUpdates/CHANGE" asp-route-id="@Model.CurrentManga.MangaID">
+                                    @foreach (var item in Model.CurrentManga.AllLanguages)
+                                    {
+                                        @if(item.LanguageName != Model.CurrentManga.OfficalLanguage)
+                                        {
+                                            <div class="CUS-MangaInputText">@item.LanguageName</div>
+                                        }
+                                      
+                                       }
+                                </a>
+                            }
+                            else
+                            {
+                                @foreach (var item in Model.CurrentManga.AllLanguages)
+                                {
+                                    @if (item.LanguageName != Model.CurrentManga.OfficalLanguage)
+                                    {
+                                        <div class="CUS-MangaInputText">@item.LanguageName</div>
+                                    }
+                                }
+                            }
+
+                        }
+                        else
+                        {
+                            @if (UpdaterUser)
+                            {
+                                <a asp-page="/MangaUpdates/CHANGE" asp-route-id="@Model.CurrentManga.MangaID">
+                                    <div class="CUS-MangaInputText">
+                                        <p>N/A</p>
+                                    </div>
+
+                                </a>
+                            }
+                            else
+                            {
+                                <div class="CUS-MangaInputText">
+                                    <p>N/A</p>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+            }
             @if (Model.CurrentManga.BuyPages != null && Model.CurrentManga.BuyPages.Any(bp => bp._Languages != null && bp._Languages.Count > 0))
         {
             <div class="CUS-LeftSidemangaDetailsBox">
@@ -485,6 +539,28 @@
             </div>
         </div>
         }
+            @if (Model.CurrentManga.OfficalWebsites != null)
+            {
+                <div class="CUS-LeftSidemangaDetailsBox">
+                    <h3>Offical Website</h3>
+                    <div class="CUS-MangaContainerInput">
+                        @foreach (var item in Model.CurrentManga.OfficalWebsites)
+                        {
+
+                            <a href="@item.OfficalWebsiteString">
+
+
+                              
+
+                                    <div class="CUS-MangaInputText">
+                                        <p> @item.OfficalWebsiteName</p>
+                                    </div>
+                                
+                            </a>
+                        }
+                    </div>
+                </div>
+            }
           <div class="CUS-LeftSidemangaDetailsBox">  <h3>Release | Ending</h3>
                 <div class="CUS-MangaContainerInput">
 
@@ -676,6 +752,141 @@
 
                 </div>
                 </div>
+            <div class="CUS-LeftSidemangaDetailsBox">
+                <h3>Status:</h3>
+                <div class="CUS-MangaContainerInput">
+                    @if (Model.CurrentManga.StatusInCountryOfOrigin != null)
+                    {
+                    
+                        @if (UpdaterUser)
+                        {
+                            <a asp-action="@Model.CurrentManga.StatusInCountryOfOrigin" asp-route-id="@Model.CurrentManga.MangaID">
+                                <div class="CUS-MangaInputText">
+                                    @Model.CurrentManga.StatusInCountryOfOrigin
+                                </div>
+                            </a>
+                        }
+                        else
+                        {
+
+                            <div class="CUS-MangaInputText">
+                                @Model.CurrentManga.StatusInCountryOfOrigin
+                            </div>
+
+                        }
+                    }
+                    else
+                    {
+                        @if (UpdaterUser)
+                        {
+                            <a asp-action="@Model.CurrentManga.StatusInCountryOfOrigin" asp-route-id="@Model.CurrentManga.MangaID">
+                                <div class="CUS-MangaInputText">
+                                    Status In Country Of Origin: N/A
+                                </div>
+                            </a>
+                        }
+                        else
+                        {
+                            <div class="CUS-MangaInputText">
+                                Status In Country Of Origin: N/A
+                            </div>
+                        }
+
+
+                    }
+
+                </div>
+            </div>
+            <div class="CUS-LeftSidemangaDetailsBox">
+                <h3>Translation:</h3>
+                <div class="CUS-MangaContainerInput">
+                    @if (Model.CurrentManga.CompletelyTranslated != null)
+                    {
+                  
+                        @if (UpdaterUser)
+                        {
+                            <a asp-action="@Model.CurrentManga.CompletelyTranslated" asp-route-id="@Model.CurrentManga.MangaID">
+                                <div class="CUS-MangaInputText">
+                                    @Model.CurrentManga.CompletelyTranslated
+                                </div>
+                            </a>
+                        }
+                        else
+                        {
+
+                            <div class="CUS-MangaInputText">
+                                @Model.CurrentManga.CompletelyTranslated
+                            </div>
+
+                        }
+                    }
+                    else
+                    {
+                        @if (UpdaterUser)
+                        {
+                            <a asp-action="@Model.CurrentManga.CompletelyTranslated" asp-route-id="@Model.CurrentManga.MangaID">
+                                <div class="CUS-MangaInputText">
+                                     Translation: N/A
+                                </div>
+                            </a>
+                        }
+                        else
+                        {
+                            <div class="CUS-MangaInputText">
+                                 Translation: N/A
+                            </div>
+                        }
+
+
+                    }
+
+                </div>
+            </div>
+            <div class="CUS-LeftSidemangaDetailsBox">
+                <h3>Complete Translation:</h3>
+                <div class="CUS-MangaContainerInput">
+                    @if (Model.CurrentManga.orignalWebtoon != null)
+                    {
+
+                        @if (UpdaterUser)
+                        {
+                            <a asp-action="@Model.CurrentManga.orignalWebtoon" asp-route-id="@Model.CurrentManga.MangaID">
+                                <div class="CUS-MangaInputText">
+                                    @Model.CurrentManga.orignalWebtoon
+                                </div>
+                            </a>
+                        }
+                        else
+                        {
+
+                            <div class="CUS-MangaInputText">
+                                @Model.CurrentManga.orignalWebtoon
+                            </div>
+
+                        }
+                    }
+                    else
+                    {
+                        @if (UpdaterUser)
+                        {
+                            <a asp-action="@Model.CurrentManga.orignalWebtoon" asp-route-id="@Model.CurrentManga.MangaID">
+                                <div class="CUS-MangaInputText">
+                                   Original Webtoon: N/A
+                                </div>
+                            </a>
+                        }
+                        else
+                        {
+                            <div class="CUS-MangaInputText">
+                                Original Webtoon: N/A
+                            </div>
+                        }
+
+
+                    }
+
+                </div>
+            </div>
          <div class="CUS-LeftSidemangaDetailsBox">
       
          
