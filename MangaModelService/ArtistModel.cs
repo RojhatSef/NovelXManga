@@ -28,7 +28,8 @@ namespace MangaModelService
         public string? Contact { get; set; }
         public virtual ICollection<MangaModel>? MangaModels { get; set; }
 
-        // Missing data Icollection of Character
+        // Missing data Icollection of Characters
+        //  public virtual ICollection<Character> CreatorsCharacters { get; set; }
         public bool isChecked { get; set; }
     }
 }

@@ -17,12 +17,15 @@ namespace MangaModelService
         public string? Twitter { get; set; }
         public string? reddit { get; set; }
         public string? BirthPlace { get; set; }
-        public string? CharacterName { get; set; }
+
+        // Missing data Icollection of Character
+        // public virtual ICollection<Character> CreatorsCharacters { get; set; }
+        public string? CharacterName { get; set; } // this should be removed as a voice actor can have multiple of characters, i must have been on crack to have missed this
+
         public string? Biography { get; set; }
         public string? NameInNative { get; set; }
         public string? WikiPedia { get; set; }
 
-        // Missing data Icollection of Character
         public virtual ICollection<AssociatedNames>? AssociatedNames { get; set; }
 
         public int? AmountOfWork { get; set; }

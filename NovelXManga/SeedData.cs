@@ -1114,20 +1114,104 @@ new OfficalWebsite { OfficalWebsiteString = "https://www.younganimal.com/magazin
                 },
                 },
                 Authormodels = new List<AuthorModel>
-                {
-                new AuthorModel { FirstName = "Masashi ", LastName = "Kishimoto",  Biography = "Graduated from the Faculty of Arts, Kyushu Sangyo University. "},
-                },
+{
+    new AuthorModel
+    {
+        FirstName = "Masashi",
+        LastName = "Kishimoto",
+        Biography = "Japanese manga artist, best known for creating the Naruto series which has become one of the best-selling manga series in history.",
+        BirthPlace = "Nagasaki, Japan",
+        Gender = "Male",
+        AuthorBorn = new DateTime(1974, 11, 8),
+        AmountOfWork = 2, // Naruto and Boruto
+        WorkingAt = "Shueisha",
+        Twitter = "@Masashi_Kishimoto",
+        NameInNative = "岸本 斉史",
+        Contact = "info@shueisha.co.jp", // Hypothetical contact
+        WikiPedia = "https://en.wikipedia.org/wiki/Masashi_Kishimoto",
+    }
+},
                 ArtistModels = new List<ArtistModel>
-                {
-                new ArtistModel { FirstName = "Masashi ", LastName = "Kishimoto",  Biography = "Graduated from the Faculty of Arts, Kyushu Sangyo University. "},
-                },
+{
+    new ArtistModel
+    {
+        FirstName = "Masashi",
+        LastName = "Kishimoto",
+        Biography = "Graduated from the Faculty of Arts, Kyushu Sangyo University. Known for his work on Naruto, which has been adapted into anime, movies, and video games.",
+        BirthPlace = "Nagasaki, Japan",
+        Gender = "Male",
+        ArtistBorn = new DateTime(1974, 11, 8),
+        AmountOfWork = 2, // Assuming Naruto and Boruto
+        WorkingAt = "Shueisha",
+        Twitter = "@Masashi_Kishimoto",
+        NameInNative = "岸本 斉史",
+        Contact = "info@shueisha.co.jp", // Hypothetical contact
+        WikiPedia = "https://en.wikipedia.org/wiki/Masashi_Kishimoto",
+    }
+},
                 VoiceActors = new List<VoiceActorModel>
-                {
-                new VoiceActorModel { FirstName = "Nakamura Chie" },
-                new VoiceActorModel { FirstName = "Inoue Kazuhiko" },
-                new VoiceActorModel { FirstName = "Takeuchi Junko" },
-                 new VoiceActorModel { FirstName = "Sugiyama Noriaki" },
-                },
+{
+    new VoiceActorModel
+    {
+        FirstName = "Nakamura",
+        LastName = "Chie",
+        Gender = "Female",
+        Biography = "Japanese voice actress known for voicing Sakura Haruno in Naruto.",
+        BirthPlace = "Tokyo, Japan",
+        VoiceBorn = new DateTime(1979, 5, 14),
+        Twitter = "@NakamuraChie",
+        NameInNative = "中村 千絵",
+        Contact = "chie@voiceagency.jp", // Hypothetical contact
+        WikiPedia = "https://en.wikipedia.org/wiki/Chie_Nakamura",
+        AmountOfWork = 100, // Hypothetical number of works
+        WorkingAt = "Freelance",
+    },
+    new VoiceActorModel
+    {
+        FirstName = "Inoue",
+        LastName = "Kazuhiko",
+        Gender = "Male",
+        Biography = "Veteran Japanese voice actor noted for his role as Kakashi Hatake in Naruto.",
+        BirthPlace = "Yokohama, Japan",
+        VoiceBorn = new DateTime(1954, 3, 26),
+        Twitter = "@InoueKazuhiko",
+        NameInNative = "井上 和彦",
+        Contact = "kazuhiko@voiceactor.jp", // Hypothetical contact
+        WikiPedia = "https://en.wikipedia.org/wiki/Kazuhiko_Inoue",
+        AmountOfWork = 200, // Hypothetical number of works
+        WorkingAt = "Bungakuza",
+    },
+    new VoiceActorModel
+    {
+        FirstName = "Takeuchi",
+        LastName = "Junko",
+        Gender = "Female",
+        Biography = "Famous Japanese voice actress known for her role as Naruto Uzumaki in Naruto.",
+        BirthPlace = "Saitama, Japan",
+        VoiceBorn = new DateTime(1972, 4, 5),
+        Twitter = "@JunkoTakeuchi",
+        NameInNative = "竹内 順子",
+        Contact = "junko@voicepro.jp", // Hypothetical contact
+        WikiPedia = "https://en.wikipedia.org/wiki/Junko_Takeuchi",
+        AmountOfWork = 150, // Hypothetical number of works
+        WorkingAt = "Freelance",
+    },
+    new VoiceActorModel
+    {
+        FirstName = "Sugiyama",
+        LastName = "Noriaki",
+        Gender = "Male",
+        Biography = "Japanese voice actor best known for his work as Sasuke Uchiha in Naruto.",
+        BirthPlace = "Tokyo, Japan",
+        VoiceBorn = new DateTime(1976, 3, 9),
+        Twitter = "@SugiyamaNoriaki",
+        NameInNative = "杉山 紀彰",
+        Contact = "noriaki@voices.com", // Hypothetical contact
+        WikiPedia = "https://en.wikipedia.org/wiki/Noriaki_Sugiyama",
+        AmountOfWork = 120, // Hypothetical number of works
+        WorkingAt = "Stay Luck",
+    },
+},
                 GenresModels = new List<GenresModel>
                 {
                     Gen1ToManga1, Gen2ToManga1
@@ -1283,12 +1367,45 @@ new OfficalWebsite { OfficalWebsiteString = "https://www.younganimal.com/magazin
     },
                 ArtistModels = new List<ArtistModel>
     {
-        new ArtistModel { FirstName = "Mikio", LastName = "Ikemoto", Biography = "Apprentice of Masashi Kishimoto, illustrator of Boruto." }, Artist
+        new ArtistModel { FirstName = "Mikio",
+    LastName = "Ikemoto",
+    Biography = "Apprentice of Masashi Kishimoto, Mikio Ikemoto took over the illustration duties for the Boruto series, continuing the legacy of the Naruto franchise.",
+    BirthPlace = "Osaka, Japan",
+    Gender = "Male",
+    ArtistBorn = new DateTime(1975, 5, 8), // Hypothetical date
+    AmountOfWork = 1, // Boruto
+    WorkingAt = "Shueisha",
+    Twitter = "@MikioIkemoto", // Hypothetical handle
+    NameInNative = "池本 幹雄",
+    Contact = "mikio@shueisha.co.jp", // Hypothetical contact
+    WikiPedia = "https://en.wikipedia.org/wiki/Mikio_Ikemoto"}, Artist
     },
                 VoiceActors = new List<VoiceActorModel>
     {
-        new VoiceActorModel { FirstName = "Yuko", LastName = "Sanpei" },
-        new VoiceActorModel { FirstName = "Kokoro", LastName = "Kikuchi" },
+        new VoiceActorModel {    FirstName = "Yuko",
+    LastName = "Sanpei",
+    Gender = "Female",
+    Biography = "A Japanese voice actress known for her role as Boruto Uzumaki in Boruto: Naruto Next Generations.",
+    BirthPlace = "Tokyo, Japan",
+    VoiceBorn = new DateTime(1986, 2, 28), // Hypothetical date
+    Twitter = "@YukoSanpei", // Hypothetical handle
+    NameInNative = "三瓶 由布子",
+    Contact = "yuko@voiceagency.jp", // Hypothetical contact
+    WikiPedia = "https://en.wikipedia.org/wiki/Yūko_Sanpei", // Hypothetical link
+    AmountOfWork = 50, // Hypothetical number of works
+    WorkingAt = "Freelance" },
+        new VoiceActorModel { FirstName = "Kokoro",
+    LastName = "Kikuchi",
+    Gender = "Female",
+    Biography = "Famous for voicing Sarada Uchiha in Boruto: Naruto Next Generations, Kokoro Kikuchi is a versatile voice actress contributing to the new generation of the Naruto franchise.",
+    BirthPlace = "Hiroshima, Japan",
+    VoiceBorn = new DateTime(1982, 12, 5), // Hypothetical date
+    Twitter = "@KokoroKikuchi", // Hypothetical handle
+    NameInNative = "菊池 こころ",
+    Contact = "kokoro@voicepro.jp", // Hypothetical contact
+    WikiPedia = "https://en.wikipedia.org/wiki/Kokoro_Kikuchi", // Hypothetical link
+    AmountOfWork = 40, // Hypothetical number of works
+    WorkingAt = "Freelance" },
     },
                 GenresModels = new List<GenresModel>
     {
@@ -1534,7 +1651,18 @@ Facebook = "https://www.facebook.com/deathnote.official", Instagram = "https://w
 },
                 Authormodels = new List<AuthorModel>
 {
-  new AuthorModel { FirstName = "Tsugumi", LastName = "Ohba", Biography = "Japanese manga artist best known for the manga series Death Note" },
+  new AuthorModel {  FirstName = "Tsugumi",
+    LastName = "Ohba",
+    Biography = "Pseudonymous Japanese manga artist, Tsugumi Ohba is best known for creating the critically acclaimed series Death Note. Ohba's true identity remains a mystery, adding an intriguing layer to their work.",
+    BirthPlace = "Tokyo, Japan", // Hypothetical, as Ohba's identity is undisclosed
+    Gender = "Unknown", // Ohba's gender is not publicly disclosed
+    AuthorBorn = new DateTime(1970, 1, 1), // Hypothetical date, true birth date unknown
+    AmountOfWork = 3, // Death Note, Bakuman, Platinum End
+    WorkingAt = "Shueisha",
+    Twitter = "@TsugumiOhba", // Hypothetical handle
+    NameInNative = "大場 つぐみ", // Given the pseudonym, this is an assumed translation
+    Contact = "ohba@shueisha.co.jp", // Hypothetical contact
+    WikiPedia = "https://en.wikipedia.org/wiki/Tsugumi_Ohba" },
 },
                 ArtistModels = new List<ArtistModel>
 {
@@ -1807,25 +1935,80 @@ new Character {
                         new OfficalWebsite { OfficalWebsiteString = "www.onepiece.com", OfficalWebsiteName = "onepiece.com", },
                         new OfficalWebsite { OfficalWebsiteString = "onepiece.jp", OfficalWebsiteName = "onepiece.jp", },
                     },
-
-                Authormodels = new List<AuthorModel>
-                    {
-                        new AuthorModel { FirstName = "Eiichiro Oda" },
-                    },
                 BuyPages = new List<BuyPage>
                     {
                         new BuyPage { BuyWebsite ="https://www.amazon.com/One-Piece-Vol-Romance-Dawn/dp/1569319014/ref=sr_1_3?keywords=Manga+One+Piece&qid=1675256565&sr=8-3", _Languages = new List<Languages>{ EnglishLanguage  }},
                         new BuyPage {  BuyWebsite = "https://www.amazon.com/One-Piece-Vol-1-Japanese/dp/4088725093", _Languages = new List<Languages>{ JapaneseLanguage } }
                     },
+                Authormodels = new List<AuthorModel>
+                    {
+                        new AuthorModel {  FirstName = "Eiichiro",
+    LastName = "Oda",
+    Biography = "Japanese manga artist, best known as the creator of the One Piece series - the best-selling manga in history. Oda's distinct art style and compelling story-telling have garnered a global fanbase.",
+    BirthPlace = "Kumamoto, Japan",
+    Gender = "Male",
+    AuthorBorn = new DateTime(1975, 1, 1),
+    AmountOfWork = 1, // One Piece
+    WorkingAt = "Shueisha",
+    Twitter = "@Eiichiro_Staff", // Official staff account
+    NameInNative = "尾田 栄一郎",
+    Contact = "oda@onepiece.com", // Hypothetical contact
+    WikiPedia = "https://en.wikipedia.org/wiki/Eiichiro_Oda" },
+                    },
+
                 ArtistModels = new List<ArtistModel>
                     {
-                        new ArtistModel { FirstName = "Eiichiro Oda" },
+                        new ArtistModel { FirstName = "Eiichiro",
+    LastName = "Oda",
+    Biography = "Creator and artist of One Piece, Eiichiro Oda's unparalleled imagination has crafted one of the longest-running and beloved manga and anime series worldwide.",
+    BirthPlace = "Kumamoto, Japan",
+    Gender = "Male",
+    ArtistBorn = new DateTime(1975, 1, 1),
+    AmountOfWork = 1, // One Piece
+    WorkingAt = "Shueisha",
+    Twitter = "@Eiichiro_Staff", // Official staff account
+    NameInNative = "尾田 栄一郎",
+    Contact = "oda@onepiece.com", // Hypothetical contact
+    WikiPedia = "https://en.wikipedia.org/wiki/Eiichiro_Oda" },
                     },
                 VoiceActors = new List<VoiceActorModel>
                     {
-                        new VoiceActorModel { FirstName = "Mayumi Tanaka" },
-                        new VoiceActorModel { FirstName = "Akemi Okamura" },
-                        new VoiceActorModel { FirstName = "Kazuya Nakai" },
+                        new VoiceActorModel {  FirstName = "Mayumi",
+    LastName = "Tanaka",
+    Gender = "Female",
+    Biography = "Japanese voice actress renowned for her role as Monkey D. Luffy in One Piece. Her energetic voice has brought to life one of the most iconic characters in anime.",
+    BirthPlace = "Tokyo, Japan",
+    VoiceBorn = new DateTime(1955, 1, 15),
+    Twitter = "@MayumiTanaka", // Hypothetical handle
+    NameInNative = "田中 真弓",
+    Contact = "tanaka@voicepro.jp", // Hypothetical contact
+    WikiPedia = "https://en.wikipedia.org/wiki/Mayumi_Tanaka",
+    AmountOfWork = 100, // Hypothetical number of works
+    WorkingAt = "Freelance" },
+                        new VoiceActorModel {  FirstName = "Akemi",
+    LastName = "Okamura",
+    Gender = "Female",
+    Biography = "Voice actress known for her portrayal of Nami in One Piece. Okamura's voice perfectly captures Nami's complex character, from her cleverness to her vulnerability.",
+    BirthPlace = "Tokyo, Japan",
+    VoiceBorn = new DateTime(1969, 3, 12),
+    Twitter = "@AkemiOkamura", // Hypothetical handle
+    NameInNative = "岡村 明美",
+    Contact = "okamura@voiceagency.jp", // Hypothetical contact
+    WikiPedia = "https://en.wikipedia.org/wiki/Akemi_Okamura",
+    AmountOfWork = 80, // Hypothetical number of works
+    WorkingAt = "Freelance" },
+                        new VoiceActorModel { FirstName = "Kazuya",
+    LastName = "Nakai",
+    Gender = "Male",
+    Biography = "Esteemed for his role as Roronoa Zoro in One Piece, Kazuya Nakai's deep and powerful voice lends a significant depth to the swordsman's character.",
+    BirthPlace = "Kobe, Hyogo, Japan",
+    VoiceBorn = new DateTime(1967, 11, 25),
+    Twitter = "@KazuyaNakai", // Hypothetical handle
+    NameInNative = "中井 和哉",
+    Contact = "nakai@voices.jp", // Hypothetical contact
+    WikiPedia = "https://en.wikipedia.org/wiki/Kazuya_Nakai",
+    AmountOfWork = 120, // Hypothetical number of works
+    WorkingAt = "Freelance" },
                     },
 
                 TagsModels = new List<TagModel>
@@ -2086,25 +2269,75 @@ new Character {
         new OfficalWebsite { OfficalWebsiteString = "www.sailormoon.com", OfficalWebsiteName = "SailorMoon.Com",  },
         new OfficalWebsite { OfficalWebsiteString = "sailormoon.jp", OfficalWebsiteName = "SailorMoon.jp", },
     },
-                Authormodels = new List<AuthorModel>
-    {
-        new AuthorModel { FirstName = "Naoko Takeuchi" },
-    },
-                ArtistModels = new List<ArtistModel>
-    {
-        new ArtistModel { FirstName = "Naoko Takeuchi" },
-    },
                 BuyPages = new List<BuyPage>
     {
         new BuyPage { BuyWebsite ="https://www.amazon.com/Sailor-Moon-Kodansha-Comics-Edition/dp/1632366419", _Languages = new List<Languages>{ EnglishLanguage }},
         new BuyPage { BuyWebsite = "https://www.amazon.co.jp/SAILOR-MOON-SAILOR-MOON/dp/4088725093", _Languages = new List<Languages>{ JapaneseLanguage } }
     },
+                Authormodels = new List<AuthorModel>
+    {
+        new AuthorModel {  FirstName = "Naoko",
+        LastName = "Takeuchi",
+        Biography = "Japanese manga artist best known for creating Sailor Moon, a seminal series that redefined the magical girl genre. Her work has had a significant impact on pop culture worldwide.",
+        BirthPlace = "Kofu, Yamanashi, Japan",
+        Gender = "Female",
+        AuthorBorn = new DateTime(1967, 3, 15),
+        AmountOfWork = 1, // Mainly known for Sailor Moon
+        WorkingAt = "Kodansha",
+        Twitter = null, // Naoko Takeuchi is not known to have a public Twitter account
+        NameInNative = "武内 直子",
+        Contact = "contact@kodansha.co.jp", // Hypothetical contact
+        WikiPedia = "https://en.wikipedia.org/wiki/Naoko_Takeuchi" },
+    },
+                ArtistModels = new List<ArtistModel>
+    {
+        new ArtistModel {  FirstName = "Naoko",
+        LastName = "Takeuchi",
+        Biography = "Noted for her detailed and expressive artwork in Sailor Moon, Naoko Takeuchi has inspired countless artists and fans with her dedication and artistic skill.",
+        BirthPlace = "Kofu, Yamanashi, Japan",
+        Gender = "Female",
+        ArtistBorn = new DateTime(1967, 3, 15),
+        AmountOfWork = 1, // Mainly known for Sailor Moon
+        WorkingAt = "Kodansha",
+        Twitter = null, // Assuming no public Twitter account
+        NameInNative = "武内 直子",
+        Contact = "contact@kodansha.co.jp", // Hypothetical contact
+        WikiPedia = "https://en.wikipedia.org/wiki/Naoko_Takeuchi" },
+    },
+
                 AllLanguages = new List<Languages> { JapaneseLanguage, EnglishLanguage, FrenchLanguage },
                 VoiceActors = new List<VoiceActorModel>
     {
-        new VoiceActorModel { FirstName = "Kotono Mitsuishi" },
-        new VoiceActorModel { FirstName = "Aya Hisakawa" },
-        new VoiceActorModel { FirstName = "Emi Shinohara" },
+        new VoiceActorModel {  FirstName = "Kotono",
+        LastName = "Mitsuishi",
+        Gender = "Female",
+        Biography = "A leading Japanese voice actress renowned for her role as Usagi Tsukino in Sailor Moon. Her voice work has earned her critical acclaim and a devoted fanbase.",
+        BirthPlace = "Tokyo, Japan",
+        VoiceBorn = new DateTime(1967, 12, 8),
+        Twitter = "@kotochawanmoon", // Hypothetical handle
+        NameInNative = "三石 琴乃",
+        Contact = "mitsuishi@voiceacting.jp", // Hypothetical contact
+        WikiPedia = "https://en.wikipedia.org/wiki/Kotono_Mitsuishi" },
+        new VoiceActorModel { FirstName = "Aya",
+        LastName = "Hisakawa",
+        Gender = "Female",
+        Biography = "Esteemed for her voice role as Ami Mizuno in Sailor Moon, Aya Hisakawa's performances have captivated audiences, showcasing her versatility and emotional range.",
+        BirthPlace = "Osaka, Japan",
+        VoiceBorn = new DateTime(1968, 11, 12),
+        Twitter = "@aya_hisakawa", // Hypothetical handle
+        NameInNative = "久川 綾",
+        Contact = "hisakawa@voiceacting.jp", // Hypothetical contact
+        WikiPedia = "https://en.wikipedia.org/wiki/Aya_Hisakawa" },
+        new VoiceActorModel {  FirstName = "Emi",
+        LastName = "Shinohara",
+        Gender = "Female",
+        Biography = "Known for her role as Makoto Kino in Sailor Moon, Emi Shinohara's voice acting brings depth and strength to her characters, making her a beloved figure in the anime community.",
+        BirthPlace = "Nagano, Japan",
+        VoiceBorn = new DateTime(1963, 8, 8),
+        Twitter = "@emi_shinohara", // Hypothetical handle
+        NameInNative = "篠原 恵美",
+        Contact = "shinohara@voiceacting.jp", // Hypothetical contact
+        WikiPedia = "https://en.wikipedia.org/wiki/Emi_Shinohara" },
     },
                 GenresModels = new List<GenresModel>
     {
@@ -2242,7 +2475,11 @@ new Character {
 new AssociatedNames { nameString = "Detective Conan Comics" },
 new AssociatedNames { nameString = "Detective Conan Manga" },
 },
-
+                BuyPages = new List<BuyPage>
+    {
+        new BuyPage { BuyWebsite ="https://www.amazon.com/Sailor-Moon-Kodansha-Comics-Edition/dp/1632366419", _Languages = new List<Languages>{ EnglishLanguage }},
+        new BuyPage { BuyWebsite = "https://www.amazon.co.jp/SAILOR-MOON-SAILOR-MOON/dp/4088725093", _Languages = new List<Languages>{ JapaneseLanguage } }
+    },
                 OfficalWebsites = new List<OfficalWebsite>
             {
             new OfficalWebsite { OfficalWebsiteString = "www.detectiveConan.com", OfficalWebsiteName = "DetectiveConan.Com"},
@@ -2250,22 +2487,67 @@ new AssociatedNames { nameString = "Detective Conan Manga" },
             },
                 Authormodels = new List<AuthorModel>
             {
-            new AuthorModel { FirstName = "Gosho Aoyama" },
+            new AuthorModel {  FirstName = "Gosho",
+        LastName = "Aoyama",
+        Biography = "Japanese manga artist best known for creating Detective Conan (also known as Case Closed). His intricate plots and mystery genres have captivated readers globally.",
+        BirthPlace = "Hokuei, Tottori, Japan",
+        Gender = "Male",
+        AuthorBorn = new DateTime(1963, 6, 21),
+        AmountOfWork = 1, // Primarily known for Detective Conan
+        WorkingAt = "Shogakukan",
+        Twitter = null, // Gosho Aoyama is not known to have a public Twitter account
+        NameInNative = "青山 剛昌",
+        Contact = "aoyama@shogakukan.co.jp", // Hypothetical contact
+        WikiPedia = "https://en.wikipedia.org/wiki/Gosho_Aoyama" },
             },
                 ArtistModels = new List<ArtistModel>
             {
-            new ArtistModel { FirstName = "Gosho Aoyama" },
+            new ArtistModel {  FirstName = "Gosho",
+        LastName = "Aoyama",
+        Biography = "Creator of Detective Conan, Aoyama's detailed and expressive art style has made the series one of the longest-running and most beloved in manga history.",
+        BirthPlace = "Hokuei, Tottori, Japan",
+        Gender = "Male",
+        ArtistBorn = new DateTime(1963, 6, 21),
+        AmountOfWork = 1, // Detective Conan
+        WorkingAt = "Shogakukan",
+        Twitter = null, // Assuming no public Twitter account
+        NameInNative = "青山 剛昌",
+        Contact = "aoyama@shogakukan.co.jp", // Hypothetical contact
+        WikiPedia = "https://en.wikipedia.org/wiki/Gosho_Aoyama"},
             },
-                BuyPages = new List<BuyPage>
-    {
-        new BuyPage { BuyWebsite ="https://www.amazon.com/Sailor-Moon-Kodansha-Comics-Edition/dp/1632366419", _Languages = new List<Languages>{ EnglishLanguage }},
-        new BuyPage { BuyWebsite = "https://www.amazon.co.jp/SAILOR-MOON-SAILOR-MOON/dp/4088725093", _Languages = new List<Languages>{ JapaneseLanguage } }
-    },
+
                 VoiceActors = new List<VoiceActorModel>
             {
-            new VoiceActorModel { FirstName = "Minami Takayama" },
-            new VoiceActorModel { FirstName = "Wakana Yamazaki" },
-            new VoiceActorModel { FirstName = "Rikiya Koyama" },
+            new VoiceActorModel {  FirstName = "Minami",
+        LastName = "Takayama",
+        Gender = "Female",
+        Biography = "Renowned Japanese voice actress and singer, best known for her role as Conan Edogawa in Detective Conan. Her ability to convey Conan's intelligence and bravery has been pivotal to the series' success.",
+        BirthPlace = "Tokyo, Japan",
+        VoiceBorn = new DateTime(1964, 5, 5),
+        Twitter = "@minami_takayama", // Hypothetical handle
+        NameInNative = "高山 みなみ",
+        Contact = "takayama@voiceactor.jp", // Hypothetical contact
+        WikiPedia = "https://en.wikipedia.org/wiki/Minami_Takayama" },
+            new VoiceActorModel {   FirstName = "Wakana",
+        LastName = "Yamazaki",
+        Gender = "Female",
+        Biography = "A Japanese voice actress known for her role as Ran Mouri in Detective Conan. Her performance adds depth to Ran's character, making her one of the series' most beloved figures.",
+        BirthPlace = "Tokyo, Japan",
+        VoiceBorn = new DateTime(1965, 3, 21),
+        Twitter = "@wakana_yamazaki", // Hypothetical handle
+        NameInNative = "山崎 和佳奈",
+        Contact = "yamazaki@voiceactor.jp", // Hypothetical contact
+        WikiPedia = "https://en.wikipedia.org/wiki/Wakana_Yamazaki" },
+            new VoiceActorModel {  FirstName = "Rikiya",
+        LastName = "Koyama",
+        Gender = "Male",
+        Biography = "Esteemed Japanese voice actor, well-known for voicing Kogoro Mouri in Detective Conan. His portrayal of Kogoro's complex personality has contributed significantly to the series' intrigue and humor.",
+        BirthPlace = "Kyoto, Japan",
+        VoiceBorn = new DateTime(1963, 12, 18),
+        Twitter = "@rikiya_koyama", // Hypothetical handle
+        NameInNative = "小山 力也",
+        Contact = "koyama@voiceactor.jp", // Hypothetical contact
+        WikiPedia = "https://en.wikipedia.org/wiki/Rikiya_Koyama" },
             },
                 GenresModels = new List<GenresModel>
             {
@@ -2417,17 +2699,66 @@ new OfficalWebsite { OfficalWebsiteString = "AttackOnTitan.jp", OfficalWebsiteNa
 },
                 Authormodels = new List<AuthorModel>
 {
-new AuthorModel { FirstName = "Hajime Isayama" },
+new AuthorModel {  FirstName = "Hajime",
+        LastName = "Isayama",
+        Biography = "Japanese manga artist best known for creating the Attack on Titan series, which has become one of the best-selling manga series of all time. Isayama's unique storytelling and art style have garnered critical acclaim worldwide.",
+        BirthPlace = "Ōyama, Ōita, Japan",
+        Gender = "Male",
+        AuthorBorn = new DateTime(1986, 8, 29),
+        AmountOfWork = 1, // Attack on Titan
+        WorkingAt = "Kodansha",
+        Twitter = null, // Hajime Isayama is not known to have a public Twitter account
+        NameInNative = "諫山 創",
+        Contact = "isayama@kodansha.jp", // Hypothetical contact
+        WikiPedia = "https://en.wikipedia.org/wiki/Hajime_Isayama" },
 },
                 ArtistModels = new List<ArtistModel>
 {
-new ArtistModel { FirstName = "Hajime Isayama" },
+new ArtistModel { FirstName = "Hajime",
+        LastName = "Isayama",
+        Biography = "Known for his groundbreaking work on Attack on Titan, Hajime Isayama has redefined manga with his innovative storytelling and detailed art, captivating a global audience.",
+        BirthPlace = "Ōyama, Ōita, Japan",
+        Gender = "Male",
+        ArtistBorn = new DateTime(1986, 8, 29),
+        AmountOfWork = 1, // Attack on Titan
+        WorkingAt = "Kodansha",
+        Twitter = null, // Assuming no public Twitter account
+        NameInNative = "諫山 創",
+        Contact = "isayama@kodansha.jp", // Hypothetical contact
+        WikiPedia = "https://en.wikipedia.org/wiki/Hajime_Isayama" },
 },
                 VoiceActors = new List<VoiceActorModel>
 {
-new VoiceActorModel { FirstName = "Yuki Kaji" },
-new VoiceActorModel { FirstName = "Yui Ishikawa" },
-new VoiceActorModel { FirstName = "Marina Inoue" },
+new VoiceActorModel {  FirstName = "Yuki",
+        LastName = "Kaji",
+        Gender = "Male",
+        Biography = "Prominent Japanese voice actor known for his role as Eren Yeager in Attack on Titan. Kaji's intense and emotional portrayal has contributed greatly to the character's popularity.",
+        BirthPlace = "Tokyo, Japan",
+        VoiceBorn = new DateTime(1985, 9, 3),
+        Twitter = "@YukiKaji", // Hypothetical handle
+        NameInNative = "梶 裕貴",
+        Contact = "kaji@voiceactor.jp", // Hypothetical contact
+        WikiPedia =  "https://en.wikipedia.org/wiki/Yuki_Kaji" },
+new VoiceActorModel {  FirstName = "Yui",
+        LastName = "Ishikawa",
+        Gender = "Female",
+        Biography = "Japanese voice actress celebrated for her role as Mikasa Ackerman in Attack on Titan. Ishikawa's performance has been praised for its depth and strength, mirroring Mikasa's character.",
+        BirthPlace = "Hyogo, Japan",
+        VoiceBorn = new DateTime(1989, 5, 30),
+        Twitter = "@YuiIshikawa", // Hypothetical handle
+        NameInNative = "石川 由依",
+        Contact = "ishikawa@voiceactor.jp", // Hypothetical contact
+        WikiPedia = "https://en.wikipedia.org/wiki/Yui_Ishikawa"},
+new VoiceActorModel {  FirstName = "Marina",
+        LastName = "Inoue",
+        Gender = "Female",
+        Biography = "Known for voicing Armin Arlert in Attack on Titan, Marina Inoue has brought to life one of the series' most intellectually driven characters with her versatile voice acting.",
+        BirthPlace = "Tokyo, Japan",
+        VoiceBorn = new DateTime(1985, 1, 20),
+        Twitter = "@Mari_navi", // Hypothetical handle
+        NameInNative = "井上 麻里奈",
+        Contact = "inoue@voiceactor.jp", // Hypothetical contact
+        WikiPedia = "https://en.wikipedia.org/wiki/Marina_Inoue" },
 },
                 GenresModels = new List<GenresModel>
 {
@@ -2510,39 +2841,166 @@ tagAt5, tag4,tag5,tag6
                 userModels = null,
                 userId = null,
                 AllLanguages = new List<Languages> { EnglishLanguage },
+                AssociatedNames = new List<AssociatedNames>
+                {
+                new AssociatedNames { nameString = "LOTR"  },
+                new AssociatedNames { nameString = "In the Name of the King" } ,
+                },
                 BuyPages = new List<BuyPage>
         {
             new BuyPage { BuyWebsite = "https://www.amazon.com/Lord-Rings-Trilogy-Boxed-Set/dp/0544445783/ref=sr_1_1?keywords=lord+of+the+rings&qid=1645876628&sr=8-1", _Languages = new List<Languages> { EnglishLanguage } }
         },
-                AssociatedNames = new List<AssociatedNames>
-        {
-            new AssociatedNames { nameString = "LOTR" },
-            new AssociatedNames { nameString = "In the Name of the King" }
-        },
+
                 OfficalWebsites = new List<OfficalWebsite>
         {
             new OfficalWebsite { OfficalWebsiteString = "https://www.lordoftherings.net/", OfficalWebsiteName = "Lord of the Rings Official Site", Twitter = "https://twitter.com/lordoftherings", Facebook = "https://www.facebook.com/lordoftheringstrilogy/", Line = null }
         },
                 Authormodels = new List<AuthorModel>
         {
-            new AuthorModel { FirstName = "J.R.R.", LastName = "Tolkien", Biography = "John Ronald Reuel Tolkien CBE FRSL (3 January 1892 – 2 September 1973) was an English writer, poet, philologist, and academic. He is best known as the author of the high fantasy works The Hobbit, The Lord of the Rings, and The Silmarillion." }
+            new AuthorModel {  FirstName = "J.R.R.",
+        LastName = "Tolkien",
+        Biography = "John Ronald Reuel Tolkien CBE FRSL (3 January 1892 – 2 September 1973) was an English writer, poet, philologist, and academic. He is best known as the author of the high fantasy works The Hobbit, The Lord of the Rings, and The Silmarillion.",
+        BirthPlace = "Bloemfontein, South Africa",
+        Gender = "Male",
+        AuthorBorn = new DateTime(1892, 1, 3),
+        AuthorDeath = new DateTime(1973, 9, 2),
+        AmountOfWork = 3, // The Hobbit, The Lord of the Rings, The Silmarillion
+        WorkingAt = "Oxford University",
+        Twitter = null, // Tolkien's era predates social media
+        NameInNative = "J.R.R. Tolkien",
+        Contact = "info@tolkiensociety.org", // Hypothetical contact based on the Tolkien Society
+        WikiPedia = "https://en.wikipedia.org/wiki/J._R._R._Tolkien"}
         },
                 ArtistModels = new List<ArtistModel>
 {
-    new ArtistModel { FirstName = "Alan", LastName = "Lee", Biography = "Alan Lee is an English artist and writer. He is best known for his illustration work based on J. R. R. Tolkien's Middle-earth fantasy writings. He won an Academy Award for Best Art Direction for his work on the 2003 film The Lord of the Rings: The Return of the King." },
-    new ArtistModel { FirstName = "John", LastName = "Howe", Biography = "John Howe is a Canadian book illustrator, living in Neuchâtel, Switzerland. One year after studying in a college in Oakville, Howe moved to France. He has illustrated many fantasy books, including The Lord of the Rings and The Hobbit by J. R. R. Tolkien, and is one of the conceptual designers employed by Peter Jackson's The Lord of the Rings film trilogy." },
-    new ArtistModel { FirstName = "Ted", LastName = "Nasmith", Biography = "Ted Nasmith is a Canadian artist and illustrator. He is best known for his illustration work based on J. R. R. Tolkien's Middle-earth fantasy writings, and has produced several Tolkien-themed calendars and illustrated editions of The Silmarillion, The Lord of the Rings and The Hobbit." },
-    new ArtistModel { FirstName = "Roger", LastName = "Garland", Biography = "Roger Garland is an artist and illustrator from the United Kingdom. He is known for his illustration work based on J. R. R. Tolkien's Middle-earth fantasy writings, and has created artwork for various editions of The Hobbit and The Lord of the Rings, as well as other fantasy works." },
-    new ArtistModel { FirstName = "Donato", LastName = "Giancola", Biography = "Donato Giancola is an American artist and illustrator, best known for his work in the science fiction and fantasy genres. He has created artwork for a number of book covers, including editions of The Lord of the Rings and The Hobbit, as well as works by other authors in the genre." },
-    new ArtistModel { FirstName = "Michael", LastName = "Hague", Biography = "Michael Hague is an American illustrator and author, known for his work in the fantasy genre. He has created artwork for numerous children's books, including editions of The Hobbit and The Lord of the Rings, as well as works by other authors." }
+    new ArtistModel
+    {
+        FirstName = "Alan",
+        LastName = "Lee",
+        Biography = "Alan Lee is an English artist and writer. He is best known for his illustration work based on J. R. R. Tolkien's Middle-earth fantasy writings. He won an Academy Award for Best Art Direction for his work on the 2003 film The Lord of the Rings: The Return of the King.",
+        BirthPlace = "Middlesex, England",
+        Gender = "Male",
+        ArtistBorn = new DateTime(1947, 8, 20),
+        NameInNative = "Alan Lee",
+        Contact = "alanlee@middleeartharts.com", // Hypothetical contact
+        WikiPedia = "https://en.wikipedia.org/wiki/Alan_Lee_(illustrator)"
+    },
+    new ArtistModel
+    {
+        FirstName = "John",
+        LastName = "Howe",
+        Biography = "John Howe is a Canadian book illustrator, living in Neuchâtel, Switzerland. He has illustrated many fantasy books, including The Lord of the Rings and The Hobbit by J. R. R. Tolkien, and is one of the conceptual designers employed by Peter Jackson's The Lord of the Rings film trilogy.",
+        BirthPlace = "Vancouver, Canada",
+        Gender = "Male",
+        ArtistBorn = new DateTime(1957, 8, 21),
+        NameInNative = "John Howe",
+        Contact = "johnhowe@fantasyarts.net", // Hypothetical contact
+        WikiPedia = "https://en.wikipedia.org/wiki/John_Howe_(illustrator)"
+    },
+    new ArtistModel
+    {
+        FirstName = "Ted",
+        LastName = "Nasmith",
+        Biography = "Ted Nasmith is a Canadian artist and illustrator. He is best known for his illustration work based on J. R. R. Tolkien's Middle-earth fantasy writings, and has produced several Tolkien-themed calendars and illustrated editions of The Silmarillion, The Lord of the Rings, and The Hobbit.",
+        BirthPlace = "Godrich, Ontario, Canada",
+        Gender = "Male",
+        ArtistBorn = new DateTime(1956, 1, 1), // Hypothetical birth date
+        NameInNative = "Ted Nasmith",
+        Contact = "tednasmith@tolkienarts.com", // Hypothetical contact
+        WikiPedia = "https://en.wikipedia.org/wiki/Ted_Nasmith"
+    },
+    new ArtistModel
+    {
+        FirstName = "Roger",
+        LastName = "Garland",
+        Biography = "Roger Garland is an artist and illustrator from the United Kingdom. He is known for his illustration work based on J. R. R. Tolkien's Middle-earth fantasy writings, and has created artwork for various editions of The Hobbit and The Lord of the Rings, as well as other fantasy works.",
+        BirthPlace = "United Kingdom",
+        Gender = "Male",
+        ArtistBorn = new DateTime(1950, 4, 10), // Hypothetical birth date
+        NameInNative = "Roger Garland",
+        Contact = "rogergarland@fantasyillustrations.com", // Hypothetical contact
+        WikiPedia = "https://en.wikipedia.org/wiki/Roger_Garland_(illustrator)" // This is a fabricated link for demonstration
+    },
+    new ArtistModel
+    {
+        FirstName = "Donato",
+        LastName = "Giancola",
+        Biography = "Donato Giancola is an American artist and illustrator, best known for his work in the science fiction and fantasy genres. He has created artwork for a number of book covers, including editions of The Lord of the Rings and The Hobbit, as well as works by other authors in the genre.",
+        BirthPlace = "Colchester, Vermont, USA",
+        Gender = "Male",
+        ArtistBorn = new DateTime(1967, 5, 25),
+        NameInNative = "Donato Giancola",
+        Contact = "donatogiancola@sciart.com", // Hypothetical contact
+        WikiPedia = "https://en.wikipedia.org/wiki/Donato_Giancola"
+    },
+    new ArtistModel
+    {
+        FirstName = "Michael",
+        LastName = "Hague",
+        Biography = "Michael Hague is an American illustrator and author, known for his work in the fantasy genre. He has created artwork for numerous children's books, including editions of The Hobbit and The Lord of the Rings, as well as works by other authors.",
+        BirthPlace = "Los Angeles, California, USA",
+        Gender = "Male",
+        ArtistBorn = new DateTime(1948, 9, 8),
+        NameInNative = "Michael Hague",
+        Contact = "michaelhague@childrensbooks.com", // Hypothetical contact
+        WikiPedia = "https://en.wikipedia.org/wiki/Michael_Hague"
+    }
 },
+
                 VoiceActors = new List<VoiceActorModel>
 {
-    new VoiceActorModel { FirstName = "Rob Inglis", CharacterName = "Narrator" },
-    new VoiceActorModel { FirstName = "Ian Holm", CharacterName = "Bilbo Baggins" },
-    new VoiceActorModel { FirstName = "Andy Serkis", CharacterName = "Gollum" },
-    new VoiceActorModel { FirstName = "Christopher Lee", CharacterName = "Saruman" }
+    new VoiceActorModel
+    {
+        FirstName = "Rob",
+        LastName = "Inglis",
+        CharacterName = "Narrator",
+        Gender = "Male",
+        Biography = "Rob Inglis is known for his unabridged narrations of The Hobbit and The Lord of the Rings for Recorded Books.",
+        VoiceBorn = new DateTime(1933, 10, 10), // Hypothetical birth date
+        Twitter = "@RobInglisNarrator", // Hypothetical handle
+        NameInNative = "Rob Inglis",
+        Contact = "robinglis@audiobooks.com", // Hypothetical contact
+    },
+    new VoiceActorModel
+    {
+        FirstName = "Ian",
+        LastName = "Holm",
+        CharacterName = "Bilbo Baggins",
+        Gender = "Male",
+        Biography = "Ian Holm was a British actor known for his role as Bilbo Baggins in The Lord of the Rings film series.",
+        VoiceBorn = new DateTime(1931, 9, 12), // Actual birth date
+        VoiceDeath = new DateTime(2020, 6, 19), // Actual death date
+        Twitter = null, // Ian Holm's era largely predates social media
+        NameInNative = "Ian Holm",
+        Contact = "legacy@ianholm.com", // Hypothetical contact
+    },
+    new VoiceActorModel
+    {
+        FirstName = "Andy",
+        LastName = "Serkis",
+        CharacterName = "Gollum",
+        Gender = "Male",
+        Biography = "Andy Serkis, an English actor and director, gained fame for his performance as Gollum in The Lord of the Rings and The Hobbit film trilogies, utilizing motion capture technology.",
+        VoiceBorn = new DateTime(1964, 4, 20),
+        Twitter = "@andyserkis",
+        NameInNative = "Andy Serkis",
+        Contact = "contact@andyserkis.com", // Hypothetical contact
+    },
+    new VoiceActorModel
+    {
+        FirstName = "Christopher",
+        LastName = "Lee",
+        CharacterName = "Saruman",
+        Gender = "Male",
+        Biography = "Sir Christopher Lee was an English actor, singer, and author known for his role as Saruman in The Lord of the Rings and The Hobbit film trilogies.",
+        VoiceBorn = new DateTime(1922, 5, 27),
+        VoiceDeath = new DateTime(2015, 6, 7),
+        Twitter = null, // Christopher Lee's era largely predates social media
+        NameInNative = "Christopher Lee",
+        Contact = "legacy@christopherlee.com", // Hypothetical contact
+    },
 },
+
                 GenresModels = new List<GenresModel>
         {
             genre1,
@@ -2725,12 +3183,10 @@ new Character
             var Artist5 = context.artistModels.FirstOrDefault(a => a.FirstName == "Donato" && a.LastName == "Giancola");
             var Artist6 = context.artistModels.FirstOrDefault(a => a.FirstName == "Michael" && a.LastName == "Hague");
             var Author1 = context.authorModels.FirstOrDefault(at => at.FirstName == "J.R.R.");
-            var voiceactor1 = context.voiceActorModels.FirstOrDefault(v => v.FirstName == "Rob Inglis");
-            var voiceactor2 = context.voiceActorModels.FirstOrDefault(v => v.FirstName == "Ian Holm");
-            var voiceactor3 = context.voiceActorModels.FirstOrDefault(v => v.FirstName == "Andy Serkis");
-            var voiceactor4 = context.voiceActorModels.FirstOrDefault(v => v.FirstName == "Christopher Lee");
-            var assoicatedNames = context.AssociatedNames.FirstOrDefault(an => an.nameString == "LOTR");
-            var assoicatedNames2 = context.AssociatedNames.FirstOrDefault(an => an.nameString == "In the Name of the King");
+            var voiceactor1 = context.voiceActorModels.FirstOrDefault(v => v.FirstName == "Rob");
+            var voiceactor2 = context.voiceActorModels.FirstOrDefault(v => v.FirstName == "Ian");
+            var voiceactor3 = context.voiceActorModels.FirstOrDefault(v => v.FirstName == "Andy");
+            var voiceactor4 = context.voiceActorModels.FirstOrDefault(v => v.FirstName == "Christopher");
 
             #region chars
 
@@ -2793,7 +3249,8 @@ new Character
         },
                 AssociatedNames = new List<AssociatedNames>
         {
-           assoicatedNames, assoicatedNames2
+             new AssociatedNames { nameString = "TestData"  },
+                new AssociatedNames { nameString = "Fix Data for characters" } ,
         },
                 OfficalWebsites = new List<OfficalWebsite>
         {
@@ -2982,15 +3439,69 @@ new Character
 
                 Authormodels = new List<AuthorModel>
     {
-        new AuthorModel { FirstName = "Chu-Gong" },
+        new AuthorModel
+    {
+        FirstName = "Chu-Gong",
+        Biography = "South Korean web novel author, best known for writing Solo Leveling, a highly popular web novel that has been adapted into a webtoon. Chu-Gong's story combines action, adventure, and fantasy in a unique world where hunters gain power to battle monsters.",
+        BirthPlace = "South Korea",
+        Gender = "Male",
+        AuthorBorn = new DateTime(1980, 1, 1), // Hypothetical birth date
+        AmountOfWork = 1, // Mainly known for Solo Leveling
+        WorkingAt = "D&C Media",
+        Twitter = null, // Assuming no public Twitter account
+        NameInNative = "추공",
+        Contact = "chugong@solo.com", // Hypothetical contact
+        WikiPedia = null, // Assuming no dedicated Wikipedia page
+    },
     },
 
                 ArtistModels = new List<ArtistModel>
     {
-        new ArtistModel { FirstName = "Jang Sung-Rak" },
+        new ArtistModel
+    {
+        FirstName = "Jang",
+        LastName = "Sung-Rak",
+        Biography = "Known as Dubu, Jang Sung-Rak is the CEO of Redice Studio and the artist behind the Solo Leveling webtoon. His artwork brings to life the intricate details of the Solo Leveling world, captivating fans with dynamic action scenes and vivid character portrayals.",
+        BirthPlace = "South Korea",
+        Gender = "Male",
+        ArtistBorn = new DateTime(1975, 6, 20), // Hypothetical birth date
+        AmountOfWork = 1, // Solo Leveling
+        WorkingAt = "Redice Studio",
+        Twitter = "@Dubu_Redice", // Hypothetical handle
+        NameInNative = "장성락 (Dubu)",
+        Contact = "jangsung@solo.com", // Hypothetical contact
+        WikiPedia = null, // Assuming no dedicated Wikipedia page
+    },
     },
 
-                VoiceActors = new List<VoiceActorModel>(),
+                VoiceActors = new List<VoiceActorModel> {  new VoiceActorModel
+    {
+        FirstName = "Taito",
+        LastName = "Ban",
+        Gender = "Male",
+        Biography = "A Japanese voice actor known for voicing Sung Jin-Woo in the anime adaptation of Solo Leveling. His performance brings to life the depth and complexity of the protagonist.",
+        BirthPlace = "Tokyo, Japan", // Hypothetical birthplace, as specific details might not be widely known
+        VoiceBorn = new DateTime(1986, 4, 25), // Hypothetical birth date
+        Twitter = "@TaitoBan", // Hypothetical handle, assuming availability
+        NameInNative = "伴 太斗", // Standard representation
+        Contact = "ban@voiceagency.jp", // Hypothetical contact
+        WikiPedia = "https://myanimelist.net/people/48849/Taito_Ban", // Reference to a profile
+        CharacterName = "Sung Jin-Woo"
+    },
+    new VoiceActorModel
+    {
+        FirstName = "Reina",
+        LastName = "Ueda",
+        Gender = "Female",
+        Biography = "Japanese voice actress Reina Ueda is known for her role as Cha Hae-In in Solo Leveling. Her voice acting adds a rich layer of personality to the character, enhancing the story's immersive experience.",
+        BirthPlace = "Toyama, Japan",
+        VoiceBorn = new DateTime(1994, 1, 17),
+        Twitter = "@ReinaUeda_Staff", // Hypothetical handle
+        NameInNative = "上田 麗奈",
+        Contact = "ueda@voiceagency.jp", // Hypothetical contact
+        WikiPedia = "https://myanimelist.net/people/18593/Reina_Ueda",
+        CharacterName = "Cha Hae-In"
+    }, },
             };
 
             context.mangaModels.Add(manga);
@@ -3048,13 +3559,51 @@ new Character
         },
                 Authormodels = new List<AuthorModel>
         {
-            new AuthorModel { FirstName = "S.I.", LastName = "UWoo" },
+          new AuthorModel
+    {
+        FirstName = "S.I.",
+        LastName = "Uoo", // Assuming a typo in the initial entry, correcting to SIU's known pen name
+        Biography = "Known by his pen name SIU (Slave In Utero), he is the author and artist behind the popular webtoon Tower of God. The series has garnered attention for its intricate plot and detailed world-building.",
+        BirthPlace = "South Korea", // Specific birthplace details are not publicly disclosed
+        Gender = "Male",
+        AuthorBorn = new DateTime(1985, 11, 29), // Hypothetical birth date
+        AmountOfWork = 1, // Tower of God
+        WorkingAt = "Naver Webtoon",
+        Twitter = "@SIU_Manwha", // Hypothetical handle, as specific social media details are scarce
+        NameInNative = "S.I.Uoo",
+        Contact = "siu@naverwebtoon.kr", // Hypothetical contact
+        WikiPedia = "https://en.wikipedia.org/wiki/Tower_of_God",
+    },
         },
                 ArtistModels = new List<ArtistModel>
         {
-            new ArtistModel { FirstName = "LEE", LastName = "Jong-hui" },
+             new ArtistModel
+    {
+        FirstName = "LEE",
+        LastName = "Jong-hui", // Correcting to reflect SIU's real name
+        Biography = "LEE Jong-hui, known by his pen name SIU, is both the author and artist of Tower of God. His work on the series showcases a unique art style that has contributed to its success across the globe.",
+        BirthPlace = "South Korea", // As above, specific details are not widely disclosed
+        Gender = "Male",
+        ArtistBorn = new DateTime(1985, 11, 29), // Matching the author entry
+        AmountOfWork = 1, // Reflecting his work on Tower of God
+        WorkingAt = "Naver Webtoon",
+        Twitter = "@SIU_Manwha", // Assuming the same hypothetical handle
+        NameInNative = "이종휘",
+        Contact = "leejonghui@naverwebtoon.kr", // Hypothetical contact
+        WikiPedia = "https://en.wikipedia.org/wiki/Tower_of_God",
+    },
         },
-                VoiceActors = new List<VoiceActorModel>(),
+                VoiceActors = new List<VoiceActorModel> { new VoiceActorModel {FirstName = "Taichi",
+    LastName = "Ichikawa",
+    Gender = "Male",
+    Biography = "Japanese voice actor known for his role as Twenty-Fifth Bam in the anime adaptation of Tower of God. His performance captures the innocence and determination of Bam, resonating well with fans of the series.",
+    BirthPlace = "Tokyo, Japan",
+    VoiceBorn = new DateTime(1992, 3, 29),
+    Twitter = "@TaichiIchikawa", // Hypothetical handle
+    NameInNative = "市川 太一",
+    Contact = "ichikawa@voiceagency.jp", // Hypothetical contact
+    WikiPedia = "https://en.wikipedia.org/wiki/Taichi_Ichikawa", // Assuming a page exists
+    CharacterName = "Twenty-Fifth Bam" }, },
                 GenresModels = new List<GenresModel>
         {
           Gen1ToManga1,
@@ -3206,16 +3755,90 @@ new Character {
     },
                 Authormodels = new List<AuthorModel>
     {
-        new AuthorModel { FirstName = "Miguel de", LastName = "Cervantes",  Biography = "An acclaimed Spanish writer who is widely regarded as one of the greatest writers in the Spanish language and one of the world's pre-eminent novelists." },
+        new AuthorModel
+    {
+        FirstName = "Miguel de",
+        LastName = "Cervantes",
+        Biography = "An acclaimed Spanish writer who is widely regarded as one of the greatest writers in the Spanish language and one of the world's pre-eminent novelists. His masterpiece, Don Quixote, is considered a founding work of Western literature.",
+        BirthPlace = "Alcalá de Henares, Spain",
+        Gender = "Male",
+        AuthorBorn = new DateTime(1547, 9, 29),
+        AuthorDeath = new DateTime(1616, 4, 22),
+        AmountOfWork = 2, // Don Quixote and various other works
+        WorkingAt = "Spanish Royal Court", // Hypothetically speaking, given the era
+        Twitter = null,
+        NameInNative = "Miguel de Cervantes Saavedra",
+        Contact = "info@literaturaespanola.es", // Hypothetical contact
+        WikiPedia = "https://en.wikipedia.org/wiki/Miguel_de_Cervantes",
+    },
     },
                 ArtistModels = new List<ArtistModel> {
-        new ArtistModel { FirstName = "Gustave", LastName = "Doré", Biography = "A French artist, engraver, illustrator, and sculptor. Doré worked primarily with wood engraving and steel engraving." },
-        new ArtistModel { FirstName = "Francisco", LastName = "Rico", Biography = "A Spanish literary critic and academician. He is an expert in C " }
+     new ArtistModel
+    {
+        FirstName = "Gustave",
+        LastName = "Doré",
+        Biography = "A French artist, engraver, illustrator, and sculptor. Doré worked primarily with wood engraving and steel engraving. He is renowned for his detailed illustrations that bring literary works to life, including the epic Don Quixote.",
+        BirthPlace = "Strasbourg, France",
+        Gender = "Male",
+        ArtistBorn = new DateTime(1832, 1, 6),
+        ArtistDeath = new DateTime(1883, 1, 23),
+        NameInNative = "Paul Gustave Louis Christophe Doré",
+        Contact = "info@doregallery.com", // Hypothetical contact
+        WikiPedia = "https://en.wikipedia.org/wiki/Gustave_Dor%C3%A9",
+    },
+    new ArtistModel
+    {
+        FirstName = "Francisco",
+        LastName = "Rico",
+        Biography = "A Spanish literary critic and academician. He is an expert in Medieval and Golden Age Spanish Literature, with a focus on the works of Miguel de Cervantes. Rico has contributed extensively to the study and annotation of Don Quixote.",
+        BirthPlace = "Barcelona, Spain", // Hypothetical, based on academic affiliation
+        Gender = "Male",
+        ArtistBorn = new DateTime(1942, 11, 27), // Hypothetical birth date
+        NameInNative = "Francisco Rico Manrique",
+        Contact = "frico@universidad.es", // Hypothetical contact
+        WikiPedia = "https://en.wikipedia.org/wiki/Francisco_Rico", // Assuming a page exists
+    }
                 },
                 VoiceActors = new List<VoiceActorModel> {
-new VoiceActorModel { FirstName = "John", LastName = "Lescault" },
-new VoiceActorModel { FirstName = "Robert", LastName = "Whitmire" },
-new VoiceActorModel { FirstName = "George", LastName = "Guidall" },
+  new VoiceActorModel
+    {
+        FirstName = "John",
+        LastName = "Lescault",
+        Gender = "Male",
+        Biography = "An accomplished voice actor known for his rich narrative style, John Lescault has lent his voice to a variety of audiobooks and dramatic readings. His ability to convey deep, nuanced emotions makes him a sought-after narrator for classic literature.",
+        BirthPlace = "Washington, D.C., USA", // Hypothetical
+        VoiceBorn = new DateTime(1960, 4, 15), // Hypothetical birth date
+        Twitter = "@JohnLescault", // Hypothetical handle
+        NameInNative = "John Lescault",
+        Contact = "jlescault@voiceactorsguild.com", // Hypothetical contact
+        WikiPedia = "https://en.wikipedia.org/wiki/John_Lescault", // Assuming a page exists
+    },
+    new VoiceActorModel
+    {
+        FirstName = "Robert",
+        LastName = "Whitmire",
+        Gender = "Male",
+        Biography = "Robert Whitmire, with his dynamic range and expressive depth, has become a prominent voice in the world of audiobook narration. His interpretations of classic and contemporary works alike resonate with listeners around the globe.",
+        BirthPlace = "Los Angeles, California, USA", // Hypothetical
+        VoiceBorn = new DateTime(1965, 7, 20), // Hypothetical birth date
+        Twitter = "@RobertWhitmire", // Hypothetical handle
+        NameInNative = "Robert Whitmire",
+        Contact = "rwhitmire@voiceactorsguild.com", // Hypothetical contact
+        WikiPedia = "https://en.wikipedia.org/wiki/Robert_Whitmire", // Assuming a page exists
+    },
+    new VoiceActorModel
+    {
+        FirstName = "George",
+        LastName = "Guidall",
+        Gender = "Male",
+        Biography = "George Guidall is an award-winning narrator with hundreds of audiobooks to his credit. Renowned for his storytelling prowess, Guidall's voice has brought to life some of literature's most enduring works, making him a legend in the audiobook industry.",
+        BirthPlace = "New York City, New York, USA", // Real data, as Guidall is a known narrator
+        VoiceBorn = new DateTime(1938, 6, 7), // Real birth date
+        Twitter = "@GeorgeGuidall", // Hypothetical handle
+        NameInNative = "George Guidall",
+        Contact = "gguidall@audiobooknarrators.com", // Hypothetical contact
+        WikiPedia = "https://en.wikipedia.org/wiki/George_Guidall", // Real Wikipedia page
+    },
 },
                 GenresModels = new List<GenresModel>
 {
@@ -3346,15 +3969,73 @@ new Character
         },
                 Authormodels = new List<AuthorModel>
         {
-            new AuthorModel { FirstName = "Kohei", LastName = "Horikoshi",  Biography = "A Japanese manga artist known for creating the My Hero Academia series." },
+            new AuthorModel {    FirstName = "Kohei",
+        LastName = "Horikoshi",
+        Biography = "A Japanese manga artist known for creating the My Hero Academia series, which has become a worldwide phenomenon for its unique take on the superhero genre, blending Japanese manga aesthetics with Western superhero motifs.",
+        BirthPlace = "Aichi Prefecture, Japan",
+        Gender = "Male",
+        AuthorBorn = new DateTime(1986, 11, 20),
+        AmountOfWork = 1, // My Hero Academia
+        WorkingAt = "Shueisha",
+        Twitter = "@horikoshiko",
+        NameInNative = "堀越 耕平",
+        Contact = "info@shueisha.co.jp", // Hypothetical contact based on publisher
+        WikiPedia = "https://en.wikipedia.org/wiki/K%C5%8Dhei_Horikoshi"},
         },
                 ArtistModels = new List<ArtistModel> {
-            new ArtistModel { FirstName = "Kohei", LastName = "Horikoshi", Biography = "A Japanese manga artist known for creating the My Hero Academia series." }
+            new ArtistModel {  FirstName = "Kohei",
+        LastName = "Horikoshi",
+        Biography = "Renowned for his work on My Hero Academia, Kohei Horikoshi has garnered acclaim for his dynamic art style and compelling character designs, contributing significantly to the manga's success both in Japan and internationally.",
+        BirthPlace = "Aichi Prefecture, Japan",
+        Gender = "Male",
+        ArtistBorn = new DateTime(1986, 11, 20),
+        AmountOfWork = 1, // Reiterating My Hero Academia
+        WorkingAt = "Shueisha",
+        Twitter = "@horikoshiko",
+        NameInNative = "堀越 耕平",
+        Contact = "info@shueisha.co.jp", // Assuming similar contact details
+        WikiPedia = "https://en.wikipedia.org/wiki/K%C5%8Dhei_Horikoshi" }
         },
                 VoiceActors = new List<VoiceActorModel> {
-            new VoiceActorModel { FirstName = "Daiki", LastName = "Yamashita" },
-            new VoiceActorModel { FirstName = "Kenta", LastName = "Miyake" },
-            new VoiceActorModel { FirstName = "Nobuhiko", LastName = "Okamoto" },
+              new VoiceActorModel
+    {
+        FirstName = "Daiki",
+        LastName = "Yamashita",
+        Gender = "Male",
+        Biography = "Daiki Yamashita is celebrated for his role as Izuku Midoriya in My Hero Academia. His ability to convey the character's heartfelt determination and vulnerability has made Midoriya one of the most beloved protagonists in recent anime.",
+        BirthPlace = "Shizuoka Prefecture, Japan",
+        VoiceBorn = new DateTime(1989, 9, 7),
+        Twitter = "@D_Yamashita48",
+        NameInNative = "山下 大輝",
+        Contact = "yamashita@voiceagency.jp", // Hypothetical contact
+        WikiPedia = "https://en.wikipedia.org/wiki/Daiki_Yamashita",
+        CharacterName = "Izuku Midoriya"
+    },
+    new VoiceActorModel
+    {
+        FirstName = "Kenta",
+        LastName = "Miyake",
+        Gender = "Male",
+        Biography = "Kenta Miyake is known for his role as All Might in My Hero Academia, bringing to life the iconic symbol of peace with his deep, powerful voice that's both inspiring and comforting.",
+        BirthPlace = "Okaya, Nagano, Japan",
+        VoiceBorn = new DateTime(1977, 8, 23),
+        Twitter = "@MiyakeKenta",
+        NameInNative = "三宅 健太",
+        Contact = "miyake@voiceagency.jp", // Hypothetical contact
+        WikiPedia = "https://en.wikipedia.org/wiki/Kenta_Miyake",
+        CharacterName = "All Might"
+    },
+            new VoiceActorModel {  FirstName = "Nobuhiko",
+        LastName = "Okamoto",
+        Gender = "Male",
+        Biography = "Nobuhiko Okamoto is acclaimed for his versatile voice acting skills, notably for his role as Katsuki Bakugo in My Hero Academia. His portrayal adds depth to Bakugo's fiery, complex personality.",
+        BirthPlace = "Tokyo, Japan",
+        VoiceBorn = new DateTime(1986, 10, 24),
+        Twitter = "@nobuhiko_okamoto",
+        NameInNative = "岡本 信彦",
+        Contact = "okamoto@voiceagency.jp", // Hypothetical contact
+         WikiPedia = "https://en.wikipedia.org/wiki/Nobuhiko_Okamoto",
+        CharacterName = "Katsuki Bakugou" },
         },
                 GenresModels = new List<GenresModel>
         {
