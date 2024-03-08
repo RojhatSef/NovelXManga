@@ -19,11 +19,16 @@ namespace NovelXManga.Pages.CharacterPage
         private readonly IReviewRepsitory reviewRepsitory;
 
         [BindProperty]
-        public Character CurrentCharacter { get; set; } // Adjusted to CharacterDTO
+        public Character CurrentCharacter { get; set; }
 
-        public CharacterDTO CurrentCharacterDTO { get; set; } // Adjusted to CharacterDTO
+        public CharacterDTO CurrentCharacterDTO { get; set; }
 
-        // Ensure you declare these properties to hold your DTO objects
+        [BindProperty]
+        public List<OfficalWebsiteDTO> OfficialWebsites { get; set; }
+
+        [BindProperty]
+        public List<AssociatedNameDTO> AssociatedNames { get; set; }
+
         [BindProperty]
         public List<MangaModelDTO> CurrentMangas { get; set; } = new List<MangaModelDTO>();
 
@@ -56,11 +61,31 @@ namespace NovelXManga.Pages.CharacterPage
                 .Select(c => new
                 {
                     Character = c,
+                    c.CharacterId,
+                    c.CharacterName,
                     MangaModels = c.MangaModels.Take(5).Select(m => new MangaModelDTO
                     {
                         MangaID = m.MangaID,
                         MangaName = m.MangaName,
                         PhotoPath = m.PhotoPath
+                    }).ToList(),
+                    OfficalWebsites = c.OfficalWebsites.Select(ow => new OfficalWebsiteDTO
+                    {
+                        OfficalID = ow.OfficalID,
+                        OfficalWebsiteName = ow.OfficalWebsiteName,
+                        Twitter = ow.Twitter,
+                        Facebook = ow.Facebook,
+                        Line = ow.Line,
+                        Naver = ow.Naver,
+                        Instagram = ow.Instagram,
+                        OfficalWebsiteString = ow.OfficalWebsiteString,
+                        CharacterId = ow.CharacterId
+                    }).ToList(),
+                    AssociatedNames = c.AssociatedNames.Select(an => new AssociatedNameDTO
+                    {
+                        AssociatedNamesId = an.AssociatedNamesId,
+                        Name = an.nameString,
+                        CharacterId = an.CharacterId
                     }).ToList(),
                     Family = c.Family.Take(5).Select(f => new CharacterDTO
                     {
@@ -79,6 +104,8 @@ namespace NovelXManga.Pages.CharacterPage
             CurrentCharacter = characterProjection.Character;
             CurrentMangas = characterProjection.MangaModels;
             FamilyMembers = characterProjection.Family;
+            OfficialWebsites = characterProjection.OfficalWebsites;
+            AssociatedNames = characterProjection.AssociatedNames;
 
             // If you still need the CurrentCharacterDTO for any reason, you can fill it like this:
             CurrentCharacterDTO = new CharacterDTO

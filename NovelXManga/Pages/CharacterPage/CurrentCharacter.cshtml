@@ -113,7 +113,9 @@
     </div>
     <hr / class="CUS-DescriptionDiver">
     <div class="CUS-CommonContainer">
-        <div class="CUS-LeftSide">
+ 
+          
+            <div class="CUS-LeftSide">
             <div class="CUS-LeftSidemangaDetailsBox">
                 <h3>Gender:</h3>
                 <div class="CUS-MangaContainerInput">
@@ -138,7 +140,74 @@
                     </div>
                 </div>
             </div>
+                @if (@Model.AssociatedNames != null && @Model.AssociatedNames.Any())
+                {
+                    <div class="CUS-LeftSidemangaDetailsBox">
 
+                        <h3>Associated names:</h3>
+                        <div class="CUS-MangaContainerInput">
+
+                            @if (UpdaterUser)
+                            {
+                                <a asp-page="/MangaUpdates/CHANGE" asp-route-id="@Model.CurrentCharacter.CharacterId">
+                                    @foreach (var item in Model.AssociatedNames)
+                                    {
+                                        <div class="CUS-MangaInputText">@item.Name</div>
+
+                                    }
+                                </a>
+                            }
+                            else
+                            {
+                                @foreach (var item in Model.CurrentCharacter.AssociatedNames)
+                                {
+                                    <div class="CUS-MangaInputText">@item.nameString</div>
+
+                                }
+                            }
+
+
+
+                        </div>
+                    </div>
+                }
+                @if (Model.OfficialWebsites != null && Model.OfficialWebsites.Any())
+                {
+                    <div class="CUS-LeftSidemangaDetailsBox">
+                        <h3>Official Websites</h3>
+                        <div class="CUS-MangaContainerInput">
+                            @foreach (var item in Model.OfficialWebsites)
+                            {
+                                <div>
+                                    @if (!string.IsNullOrEmpty(item.OfficalWebsiteString))
+                                    {
+                                        <a href="@item.OfficalWebsiteString" target="_blank">@item.OfficalWebsiteName</a>
+                                    }
+                                    @if (!string.IsNullOrEmpty(item.Twitter))
+                                    {
+                                        <a href="@item.Twitter" target="_blank">Twitter</a>
+                                    }
+                                    @if (!string.IsNullOrEmpty(item.Facebook))
+                                    {
+                                        <a href="@item.Facebook" target="_blank">Facebook</a>
+                                    }
+                                    @if (!string.IsNullOrEmpty(item.Instagram))
+                                    {
+                                        <a href="@item.Instagram" target="_blank">Instagram</a>
+                                    }
+                                    @if (!string.IsNullOrEmpty(item.Line))
+                                    {
+                                        <a href="@item.Line" target="_blank">Line</a>
+                                    }
+                                    @if (!string.IsNullOrEmpty(item.Naver))
+                                    {
+                                        <a href="@item.Naver" target="_blank">Naver</a>
+                                    }
+                                </div>
+                            }
+                        </div>
+                    </div>
+                }
             <div class="CUS-LeftSidemangaDetailsBox">
                 <h3>Born:</h3>
                 <div class="CUS-MangaContainerInput">
@@ -622,5 +691,5 @@
             }
         </div>
 
-    </div>
+   
 </div>

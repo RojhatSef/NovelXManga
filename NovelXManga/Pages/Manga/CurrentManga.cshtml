@@ -443,7 +443,43 @@
                      
                     </div>
             </div>
-        }
+            }@if (Model.CurrentManga.OfficalWebsites != null && Model.CurrentManga.OfficalWebsites.Any())
+            {
+                <div class="CUS-LeftSidemangaDetailsBox">
+                    <h3>Official Websites</h3>
+                    <div class="CUS-MangaContainerInput">
+                        @foreach (var item in Model.CurrentManga.OfficalWebsites)
+                        {
+                           
+                                @if (!string.IsNullOrEmpty(item.OfficalWebsiteString))
+                                {
+                                    <a href="@item.OfficalWebsiteString" target="_blank">   <div class="CUS-MangaInputText">@item.OfficalWebsiteName</div></a>
+                                }
+                                @if (!string.IsNullOrEmpty(item.Twitter))
+                                {
+                                <a href="@item.Twitter" target="_blank"> <div class="CUS-MangaInputText">Twitter</div></a>
+                                }
+                                @if (!string.IsNullOrEmpty(item.Facebook))
+                                {
+                                <a href="@item.Facebook" target="_blank"> <div class="CUS-MangaInputText">Facebook</div></a>
+                                }
+                                @if (!string.IsNullOrEmpty(item.Instagram))
+                                {
+                                <a href="@item.Instagram" target="_blank"> <div class="CUS-MangaInputText">Instagram</div></a>
+                                }
+                                @if (!string.IsNullOrEmpty(item.Line))
+                                {
+                                <a href="@item.Line" target="_blank"> <div class="CUS-MangaInputText">Line</div></a>
+                                }
+                                @if (!string.IsNullOrEmpty(item.Naver))
+                                {
+                                <a href="@item.Naver" target="_blank"><div class="CUS-MangaInputText">Naver</div></a>
+                                }
+                        
+                        }
+                    </div>
+                </div>
+            }
             @if (Model.CurrentManga.AllLanguages != null && Model.CurrentManga.AllLanguages.Any())
             {
                 <div class="CUS-LeftSidemangaDetailsBox">
@@ -508,28 +544,7 @@
             </div>
         </div>
         }
-            @if (Model.CurrentManga.OfficalWebsites != null)
-            {
-                <div class="CUS-LeftSidemangaDetailsBox">
-                    <h3>Offical Website</h3>
-                    <div class="CUS-MangaContainerInput">
-                        @foreach (var item in Model.CurrentManga.OfficalWebsites)
-                        {
-
-                            <a href="@item.OfficalWebsiteString">
-
-
-                              
-
-                                    <div class="CUS-MangaInputText">
-                                        <p> @item.OfficalWebsiteName</p>
-                                    </div>
-                                
-                            </a>
-                        }
-                    </div>
-                </div>
-            }
+          
           <div class="CUS-LeftSidemangaDetailsBox">  <h3>Release | Ending</h3>
                 <div class="CUS-MangaContainerInput">
 
@@ -812,25 +827,27 @@
                 </div>
             </div>
             <div class="CUS-LeftSidemangaDetailsBox">
-                <h3>Complete Translation:</h3>
+                <h3>Webtoon</h3>
                 <div class="CUS-MangaContainerInput">
-                    @if (Model.CurrentManga.orignalWebtoon != null)
+                    @if (Model.CurrentManga.orignalWebtoon != null && Model.CurrentManga.orignalWebtoon != "N/A")
                     {
 
                         @if (UpdaterUser)
                         {
                             <a asp-action="@Model.CurrentManga.orignalWebtoon" asp-route-id="@Model.CurrentManga.MangaID">
                                 <div class="CUS-MangaInputText">
-                                    @Model.CurrentManga.orignalWebtoon
+                                    Webtoon
                                 </div>
                             </a>
                         }
                         else
                         {
 
-                            <div class="CUS-MangaInputText">
-                                @Model.CurrentManga.orignalWebtoon
-                            </div>
+                            <a href="@Model.CurrentManga.orignalWebtoon">
+                                <div class="CUS-MangaInputText">
+                                    Homepage
+                                </div>
+                            </a>
 
                         }
                     }
@@ -840,14 +857,14 @@
                         {
                             <a asp-action="@Model.CurrentManga.orignalWebtoon" asp-route-id="@Model.CurrentManga.MangaID">
                                 <div class="CUS-MangaInputText">
-                                   Original Webtoon: N/A
+                                  N/A
                                 </div>
                             </a>
                         }
                         else
                         {
                             <div class="CUS-MangaInputText">
-                                Original Webtoon: N/A
+                               N/A
                             </div>
                         }
 
