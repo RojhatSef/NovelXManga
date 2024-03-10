@@ -15,6 +15,15 @@ namespace NovelXManga.Pages.Register
         private readonly MangaNNovelAuthDBContext Context;
         private readonly UserManager<UserModel> _userManager;
         private readonly ILogger<DeleteUserPageModel> _logger;
+        /* things to do,
+ Post get whose getting deleted.
+Check if the User is allowed to get deleted. Owners can't be deleted.
+Get
+check the Yuser, is the Yuser even allowed to delete this XUser.
+
+Owners can delete everyone, AdminController can Delete Everyone below.
+No one else can delete.
+ */
 
         public DeleteUserPageModel(MangaNNovelAuthDBContext context, UserManager<UserModel> userManager, ILogger<DeleteUserPageModel> logger)
         {
@@ -109,26 +118,36 @@ namespace NovelXManga.Pages.Register
         {
             if (string.IsNullOrEmpty(searchTerm))
             {
-                return new JsonResult(new List<UserModel>());
+                return new JsonResult(new List<object>()); // Return an empty array if no search term is provided
             }
 
             searchTerm = searchTerm.ToLower();
 
+            // Fetch users and their roles efficiently
             var users = await _userManager.Users
-                .Where(u => u.UserName.ToLower().StartsWith(searchTerm) ||
-                            u.Email.ToLower().StartsWith(searchTerm))
+                .Where(u => u.UserName.ToLower().Contains(searchTerm) ||
+                            u.Email.ToLower().Contains(searchTerm) ||
+                            (u.Allias != null && u.Allias.ToLower().Contains(searchTerm)))
+                .Select(u => new
+                {
+                    u.Id,
+                    u.UserName,
+                    u.Email,
+                    Alias = u.Allias ?? "No Alias",
+                })
                 .ToListAsync();
 
             var userRoles = new List<object>();
 
             foreach (var user in users)
             {
-                var roles = await _userManager.GetRolesAsync(user);
+                var roles = await _userManager.GetRolesAsync(await _userManager.FindByIdAsync(user.Id));
                 userRoles.Add(new
                 {
+                    user.Id,
                     user.UserName,
                     user.Email,
-                    user.Id,
+                    user.Alias,
                     Roles = roles
                 });
             }
@@ -203,13 +222,3 @@ namespace NovelXManga.Pages.Register
         }
     }
 }
-
-/* things to do,
- Post get whose getting deleted.
-Check if the User is allowed to get deleted. Owners can't be deleted.
-Get
-check the Yuser, is the Yuser even allowed to delete this XUser.
-
-Owners can delete everyone, AdminController can Delete Everyone below.
-No one else can delete.
- */

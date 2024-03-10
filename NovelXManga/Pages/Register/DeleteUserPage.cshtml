@@ -3,20 +3,16 @@
 @{
     @Html.AntiForgeryToken()
 }
+<link rel="stylesheet" href="~/css/DeleteuserStyleSheet.css" asp-append-version="true" />
+
 <div class="delete-page-container">
-    <h2>Delete User</h2>
+    <h2>Delete User/s</h2>
     <p>Select a user to delete:</p>
 
     <input type="text" id="searchField" placeholder="Search for users..." />
     <div id="results"></div>
 
-    <div id="userDetails">
-        <p>-----------------------------</p>
-        <p>Role: <span id="userRole"></span></p>
-        <p>Username: <span id="userName"></span></p>
-        <p>Email: <span id="userEmail"></span></p>
-        <button onclick="requestDeletion()" class="delete-init-button">Delete this User</button>
-    </div>
+
 </div>
 
 <script>
@@ -26,13 +22,14 @@
             .then(response => response.json())
             .then(data => {
                 document.getElementById('results').innerHTML = data.map(user => `
-                    <div>
-                        <input type="radio" name="selectedUser"
-                               value="${user.id}"
-                               data-username="${user.userName}"
-                               data-email="${user.email}"
-                               data-role="${user.roles.join(', ')}">
-                        ${user.userName} - ${user.email} - Role: ${user.roles.join(", ")}
+                         <div class="user-details-container">
+                        <p>-----------------------------</p>
+                        <p>Role: ${user.roles.join(", ")}</p>
+                        <p>Alias: ${user.alias}</p>
+                        <p>Username: ${user.userName}</p>
+                        <p>Email: ${user.email}</p>
+                <button onclick="requestDeletion('${user.id}', '${user.userName}', '${user.alias}', '${user.email}', '${user.roles.join(", ")}')" class="delete-init-button">Delete this User</button>
+
                     </div>
                 `).join('');
             });
@@ -42,44 +39,38 @@
         return document.querySelector('input[name="__RequestVerificationToken"]').value;
     }
 
-    function requestDeletion() {
-        const selectedUser = document.querySelector('input[name="selectedUser"]:checked');
-        if (selectedUser) {
-            const userName = selectedUser.getAttribute("data-username");
-            const userEmail = selectedUser.getAttribute("data-email");
-            const userRole = selectedUser.getAttribute("data-role");
-            const userId = selectedUser.value;
+    function requestDeletion(userId, userName, alias, email, roles) {
+        // Construct the confirmation message with user details
+        const message = `Are you sure you want to delete the following user?
+                         \n\nUsername: ${userName}
+                         \nAlias: ${alias}
+                         \nEmail: ${email}
+                         \nRole: ${roles}`;
 
-            const message = `Are you sure you want to delete the following user?
-                             \n\nName: ${userName}\nEmail: ${userEmail}\nRole: ${userRole}`;
-
-            if (confirm(message)) {
-                fetch('/Register/DeleteUserPage?handler=DeleteUser', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'RequestVerificationToken': getAntiForgeryToken() // Include the antiforgery token
-                    },
-                    body: JSON.stringify({ userId: userId })
+        // Display the confirmation dialog
+        if (confirm(message)) {
+            fetch('/Register/DeleteUserPage?handler=DeleteUser', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'RequestVerificationToken': getAntiForgeryToken(),
+                },
+                body: JSON.stringify({ userId: userId }) // Pass the userId in the request body
+            })
+                .then(response => {
+                    if (response.ok) {
+                        alert("User successfully deleted.");
+                        location.reload(); // Refresh the page to update the list of users
+                    } else {
+                        alert("An error occurred. User was not deleted.");
+                    }
                 })
-                    .then(response => {
-                        if (response.ok) {
-                            // Success handling here, e.g., display a success message or refresh the page.
-                            alert("User successfully deleted.");
-                            location.reload();
-                        } else {
-                            // Error handling here
-                            alert("An error occurred. User was not deleted.");
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                        alert("An unexpected error occurred.");
-                    });
-            }
-        } else {
-            alert("Please select a user to delete.");
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert("An unexpected error occurred.");
+                });
         }
     }
+
 </script>
 
