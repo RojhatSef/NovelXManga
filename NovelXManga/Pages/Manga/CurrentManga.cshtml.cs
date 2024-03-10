@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
-using System.Diagnostics;
 using System.Net;
 using System.Text.RegularExpressions;
 
@@ -69,6 +68,9 @@ namespace NovelXManga.Pages.Manga
 
         [BindProperty]
         public bool IsInWishList { get; set; }
+
+        [BindProperty]
+        public CurrentMangaRelatedRecommendedSeriesDTO relatedRecommendedManga { get; set; }
 
         public IDictionary<int, int> ScoreDistribution { get; set; }
 
@@ -480,6 +482,28 @@ namespace NovelXManga.Pages.Manga
             IsInWishList = await CheckIfMangaInWishListAsync(userId, mangaId);
         }
 
+        public async Task<CurrentMangaRelatedRecommendedSeriesDTO> LoadRelatedRecommended(int id)
+        {
+            var relatedmanga = await Context.mangaModels
+  .Where(e => e.MangaID == id)
+  .Select(e => new CurrentMangaRelatedRecommendedSeriesDTO
+  {
+      RelatedSeries = e.relatedSeries.Select(rs => new CurrentMangaRelatedSeriesDTO
+      {
+          MangaID = rs.MangaID,
+          MangaName = rs.MangaName,
+          PhotoPath = rs.PhotoPath
+      }).Take(5).ToList(),
+      RecommendedMangaModels = e.RecommendedMangaModels.Select(rm => new MangaModelDTO
+      {
+          MangaID = rm.MangaID,
+          MangaName = rm.MangaName,
+          PhotoPath = rm.PhotoPath
+      }).Take(5).ToList()
+  }).FirstOrDefaultAsync();
+            return relatedmanga;
+        }
+
         public async Task<IActionResult> OnPostPostTotalScoreAsync(int id)
         {
             bool validScore = (
@@ -488,13 +512,14 @@ namespace NovelXManga.Pages.Manga
     && new[] { 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5 }.Contains(_ViewReview.StylesScore)
     && new[] { 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5 }.Contains(_ViewReview.CharactersScore)
 );
-
             if (!validScore)
             {
                 ModelState.AddModelError(string.Empty, "Invalid input or review details. Please try again.");
                 await OnGetAsync(id);
+
                 return Page();
             }
+
             if (!string.IsNullOrEmpty(_ViewReview.Title))
             {
                 string sanitizedTitle = WebUtility.HtmlEncode(Regex.Replace(_ViewReview.Title, "<.*?>", string.Empty));
@@ -530,8 +555,12 @@ namespace NovelXManga.Pages.Manga
                 OnGetAsync(id);
                 return Page();
             }
-            CurrentManga = await mangaRepository.GetOneMangaAllIncludedAsync(id);
+            relatedRecommendedManga = await LoadRelatedRecommended(id);
+            CurrentManga = await mangaRepository.GetOneEssentialMangaIncludedAsync(id);
+            CurrentManga2 = await mangaRepository.GetOneEssentialMangaDtoIncludedAsync(id);
+
             var user = await userManager.GetUserAsync(User);
+
             if (user.UserActivityTimer.HasValue && (DateTime.Now - user.UserActivityTimer.Value < TimeSpan.FromSeconds(5)))
             {
                 return RedirectToPage(new { id });  // or some error message page.
@@ -579,10 +608,10 @@ namespace NovelXManga.Pages.Manga
                     user.Reviews.Add(newReview);
                 }
             }
-            // Save changes
 
             user.UserActivityTimer = DateTime.Now;
             await Context.SaveChangesAsync();
+
             return RedirectToPage(new { id });
         }
 
@@ -661,15 +690,11 @@ namespace NovelXManga.Pages.Manga
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
-            var totalStopwatch = new Stopwatch();
-            totalStopwatch.Start();
-            var stopwatch = new Stopwatch();
-
             if (id == 0)
             {
                 return NotFound();
             }
-
+            relatedRecommendedManga = await LoadRelatedRecommended(id);
             CurrentManga = await mangaRepository.GetOneEssentialMangaIncludedAsync(id);
             CurrentManga2 = await mangaRepository.GetOneEssentialMangaDtoIncludedAsync(id);
 

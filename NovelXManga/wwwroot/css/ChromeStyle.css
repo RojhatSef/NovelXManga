@@ -22,6 +22,10 @@
         --tag-bg-light: #ccc;
     }
 
+    body.light-mode .user-dropdown-menu a {
+        color: var(--text-color); /* This ensures text color is set to black in light mode */
+    }
+
     body.dark-mode {
         --background-color: #191a1c;
         --text-color: whitesmoke;
@@ -609,10 +613,12 @@
         position: absolute; /* Positioning relative to its parent */
         right: 0; /* Align to the right side */
         background-color: var(--background-color);
-        color: white;
+        color: var(--text-color);
         min-width: 160px;
+        padding-left:5%; 
         box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
         z-index: 1000;
+        border-radius:4px; 
     }
 
     .user-dropdown-menu {
@@ -1137,7 +1143,7 @@
 .BoxImage {
     height: 100%;
     width: 100%;
-    min-width:125px; 
+    min-width: 125px;
     object-fit: cover;
     transition: width 0.5s, height 0.5s;
 }

@@ -1124,12 +1124,12 @@
             }
             
         </div>
-                @if (Model.CurrentManga.relatedSeries.Count >= 1)
+                @if (Model.relatedRecommendedManga.RelatedSeries.Count >= 1)
                 {
                     <div class="CUS-mangaDetailsBox">
                         <h1> Related Books:</h1>
                         <div class="GridWrapper">
-                        @foreach (var relatedManga in Model.CurrentManga.relatedSeries.Take(5))
+                            @foreach (var relatedManga in Model.relatedRecommendedManga.RelatedSeries.Take(5))
                         {
 
 
@@ -1152,12 +1152,12 @@
                         </div>
                     </div>
                 }
-                @if (Model.CurrentManga.RecommendedMangaModels.Count >= 1)
+                @if (Model.relatedRecommendedManga.RecommendedMangaModels.Count >= 1)
                 {
                     <div class="CUS-mangaDetailsBox">
                         <h1> Recomended Books:</h1>
                         <div class="GridWrapper">
-                            @foreach (var relatedManga in Model.CurrentManga.RecommendedMangaModels.Take(5))
+                            @foreach (var relatedManga in Model.relatedRecommendedManga.RecommendedMangaModels.Take(5))
                             {
 
 
@@ -1448,11 +1448,10 @@
                 </div>
             </div>
            </div>
-       
-         
+
+
         
-         
-              </div>   <button type="submit">Send</button>
+        </div>   <button class="CurrentMangaReviewButton" type="submit">Send</button>
         </form>
       
    

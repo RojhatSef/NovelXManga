@@ -67,6 +67,8 @@
         justify-content: space-between; /* Distributes space evenly between the rating containers */
         align-items: center; /* Aligns items vertically in the center */
         gap: 1em; /* Space between each rating container */
+        margin-right:10%;
+        margin-left:10%;
     }
 
     .CUS-LeftSidemangaDetailsBox {
@@ -164,6 +166,8 @@
         flex-direction: row;
         align-items: flex-start;
         width: 100%;
+        margin-right:10%; 
+        margin-left:10%; 
     }
 
     .CUS-ratingLeftSide {
@@ -807,31 +811,41 @@
         }
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 1024px) {
         .CUS-ratingContainer {
-            flex-direction: column;
+            margin-right: 5%;
+            margin-left: 5%;
         }
 
-        .CUS-RatingRightSide {
-            order: 1; /* Makes the right side come first */
-            width: 100%; /* Take full width */
+        @media (max-width: 768px) {
+            .CUS-ratingContainer {
+                flex-direction: column;
+                margin-right: 0%;
+                margin-left: 0;
+            }
+
+            .CUS-RatingRightSide {
+                order: 1; /* Makes the right side come first */
+                width: 100%; /* Take full width */
+            }
+
+            .CUS-ratingLeftSide {
+                order: 2; /* Makes the left side come after the right side */
+                width: 100%; /* Take full width */
+
+                justify-content: center;
+            }
         }
 
-        .CUS-ratingLeftSide {
-            order: 2; /* Makes the left side come after the right side */
-            width: 100%; /* Take full width */
+        @media (max-width: 768px) {
+            .CUS-CommonContainer {
+                flex-direction: column; /* Stack children vertically */
+                margin-right: 0%;
+                margin-left: 0%;
+            }
 
-            justify-content: center;
+            .CUS-LeftSide, .CUS-RightSide {
+                width: 100%; /* Full width for small screens */
+            }
         }
     }
-
-    @media (max-width: 768px) {
-        .CUS-CommonContainer {
-            flex-direction: column; /* Stack children vertically */
-        }
-
-        .CUS-LeftSide, .CUS-RightSide {
-            width: 100%; /* Full width for small screens */
-        }
-    }
-}
