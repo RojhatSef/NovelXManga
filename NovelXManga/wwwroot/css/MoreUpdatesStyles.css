@@ -1,5 +1,5 @@
 ﻿.MoreRecentUpdateStyle {
-    width: 100%;
+    width: 85%;
     height: 45px;
     display: flex;
     justify-content: center;
@@ -13,8 +13,16 @@
         background-color: #ff6740;
         color: black;
     }
-
+.AllView {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
 .MoreUpdatContainer {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    flex-direction: column;
     margin-top: 3.5%;
     transition: margin-top 0.3s ease;
 }
