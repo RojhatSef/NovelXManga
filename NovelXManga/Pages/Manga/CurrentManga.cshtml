@@ -1206,8 +1206,17 @@
                                         <div class="UserReview">
                                             <div class="ReviewLeft">
                                                 <!-- User's photo -->
+
                                                 <a class="HeadDividerReview" asp-route-userId="@review.UserModels.FirstOrDefault().Id" asp-page="/UserInteractions/UserProfile">
-                                                    <img class="CUS-Review-img" src="~/Images/GeneratedUserImage/@review.UserModels.FirstOrDefault()?.userPhotoPath" onerror="this.onerror=null;this.src='~/Images/UserImage/NoPhoto.png';" alt="User Image">
+
+
+                                                    <img class="CUS-Review-img" asp-append-version="true"
+                                                                 src="@(!string.IsNullOrEmpty(user.userPhotoPath) ? "/Images/GeneratedUserImage/" + user.userPhotoPath : "~/Images/UserImage/NoPhoto.png")"
+                                                                 alt="User Photo">
+
+
+                                                    <img class="CUS-Review-img" src="~/Images/GeneratedUserImage/@(review.UserModels.FirstOrDefault()?.userPhotoPath ?? "NoPhoto.png")" alt="User Image">
+
                                                 </a><!-- Style Score -->
                                                 <div class="Score PresentingReviewScorePadder">
                                                     <span>Style Score:</span>

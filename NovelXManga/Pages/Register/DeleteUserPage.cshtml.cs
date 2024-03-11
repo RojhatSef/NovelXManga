@@ -49,8 +49,8 @@ No one else can delete.
                 var uniqueId = Guid.NewGuid().ToString();
 
                 // Obfuscate primary user details
-                user.UserName = "DeletedUser" + uniqueId;
-                user.Email = "DeletedUser" + uniqueId + "@deleted.com";
+                //user.UserName = "DeletedUser" + uniqueId;
+                //user.Email = "DeletedUser" + uniqueId + "@deleted.com";
                 user.NormalizedEmail = user.Email.ToUpper();
                 user.NormalizedUserName = user.UserName.ToUpper();
                 // Set a complex random password

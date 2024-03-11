@@ -14,6 +14,7 @@ namespace NovelXManga.Pages.Login
         private readonly UserManager<UserModel> _userManager;
         private readonly SignInManager<UserModel> signInManager;
         private readonly IMangaRepository mangaRepository;
+        private readonly RoleManager<IdentityRole> roleManager;
 
         [BindProperty]
         public List<LoginRegiForgetCombineDto> AllBooksList { get; set; }
@@ -24,10 +25,11 @@ namespace NovelXManga.Pages.Login
         [TempData]
         public string TempDataSuccededPassWordChange { get; set; }
 
-        public ResetPasswordPageModel(UserManager<UserModel> userManager, IMangaRepository mangaRepository)
+        public ResetPasswordPageModel(UserManager<UserModel> userManager, IMangaRepository mangaRepository, RoleManager<IdentityRole> roleManager)
         {
             this._userManager = userManager;
             this.mangaRepository = mangaRepository;
+            this.roleManager = roleManager;
         }
 
         [BindProperty]
@@ -35,7 +37,9 @@ namespace NovelXManga.Pages.Login
 
         public async Task<IActionResult> OnPost(ResetPasswordModelView resetPasswordModelView)
         {
+
             UserModel activeuser = await _userManager.GetUserAsync(User);
+
             model.Email = resetPasswordModelView.Email;
             model.Token = resetPasswordModelView.Token;
             if (model.Password == null)
@@ -52,9 +56,9 @@ namespace NovelXManga.Pages.Login
             }
 
             var user = await _userManager.FindByEmailAsync(resetPasswordModelView.Email);
-            if (user == null)
+            if (user == null || await _userManager.IsInRoleAsync(user, "ShadowBanned") || await _userManager.IsInRoleAsync(user, "DELETEDUSER"))
             {
-                RedirectToPage("/Pages/Login/ForgotPassword");
+                return RedirectToPage("/Pages/Login/ForgotPassword");
             }
 
             var resetPassResult = await _userManager.ResetPasswordAsync(user, model.Token, model.Password);
