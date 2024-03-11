@@ -30,7 +30,7 @@
         border: 1px solid #ccc;
         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         width: calc(100% - 20px);
-        max-height: 500px;
+     
         overflow: hidden;
         box-sizing: border-box;
         overflow-wrap: break-word;
@@ -72,12 +72,14 @@
         align-self: flex-start;
         margin-top: 7px
     }
-
+    .ReviewColor {
+        color: #ff6740;
+    }
     .ReviewRight {
         flex: 70%;
         display: flex;
         flex-direction: column;
-    
+        margin-right:10px; 
     }
 
     .ReviewImageCenter {
@@ -85,6 +87,7 @@
         display: flex;
         justify-content: center; /* Center the image horizontally */
         margin-bottom: 10px; /* Optional: Adjust spacing between the image and scores */
+        margin-top:10px; 
     }
 
     @media (max-width: 768px) {
@@ -108,7 +111,10 @@
         .ReviewLeft, .ReviewRight {
             flex: 100%;
         }
-        .ReviewImageCenter {
+        .ReviewRight {
+            margin-right:0px; 
+        }
+            .ReviewImageCenter {
             /* Additional styling to ensure the image remains centered */
             display: flex;
             justify-content: center;
@@ -135,11 +141,12 @@
                 margin: auto; /* Center-align block-level elements or elements with a specified width */
                 text-align: center;
             }
-            
+
         .UserReviewcontent {
             /* Adjustments to ensure content text is centered properly */
             text-align: justify;
             margin: 0 auto; /* Center the content block horizontally */
+            margin-right: 0px;
         }
         .CUS-Review-img {
             /* Ensure image sizing is appropriate and doesn't overflow */
@@ -162,6 +169,7 @@
         max-width: 100%;
         box-sizing: border-box;
         text-align: justify;
+        margin-right: auto; 
     }
 
     .ReviewPadder {

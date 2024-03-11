@@ -1306,16 +1306,17 @@
 
                                             <div class="ReviewRight">
 
-                                                <div class="ReviewRightHeader">
-                                                    by @review.UserModels.FirstOrDefault()?.UserName
+                                                <div class="ReviewRightHeader ">
+                                                    <p class="ReviewColor">  By @review.UserModels.FirstOrDefault()?.UserName</p>
+                                                  
                                                 </div>
                                                 <div class="ReviewRightHeader">
 
                                                     Created: @review.Created.ToString("yyyy-MM-dd")
 
                                                 </div>
-                                                <div class="ReviewRightHeader">
-                                                    <h2>@review.Title</h2>
+                                                <div class="ReviewRightHeader ">
+                                                    <h2 class="ReviewColor">@review.Title</h2>
                                                 </div>
 
 
@@ -1449,7 +1450,8 @@
                                         <div class="ReviewRight">
                                                
                                             <div class="ReviewRightHeader">
-                                                by @review.UserModels.FirstOrDefault()?.UserName
+
+                                                <p class="ReviewColor">  By @review.UserModels.FirstOrDefault()?.UserName</p>
                                             </div>
                                             <div class="ReviewRightHeader">
 
@@ -1457,7 +1459,7 @@
 
                                             </div>
                                             <div class="ReviewRightHeader">
-                                                    <h2>@review.Title</h2>
+                                                <h2 class="ReviewColor">@review.Title</h2>
                                             </div>
                                             
                                         
