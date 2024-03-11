@@ -24,13 +24,27 @@
         padding: 5px;
         border: 1px solid #ccc;
         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        max-width: 100%;
+        width: calc(100% - 20px);
+        max-height: 500px;
+        overflow: hidden;
+        box-sizing: border-box;
     }
 
     .UserReviewcontent {
         word-wrap: break-word;
         overflow-wrap: break-word;
+        word-break: break-all;
         max-width: 100%;
+        min-height: 150px;
+        overflow-y: auto; /* Add vertical scrollbar if content overflows */
+        box-sizing: border-box; /* Include padding and border in the element's size */
+    }
+
+    .ReviewPadder {
+        margin-right: 10%;
+        margin-left: 10%;
+        height: 100%;
+        width: 100%;
     }
 
     .CUS-GridItem {
@@ -67,9 +81,10 @@
         justify-content: space-between; /* Distributes space evenly between the rating containers */
         align-items: center; /* Aligns items vertically in the center */
         gap: 1em; /* Space between each rating container */
-        margin-left:10%; 
-        margin-right:10%; 
+        margin-left: 10%;
+        margin-right: 10%;
     }
+
     .CurrentMangaReviewButton {
         background-color: #ff6740;
         color: white;
@@ -79,16 +94,18 @@
         border: none;
         transition: background-color 0.3s ease;
     }
-       
+
         .CurrentMangaReviewButton:hover, .CurrentMangaReviewButton:active {
             background-color: #e35d33; /* Slightly darker shade for hover and active effect */
         }
+
     @media (max-width: 768px) {
         .CurrentMangaReviewButton {
             padding: 20px;
             font-size: 18px; /* Larger font size for better readability */
         }
     }
+
     .CUS-LeftSidemangaDetailsBox {
         /*flex: 1 1 auto;*/
         box-sizing: border-box;
@@ -185,8 +202,8 @@
         flex-direction: row;
         align-items: flex-start;
         width: 100%;
-        margin-right:10%;
-        margin-left:10%; 
+        margin-right: 10%;
+        margin-left: 10%;
     }
 
     .CUS-ratingLeftSide {
@@ -233,6 +250,43 @@
             margin: 0.5em; /* reduce margin */
             padding: 0.5em; /* reduce padding */
             overflow: hidden;
+        }
+    }
+
+    @media (max-width: 1048px) {
+        .CUS-CommonContainer {
+            margin-right: 5%;
+            margin-left: 5%;
+        }
+
+        .ReviewPadder {
+            margin-right: 5%;
+            margin-left: 5%;
+        }
+
+        .UserReview {
+            min-height: 250px; /* Set a max-height to limit content size */
+        }
+    }
+
+    @media (max-width: 768px) {
+        .CUS-CommonContainer {
+            flex-direction: column; /* Stack children vertically */
+            margin-right: 0%;
+            margin-left: 0;
+        }
+
+        .CUS-LeftSide, .CUS-RightSide {
+            width: 100%; /* Full width for small screens */
+        }
+
+        .ReviewPadder {
+            margin-right: 0%;
+            margin-left: 0%;
+        }
+
+        .UserReview {
+            min-height: 450px; /* Set a max-height to limit content size */
         }
     }
     /* Add some styles for the dropdown button and content */
@@ -829,48 +883,31 @@
             flex: 0 0 100%;
         }
     }
+
     @media (max-width: 1024px) {
         .CUS-ratingContainer {
-            
             margin-right: 5%;
             margin-left: 5%;
         }
+    }
 
-        @media (max-width: 768px) {
-            .CUS-ratingContainer {
-                flex-direction: column;
-                margin-right: 0%;
-                margin-left: 0;
-            }
-
-            .CUS-RatingRightSide {
-                order: 1; /* Makes the right side come first */
-                width: 100%; /* Take full width */
-            }
-
-            .CUS-ratingLeftSide {
-                order: 2; /* Makes the left side come after the right side */
-                width: 100%; /* Take full width */
-
-                justify-content: center;
-            }
+    @media (max-width: 768px) {
+        .CUS-ratingContainer {
+            flex-direction: column;
+            margin-right: 0%;
+            margin-left: 0;
         }
 
-        @media (max-width: 1048px) {
-            .CUS-CommonContainer {
-                margin-right: 5%;
-                margin-left: 5%;
-            }
-
-            @media (max-width: 768px) {
-                .CUS-CommonContainer {
-                    flex-direction: column; /* Stack children vertically */
-                    margin-right: 0%;
-                    margin-left: 0;
-                }
-
-                .CUS-LeftSide, .CUS-RightSide {
-                    width: 100%; /* Full width for small screens */
-                }
-            }
+        .CUS-RatingRightSide {
+            order: 1; /* Makes the right side come first */
+            width: 100%; /* Take full width */
         }
+
+        .CUS-ratingLeftSide {
+            order: 2; /* Makes the left side come after the right side */
+            width: 100%; /* Take full width */
+
+            justify-content: center;
+        }
+    }
+}
