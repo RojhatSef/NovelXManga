@@ -1201,24 +1201,134 @@
 
                                 @foreach (var review in Model.ReivewModel.Take(4))
                                 {
-                                            @if (review.UserModels.FirstOrDefault()?.IsShadowBanned != true)
-                                            {
-                                                <div class="UserReview">
-                                                    <h2>@review.Title</h2>
-
-                                                    <h3>By @review.UserModels.FirstOrDefault()?.Allias</h3>
-                                                    <div>Style Score: @review.StylesScore <i class="fas fa-star active"></i></div>
-                                                    <div>Story Score: @review.StoryScore  <i class="fas fa-star active"></i></div>
-                                                    <div>Grammar Score: @review.GrammarScore  <i class="fas fa-star active"></i></div>
-                                                    <div>Character Score: @review.CharactersScore <i class="fas fa-star active"></i></div>
-                                                    <div>Overall Score: @review.OverAllBookScore  <i class="fas fa-star active"></i></div>
-                                                    <div class="UserReviewcontent">
-                                                        @review.Content
-                                                    </div>
+                                    @if (review.UserModels.FirstOrDefault()?.IsShadowBanned != true)
+                                    {
+                                        <div class="UserReview">
+                                            <div class="ReviewLeft">
+                                                <!-- User's photo -->
+                                                <a class="HeadDividerReview" asp-route-userId="@review.UserModels.FirstOrDefault().Id" asp-page="/UserInteractions/UserProfile">
+                                                    <img class="CUS-Review-img" src="~/Images/GeneratedUserImage/@review.UserModels.FirstOrDefault()?.userPhotoPath" onerror="this.onerror=null;this.src='~/Images/UserImage/NoPhoto.png';" alt="User Image">
+                                                </a><!-- Style Score -->
+                                                <div class="Score PresentingReviewScorePadder">
+                                                    <span>Style Score:</span>
+                                                    @for (int i = 1; i <= 5; i++)
+                                                    {
+                                                        if (i <= @review.StylesScore)
+                                                        {
+                                                            <i class="fas fa-star" aria-hidden="true"></i>
+                                                        }
+                                                        else if (i - @review.StylesScore <= 0.5)
+                                                        {
+                                                            <i class="fas fa-star-half-alt" aria-hidden="true"></i>
+                                                        }
+                                                        else
+                                                        {
+                                                            <i class="far fa-star" aria-hidden="true"></i>
+                                                        }
+                                                    }
                                                 </div>
-                                            }
-                                 
+                                                <!-- Story Score -->
+                                                <div class="Score PresentingReviewScorePadder">
+                                                    <span>Story Score:</span>
+                                                    @for (int i = 1; i <= 5; i++)
+                                                    {
+                                                        if (i <= @review.StoryScore)
+                                                        {
+                                                            <i class="fas fa-star" aria-hidden="true"></i>
+                                                        }
+                                                        else if (i - @review.StoryScore <= 0.5)
+                                                        {
+                                                            <i class="fas fa-star-half-alt" aria-hidden="true"></i>
+                                                        }
+                                                        else
+                                                        {
+                                                            <i class="far fa-star" aria-hidden="true"></i>
+                                                        }
+                                                    }
+                                                </div>
+                                                <!-- Grammar Score -->
+                                                <div class="Score PresentingReviewScorePadder">
+                                                    <span>Grammar Score:</span>
+                                                    @for (int i = 1; i <= 5; i++)
+                                                    {
+                                                        if (i <= @review.GrammarScore)
+                                                        {
+                                                            <i class="fas fa-star" aria-hidden="true"></i>
+                                                        }
+                                                        else if (i - @review.GrammarScore <= 0.5)
+                                                        {
+                                                            <i class="fas fa-star-half-alt" aria-hidden="true"></i>
+                                                        }
+                                                        else
+                                                        {
+                                                            <i class="far fa-star" aria-hidden="true"></i>
+                                                        }
+                                                    }
+                                                </div>
+                                                <!-- Character Score -->
+                                                <div class="Score PresentingReviewScorePadder">
+                                                    <span>Character Score:</span>
+                                                    @for (int i = 1; i <= 5; i++)
+                                                    {
+                                                        if (i <= @review.CharactersScore)
+                                                        {
+                                                            <i class="fas fa-star" aria-hidden="true"></i>
+                                                        }
+                                                        else if (i - @review.CharactersScore <= 0.5)
+                                                        {
+                                                            <i class="fas fa-star-half-alt" aria-hidden="true"></i>
+                                                        }
+                                                        else
+                                                        {
+                                                            <i class="far fa-star" aria-hidden="true"></i>
+                                                        }
+                                                    }
+                                                </div>
+                                                <div class="Score PresentingReviewScorePadder">
+                                                    <span>Overall Score:</span>
+                                                    @for (int i = 1; i <= 5; i++)
+                                                    {
+                                                        if (i <= @review.OverAllBookScore)
+                                                        {
+                                                            <i class="fas fa-star" aria-hidden="true"></i>
+                                                        }
+                                                        else if (i - @review.OverAllBookScore <= 0.5)
+                                                        {
+                                                            <i class="fas fa-star-half-alt" aria-hidden="true"></i>
+                                                        }
+                                                        else
+                                                        {
+                                                            <i class="far fa-star" aria-hidden="true"></i>
+                                                        }
+                                                    }
+                                                </div>
+                                            </div>
+
+                                            <div class="ReviewRight">
+
+                                                <div class="ReviewRightHeader">
+                                                    by @review.UserModels.FirstOrDefault()?.UserName
+                                                </div>
+                                                <div class="ReviewRightHeader">
+
+                                                    Created: @review.Created.ToString("yyyy-MM-dd")
+
+                                                </div>
+                                                <div class="ReviewRightHeader">
+                                                    <h2>@review.Title</h2>
+                                                </div>
+
+
+                                                <div class="UserReviewcontent">
+                                                    @review.Content
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    }
+
                                 }
+
 
                             </a>
                         }
@@ -1233,16 +1343,129 @@
                                  @if (review.UserModels.FirstOrDefault()?.IsShadowBanned != true)
                                       {
                                           <div class="UserReview">
-                                              <h2>@review.Title</h2>
-                                                <h3>By @review.UserModels.FirstOrDefault()?.UserName</h3>
-                                                <div>Style Score: @review.StylesScore</div>
-                                                <div>Story Score: @review.StoryScore</div>
-                                                <div>Grammar Score: @review.GrammarScore</div>
-                                                <div>Character Score: @review.CharactersScore</div>
-                                                <div>Overall Score: @review.OverAllBookScore</div>
-                                                <div class="UserReviewcontent">
-                                                    @review.Content
-                                                </div>
+                                        <div class="ReviewLeft">
+                                            <!-- User's photo -->
+                                            <div class="ReviewImageCenter">
+                                                <a id="log" asp-route-userId="@review.UserModels.FirstOrDefault().Id" asp-page="/UserInteractions/UserProfile">
+                                                    <img class="CUS-Review-img" src="~/Images/GeneratedUserImage/@review.UserModels.FirstOrDefault()?.userPhotoPath" onerror="this.onerror=null;this.src='~/Images/UserImage/NoPhoto.png';" alt="User Image">
+                                                </a>
+                                            </div>
+                                          <!-- Style Score -->
+                                            <div class="Score PresentingReviewScorePadder">
+                                                <span>Style Score:</span>
+                                                @for (int i = 1; i <= 5; i++)
+                                                {
+                                                    if (i <= @review.StylesScore)
+                                                    {
+                                                        <i class="fas fa-star" aria-hidden="true"></i>
+                                                    }
+                                                    else if (i - @review.StylesScore <= 0.5)
+                                                    {
+                                                        <i class="fas fa-star-half-alt" aria-hidden="true"></i>
+                                                    }
+                                                    else
+                                                    {
+                                                        <i class="far fa-star" aria-hidden="true"></i>
+                                                    }
+                                                }
+                                            </div>
+                                            <!-- Story Score -->
+                                            <div class="Score PresentingReviewScorePadder">
+                                                <span>Story Score:</span>
+                                                @for (int i = 1; i <= 5; i++)
+                                                {
+                                                    if (i <= @review.StoryScore)
+                                                    {
+                                                        <i class="fas fa-star" aria-hidden="true"></i>
+                                                    }
+                                                    else if (i - @review.StoryScore <= 0.5)
+                                                    {
+                                                        <i class="fas fa-star-half-alt" aria-hidden="true"></i>
+                                                    }
+                                                    else
+                                                    {
+                                                        <i class="far fa-star" aria-hidden="true"></i>
+                                                    }
+                                                }
+                                            </div>
+                                            <!-- Grammar Score -->
+                                            <div class="Score PresentingReviewScorePadder">
+                                                <span>Grammar Score:</span>
+                                                @for (int i = 1; i <= 5; i++)
+                                                {
+                                                    if (i <= @review.GrammarScore)
+                                                    {
+                                                        <i class="fas fa-star" aria-hidden="true"></i>
+                                                    }
+                                                    else if (i - @review.GrammarScore <= 0.5)
+                                                    {
+                                                        <i class="fas fa-star-half-alt" aria-hidden="true"></i>
+                                                    }
+                                                    else
+                                                    {
+                                                        <i class="far fa-star" aria-hidden="true"></i>
+                                                    }
+                                                }
+                                            </div>
+                                            <!-- Character Score -->
+                                            <div class="Score PresentingReviewScorePadder">
+                                                <span>Character Score:</span>
+                                                @for (int i = 1; i <= 5; i++)
+                                                {
+                                                    if (i <= @review.CharactersScore)
+                                                    {
+                                                        <i class="fas fa-star" aria-hidden="true"></i>
+                                                    }
+                                                    else if (i - @review.CharactersScore <= 0.5)
+                                                    {
+                                                        <i class="fas fa-star-half-alt" aria-hidden="true"></i>
+                                                    }
+                                                    else
+                                                    {
+                                                        <i class="far fa-star" aria-hidden="true"></i>
+                                                    }
+                                                }
+                                            </div>
+                                            <div class="Score PresentingReviewScorePadder">
+                                                <span>Overall Score:</span>
+                                                @for (int i = 1; i <= 5; i++)
+                                                {
+                                                    if (i <= @review.OverAllBookScore)
+                                                    {
+                                                        <i class="fas fa-star" aria-hidden="true"></i>
+                                                    }
+                                                    else if (i - @review.OverAllBookScore <= 0.5)
+                                                    {
+                                                        <i class="fas fa-star-half-alt" aria-hidden="true"></i>
+                                                    }
+                                                    else
+                                                    {
+                                                        <i class="far fa-star" aria-hidden="true"></i>
+                                                    }
+                                                }
+                                            </div>
+                                        </div>
+
+                                        <div class="ReviewRight">
+                                               
+                                            <div class="ReviewRightHeader">
+                                                by @review.UserModels.FirstOrDefault()?.UserName
+                                            </div>
+                                            <div class="ReviewRightHeader">
+
+                                                Created: @review.Created.ToString("yyyy-MM-dd")
+
+                                            </div>
+                                            <div class="ReviewRightHeader">
+                                                    <h2>@review.Title</h2>
+                                            </div>
+                                            
+                                        
+                                            <div class="UserReviewcontent">
+                                                @review.Content
+                                            </div>
+                                        </div>
+                                 
                                             </div>
                                        }
                                      
@@ -1268,7 +1491,7 @@
 
     </div>
 
-
+<hr class="CUS-DescriptionDiver" />
 
 @if (SignInManager.IsSignedIn(User))
 {

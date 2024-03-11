@@ -155,7 +155,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
-
 // sanitize html, trying to remove injections.
 function sanitizeHTML(text) {
     var element = document.createElement('div');
@@ -189,9 +188,6 @@ document.getElementById('dropdownToggle').addEventListener('click', function (ev
     dropdownMenu.classList.toggle('show');
     event.stopPropagation(); // Prevent click event from reaching document
 });
-
-
-
 
 ////old
 //function searchManga(searchTerm) {

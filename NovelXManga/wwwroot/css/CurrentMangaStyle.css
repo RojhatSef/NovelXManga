@@ -18,9 +18,14 @@
     #zViewReview_Title {
         color: black;
     }
-
+  
+    .fas {
+        color: rgb(255, 103, 64);
+        
+    }
     .UserReview {
         margin: 10px;
+        display: flex;
         padding: 5px;
         border: 1px solid #ccc;
         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
@@ -28,16 +33,135 @@
         max-height: 500px;
         overflow: hidden;
         box-sizing: border-box;
+        overflow-wrap: break-word;
+        word-break: break-all;
+    }
+    @media (max-width: 768px) {
+       
+
+        .ReviewPadder {
+            margin-right: 0%;
+            margin-left: 0%;
+        }
+
+        .UserReview {
+            min-height: 350px; /* Set a max-height to limit content size */
+        }
+    }
+    @media (max-width: 1048px) {
+    
+
+        .ReviewPadder {
+            margin-right: 5%;
+            margin-left: 5%;
+        }
+
+        .UserReview {
+            min-height: 350px; /* Set a max-height to limit content size */
+        }
+    }
+    .ReviewLeft {
+        flex: 30%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+    }
+
+    .ReviewRightHeader {
+        align-self: flex-start;
+        margin-top: 7px
+    }
+
+    .ReviewRight {
+        flex: 70%;
+        display: flex;
+        flex-direction: column;
+    
+    }
+
+    .ReviewImageCenter {
+        width: 100%; /* Take the full width to center the image */
+        display: flex;
+        justify-content: center; /* Center the image horizontally */
+        margin-bottom: 10px; /* Optional: Adjust spacing between the image and scores */
+    }
+
+    @media (max-width: 768px) {
+        .UserReview {
+            flex-direction: column;
+            align-items: center; /* Center align the flex items */
+            min-height: auto; /* Remove any fixed height if previously set */
+            height: auto;
+        }
+
+        .ReviewLeft, .ReviewRight, .UserReview {
+        
+            align-items: center;
+            text-align: center; /* Center text for all child elements */
+        }
+        .PresentingReviewScorePadder {
+            /* Adjust alignment and spacing as needed */
+            text-align: center; /* Center-align score text */
+            width: 100%; /* Full width to contain icons and text properly */
+        }
+        .ReviewLeft, .ReviewRight {
+            flex: 100%;
+        }
+        .ReviewImageCenter {
+            /* Additional styling to ensure the image remains centered */
+            display: flex;
+            justify-content: center;
+            margin-bottom: 10px; /* Adjust spacing as needed */
+        }
+        .ReviewLeft {
+            width: 100%; /* Ensure full width to maintain layout */
+            /* Set a fixed height or min-height based on your content, or use auto for dynamic height */
+            min-height: 200px; /* Example: adjust this value as needed */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .ReviewRight {
+            flex-grow: 1; /* Allow the right side to grow and fill available space */
+            width: 100%;
+        }
+        /* Ensure ReviewLeft does not grow or shrink based on content */
+        .ReviewLeft {
+            flex-shrink: 0;
+        }
+            .ReviewLeft img, .ReviewRightHeader, .UserReviewcontent {
+                /* Ensure all content within ReviewLeft and ReviewRight are centered */
+                margin: auto; /* Center-align block-level elements or elements with a specified width */
+                text-align: center;
+            }
+            
+        .UserReviewcontent {
+            /* Adjustments to ensure content text is centered properly */
+            text-align: justify;
+            margin: 0 auto; /* Center the content block horizontally */
+        }
+        .CUS-Review-img {
+            /* Ensure image sizing is appropriate and doesn't overflow */
+            max-width: 100px; /* Example: adjust this value as needed */
+            height: auto; /* Maintain aspect ratio */
+            border-radius: 50%; /* Keep circular shape if desired */
+        }
     }
 
     .UserReviewcontent {
+        height: 100%;
+        overflow-y: auto; /* Add vertical scrollbar if content overflows */
+        text-align: center;
+        -webkit-hyphens: auto;
+        -ms-hyphens: auto;
+        hyphens: auto;
         word-wrap: break-word;
         overflow-wrap: break-word;
-        word-break: break-all;
+        word-break: break-word; /* Consider using 'break-word' or 'keep-all' depending on your needs */
         max-width: 100%;
-        min-height: 150px;
-        overflow-y: auto; /* Add vertical scrollbar if content overflows */
-        box-sizing: border-box; /* Include padding and border in the element's size */
+        box-sizing: border-box;
+        text-align: justify;
     }
 
     .ReviewPadder {
@@ -258,15 +382,6 @@
             margin-right: 5%;
             margin-left: 5%;
         }
-
-        .ReviewPadder {
-            margin-right: 5%;
-            margin-left: 5%;
-        }
-
-        .UserReview {
-            min-height: 250px; /* Set a max-height to limit content size */
-        }
     }
 
     @media (max-width: 768px) {
@@ -274,19 +389,6 @@
             flex-direction: column; /* Stack children vertically */
             margin-right: 0%;
             margin-left: 0;
-        }
-
-        .CUS-LeftSide, .CUS-RightSide {
-            width: 100%; /* Full width for small screens */
-        }
-
-        .ReviewPadder {
-            margin-right: 0%;
-            margin-left: 0%;
-        }
-
-        .UserReview {
-            min-height: 450px; /* Set a max-height to limit content size */
         }
     }
     /* Add some styles for the dropdown button and content */
@@ -356,9 +458,11 @@
         border: none;
         padding: 10px 20px;
         cursor: pointer;
+        border-bottom-right-radius: 5px;
+        border-bottom-left-radius: 5px;
     }
 
-        .CUS-load-more-button:hover {
+        .CUS-load-more-button:hover, CUS-load-more-button:active {
             background-color: #ff5c33;
         }
 
@@ -454,6 +558,17 @@
         height: 200px; /* Adjust this value based on your design requirements */
         left: 10%;
         transition: top 0.5s, left 0.5s; /* Smooth transition for top and left */
+    }
+
+    .CUS-Review-img {
+        height: 50px;
+        width: 50px;
+        margin: 10px;
+        border-radius: 50%;
+    }
+
+    .PresentingReviewScorePadder {
+        margin-bottom: 10px;
     }
 
     .CUS-manga-img {

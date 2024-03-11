@@ -8,8 +8,8 @@
             maxReviews = scoreDistribution[score];
         }
     }
-
-    console.log("Max Reviews: ", maxReviews);
+    //For testing 
+  //  console.log("Max Reviews: ", maxReviews);
 
     for (var score in scoreDistribution) {
         var percentage = (scoreDistribution[score] / maxReviews) * 100;
@@ -21,8 +21,8 @@
             case 2: barId += 'two'; break;
             case 1: barId += 'one'; break;
         }
-
-        console.log("Score: " + score + ", Count: " + scoreDistribution[score] + ", Percentage: " + percentage + "%, Bar ID: " + barId);
+        // For testing. 
+      //  console.log("Score: " + score + ", Count: " + scoreDistribution[score] + ", Percentage: " + percentage + "%, Bar ID: " + barId);
 
         $(barId).animate({
             width: percentage + '%'
