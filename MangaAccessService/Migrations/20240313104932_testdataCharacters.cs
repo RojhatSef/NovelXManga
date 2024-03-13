@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MangaAccessService.Migrations
 {
-    public partial class test3321312 : Migration
+    public partial class testdataCharacters : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -615,6 +615,54 @@ namespace MangaAccessService.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ArtistModelCharacter",
+                columns: table => new
+                {
+                    ArtistModelArtistId = table.Column<int>(type: "int", nullable: false),
+                    CreatorsCharactersCharacterId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ArtistModelCharacter", x => new { x.ArtistModelArtistId, x.CreatorsCharactersCharacterId });
+                    table.ForeignKey(
+                        name: "FK_ArtistModelCharacter_artistModels_ArtistModelArtistId",
+                        column: x => x.ArtistModelArtistId,
+                        principalTable: "artistModels",
+                        principalColumn: "ArtistId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ArtistModelCharacter_Characters_CreatorsCharactersCharacterId",
+                        column: x => x.CreatorsCharactersCharacterId,
+                        principalTable: "Characters",
+                        principalColumn: "CharacterId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AuthorModelCharacter",
+                columns: table => new
+                {
+                    CharacterAuthorAuthorID = table.Column<int>(type: "int", nullable: false),
+                    CreatorsCharactersCharacterId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AuthorModelCharacter", x => new { x.CharacterAuthorAuthorID, x.CreatorsCharactersCharacterId });
+                    table.ForeignKey(
+                        name: "FK_AuthorModelCharacter_authorModels_CharacterAuthorAuthorID",
+                        column: x => x.CharacterAuthorAuthorID,
+                        principalTable: "authorModels",
+                        principalColumn: "AuthorID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_AuthorModelCharacter_Characters_CreatorsCharactersCharacterId",
+                        column: x => x.CreatorsCharactersCharacterId,
+                        principalTable: "Characters",
+                        principalColumn: "CharacterId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "CharacterCharacter",
                 columns: table => new
                 {
@@ -782,6 +830,30 @@ namespace MangaAccessService.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "CharacterVoiceActorModel",
+                columns: table => new
+                {
+                    CreatorsCharactersCharacterId = table.Column<int>(type: "int", nullable: false),
+                    VoiceActorsVoiceActorId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CharacterVoiceActorModel", x => new { x.CreatorsCharactersCharacterId, x.VoiceActorsVoiceActorId });
+                    table.ForeignKey(
+                        name: "FK_CharacterVoiceActorModel_Characters_CreatorsCharactersCharacterId",
+                        column: x => x.CreatorsCharactersCharacterId,
+                        principalTable: "Characters",
+                        principalColumn: "CharacterId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CharacterVoiceActorModel_voiceActorModels_VoiceActorsVoiceActorId",
+                        column: x => x.VoiceActorsVoiceActorId,
+                        principalTable: "voiceActorModels",
+                        principalColumn: "VoiceActorId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "UserModelWishBookList",
                 columns: table => new
                 {
@@ -835,18 +907,18 @@ namespace MangaAccessService.Migrations
                 {
                     MangaID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    MangaName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ISBN10 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ISBN13 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    futureEvents = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StatusInCountryOfOrigin = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CompletelyTranslated = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    orignalWebtoon = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    OriginalPublisher = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MangaName = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    ISBN10 = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
+                    ISBN13 = table.Column<string>(type: "nvarchar(14)", maxLength: 14, nullable: true),
+                    futureEvents = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true),
+                    StatusInCountryOfOrigin = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    CompletelyTranslated = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    orignalWebtoon = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
+                    OriginalPublisher = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
                     Rank = table.Column<int>(type: "int", nullable: true),
                     PageView = table.Column<int>(type: "int", nullable: true),
-                    Type = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    OfficalLanguage = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Type = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    OfficalLanguage = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     PhotoPath = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastDailyReadDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     LastWeeklyReadDate = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -857,7 +929,7 @@ namespace MangaAccessService.Migrations
                     MonthRead = table.Column<int>(type: "int", nullable: true),
                     YearRead = table.Column<int>(type: "int", nullable: true),
                     ForeverRead = table.Column<int>(type: "int", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", maxLength: 5000, nullable: true),
                     ReleaseYear = table.Column<DateTime>(type: "datetime2", nullable: true),
                     EndingYear = table.Column<DateTime>(type: "datetime2", nullable: true),
                     BookAddedToDB = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -1274,7 +1346,7 @@ namespace MangaAccessService.Migrations
                 {
                     AssociatedNamesId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    nameString = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    nameString = table.Column<string>(type: "nvarchar(1500)", maxLength: 1500, nullable: false),
                     MangaID = table.Column<int>(type: "int", nullable: true),
                     mangaModelMangaID = table.Column<int>(type: "int", nullable: true),
                     AuthorID = table.Column<int>(type: "int", nullable: true),
@@ -1583,6 +1655,11 @@ namespace MangaAccessService.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_ArtistModelCharacter_CreatorsCharactersCharacterId",
+                table: "ArtistModelCharacter",
+                column: "CreatorsCharactersCharacterId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ArtistModelMangaModel_MangaModelsMangaID",
                 table: "ArtistModelMangaModel",
                 column: "MangaModelsMangaID");
@@ -1662,6 +1739,11 @@ namespace MangaAccessService.Migrations
                 column: "PrivateMessageId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_AuthorModelCharacter_CreatorsCharactersCharacterId",
+                table: "AuthorModelCharacter",
+                column: "CreatorsCharactersCharacterId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_AuthorModelMangaModel_MangaModelsMangaID",
                 table: "AuthorModelMangaModel",
                 column: "MangaModelsMangaID");
@@ -1700,6 +1782,11 @@ namespace MangaAccessService.Migrations
                 name: "IX_CharacterMangaModel_MangaModelsMangaID",
                 table: "CharacterMangaModel",
                 column: "MangaModelsMangaID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CharacterVoiceActorModel_VoiceActorsVoiceActorId",
+                table: "CharacterVoiceActorModel",
+                column: "VoiceActorsVoiceActorId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_CompletedBookListUserModel_UserModelsId",
@@ -1936,6 +2023,9 @@ namespace MangaAccessService.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "ArtistModelCharacter");
+
+            migrationBuilder.DropTable(
                 name: "ArtistModelMangaModel");
 
             migrationBuilder.DropTable(
@@ -1960,6 +2050,9 @@ namespace MangaAccessService.Migrations
                 name: "Attachments");
 
             migrationBuilder.DropTable(
+                name: "AuthorModelCharacter");
+
+            migrationBuilder.DropTable(
                 name: "AuthorModelMangaModel");
 
             migrationBuilder.DropTable(
@@ -1979,6 +2072,9 @@ namespace MangaAccessService.Migrations
 
             migrationBuilder.DropTable(
                 name: "CharacterMangaModel");
+
+            migrationBuilder.DropTable(
+                name: "CharacterVoiceActorModel");
 
             migrationBuilder.DropTable(
                 name: "CompletedBookListUserModel");

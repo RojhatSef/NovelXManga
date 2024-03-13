@@ -16,7 +16,7 @@ namespace MangaModelService
         [StringLength(10, ErrorMessage = "ISBN10 must be 10 characters", MinimumLength = 10)]
         public string? ISBN10 { get; set; }
 
-        [StringLength(13, ErrorMessage = "ISBN13 must be 13 characters", MinimumLength = 13)]
+        [StringLength(14, ErrorMessage = "ISBN13 must be 13 characters", MinimumLength = 14)]
         public string? ISBN13 { get; set; }
 
         [MaxLength(1000, ErrorMessage = "futureEvents must not exceed 1000 characters")]

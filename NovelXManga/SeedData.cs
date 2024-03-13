@@ -425,7 +425,7 @@ namespace NovelXManga
             var soloLeveling = await GetOrCreateMangaAsync("Solo Leveling");
             var towerOfGod = await GetOrCreateMangaAsync("Tower of God");
             var sailorMoon = await GetOrCreateMangaAsync("Sailor Moon");
-            var Testbook = await GetOrCreateMangaAsync("ThisIsACharacterTestToCheckIfATitleCouldbeLongerThanItShouldBePossibleToViewWhenWatchingThisFromANormalUsersperspectiveNowIamJustWritingThisFortheFunOfItHoweverItsEssentialThatThisTitleIsWorkingAsIntendedLaterOnWhenIseeThisKindOfCrappyLongTittlesInBookSIfThisHappensWeNeedSomething");
+            var Testbook = await GetOrCreateMangaAsync("ThisIsACharacterTestToCheckIfATitleCouldbeLongerThanItShouldBePossibleToViewWhenWatchingThisFromANormal");
 
             // Seed user reviews
             var testUser = await context.UserModels.FirstOrDefaultAsync(u => u.UserName == "TestUser");
@@ -669,7 +669,7 @@ namespace NovelXManga
 .Include(m => m.relatedSeries)
 .Include(m => m.Characters)
 .Include(r => r.RecommendedMangaModels)
-.FirstOrDefault(n => n.MangaName == "ThisIsACharacterTestToCheckIfATitleCouldbeLongerThanItShouldBePossibleToViewWhenWatchingThisFromANormalUsersperspectiveNowIamJustWritingThisFortheFunOfItHoweverItsEssentialThatThisTitleIsWorkingAsIntendedLaterOnWhenIseeThisKindOfCrappyLongTittlesInBookSIfThisHappensWeNeedSomething");
+.FirstOrDefault(n => n.MangaName == "ThisIsACharacterTestToCheckIfATitleCouldbeLongerThanItShouldBePossibleToViewWhenWatchingThisFromANormal");
             var Death = context.mangaModels
        .Include(m => m.relatedSeries)
        .Include(m => m.Characters)
@@ -1761,7 +1761,7 @@ new Character {
                 MangaName = "Fullmetal Alchemist",
                 BlogModel = new BlogModel { mangaName = "Fullmetal Alchemist" },
                 ISBN10 = "2345678901",
-                ISBN13 = "2345678901234",
+                ISBN13 = "234-5678901234",
                 futureEvents = "None",
                 StatusInCountryOfOrigin = "Completed",
                 CompletelyTranslated = "Yes",
@@ -1911,7 +1911,7 @@ new Character {
                 MangaName = "One Piece",
                 BlogModel = new BlogModel { mangaName = "One Piece" },
                 ISBN10 = "1234567890",
-                ISBN13 = "1234567890123",
+                ISBN13 = "123-4567890123",
                 futureEvents = "None",
                 StatusInCountryOfOrigin = "Ongoing",
                 CompletelyTranslated = "No",
@@ -2246,7 +2246,7 @@ new Character {
                 MangaName = "Sailor Moon",
                 BlogModel = new BlogModel { mangaName = "Sailor Moon" },
                 ISBN10 = "0123456789",
-                ISBN13 = "0123456789012",
+                ISBN13 = "012-3456789012",
                 futureEvents = "None",
                 StatusInCountryOfOrigin = "Completed",
                 CompletelyTranslated = "Yes",
@@ -2457,7 +2457,7 @@ new Character {
                 MangaName = "Detective Conan",
                 BlogModel = new BlogModel { mangaName = "Detective Conan" },
                 ISBN10 = "3456789012",
-                ISBN13 = "3456789012345",
+                ISBN13 = "345-6789012345",
                 futureEvents = "None",
                 StatusInCountryOfOrigin = "Ongoing",
                 CompletelyTranslated = "No",
@@ -2668,7 +2668,7 @@ new AssociatedNames { nameString = "Detective Conan Manga" },
                 MangaName = "Attack on Titan",
                 BlogModel = new BlogModel { mangaName = "Attack on Titan" },
                 ISBN10 = "2345678901",
-                ISBN13 = "2345678901234",
+                ISBN13 = "234-5678901234",
                 futureEvents = "None",
                 StatusInCountryOfOrigin = "Completed",
                 CompletelyTranslated = "Yes",
@@ -3223,9 +3223,9 @@ new Character
 
             MangaModel lotr = new MangaModel
             {
-                MangaName = "ThisIsACharacterTestToCheckIfATitleCouldbeLongerThanItShouldBePossibleToViewWhenWatchingThisFromANormalUsersperspectiveNowIamJustWritingThisFortheFunOfItHoweverItsEssentialThatThisTitleIsWorkingAsIntendedLaterOnWhenIseeThisKindOfCrappyLongTittlesInBookSIfThisHappensWeNeedSomething",
+                MangaName = "ThisIsACharacterTestToCheckIfATitleCouldbeLongerThanItShouldBePossibleToViewWhenWatchingThisFromANormal",
                 PhotoPath = Path.Combine(ProcessUploadedFile("TestTest.png")),
-                BlogModel = new BlogModel { mangaName = "ThisIsACharacterTestToCheckIfATitleCouldbeLongerThanItShouldBePossibleToViewWhenWatchingThisFromANormalUsersperspectiveNowIamJustWritingThisFortheFunOfItHoweverItsEssentialThatThisTitleIsWorkingAsIntendedLaterOnWhenIseeThisKindOfCrappyLongTittlesInBookSIfThisHappensWeNeedSomething" },
+                BlogModel = new BlogModel { mangaName = "ThisIsACharacterTestToCheckIfATitleCouldbeLongerThanItShouldBePossibleToViewWhenWatchingThisFromANormal" },
                 ReleaseYear = new DateTime(1954, 7, 29),
                 Description = "In a sleepy village in the Shire, young hobbit Frodo Baggins finds himself tasked with an immense quest; to destroy the One Ring and thus ensure the destruction of the Dark Lord Sauron. Alongside a fellowship of heroes including wizards, elves and dwarves, he must journey across the land of Middle-earth, facing danger at every turn.",
                 CompletelyTranslated = "Yes",
@@ -3730,8 +3730,8 @@ new Character {
                 Description = "A man who reads too many chivalric romances and decides to become a knight-errant",
                 CompletelyTranslated = "Completed",
                 OfficalLanguage = "Spanish",
-                ISBN10 = "9780142437230",
-                ISBN13 = "0142437239",
+                ISBN13 = "978-0142437230",
+                ISBN10 = "0142437239",
 
                 relatedSeries = null,
                 EndingYear = DateTime.Now,
@@ -3945,8 +3945,8 @@ new Character
                 Description = "In a world where nearly every human has some form of superpower, or 'quirk', aspiring heroes join U.A. High School to learn how to become a superhero.",
                 CompletelyTranslated = "Ongoing",
                 OfficalLanguage = "Japanese",
-                ISBN10 = "9784088802640",
-                ISBN13 = "4088802646",
+                ISBN13 = "978-4088802640",
+                ISBN10 = "4088802646",
                 relatedSeries = null,
                 EndingYear = DateTime.Now,
                 StatusInCountryOfOrigin = "Ongoing",

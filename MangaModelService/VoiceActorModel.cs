@@ -19,7 +19,8 @@ namespace MangaModelService
         public string? BirthPlace { get; set; }
 
         // Missing data Icollection of Character
-        // public virtual ICollection<Character> CreatorsCharacters { get; set; }
+        public virtual ICollection<Character> CreatorsCharacters { get; set; }
+
         public string? CharacterName { get; set; } // this should be removed as a voice actor can have multiple of characters, i must have been on crack to have missed this
 
         public string? Biography { get; set; }
