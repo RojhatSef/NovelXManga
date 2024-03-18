@@ -18,11 +18,27 @@
     #zViewReview_Title {
         color: black;
     }
-  
+
     .fas {
         color: rgb(255, 103, 64);
-        
     }
+
+    html body *, html body ::after, html body ::before {
+        box-sizing: content-box !important;
+    }
+    .MUS-genre, .MUS-genre::before, .MUS-genre::after {
+        box-sizing: content-box !important;
+    }
+    *, ::after, ::before {
+        box-sizing: content-box !important;
+    }
+
+    body *,
+    body *::after,
+    body *::before {
+        box-sizing: content-box !important;
+    }
+
     .UserReview {
         margin: 10px;
         display: flex;
@@ -30,15 +46,13 @@
         border: 1px solid #ccc;
         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         width: calc(100% - 20px);
-     
         overflow: hidden;
         box-sizing: border-box;
         overflow-wrap: break-word;
         word-break: break-all;
     }
-    @media (max-width: 768px) {
-       
 
+    @media (max-width: 768px) {
         .ReviewPadder {
             margin-right: 0%;
             margin-left: 0%;
@@ -48,9 +62,8 @@
             min-height: 350px; /* Set a max-height to limit content size */
         }
     }
-    @media (max-width: 1048px) {
-    
 
+    @media (max-width: 1048px) {
         .ReviewPadder {
             margin-right: 5%;
             margin-left: 5%;
@@ -60,6 +73,7 @@
             min-height: 350px; /* Set a max-height to limit content size */
         }
     }
+
     .ReviewLeft {
         flex: 30%;
         display: flex;
@@ -72,14 +86,16 @@
         align-self: flex-start;
         margin-top: 7px
     }
+
     .ReviewColor {
         color: #ff6740;
     }
+
     .ReviewRight {
         flex: 70%;
         display: flex;
         flex-direction: column;
-        margin-right:10px; 
+        margin-right: 10px;
     }
 
     .ReviewImageCenter {
@@ -87,7 +103,7 @@
         display: flex;
         justify-content: center; /* Center the image horizontally */
         margin-bottom: 10px; /* Optional: Adjust spacing between the image and scores */
-        margin-top:10px; 
+        margin-top: 10px;
     }
 
     @media (max-width: 768px) {
@@ -99,27 +115,31 @@
         }
 
         .ReviewLeft, .ReviewRight, .UserReview {
-        
             align-items: center;
             text-align: center; /* Center text for all child elements */
         }
+
         .PresentingReviewScorePadder {
             /* Adjust alignment and spacing as needed */
             text-align: center; /* Center-align score text */
             width: 100%; /* Full width to contain icons and text properly */
         }
+
         .ReviewLeft, .ReviewRight {
             flex: 100%;
         }
+
         .ReviewRight {
-            margin-right:0px; 
+            margin-right: 0px;
         }
-            .ReviewImageCenter {
+
+        .ReviewImageCenter {
             /* Additional styling to ensure the image remains centered */
             display: flex;
             justify-content: center;
             margin-bottom: 10px; /* Adjust spacing as needed */
         }
+
         .ReviewLeft {
             width: 100%; /* Ensure full width to maintain layout */
             /* Set a fixed height or min-height based on your content, or use auto for dynamic height */
@@ -128,6 +148,7 @@
             flex-direction: column;
             align-items: center;
         }
+
         .ReviewRight {
             flex-grow: 1; /* Allow the right side to grow and fill available space */
             width: 100%;
@@ -136,6 +157,7 @@
         .ReviewLeft {
             flex-shrink: 0;
         }
+
             .ReviewLeft img, .ReviewRightHeader, .UserReviewcontent {
                 /* Ensure all content within ReviewLeft and ReviewRight are centered */
                 margin: auto; /* Center-align block-level elements or elements with a specified width */
@@ -148,6 +170,7 @@
             margin: 0 auto; /* Center the content block horizontally */
             margin-right: 0px;
         }
+
         .CUS-Review-img {
             /* Ensure image sizing is appropriate and doesn't overflow */
             max-width: 100px; /* Example: adjust this value as needed */
@@ -169,7 +192,7 @@
         max-width: 100%;
         box-sizing: border-box;
         text-align: justify;
-        margin-right: auto; 
+        margin-right: auto;
     }
 
     .ReviewPadder {

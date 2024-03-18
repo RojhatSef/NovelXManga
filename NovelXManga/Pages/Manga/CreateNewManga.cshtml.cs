@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json;
 
 namespace NovelXManga.Pages.Manga
 {
@@ -16,6 +17,7 @@ namespace NovelXManga.Pages.Manga
         private readonly IMangaRepository mangaRepository;
         private readonly IWebHostEnvironment webHostEnvironment;
         private readonly ITagRepsitory tagRepsitory;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
         [BindProperty]
         public MangaModel _MangaModel { get; set; }
@@ -37,12 +39,16 @@ namespace NovelXManga.Pages.Manga
         public DateTime? EndingYear { get; set; } = null;
 
         [BindProperty]
-        [FromForm(Name = "selectedTags")]
+        [FromForm(Name = "JsSelectedTags")]
         public List<int> SelectedTags { get; set; }
 
         [BindProperty]
         [FromForm(Name = "selectedGenres")]
         public List<int> SelectedGenres { get; set; }
+
+        [BindProperty]
+        [FromForm(Name = "PositiveSelectedGenres")]
+        public List<int> PositiveSelectedGenres { get; set; }
 
         public List<TagModel> Tags { get; set; }
         public List<GenresModel> Genres { get; set; }
@@ -51,12 +57,22 @@ namespace NovelXManga.Pages.Manga
         [TempData]
         public string SucessFulManga { get; set; }
 
-        public Create_new_MangaModel(MangaNNovelAuthDBContext mangaNNovelAuthDBContext, IMangaRepository mangaRepository, IWebHostEnvironment webHostEnvironment, ITagRepsitory tagRepsitory, ILogger<IndexModel> logger)
+        public Create_new_MangaModel(MangaNNovelAuthDBContext mangaNNovelAuthDBContext, IMangaRepository mangaRepository, IWebHostEnvironment webHostEnvironment, ITagRepsitory tagRepsitory, ILogger<IndexModel> logger, IHttpContextAccessor httpContextAccessor)
         {
             this.context = mangaNNovelAuthDBContext;
             this.mangaRepository = mangaRepository;
             this.webHostEnvironment = webHostEnvironment;
             this.tagRepsitory = tagRepsitory;
+            _httpContextAccessor = httpContextAccessor;
+        }
+
+        private void DeserializeAndRetrieveSessionData()
+        {
+            var selectedTagsSerialized = _httpContextAccessor.HttpContext.Session.GetString("SelectedTags");
+            SelectedTags = string.IsNullOrEmpty(selectedTagsSerialized) ? new List<int>() : JsonSerializer.Deserialize<List<int>>(selectedTagsSerialized);
+
+            var selectedGenresSerialized = _httpContextAccessor.HttpContext.Session.GetString("PositiveSelectedGenres");
+            PositiveSelectedGenres = string.IsNullOrEmpty(selectedGenresSerialized) ? new List<int>() : JsonSerializer.Deserialize<List<int>>(selectedGenresSerialized);
         }
 
         public async Task<IActionResult> OnPostAsync()
@@ -68,20 +84,18 @@ namespace NovelXManga.Pages.Manga
             {
                 Directory.CreateDirectory(uploadsDirectory);
             }
-
+            InitializeSettings();
+            SerializeAndStoreSessionData();
             // Process uploaded file and get the photo path, if there's no photo photopath is null.
             string photoPath = Photo != null ? ProcessUploadedFile() : null;
             // create a new list of TagModel objects
-            var selectedTags = await context.TagModels.Where(tag => SelectedTags.Contains(tag.TagId)).ToListAsync();
-            var selectedGenres = await context.GenresModels.Where(tag => SelectedGenres.Contains(tag.GenresId)).ToListAsync();
 
-            _MangaModel.TagsModels = selectedTags;
+            _MangaModel.TagsModels = await context.TagModels.Where(tag => SelectedTags.Contains(tag.TagId)).ToListAsync();
+            _MangaModel.GenresModels = await context.GenresModels.Where(genre => PositiveSelectedGenres.Contains(genre.GenresId)).ToListAsync();
 
             _MangaModel.PhotoPath = photoPath;
             _MangaModel.ReleaseYear = ReleaseYear;
             _MangaModel.EndingYear = EndingYear;
-            _MangaModel.TagsModels = selectedTags;
-            _MangaModel.GenresModels = selectedGenres;
 
             #region If Something == null
 
@@ -112,8 +126,8 @@ namespace NovelXManga.Pages.Manga
                 CompletelyTranslated = _MangaModel.CompletelyTranslated,
 
                 orignalWebtoon = _MangaModel.orignalWebtoon,
-                TagsModels = selectedTags,
-                GenresModels = selectedGenres,
+                TagsModels = _MangaModel.TagsModels,
+                GenresModels = _MangaModel.GenresModels,
                 BookAddedToDB = DateTime.UtcNow,
             };
 
@@ -128,9 +142,33 @@ namespace NovelXManga.Pages.Manga
         {
             Tags = await context.TagModels.ToListAsync();
             Genres = await context.GenresModels.ToListAsync();
+            DeserializeAndRetrieveSessionData();
             MangaModels = await mangaRepository.GetAllModelAsync();
+            var selectedTagsSession = _httpContextAccessor.HttpContext.Session.GetString("SelectedTags");
+            var selectedGenresSession = _httpContextAccessor.HttpContext.Session.GetString("SelectedGenres");
+            if (!string.IsNullOrEmpty(selectedTagsSession))
+            {
+                SelectedTags = JsonSerializer.Deserialize<List<int>>(selectedTagsSession);
+            }
 
+            if (!string.IsNullOrEmpty(selectedGenresSession))
+            {
+                PositiveSelectedGenres = JsonSerializer.Deserialize<List<int>>(selectedGenresSession);
+            }
             return Page();
+        }
+
+        private void SerializeAndStoreSessionData()
+        {
+            var selectedTagsSerialized = JsonSerializer.Serialize(SelectedTags);
+            var selectedGenresSerialized = JsonSerializer.Serialize(PositiveSelectedGenres);
+        }
+
+        private void InitializeSettings()
+        {
+            PositiveSelectedGenres ??= new List<int>();
+
+            SelectedTags ??= new List<int>();
         }
 
         private string ProcessUploadedFile()

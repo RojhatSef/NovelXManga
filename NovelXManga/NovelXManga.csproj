@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <_ContentIncludedByDefault Remove="wwwroot\css\ChromeStyle.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\CreateBookStyke.css" />
   </ItemGroup>
 
   <ItemGroup>

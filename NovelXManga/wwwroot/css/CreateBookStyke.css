@@ -1,0 +1,27 @@
+﻿.col-md-12 {
+    margin-top: 10%;
+}
+
+html body *, html body ::after, html body ::before {
+    box-sizing: content-box !important;
+}
+
+.MUS-genre, .MUS-genre::before, .MUS-genre::after {
+    box-sizing: content-box !important;
+}
+
+*, ::after, ::before {
+    box-sizing: content-box !important;
+}
+
+html body .MUS-genre,
+html body .MUS-genre::before,
+html body .MUS-genre::after {
+    box-sizing: content-box !important;
+}
+
+body *,
+body *::after,
+body *::before {
+    box-sizing: content-box !important;
+}
