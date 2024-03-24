@@ -62,7 +62,6 @@
     }
 
     searchButton.addEventListener("click", function (e) {
-        e.preventDefault();
         updateSelectedGenresInput(hiddenContainerPositive, positiveSelectedGenres);
         saveState();
         form.submit();
@@ -147,7 +146,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     document.getElementById('searchButton').addEventListener('click', function (e) {
-        e.preventDefault();
         updateSelectedTagsInput();
         document.getElementById('AdvancedSearch').submit();
     });

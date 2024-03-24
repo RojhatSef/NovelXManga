@@ -86,16 +86,15 @@ namespace NovelXManga.Pages.Manga
             }
             InitializeSettings();
             SerializeAndStoreSessionData();
+
             // Process uploaded file and get the photo path, if there's no photo photopath is null.
-            string photoPath = Photo != null ? ProcessUploadedFile() : null;
+
+            _MangaModel.PhotoPath = ProcessUploadedFile(Photo);
+
             // create a new list of TagModel objects
 
             _MangaModel.TagsModels = await context.TagModels.Where(tag => SelectedTags.Contains(tag.TagId)).ToListAsync();
             _MangaModel.GenresModels = await context.GenresModels.Where(genre => PositiveSelectedGenres.Contains(genre.GenresId)).ToListAsync();
-
-            _MangaModel.PhotoPath = photoPath;
-            _MangaModel.ReleaseYear = ReleaseYear;
-            _MangaModel.EndingYear = EndingYear;
 
             #region If Something == null
 
@@ -136,6 +135,7 @@ namespace NovelXManga.Pages.Manga
             int newMangaId = MangaModels.MangaID;
             SucessFulManga = "Manga has been created successfully";
             return RedirectToPage("/Author/CreateAuthor", new { mangaId = newMangaId });
+            //return RedirectToPage("/Author/CreateAuthor", new { mangaId = newMangaId });
         }
 
         public async Task<IActionResult> OnGetAsync()
@@ -171,21 +171,30 @@ namespace NovelXManga.Pages.Manga
             SelectedTags ??= new List<int>();
         }
 
-        private string ProcessUploadedFile()
+        private string ProcessUploadedFile(IFormFile uploadedFile)
         {
-            string uniqueFileName = null;
-            if (Photo != null)
+            // Path for the default image
+            string defaultImagePath = "NoPhoto.png";
+
+            if (uploadedFile != null)
             {
-                string uploadsFolder = Path.Combine(webHostEnvironment.WebRootPath, "Images", "MangaImage");
-                string extension = Path.GetExtension(Photo.FileName);
-                uniqueFileName = Guid.NewGuid().ToString() + extension;
+                string uploadsFolder = Path.Combine(webHostEnvironment.WebRootPath, "Images", "GeneratedMangaImage");
+                Directory.CreateDirectory(uploadsFolder); // Ensure the directory exists
+
+                string extension = Path.GetExtension(uploadedFile.FileName);
+                string uniqueFileName = Guid.NewGuid().ToString() + extension;
                 string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
                 using (var fileStream = new FileStream(filePath, FileMode.Create))
                 {
-                    Photo.CopyTo(fileStream);
+                    uploadedFile.CopyTo(fileStream);
                 }
+
+                // Return only the file name for uploaded images, assuming all access is prefixed in the frontend
+                return uniqueFileName;
             }
-            return uniqueFileName;
+
+            return defaultImagePath;
         }
     }
 }

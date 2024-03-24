@@ -413,7 +413,8 @@
       <hr / class="CUS-DescriptionDiver">
         <div class="CUS-CommonContainer">
          <div class="CUS-LeftSide">
-        @if (Model.CurrentManga.AssociatedNames != null || Model.CurrentManga.AssociatedNames.Count > 0 )
+            @if (Model.CurrentManga.AssociatedNames != null && Model.CurrentManga.AssociatedNames.Count > 0)
+
             {
                 <div class="CUS-LeftSidemangaDetailsBox">
 
@@ -1061,7 +1062,7 @@
 
             @*  LeftSideEndhere*@
          </div>
-          @if (Model.CurrentManga2.Characters != null || Model.CurrentManga2.Characters.Count <= 1 && Model.CurrentManga.OverAllBookScore != null)
+          @if (Model.CurrentManga2.Characters != null && Model.CurrentManga2.Characters.Any() && Model.CurrentManga.OverAllBookScore != null)
                 {
             <div class="CUS-RightSide">     
                 <div class="CUS-mangaDetailsBox">
@@ -1073,9 +1074,7 @@
                 {
                     @foreach (var character in Model.CurrentManga2.Characters.Take(5))
                     {
-                        
-                            
-                      
+                     
                             <div class="CUS-GridItem">
                                 <a asp-page="/CharacterPage/CurrentCharacter" asp-route-id="@character.CharacterId">
                                     <img class="GridImage" src="~/Images/GeneratedCharacterImage/@character.PhotoPath" />

@@ -13,6 +13,7 @@ namespace NovelXManga.Pages.Register
         private readonly SignInManager<UserModel> signInManager;
         private readonly MangaNNovelAuthDBContext context;
         private readonly IMangaRepository mangaRepository;
+        private readonly IWebHostEnvironment webHostEnvironment;
 
         [BindProperty]
         public RegisterViewModel Model { get; set; }
@@ -22,13 +23,14 @@ namespace NovelXManga.Pages.Register
         public List<MangaModel> AllBooksList { get; set; }
         public IEnumerable<MangaModel> GetAllBooks { get; set; }
 
-        public UserRegisterModel(UserManager<UserModel> userManager, SignInManager<UserModel> signInManager, IMangaRepository mangaRepository, MangaNNovelAuthDBContext context)
+        public UserRegisterModel(UserManager<UserModel> userManager, SignInManager<UserModel> signInManager, IMangaRepository mangaRepository, MangaNNovelAuthDBContext context, IWebHostEnvironment webHostEnvironment)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
 
             this.mangaRepository = mangaRepository;
             this.context = context;
+            this.webHostEnvironment = webHostEnvironment;
         }
 
         public async Task<IActionResult> OnPostAsync()
@@ -38,6 +40,8 @@ namespace NovelXManga.Pages.Register
                 var usermail = await userManager.FindByEmailAsync(Model?.Email); // Added null-conditional operator
                 if (usermail == null)
                 {
+                    //string defaultUserImagePath = "NoPhoto.png";
+                    //string photoPath = UserProfileProcessUploadedFile(defaultUserImagePath);
                     var user = new UserModel
                     {
                         UserName = Model.Email,
@@ -105,6 +109,29 @@ namespace NovelXManga.Pages.Register
 
             return Page();
         }
+
+        //private string UserProfileProcessUploadedFile(string filename)
+        //{
+        //    return GeneradedUploadedFile(filename, "GeneratedUserImage");
+        //}
+
+        //private string GeneradedUploadedFile(string filename, string generatedFolder)
+        //{
+        //    string uniqueFileName = null;
+        //    if (filename != null)
+        //    {
+        //        string uploadsFolder = Path.Combine(webHostEnvironment.WebRootPath, "Images", generatedFolder);
+
+        //        // Create the directory if it doesn't exist
+        //        Directory.CreateDirectory(uploadsFolder);
+
+        //        string extension = Path.GetExtension(filename);
+        //        uniqueFileName = Guid.NewGuid().ToString() + extension;
+        //        string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+        //        File.Copy(Path.Combine(webHostEnvironment.ContentRootPath, "wwwroot", "Images", generatedFolder.Replace("Generated", ""), filename), filePath);
+        //    }
+        //    return uniqueFileName;
+        //}
 
         public async Task<IActionResult> OnGetAsync()
         {
