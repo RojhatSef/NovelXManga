@@ -719,7 +719,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        padding: 10px;
+  
         border: none;
         border-radius: 5px;
         cursor: pointer;
@@ -735,7 +735,7 @@
         }
 
     .CUS-ReportBookButton {
-        padding: 10px;
+      
         background-color: red;
         border: none;
         cursor: pointer;

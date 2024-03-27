@@ -45,6 +45,13 @@ namespace MangaAccessService.Migrations
             return NewManga;
         }
 
+        public async Task<List<MangaDTO>> GetAllMangaMinimalAsync()
+        {
+            return await mangaNNovelAuthDBContext.mangaModels
+                .Select(m => new MangaDTO { MangaID = m.MangaID, MangaName = m.MangaName })
+                .ToListAsync();
+        }
+
         public MangaModel Delete(int id)
         {
             MangaModel mangaModel = mangaNNovelAuthDBContext.mangaModels.Find(id);

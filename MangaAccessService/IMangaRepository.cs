@@ -57,6 +57,8 @@ namespace MangaAccessService
 
         Task<IEnumerable<MangaModel>> GetMostPopularMangaAsync(int count);
 
+        Task<List<MangaDTO>> GetAllMangaMinimalAsync();
+
         Task UpdateMangaRankingAsync(MangaModel manga, int rank);
     }
 }

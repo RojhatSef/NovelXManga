@@ -83,21 +83,21 @@
                                         <div class="MUS-Score">
                                             @if (Model.AllBooksList[i].OverAllBookScore != null)
                                             {
-                                                <span>     @Model.AllBooksList[i].OverAllBookScore  <i class="fas fa-star active colorstarCurrent"></i> </span>
+                                                <span class="WhiteColorStyle">     @Model.AllBooksList[i].OverAllBookScore  <i class="fas fa-star active colorstarCurrent"></i> </span>
                                             }
                                             else
                                             {
-                                                <span>   <i class="fas fa-star active colorstarCurrent"></i>   N/A  </span>
+                                                <span class="WhiteColorStyle">   <i class="fas fa-star active colorstarCurrent"></i>   N/A  </span>
                                             }
                                             @if (Model.AllBooksList[i].ForeverRead != null)
                                             {
-                                                <span>
+                                                <span class="WhiteColorStyle">
                                                     <i class="fa-solid fa-eye"></i>   @Model.AllBooksList[i].ForeverRead &nbsp;
                                                 </span>
                                             }
                                             else
                                             {
-                                                <span>
+                                                <span class="WhiteColorStyle">
                                                     <i class="fa-solid fa-eye"></i>  N/A
                                                 </span>
                                             }

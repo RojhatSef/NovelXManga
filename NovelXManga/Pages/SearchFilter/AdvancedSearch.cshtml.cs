@@ -14,7 +14,7 @@ using System.Text.RegularExpressions;
 
 //bug not FIXED OnGetBooksPage is being called when we do the OnPost.
 // This makes the data fetch happen twice. THis is a bug, unsure how to fix it now. Not on high priority.
-// Datetime picker for SearchReleaseYearStart and SearchReleaseYearEnd does not work. also need to do a Frontend on it. 
+// Datetime picker for SearchReleaseYearStart and SearchReleaseYearEnd does not work. also need to do a Frontend on it.
 namespace NovelXManga.Pages.SearchFilter
 {
     [ValidateAntiForgeryToken]
@@ -564,7 +564,6 @@ namespace NovelXManga.Pages.SearchFilter
                 // Retrieve the sort order from the form or session
                 SortOrder = Request.Form["SortOrder"].FirstOrDefault() ?? _httpContextAccessor.HttpContext.Session.GetString("SortOrder") ?? "TitleAscending";
                 _httpContextAccessor.HttpContext.Session.SetString("SortOrder", SortOrder);
-
 
                 SetSessionState();
                 SerializeAndStoreSessionData();

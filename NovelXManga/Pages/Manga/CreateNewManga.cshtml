@@ -78,6 +78,12 @@
                     <span asp-validation-for="_MangaModel.Description" class="text-danger"></span>
                 </div>
                 <p>Not working Yet</p>
+                <select asp-for="_MangaModel.relatedSeries" asp-items="@(new SelectList(Model.MangaRecommendedRelatedOptions, "MangaID", "MangaName"))" class="form-control" multiple>
+</select>
+
+        <select asp-for="_MangaModel.RecommendedMangaModels" asp-items="@(new SelectList(Model.MangaRecommendedRelatedOptions, "MangaID", "MangaName"))" class="form-control" multiple>
+</select>
+
 <div class="mb-3">
             <p>Search bar should be here </p>
     <label class="form-label" asp-for="_MangaModel.relatedSeries">Related Series</label>

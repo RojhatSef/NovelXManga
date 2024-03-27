@@ -18,7 +18,7 @@
     #zViewReview_Title {
         color: black;
     }
-  
+
     .UserReview {
         margin: 10px;
         padding: 5px;
@@ -46,11 +46,13 @@
         justify-content: center;
         margin: 8px;
     }
+
     .AllView {
         display: flex;
         flex-direction: column;
         min-height: 100vh;
     }
+
     .CUS-mangaDetailsBox {
         flex: 1 1 auto; /* Will take up 30% of the container's width when the screen is large */
         box-sizing: border-box;
@@ -71,8 +73,8 @@
         justify-content: space-between; /* Distributes space evenly between the rating containers */
         align-items: center; /* Aligns items vertically in the center */
         gap: 1em; /* Space between each rating container */
-        margin-right:10%;
-        margin-left:10%;
+        margin-right: 10%;
+        margin-left: 10%;
     }
 
     .CUS-LeftSidemangaDetailsBox {
@@ -170,8 +172,8 @@
         flex-direction: row;
         align-items: flex-start;
         width: 100%;
-        margin-right:10%; 
-        margin-left:10%; 
+        margin-right: 10%;
+        margin-left: 10%;
     }
 
     .CUS-ratingLeftSide {
@@ -853,3 +855,4 @@
             }
         }
     }
+}

@@ -1,4 +1,5 @@
 using MangaAccessService;
+using MangaAccessService.DTO;
 using MangaModelService;
 using MangaModelService.ViewModels;
 using Microsoft.AspNetCore.Authorization;
@@ -53,6 +54,13 @@ namespace NovelXManga.Pages.Manga
         public List<TagModel> Tags { get; set; }
         public List<GenresModel> Genres { get; set; }
         public IEnumerable<MangaModel> MangaModels { get; set; }
+        public IEnumerable<MangaDTO> MangaRecommendedRelatedOptions { get; set; }
+
+        [BindProperty]
+        public int[] SelectedRelatedMangaIds { get; set; }
+
+        [BindProperty]
+        public int[] SelectedRecommendedMangaIds { get; set; }
 
         [TempData]
         public string SucessFulManga { get; set; }
@@ -64,6 +72,13 @@ namespace NovelXManga.Pages.Manga
             this.webHostEnvironment = webHostEnvironment;
             this.tagRepsitory = tagRepsitory;
             _httpContextAccessor = httpContextAccessor;
+        }
+
+        public async Task<List<MangaDTO>> GetAllMangaMinimalAsync()
+        {
+            return await context.mangaModels
+                .Select(m => new MangaDTO { MangaID = m.MangaID, MangaName = m.MangaName })
+                .ToListAsync();
         }
 
         private void DeserializeAndRetrieveSessionData()
@@ -142,6 +157,7 @@ namespace NovelXManga.Pages.Manga
         {
             Tags = await context.TagModels.ToListAsync();
             Genres = await context.GenresModels.ToListAsync();
+            MangaRecommendedRelatedOptions = await mangaRepository.GetAllMangaMinimalAsync();
             DeserializeAndRetrieveSessionData();
             MangaModels = await mangaRepository.GetAllModelAsync();
             var selectedTagsSession = _httpContextAccessor.HttpContext.Session.GetString("SelectedTags");
