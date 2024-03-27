@@ -145,9 +145,10 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    document.getElementById('searchButton').addEventListener('click', function (e) {
+    document.getElementById('CreateManga').addEventListener('click', function (e) {
+        e.preventDefault();
         updateSelectedTagsInput();
-        document.getElementById('AdvancedSearch').submit();
+        document.getElementById('create-manga-form').submit();
     });
 
     function addCheckboxEvent(checkbox, tag) {
