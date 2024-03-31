@@ -855,9 +855,17 @@
             display: block;
             margin: 8px 0;
         }
-
-    @media screen and (min-width: 769px) and (max-width: 849px) {
-        .CUS-commonParentContainer {
+    .gg-menu-round{
+        width:19px;
+        height:19px;
+        --ggs: 1.5;
+    }
+        .gg-menu-round::before{
+            top:4.5px;
+            left:4.5px; 
+        }
+        @media screen and (min-width: 769px) and (max-width: 849px) {
+            .CUS-commonParentContainer {
             margin-left: 44% !important; /* Adjusted to move to the right by setting margin-left to 40% */
             margin-right: 0; /* Reset margin-right to 0 */
         }
@@ -1093,4 +1101,5 @@
             justify-content: center;
         }
     }
+
 }

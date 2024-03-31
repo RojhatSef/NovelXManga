@@ -206,25 +206,44 @@
         text-decoration: none !important;
         color: inherit;
     }
-
-    .MoreRecentUpdateStyle {
-        width: 100%;
-        height: 35px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: #333; /* Optional: background color for the button */
-        color: #fff; /* Optional: text color for the button */
-        border-top-left-radius: 0;
-        border-top-right-radius: 0;
-        border-bottom-right-radius: 30px; /* Adjust as needed */
-        border-bottom-left-radius: 30px; /* Adjust as needed */
+    body.light-mode .MiniCards {
+        background-color: #e6e6e6;
     }
 
-        .MoreRecentUpdateStyle:hover {
-            background-color: #ff6740; /* Optional: background color for the button */
-            color: black; /* Optional: text color for the button */
+
+    @media all and (-webkit-min-device-pixel-ratio:0) and (min-resolution: .001dpcm) {
+        body.light-mode .MoreRecentUpdateStyle {
+            background-color: #e6e6e6;
+            color: #333;
+            border: 2px solid #ff6740; /* Add border with specific color */
         }
+            body.light-mode .MoreRecentUpdateStyle:hover {
+                background-color: #ff6740;
+            }
+
+            .MoreRecentUpdateStyle {
+                width: 100%;
+                height: 35px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: var(--background-color);
+                color: var(--text-color);
+               
+                border-top-left-radius: 0;
+                border-top-right-radius: 0;
+                border-bottom-right-radius: 30px;
+                border-bottom-left-radius: 30px;
+                transition: background-color 0.3s, color 0.3s, border-color 0.3s; /* Add transition for smooth effect */
+            }
+
+            .MoreRecentUpdateStyle:hover {
+                background-color: #ff6740;
+                color: #000;
+                border-color: #e65c00;
+            }
+            
+    }
 
     .container-custom {
         /*   min-height: 100vh;*/
@@ -519,35 +538,43 @@
             margin: 0;
         }
 
-            .Custom-o-sidebar ul li {
-                /* Add your HoverEffektLi styles here. If you have none, you can remove this */
-            }
+    .HoverEffektLi:hover > a > span {
+        color: #ff6740;
+    }
 
-                .Custom-o-sidebar ul li a {
-                    display: flex;
-                    margin: 10px 0;
-                    padding-left: 10px;
-                }
+    .HoverEffektLi:active > a > span {
+        color: #ff6740;
+    }
 
-                    .Custom-o-sidebar ul li a i {
-                        margin-right: 10px;
-                    }
+    .Custom-o-sidebar ul li {
+        /* Add your HoverEffektLi styles here. If you have none, you can remove this */
+    }
 
-        .Custom-o-sidebar .sidebar-section {
-            margin-bottom: 20px;
-        }
-
-        .Custom-o-sidebar .sidebar-title {
+        .Custom-o-sidebar ul li a {
             display: flex;
-            align-items: center;
-            margin-bottom: 10px;
+            margin: 10px 0;
+            padding-left: 10px;
         }
 
-            .Custom-o-sidebar .sidebar-title i,
-            .Custom-o-sidebar .sidebar-title .gg-user {
+            .Custom-o-sidebar ul li a i {
                 margin-right: 10px;
-                color: #ff6740;
             }
+
+    .Custom-o-sidebar .sidebar-section {
+        margin-bottom: 20px;
+    }
+
+    .Custom-o-sidebar .sidebar-title {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+        .Custom-o-sidebar .sidebar-title i,
+        .Custom-o-sidebar .sidebar-title .gg-user {
+            margin-right: 10px;
+            color: #ff6740;
+        }
 
     .sidebar-title span {
         color: #ff6740;
@@ -616,10 +643,10 @@
         background-color: var(--background-color);
         color: var(--text-color);
         min-width: 160px;
-        padding-left:5%; 
+        padding-left: 5%;
         box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
         z-index: 1000;
-        border-radius:4px; 
+        border-radius: 4px;
     }
 
     .user-dropdown-menu {
@@ -811,11 +838,12 @@
         max-height: 6em; /* Continue to enforce 4 lines */
     }
 }
+
 @media (max-width: 260px) {
     .IndexTitleFourOfaKind, .DescriptionContainerSize {
         display: none !important; /* Hide MangaName and Description */
     }
- 
+
     .FourofKindContent:hover .BoxImage {
         display: block !important; /* Ensure image is displayed */
         width: auto; /* Allow the image to take natural width */
@@ -823,6 +851,7 @@
         height: auto; /* Adjust height accordingly */
         max-height: none; /* Ensure it can expand fully */
     }
+
     .FourOfAKind:hover .DisplayWhenHoverFourOfaKind {
         display: flex !important; /* Use flex to center content */
         align-items: center; /* Center content vertically */
@@ -836,20 +865,24 @@
         color: white;
         z-index: 2;
     }
+
     .CardFour .FourOfAKind img {
         width: 100% !important;
-      
     }
+
     .FourofKindContent .tag-container .tag {
         color: white !important;
     }
+
     .WhiteColorStyle {
         color: white !important;
     }
+
     .fa-solid {
-        color:#ff6740; 
+        color: #ff6740;
     }
 }
+
 .tag-container .tag {
     margin: 2px; /* Add margin for spacing between tags */
     white-space: nowrap; /* Ensure tags don't break into multiple lines */
@@ -1142,6 +1175,8 @@
     background-color: rgba(0, 0, 0, 0.5);
     padding: 10px 20px;
     border-radius: 50%;
+    color: white;
+    border: 0.5px solid black;
 }
 
 .left-arrow {
@@ -1248,16 +1283,16 @@
 
     .BoxOne {
         width: 50%; /* for showing 2 images */
-        padding:0px; 
+        padding: 0px;
     }
+
     .MiniCards {
- 
-      gap:0px; 
-       
+        gap: 0px;
     }
-        .BoxOne.hide-on-small {
-            display: none;
-        }
+
+    .BoxOne.hide-on-small {
+        display: none;
+    }
 
     .ContentDescription {
         padding-top: 4.5%;
@@ -1271,7 +1306,8 @@
         font-size: 13px !important;
     }
 }
-@media (max-width: 250px){
+
+@media (max-width: 250px) {
     .BoxOne {
         flex: none;
         width: calc(100% / 2 - 20px); /* Adjust based on your current setup, this is an example for two cards */
@@ -1281,7 +1317,7 @@
 
     .MiniCards {
         justify-content: center; /* Center the card if there's only one */
-        gap:4px; 
+        gap: 4px;
     }
 
     .BoxOne {
@@ -1289,7 +1325,6 @@
         margin: 0; /* Adjust margin as needed */
     }
     /* You might want to adjust or hide the arrows as well */
-   
 }
 /* MINICARDS ENDS HERE*/
 /* Card2 Starts HERE*/
@@ -1469,6 +1504,7 @@
         border-radius: 10px;
         border: 20px;
     }
+
 
 .gg-menu-round {
     box-sizing: border-box;
