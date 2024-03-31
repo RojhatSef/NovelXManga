@@ -26,9 +26,11 @@
     html body *, html body ::after, html body ::before {
         box-sizing: content-box !important;
     }
+
     .MUS-genre, .MUS-genre::before, .MUS-genre::after {
         box-sizing: content-box !important;
     }
+
     *, ::after, ::before {
         box-sizing: content-box !important;
     }
@@ -52,10 +54,17 @@
         word-break: break-all;
     }
 
+    @media (max-width: 300px) {
+        .ReviewPadder {
+            margin-right: 0% !important;
+            margin-left: 0% !important;
+        }
+    }
+
     @media (max-width: 768px) {
         .ReviewPadder {
-            margin-right: 0%;
-            margin-left: 0%;
+            margin-right: 2.5%;
+            margin-left: 2.5%;
         }
 
         .UserReview {
@@ -266,7 +275,6 @@
         box-sizing: border-box;
         flex-direction: column;
         display: flex;
-        flex-direction: column;
         align-items: flex-start;
         justify-content: center; /* Centers the content vertically */
 
@@ -297,7 +305,8 @@
         flex-direction: column;
         align-items: center; /* Centers the content horizontally */
         justify-content: center; /* Centers the content vertically */
-
+        margin-right: 10%;
+        margin-left: 10%;
         transition: margin-left 0.5s ease, margin-top 0.5s ease;
     }
 
@@ -307,7 +316,7 @@
         border-radius: 5px;
         display: flex;
         flex-wrap: wrap;
-        align-items: flex-start;
+        /*align-items: flex-start;*/
         gap: 10px;
         font-size: 17px;
         padding: 5px;
@@ -335,7 +344,7 @@
         border-radius: 5px;
         display: flex;
         flex-wrap: wrap;
-        align-items: flex-start;
+        /*    align-items: flex-start;*/
         gap: 10px;
         padding: 5px;
         box-sizing: border-box;
@@ -405,6 +414,13 @@
             margin: 0.5em; /* reduce margin */
             padding: 0.5em; /* reduce padding */
             overflow: hidden;
+        }
+    }
+
+    @media (max-width: 755px) {
+        .CUS-MangaDetaiDescription {
+            margin-right: 0% !important;
+            margin-left: 0% !important;
         }
     }
 
@@ -719,7 +735,6 @@
         display: flex;
         justify-content: center;
         align-items: center;
-  
         border: none;
         border-radius: 5px;
         cursor: pointer;
@@ -735,7 +750,6 @@
         }
 
     .CUS-ReportBookButton {
-      
         background-color: red;
         border: none;
         cursor: pointer;
@@ -1017,6 +1031,29 @@
             letter-spacing: 0px !important;
             width: 90%;
         }
+    }
+
+  
+    @media (max-width: 228px) {
+        .Score span {
+            white-space: nowrap;
+        }
+        .Score {
+          
+            display: flex;
+            flex-wrap: wrap; /* Allow items to wrap */
+            justify-content: center; /* Center the items when they wrap */
+        }
+
+            .Score span {
+
+                width: 100%; /* Force the label to take full width, causing stars to wrap */
+                text-align: center; /* Center-align the label text */
+            }
+            .Score i {
+                margin-top: 5px; /* Add top margin to stars */
+                display: inline-block; /* Ensure the icons are treated as inline-block for margin to take effect */
+            }
     }
 
     @media screen and (max-width: 768px) { /* Adjust the max-width as per your breakpoint for mobile or laptop screens */
