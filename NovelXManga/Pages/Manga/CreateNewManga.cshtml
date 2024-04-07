@@ -77,33 +77,62 @@
                     <input type="text" asp-for="_MangaModel.Description" class="form-control" />
                     <span asp-validation-for="_MangaModel.Description" class="text-danger"></span>
                 </div>
-                <p>Not working Yet</p>
-                <select asp-for="_MangaModel.relatedSeries" asp-items="@(new SelectList(Model.MangaRecommendedRelatedOptions, "MangaID", "MangaName"))" class="form-control" multiple>
-</select>
 
-        <select asp-for="_MangaModel.RecommendedMangaModels" asp-items="@(new SelectList(Model.MangaRecommendedRelatedOptions, "MangaID", "MangaName"))" class="form-control" multiple>
-</select>
 
-<div class="mb-3">
-            <p>Search bar should be here </p>
-    <label class="form-label" asp-for="_MangaModel.relatedSeries">Related Series</label>
-    <select asp-for="_MangaModel.relatedSeries" class="form-control" multiple>
-        @foreach (var manga in Model.MangaModels)
-        {
-            <option value="@manga.MangaID">@manga.MangaName</option>
-        }
-    </select>
-</div>
-        <div class="mb-3">
-            <p>Search bar should be here </p>
-            <label class="form-label" asp-for="_MangaModel.RecommendedMangaModels">Recommended Series</label>
-            <select asp-for="_MangaModel.relatedSeries" class="form-control" multiple>
-                @foreach (var manga in Model.MangaModels)
-                {
-                    <option value="@manga.MangaID">@manga.MangaName</option>
-                }
-            </select>
+
+        <div class="MUS-tag-alignment-container">
+            <div class="Mus-Tag-Divider">
+                @*        Positive Tag*@
+
+                <div id="selectedTagsSection">
+                    <span class="MUS-tag-title">Include Tags:</span>
+                    <span id="selectedTagsList"></span>
+                </div>
+
+                <div class="MUS-dropdown">
+                    <input type="text" id="tagInput" placeholder="Tags">
+                    <div class="MUS-dropdown-content" id="tagDropdown">
+                        @foreach (var tag in Model.Tags ?? new List<TagModel>())
+                        {
+                            <div class="MUS-tag-genre-item" onclick="document.getElementById('tag-@tag.TagId').click();">
+                                <input type="checkbox" class="MUS-hidden-checkbox" id="tag-@tag.TagId" name="SelectedTags" value="@tag.TagId" @(Model.SelectedTags?.Contains(tag.TagId) ?? false ? "checked" : "")>
+                                <label class="MUS-tag-label" for="tag-@tag.TagId">@tag.TagName</label>
+                            </div>
+                        }
+                    </div>
+                </div>
+
+                <div id="hiddenContainer"></div>
+            </div>
         </div>
+        <div class="MUS-tag-alignment-container">
+            <div class="Mus-Tag-Divider">
+                <div id="selectedRelatedMangaSection">
+                    <span class="MUS-tag-title">Include Related Manga:</span>
+                    <span id="selectedRelatedMangaList"></span>
+                </div>
+
+                <div class="MUS-dropdown">
+                    <input type="text" id="relatedMangaInput" placeholder="Related Manga">
+                    <div class="MUS-dropdown-content" id="relatedMangaDropdown">
+                        @foreach (var manga in Model.RelatedMangaOptions)
+                        {
+                            <div class="MUS-tag-genre-item" id="RelatedMangaItems"  onclick="document.getElementById('related-manga-@manga.MangaID').click();">
+                                <input type="checkbox" class="MUS-hidden-checkbox" id="related-manga-@manga.MangaID" name="SelectedRelatedManga" value="@manga.MangaID" @(Model.SelectedRelatedMangaIds?.Contains(manga.MangaID) ?? false ? "checked" : "")>
+                                <label class="MUS-tag-label" for="related-manga-@manga.MangaID">@manga.MangaName</label>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+
+                <div id="hiddenContainerForRelatedManga"></div>
+            </div>
+        </div>
+
+
+
+ 
 
 <div class="mb-3">
     <label class="form-label" asp-for="_MangaModel.ISBN10">ISBN10 | Must have 10 characters</label>

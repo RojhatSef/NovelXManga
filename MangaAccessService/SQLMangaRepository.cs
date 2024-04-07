@@ -48,7 +48,7 @@ namespace MangaAccessService.Migrations
         public async Task<List<MangaDTO>> GetAllMangaMinimalAsync()
         {
             return await mangaNNovelAuthDBContext.mangaModels
-                .Select(m => new MangaDTO { MangaID = m.MangaID, MangaName = m.MangaName })
+                .Select(m => new MangaDTO { MangaID = m.MangaID, MangaName = m.MangaName, IsChecked = m.IsChecked })
                 .ToListAsync();
         }
 

@@ -216,7 +216,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let dropdownOpen = false;
 
     // Manual dropdown control
-    relatedMangaInput.addEventListener('focusin', function () {
+    relatedMangaInput.addEventListener('focus', function () {
         dropdownOpen = true;
         relatedMangaDropdown.style.display = 'block';
     });
@@ -235,7 +235,7 @@ document.addEventListener("DOMContentLoaded", function () {
         relatedMangaDropdown.style.display = 'block';
     });
 
-    let allRelatedMangaData = Array.from(document.querySelectorAll('#RelatedMangaItems')).map(allRelatedMangaData => {
+    let allTagsData = Array.from(document.querySelectorAll('.MUS-tag-genre-item')).map(tag => {
         return {
             id: tag.querySelector('.MUS-hidden-checkbox').id,
             name: tag.querySelector('.MUS-tag-label').textContent,
@@ -248,21 +248,23 @@ document.addEventListener("DOMContentLoaded", function () {
         checkedState[manga.id] = manga.checked;
     });
     function updateSelectedRelatedMangaDisplay() {
-        selectedRelatedMangaList.innerHTML = ''; // Clear existing display first
-        // Iterate over each manga, checking if it's selected
-        allRelatedMangaData.forEach(manga => {
-            if (checkedState[manga.id]) { // Checking if manga is selected
-                const span = document.createElement('span');
-                span.textContent = manga.name;
-                span.className = 'selected-related-manga-item';
-                span.addEventListener('click', () => {
-                    // Toggle selection off when clicked
-                    checkedState[manga.id] = !checkedState[manga.id];
-                    document.getElementById(manga.id).checked = false; // Assuming IDs are unique and correctly referenced
-                    updateSelectedRelatedMangaDisplay();
-                    updateSelectedRelatedMangaInput();
-                });
-                selectedRelatedMangaList.appendChild(span);
+        selectedRelatedMangaList.innerHTML = ''; // Clear existing display
+        Object.keys(checkedState).forEach(id => {
+            if (checkedState[id]) {
+                const manga = allRelatedMangaData.find(m => m.id === id);
+                if (manga) {
+                    const span = document.createElement('span');
+                    span.textContent = manga.name;
+                    span.className = 'selected-related-manga-item';
+                    span.addEventListener('click', () => {
+                        // Toggle selection off
+                        checkedState[id] = !checkedState[id];
+                        document.getElementById(`related-manga-${id}`).checked = checkedState[id];
+                        updateSelectedRelatedMangaDisplay(); // Refresh display for related manga
+                        updateSelectedRelatedMangaInput(); // Refresh hidden inputs for form submission
+                    });
+                    selectedRelatedMangaList.appendChild(span);
+                }
             }
         });
     }
@@ -296,18 +298,17 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
     function updateSelectedRelatedMangaInput() {
-        hiddenContainerForRelatedManga.innerHTML = ''; // Clear any previously added inputs
+        hiddenContainerForRelatedManga.innerHTML = '';
         Object.keys(checkedState).forEach(id => {
-            if (checkedState[id]) { // If the manga is selected
+            if (checkedState[id]) {
                 const input = document.createElement('input');
                 input.type = 'hidden';
                 input.name = 'SelectedRelatedMangaIds';
-                input.value = id.replace('related-manga-', ''); // Remove prefix if it exists
+                input.value = id;
                 hiddenContainerForRelatedManga.appendChild(input);
             }
         });
     }
-
     relatedMangaInput.addEventListener('focus', () => {
         dropdownOpen = true;
         relatedMangaDropdown.style.display = 'block';

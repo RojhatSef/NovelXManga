@@ -54,7 +54,7 @@ namespace NovelXManga.Pages.Manga
         public List<TagModel> Tags { get; set; }
         public List<GenresModel> Genres { get; set; }
         public IEnumerable<MangaModel> MangaModels { get; set; }
-        public IEnumerable<MangaDTO> MangaRecommendedRelatedOptions { get; set; }
+        public IEnumerable<MangaDTO> RelatedMangaOptions { get; set; } = new List<MangaDTO>();
 
         [BindProperty]
         public int[] SelectedRelatedMangaIds { get; set; }
@@ -88,6 +88,8 @@ namespace NovelXManga.Pages.Manga
 
             var selectedGenresSerialized = _httpContextAccessor.HttpContext.Session.GetString("PositiveSelectedGenres");
             PositiveSelectedGenres = string.IsNullOrEmpty(selectedGenresSerialized) ? new List<int>() : JsonSerializer.Deserialize<List<int>>(selectedGenresSerialized);
+            var selectedRelatedMangaIdsSerialized = _httpContextAccessor.HttpContext.Session.GetString("SelectedRelatedMangaIds");
+            SelectedRelatedMangaIds = string.IsNullOrEmpty(selectedRelatedMangaIdsSerialized) ? new int[0] : JsonSerializer.Deserialize<int[]>(selectedRelatedMangaIdsSerialized);
         }
 
         public async Task<IActionResult> OnPostAsync()
@@ -107,7 +109,12 @@ namespace NovelXManga.Pages.Manga
             _MangaModel.PhotoPath = ProcessUploadedFile(Photo);
 
             // create a new list of TagModel objects
-
+            if (SelectedRelatedMangaIds != null)
+            {
+                _MangaModel.relatedSeries = await context.mangaModels
+                    .Where(m => SelectedRelatedMangaIds.Contains(m.MangaID))
+                    .ToListAsync();
+            }
             _MangaModel.TagsModels = await context.TagModels.Where(tag => SelectedTags.Contains(tag.TagId)).ToListAsync();
             _MangaModel.GenresModels = await context.GenresModels.Where(genre => PositiveSelectedGenres.Contains(genre.GenresId)).ToListAsync();
 
@@ -157,7 +164,7 @@ namespace NovelXManga.Pages.Manga
         {
             Tags = await context.TagModels.ToListAsync();
             Genres = await context.GenresModels.ToListAsync();
-            MangaRecommendedRelatedOptions = await mangaRepository.GetAllMangaMinimalAsync();
+            RelatedMangaOptions = await GetAllMangaMinimalAsync();
             DeserializeAndRetrieveSessionData();
             MangaModels = await mangaRepository.GetAllModelAsync();
             var selectedTagsSession = _httpContextAccessor.HttpContext.Session.GetString("SelectedTags");
@@ -178,6 +185,8 @@ namespace NovelXManga.Pages.Manga
         {
             var selectedTagsSerialized = JsonSerializer.Serialize(SelectedTags);
             var selectedGenresSerialized = JsonSerializer.Serialize(PositiveSelectedGenres);
+            var selectedRelatedMangaIdsSerialized = JsonSerializer.Serialize(SelectedRelatedMangaIds);
+            _httpContextAccessor.HttpContext.Session.SetString("SelectedRelatedMangaIds", selectedRelatedMangaIdsSerialized);
         }
 
         private void InitializeSettings()
@@ -214,33 +223,3 @@ namespace NovelXManga.Pages.Manga
         }
     }
 }
-
-#region TestOnGet
-
-//public IActionResult OnGet(int? id)
-//{
-//    if (id.HasValue)
-//    {
-//        mangaModel = mangaRepository.GetManga(id.Value);
-//    }
-//    else
-//    {
-//        var newManga = new MangaModel
-//        {
-//            MangaName = mangaModel.MangaName,
-//            AssociatedNames = mangaModel.AssociatedNames,
-//            MangaID = mangaModel.MangaID,
-//            MasterID = mangaModel.MasterModelID,
-
-//        };
-
-//    }
-
-//    if (mangaModel == null)
-//    {
-//        return RedirectToPage("/Index");
-//    }
-//    return Page();
-//}
-
-#endregion TestOnGet
