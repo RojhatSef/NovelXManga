@@ -107,7 +107,7 @@ document.addEventListener("DOMContentLoaded", function () {
     setupMultiStateCheckboxes();
 });
 
-//Positive TAG
+//Positive TAG AdvancedFilter page
 document.addEventListener("DOMContentLoaded", function () {
     const tagInput = document.getElementById('tagInput');
     const tagDropdown = document.getElementById('tagDropdown');

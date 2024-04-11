@@ -55,6 +55,7 @@ namespace NovelXManga.Pages.Manga
         public List<GenresModel> Genres { get; set; }
         public IEnumerable<MangaModel> MangaModels { get; set; }
         public IEnumerable<MangaDTO> RelatedMangaOptions { get; set; } = new List<MangaDTO>();
+        public IEnumerable<MangaDTO> RecommendedMangaOptions { get; set; } = new List<MangaDTO>();
 
         [BindProperty]
         public int[] SelectedRelatedMangaIds { get; set; }
@@ -165,6 +166,7 @@ namespace NovelXManga.Pages.Manga
             Tags = await context.TagModels.ToListAsync();
             Genres = await context.GenresModels.ToListAsync();
             RelatedMangaOptions = await GetAllMangaMinimalAsync();
+            RecommendedMangaOptions = await GetAllMangaMinimalAsync();
             DeserializeAndRetrieveSessionData();
             MangaModels = await mangaRepository.GetAllModelAsync();
             var selectedTagsSession = _httpContextAccessor.HttpContext.Session.GetString("SelectedTags");

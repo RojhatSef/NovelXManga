@@ -25,3 +25,34 @@ body *::after,
 body *::before {
     box-sizing: content-box !important;
 }
+
+
+.MUS-tag-genre-item-tag:hover{
+    background-color: rgba(0, 0, 0, 0.2); /* Add your desired darker shade here */
+}
+
+
+.MUS-tag-genre-item-tag {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+    .MUS-tag-genre-item-tag.selected {
+        background-color: blue;
+    }
+
+    .MUS-tag-genre-item-SelManga:hover{
+    background-color: rgba(0, 0, 0, 0.2); /* Add your desired darker shade here */
+}
+
+
+. .MUS-tag-genre-item-SelManga {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+    . .MUS-tag-genre-item-SelManga.selected {
+        background-color: blue;
+    }

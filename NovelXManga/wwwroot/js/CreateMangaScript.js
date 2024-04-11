@@ -71,20 +71,18 @@
     setupMultiStateCheckboxes();
 });
 
-//Positive TAG
+//Positive TAG Create Manga
 document.addEventListener("DOMContentLoaded", function () {
     const tagInput = document.getElementById('tagInput');
     const tagDropdown = document.getElementById('tagDropdown');
     const selectedTagsList = document.getElementById('selectedTagsList');
     const hiddenContainer = document.getElementById('hiddenContainer');
     let dropdownOpen = false;
-
     // Manual dropdown control
     tagDropdown.addEventListener('focusin', function () {
         dropdownOpen = true;
         tagDropdown.style.display = 'block';
     });
-
     tagDropdown.addEventListener('focusout', function () {
         dropdownOpen = false;
         setTimeout(function () {
@@ -93,48 +91,64 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }, 100);
     });
-
     tagInput.addEventListener('focus', function () {
         dropdownOpen = true;
         tagDropdown.style.display = 'block';
     });
-
-    let allTagsData = Array.from(document.querySelectorAll('.MUS-tag-genre-item')).map(tag => {
+    let allTagsData = Array.from(document.querySelectorAll('.MUS-tag-genre-item-tag')).map(tag => {
         return {
             id: tag.querySelector('.MUS-hidden-checkbox').id,
             name: tag.querySelector('.MUS-tag-label').textContent,
             checked: tag.querySelector('.MUS-hidden-checkbox').checked
         };
     });
-
-    let checkedState = {};
+    let checkedTagsState = {};
     allTagsData.forEach(tag => {
-        checkedState[tag.id] = tag.checked;
+        checkedTagsState[tag.id] = tag.checked;
     });
-
     function updateSelectedTagsDisplay() {
-        let selectedTags = allTagsData.filter(tag => checkedState[tag.id]);
+        // Clear the current display to rebuild it
         selectedTagsList.innerHTML = '';
-        selectedTags.forEach((tag, index) => {
-            let span = document.createElement('span');
-            span.textContent = tag.name;
-            if (index !== 0) {
-                let space = document.createTextNode(' ');
-                selectedTagsList.appendChild(space);
+
+        // Filter out only selected tags based on the checked state
+        let selectedTags = allTagsData.filter(tag => checkedTagsState[tag.id]);
+
+        // Create a new Set to track which tags have been added
+        let addedTags = new Set();
+
+        // Iterate over selected tags to add them to the display
+        selectedTags.forEach(tag => {
+            // Check if the tag has already been added to prevent duplicates
+            if (!addedTags.has(tag.id)) {
+                // Create a span element for the tag
+                let span = document.createElement('span');
+                span.textContent = tag.name;
+                span.className = 'selected-tag-item';
+                // Add a click listener to remove the tag on click
+                span.addEventListener('click', function () {
+                    // Update the checked state and UI
+                    checkedTagsState[tag.id] = false;
+                    document.getElementById(tag.id).checked = false;
+                    updateSelectedTagsDisplay();
+                    updateSelectedTagsInput();
+                });
+
+                // Append the tag span to the list
+                selectedTagsList.appendChild(span);
+
+                // If not the first item, add a space for visual separation
+                if (selectedTagsList.children.length > 1) {
+                    selectedTagsList.insertBefore(document.createTextNode(' '), span);
+                }
+
+                // Mark the tag as added to avoid duplication
+                addedTags.add(tag.id);
             }
-            span.className = 'selected-tag-item';
-            span.addEventListener('click', function () {
-                checkedState[tag.id] = false;
-                document.getElementById(tag.id).checked = false;
-                updateSelectedTagsDisplay();
-                updateSelectedTagsInput();
-            });
-            selectedTagsList.appendChild(span);
         });
     }
 
     function updateSelectedTagsInput() {
-        let selectedTagIds = allTagsData.filter(tag => checkedState[tag.id]).map(tag => parseInt(tag.id.split('-')[1]));
+        let selectedTagIds = allTagsData.filter(tag => checkedTagsState[tag.id]).map(tag => parseInt(tag.id.split('-')[1]));
         hiddenContainer.innerHTML = '';
         selectedTagIds.forEach(tagId => {
             let hiddenInput = document.createElement('input');
@@ -153,39 +167,36 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function addCheckboxEvent(checkbox, tag) {
         checkbox.addEventListener('change', function () {
-            checkedState[tag.id] = checkbox.checked;
+            checkedTagsState[tag.id] = checkbox.checked;
             updateSelectedTagsDisplay();
             updateSelectedTagsInput();
         });
     }
-
     function displayTags(tagList) {
         tagDropdown.innerHTML = '';
         tagList.forEach(tag => {
-            tag.checked = checkedState[tag.id];
             let tagItem = document.createElement('div');
-            tagItem.className = 'MUS-tag-genre-item';
-            //tagItem.onclick = function () {
-            //    document.getElementById(tag.id).click();
-            //};
+            tagItem.className = 'MUS-tag-genre-item-tag';
             let checkbox = document.createElement('input');
             checkbox.type = 'checkbox';
             checkbox.className = 'MUS-hidden-checkbox';
             checkbox.id = tag.id;
             checkbox.name = 'SelectedTags';
             checkbox.value = parseInt(tag.id.split('-')[1]);
-            checkbox.checked = tag.checked;
-            addCheckboxEvent(checkbox, tag);
+            checkbox.checked = checkedTagsState[tag.id];
+
             let label = document.createElement('label');
             label.className = 'MUS-tag-label';
             label.htmlFor = tag.id;
             label.textContent = tag.name;
+
             tagItem.appendChild(checkbox);
             tagItem.appendChild(label);
             tagDropdown.appendChild(tagItem);
+
+            addCheckboxEvent(checkbox, tag);
         });
     }
-
     function filterTags() {
         let query = tagInput.value.toLowerCase();
         let filteredTags = allTagsData.filter(tag => tag.name.toLowerCase().includes(query));
@@ -200,7 +211,6 @@ document.addEventListener("DOMContentLoaded", function () {
     tagInput.addEventListener('input', function () {
         filterTags();
     });
-
     displayTags(allTagsData);
     updateSelectedTagsDisplay();
     updateSelectedTagsInput();
@@ -237,28 +247,32 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let allRelatedMangaData = Array.from(document.querySelectorAll('#RelatedMangaItems')).map(allRelatedMangaData => {
         return {
-            id: tag.querySelector('.MUS-hidden-checkbox').id,
-            name: tag.querySelector('.MUS-tag-label').textContent,
-            checked: tag.querySelector('.MUS-hidden-checkbox').checked
+            id: allRelatedMangaData.querySelector('.MUS-hidden-checkbox').id,
+            name: allRelatedMangaData.querySelector('.MUS-tag-label').textContent,
+            checked: allRelatedMangaData.querySelector('.MUS-hidden-checkbox').checked
         };
     });
 
-    let checkedState = {};
+    let checkedStateRelatedManga = {};
     allRelatedMangaData.forEach(manga => {
-        checkedState[manga.id] = manga.checked;
+        checkedStateRelatedManga[manga.id] = manga.checked;
     });
     function updateSelectedRelatedMangaDisplay() {
         selectedRelatedMangaList.innerHTML = ''; // Clear existing display first
         // Iterate over each manga, checking if it's selected
         allRelatedMangaData.forEach(manga => {
-            if (checkedState[manga.id]) { // Checking if manga is selected
+            if (checkedStateRelatedManga[manga.id]) { // Checking if manga is selected
                 const span = document.createElement('span');
                 span.textContent = manga.name;
                 span.className = 'selected-related-manga-item';
                 span.addEventListener('click', () => {
                     // Toggle selection off when clicked
-                    checkedState[manga.id] = !checkedState[manga.id];
-                    document.getElementById(manga.id).checked = false; // Assuming IDs are unique and correctly referenced
+                    const isSelected = !checkedStateRelatedManga[manga.id]; // Toggle and capture new state
+                    checkedStateRelatedManga[manga.id] = isSelected; // Update the state
+                    const checkbox = document.getElementById(manga.id); // Get the checkbox
+                    if (checkbox) { // Safety check in case the element is not found
+                        checkbox.checked = isSelected; // Align checkbox state
+                    } // Assuming IDs are unique and correctly referenced
                     updateSelectedRelatedMangaDisplay();
                     updateSelectedRelatedMangaInput();
                 });
@@ -274,7 +288,7 @@ document.addEventListener("DOMContentLoaded", function () {
             div.textContent = manga.name;
             div.className = 'related-manga-item';
             div.onclick = () => {
-                checkedState[manga.id] = !checkedState[manga.id]; // Toggle selection state
+                checkedStateRelatedManga[manga.id] = !checkedStateRelatedManga[manga.id]; // Toggle selection state
                 updateSelectedRelatedMangaDisplay(); // Update UI
                 updateSelectedRelatedMangaInput(); // Update hidden inputs
             };
@@ -297,8 +311,8 @@ document.addEventListener("DOMContentLoaded", function () {
     });
     function updateSelectedRelatedMangaInput() {
         hiddenContainerForRelatedManga.innerHTML = ''; // Clear any previously added inputs
-        Object.keys(checkedState).forEach(id => {
-            if (checkedState[id]) { // If the manga is selected
+        Object.keys(checkedStateRelatedManga).forEach(id => {
+            if (checkedStateRelatedManga[id]) { // If the manga is selected
                 const input = document.createElement('input');
                 input.type = 'hidden';
                 input.name = 'SelectedRelatedMangaIds';
