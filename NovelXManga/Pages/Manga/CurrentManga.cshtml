@@ -1062,9 +1062,10 @@
 
             @*  LeftSideEndhere*@
          </div>
-          @if (Model.CurrentManga2.Characters != null && Model.CurrentManga2.Characters.Any())
-                {
-            <div class="CUS-RightSide">     
+      
+            <div class="CUS-RightSide">
+            @if (Model.CurrentManga2.Characters != null && Model.CurrentManga2.Characters.Any())
+            {
                 <div class="CUS-mangaDetailsBox">
 
 
@@ -1109,7 +1110,6 @@
                 }
 
 
-              
 
             </div> 
             @if (Model.CurrentManga2.Characters.Count() < 5)
@@ -1122,7 +1122,7 @@
                 <button id="loadMoreCharacters" class="CUS-load-more-button" data-manga-id="@Model.CurrentManga2.MangaID">More Characters</button>
             }
             
-        </div>
+        </div>}
                 @if (Model.relatedRecommendedManga.RelatedSeries.Count >= 1)
                 {
                     <div class="CUS-mangaDetailsBox">
@@ -1179,11 +1179,12 @@
                         </div>
                     </div>
                 }
+              
   
     @*    RightSideEndsHere*@
 </div>
 
-}
+
 </div>
        @if (Model.CurrentManga.OverAllBookScore != null)
         {

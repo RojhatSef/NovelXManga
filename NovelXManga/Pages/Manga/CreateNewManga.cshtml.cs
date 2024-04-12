@@ -110,11 +110,27 @@ namespace NovelXManga.Pages.Manga
             _MangaModel.PhotoPath = ProcessUploadedFile(Photo);
 
             // create a new list of TagModel objects
-            if (SelectedRelatedMangaIds != null)
+            if (SelectedRelatedMangaIds != null && SelectedRelatedMangaIds.Any())
             {
                 _MangaModel.relatedSeries = await context.mangaModels
                     .Where(m => SelectedRelatedMangaIds.Contains(m.MangaID))
                     .ToListAsync();
+            }
+            else
+            {
+                _MangaModel.relatedSeries = new List<MangaModel>();
+            }
+
+            // Handle recommended manga
+            if (SelectedRecommendedMangaIds != null && SelectedRecommendedMangaIds.Any())
+            {
+                _MangaModel.RecommendedMangaModels = await context.mangaModels
+                    .Where(m => SelectedRecommendedMangaIds.Contains(m.MangaID))
+                    .ToListAsync();
+            }
+            else
+            {
+                _MangaModel.RecommendedMangaModels = new List<MangaModel>();
             }
             _MangaModel.TagsModels = await context.TagModels.Where(tag => SelectedTags.Contains(tag.TagId)).ToListAsync();
             _MangaModel.GenresModels = await context.GenresModels.Where(genre => PositiveSelectedGenres.Contains(genre.GenresId)).ToListAsync();
@@ -146,7 +162,9 @@ namespace NovelXManga.Pages.Manga
                 OfficalLanguage = _MangaModel.OfficalLanguage,
                 OriginalPublisher = _MangaModel.orignalWebtoon,
                 CompletelyTranslated = _MangaModel.CompletelyTranslated,
+                relatedSeries = new List<MangaModel>(_MangaModel.relatedSeries),
 
+                RecommendedMangaModels = new List<MangaModel>(_MangaModel.RecommendedMangaModels),
                 orignalWebtoon = _MangaModel.orignalWebtoon,
                 TagsModels = _MangaModel.TagsModels,
                 GenresModels = _MangaModel.GenresModels,

@@ -226,24 +226,7 @@ input[type="checkbox"].negative + label {
 .MUS-hidden-checkbox {
     cursor: pointer;
 }
-#selectedRelatedMangaList .selected-related-manga-item {
-    background-color: #ff6740; /* Example background color, adjust as needed */
-    font-size: 16px;
-    border-radius: 2px;
-    margin-bottom: 2px;
-    padding: 2px;
-    margin-right: 2px;
-    display: inline-block;
-    cursor: pointer;
-}
 
-    #selectedRelatedMangaList .selected-related-manga-item:hover {
-        filter: brightness(0.8);
-    }
-.related-manga-item:hover {
-    background-color: rgba(0, 0, 0, 0.1); /* Slightly darker background on hover */
-    cursor: pointer; /* Changes the cursor to indicate the item is clickable */
-}
 .MUS-genre {
     display: inline-block;
     padding: 0;

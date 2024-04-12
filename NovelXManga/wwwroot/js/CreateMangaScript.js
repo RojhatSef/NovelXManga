@@ -336,3 +336,121 @@ document.addEventListener("DOMContentLoaded", function () {
     updateSelectedRelatedMangaDisplay();
     updateSelectedRelatedMangaInput();
 });
+
+//recommended manga
+document.addEventListener("DOMContentLoaded", function () {
+    const recommendedMangaInput = document.getElementById('recommendedMangaInput');
+    const recommendedMangaDropdown = document.getElementById('recommendedMangaDropdown');
+    const selectedRecommendedMangaList = document.getElementById('selectedRecommendedMangaList');
+    const hiddenContainerForRecommendedManga = document.getElementById('hiddenContainerForRecommendedManga');
+    let dropdownOpen = false;
+
+    // Manual dropdown control
+    recommendedMangaInput.addEventListener('focusin', function () {
+        dropdownOpen = true;
+        recommendedMangaDropdown.style.display = 'block';
+    });
+
+    recommendedMangaDropdown.addEventListener('focusout', function () {
+        dropdownOpen = false;
+        setTimeout(function () {
+            if (!dropdownOpen) {
+                recommendedMangaDropdown.style.display = 'none';
+            }
+        }, 100);
+    });
+
+    recommendedMangaInput.addEventListener('focus', function () {
+        dropdownOpen = true;
+        recommendedMangaDropdown.style.display = 'block';
+    });
+
+    let allRecommendedMangaData = Array.from(document.querySelectorAll('#RecommendedMangaItems')).map(recommendedMangaData => {
+        return {
+            id: recommendedMangaData.querySelector('.MUS-hidden-checkbox').id,
+            name: recommendedMangaData.querySelector('.MUS-tag-label').textContent,
+            checked: recommendedMangaData.querySelector('.MUS-hidden-checkbox').checked
+        };
+    });
+
+    let checkedStateRecommendedManga = {};
+    allRecommendedMangaData.forEach(manga => {
+        checkedStateRecommendedManga[manga.id] = manga.checked;
+    });
+    function updateSelectedRecommendedMangaDisplay() {
+        selectedRecommendedMangaList.innerHTML = '';
+        allRecommendedMangaData.forEach(manga => {
+            if (checkedStateRecommendedManga[manga.id]) {
+                const span = document.createElement('span');
+                span.textContent = manga.name;
+                span.className = 'selected-recommended-manga-item';
+                span.addEventListener('click', () => {
+                    const isSelected = !checkedStateRecommendedManga[manga.id];
+                    checkedStateRecommendedManga[manga.id] = isSelected;
+                    const checkbox = document.getElementById(manga.id);
+                    if (checkbox) {
+                        checkbox.checked = isSelected;
+                    }
+                    updateSelectedRecommendedMangaDisplay();
+                    updateSelectedRecommendedMangaInput();
+                });
+                selectedRecommendedMangaList.appendChild(span);
+            }
+        });
+    }
+
+    function displayRecommendedManga() {
+        recommendedMangaDropdown.innerHTML = '';
+        allRecommendedMangaData.forEach(manga => {
+            const div = document.createElement('div');
+            div.textContent = manga.name;
+            div.className = 'recommended-manga-item';
+            div.onclick = () => {
+                checkedStateRecommendedManga[manga.id] = !checkedStateRecommendedManga[manga.id];
+                updateSelectedRecommendedMangaDisplay();
+                updateSelectedRecommendedMangaInput();
+            };
+            recommendedMangaDropdown.appendChild(div);
+        });
+    }
+
+    recommendedMangaInput.addEventListener('input', () => {
+        let searchText = recommendedMangaInput.value.toLowerCase();
+        let filteredManga = allRecommendedMangaData.filter(manga => manga.name.toLowerCase().includes(searchText));
+        displayRecommendedManga(filteredManga);
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!recommendedMangaDropdown.contains(e.target) && e.target !== recommendedMangaInput) {
+            dropdownOpen = false;
+            recommendedMangaDropdown.style.display = 'none';
+        }
+    });
+    function updateSelectedRecommendedMangaInput() {
+        hiddenContainerForRecommendedManga.innerHTML = '';
+        Object.keys(checkedStateRecommendedManga).forEach(id => {
+            if (checkedStateRecommendedManga[id]) {
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = 'SelectedRecommendedMangaIds';
+                input.value = id.replace('recommended-manga-', '');
+                hiddenContainerForRecommendedManga.appendChild(input);
+            }
+        });
+    }
+
+    recommendedMangaInput.addEventListener('focus', () => {
+        dropdownOpen = true;
+        recommendedMangaDropdown.style.display = 'block';
+    });
+    document.getElementById('CreateManga').addEventListener('click', function (e) {
+        e.preventDefault();
+        // Assuming updateSelectedTagsInput function exists and is relevant for recommended manga as well
+        updateSelectedTagsInput();
+        document.getElementById('create-manga-form').submit();
+    });
+
+    displayRecommendedManga(allRecommendedMangaData);
+    updateSelectedRecommendedMangaDisplay();
+    updateSelectedRecommendedMangaInput();
+});

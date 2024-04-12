@@ -26,11 +26,9 @@ body *::before {
     box-sizing: content-box !important;
 }
 
-
-.MUS-tag-genre-item-tag:hover{
+.MUS-tag-genre-item-tag:hover {
     background-color: rgba(0, 0, 0, 0.2); /* Add your desired darker shade here */
 }
-
 
 .MUS-tag-genre-item-tag {
     display: flex;
@@ -42,17 +40,56 @@ body *::before {
         background-color: blue;
     }
 
-    .MUS-tag-genre-item-SelManga:hover{
+.MUS-tag-genre-item-SelManga:hover {
     background-color: rgba(0, 0, 0, 0.2); /* Add your desired darker shade here */
 }
 
-
-. .MUS-tag-genre-item-SelManga {
+.MUS-tag-genre-item-SelManga {
     display: flex;
     align-items: center;
     cursor: pointer;
 }
 
-    . .MUS-tag-genre-item-SelManga.selected {
+    .MUS-tag-genre-item-SelManga.selected {
         background-color: blue;
     }
+
+#selectedRelatedMangaList .selected-related-manga-item {
+    background-color: #ff6740; /* Example background color, adjust as needed */
+    font-size: 16px;
+    border-radius: 2px;
+    margin-bottom: 2px;
+    padding: 2px;
+    margin-right: 2px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+    #selectedRelatedMangaList .selected-related-manga-item:hover {
+        filter: brightness(0.8);
+    }
+
+.related-manga-item:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+#selectedRecommendedMangaList .selected-recommended-manga-item {
+    background-color: #ff6740;
+    font-size: 16px;
+    border-radius: 2px;
+    margin-bottom: 2px;
+    padding: 2px;
+    margin-right: 2px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+    #selectedRecommendedMangaList .selected-recommended-manga-item:hover {
+        filter: brightness(0.8);
+    }
+
+.recommended-manga-item:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
