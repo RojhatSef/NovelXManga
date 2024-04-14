@@ -2,59 +2,61 @@
 @model NovelXManga.Pages.MangaUpdates.UpdateDescriptionModel
 @{
 }
-<form method="post" enctype="multipart/form-data">
+
+<link rel="stylesheet" href="~/css/UpdatesStyle.css" asp-append-version="true" />
+<form method="post" enctype="multipart/form-data" class="MarginUpdateClass">
 
     <input type="hidden" name="mangaModel.MangaID" value="@Model.mangaModelUpdate.MangaID" /> 
-    <div class="form-group">
+    <div class="manga-update-form-group">
         <label for="description">Description:</label>
-        <textarea input class="form-control" id="description" name="mangaModel.Description" rows="5" required>@Model.mangaModelUpdate.Description</textarea>
+        <textarea input class="manga-update-input" id="description" name="mangaModel.Description" rows="5" required>@Model.mangaModelUpdate.Description</textarea>
        
     </div>
-    <div class="form-group">
+    <div class="manga-update-form-group">
         <label for="isbn10">ISBN10:</label>
-        <input type="text" class="form-control" id="isbn10" name="mangaModel.ISBN10" value="@Model.mangaModelUpdate.ISBN10">
+        <input type="text" class="manga-update-input" id="isbn10" name="mangaModel.ISBN10" value="@Model.mangaModelUpdate.ISBN10">
     </div>
 
-    <div class="form-group">
+    <div class="manga-update-form-group">
         <label for="isbn13">ISBN13:</label>
-        <input type="text" class="form-control" id="isbn13" name="mangaModel.ISBN13" value="@Model.mangaModelUpdate.ISBN13">
+        <input type="text" class="manga-update-input" id="isbn13" name="mangaModel.ISBN13" value="@Model.mangaModelUpdate.ISBN13">
     </div>
 
-    <div class="form-group">
+    <div class="manga-update-form-group">
         <label for="futureEvents">Future Events:</label>
-        <input type="text" class="form-control" id="futureEvents" name="mangaModel.futureEvents" value="@Model.mangaModelUpdate.futureEvents">
+        <input type="text" class="manga-update-input" id="futureEvents" name="mangaModel.futureEvents" value="@Model.mangaModelUpdate.futureEvents">
     </div>
 
-    <div class="form-group">
+    <div class="manga-update-form-group">
         <label for="statusInCountryOfOrigin">Status In Country Of Origin:</label>
-        <input type="text" class="form-control" id="statusInCountryOfOrigin" name="mangaModel.StatusInCountryOfOrigin" value="@Model.mangaModelUpdate.StatusInCountryOfOrigin">
+        <input type="text" class="manga-update-input" id="statusInCountryOfOrigin" name="mangaModel.StatusInCountryOfOrigin" value="@Model.mangaModelUpdate.StatusInCountryOfOrigin">
     </div>
 
-    <div class="form-group">
+    <div class="manga-update-form-group">
         <label for="completelyTranslated">Completely Translated:</label>
-        <input type="text" class="form-control" id="completelyTranslated" name="mangaModel.CompletelyTranslated" value="@Model.mangaModelUpdate.CompletelyTranslated">
+        <input type="text" class="manga-update-input" id="completelyTranslated" name="mangaModel.CompletelyTranslated" value="@Model.mangaModelUpdate.CompletelyTranslated">
     </div>
 
-    <div class="form-group">
+    <div class="manga-update-form-group">
         <label for="orignalWebtoon">Original Webtoon:</label>
-        <input type="text" class="form-control" id="orignalWebtoon" name="mangaModel.orignalWebtoon" value="@Model.mangaModelUpdate.orignalWebtoon">
+        <input type="text" class="manga-update-input" id="orignalWebtoon" name="mangaModel.orignalWebtoon" value="@Model.mangaModelUpdate.orignalWebtoon">
     </div>
 
-    <div class="form-group">
+    <div class="manga-update-form-group">
         <label for="originalPublisher">Original Publisher:</label>
-        <input type="text" class="form-control" id="originalPublisher" name="mangaModel.OriginalPublisher" value="@Model.mangaModelUpdate.OriginalPublisher">
+        <input type="text" class="manga-update-input" id="originalPublisher" name="mangaModel.OriginalPublisher" value="@Model.mangaModelUpdate.OriginalPublisher">
     </div>
  
 
 
-    <div class="form-group">
+    <div class="manga-update-form-group">
         <label for="type">Type:</label>
-        <input type="text" class="form-control" id="type" name="mangaModel.Type" value="@Model.mangaModelUpdate.Type">
+        <input type="text" class="manga-update-input" id="type" name="mangaModel.Type" value="@Model.mangaModelUpdate.Type">
     </div>
 
-    <div class="form-group">
+    <div class="manga-update-form-group">
         <label for="officalLanguage">Offical Language:</label>
-        <input type="text" class="form-control" id="officalLanguage" name="mangaModel.OfficalLanguage" value="@Model.mangaModelUpdate.OfficalLanguage">
+        <input type="text" class="manga-update-input" id="officalLanguage" name="mangaModel.OfficalLanguage" value="@Model.mangaModelUpdate.OfficalLanguage">
     </div>
  
     <button type="submit" class="btn btn-danger">Update</button>

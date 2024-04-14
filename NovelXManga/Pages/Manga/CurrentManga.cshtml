@@ -5,8 +5,14 @@
 @inject SignInManager<UserModel> SignInManager
 @{
     var user = await UserManager.GetUserAsync(User);
-    var UpdaterUser = user != null && await UserManager.IsInRoleAsync(user, "NormalUser");
-     bool showAuthors = Model.CurrentManga2.Authors != null && Model.CurrentManga2.Authors.Any();
+
+    bool CanEditManga(UserModel user)
+    {
+        // Check if the user has any of the roles that allow editing
+        var allowedRoles = new[] { "Admin", "Owner", "AdminControl", "Updater" };
+        return allowedRoles.Any(role => UserManager.IsInRoleAsync(user, role).Result);
+    }
+    bool showAuthors = Model.CurrentManga2.Authors != null && Model.CurrentManga2.Authors.Any();
     bool showArtists = Model.CurrentManga2.Artists != null && Model.CurrentManga2.Artists.Any();
     bool showVoiceActors = Model.CurrentManga2.VoiceActors != null && Model.CurrentManga2.VoiceActors.Any();
 
@@ -29,7 +35,7 @@
                     @if (@Model.CurrentManga.PhotoPath != string.Empty)
                     {
                         <div>
-                            @if (UpdaterUser)
+                        @if (CanEditManga(user))
                             {
                                 <a asp-page="/MangaUpdates/UpdatePhoto" asp-route-id="@Model.CurrentManga.MangaID">
                                     <img class="CUS-manga-img" asp-append-version="true" src="~/Images/GeneratedMangaImage/@Model.CurrentManga.PhotoPath" alt="NoImage">
@@ -140,9 +146,18 @@
                 }
 
                 <!-- Other buttons like Edit and Report can stay outside the dropdown -->
-                <div class="CUS-EditSizeCurrentpage">
-                    <button type="submit" class="CUS-EditBookButton">Edit</button>
-                </div>
+                @if (CanEditManga(user))
+                {
+                    <div class="CUS-EditSizeCurrentpage">
+                        <a asp-page="/MangaUpdates/UpdateDescription" asp-route-id="@Model.CurrentManga.MangaID" class="CUS-EditBookButton">Edit</a>
+                    </div>
+                }else
+                {
+                    <div class="CUS-EditSizeCurrentpage">
+                        <button class="CUS-EditBookButton">Edit</button>
+                    </div>
+                }
+                
                 <div class="CUS-ReportSizeCurrentpage">
                     <button type="submit" class="CUS-ReportBookButton">Report</button>
                 </div>
@@ -169,7 +184,7 @@
                 @foreach (var item in Model.CurrentManga2.Genres)
                 {
                     <div class="CUS-tagsInsideInsideCurrentManga">
-                        @if (UpdaterUser)
+                      @if (CanEditManga(user))
                         {
                             <a asp-page="/MangaUpdates/UpdateGenre" asp-route-id="@Model.CurrentManga.MangaID">
                                 @if (item.GenreName == "Adult" || item.GenreName == "Smut" || item.GenreName == "Mature")
@@ -208,7 +223,7 @@
             {
                 @foreach (var item in Model.CurrentManga2.Tags)
                 {
-                    @if (UpdaterUser)
+                    @if (CanEditManga(user))
                     {
                         <a asp-page="/MangaUpdates/UpdateTags" asp-route-id="@Model.CurrentManga2.MangaID">
                             <div class="CUS-tagsInsideInsideCurrentManga">
@@ -374,7 +389,7 @@
 
                 @if (Model.CurrentManga.Description != null)
                 {
-                    @if (UpdaterUser)
+                @if (CanEditManga(user))
                     {
 
                         <a asp-page="/MangaUpdates/UpdateGenre" asp-route-id="@Model.CurrentManga.MangaID">
@@ -391,7 +406,7 @@
                 }
                 else
                 {
-                    @if (UpdaterUser)
+                @if (CanEditManga(user))
                     {
 
                         <a asp-page="/MangaUpdates/UpdateGenre" asp-route-id="@Model.CurrentManga.MangaID">
@@ -420,8 +435,8 @@
 
                     <h3>Associated names:</h3>
                     <div class="CUS-MangaContainerInput">
-                       
-                            @if (UpdaterUser)
+
+                        @if (CanEditManga(user))
                             {
                                 <a asp-page="/MangaUpdates/CHANGE" asp-route-id="@Model.CurrentManga.MangaID">
                                     @foreach (var item in Model.CurrentManga.AssociatedNames)
@@ -567,7 +582,7 @@
                     }
                     else
                     {
-                        @if (UpdaterUser)
+                        @if (CanEditManga(user))
                         {
                             <a asp-action="@Model.CurrentManga.ReleaseYear" asp-route-id="@Model.CurrentManga.MangaID">
                             <div class="CUS-MangaInputText">
@@ -604,7 +619,7 @@
                      
                     @if (Model.CurrentManga.Type != null)
                     {
-                        @if (UpdaterUser)
+                        @if (CanEditManga(user))
                         {
                             <a asp-page="/MangaUpdates/UpdateDescription" asp-route-id="@Model.CurrentManga.MangaID">
                             <div class="CUS-MangaInputText">
@@ -624,7 +639,7 @@
                     }
                     else
                     {
-                        @if (UpdaterUser)
+                        @if (CanEditManga(user))
                         {
                             <a asp-page="/MangaUpdates/UpdateDescription" asp-route-id="@Model.CurrentManga.MangaID">
                                 <div class="CUS-MangaInputText">
@@ -654,7 +669,7 @@
                 <div class="CUS-MangaContainerInput">
                     @if (Model.CurrentManga.OriginalPublisher != null)
                     {
-                        @if (UpdaterUser)
+                        @if (CanEditManga(user))
                         {
                             <a asp-action="@Model.CurrentManga.OriginalPublisher" asp-route-id="@Model.CurrentManga.MangaID">
                                 <div class="CUS-MangaInputText">
@@ -673,7 +688,7 @@
                     }
                     else
                     {
-                        @if (UpdaterUser)
+                        @if (CanEditManga(user))
                         {
                             <a asp-action="@Model.CurrentManga.OriginalPublisher" asp-route-id="@Model.CurrentManga.MangaID">
                                 <div class="CUS-MangaInputText">
@@ -698,7 +713,7 @@
 
                     @if (Model.CurrentManga.OfficalLanguage != null)
                     {
-                        @if (UpdaterUser)
+                        @if (CanEditManga(user))
                         {
                             <a asp-action="@Model.CurrentManga.OfficalLanguage" asp-route-id="@Model.CurrentManga.MangaID">
                             <div class="CUS-MangaInputText">
@@ -717,7 +732,7 @@
                     }
                     else
                     {
-                        @if (UpdaterUser)
+                        @if (CanEditManga(user))
                         {
                             <a asp-action="@Model.CurrentManga.OfficalLanguage" asp-route-id="@Model.CurrentManga.MangaID">
                             <div class="CUS-MangaInputText">
@@ -743,7 +758,7 @@
                     @if (Model.CurrentManga.StatusInCountryOfOrigin != null)
                     {
                     
-                        @if (UpdaterUser)
+                 @if (CanEditManga(user))
                         {
                             <a asp-action="@Model.CurrentManga.StatusInCountryOfOrigin" asp-route-id="@Model.CurrentManga.MangaID">
                                 <div class="CUS-MangaInputText">
@@ -762,7 +777,7 @@
                     }
                     else
                     {
-                        @if (UpdaterUser)
+                        @if (CanEditManga(user))
                         {
                             <a asp-action="@Model.CurrentManga.StatusInCountryOfOrigin" asp-route-id="@Model.CurrentManga.MangaID">
                                 <div class="CUS-MangaInputText">
@@ -787,8 +802,8 @@
                 <div class="CUS-MangaContainerInput">
                     @if (Model.CurrentManga.CompletelyTranslated != null)
                     {
-                  
-                        @if (UpdaterUser)
+
+                        @if (CanEditManga(user))
                         {
                             <a asp-action="@Model.CurrentManga.CompletelyTranslated" asp-route-id="@Model.CurrentManga.MangaID">
                                 <div class="CUS-MangaInputText">
@@ -807,7 +822,7 @@
                     }
                     else
                     {
-                        @if (UpdaterUser)
+                        @if (CanEditManga(user))
                         {
                             <a asp-action="@Model.CurrentManga.CompletelyTranslated" asp-route-id="@Model.CurrentManga.MangaID">
                                 <div class="CUS-MangaInputText">
@@ -833,7 +848,7 @@
                     @if (Model.CurrentManga.orignalWebtoon != null && Model.CurrentManga.orignalWebtoon != "N/A")
                     {
 
-                        @if (UpdaterUser)
+                        @if (CanEditManga(user))
                         {
                             <a asp-action="@Model.CurrentManga.orignalWebtoon" asp-route-id="@Model.CurrentManga.MangaID">
                                 <div class="CUS-MangaInputText">
@@ -854,7 +869,7 @@
                     }
                     else
                     {
-                        @if (UpdaterUser)
+                        @if (CanEditManga(user))
                         {
                             <a asp-action="@Model.CurrentManga.orignalWebtoon" asp-route-id="@Model.CurrentManga.MangaID">
                                 <div class="CUS-MangaInputText">
@@ -884,7 +899,7 @@
                     {
                         foreach (var item in Model.CurrentManga.StudioModels)
                         {
-                            @if (UpdaterUser)
+                            @if (CanEditManga(user))
                             {
                                 <a asp-page="/MangaUpdates/UpdateGenre" asp-route-id="@Model.CurrentManga.MangaID">
                                     <div class="CUS-MangaInputText" asp-for="@item.website">@item.GroupName </div>
@@ -904,7 +919,7 @@
                     }
                     else
                     {
-                        @if (@UpdaterUser)
+                        @if (CanEditManga(user))
                         {
                             <a asp-action="@Model.CurrentManga.StudioModels" asp-route-id="@Model.CurrentManga.MangaID">
                                 <div class="CUS-MangaInputText">
@@ -937,7 +952,7 @@
                     @if (Model.CurrentManga.ISBN13 != null || Model.CurrentManga.ISBN10 != null)
                     {
 
-                        @if (UpdaterUser)
+                        @if (CanEditManga(user))
                         {
                             @if (Model.CurrentManga.ISBN13 != null)
                             {
@@ -971,7 +986,7 @@
                     }
                     else
                     {
-                        @if (UpdaterUser)
+                        @if (CanEditManga(user))
                         {
                             <a asp-page="/MangaUpdates/UpdateDescription" asp-route-id="@Model.CurrentManga.MangaID">
                                 <div class="CUS-MangaInputText">
@@ -1093,7 +1108,7 @@
                 }
                 else
                 {
-                    @if (UpdaterUser)
+                            @if (CanEditManga(user))
                     {
                         <a asp-page="/MangaUpdates/AddCharacter" asp-route-id="@Model.CurrentManga2.MangaID">
                         <div class="CUS-MangaInputText">
@@ -1195,7 +1210,7 @@
 
                     @if (Model.CurrentManga.OverAllBookScore != null)
                     {
-                        @if (UpdaterUser)
+                        @if (CanEditManga(user))
                         {
                             <a asp-page="/MangaUpdates/SomethingHere" asp-route-id="@Model.CurrentManga.MangaID">
 

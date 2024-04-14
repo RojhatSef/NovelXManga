@@ -3,6 +3,7 @@ using MangaModelService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 
 namespace NovelXManga.Pages.MangaUpdates
 {
@@ -32,22 +33,34 @@ namespace NovelXManga.Pages.MangaUpdates
                 return RedirectToPage("/Index");
             }
 
-            mangaModelUpdate = await mangaRepository.GetOneMangaAllIncludedAsync(mangaModel.MangaID);
+            // Retrieve the existing entity from the database to avoid tracking conflicts.
+            MangaModel existingEntity = await context.mangaModels
+                .FirstOrDefaultAsync(e => e.MangaID == mangaModel.MangaID);
 
-            mangaModelUpdate.Description = mangaModel.Description;
-            mangaModelUpdate.ISBN10 = mangaModel.ISBN10;
-            mangaModelUpdate.ISBN13 = mangaModel.ISBN13;
-            mangaModelUpdate.futureEvents = mangaModel.futureEvents;
-            mangaModelUpdate.StatusInCountryOfOrigin = mangaModel.StatusInCountryOfOrigin;
-            mangaModelUpdate.CompletelyTranslated = mangaModel.CompletelyTranslated;
-            mangaModelUpdate.orignalWebtoon = mangaModel.orignalWebtoon;
-            mangaModelUpdate.OriginalPublisher = mangaModel.OriginalPublisher;
-            mangaModelUpdate.OfficalLanguage = mangaModel.OfficalLanguage;
+            // If the entity does not exist, return NotFound.
+            if (existingEntity == null)
+            {
+                return NotFound();
+            }
 
-            mangaModelUpdate = await mangaRepository.UpdateAsync(mangaModelUpdate);
+            // Update the existing entity with the values from the form
+            existingEntity.Description = mangaModel.Description;
+            existingEntity.ISBN10 = mangaModel.ISBN10;
+            existingEntity.ISBN13 = mangaModel.ISBN13;
+            existingEntity.futureEvents = mangaModel.futureEvents;
+            existingEntity.StatusInCountryOfOrigin = mangaModel.StatusInCountryOfOrigin;
+            existingEntity.CompletelyTranslated = mangaModel.CompletelyTranslated;
+            existingEntity.orignalWebtoon = mangaModel.orignalWebtoon;
+            existingEntity.OriginalPublisher = mangaModel.OriginalPublisher;
+            existingEntity.OfficalLanguage = mangaModel.OfficalLanguage;
+            existingEntity.Type = mangaModel.Type;
+
+            // Since the entity is already tracked, simply call SaveChangesAsync.
+            await context.SaveChangesAsync();
 
             return RedirectToPage("/Index");
         }
+
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {

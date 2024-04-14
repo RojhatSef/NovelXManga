@@ -1,0 +1,32 @@
+﻿.MarginUpdateClass {
+    margin-top: 10%;
+}
+
+.manga-update-form-group {
+    margin-bottom: 20px; /* Spacing between form groups */
+}
+
+.manga-update-input {
+    width: 100%; /* Full width */
+    padding: 8px; /* Padding inside the input */
+    border: 1px solid #ccc; /* Border color */
+    border-radius: 4px; /* Rounded corners */
+}
+
+.btn-danger {
+    background-color: #d9534f; /* Red color */
+    color: white; /* White text */
+    border: none; /* No border */
+    padding: 10px 20px; /* Padding around text */
+    margin-top: 20px; /* Margin from the top of the last element */
+    cursor: pointer; /* Pointer cursor on hover */
+}
+
+.btn-primary {
+    background-color: #007bff; /* Blue color */
+    color: white; /* White text */
+    border: none; /* No border */
+    padding: 10px 20px; /* Padding around text */
+    margin-left: 10px; /* Space between buttons */
+    cursor: pointer; /* Pointer cursor on hover */
+}
