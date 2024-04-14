@@ -21,3 +21,4 @@ function reorderchange(args) {
             $('#HideTagsWhen').toggleClass('hidden-tags');
         });
     });
+}
