@@ -206,10 +206,10 @@
         text-decoration: none !important;
         color: inherit;
     }
+
     body.light-mode .MiniCards {
         background-color: #e6e6e6;
     }
-
 
     @media all and (-webkit-min-device-pixel-ratio:0) and (min-resolution: .001dpcm) {
         body.light-mode .MoreRecentUpdateStyle {
@@ -217,32 +217,31 @@
             color: #333;
             border: 2px solid #ff6740; /* Add border with specific color */
         }
+
             body.light-mode .MoreRecentUpdateStyle:hover {
                 background-color: #ff6740;
             }
 
-            .MoreRecentUpdateStyle {
-                width: 100%;
-                height: 35px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                background-color: var(--background-color);
-                color: var(--text-color);
-               
-                border-top-left-radius: 0;
-                border-top-right-radius: 0;
-                border-bottom-right-radius: 30px;
-                border-bottom-left-radius: 30px;
-                transition: background-color 0.3s, color 0.3s, border-color 0.3s; /* Add transition for smooth effect */
-            }
+        .MoreRecentUpdateStyle {
+            width: 100%;
+            height: 35px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 30px;
+            border-bottom-left-radius: 30px;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s; /* Add transition for smooth effect */
+        }
 
             .MoreRecentUpdateStyle:hover {
                 background-color: #ff6740;
                 color: #000;
                 border-color: #e65c00;
             }
-            
     }
 
     .container-custom {
@@ -812,9 +811,10 @@
 }
 
 .DescriptionContainerSize {
-    display: block;
     align-content: center;
+    display: -webkit-box;
     width: 100%;
+    text-overflow: ellipsis;
     line-height: 1.5em; /* Adjust the line height as needed */
     max-height: 6em; /* 4 lines of text, considering the line height */
     overflow: hidden; /* Hide the overflow text */
@@ -1504,7 +1504,6 @@
         border-radius: 10px;
         border: 20px;
     }
-
 
 .gg-menu-round {
     box-sizing: border-box;

@@ -337,6 +337,14 @@
         margin-inline-end: 0px;
         font-weight: bold;
         padding-right: 5px;
+
+    }
+    .CUS-MangaContainerInput a {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: start;
+ 
     }
 
     .CUS-MangaContainerInput {
@@ -652,6 +660,7 @@
         height: 15px;
         white-space: nowrap;
         overflow: hidden;
+        margin-right:2px; 
         text-overflow: ellipsis;
         min-width: 75px;
         flex-shrink: 0;
@@ -659,7 +668,9 @@
         border-radius: 5px;
         font-family: Lato !important;
     }
-
+    .CUS-LeftSidemangaDetailsBox h3 {
+        margin-left:2px; 
+    }
     .CUS-scoreArea:hover .CUS-scoreDistribution {
         display: block; /* Shows the dropdown on hover */
     }

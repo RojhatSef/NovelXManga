@@ -61,14 +61,13 @@ namespace NovelXManga.Pages.MangaUpdates
             return RedirectToPage("/Index");
         }
 
-
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
-            mangaModelUpdate = context.mangaModels.FirstOrDefault(e => e.MangaID == id);
+            mangaModelUpdate = await context.mangaModels.FirstOrDefaultAsync(e => e.MangaID == id);
 
             if (mangaModelUpdate == null)
             {

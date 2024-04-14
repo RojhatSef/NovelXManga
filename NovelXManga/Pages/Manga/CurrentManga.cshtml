@@ -6,9 +6,11 @@
 @{
     var user = await UserManager.GetUserAsync(User);
 
+
     bool CanEditManga(UserModel user)
     {
-        // Check if the user has any of the roles that allow editing
+        if (user == null) return false; // Return false if there is no user logged in
+
         var allowedRoles = new[] { "Admin", "Owner", "AdminControl", "Updater" };
         return allowedRoles.Any(role => UserManager.IsInRoleAsync(user, role).Result);
     }
@@ -425,7 +427,7 @@
             </div>
 
         </div>
-      <hr / class="CUS-DescriptionDiver">
+      <hr class="CUS-DescriptionDiver">
         <div class="CUS-CommonContainer">
          <div class="CUS-LeftSide">
             @if (Model.CurrentManga.AssociatedNames != null && Model.CurrentManga.AssociatedNames.Count > 0)
@@ -438,7 +440,7 @@
 
                         @if (CanEditManga(user))
                             {
-                                <a asp-page="/MangaUpdates/CHANGE" asp-route-id="@Model.CurrentManga.MangaID">
+                                <a  asp-page="/MangaUpdates/CHANGE" asp-route-id="@Model.CurrentManga.MangaID">
                                     @foreach (var item in Model.CurrentManga.AssociatedNames)
                                     {
                                         <div class="CUS-MangaInputText">@item.nameString</div>
