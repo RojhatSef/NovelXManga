@@ -257,6 +257,8 @@
         border-radius: 10px;
         border: none;
         transition: background-color 0.3s ease;
+        width:78.5%;
+        margin:auto; 
     }
 
         .CurrentMangaReviewButton:hover, .CurrentMangaReviewButton:active {
