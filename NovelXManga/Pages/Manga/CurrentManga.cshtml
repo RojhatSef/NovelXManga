@@ -32,29 +32,34 @@
                 <div class="CUS-blurredbackground ">
                     <img class="CUS-BoxImage CUS-blurimage" src="/Images/GeneratedMangaImage/@Model.CurrentManga.PhotoPath" />
                 </div>
-                <div class="CUS-manga-img-container">
-                    <!-- Manga image -->
-                    @if (@Model.CurrentManga.PhotoPath != string.Empty)
-                    {
-                        <div>
-                        @if (CanEditManga(user))
-                            {
-                                <a asp-page="/MangaUpdates/UpdatePhoto" asp-route-id="@Model.CurrentManga.MangaID">
-                                    <img class="CUS-manga-img" asp-append-version="true" src="~/Images/GeneratedMangaImage/@Model.CurrentManga.PhotoPath" alt="NoImage">
-                                </a>
-                            }
-                            else
-                            {
-                                <img class="CUS-manga-img" asp-append-version="true" src="~/Images/GeneratedMangaImage/@Model.CurrentManga.PhotoPath" alt="NoImage">
-                            }
+         <div class="CUS-manga-img-container">
+  
+    @if (!string.IsNullOrEmpty(Model.CurrentManga.PhotoPath))
+    {
+        <div>
+            @if (CanEditManga(user))
+            {
+              
+                <a asp-page="/MangaUpdates/UpdatePhoto" asp-route-id="@Model.CurrentManga.MangaID">
+                    <img class="CUS-manga-img" asp-append-version="true" src="~/Images/GeneratedMangaImage/@Model.CurrentManga.PhotoPath" alt="NoImage">
+                </a>
+            }
+            else
+            {
+             
+                <a href="~/Images/GeneratedMangaImage/@Model.CurrentManga.PhotoPath" target="_blank">
+                    <img class="CUS-manga-img" asp-append-version="true" src="~/Images/GeneratedMangaImage/@Model.CurrentManga.PhotoPath" alt="NoImage">
+                </a>
+            }
+        </div>
+    }
+    else
+    {
+    
+        <img class="CUS-manga-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png" alt="BookImage">
+    }
+</div>
 
-                        </div>
-                    }
-                    else
-                    {
-                        <img class="CUS-manga-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png" alt="BookImage">
-                    }
-                </div>
             <div class="CUS-manga-title CUS-HideTitleCurrentMangaOnSmall">
                     <!-- Manga TITLE -->
                     @if (@Model.CurrentManga.MangaName != null)
