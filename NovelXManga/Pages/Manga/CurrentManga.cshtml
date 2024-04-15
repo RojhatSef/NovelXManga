@@ -664,7 +664,28 @@
                 </div>
 
             </div>
-       
+             @if (Model.CurrentManga.futureEvents != null ){
+          
+                 <div class="CUS-LeftSidemangaDetailsBox">  
+               <h3>Future Events: </h3>
+                <div class="CUS-MangaContainerInput">
+                     
+                 
+                      
+                        <div class="CUS-MangaInputText">
+                                @Model.CurrentManga.futureEvents
+
+                            </div>
+                        
+                
+              
+                    <br />
+
+
+                </div>
+
+            </div>
+          }
    
 
             <div class="CUS-LeftSidemangaDetailsBox">     <h3>Original Publisher:</h3>
@@ -694,14 +715,14 @@
                         {
                             <a asp-action="@Model.CurrentManga.OriginalPublisher" asp-route-id="@Model.CurrentManga.MangaID">
                                 <div class="CUS-MangaInputText">
-                                    OriginalPublisher: N/A
+                                    N/A
                                 </div>
                             </a>
                         }
                         else
                         {
                             <div class="CUS-MangaInputText">
-                                OriginalPublisher: N/A
+                               N/A
                             </div>
                         }
 
@@ -738,14 +759,14 @@
                         {
                             <a asp-action="@Model.CurrentManga.OfficalLanguage" asp-route-id="@Model.CurrentManga.MangaID">
                             <div class="CUS-MangaInputText">
-                                    Offical Language: N/A
+                                    N/A
                                 </div>
                             </a>
                         }
                         else
                         {
                         <div class="CUS-MangaInputText">
-                                Offical Language: N/A
+                               N/A
                             </div>
                         }
 
@@ -783,14 +804,14 @@
                         {
                             <a asp-action="@Model.CurrentManga.StatusInCountryOfOrigin" asp-route-id="@Model.CurrentManga.MangaID">
                                 <div class="CUS-MangaInputText">
-                                    Status In Country Of Origin: N/A
+                                     N/A
                                 </div>
                             </a>
                         }
                         else
                         {
                             <div class="CUS-MangaInputText">
-                                Status In Country Of Origin: N/A
+                                N/A
                             </div>
                         }
 
@@ -828,14 +849,14 @@
                         {
                             <a asp-action="@Model.CurrentManga.CompletelyTranslated" asp-route-id="@Model.CurrentManga.MangaID">
                                 <div class="CUS-MangaInputText">
-                                     Translation: N/A
+                                     N/A
                                 </div>
                             </a>
                         }
                         else
                         {
                             <div class="CUS-MangaInputText">
-                                 Translation: N/A
+                               N/A
                             </div>
                         }
 
@@ -1004,10 +1025,10 @@
                         else
                         {
                             <div class="CUS-MangaInputText">
-                                ISBN13: TBA
+                                 TBA
                             </div>
                             <div class="CUS-MangaInputText">
-                                ISBN10: TBA
+                               TBA
                             </div>
                         }
                     }
@@ -1232,7 +1253,7 @@
                                                                  alt="User Photo">
 
 
-                                                    <img class="CUS-Review-img" src="~/Images/GeneratedUserImage/@(review.UserModels.FirstOrDefault()?.userPhotoPath ?? "NoPhoto.png")" alt="User Image">
+                                               
 
                                                 </a><!-- Style Score -->
                                                 <div class="Score PresentingReviewScorePadder">

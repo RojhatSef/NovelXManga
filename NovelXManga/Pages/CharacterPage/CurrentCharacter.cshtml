@@ -424,34 +424,25 @@
                     </div>
                 </div>
             </div>
-            <div class="CUS-LeftSidemangaDetailsBox">
-                <h3>FamousQuote:</h3>
-                <div class="CUS-MangaContainerInput">
-                    <div class="CUS-MangaInputText">
-                        @if (Model.CurrentCharacter.FamousQuote != null)
-                        {
-                            @if (UpdaterUser)
-                            {
-                                <a asp-page="/MangaUpdates/UpdateDescription" asp-route-id="@Model.CurrentCharacter.CharacterId">
+               @if (Model.CurrentCharacter.FamousQuote != null)
+               {
+                <div class="CUS-LeftSidemangaDetailsBox">
+                    <h3>Famous Quote:</h3>
+                    <div class="CUS-MangaContainerInputQuote">
+                        <div class=" CUS-FamousQuoteText">
+                            
                                     @Model.CurrentCharacter.FamousQuote
-                                </a>
-                            }
-                            else
-                            {
-                                @Model.CurrentCharacter.FamousQuote
-                            }
-                        }
-                        else
-                        {
-                            <p>TBA</p>
-                        }
-                    </div>
+                              
+                       
+                        </div>
                 </div>
             </div>
+            }
+
             <div class="CUS-LeftSidemangaDetailsBox">
                 <h3>Height:</h3>
                 <div class="CUS-MangaContainerInput">
-                    <div class="CUS-MangaInputText">
+                    <div class="CUS-MangaInputText ">
                         @if (Model.CurrentCharacter.Height != null)
                         {
                             @if (UpdaterUser)
@@ -693,3 +684,4 @@
 
    
 </div>
+<script src="~/js/CurrentManga.jsjs" asp-append-version="true"></script>

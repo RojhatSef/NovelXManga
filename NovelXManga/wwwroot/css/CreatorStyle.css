@@ -150,7 +150,6 @@
         border-radius: 5px;
         display: flex;
         flex-wrap: wrap;
-        align-items: flex-start;
         gap: 10px;
         padding: 5px;
         box-sizing: border-box;
@@ -158,6 +157,30 @@
         align-items: center; /* Centers the content horizontally */
     }
 
+    .CUS-MangaContainerInputQuote {
+        display: flex;
+        flex-wrap: wrap;
+        padding:5px;  
+        align-items: flex-start;
+        width: 100%;
+        min-height: 15px; 
+        border: 2px solid #ff6740;
+        border-radius: 5px;
+        box-sizing: border-box;
+        background-color: #444;
+    }
+    .CUS-FamousQuoteText {
+        flex: 1 1 auto;
+       
+     
+        color: white;
+  
+        border-radius: 3px;
+        white-space: normal;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+  
     .CUS-mangaDetailsWrapper {
         display: flex;
         flex-wrap: wrap;
@@ -174,6 +197,7 @@
         width: 100%;
         margin-right: 10%;
         margin-left: 10%;
+        margin-top: 5px;
     }
 
     .CUS-ratingLeftSide {
@@ -190,6 +214,7 @@
         display: flex;
         flex-wrap: wrap;
         justify-content: flex-start;
+        overflow: hidden;
     }
 
     .CUS-ReviewTitleCenter {

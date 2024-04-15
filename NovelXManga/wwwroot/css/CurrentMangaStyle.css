@@ -115,7 +115,7 @@
         margin-top: 10px;
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 838px) {
         .UserReview {
             flex-direction: column;
             align-items: center; /* Center align the flex items */
@@ -172,13 +172,16 @@
                 margin: auto; /* Center-align block-level elements or elements with a specified width */
                 text-align: center;
             }
-
-        .UserReviewcontent {
-            /* Adjustments to ensure content text is centered properly */
-            text-align: justify;
-            margin: 0 auto; /* Center the content block horizontally */
-            margin-right: 0px;
-        }
+            .ReviewLeft img {
+                margin-bottom:15px;
+                margin-top:15px;    
+            }
+            .UserReviewcontent {
+                /* Adjustments to ensure content text is centered properly */
+                text-align: justify;
+                margin: 0 auto; /* Center the content block horizontally */
+                margin-right: 0px;
+            }
 
         .CUS-Review-img {
             /* Ensure image sizing is appropriate and doesn't overflow */
@@ -354,7 +357,7 @@
         border-radius: 5px;
         display: flex;
         flex-wrap: wrap;
-        /*    align-items: flex-start;*/
+      
         gap: 10px;
         padding: 5px;
         box-sizing: border-box;
@@ -622,6 +625,7 @@
         width: 50px;
         margin: 10px;
         border-radius: 50%;
+        
     }
 
     .PresentingReviewScorePadder {
