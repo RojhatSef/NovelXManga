@@ -3,25 +3,19 @@
 @{
 }
 
+<link rel="stylesheet" href="~/css/UpdatesStyle.css" asp-append-version="true" />
+<h3>Update Photo</h3>
 
-<h3> Update Photo</h3>
-
-<form method="post" enctype="multipart/form-data">
-  
-    <img src="@Model.mangaModelUpdate.PhotoPath" class="card-img-top" alt="Image" />
-    <div class="form-group row">
-        <label asp-for="Photo" class="col-sm-2 col-form-label"></label>  <br />
-        <div class="col-sm-10">
-            <div class="custom-file">
-                <input asp-for="Photo" name="Photo" class="custom-file-input form-control" />
-                <label class="custom-file-label">Click here to add photo</label>
-                <span asp-validation-for="Photo" class="text-danger"></span>
-
-            </div>
-            <input type="hidden" name="mangaModel.MangaID" value="@Model.mangaModelUpdate.MangaID" />
-        </div>
+<form method="post" class="photo-update-form" enctype="multipart/form-data">
+    <img src="@Model.mangaModelUpdate.PhotoPath" class="photo-preview" alt="Image" />
+    <div class="form-group">
+        <label for="Photo" class="form-label"></label>
+        <br />
+        <input type="file" id="Photo" name="Photo" class="file-input" />
+        <label for="Photo" class="file-label">Click here to add photo</label>
+        <span id="Photo-error" class="error-text"></span>
     </div>
- 
-    <button type="submit" class="btn btn-danger">Update</button>
-    <a asp-page="/Index" class="btn btn-primary">Back</a>
+    <input type="hidden" name="mangaModel.MangaID" value="@Model.mangaModelUpdate.MangaID" />
+    <button type="submit" class="update-button">Update</button>
+    <a href="/Index" class="back-button">Back</a>
 </form>

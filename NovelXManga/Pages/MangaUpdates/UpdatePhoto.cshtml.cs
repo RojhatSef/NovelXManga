@@ -82,7 +82,7 @@ namespace NovelXManga.Pages.MangaUpdates
             {
                 return NotFound();
             }
-            mangaModelUpdate = _context.mangaModels.FirstOrDefault(e => e.MangaID == id);
+            mangaModelUpdate = await _context.mangaModels.FirstOrDefaultAsync(e => e.MangaID == id);
 
             if (mangaModelUpdate == null)
             {
