@@ -16,7 +16,7 @@
          <div class="CUS-card-ex">
           <div class="CUS-card-image-ex">
             <div class="CUS-blurredbackground ">
-                <img class="CUS-BoxImage CUS-blurimage" src="/Images/GeneratedCharacterImage/@Model.CurrentCharacter.PhotoPath" />
+                <img class="CUS-BoxImage CUS-blurimage" src="/Images/GeneratedCharacterImage/@Model.CurrentCharacter.PhotoPath" onerror="this.onerror=null;this.src='/Images/CharacterImage/NoPhoto.jpg';" />
                   
                 </div>
 
@@ -28,19 +28,19 @@
                             @if (UpdaterUser)
                             {
                                 <a asp-page="/MangaUpdates/UpdatePhoto" asp-route-id="@Model.CurrentCharacter.CharacterId">
-                                <img class="CUS-manga-img" asp-append-version="true" src="~/Images/GeneratedCharacterImage/@Model.CurrentCharacter.PhotoPath" alt="NoImage">
+                                <img class="CUS-manga-img" asp-append-version="true" src="~/Images/GeneratedCharacterImage/@Model.CurrentCharacter.PhotoPath" alt="NoImage" onerror="this.onerror=null;this.src='/Images/CharacterImage/NoPhoto.jpg';">
                                 </a>
                             }
                             else
                             {
-                            <img class="CUS-manga-img" asp-append-version="true" src="~/Images/GeneratedCharacterImage/@Model.CurrentCharacter.PhotoPath" alt="NoImage">
+                            <img class="CUS-manga-img" asp-append-version="true" src="~/Images/GeneratedCharacterImage/@Model.CurrentCharacter.PhotoPath" alt="NoImage" onerror="this.onerror=null;this.src='/Images/CharacterImage/NoPhoto.jpg';">
                             }
 
                         </div>
                     }
                     else
                     {
-                    <img class="CUS-manga-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png" alt="BookImage">
+                    <img class="CUS-manga-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png" alt="BookImage" onerror="this.onerror=null;this.src='/Images/CharacterImage/NoPhoto.jpg';">
                     }
                 </div>
             <div class="CUS-manga-title CUS-HideTitleCurrentMangaOnSmall">
@@ -644,7 +644,7 @@
                         {
                             <div class="CUS-GridItem">
                                 <a asp-page="/Manga/CurrentManga" asp-route-id="@manga.MangaID">
-                                    <img class="GridImage" src="~/Images/GeneratedMangaImage/@manga.PhotoPath" />
+                                    <img class="GridImage" src="~/Images/GeneratedMangaImage/@manga.PhotoPath" onerror="this.onerror=null;this.src='/Images/MangaImage/NoPhoto.png';" />
                                 </a>
                                 <div class="CUS-MangaInputText">
                                     <a asp-page="/Manga/CurrentManga" asp-route-id="@manga.MangaID">
@@ -667,7 +667,7 @@
                         {
                             <div class="CUS-GridItem">
                                 <a asp-page="/CharacterPage/CurrentCharacter" asp-route-id="@member.CharacterId">
-                                    <img class="GridImage" src="~/Images/GeneratedCharacterImage/@member.PhotoPath" />
+                                    <img class="GridImage" src="~/Images/GeneratedCharacterImage/@member.PhotoPath" onerror="this.onerror=null;this.src='/Images/CharacterImage/NoPhoto.jpg';" />
                                 </a>
                                 <div class="CUS-MangaInputText">
                                     <a asp-page="/CharacterPage/CurrentCharacter" asp-route-id="@member.CharacterId">
@@ -682,6 +682,6 @@
             }
         </div>
 
-   
+   </div>
 </div>
 <script src="~/js/CurrentManga.jsjs" asp-append-version="true"></script>

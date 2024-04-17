@@ -3,6 +3,7 @@ using MangaModelService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 
 namespace NovelXManga.Pages.MangaUpdates
 {
@@ -32,7 +33,7 @@ namespace NovelXManga.Pages.MangaUpdates
             string uniqueFileName = null;
             if (Photo != null)
             {
-                string uploadsFolder = Path.Combine(webHostEnvironment.WebRootPath, "Images", "MangaImage");
+                string uploadsFolder = Path.Combine(webHostEnvironment.WebRootPath, "Images", "GeneratedMangaImage");
                 string extension = Path.GetExtension(Photo.FileName);
                 uniqueFileName = Guid.NewGuid().ToString() + extension;
                 string filePath = Path.Combine(uploadsFolder, uniqueFileName);
@@ -50,12 +51,12 @@ namespace NovelXManga.Pages.MangaUpdates
             {
                 return NotFound();
             }
-            mangaModelUpdate = await mangaRepository.GetOneMangaAllIncludedAsync(mangaModel.MangaID);
+            mangaModelUpdate = await _context.mangaModels.FirstOrDefaultAsync(e => e.MangaID == mangaModel.MangaID);
 
             if (mangaModelUpdate.PhotoPath != null)
             {
-                string filePath = Path.Combine(webHostEnvironment.WebRootPath, "Images", "MangaImage", mangaModelUpdate.PhotoPath);
-                if (System.IO.File.Exists(filePath) && !filePath.EndsWith("NoPhoto.png"))
+                string filePath = Path.Combine(webHostEnvironment.WebRootPath, "Images", "GeneratedMangaImage", mangaModelUpdate.PhotoPath);
+                if (System.IO.File.Exists(filePath))
                 {
                     try
                     {

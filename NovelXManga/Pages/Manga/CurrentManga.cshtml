@@ -30,7 +30,7 @@
         <div class="CUS-card-ex">
             <div class="CUS-card-image-ex">
                 <div class="CUS-blurredbackground ">
-                    <img class="CUS-BoxImage CUS-blurimage" src="/Images/GeneratedMangaImage/@Model.CurrentManga.PhotoPath" />
+                <img class="CUS-BoxImage CUS-blurimage" src="/Images/GeneratedMangaImage/@Model.CurrentManga.PhotoPath" onerror="this.onerror=null;this.src='/Images/MangaImage/NoPhoto.png';" />
                 </div>
          <div class="CUS-manga-img-container">
   
@@ -41,22 +41,22 @@
             {
               
                 <a asp-page="/MangaUpdates/UpdatePhoto" asp-route-id="@Model.CurrentManga.MangaID">
-                    <img class="CUS-manga-img" asp-append-version="true" src="~/Images/GeneratedMangaImage/@Model.CurrentManga.PhotoPath" alt="NoImage">
+                    <img class="CUS-manga-img" asp-append-version="true" src="~/Images/GeneratedMangaImage/@Model.CurrentManga.PhotoPath" alt="NoImage" onerror="this.onerror=null; this.src='~/Images/MangaImage/NoPhoto.png';">
                 </a>
             }
             else
             {
              
                 <a href="~/Images/GeneratedMangaImage/@Model.CurrentManga.PhotoPath" target="_blank">
-                    <img class="CUS-manga-img" asp-append-version="true" src="~/Images/GeneratedMangaImage/@Model.CurrentManga.PhotoPath" alt="NoImage">
+                                <img class="CUS-manga-img" asp-append-version="true" src="~/Images/GeneratedMangaImage/@Model.CurrentManga.PhotoPath" alt="NoImage" onerror="this.onerror=null; this.src='~/Images/MangaImage/NoPhoto.png';">
                 </a>
             }
         </div>
     }
     else
     {
-    
-        <img class="CUS-manga-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png" alt="BookImage">
+
+                    <img class="CUS-manga-img" src="~/Images/MangaImage/NoPhoto.png" alt="BookImage">
     }
 </div>
 
@@ -1178,7 +1178,7 @@
 
                             <div class="CUS-GridItem">
                                 <a asp-page="/Manga/CurrentManga" asp-route-id="@relatedManga.MangaID">
-                                    <img class="GridImage" src="~/Images/GeneratedMangaImage/@relatedManga.PhotoPath"   />
+                                    <img class="GridImage" src="~/Images/GeneratedMangaImage/@relatedManga.PhotoPath" onerror="this.onerror=null;this.src='/Images/MangaImage/NoPhoto.png';" />
                                 </a>
                                 <div class="CUS-MangaInputText">
                                     <a asp-page="/Manga/CurrentManga" asp-route-id="@relatedManga.MangaID">
@@ -1206,7 +1206,7 @@
 
                                 <div class="CUS-GridItem">
                                     <a asp-page="/Manga/CurrentManga" asp-route-id="@relatedManga.MangaID">
-                                        <img class="GridImage" src="~/Images/GeneratedMangaImage/@relatedManga.PhotoPath" />
+                                    <img class="GridImage" src="~/Images/GeneratedMangaImage/@relatedManga.PhotoPath" onerror="this.onerror=null;this.src='/Images/MangaImage/NoPhoto.png';" />
                                     </a>
                                     <div class="CUS-MangaInputText">
                                         <a asp-page="/Manga/CurrentManga" asp-route-id="@relatedManga.MangaID">
@@ -1364,8 +1364,11 @@
                                                 </div>
                                                 <div class="ReviewRightHeader">
 
-                                                    Created: @review.Created.ToString("yyyy-MM-dd")
-
+                                                    <div class="InlineCreatedUpdatedStyle" > Created: @review.Created.ToString("yyyy-MM-dd")</div>
+                                                    @if (review.LastUpdated.HasValue && review.LastUpdated.Value > review.Created.AddSeconds(1))
+                                                    {
+                                                        <div class="InlineCreatedUpdatedStyle">Last Updated: @review.LastUpdated.Value.ToString("yyyy-MM-dd")</div>
+                                                    }
                                                 </div>
                                                 <div class="ReviewRightHeader ">
                                                     <h2 class="ReviewColor">@review.Title</h2>

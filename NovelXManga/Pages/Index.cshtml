@@ -20,7 +20,7 @@
             <div class="card-image-ex">
                 <a asp-page="/Index">
                     <div class="MoveDownIndexWallPapers">
-                        <img class="BoxImage " src="/Images/GeneratedWallpaperImages/@Model.WallpaperList[2].WallPaperPhotoPath" />
+                        <img class="BoxImage " src="/Images/GeneratedWallpaperImages/@Model.WallpaperList[2].WallPaperPhotoPath" onerror="this.onerror=null;this.src='/Images/MangaImage/NoPhoto.png';" />
                     </div>
                 </a>
             </div>
@@ -55,7 +55,7 @@
 
                     <div class="FourOfAKind @displayClass">
                         <a class="ANoneStyle" asp-page="/Manga/CurrentManga" asp-route-id="@Model.AllBooksList[i].MangaID">
-                            <img class="BoxImage" src="~/Images/GeneratedMangaImage/@Model.AllBooksList[i].PhotoPath" />
+                            <img class="BoxImage" src="~/Images/GeneratedMangaImage/@Model.AllBooksList[i].PhotoPath" onerror="this.onerror=null;this.src='/Images/MangaImage/NoPhoto.png';" />
                             <div class="FourofKindContent">
                                 @if (Model.AllBooksList[i].MangaName != null)
                                 {
@@ -127,7 +127,7 @@
             {
                 <div class="BoxOne carouselItem">
                     <a asp-page="/Manga/CurrentManga" asp-route-id="@Model.AllBooksList[i].MangaID">
-                        <img class="BoxImage" src="~/Images/GeneratedMangaImage/@Model.AllBooksList[i].PhotoPath" />
+                        <img class="BoxImage" src="~/Images/GeneratedMangaImage/@Model.AllBooksList[i].PhotoPath" onerror="this.onerror=null;this.src='/Images/MangaImage/NoPhoto.png';" />
                     </a>
                 </div>
             }
@@ -146,9 +146,9 @@
                 {
                     <a asp-page="/Manga/CurrentManga" asp-route-id="@book.MangaID">
                         <div class="slide">
-                            <img class="card-img-background" src="~/Images/GeneratedMangaImage/@book.PhotoPath" />
+                            <img class="card-img-background" src="~/Images/GeneratedMangaImage/@book.PhotoPath" onerror="this.onerror=null;this.src='/Images/MangaImage/NoPhoto.png';" />
                             <div class="card-body">
-                                <img class="card-img-index HideIndexBottomImage" src="~/Images/GeneratedMangaImage/@book.PhotoPath" />
+                                <img class="card-img-index HideIndexBottomImage" src="~/Images/GeneratedMangaImage/@book.PhotoPath" onerror="this.onerror=null;this.src='/Images/MangaImage/NoPhoto.png';" />
                                 <div class="TitleTagDescriptionCostum">
                                     <div class="card-title">
                                         <a asp-page="/Manga/CurrentManga" asp-route-id="@book.MangaID">
