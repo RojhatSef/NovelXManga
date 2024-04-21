@@ -435,6 +435,28 @@
       <hr class="CUS-DescriptionDiver">
         <div class="CUS-CommonContainer">
          <div class="CUS-LeftSide">
+            @if (CanEditManga(user))
+            {
+                <div class="CUS-LeftSidemangaDetailsBox">
+
+                    <h3>Update</h3>
+                    <div class="CUS-MangaContainerInput">
+
+
+                        <a asp-page="/MangaUpdates/RelatedRecommendedManga" asp-route-id="@Model.CurrentManga.MangaID">
+                            
+                                    <div class="CUS-MangaInputText">Updated related</div>
+
+                            </a>
+                       
+                       
+
+
+
+                </div>
+            </div>
+            }
+
             @if (Model.CurrentManga.AssociatedNames != null && Model.CurrentManga.AssociatedNames.Count > 0)
 
             {
@@ -466,7 +488,8 @@
                      
                     </div>
             </div>
-            }@if (Model.CurrentManga.OfficalWebsites != null && Model.CurrentManga.OfficalWebsites.Any())
+            }
+            @if (Model.CurrentManga.OfficalWebsites != null && Model.CurrentManga.OfficalWebsites.Any())
             {
                 <div class="CUS-LeftSidemangaDetailsBox">
                     <h3>Official Websites</h3>

@@ -1,0 +1,63 @@
+﻿@page
+@model NovelXManga.Pages.MangaUpdates.RelatedRecommendedMangaModel
+@{
+}
+<link rel="stylesheet" href="~/css/UpdatesStyle.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/CreateBookStyke.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/AdvancedFilter.css" asp-append-version="true" />
+
+
+<form method="post" enctype="multipart/form-data" class="MarginUpdateClass">
+    <div class="MUS-tag-alignment-container">
+        <div class="Mus-Tag-Divider">
+            <div id="selectedRelatedMangaSection">
+                <span class="MUS-tag-title">Include Related Manga:</span>
+                <span id="selectedRelatedMangaList"></span>
+            </div>
+
+            <div class="MUS-dropdown">
+                <input type="text" id="relatedMangaInput" placeholder="Related Manga">
+                <div class="MUS-dropdown-content" id="relatedMangaDropdown">
+                    @foreach (var manga in Model.RelatedMangaOptions)
+                    {
+                        <div class="MUS-tag-genre-item" id="RelatedMangaItems" onclick="document.getElementById('related-manga-@manga.MangaID').click();">
+                            <input type="checkbox" class="MUS-hidden-checkbox" id="related-manga-@manga.MangaID" name="SelectedRelatedManga" value="@manga.MangaID" @(Model.SelectedRelatedMangaIds?.Contains(manga.MangaID) ?? false ? "checked" : "")>
+                            <label class="MUS-tag-label" for="related-manga-@manga.MangaID">@manga.MangaName</label>
+                        </div>
+                    }
+
+                </div>
+            </div>
+
+            <div id="hiddenContainerForRelatedManga"></div>
+        </div>
+    </div>
+    <div class="MUS-tag-alignment-container">
+        <div class="Mus-Tag-Divider">
+            <div id="selectedRecommendedMangaSection">
+                <span class="MUS-tag-title">Include Recommended Manga:</span>
+                <span id="selectedRecommendedMangaList"></span>
+            </div>
+
+            <div class="MUS-dropdown">
+                <input type="text" id="recommendedMangaInput" placeholder="Search Recommended Manga">
+                <div class="MUS-dropdown-content" id="recommendedMangaDropdown">
+
+                    @foreach (var manga in Model.RecommendedMangaOptions)
+                    {
+                        <div class="MUS-tag-genre-item" id="RecommendedMangaItems">
+                            <input type="checkbox" class="MUS-hidden-checkbox" id="recommended-manga-@manga.MangaID" name="SelectedRecommendedManga" value="@manga.MangaID" @(Model.SelectedRecommendedMangaIds?.Contains(manga.MangaID) ?? false ? "checked" : "")>
+                            <label class="MUS-tag-label" for="recommended-manga-@manga.MangaID">@manga.MangaName</label>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <div id="hiddenContainerForRecommendedManga"></div>
+        </div>
+    </div>
+   
+    <button type="submit" id="CreateManga" class="btn btn-danger">Update</button>
+    <a asp-page="/Index" class="btn btn-primary">Back</a>
+</form>
+<script src="~/js/UpdatedMangaScript.js" asp-append-version="true"></script>

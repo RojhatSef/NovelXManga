@@ -821,7 +821,6 @@
     box-sizing: border-box; /* Include padding and border in the element's total width and height */
     -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
-  
 }
 
     .DescriptionContainerSize::after {
@@ -2575,4 +2574,3 @@
         background-color: #f0f0f0;
     }
 /*Deletepage ends*/
-}
