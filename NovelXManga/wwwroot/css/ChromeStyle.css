@@ -2552,7 +2552,27 @@
     .delete-init-button:hover {
         background-color: #c0392b;
     }
+    /*Search result styling */
+.search-result-details {
+    display: flex;
+    flex-direction: column;
+}
+.search-result-image {
+    width: 50px; /* Adjust as necessary */
+    height: auto;
+    margin-right: 10px;
+}
+.additional-details .rank,
+.additional-details .translation-status,
+.additional-details .user-count {
+    display: block; /* Each detail on a new line */
+}
+.additional-details {
+    font-size: 0.75rem; /* Smaller text for details */
+    color: #ccc; /* Lighter color for less emphasis */
+}
 
+/* end of result styling */
 #userDetails {
     border: 1px solid #ddd;
     padding: 10px;

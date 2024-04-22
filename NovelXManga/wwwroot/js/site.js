@@ -112,10 +112,29 @@ function processSearchResults(data) {
             `/Images/Generated${type}Image/${sanitizeHTML(item.photoPath)}` :
             `/Images/${type}Image/NoPhoto.png`;
 
-        return `<a href="${basePath}" class="dropdown-item">
-                    <img src="${imagePath}" alt="${sanitizeHTML(item.name)}">
-                    <span>${sanitizeHTML(item.name)}</span>
-                </a>`;
+        let resultHTML = `
+        <a href="${basePath}" class="dropdown-item">
+            <img src="${imagePath}" alt="${sanitizeHTML(item.name)}" class="search-result-image">
+            <div class="search-result-details">
+                <span>${sanitizeHTML(item.name)}</span>`;
+
+        if (type === "Manga") {
+            let starRating = item.OverAllBookScore ? Array(Math.round(item.OverAllBookScore)).fill('★').join('') : 'No rating';
+            let rankDisplay = item.Rank ? `<span class="rank">Rank: ${item.Rank}</span>` : 'Not ranked';
+            let translatedStatus = `<span class="translation-status">${item.CompletelyTranslated ? 'Fully Translated' : 'Ongoing'}</span>`;
+            let userCount = `<span class="user-count">${item.ReadingUsersCount} readers</span>`;
+
+            resultHTML += `
+            <div class="additional-details">
+                ${starRating}
+                ${translatedStatus}
+                ${rankDisplay}
+                ${userCount}
+            </div>`;
+        }
+
+        resultHTML += `</div></a>`;
+        return resultHTML;
     }
 
     ['Manga', 'Author', 'Artist', 'VoiceActor'].forEach(category => {
@@ -188,76 +207,3 @@ document.getElementById('dropdownToggle').addEventListener('click', function (ev
     dropdownMenu.classList.toggle('show');
     event.stopPropagation(); // Prevent click event from reaching document
 });
-
-////old
-//function searchManga(searchTerm) {
-//    var dropdown = document.getElementById('mangaResultsDropdown');
-
-//    if (searchTerm.length >= 2) {
-//        fetch(`/Index?handler=SearchManga&searchTerm=${sanitizeHTML(searchTerm)}`)
-//            .then(response => response.json())
-//            .then(data => {
-//                // Debugging line
-//                let allResults = [];
-//                // Manga Results
-//                if (data.Manga) {
-//                    allResults.push('<h1>Books:</h1>');
-//                    let mangaResults = data.Manga.map(manga => `
-//                <div class="dropdown-item">
-//                    <a href="/Manga/CurrentManga?id=${sanitizeHTML(manga.id)}">
-//                        <img src="/Images/GeneratedMangaImage/${sanitizeHTML(manga.photoPath)}" alt="${sanitizeHTML(manga.name)}">
-//                        <span data-mangaName="${sanitizeHTML(manga.name)}">
-//                            ${sanitizeHTML(manga.name)}
-//                        </span>
-//                    </a>
-//                </div>
-//            `);
-//                    allResults.push(mangaResults.join(''));
-//                }
-//                // Author Results
-//                if (data.Author) {
-//                    allResults.push('<h1>Authors:</h1>');
-//                    let authorResults = data.Author.map(author => `
-//                        <div class="dropdown-item">
-//                            <span data-authorName="${sanitizeHTML(author.name)}">
-//                                ${sanitizeHTML(author.name)}
-//                            </span>
-//                        </div>
-//                    `);
-//                    allResults.push(authorResults.join(''));
-//                }
-
-//                // Artist Results
-//                if (data.Artist) {
-//                    allResults.push('<h1>Artists:</h1>');
-//                    let artistResults = data.Artist.map(artist => `
-//                        <div class="dropdown-item">
-//                            <span data-artistName="${sanitizeHTML(artist.name)}">
-//                                ${sanitizeHTML(artist.name)}
-//                            </span>
-//                        </div>
-//                    `);
-//                    allResults.push(artistResults.join(''));
-//                }
-
-//                // Voice Actor Results
-//                if (data.VoiceActor) {
-//                    allResults.push('<h1>Voice Actors:</h1>');
-//                    let voiceActorResults = data.VoiceActor.map(voiceActor => `
-//                        <div class="dropdown-item">
-//                            <span data-voiceActorName="${sanitizeHTML(voiceActor.name)}">
-//                                ${sanitizeHTML(voiceActor.name)}
-//                            </span>
-//                        </div>
-//                    `);
-//                    allResults.push(voiceActorResults.join(''));
-//                }
-
-//                dropdown.innerHTML = allResults.join('');
-//                dropdown.style.display = 'block';
-//            });
-//    } else {
-//        dropdown.innerHTML = "";
-//        dropdown.style.display = 'none';
-//    }
-//}

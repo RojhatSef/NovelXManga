@@ -1,4 +1,5 @@
 ﻿using MangaAccessService;
+using MangaAccessService.DTO;
 using MangaAccessService.DTO.IndexDto;
 using MangaModelService;
 using Microsoft.AspNetCore.Identity;
@@ -26,6 +27,9 @@ namespace NovelXManga.Pages
         public string SucessFulManga { get; set; }
 
         [BindProperty]
+        public int ReadingUsersCount { get; set; }
+
+        [BindProperty]
         public UserSettings UserSettings { get; set; }
 
         public IndexModel(ILogger<IndexModel> logger, IMangaRepository mangaRepository, IWebHostEnvironment webHostEnvironment, MangaNNovelAuthDBContext context, CheckUserSettings checkUserSettings, UserManager<UserModel> userManager)
@@ -37,6 +41,8 @@ namespace NovelXManga.Pages
             _checkUserSettings = checkUserSettings;
             this.userManager = userManager;
         }
+
+        // Part of the search field
 
         public async Task<JsonResult> OnGetSearchMangaAsync(string searchTerm)
         {
@@ -122,6 +128,68 @@ namespace NovelXManga.Pages
             AllBooksList = GetAllBooks.ToList();
             WallPapers = await context.WallPapers.ToListAsync();
             WallpaperList = WallPapers.ToList();
+        }
+
+        private async Task<List<UserListDto>> GetUsersInListAsync(int mangaId, DbSet<MangaModel> mangaDbSet)
+        {
+            return await mangaDbSet
+          .AsNoTracking()
+          .Where(m => m.MangaID == mangaId)
+          .SelectMany(m => m.userModels) // Use the correct navigation property name
+          .Distinct() // Ensure distinct users are selected
+          .Select(u => new UserListDto { UserId = u.Id })
+          .ToListAsync();
+        }
+
+        private async Task<List<UserListDto>> GetFavoriteUsersInListAsync(int mangaId)
+        {
+            return await context.favoritBookLists
+                .AsNoTracking()
+                .Where(fl => fl.MangaModelId == mangaId)
+                .SelectMany(fl => fl.UserModels)
+                .Distinct()
+                .Select(u => new UserListDto { UserId = u.Id })
+                .ToListAsync();
+        }
+
+        private async Task<List<UserListDto>> GetCompletedUsersInListAsync(int mangaId)
+        {
+            return await context.completedBookLists
+                .AsNoTracking()
+                .Where(fl => fl.MangaModelId == mangaId)
+                .SelectMany(fl => fl.UserModels)
+                .Distinct()
+                .Select(u => new UserListDto { UserId = u.Id })
+                .ToListAsync();
+        }
+
+        private async Task<List<UserListDto>> GetWishUsersInListAsync(int mangaId)
+        {
+            return await context.wishBookLists
+                .AsNoTracking()
+                .Where(fl => fl.MangaModelId == mangaId)
+                .SelectMany(fl => fl.UserModels)
+                .Distinct()
+                .Select(u => new UserListDto { UserId = u.Id })
+                .ToListAsync();
+        }
+
+        private async Task RecalculateReadingUsersCount(int mangaId)
+        {
+            // Fetch user lists associated with the manga
+            var readingListUserIds = await GetUsersInListAsync(mangaId, context.mangaModels); // Adjusted to use the method
+            var favoriteListUserIds = await GetFavoriteUsersInListAsync(mangaId); // Specific method for favorite lists
+            var completedListUserIds = await GetCompletedUsersInListAsync(mangaId); // Specific method for completed lists
+            var wishListUserIds = await GetWishUsersInListAsync(mangaId);
+
+            // Calculate unique user count
+            ReadingUsersCount = readingListUserIds
+                .Union(favoriteListUserIds)
+                .Union(completedListUserIds)
+                .Union(wishListUserIds)
+                .GroupBy(u => u.UserId)
+                .Select(group => group.First())
+                .Count();
         }
     }
 }
