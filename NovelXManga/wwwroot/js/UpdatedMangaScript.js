@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     const checkbox = document.getElementById(manga.id); // Get the checkbox
                     if (checkbox) { // Safety check in case the element is not found
                         checkbox.checked = isSelected; // Align checkbox state
-                    } // Assuming IDs are unique and correctly referenced
+                    }
                     updateSelectedRelatedMangaDisplay();
                     updateSelectedRelatedMangaInput();
                 });
@@ -108,10 +108,10 @@ document.addEventListener("DOMContentLoaded", function () {
         dropdownOpen = true;
         relatedMangaDropdown.style.display = 'block';
     });
-    document.getElementById('CreateManga').addEventListener('click', function (e) {
-        e.preventDefault();
+    document.getElementById('UpdateManga').addEventListener('click', function (e) {
+        /* e.preventDefault();*/
         updateSelectedTagsInput();
-        document.getElementById('create-manga-form').submit();
+        document.getElementById('create-manga-update').submit();
     });
 
     displayRelatedManga(allRelatedMangaData);
@@ -225,11 +225,11 @@ document.addEventListener("DOMContentLoaded", function () {
         dropdownOpen = true;
         recommendedMangaDropdown.style.display = 'block';
     });
-    document.getElementById('CreateManga').addEventListener('click', function (e) {
-        e.preventDefault();
+    document.getElementById('UpdateManga').addEventListener('click', function (e) {
+        /*     e.preventDefault();*/
         // Assuming updateSelectedTagsInput function exists and is relevant for recommended manga as well
         updateSelectedTagsInput();
-        document.getElementById('create-manga-form').submit();
+        document.getElementById('create-manga-update').submit();
     });
 
     displayRecommendedManga(allRecommendedMangaData);

@@ -272,7 +272,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     const checkbox = document.getElementById(manga.id); // Get the checkbox
                     if (checkbox) { // Safety check in case the element is not found
                         checkbox.checked = isSelected; // Align checkbox state
-                    } // Assuming IDs are unique and correctly referenced
+                    }
                     updateSelectedRelatedMangaDisplay();
                     updateSelectedRelatedMangaInput();
                 });
@@ -445,7 +445,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
     document.getElementById('CreateManga').addEventListener('click', function (e) {
         e.preventDefault();
-        // Assuming updateSelectedTagsInput function exists and is relevant for recommended manga as well
+
         updateSelectedTagsInput();
         document.getElementById('create-manga-form').submit();
     });

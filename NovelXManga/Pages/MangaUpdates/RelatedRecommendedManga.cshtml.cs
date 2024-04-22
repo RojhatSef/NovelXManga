@@ -45,6 +45,53 @@ namespace NovelXManga.Pages.MangaUpdates
                 .ToListAsync();
         }
 
+        public async Task<IActionResult> OnPostAsync(int id)
+        {
+            var mangaToUpdate = await context.mangaModels
+                                             .Include(m => m.relatedSeries)
+                                             .Include(m => m.RecommendedMangaModels)
+                                             .FirstOrDefaultAsync(m => m.MangaID == id);
+
+            if (mangaToUpdate == null)
+            {
+                return NotFound("Manga not found.");
+            }
+
+            // Update or create new list for related manga
+            if (SelectedRelatedMangaIds != null && SelectedRelatedMangaIds.Any())
+            {
+                var relatedManga = await context.mangaModels
+                                                .Where(m => SelectedRelatedMangaIds.Contains(m.MangaID))
+                                                .ToListAsync();
+                mangaToUpdate.relatedSeries = relatedManga;
+            }
+            else
+            {
+                mangaToUpdate.relatedSeries.Clear();  // Clear existing entries if no manga is selected
+                mangaToUpdate.relatedSeries = new List<MangaModel>();  // Re-initialize if needed
+            }
+
+            // Update or create new list for recommended manga
+            if (SelectedRecommendedMangaIds != null && SelectedRecommendedMangaIds.Any())
+            {
+                var recommendedManga = await context.mangaModels
+                                                    .Where(m => SelectedRecommendedMangaIds.Contains(m.MangaID))
+                                                    .ToListAsync();
+                mangaToUpdate.RecommendedMangaModels = recommendedManga;
+            }
+            else
+            {
+                mangaToUpdate.RecommendedMangaModels.Clear();  // Clear existing entries if no manga is selected
+                mangaToUpdate.RecommendedMangaModels = new List<MangaModel>();  // Re-initialize if needed
+            }
+
+            context.Update(mangaToUpdate);
+            await context.SaveChangesAsync();
+
+            // Redirect to the page before, which seems to be the current manga details page
+            return RedirectToPage("/Manga/CurrentManga", new { id = id });
+        }
+
         public async Task<IActionResult> OnGetAsync(int id)
         {
             _MangaModel = await context.mangaModels
@@ -57,33 +104,13 @@ namespace NovelXManga.Pages.MangaUpdates
                 return NotFound("Specified manga not found.");
             }
 
-            // Handle related manga session storage
-            HandleSessionData("SelectedRelatedMangaIds", _MangaModel.relatedSeries.Select(m => m.MangaID).ToArray());
-
-            // Handle recommended manga session storage
-            HandleSessionData("SelectedRecommendedMangaIds", _MangaModel.RecommendedMangaModels.Select(m => m.MangaID).ToArray());
-
             // Load minimal manga data for dropdowns or lists
             RelatedMangaOptions = await GetAllMangaMinimalAsync();
             RecommendedMangaOptions = await GetAllMangaMinimalAsync();
+            SelectedRelatedMangaIds = _MangaModel.relatedSeries.Select(rs => rs.MangaID).ToArray();
+            SelectedRecommendedMangaIds = _MangaModel.RecommendedMangaModels.Select(rm => rm.MangaID).ToArray();
 
             return Page();
-        }
-
-        private void HandleSessionData(string sessionKey, int[] currentIds)
-        {
-            var serializedIds = _httpContextAccessor.HttpContext.Session.GetString(sessionKey);
-            int[] sessionIds = null;
-
-            if (!string.IsNullOrEmpty(serializedIds))
-            {
-                sessionIds = JsonSerializer.Deserialize<int[]>(serializedIds);
-            }
-
-            if (sessionIds == null || !sessionIds.SequenceEqual(currentIds))
-            {
-                _httpContextAccessor.HttpContext.Session.SetString(sessionKey, JsonSerializer.Serialize(currentIds));
-            }
         }
     }
 }
