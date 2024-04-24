@@ -193,7 +193,7 @@
                     <div class="CUS-tagsInsideInsideCurrentManga">
                       @if (CanEditManga(user))
                         {
-                            <a asp-page="/MangaUpdates/UpdateGenre" asp-route-id="@Model.CurrentManga.MangaID">
+                            <a asp-page="/MangaUpdates/UpdateTags" asp-route-id="@Model.CurrentManga.MangaID">
                                 @if (item.GenreName == "Adult" || item.GenreName == "Smut" || item.GenreName == "Mature")
                                 {
                                     <label class="CUS-CustomWarningLabel">

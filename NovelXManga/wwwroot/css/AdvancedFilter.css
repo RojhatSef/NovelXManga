@@ -150,7 +150,9 @@ input[type="text"], input[type="checkbox"] {
 input[type="checkbox"].positive + label {
     background-color: #ff6740 !important;
 }
-
+.positive {
+    background-color: #ff6740 !important; /* Adjust color as needed */
+}
 input[type="checkbox"].negative + label {
     background-color: red !important;
 }

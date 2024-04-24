@@ -27,6 +27,10 @@
         max-width: 100%;
     }
 
+    .CreatorTopMargin {
+        margin-top: 10%;
+    }
+
     .UserReviewcontent {
         word-wrap: break-word;
         overflow-wrap: break-word;
@@ -160,27 +164,25 @@
     .CUS-MangaContainerInputQuote {
         display: flex;
         flex-wrap: wrap;
-        padding:5px;  
+        padding: 5px;
         align-items: flex-start;
         width: 100%;
-        min-height: 15px; 
+        min-height: 15px;
         border: 2px solid #ff6740;
         border-radius: 5px;
         box-sizing: border-box;
         background-color: #444;
     }
+
     .CUS-FamousQuoteText {
         flex: 1 1 auto;
-       
-     
         color: white;
-  
         border-radius: 3px;
         white-space: normal;
         overflow: hidden;
         text-overflow: ellipsis;
     }
-  
+
     .CUS-mangaDetailsWrapper {
         display: flex;
         flex-wrap: wrap;

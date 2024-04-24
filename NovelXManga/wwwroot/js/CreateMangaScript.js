@@ -21,9 +21,12 @@
     }
 
     function loadState() {
+        // Load from local storage or use embedded initial genres if available
         const savedPositive = localStorage.getItem('positiveSelectedGenres');
         if (savedPositive) {
             JSON.parse(savedPositive).forEach(id => positiveSelectedGenres.add(id));
+        } else if (initialGenres) {
+            initialGenres.forEach(id => positiveSelectedGenres.add(id));
         }
     }
 

@@ -1,4 +1,5 @@
 using MangaAccessService;
+using MangaAccessService.DTO;
 using MangaModelService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -13,64 +14,61 @@ namespace NovelXManga.Pages.MangaUpdates
     {
         private readonly IMangaRepository mangaRepository;
         private readonly MangaNNovelAuthDBContext context;
-        private readonly ITagRepsitory tagRepsitory;
 
-        public UpdateTagsModel(IMangaRepository mangaRepository, MangaNNovelAuthDBContext context, ITagRepsitory tagRepsitory)
+        public UpdateTagsModel(IMangaRepository mangaRepository, MangaNNovelAuthDBContext context)
         {
             this.mangaRepository = mangaRepository;
             this.context = context;
-            this.tagRepsitory = tagRepsitory;
         }
 
         [BindProperty]
-        [FromForm(Name = "selectedTags")]
+        [FromForm(Name = "JsSelectedTags")]
         public List<int> SelectedTags { get; set; }
 
         [BindProperty]
-        public MangaModel mangaModelUpdate { get; set; }
+        [FromForm(Name = "PositiveSelectedGenres")]
+        public List<int> PositiveSelectedGenres { get; set; }
 
         public List<TagModel> Tags { get; set; }
+        public List<GenresModel> Genres { get; set; }
 
-        public async Task<IActionResult> OnPostAsync(MangaModel mangaModel)
+        [BindProperty]
+        public MangaModel MangaModels { get; set; }
+
+        public async Task<List<MangaDTO>> GetAllMangaMinimalAsync()
         {
-            if (mangaModel == null)
+            return await context.mangaModels
+                .Select(m => new MangaDTO { MangaID = m.MangaID, MangaName = m.MangaName })
+                .ToListAsync();
+        }
+
+        public async Task<IActionResult> OnPostAsync(int id)
+        {
+            var mangaToUpdate = await context.mangaModels
+                                             .Include(m => m.TagsModels)
+                                             .Include(m => m.GenresModels)
+                                             .FirstOrDefaultAsync(m => m.MangaID == id);
+
+            if (mangaToUpdate == null)
             {
-                return RedirectToPage("/Index");
-            }
-            mangaModelUpdate = await mangaRepository.GetOneMangaAllIncludedAsync(mangaModel.MangaID);
-            Tags = await context.TagModels.ToListAsync();
-
-            // Get the selected tag ids
-            var selectedTagIds = SelectedTags ?? new List<int>();
-
-            // Get the existing tag ids
-            var existingTagIds = mangaModelUpdate.TagsModels.Select(t => t.TagId).ToList();
-
-            // Remove tags that are not selected anymore
-            var tagsToRemove = existingTagIds.Except(selectedTagIds);
-            foreach (var tagId in tagsToRemove)
-            {
-                var tagToRemove = mangaModelUpdate.TagsModels.FirstOrDefault(t => t.TagId == tagId);
-                if (tagToRemove != null)
-                {
-                    mangaModelUpdate.TagsModels.Remove(tagToRemove);
-                }
+                return NotFound("Manga not found.");
             }
 
-            // Add new tags that are selected now
-            var tagsToAdd = selectedTagIds.Except(existingTagIds);
-            foreach (var tagId in tagsToAdd)
-            {
-                var tagToAdd = await context.TagModels.FindAsync(tagId);
-                if (tagToAdd != null)
-                {
-                    mangaModelUpdate.TagsModels.Add(tagToAdd);
-                }
-            }
+            // Update Tags
+            var currentTags = mangaToUpdate.TagsModels.ToList();
+            var updatedTags = context.TagModels.Where(t => SelectedTags.Contains(t.TagId)).ToList();
+            mangaToUpdate.TagsModels = updatedTags;
 
+            // Update Genres
+            var currentGenres = mangaToUpdate.GenresModels.ToList();
+            var updatedGenres = context.GenresModels.Where(g => PositiveSelectedGenres.Contains(g.GenresId)).ToList();
+            mangaToUpdate.GenresModels = updatedGenres;
+
+            // Save changes
+            context.Update(mangaToUpdate);
             await context.SaveChangesAsync();
 
-            return RedirectToPage("/Index");
+            return RedirectToPage("/Manga/CurrentManga", new { id = id });
         }
 
         public async Task<IActionResult> OnGetAsync(int? id)
@@ -79,20 +77,24 @@ namespace NovelXManga.Pages.MangaUpdates
             {
                 return NotFound();
             }
-            mangaModelUpdate = context.mangaModels.Include(e => e.TagsModels).FirstOrDefault(e => e.MangaID == id);
-            if (mangaModelUpdate == null)
+
+            MangaModels = await context.mangaModels
+                                       .Include(m => m.TagsModels)
+                                       .Include(m => m.GenresModels)
+                                       .FirstOrDefaultAsync(m => m.MangaID == id.Value);
+
+            if (MangaModels == null)
             {
-                return NotFound();
+                return NotFound("Specified manga not found.");
             }
 
-            if (mangaModelUpdate.TagsModels == null)
-            {
-                mangaModelUpdate.TagsModels = new List<TagModel>();
-            }
+            SelectedTags = MangaModels.TagsModels.Select(t => t.TagId).ToList();
+            PositiveSelectedGenres = MangaModels.GenresModels.Select(g => g.GenresId).ToList();
 
-            SelectedTags = mangaModelUpdate.TagsModels.Select(t => t.TagId).ToList();
+            // Load all tags and genres for selection lists
+            Tags = await context.TagModels.ToListAsync();
+            Genres = await context.GenresModels.ToListAsync();
 
-            Tags = await context.TagModels.ToListAsync() ?? new List<TagModel>();
             return Page();
         }
     }

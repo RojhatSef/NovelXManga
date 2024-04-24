@@ -31,20 +31,23 @@ namespace NovelXManga.Pages.MangaUpdates
 
         public List<GenresModel> Genres { get; set; }
 
-        public async Task<IActionResult> OnPostAsync(MangaModel mangaModel)
+        public async Task<IActionResult> OnPostAsync(int id)
         {
-            if (mangaModel == null)
+            var mangaToUpdate = await context.mangaModels
+
+                                             .Include(m => m.GenresModels)
+                                             .FirstOrDefaultAsync(m => m.MangaID == id);
+            if (mangaToUpdate == null)
             {
                 return RedirectToPage("/Index");
             }
-            mangaModelUpdate = await mangaRepository.GetOneMangaAllIncludedAsync(mangaModel.MangaID);
             Genres = await context.GenresModels.ToListAsync();
 
             // Get the selected tag ids
             var SelectedGenre = SelectedTags ?? new List<int>();
 
             // Get the existing tag ids
-            var exsitingGenre = mangaModelUpdate.GenresModels.Select(t => t.GenresId).ToList();
+            var exsitingGenre = mangaToUpdate.GenresModels.Select(t => t.GenresId).ToList();
 
             // Remove tags that are not selected anymore
             var genreToRemove = exsitingGenre.Except(SelectedGenre);
