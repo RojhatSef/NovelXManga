@@ -57,7 +57,8 @@
             <div id="hiddenContainerPositive"></div>
         </div>
         <button type="submit" id="CreateManga" class="btn btn-danger">Update Tags</button>
-        <a asp-page="/Index" class="btn btn-primary">Back</a>
+        <a asp-page="/Manga/CurrentManga" asp-route-id="@Model.MangaModels.MangaID" class="btn btn-primary">Back</a>
+
     </form>
 </div>
 

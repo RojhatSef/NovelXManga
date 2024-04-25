@@ -136,7 +136,7 @@
 
 <div class="mb-3">
     <label class="form-label" asp-for="_MangaModel.ISBN10">ISBN10 | Must have 10 characters</label>
-    <input asp-for="_MangaModel.ISBN10" class="form-control" />
+            <input asp-for="_MangaModel.ISBN10"  class="form-control"  />
     <span asp-validation-for="_MangaModel.ISBN10" class="text-danger"></span>
 </div>
 
@@ -171,7 +171,7 @@
 </div>
 
 <div class="mb-3">
-    <label class="form-label" asp-for="_MangaModel.OriginalPublisher">Original Publisher</label>
+    <label class="form-label" asp-for="_MangaModel.OriginalPublisher">Original Publisher Example: Kanna IBO , Shounen Jump</label>
     <input asp-for="_MangaModel.OriginalPublisher" class="form-control" />
     <span asp-validation-for="_MangaModel.OriginalPublisher" class="text-danger"></span>
 </div>
@@ -189,16 +189,17 @@
     <span asp-validation-for="_MangaModel.OfficalLanguage" class="text-danger"></span>
                 </div><p>Not working Yet</p>
 
-<div class="mb-3">
-                    <label class="form-label" asp-for="ReleaseYear">Release Year</label>
-    <input asp-for="ReleaseYear" class="form-control" />
-                    <span asp-validation-for="ReleaseYear" class="text-danger"></span>
-</div>
-<div class="mb-3">
-    <label class="form-label" asp-for="EndingYear">Ending Year</label>
-                    <input asp-for="EndingYear" class="form-control" />
-                    <span asp-validation-for="EndingYear" class="text-danger"></span>
-                </div>
+        <div class="mb-3">
+            <label class="form-label" asp-for="_MangaModel.ReleaseYear">Release Date</label>
+            <input asp-for="_MangaModel.ReleaseYear" type="date" class="form-control" />
+            <span asp-validation-for="_MangaModel.ReleaseYear" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" asp-for="_MangaModel.EndingYear">Ending Date</label>
+            <input asp-for="_MangaModel.EndingYear" type="date" class="form-control" />
+            <span asp-validation-for="_MangaModel.EndingYear" class="text-danger"></span>
+        </div>
+
 
                 <div class="form-group row">
             <label asp-for="Photo" class="col-sm-2 col-form-label">Photo: (Must have a photo)</label>  <br />
@@ -225,4 +226,5 @@
         </div>
 
 <script src="~/js/CreateMangaScript.js" asp-append-version="true"></script>
+
 <script src="~/js/ShowHideTagsGenres.js" asp-append-version="true"></script>

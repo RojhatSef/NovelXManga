@@ -17,5 +17,6 @@
     </div>
     <input type="hidden" name="mangaModel.MangaID" value="@Model.mangaModelUpdate.MangaID" />
     <button type="submit" class="update-button">Update</button>
-    <a href="/Index" class="back-button">Back</a>
+    <a asp-page="/Manga/CurrentManga" asp-route-id="@Model.mangaModelUpdate.MangaID" class="btn btn-primary">Back</a>
+
 </form>

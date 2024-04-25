@@ -1,8 +1,7 @@
 ﻿document.addEventListener("DOMContentLoaded", function () {
-    const form = document.getElementById('genreForm');
+    const form = document.getElementById('create-manga-form');
     const searchButton = document.getElementById('CreateManga');
     const hiddenContainerPositive = document.getElementById('hiddenContainerPositive');
-
     const positiveSelectedGenres = new Set();
 
     function updateSelectedGenresInput(container, selectedGenres) {
@@ -20,27 +19,44 @@
         localStorage.setItem('positiveSelectedGenres', JSON.stringify(Array.from(positiveSelectedGenres)));
     }
 
+    function clearLocalStorage() {
+        localStorage.removeItem('positiveSelectedGenres');  // Clear any saved genre selections from previous sessions
+    }
+
     function loadState() {
-        // Load from local storage or use embedded initial genres if available
+        // After clearing, check if there is still relevant data (e.g., if cleared just before saving new state)
         const savedPositive = localStorage.getItem('positiveSelectedGenres');
         if (savedPositive) {
-            JSON.parse(savedPositive).forEach(id => positiveSelectedGenres.add(id));
-        } else if (initialGenres) {
-            initialGenres.forEach(id => positiveSelectedGenres.add(id));
+            const savedGenres = new Set(JSON.parse(savedPositive));
+            document.querySelectorAll('.multi-state-checkbox').forEach(checkbox => {
+                const genreId = checkbox.value;
+                const label = document.querySelector(`label[for="genre-${genreId}"]`);
+                if (savedGenres.has(genreId)) {
+                    checkbox.checked = true;
+                    label.classList.add("positive");
+                    positiveSelectedGenres.add(genreId);
+                } else {
+                    checkbox.checked = false;
+                    label.classList.remove("positive");
+                    positiveSelectedGenres.delete(genreId);
+                }
+            });
         }
     }
 
     function initializeCheckboxes() {
-        loadState();
+        // Clear any old data before initializing checkboxes based on server-rendered state
+        clearLocalStorage();
         const checkboxes = document.querySelectorAll('.multi-state-checkbox');
         checkboxes.forEach((checkbox) => {
             const genreId = checkbox.value;
             const label = document.querySelector(`label[for="genre-${genreId}"]`);
-            if (positiveSelectedGenres.has(genreId)) {
-                checkbox.checked = true;
+            if (checkbox.checked) {
                 label.classList.add("positive");
+                positiveSelectedGenres.add(genreId);
             } else {
-                checkbox.checked = false;
+                label.classList.remove("positive");
+                positiveSelectedGenres.delete(genreId);
             }
         });
     }
@@ -49,22 +65,20 @@
         const checkboxes = document.querySelectorAll('.multi-state-checkbox');
         checkboxes.forEach((checkbox) => {
             const label = document.querySelector(`label[for="${checkbox.id}"]`);
-            checkbox.addEventListener('click', function (event) {
+            checkbox.addEventListener('click', function () {
                 const genreId = checkbox.value;
-                if (positiveSelectedGenres.has(genreId)) {
-                    checkbox.classList.remove("positive");
-                    label.classList.remove("positive");
-                    positiveSelectedGenres.delete(genreId);
-                } else {
-                    checkbox.classList.add("positive");
+                if (checkbox.checked) {
                     label.classList.add("positive");
                     positiveSelectedGenres.add(genreId);
+                } else {
+                    label.classList.remove("positive");
+                    positiveSelectedGenres.delete(genreId);
                 }
             });
         });
     }
 
-    searchButton.addEventListener("click", function (e) {
+    searchButton.addEventListener("click", function () {
         updateSelectedGenresInput(hiddenContainerPositive, positiveSelectedGenres);
         saveState();
         form.submit();
@@ -457,3 +471,5 @@ document.addEventListener("DOMContentLoaded", function () {
     updateSelectedRecommendedMangaDisplay();
     updateSelectedRecommendedMangaInput();
 });
+
+//checks if ending year is less than release year

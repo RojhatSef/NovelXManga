@@ -157,10 +157,10 @@ namespace NovelXManga.Pages.Manga
                 ISBN13 = _MangaModel.ISBN13,
                 Description = _MangaModel.Description,
                 ReleaseYear = _MangaModel.ReleaseYear,
-                EndingYear = EndingYear,
+                EndingYear = _MangaModel.EndingYear,
                 Type = _MangaModel.Type,
                 OfficalLanguage = _MangaModel.OfficalLanguage,
-                OriginalPublisher = _MangaModel.orignalWebtoon,
+                OriginalPublisher = _MangaModel.OriginalPublisher,
                 CompletelyTranslated = _MangaModel.CompletelyTranslated,
                 relatedSeries = new List<MangaModel>(_MangaModel.relatedSeries),
 

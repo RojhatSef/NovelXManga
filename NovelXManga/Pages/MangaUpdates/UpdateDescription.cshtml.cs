@@ -42,8 +42,18 @@ namespace NovelXManga.Pages.MangaUpdates
             {
                 return NotFound();
             }
+            if (mangaModel.EndingYear.HasValue && mangaModel.ReleaseYear.HasValue)
+            {
+                if (mangaModel.EndingYear < mangaModel.ReleaseYear)
+                {
+                    ModelState.AddModelError("mangaModel.EndingYear", "Ending year cannot be earlier than the release year.");
+                }
+            }
 
             // Update the existing entity with the values from the form
+            existingEntity.BookUpdated = DateTime.UtcNow;
+            existingEntity.EndingYear = mangaModel.EndingYear;
+            existingEntity.ReleaseYear = mangaModel.ReleaseYear;
             existingEntity.Description = mangaModel.Description;
             existingEntity.ISBN10 = mangaModel.ISBN10;
             existingEntity.ISBN13 = mangaModel.ISBN13;
@@ -58,7 +68,7 @@ namespace NovelXManga.Pages.MangaUpdates
             // Since the entity is already tracked, simply call SaveChangesAsync.
             await context.SaveChangesAsync();
 
-            return RedirectToPage("/Index");
+            return RedirectToPage("/Manga/CurrentManga", new { id = mangaModel.MangaID });
         }
 
         public async Task<IActionResult> OnGetAsync(int? id)

@@ -74,7 +74,7 @@ namespace NovelXManga.Pages.MangaUpdates
             mangaModelUpdate.PhotoPath = ProcessUploadedFile();
             mangaModelUpdate = await mangaRepository.UpdateAsync(mangaModelUpdate);
 
-            return RedirectToPage("/Index");
+            return RedirectToPage("/Manga/CurrentManga", new { id = mangaModelUpdate.MangaID });
         }
 
         public async Task<IActionResult> OnGetAsync(int? id)

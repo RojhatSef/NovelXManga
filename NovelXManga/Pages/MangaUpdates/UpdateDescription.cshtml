@@ -46,8 +46,15 @@
         <label for="originalPublisher">Original Publisher:</label>
         <input type="text" class="manga-update-input" id="originalPublisher" name="mangaModel.OriginalPublisher" value="@Model.mangaModelUpdate.OriginalPublisher">
     </div>
- 
 
+    <div class="manga-update-form-group">
+        <label for="releaseYear">Release Date:</label>
+        <input type="date" class="manga-update-input" id="releaseYear" name="mangaModel.ReleaseYear" value="@Model.mangaModelUpdate.ReleaseYear?.ToString("yyyy-MM-dd")">
+    </div>
+    <div class="manga-update-form-group">
+        <label for="endingYear">Ending Date:</label>
+        <input type="date" class="manga-update-input" id="endingYear" name="mangaModel.EndingYear" value="@Model.mangaModelUpdate.EndingYear?.ToString("yyyy-MM-dd")">
+    </div>
 
     <div class="manga-update-form-group">
         <label for="type">Type:</label>
@@ -60,6 +67,8 @@
     </div>
  
     <button type="submit" class="btn btn-danger">Update</button>
-    <a asp-page="/Index" class="btn btn-primary">Back</a>
+    <a asp-page="/Manga/CurrentManga" asp-route-id="@Model.mangaModelUpdate.MangaID" class="btn btn-primary">Back</a>
+
 </form>
 
+<script src="~/js/YearEndingCheck.js" asp-append-version="true"></script>
