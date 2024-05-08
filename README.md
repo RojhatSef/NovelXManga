@@ -1,7 +1,7 @@
 Hello! This is a project made by rojhat Sefdin aydal https://www.linkedin.com/in/rojhat-sefdin-aydal-387ab3220/
 
 I love manga/anime, so i made a website, now this site is not 100% finished, however a lot of components are done. Some are even still progress. 
-The website can add books(not all parts), edit books(not all parts) this may be edite in the future.
+The website can add books(not all parts) on the website yet, but if you want to seed them it works, edit books(not all parts) this may be edite in the future.
 
 This page was meant for showcasing/info on books. 
 I use Microsoft SQL server managment studio(MSQSSM) & Visual studio 2022 
