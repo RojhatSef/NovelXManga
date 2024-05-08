@@ -10,7 +10,7 @@ Step 1: First to run this, you probably going to need to have Visual Studio(2022
 
 step 2: After you've cloned it, it's probably going to ask you to download the right frameworks. When this is finished, it's probably going to ask you to install the right.NET.
 
-step 3: Open project manager console, in the default project, select MangaAccessService then in the PM> write: update-database. This will start the creation of the database on your computer. (hopefully you use MSQSSM for databasing).
+step 3: Open project manager console, in the default project, select MangaAccessService then in the PM> write: "update-database". This will start the creation of the database on your computer. (hopefully you use MSQSSM for databasing).
 It's complete when you see the word "Done." 
 To test it out choose either the NovelXManga, IIS express, or whatever you feel like. I recommend IIS express. 
 
