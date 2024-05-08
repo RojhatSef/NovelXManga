@@ -1,20 +1,39 @@
-Hello! This is a project made by rojhat Sefdin aydal https://www.linkedin.com/in/rojhat-sefdin-aydal-387ab3220/
+NovelXManga
 
-I love manga/anime, so i made a website, now this site is not 100% finished, however a lot of components are done. Some are even still progress. 
-The website can add books(not all parts) on the website yet, but if you want to seed them it works, edit books(not all parts) this may be edite in the future.
+Welcome to NovelXManga, a project created by Rojhat Sefdin Aydal. I'm passionate about manga and anime, which inspired me to build this website. While the site is not yet fully complete, many components are functional, and ongoing improvements are planned.
+Project Overview
 
-This page was meant for showcasing/info on books. 
-I use Microsoft SQL server managment studio(MSQSSM) & Visual studio 2022 
+NovelXManga is designed to showcase and manage information about books, particularly in the manga genre. Here are some of the features and their current status:
 
-Step 1: First to run this, you probably going to need to have Visual Studio(2022). (i use it no other idea how it works with other IDE).
+    Add Books: Partially implemented. You can seed book data.
+    Edit Books: Partial functionality available; further enhancements expected.
 
-step 2: After you've cloned it, it's probably going to ask you to download the right frameworks. When this is finished, it's probably going to ask you to install the right.NET.
+I've developed the project using Microsoft SQL Server Management Studio (MSSMS) and Visual Studio 2022.
+Getting Started
 
-step 3: Open project manager console, in the default project, select MangaAccessService then in the PM> write: "update-database" (Skip the "" only update-database). This will start the creation of the database on your computer. (hopefully you use MSQSSM for databasing).
-It's complete when you see the word "Done." 
-To test it out choose either the NovelXManga, IIS express, or whatever you feel like. I recommend IIS express. 
+To set up and run the project, follow these steps:
+Step 1: Prerequisites
 
+    Ensure you have Visual Studio 2022 installed. This project was developed with it, and compatibility with other IDEs hasn't been tested.
 
-I have no name stamp or anything that could link it back to me, but i would be very happy if you sent me a message on linkIn or Here. 
+Step 2: Framework and Dependencies
 
-Best regards. 
+    After cloning the repository, Visual Studio may prompt you to download and install the necessary frameworks and the correct version of .NET.
+
+Step 3: Database Setup
+
+    Open the Package Manager Console in Visual Studio.
+    In the console, set MangaAccessService as the default project.
+    Type update-database to create and configure the database on your local machine. Be sure you are using MSSMS for database management.
+    You'll know the process is complete when you see "Done."
+
+Running the Application
+
+    To test the application, you can run it using IIS Express from Visual Studio.
+
+Connect and Contribute
+
+Although there's no direct attribution in the code, I'd love to hear from you if you use or contribute to the project. Feel free to connect with me on LinkedIn https://www.linkedin.com/in/rojhat-sefdin-aydal-387ab3220/ or through GitHub.
+
+Best regards,
+Rojhat Sefdin Aydal
