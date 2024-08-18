@@ -745,7 +745,7 @@ namespace NovelXManga.Pages.Manga
             {
                 relatedRecommendedManga = await LoadRelatedAndRecommendedSeries(id);
             }
-            var something = relatedRecommendedManga;
+
             CurrentManga = await mangaRepository.GetOneEssentialMangaIncludedAsync(id);
             CurrentManga2 = await mangaRepository.GetOneEssentialMangaDtoIncludedAsync(id);
 

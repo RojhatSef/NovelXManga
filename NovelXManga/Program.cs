@@ -12,6 +12,19 @@ using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.WebHost.ConfigureKestrel(serverOptions =>
+{
+    serverOptions.Limits.MaxConcurrentConnections = 100; // Adjust based on expected user load
+    serverOptions.Limits.MaxConcurrentUpgradedConnections = 100; // Adjust if using WebSockets
+    serverOptions.Limits.MaxRequestBodySize = 100 * 1024 * 1024; // 100 MB, to handle large file uploads
+    serverOptions.Limits.KeepAliveTimeout = TimeSpan.FromMinutes(5); // Keep alive for 5 minutes to maintain active connections
+    serverOptions.Limits.RequestHeadersTimeout = TimeSpan.FromMinutes(2); // Header timeout of 2 minutes
+    serverOptions.Limits.Http2.MaxStreamsPerConnection = 100; // Adjust based on expected load and HTTP/2 usage
+    serverOptions.Limits.Http2.MaxFrameSize = 16 * 1024; // Default 16 KB, usually sufficient
+    serverOptions.Limits.Http2.InitialConnectionWindowSize = 128 * 1024; // 128 KB for initial connection window
+    serverOptions.Limits.Http2.InitialStreamWindowSize = 128 * 1024; // 128 KB for initial stream window
+});
+
 // Add services to the container.
 builder.Services.AddRazorPages();
 //Remove if not needed - Remove to text below
@@ -141,7 +154,9 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapRazorPages();
-
+//new for hosting
+//app.Run("http://0.0.0.0:5000");
+//old for local
 app.Run();
 static void SeedDatainitialize(IHost host)
 {
