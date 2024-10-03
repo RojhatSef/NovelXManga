@@ -5,21 +5,25 @@ namespace MangaModelService
     public class ChapterModel
     {
         [Key]
-        public int chapterID { get; set; }
+        public int ChapterID { get; set; }
 
-        public DateTime dateRelease { get; set; }
+        public DateTime DateRelease { get; set; }
         public DateTime UpdatedChapter { get; set; }
         public int? Volumes { get; set; }
-        public int? chapterNumber { get; set; }
-        public string chapterName { get; set; }
-
-        public string chapterLinkNumber { get; set; }
+        public int? ChapterNumber { get; set; }
+        public string ChapterName { get; set; }
+        public string ChapterLinkNumber { get; set; }
+        public bool IsChecked { get; set; }
 
         public int GroupScanlatingID { get; set; }
         public virtual ICollection<GroupScanlatingModel> GroupScanlatingModels { get; set; }
-        public bool isChecked { get; set; }
 
-        //public int MangaId { get; set; }
-        //public MangaModel mangaModel { get; set; }
+        // Relationships
+        public int? MangaID { get; set; }
+
+        public MangaModel Manga { get; set; }
+
+        // Navigation Property
+        public ChapterContent ChapterContent { get; set; }
     }
 }

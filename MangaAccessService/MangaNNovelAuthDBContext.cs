@@ -14,6 +14,8 @@ namespace MangaAccessService
         public DbSet<AuthorModel> authorModels { get; set; }
         public DbSet<VoiceActorModel> voiceActorModels { get; set; }
         public DbSet<ChapterModel> chapterModels { get; set; }
+        public DbSet<ChapterContent> ChapterContents { get; set; }
+        public DbSet<ChapterImage> ChapterImages { get; set; }
         public DbSet<Review> Reviews { get; set; }
         public DbSet<ReadingList> readingLists { get; set; }
         public DbSet<CompletedBookList> completedBookLists { get; set; }
@@ -62,6 +64,18 @@ namespace MangaAccessService
        .WithOne(c => c.UserOne)
        .HasForeignKey(c => c.UserOneId)
        .OnDelete(DeleteBehavior.Restrict);
+
+            // Configure one-to-one relationship between ChapterModel and ChapterContent
+            modelBuilder.Entity<ChapterModel>()
+                .HasOne(c => c.ChapterContent)
+                .WithOne(cc => cc.Chapter)
+                .HasForeignKey<ChapterContent>(cc => cc.ChapterId);
+
+            // Configure one-to-many relationship between ChapterContent and ChapterImage
+            modelBuilder.Entity<ChapterContent>()
+                .HasMany(cc => cc.Images)
+                .WithOne(ci => ci.ChapterContent)
+                .HasForeignKey(ci => ci.ChapterContentId);
 
             // Configures a one-to-many relationship between UserModel and PrivateConversation as UserTwo.
             // Also prevents cascade deletion to avoid deleting conversations when the UserTwo is deleted.
